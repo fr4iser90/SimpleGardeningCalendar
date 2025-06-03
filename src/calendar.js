@@ -3,6 +3,7 @@ import dayGridPlugin from '@fullcalendar/daygrid';
 import interactionPlugin from '@fullcalendar/interaction';
 import { openDB } from 'idb';
 import { format } from 'date-fns';
+import { PLANTS_DATA, addPlanting } from './db';
 
 let calendar;
 
@@ -33,7 +34,8 @@ export async function initializeCalendar() {
         textColor: '#ffffff',
         extendedProps: {
           description: event.description,
-          type: event.type
+          type: event.type,
+          plantingId: event.plantingId
         }
       })));
     },
@@ -68,27 +70,49 @@ async function showAddEventModal(date) {
       <h2 class="text-xl font-semibold mb-4 dark:text-white">Add Garden Event</h2>
       <form id="eventForm" class="space-y-4">
         <div>
-          <label class="block text-sm font-medium mb-1 dark:text-gray-200">Title</label>
-          <input type="text" name="title" class="w-full p-2 border rounded dark:bg-gray-700 dark:border-gray-600 dark:text-white" required>
+          <label class="block text-sm font-medium mb-1 dark:text-gray-200">Event Type</label>
+          <select name="eventType" class="w-full p-2 border rounded dark:bg-gray-700 dark:border-gray-600 dark:text-white" onchange="togglePlantingFields(this.value)">
+            <option value="custom">Custom Event</option>
+            <option value="planting">Start Planting</option>
+          </select>
         </div>
+        
+        <div id="customFields">
+          <div>
+            <label class="block text-sm font-medium mb-1 dark:text-gray-200">Title</label>
+            <input type="text" name="title" class="w-full p-2 border rounded dark:bg-gray-700 dark:border-gray-600 dark:text-white" required>
+          </div>
+          <div>
+            <label class="block text-sm font-medium mb-1 dark:text-gray-200">Type</label>
+            <select name="type" class="w-full p-2 border rounded dark:bg-gray-700 dark:border-gray-600 dark:text-white">
+              <option value="maintenance">Maintenance</option>
+              <option value="watering">Watering</option>
+              <option value="fertilizing">Fertilizing</option>
+            </select>
+          </div>
+        </div>
+        
+        <div id="plantingFields" style="display: none;">
+          <div>
+            <label class="block text-sm font-medium mb-1 dark:text-gray-200">Plant Type</label>
+            <select name="plantType" class="w-full p-2 border rounded dark:bg-gray-700 dark:border-gray-600 dark:text-white">
+              ${Object.entries(PLANTS_DATA).map(([value, plant]) => 
+                `<option value="${value}">${plant.name}</option>`
+              ).join('')}
+            </select>
+          </div>
+        </div>
+        
         <div>
           <label class="block text-sm font-medium mb-1 dark:text-gray-200">Date</label>
           <input type="date" name="date" value="${date}" class="w-full p-2 border rounded dark:bg-gray-700 dark:border-gray-600 dark:text-white" required>
         </div>
-        <div>
-          <label class="block text-sm font-medium mb-1 dark:text-gray-200">Type</label>
-          <select name="type" class="w-full p-2 border rounded dark:bg-gray-700 dark:border-gray-600 dark:text-white">
-            <option value="planting">Planting</option>
-            <option value="watering">Watering</option>
-            <option value="fertilizing">Fertilizing</option>
-            <option value="harvesting">Harvesting</option>
-            <option value="maintenance">Maintenance</option>
-          </select>
-        </div>
+        
         <div>
           <label class="block text-sm font-medium mb-1 dark:text-gray-200">Description</label>
           <textarea name="description" class="w-full p-2 border rounded dark:bg-gray-700 dark:border-gray-600 dark:text-white" rows="3"></textarea>
         </div>
+        
         <div class="flex justify-end space-x-2">
           <button type="button" class="px-4 py-2 text-gray-600 dark:text-gray-300" id="cancelBtn">Cancel</button>
           <button type="submit" class="px-4 py-2 bg-green-600 text-white rounded hover:bg-green-700">Save</button>
@@ -98,6 +122,20 @@ async function showAddEventModal(date) {
   `;
 
   document.body.appendChild(modal);
+
+  // Add the toggle function
+  window.togglePlantingFields = function(value) {
+    const customFields = document.getElementById('customFields');
+    const plantingFields = document.getElementById('plantingFields');
+    
+    if (value === 'planting') {
+      customFields.style.display = 'none';
+      plantingFields.style.display = 'block';
+    } else {
+      customFields.style.display = 'block';
+      plantingFields.style.display = 'none';
+    }
+  };
 
   const form = document.getElementById('eventForm');
   const cancelBtn = document.getElementById('cancelBtn');
@@ -109,16 +147,25 @@ async function showAddEventModal(date) {
   form.addEventListener('submit', async (e) => {
     e.preventDefault();
     const formData = new FormData(form);
-    const eventData = {
-      title: formData.get('title'),
-      date: formData.get('date'),
-      type: formData.get('type'),
-      description: formData.get('description')
-    };
-
+    
     try {
-      const db = await openDB('gardening-calendar');
-      await db.add('events', eventData);
+      if (formData.get('eventType') === 'planting') {
+        await addPlanting(
+          formData.get('plantType'),
+          formData.get('date')
+        );
+      } else {
+        const eventData = {
+          title: formData.get('title'),
+          date: formData.get('date'),
+          type: formData.get('type'),
+          description: formData.get('description')
+        };
+        
+        const db = await openDB('gardening-calendar');
+        await db.add('events', eventData);
+      }
+      
       document.body.removeChild(modal);
       calendar.refetchEvents();
     } catch (error) {
@@ -149,7 +196,7 @@ function showEventDetails(event) {
         </p>
       </div>
       <div class="flex justify-between mt-6">
-        <button class="px-4 py-2 bg-red-600 text-white rounded hover:bg-red-700" onclick="deleteEvent(${event.id})">
+        <button class="px-4 py-2 bg-red-600 text-white rounded hover:bg-red-700" onclick="deleteEvent(${event.id}, ${event.extendedProps.plantingId})">
           Delete
         </button>
         <button class="px-4 py-2 text-gray-600 dark:text-gray-300" onclick="this.closest('.fixed').remove()">
@@ -162,14 +209,29 @@ function showEventDetails(event) {
   document.body.appendChild(modal);
 }
 
-async function deleteEvent(eventId) {
+async function deleteEvent(eventId, plantingId) {
   if (!confirm('Are you sure you want to delete this event?')) {
     return;
   }
 
   try {
     const db = await openDB('gardening-calendar');
-    await db.delete('events', eventId);
+    
+    if (plantingId) {
+      // Delete all events related to this planting
+      const tx = db.transaction(['events', 'plantings'], 'readwrite');
+      const events = await tx.objectStore('events').index('plantingId').getAll(plantingId);
+      
+      for (const event of events) {
+        await tx.objectStore('events').delete(event.id);
+      }
+      
+      await tx.objectStore('plantings').delete(plantingId);
+      await tx.done;
+    } else {
+      await db.delete('events', eventId);
+    }
+    
     document.querySelector('.fixed').remove();
     calendar.refetchEvents();
   } catch (error) {
