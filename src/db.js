@@ -1,51 +1,93 @@
 import { openDB } from 'idb';
 
 const DB_NAME = 'gardening-calendar';
-const DB_VERSION = 2;
+const DB_VERSION = 3;
 
 export const PLANTS_DATA = {
   tomatoes: {
     name: 'Tomatoes',
     phases: {
-      germination: { days: 7, description: 'Seeds sprouting' },
-      seedling: { days: 21, description: 'Young plant development' },
-      vegetative: { days: 30, description: 'Leaf and stem growth' },
-      flowering: { days: 20, description: 'Flower development' },
-      fruiting: { days: 45, description: 'Fruit development to harvest' }
+      germination: { days: 7, description: 'Seeds sprouting', care: 'Keep soil warm (70-80°F) and moist' },
+      seedling: { days: 21, description: 'Young plant development', care: 'Provide strong light, maintain moisture' },
+      vegetative: { days: 30, description: 'Leaf and stem growth', care: 'Start fertilizing, support stems' },
+      flowering: { days: 20, description: 'Flower development', care: 'Maintain consistent watering, shake plants gently to aid pollination' },
+      fruiting: { days: 45, description: 'Fruit development to harvest', care: 'Regular feeding, watch for pests and disease' }
     },
     careTips: {
-      watering: 'Keep soil consistently moist',
-      fertilizing: 'Feed every 4 weeks',
-      sunlight: 'Full sun (6-8 hours daily)'
+      watering: 'Keep soil consistently moist, water deeply 2-3 times per week',
+      fertilizing: 'Feed every 4 weeks with balanced fertilizer',
+      sunlight: 'Full sun (6-8 hours daily)',
+      spacing: '18-24 inches apart',
+      support: 'Cage or stake plants when 12 inches tall'
+    },
+    commonProblems: {
+      'Blossom End Rot': 'Calcium deficiency - maintain consistent watering',
+      'Leaf Yellowing': 'Could be nutrient deficiency or overwatering',
+      'Cracked Fruits': 'Irregular watering - keep soil moisture consistent'
     }
   },
   potatoes: {
     name: 'Potatoes',
     phases: {
-      sprouting: { days: 14, description: 'Eye sprouting' },
-      vegetative: { days: 30, description: 'Leaf and stem growth' },
-      tuberization: { days: 40, description: 'Tuber formation' },
-      bulking: { days: 45, description: 'Tuber growth' },
-      maturation: { days: 20, description: 'Plant dies back, tubers ready' }
+      sprouting: { days: 14, description: 'Eye sprouting', care: 'Keep seed potatoes in warm, dark place' },
+      vegetative: { days: 30, description: 'Leaf and stem growth', care: 'Start hilling when plants are 6 inches tall' },
+      tuberization: { days: 40, description: 'Tuber formation', care: 'Hill soil around base every 2-3 weeks' },
+      bulking: { days: 45, description: 'Tuber growth', care: 'Maintain consistent moisture, continue hilling' },
+      maturation: { days: 20, description: 'Plant dies back, tubers ready', care: 'Reduce watering when plants start yellowing' }
     },
     careTips: {
-      watering: 'Regular watering, avoid waterlogging',
-      fertilizing: 'High phosphorus fertilizer',
-      sunlight: 'Full sun (6+ hours daily)'
+      watering: 'Regular watering (1-2 inches per week), avoid waterlogging',
+      fertilizing: 'High phosphorus fertilizer at planting, side-dress when flowering',
+      sunlight: 'Full sun (6+ hours daily)',
+      spacing: '12 inches apart, rows 3 feet apart',
+      soil: 'Well-draining, slightly acidic soil (pH 5.0-6.0)'
+    },
+    commonProblems: {
+      'Scab': 'Keep soil pH below 5.5, maintain even moisture',
+      'Hollow Heart': 'Irregular growing conditions - maintain consistent care',
+      'Green Tubers': 'Exposure to light - ensure proper hilling'
     }
   },
   carrots: {
     name: 'Carrots',
     phases: {
-      germination: { days: 10, description: 'Seeds sprouting' },
-      leafing: { days: 20, description: 'Leaf development' },
-      rooting: { days: 30, description: 'Root development' },
-      maturing: { days: 25, description: 'Root enlargement' }
+      germination: { days: 10, description: 'Seeds sprouting', care: 'Keep soil consistently moist, avoid crusting' },
+      leafing: { days: 20, description: 'Leaf development', care: 'Thin seedlings to 2 inches apart' },
+      rooting: { days: 30, description: 'Root development', care: 'Keep soil loose and weed-free' },
+      maturing: { days: 25, description: 'Root enlargement', care: 'Maintain even moisture to prevent splitting' }
     },
     careTips: {
-      watering: 'Keep soil moist but not wet',
-      fertilizing: 'Low nitrogen fertilizer',
-      sunlight: 'Full sun to partial shade'
+      watering: 'Keep soil moist but not wet, water deeply once a week',
+      fertilizing: 'Low nitrogen fertilizer, high in phosphorus and potassium',
+      sunlight: 'Full sun to partial shade',
+      spacing: '2-3 inches apart, rows 16 inches apart',
+      soil: 'Deep, loose, well-draining soil free from rocks'
+    },
+    commonProblems: {
+      'Forking': 'Rocky soil or recent fertilizer - prepare soil well before planting',
+      'Bitter Taste': 'Environmental stress - maintain consistent growing conditions',
+      'Short Roots': 'Soil too compact - loosen soil deeply before planting'
+    }
+  },
+  lettuce: {
+    name: 'Lettuce',
+    phases: {
+      germination: { days: 5, description: 'Seeds sprouting', care: 'Keep soil moist and cool' },
+      leafing: { days: 20, description: 'Leaf development', care: 'Thin seedlings, maintain moisture' },
+      heading: { days: 25, description: 'Head formation', care: 'Regular watering, watch for bolting' },
+      harvest: { days: 10, description: 'Ready for harvest', care: 'Harvest outer leaves or whole heads' }
+    },
+    careTips: {
+      watering: 'Regular light watering, keep soil consistently moist',
+      fertilizing: 'Light feeder - balanced fertilizer at planting',
+      sunlight: 'Partial shade in warm weather, full sun in cool weather',
+      spacing: '6-8 inches apart for leaf, 10-12 inches for head lettuce',
+      temperature: 'Cool weather crop, protect from heat'
+    },
+    commonProblems: {
+      'Bolting': 'Heat stress - plant in cool season, provide shade',
+      'Tip Burn': 'Calcium deficiency or irregular watering',
+      'Bitter Leaves': 'Heat or water stress - maintain cool, moist conditions'
     }
   }
 };
@@ -72,6 +114,14 @@ export async function initializeDB() {
         plantingStore.createIndex('startDate', 'startDate');
         plantingStore.createIndex('currentPhase', 'currentPhase');
       }
+
+      if (oldVersion < 3) {
+        if (!db.objectStoreNames.contains('plantNotes')) {
+          const notesStore = db.createObjectStore('plantNotes', { keyPath: 'id', autoIncrement: true });
+          notesStore.createIndex('plantingId', 'plantingId');
+          notesStore.createIndex('date', 'date');
+        }
+      }
     }
   });
 
@@ -87,7 +137,7 @@ export async function addPlanting(plantType, startDate) {
   const phases = [];
   let totalDays = 0;
   
-  for (const [phase, { days, description }] of Object.entries(plantData.phases)) {
+  for (const [phase, { days, description, care }] of Object.entries(plantData.phases)) {
     const phaseStartDate = new Date(currentDate);
     phaseStartDate.setDate(phaseStartDate.getDate() + totalDays);
     
@@ -95,7 +145,8 @@ export async function addPlanting(plantType, startDate) {
       name: phase,
       startDate: phaseStartDate.toISOString().split('T')[0],
       days,
-      description
+      description,
+      care
     });
     
     totalDays += days;
@@ -111,16 +162,16 @@ export async function addPlanting(plantType, startDate) {
     startDate: startDate,
     harvestDate: harvestDate.toISOString().split('T')[0],
     phases,
-    currentPhase: Object.keys(plantData.phases)[0]
+    currentPhase: Object.keys(plantData.phases)[0],
+    status: 'active',
+    notes: []
   };
   
-  const plantingId = await db.add('plantings', planting);
-  
-  // Add calendar events for each phase
-  const tx = db.transaction('events', 'readwrite');
+  const tx = db.transaction(['plantings', 'events'], 'readwrite');
+  const plantingId = await tx.objectStore('plantings').add(planting);
   
   // Add planting event
-  await tx.store.add({
+  await tx.objectStore('events').add({
     title: `Plant ${plantData.name}`,
     date: startDate,
     type: 'planting',
@@ -130,24 +181,63 @@ export async function addPlanting(plantType, startDate) {
   
   // Add phase transition events
   for (const phase of phases) {
-    await tx.store.add({
+    await tx.objectStore('events').add({
       title: `${plantData.name}: ${phase.name} phase`,
       date: phase.startDate,
       type: 'maintenance',
-      description: phase.description,
+      description: `${phase.description}\n\nCare Instructions:\n${phase.care}`,
       plantingId
     });
+
+    // Add watering reminders every 3 days during each phase
+    let wateringDate = new Date(phase.startDate);
+    const phaseEnd = new Date(wateringDate);
+    phaseEnd.setDate(phaseEnd.getDate() + phase.days);
+
+    while (wateringDate < phaseEnd) {
+      await tx.objectStore('events').add({
+        title: `Water ${plantData.name}`,
+        date: wateringDate.toISOString().split('T')[0],
+        type: 'watering',
+        description: plantData.careTips.watering,
+        plantingId
+      });
+      wateringDate.setDate(wateringDate.getDate() + 3);
+    }
   }
   
   // Add harvest event
-  await tx.store.add({
+  await tx.objectStore('events').add({
     title: `Harvest ${plantData.name}`,
     date: harvestDate.toISOString().split('T')[0],
     type: 'harvesting',
-    description: `Time to harvest your ${plantData.name}!`,
+    description: `Time to harvest your ${plantData.name}!\n\nCommon Problems to Check For:\n${Object.entries(plantData.commonProblems).map(([problem, solution]) => `- ${problem}: ${solution}`).join('\n')}`,
     plantingId
   });
   
   await tx.done;
   return plantingId;
+}
+
+export async function addPlantNote(plantingId, note) {
+  const db = await openDB(DB_NAME);
+  return db.add('plantNotes', {
+    plantingId,
+    date: new Date().toISOString(),
+    note
+  });
+}
+
+export async function getPlantNotes(plantingId) {
+  const db = await openDB(DB_NAME);
+  return db.getAllFromIndex('plantNotes', 'plantingId', plantingId);
+}
+
+export async function updatePlantingStatus(plantingId, status) {
+  const db = await openDB(DB_NAME);
+  const tx = db.transaction('plantings', 'readwrite');
+  const planting = await tx.store.get(plantingId);
+  planting.status = status;
+  await tx.store.put(planting);
+  return tx.done;
 }
