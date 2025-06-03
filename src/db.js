@@ -17,6 +17,7 @@ export async function initializeDB() {
       if (!db.objectStoreNames.contains('events')) {
         const eventStore = db.createObjectStore('events', { keyPath: 'id', autoIncrement: true });
         eventStore.createIndex('date', 'date');
+        eventStore.createIndex('type', 'type');
         eventStore.createIndex('plantId', 'plantId');
       }
 
