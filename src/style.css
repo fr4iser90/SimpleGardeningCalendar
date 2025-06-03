@@ -1,0 +1,25 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --primary: #2F855A;
+  --secondary: #48BB78;
+  --accent: #9AE6B4;
+  --background: #F7FAFC;
+  --text: #2D3748;
+}
+
+.dark {
+  --primary: #48BB78;
+  --secondary: #2F855A;
+  --accent: #276749;
+  --background: #1A202C;
+  --text: #F7FAFC;
+}
+
+body {
+  font-family: system-ui, -apple-system, sans-serif;
+  color: var(--text);
+  background: var(--background);
+}
