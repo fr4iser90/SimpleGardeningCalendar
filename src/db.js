@@ -675,38 +675,44 @@ export async function getAllPlantings() {
 export async function deletePlantingAndEvents(plantingId) {
   const db = await openDB(DB_NAME);
   
-  // Check which object stores exist and create transaction accordingly
-  const storeNames = ['plantings', 'events'];
-  if (db.objectStoreNames.contains('plantNotes')) {
-    storeNames.push('plantNotes');
-  }
-  
-  // Delete everything in a transaction
-  const tx = db.transaction(storeNames, 'readwrite');
-  
-  // Delete all events related to this planting
-  const events = await tx.objectStore('events').index('plantingId').getAll(plantingId);
-  for (const event of events) {
-    await tx.objectStore('events').delete(event.id);
-  }
-  
-  // Delete all notes if the object store exists
-  if (db.objectStoreNames.contains('plantNotes')) {
-    try {
-      const notes = await tx.objectStore('plantNotes').index('plantingId').getAll(plantingId);
-      for (const note of notes) {
-        await tx.objectStore('plantNotes').delete(note.id);
-      }
-    } catch (error) {
-      console.warn('Could not delete plant notes:', error);
+  try {
+    // Step 1: Delete all events (this should always work)
+    const eventsTx = db.transaction('events', 'readwrite');
+    const events = await eventsTx.objectStore('events').index('plantingId').getAll(plantingId);
+    
+    for (const event of events) {
+      await eventsTx.objectStore('events').delete(event.id);
     }
+    await eventsTx.done;
+    
+    // Step 2: Delete all notes (only if object store exists)
+    if (db.objectStoreNames.contains('plantNotes')) {
+      try {
+        const notesTx = db.transaction('plantNotes', 'readwrite');
+        const allNotes = await notesTx.objectStore('plantNotes').getAll();
+        const plantNotes = allNotes.filter(note => note.plantingId === plantingId);
+        
+        for (const note of plantNotes) {
+          await notesTx.objectStore('plantNotes').delete(note.id);
+        }
+        await notesTx.done;
+      } catch (notesError) {
+        console.warn('Could not delete plant notes:', notesError);
+        // Continue anyway - notes deletion is not critical
+      }
+    }
+    
+    // Step 3: Delete the planting record (this should always work)
+    const plantingTx = db.transaction('plantings', 'readwrite');
+    await plantingTx.objectStore('plantings').delete(plantingId);
+    await plantingTx.done;
+    
+    return true;
+    
+  } catch (error) {
+    console.error('Error in deletePlantingAndEvents:', error);
+    throw error;
   }
-  
-  // Delete the planting record
-  await tx.objectStore('plantings').delete(plantingId);
-  
-  await tx.done;
-  return true;
 }
 
 export async function searchPlants(query) {
