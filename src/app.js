@@ -320,61 +320,90 @@ async function showCategoryPlantsModal(category, plantings) {
 
 // Delete plant and all associated events
 async function deletePlant(plantingId) {
-  const { openDB } = await import('idb');
-  const { deletePlantingAndEvents } = await import('./db.js');
-  
   try {
-    const db = await openDB('gardening-calendar');
+    // Import what we need
+    const { openDB } = await import('idb');
     
-    // Get planting details first for confirmation
-    const tx = db.transaction('plantings', 'readonly');
-    const planting = await tx.objectStore('plantings').get(plantingId);
-    await tx.done;
+    // Open database with error handling
+    let db;
+    try {
+      db = await openDB('gardening-calendar');
+    } catch (error) {
+      console.error('Could not open database:', error);
+      alert('❌ Database connection failed. Please refresh the page and try again.');
+      return;
+    }
+    
+    // Get plant info first with simple approach
+    let planting;
+    try {
+      planting = await db.get('plantings', plantingId);
+    } catch (error) {
+      console.error('Could not get planting:', error);
+      alert('❌ Could not find plant. Please refresh the page and try again.');
+      return;
+    }
     
     if (!planting) {
       alert('❌ Plant not found');
       return;
     }
     
-    const displayName = planting.displayName || planting.plantName;
+    const displayName = planting.displayName || planting.plantName || 'Unknown Plant';
     
-    // Get count of associated events for confirmation
-    const eventsTx = db.transaction('events', 'readonly');
-    const events = await eventsTx.objectStore('events').index('plantingId').getAll(plantingId);
-    await eventsTx.done;
-    
-    // Get count of notes if the object store exists
-    let notesCount = 0;
-    if (db.objectStoreNames.contains('plantNotes')) {
-      try {
-        const notesTx = db.transaction('plantNotes', 'readonly');
-        const allNotes = await notesTx.objectStore('plantNotes').getAll();
-        const notes = allNotes.filter(note => note.plantingId === plantingId);
-        notesCount = notes.length;
-        await notesTx.done;
-      } catch (error) {
-        console.warn('Could not access plant notes:', error);
-      }
-    }
-    
-    // Show detailed confirmation dialog
-    const confirmMessage = `🗑️ Delete "${displayName}"?
-
-This will permanently delete:
-• The plant record
-• ${events.length} associated calendar events
-• ${notesCount} plant notes
-
-⚠️ This action cannot be undone!
-
-Are you sure you want to continue?`;
-    
-    if (!confirm(confirmMessage)) {
+    // Simple confirmation
+    if (!confirm(`🗑️ Delete "${displayName}"?\n\nThis will permanently delete the plant and all its events.\n\n⚠️ This action cannot be undone!`)) {
       return;
     }
     
-    // Use the existing deletePlantingAndEvents function which properly handles transactions
-    await deletePlantingAndEvents(plantingId);
+    // Delete everything step by step with error handling
+    let deletedEvents = 0;
+    let deletedNotes = 0;
+    
+    // Step 1: Delete events
+    try {
+      const allEvents = await db.getAll('events');
+      const plantEvents = allEvents.filter(event => event.plantingId === plantingId);
+      
+      for (const event of plantEvents) {
+        try {
+          await db.delete('events', event.id);
+          deletedEvents++;
+        } catch (error) {
+          console.warn('Could not delete event:', event.id, error);
+        }
+      }
+    } catch (error) {
+      console.warn('Could not access events:', error);
+    }
+    
+    // Step 2: Delete notes (if they exist)
+    try {
+      if (db.objectStoreNames.contains('plantNotes')) {
+        const allNotes = await db.getAll('plantNotes');
+        const plantNotes = allNotes.filter(note => note.plantingId === plantingId);
+        
+        for (const note of plantNotes) {
+          try {
+            await db.delete('plantNotes', note.id);
+            deletedNotes++;
+          } catch (error) {
+            console.warn('Could not delete note:', note.id, error);
+          }
+        }
+      }
+    } catch (error) {
+      console.warn('Could not access notes:', error);
+    }
+    
+    // Step 3: Delete the plant itself
+    try {
+      await db.delete('plantings', plantingId);
+    } catch (error) {
+      console.error('Could not delete planting:', error);
+      alert('❌ Failed to delete plant. Please try again.');
+      return;
+    }
     
     // Close modal and refresh UI
     const modal = document.querySelector('.fixed');
@@ -391,11 +420,12 @@ Are you sure you want to continue?`;
       window.calendar.refetchEvents();
     }
     
-    alert(`✅ "${displayName}" and all associated data deleted successfully`);
+    // Success message with details
+    alert(`✅ "${displayName}" deleted successfully!\n\n• Plant record deleted\n• ${deletedEvents} events deleted\n• ${deletedNotes} notes deleted`);
     
   } catch (error) {
     console.error('Error deleting plant:', error);
-    alert('❌ Failed to delete plant. Please try again.');
+    alert(`❌ Failed to delete plant: ${error.message}\n\nPlease refresh the page and try again.`);
   }
 }
 
