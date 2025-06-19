@@ -97,7 +97,7 @@ async function showAddEventModal(date, preselectedType = null) {
         <div id="customFields" style="display: ${eventTypeValue === 'planting' ? 'none' : 'block'};">
           <div>
             <label class="block text-sm font-medium mb-1 dark:text-gray-200">Title</label>
-            <input type="text" name="title" class="w-full p-2 border rounded dark:bg-gray-700 dark:border-gray-600 dark:text-white" required>
+            <input type="text" name="title" id="titleField" class="w-full p-2 border rounded dark:bg-gray-700 dark:border-gray-600 dark:text-white" ${eventTypeValue === 'custom' ? 'required' : ''}>
           </div>
           <div>
             <label class="block text-sm font-medium mb-1 dark:text-gray-200">Type</label>
@@ -119,7 +119,7 @@ async function showAddEventModal(date, preselectedType = null) {
           </div>
           <div>
             <label class="block text-sm font-medium mb-1 dark:text-gray-200">Plant Type</label>
-            <select name="plantType" id="plantTypeSelect" class="w-full p-2 border rounded dark:bg-gray-700 dark:border-gray-600 dark:text-white">
+            <select name="plantType" id="plantTypeSelect" class="w-full p-2 border rounded dark:bg-gray-700 dark:border-gray-600 dark:text-white" ${eventTypeValue === 'planting' ? 'required' : ''}>
               ${Object.entries(PLANTS_DATA).map(([value, plant]) => 
                 `<option value="${value}" data-category="${plant.category}">${plant.name}${plant.legalNote ? ' ⚠️' : ''}</option>`
               ).join('')}
@@ -159,6 +159,7 @@ async function showAddEventModal(date, preselectedType = null) {
   const eventTypeSelect = document.getElementById('eventTypeSelect');
   const plantCategorySelect = document.getElementById('plantCategorySelect');
   const plantTypeSelect = document.getElementById('plantTypeSelect');
+  const titleField = document.getElementById('titleField');
   const cancelBtn = document.getElementById('cancelBtn');
   const saveBtn = document.getElementById('saveBtn');
 
@@ -188,12 +189,24 @@ async function showAddEventModal(date, preselectedType = null) {
     
     const formData = new FormData(form);
     
+    // Validate based on event type
+    const eventType = formData.get('eventType');
+    if (eventType === 'custom' && !formData.get('title').trim()) {
+      alert('Please enter a title for the event');
+      return;
+    }
+    
+    if (eventType === 'planting' && !formData.get('plantType')) {
+      alert('Please select a plant type');
+      return;
+    }
+    
     // Disable save button to prevent double submission
     saveBtn.disabled = true;
     saveBtn.textContent = 'Saving...';
     
     try {
-      if (formData.get('eventType') === 'planting') {
+      if (eventType === 'planting') {
         console.log('Adding planting:', {
           plantType: formData.get('plantType'),
           date: formData.get('date'),
@@ -244,10 +257,21 @@ async function showAddEventModal(date, preselectedType = null) {
     if (value === 'planting') {
       customFields.style.display = 'none';
       plantingFields.style.display = 'block';
+      
+      // Remove required from title field when hidden
+      titleField.removeAttribute('required');
+      // Add required to plant type when visible
+      plantTypeSelect.setAttribute('required', 'required');
+      
       updatePlantInfo(); // Show initial plant info
     } else {
       customFields.style.display = 'block';
       plantingFields.style.display = 'none';
+      
+      // Add required to title field when visible
+      titleField.setAttribute('required', 'required');
+      // Remove required from plant type when hidden
+      plantTypeSelect.removeAttribute('required');
     }
   }
 
