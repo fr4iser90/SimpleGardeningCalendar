@@ -415,9 +415,17 @@ async function deletePlant(plantingId) {
     const refreshEvent = new CustomEvent('refreshSidebar');
     document.dispatchEvent(refreshEvent);
     
-    // Refresh calendar if it exists
-    if (window.calendar) {
-      window.calendar.refetchEvents();
+    // Refresh calendar if it exists and has the refetchEvents method
+    if (window.calendar && typeof window.calendar.refetchEvents === 'function') {
+      try {
+        window.calendar.refetchEvents();
+      } catch (error) {
+        console.warn('Could not refresh calendar:', error);
+      }
+    } else {
+      // Alternative: dispatch a custom event that the calendar can listen to
+      const calendarRefreshEvent = new CustomEvent('refreshCalendar');
+      document.dispatchEvent(calendarRefreshEvent);
     }
     
     // Success message with details
