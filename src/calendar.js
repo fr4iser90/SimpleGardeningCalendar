@@ -20,24 +20,27 @@ export async function initializeCalendar() {
       right: 'dayGridMonth'
     },
     events: async (info, successCallback) => {
-      const db = await openDB('gardening-calendar');
-      const tx = db.transaction('events', 'readonly');
-      const store = tx.objectStore('events');
-      const events = await store.getAll();
-      
-      successCallback(events.map(event => ({
-        id: event.id,
-        title: event.title,
-        start: event.date,
-        backgroundColor: getEventColor(event.type),
-        borderColor: getEventColor(event.type),
-        textColor: '#ffffff',
-        extendedProps: {
-          description: event.description,
-          type: event.type,
-          plantingId: event.plantingId
-        }
-      })));
+      try {
+        const db = await openDB('gardening-calendar');
+        const events = await db.getAll('events');
+        
+        successCallback(events.map(event => ({
+          id: event.id,
+          title: event.title,
+          start: event.date,
+          backgroundColor: getEventColor(event.type),
+          borderColor: getEventColor(event.type),
+          textColor: '#ffffff',
+          extendedProps: {
+            description: event.description,
+            type: event.type,
+            plantingId: event.plantingId
+          }
+        })));
+      } catch (error) {
+        console.error('Error loading events:', error);
+        successCallback([]);
+      }
     },
     dateClick: (info) => {
       showAddEventModal(info.dateStr);
@@ -48,6 +51,12 @@ export async function initializeCalendar() {
   });
 
   calendar.render();
+  
+  // Listen for custom events from the app
+  document.addEventListener('showAddEventModal', (e) => {
+    showAddEventModal(e.detail.date, e.detail.type);
+  });
+  
   return calendar;
 }
 
@@ -62,7 +71,7 @@ function getEventColor(type) {
   return colors[type] || '#2F855A';
 }
 
-async function showAddEventModal(date) {
+async function showAddEventModal(date, preselectedType = null) {
   const modal = document.createElement('div');
   modal.className = 'fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center p-4 z-50';
   
@@ -71,6 +80,8 @@ async function showAddEventModal(date) {
     `<option value="${category}">${category}</option>`
   ).join('');
 
+  const eventTypeValue = preselectedType === 'planting' ? 'planting' : 'custom';
+
   modal.innerHTML = `
     <div class="bg-white dark:bg-gray-800 rounded-lg p-6 max-w-md w-full max-h-[90vh] overflow-y-auto">
       <h2 class="text-xl font-semibold mb-4 dark:text-white">Add Garden Event</h2>
@@ -78,12 +89,12 @@ async function showAddEventModal(date) {
         <div>
           <label class="block text-sm font-medium mb-1 dark:text-gray-200">Event Type</label>
           <select name="eventType" class="w-full p-2 border rounded dark:bg-gray-700 dark:border-gray-600 dark:text-white" onchange="togglePlantingFields(this.value)">
-            <option value="custom">Custom Event</option>
-            <option value="planting">Start Planting</option>
+            <option value="custom" ${eventTypeValue === 'custom' ? 'selected' : ''}>Custom Event</option>
+            <option value="planting" ${eventTypeValue === 'planting' ? 'selected' : ''}>Start Planting</option>
           </select>
         </div>
         
-        <div id="customFields">
+        <div id="customFields" style="display: ${eventTypeValue === 'planting' ? 'none' : 'block'};">
           <div>
             <label class="block text-sm font-medium mb-1 dark:text-gray-200">Title</label>
             <input type="text" name="title" class="w-full p-2 border rounded dark:bg-gray-700 dark:border-gray-600 dark:text-white" required>
@@ -98,7 +109,7 @@ async function showAddEventModal(date) {
           </div>
         </div>
         
-        <div id="plantingFields" style="display: none;">
+        <div id="plantingFields" style="display: ${eventTypeValue === 'planting' ? 'block' : 'none'};">
           <div>
             <label class="block text-sm font-medium mb-1 dark:text-gray-200">Plant Category</label>
             <select name="plantCategory" class="w-full p-2 border rounded dark:bg-gray-700 dark:border-gray-600 dark:text-white" onchange="updatePlantOptions(this.value)">
@@ -108,7 +119,7 @@ async function showAddEventModal(date) {
           </div>
           <div>
             <label class="block text-sm font-medium mb-1 dark:text-gray-200">Plant Type</label>
-            <select name="plantType" id="plantTypeSelect" class="w-full p-2 border rounded dark:bg-gray-700 dark:border-gray-600 dark:text-white">
+            <select name="plantType" id="plantTypeSelect" class="w-full p-2 border rounded dark:bg-gray-700 dark:border-gray-600 dark:text-white" onchange="updatePlantInfo()">
               ${Object.entries(PLANTS_DATA).map(([value, plant]) => 
                 `<option value="${value}" data-category="${plant.category}">${plant.name}${plant.legalNote ? ' ⚠️' : ''}</option>`
               ).join('')}
@@ -135,7 +146,7 @@ async function showAddEventModal(date) {
         
         <div class="flex justify-end space-x-2">
           <button type="button" class="px-4 py-2 text-gray-600 dark:text-gray-300" id="cancelBtn">Cancel</button>
-          <button type="submit" class="px-4 py-2 bg-green-600 text-white rounded hover:bg-green-700">Save</button>
+          <button type="submit" class="px-4 py-2 bg-green-600 text-white rounded hover:bg-green-700" id="saveBtn">Save</button>
         </div>
       </form>
     </div>
@@ -183,7 +194,7 @@ async function showAddEventModal(date) {
   };
 
   // Add plant info update function
-  function updatePlantInfo() {
+  window.updatePlantInfo = function() {
     const plantSelect = document.getElementById('plantTypeSelect');
     const plantInfo = document.getElementById('plantInfo');
     const selectedPlant = PLANTS_DATA[plantSelect.value];
@@ -198,7 +209,13 @@ async function showAddEventModal(date) {
       }
       
       const totalDays = Object.values(selectedPlant.phases).reduce((sum, phase) => sum + phase.days, 0);
-      infoHtml += `<div class="mt-2"><strong>Growing cycle:</strong> ${totalDays} days</div>`;
+      infoHtml += `<div class="mt-2"><strong>Growing cycle:</strong> ${totalDays} days (${Math.round(totalDays/7)} weeks)</div>`;
+      
+      // Show phase breakdown
+      const phaseList = Object.entries(selectedPlant.phases).map(([name, data]) => 
+        `${name}: ${data.days} days`
+      ).join(', ');
+      infoHtml += `<div class="mt-1 text-xs"><strong>Phases:</strong> ${phaseList}</div>`;
       
       if (selectedPlant.careTips.temperature) {
         infoHtml += `<div><strong>Temperature:</strong> ${selectedPlant.careTips.temperature}</div>`;
@@ -210,13 +227,16 @@ async function showAddEventModal(date) {
       
       plantInfo.innerHTML = infoHtml;
     }
-  }
+  };
 
-  // Add event listener for plant type changes
-  document.getElementById('plantTypeSelect').addEventListener('change', updatePlantInfo);
+  // Initialize plant info if planting is preselected
+  if (eventTypeValue === 'planting') {
+    setTimeout(() => updatePlantInfo(), 100);
+  }
 
   const form = document.getElementById('eventForm');
   const cancelBtn = document.getElementById('cancelBtn');
+  const saveBtn = document.getElementById('saveBtn');
 
   cancelBtn.addEventListener('click', () => {
     document.body.removeChild(modal);
@@ -225,6 +245,10 @@ async function showAddEventModal(date) {
   form.addEventListener('submit', async (e) => {
     e.preventDefault();
     const formData = new FormData(form);
+    
+    // Disable save button to prevent double submission
+    saveBtn.disabled = true;
+    saveBtn.textContent = 'Saving...';
     
     try {
       if (formData.get('eventType') === 'planting') {
@@ -247,9 +271,16 @@ async function showAddEventModal(date) {
       
       document.body.removeChild(modal);
       calendar.refetchEvents();
+      
+      // Refresh the app sidebar data
+      const refreshEvent = new CustomEvent('refreshSidebar');
+      document.dispatchEvent(refreshEvent);
+      
     } catch (error) {
       console.error('Error saving event:', error);
       alert('Failed to save event. Please try again.');
+      saveBtn.disabled = false;
+      saveBtn.textContent = 'Save';
     }
   });
 }
@@ -292,7 +323,9 @@ async function showEventDetails(event) {
           <strong>Plant:</strong> ${planting.plantName}<br>
           <strong>Category:</strong> ${planting.category}<br>
           <strong>Location:</strong> ${planting.location}<br>
-          <strong>Current Phase:</strong> ${planting.currentPhase}
+          <strong>Current Phase:</strong> ${planting.currentPhase}<br>
+          <strong>Started:</strong> ${new Date(planting.startDate).toLocaleDateString()}<br>
+          <strong>Expected Completion:</strong> ${new Date(planting.completionDate).toLocaleDateString()}
         </div>
       `;
 
@@ -356,6 +389,10 @@ async function showEventDetails(event) {
   window.updateStatus = async function(plantingId, status) {
     await updatePlantingStatus(plantingId, status);
     calendar.refetchEvents();
+    
+    // Refresh the app sidebar data
+    const refreshEvent = new CustomEvent('refreshSidebar');
+    document.dispatchEvent(refreshEvent);
   };
 }
 
@@ -390,6 +427,11 @@ async function deleteEvent(eventId, plantingId) {
     
     document.querySelector('.fixed').remove();
     calendar.refetchEvents();
+    
+    // Refresh the app sidebar data
+    const refreshEvent = new CustomEvent('refreshSidebar');
+    document.dispatchEvent(refreshEvent);
+    
   } catch (error) {
     console.error('Error deleting event:', error);
     alert('Failed to delete event. Please try again.');

@@ -354,6 +354,7 @@ export async function initializeDB() {
         eventStore.createIndex('date', 'date');
         eventStore.createIndex('type', 'type');
         eventStore.createIndex('plantId', 'plantId');
+        eventStore.createIndex('plantingId', 'plantingId');
         
         db.createObjectStore('settings', { keyPath: 'id' });
       }
@@ -449,50 +450,84 @@ export async function addPlanting(plantType, startDate, location = 'Default Gard
   plantingDescription += `\n\nCare Tips:\n${Object.entries(plantData.careTips).map(([key, value]) => `- ${key}: ${value}`).join('\n')}`;
 
   await tx.objectStore('events').add({
-    title: `Plant ${plantData.name}`,
+    title: `🌱 Plant ${plantData.name}`,
     date: startDate,
     type: 'planting',
     description: plantingDescription,
     plantingId
   });
   
-  // Add phase transition events
-  for (const phase of phases) {
+  // Add phase transition events with enhanced scheduling
+  for (let i = 0; i < phases.length; i++) {
+    const phase = phases[i];
+    const phaseData = plantData.phases[phase.name];
+    
+    // Add phase start event
     await tx.objectStore('events').add({
-      title: `${plantData.name}: ${phase.name} phase`,
+      title: `${getPhaseEmoji(phase.name)} ${plantData.name}: ${phase.name} phase`,
       date: phase.startDate,
       type: 'maintenance',
       description: `${phase.description}\n\nCare Instructions:\n${phase.care}`,
       plantingId
     });
 
-    // Add watering reminders (frequency varies by plant type)
-    let wateringInterval = 3; // default 3 days
-    if (plantData.category === 'Cannabis') {
-      wateringInterval = 2; // Cannabis needs more frequent monitoring
-    } else if (plantData.category === 'Herbs') {
-      wateringInterval = 4; // Herbs are more drought tolerant
+    // Add weekly check-ins for longer phases (more than 14 days)
+    if (phase.days > 14) {
+      const weeklyChecks = Math.floor(phase.days / 7);
+      for (let week = 1; week <= weeklyChecks; week++) {
+        const checkDate = new Date(phase.startDate);
+        checkDate.setDate(checkDate.getDate() + (week * 7));
+        
+        if (checkDate < new Date(completionDate)) {
+          await tx.objectStore('events').add({
+            title: `📋 ${plantData.name}: Week ${week} check (${phase.name})`,
+            date: checkDate.toISOString().split('T')[0],
+            type: 'maintenance',
+            description: `Weekly check during ${phase.name} phase\n\n${phase.care}\n\nLook for signs of:\n${getPhaseCheckpoints(phase.name, plantData)}`,
+            plantingId
+          });
+        }
+      }
     }
 
+    // Add watering reminders with plant-specific intervals
+    let wateringInterval = getWateringInterval(plantData.category, phase.name);
     let wateringDate = new Date(phase.startDate);
     const phaseEnd = new Date(wateringDate);
     phaseEnd.setDate(phaseEnd.getDate() + phase.days);
 
     while (wateringDate < phaseEnd) {
       await tx.objectStore('events').add({
-        title: `Water ${plantData.name}`,
+        title: `💧 Water ${plantData.name}`,
         date: wateringDate.toISOString().split('T')[0],
         type: 'watering',
-        description: plantData.careTips.watering || 'Check soil moisture and water as needed',
+        description: `${plantData.careTips.watering || 'Check soil moisture and water as needed'}\n\nPhase: ${phase.name}\nCare: ${phase.care}`,
         plantingId
       });
       wateringDate.setDate(wateringDate.getDate() + wateringInterval);
+    }
+
+    // Add fertilizing reminders
+    if (phase.days > 14 && (phase.name === 'vegetative' || phase.name === 'flowering' || phase.name === 'fruiting')) {
+      const fertilizeDate = new Date(phase.startDate);
+      fertilizeDate.setDate(fertilizeDate.getDate() + 7); // Start fertilizing after first week
+      
+      while (fertilizeDate < phaseEnd) {
+        await tx.objectStore('events').add({
+          title: `🌿 Fertilize ${plantData.name}`,
+          date: fertilizeDate.toISOString().split('T')[0],
+          type: 'fertilizing',
+          description: `${plantData.careTips.fertilizing || 'Apply appropriate fertilizer'}\n\nPhase: ${phase.name}`,
+          plantingId
+        });
+        fertilizeDate.setDate(fertilizeDate.getDate() + 14); // Every 2 weeks
+      }
     }
   }
   
   // Add final harvest/completion event
   const finalPhase = Object.keys(plantData.phases).pop();
-  const eventTitle = finalPhase === 'harvest' ? `Harvest ${plantData.name}` : `Complete ${plantData.name} cycle`;
+  const eventTitle = finalPhase === 'harvest' ? `🌾 Harvest ${plantData.name}` : `✅ Complete ${plantData.name} cycle`;
   
   let harvestDescription = `Time to ${finalPhase === 'harvest' ? 'harvest' : 'complete'} your ${plantData.name}!`;
   if (plantData.commonProblems && Object.keys(plantData.commonProblems).length > 0) {
@@ -509,6 +544,78 @@ export async function addPlanting(plantType, startDate, location = 'Default Gard
   
   await tx.done;
   return plantingId;
+}
+
+function getPhaseEmoji(phase) {
+  const emojis = {
+    germination: '🌱',
+    sprouting: '🌱',
+    seedling: '🌿',
+    vegetative: '🍃',
+    leafing: '🍃',
+    rooting: '🌿',
+    preflower: '🌸',
+    flowering: '🌸',
+    blooming: '🌺',
+    fruiting: '🍅',
+    tuberization: '🥔',
+    bulking: '🥔',
+    harvest: '🌾',
+    maturation: '🌾',
+    establishment: '🌱',
+    dormancy: '😴'
+  };
+  return emojis[phase] || '📅';
+}
+
+function getWateringInterval(category, phase) {
+  // Return watering interval in days based on plant category and phase
+  const intervals = {
+    'Cannabis': {
+      'germination': 1,
+      'seedling': 2,
+      'vegetative': 2,
+      'flowering': 2,
+      'default': 2
+    },
+    'Vegetables': {
+      'germination': 1,
+      'seedling': 2,
+      'vegetative': 3,
+      'flowering': 2,
+      'fruiting': 2,
+      'default': 3
+    },
+    'Herbs': {
+      'default': 4
+    },
+    'Fruits': {
+      'default': 3
+    }
+  };
+  
+  return intervals[category]?.[phase] || intervals[category]?.['default'] || 3;
+}
+
+function getPhaseCheckpoints(phase, plantData) {
+  const checkpoints = {
+    'germination': 'Sprouting progress, moisture levels, temperature',
+    'seedling': 'Leaf development, stem strength, pest signs',
+    'vegetative': 'Growth rate, leaf color, branching, training needs',
+    'flowering': 'Flower development, pollination, nutrient needs',
+    'fruiting': 'Fruit set, size development, ripening signs',
+    'harvest': 'Ripeness indicators, harvest timing'
+  };
+  
+  let phaseChecks = checkpoints[phase] || 'General plant health, growth progress';
+  
+  // Add plant-specific problems to watch for
+  if (plantData.commonProblems) {
+    const problems = Object.keys(plantData.commonProblems).slice(0, 3).join(', ');
+    phaseChecks += `\nCommon issues: ${problems}`;
+  }
+  
+  return phaseChecks;
 }
 
 export async function addPlantNote(plantingId, note) {
@@ -529,8 +636,10 @@ export async function updatePlantingStatus(plantingId, status) {
   const db = await openDB(DB_NAME);
   const tx = db.transaction('plantings', 'readwrite');
   const planting = await tx.store.get(plantingId);
-  planting.status = status;
-  await tx.store.put(planting);
+  if (planting) {
+    planting.status = status;
+    await tx.store.put(planting);
+  }
   return tx.done;
 }
 

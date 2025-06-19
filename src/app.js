@@ -86,6 +86,12 @@ export function initializeApp() {
   
   // Load upcoming tasks
   loadUpcomingTasks();
+  
+  // Listen for refresh events
+  document.addEventListener('refreshSidebar', () => {
+    loadPlantCategories();
+    loadUpcomingTasks();
+  });
 }
 
 function initializeQuickActions() {
@@ -119,6 +125,10 @@ function initializeQuickActions() {
 async function loadPlantCategories() {
   const { PLANT_CATEGORIES, getPlantingsByCategory } = await import('./db.js');
   const categoriesContainer = document.getElementById('plantCategories');
+  
+  if (!categoriesContainer) return;
+  
+  categoriesContainer.innerHTML = '';
   
   for (const category of PLANT_CATEGORIES) {
     const plantings = await getPlantingsByCategory(category);
@@ -157,6 +167,8 @@ async function loadUpcomingTasks() {
     .slice(0, 5);
   
   const tasksContainer = document.getElementById('upcomingTasks');
+  if (!tasksContainer) return;
+  
   tasksContainer.innerHTML = '';
   
   if (upcomingEvents.length === 0) {
@@ -304,7 +316,7 @@ async function showPlantLibraryModal() {
               </div>
             ` : ''}
             <div class="text-sm text-gray-600 dark:text-gray-400 space-y-1">
-              <div><strong>Growing cycle:</strong> ${Object.values(plant.phases).reduce((sum, phase) => sum + phase.days, 0)} days</div>
+              <div><strong>Growing cycle:</strong> ${Object.values(plant.phases).reduce((sum, phase) => sum + phase.days, 0)} days (${Math.round(Object.values(plant.phases).reduce((sum, phase) => sum + phase.days, 0)/7)} weeks)</div>
               ${plant.careTips.sunlight ? `<div><strong>Light:</strong> ${plant.careTips.sunlight}</div>` : ''}
               ${plant.careTips.temperature ? `<div><strong>Temperature:</strong> ${plant.careTips.temperature}</div>` : ''}
             </div>
