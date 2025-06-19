@@ -23,7 +23,7 @@ export function showGoogleCalendarSetup() {
             <p><strong>Step 1:</strong> Go to <a href="https://console.cloud.google.com/" target="_blank" class="underline hover:text-blue-600">Google Cloud Console</a></p>
             <p><strong>Step 2:</strong> Create a new project or select existing one</p>
             <p><strong>Step 3:</strong> Enable the "Google Calendar API"</p>
-            <p><strong>Step 4:</strong> Create credentials (API Key + OAuth 2.0 Client ID)</p>
+            <p><strong>Step 4:</strong> Create OAuth 2.0 Client ID credentials</p>
             <p><strong>Step 5:</strong> Add your domain to authorized origins</p>
             <button onclick="showDetailedHelp()" class="mt-2 px-3 py-1 bg-blue-600 text-white rounded hover:bg-blue-700 text-xs">
               📖 Show Detailed Guide
@@ -40,7 +40,7 @@ export function showGoogleCalendarSetup() {
             </span>
           </div>
           <div id="userInfo" class="mt-2 text-sm text-gray-600 dark:text-gray-400">
-            ${googleCalendar.isSignedIn ? 'Loading user info...' : 'Enter your credentials below to connect'}
+            ${googleCalendar.isSignedIn ? 'Loading user info...' : 'Enter your Client ID below to connect'}
           </div>
         </div>
         
@@ -48,22 +48,7 @@ export function showGoogleCalendarSetup() {
         <form id="googleCalendarForm" class="space-y-4">
           <div>
             <label class="block text-sm font-medium mb-1 dark:text-gray-200">
-              🔑 Google API Key
-              <button type="button" onclick="showApiKeyHelp()" class="ml-1 text-blue-500 hover:text-blue-600">ℹ️</button>
-            </label>
-            <input 
-              type="password" 
-              name="apiKey" 
-              value="${settings.apiKey}" 
-              class="w-full p-2 border rounded dark:bg-gray-700 dark:border-gray-600 dark:text-white" 
-              placeholder="AIza..."
-              required
-            >
-          </div>
-          
-          <div>
-            <label class="block text-sm font-medium mb-1 dark:text-gray-200">
-              🆔 OAuth 2.0 Client ID
+              🆔 Google Client ID
               <button type="button" onclick="showClientIdHelp()" class="ml-1 text-blue-500 hover:text-blue-600">ℹ️</button>
             </label>
             <input 
@@ -74,11 +59,14 @@ export function showGoogleCalendarSetup() {
               placeholder="123456789-abc.apps.googleusercontent.com"
               required
             >
+            <div class="text-xs text-gray-500 dark:text-gray-400 mt-1">
+              💡 Only Client ID needed - no API Key required!
+            </div>
           </div>
           
           <div class="flex space-x-2">
-            <button type="button" id="testConnectionBtn" class="px-4 py-2 bg-blue-600 text-white rounded hover:bg-blue-700">
-              🔗 Test Connection
+            <button type="button" id="connectBtn" class="px-4 py-2 bg-blue-600 text-white rounded hover:bg-blue-700">
+              🔗 Connect to Google Calendar
             </button>
             <button type="button" id="saveSettingsBtn" class="px-4 py-2 bg-green-600 text-white rounded hover:bg-green-700">
               💾 Save Settings
@@ -150,33 +138,31 @@ export function showGoogleCalendarSetup() {
 
 function initializeGoogleCalendarEventListeners() {
   const form = document.getElementById('googleCalendarForm');
-  const testConnectionBtn = document.getElementById('testConnectionBtn');
+  const connectBtn = document.getElementById('connectBtn');
   const saveSettingsBtn = document.getElementById('saveSettingsBtn');
   const syncAllEventsBtn = document.getElementById('syncAllEventsBtn');
   const saveSyncSettingsBtn = document.getElementById('saveSyncSettingsBtn');
   const signOutBtn = document.getElementById('signOutBtn');
   
-  // Test connection
-  testConnectionBtn?.addEventListener('click', async () => {
+  // Connect to Google Calendar
+  connectBtn?.addEventListener('click', async () => {
     const formData = new FormData(form);
-    const apiKey = formData.get('apiKey');
     const clientId = formData.get('clientId');
     
-    if (!apiKey || !clientId) {
-      alert('Please enter both API Key and Client ID');
+    if (!clientId) {
+      alert('Please enter your Google Client ID');
       return;
     }
     
-    testConnectionBtn.disabled = true;
-    testConnectionBtn.textContent = '🔄 Testing...';
+    connectBtn.disabled = true;
+    connectBtn.textContent = '🔄 Connecting...';
     
     try {
-      await googleCalendar.initialize(clientId, apiKey);
+      await googleCalendar.initialize(clientId);
       await googleCalendar.signIn();
       
       // Save settings on successful connection
       const settings = googleCalendarSettings.load();
-      settings.apiKey = apiKey;
       settings.clientId = clientId;
       googleCalendarSettings.save(settings);
       
@@ -186,11 +172,11 @@ function initializeGoogleCalendarEventListeners() {
       alert('✅ Successfully connected to Google Calendar!');
       
     } catch (error) {
-      console.error('Connection test failed:', error);
+      console.error('Connection failed:', error);
       alert(`❌ Connection failed: ${error.message}`);
     } finally {
-      testConnectionBtn.disabled = false;
-      testConnectionBtn.textContent = '🔗 Test Connection';
+      connectBtn.disabled = false;
+      connectBtn.textContent = '🔗 Connect to Google Calendar';
     }
   });
   
@@ -198,7 +184,6 @@ function initializeGoogleCalendarEventListeners() {
   saveSettingsBtn?.addEventListener('click', () => {
     const formData = new FormData(form);
     const settings = googleCalendarSettings.load();
-    settings.apiKey = formData.get('apiKey');
     settings.clientId = formData.get('clientId');
     googleCalendarSettings.save(settings);
     alert('💾 Settings saved!');
@@ -259,7 +244,6 @@ function initializeGoogleCalendarEventListeners() {
   
   // Help functions
   window.showDetailedHelp = () => showDetailedSetupGuide();
-  window.showApiKeyHelp = () => showApiKeyHelp();
   window.showClientIdHelp = () => showClientIdHelp();
 }
 
@@ -298,7 +282,7 @@ async function updateConnectionStatus() {
     statusDiv.className = 'p-3 rounded-lg bg-gray-50 dark:bg-gray-700 border border-gray-200 dark:border-gray-600';
     statusDiv.querySelector('span:first-child').textContent = '❌';
     statusDiv.querySelector('span:last-child').textContent = 'Not Connected';
-    userInfoDiv.textContent = 'Enter your credentials below to connect';
+    userInfoDiv.textContent = 'Enter your Client ID below to connect';
     
     calendarSelection.style.display = 'none';
     syncOptions.style.display = 'none';
@@ -408,19 +392,10 @@ function showDetailedSetupGuide() {
         </div>
         
         <div class="border-l-4 border-purple-500 pl-4">
-          <h3 class="font-semibold text-purple-600 dark:text-purple-400">Step 3: Create API Key</h3>
+          <h3 class="font-semibold text-purple-600 dark:text-purple-400">Step 3: Create OAuth Client ID</h3>
           <ol class="list-decimal list-inside space-y-1 mt-2 dark:text-gray-300">
             <li>Go to "APIs & Services" → "Credentials"</li>
-            <li>Click "Create Credentials" → "API Key"</li>
-            <li>Copy the API key (starts with "AIza...")</li>
-            <li>Optionally restrict the key to Calendar API only</li>
-          </ol>
-        </div>
-        
-        <div class="border-l-4 border-orange-500 pl-4">
-          <h3 class="font-semibold text-orange-600 dark:text-orange-400">Step 4: Create OAuth Client ID</h3>
-          <ol class="list-decimal list-inside space-y-1 mt-2 dark:text-gray-300">
-            <li>Still in "Credentials", click "Create Credentials" → "OAuth client ID"</li>
+            <li>Click "Create Credentials" → "OAuth client ID"</li>
             <li>Choose "Web application" as application type</li>
             <li>Add your website URL to "Authorized JavaScript origins"</li>
             <li>For local development, add: <code class="bg-gray-100 dark:bg-gray-700 px-1 rounded">http://localhost:5173</code></li>
@@ -428,35 +403,35 @@ function showDetailedSetupGuide() {
           </ol>
         </div>
         
-        <div class="border-l-4 border-red-500 pl-4">
-          <h3 class="font-semibold text-red-600 dark:text-red-400">Step 5: Configure OAuth Consent</h3>
+        <div class="border-l-4 border-orange-500 pl-4">
+          <h3 class="font-semibold text-orange-600 dark:text-orange-400">Step 4: Configure OAuth Consent</h3>
           <ol class="list-decimal list-inside space-y-1 mt-2 dark:text-gray-300">
             <li>Go to "APIs & Services" → "OAuth consent screen"</li>
-            <li>Choose "External" user type (unless you have G Suite)</li>
+            <li>Choose "External" user type (unless you have Google Workspace)</li>
             <li>Fill in required fields (app name, user support email)</li>
             <li>Add your email to test users if in testing mode</li>
             <li>Add scope: <code class="bg-gray-100 dark:bg-gray-700 px-1 rounded">https://www.googleapis.com/auth/calendar.events</code></li>
           </ol>
         </div>
         
-        <div class="bg-yellow-50 dark:bg-yellow-900/20 border border-yellow-200 dark:border-yellow-800 rounded p-4">
-          <h3 class="font-semibold text-yellow-800 dark:text-yellow-200">⚠️ Important Notes</h3>
-          <ul class="list-disc list-inside space-y-1 mt-2 text-yellow-700 dark:text-yellow-300">
-            <li>Keep your API key and Client ID secure</li>
-            <li>For production, restrict API key to your domain</li>
-            <li>OAuth consent screen may need Google verification for public use</li>
-            <li>Test with your own Google account first</li>
+        <div class="bg-green-50 dark:bg-green-900/20 border border-green-200 dark:border-green-800 rounded p-4">
+          <h3 class="font-semibold text-green-800 dark:text-green-200">✅ Why Only Client ID?</h3>
+          <ul class="list-disc list-inside space-y-1 mt-2 text-green-700 dark:text-green-300">
+            <li><strong>Simpler Setup:</strong> No API Key needed for OAuth flows</li>
+            <li><strong>More Secure:</strong> OAuth handles authentication securely</li>
+            <li><strong>Better UX:</strong> Users sign in with their Google account</li>
+            <li><strong>Standard Practice:</strong> Most modern apps use this approach</li>
           </ul>
         </div>
         
-        <div class="bg-green-50 dark:bg-green-900/20 border border-green-200 dark:border-green-800 rounded p-4">
-          <h3 class="font-semibold text-green-800 dark:text-green-200">✅ Testing Your Setup</h3>
-          <ol class="list-decimal list-inside space-y-1 mt-2 text-green-700 dark:text-green-300">
-            <li>Enter your API Key and Client ID in the form above</li>
-            <li>Click "Test Connection"</li>
+        <div class="bg-blue-50 dark:bg-blue-900/20 border border-blue-200 dark:border-blue-800 rounded p-4">
+          <h3 class="font-semibold text-blue-800 dark:text-blue-200">🔧 Testing Your Setup</h3>
+          <ol class="list-decimal list-inside space-y-1 mt-2 text-blue-700 dark:text-blue-300">
+            <li>Enter your Client ID in the form above</li>
+            <li>Click "Connect to Google Calendar"</li>
             <li>You should see a Google sign-in popup</li>
             <li>Grant calendar permissions</li>
-            <li>You should see "Connected" status</li>
+            <li>You should see "Connected" status with your profile</li>
           </ol>
         </div>
       </div>
@@ -466,24 +441,8 @@ function showDetailedSetupGuide() {
   document.body.appendChild(helpModal);
 }
 
-function showApiKeyHelp() {
-  alert(`🔑 API Key Help:
-
-The API Key is used to authenticate your app with Google's servers.
-
-Where to find it:
-1. Google Cloud Console → APIs & Services → Credentials
-2. Look for "API Keys" section
-3. It starts with "AIza..." and is about 39 characters long
-
-Security:
-• Keep it secure, don't share publicly
-• For production, restrict it to your domain
-• It's used for read-only operations`);
-}
-
 function showClientIdHelp() {
-  alert(`🆔 OAuth Client ID Help:
+  alert(`🆔 Client ID Help:
 
 The Client ID is used for user authentication and authorization.
 
@@ -492,11 +451,16 @@ Where to find it:
 2. Look for "OAuth 2.0 Client IDs" section
 3. It ends with ".apps.googleusercontent.com"
 
-Setup:
+Setup Requirements:
 • Must be configured as "Web application"
 • Add your domain to "Authorized JavaScript origins"
 • For local development: http://localhost:5173
-• Used to request calendar permissions from users`);
+• Used to request calendar permissions from users
+
+Why no API Key needed?
+• OAuth 2.0 handles authentication securely
+• Client ID is sufficient for calendar access
+• Simpler and more secure than API Key + Client ID`);
 }
 
 function getTypeEmoji(type) {

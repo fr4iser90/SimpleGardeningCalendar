@@ -1,21 +1,19 @@
-// Google Calendar API Integration
+// Google Calendar API Integration - Simplified with Client ID only
 class GoogleCalendarIntegration {
   constructor() {
     this.isSignedIn = false;
     this.gapi = null;
     this.clientId = null;
-    this.apiKey = null;
     this.calendarId = 'primary'; // Default to primary calendar
     this.isInitialized = false;
   }
 
-  // Initialize Google API
-  async initialize(clientId, apiKey) {
+  // Initialize Google API with Client ID only
+  async initialize(clientId) {
     if (this.isInitialized) return true;
     
     try {
       this.clientId = clientId;
-      this.apiKey = apiKey;
       
       // Load Google API script if not already loaded
       if (!window.gapi) {
@@ -32,9 +30,8 @@ class GoogleCalendarIntegration {
         });
       });
       
-      // Initialize the client
+      // Initialize the client with Client ID only
       await this.gapi.client.init({
-        apiKey: this.apiKey,
         clientId: this.clientId,
         discoveryDocs: ['https://www.googleapis.com/discovery/v1/apis/calendar/v3/rest'],
         scope: 'https://www.googleapis.com/auth/calendar.events'
@@ -49,7 +46,7 @@ class GoogleCalendarIntegration {
       
     } catch (error) {
       console.error('Failed to initialize Google Calendar API:', error);
-      throw new Error('Failed to initialize Google Calendar API. Please check your credentials.');
+      throw new Error('Failed to initialize Google Calendar API. Please check your Client ID.');
     }
   }
 
@@ -261,7 +258,6 @@ export class GoogleCalendarSettings {
     }
     return {
       clientId: '',
-      apiKey: '',
       selectedCalendarId: 'primary',
       autoSync: false,
       syncTypes: {
