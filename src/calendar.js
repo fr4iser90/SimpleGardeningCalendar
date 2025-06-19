@@ -3,7 +3,7 @@ import dayGridPlugin from '@fullcalendar/daygrid';
 import interactionPlugin from '@fullcalendar/interaction';
 import { openDB } from 'idb';
 import { format } from 'date-fns';
-import { PLANTS_DATA, addPlanting, addPlantNote, getPlantNotes, updatePlantingStatus } from './db';
+import { PLANTS_DATA, PLANT_CATEGORIES, addPlanting, addPlantNote, getPlantNotes, updatePlantingStatus, searchPlants } from './db';
 
 let calendar;
 
@@ -65,8 +65,14 @@ function getEventColor(type) {
 async function showAddEventModal(date) {
   const modal = document.createElement('div');
   modal.className = 'fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center p-4 z-50';
+  
+  // Create category options
+  const categoryOptions = PLANT_CATEGORIES.map(category => 
+    `<option value="${category}">${category}</option>`
+  ).join('');
+
   modal.innerHTML = `
-    <div class="bg-white dark:bg-gray-800 rounded-lg p-6 max-w-md w-full">
+    <div class="bg-white dark:bg-gray-800 rounded-lg p-6 max-w-md w-full max-h-[90vh] overflow-y-auto">
       <h2 class="text-xl font-semibold mb-4 dark:text-white">Add Garden Event</h2>
       <form id="eventForm" class="space-y-4">
         <div>
@@ -94,12 +100,26 @@ async function showAddEventModal(date) {
         
         <div id="plantingFields" style="display: none;">
           <div>
+            <label class="block text-sm font-medium mb-1 dark:text-gray-200">Plant Category</label>
+            <select name="plantCategory" class="w-full p-2 border rounded dark:bg-gray-700 dark:border-gray-600 dark:text-white" onchange="updatePlantOptions(this.value)">
+              <option value="">All Categories</option>
+              ${categoryOptions}
+            </select>
+          </div>
+          <div>
             <label class="block text-sm font-medium mb-1 dark:text-gray-200">Plant Type</label>
-            <select name="plantType" class="w-full p-2 border rounded dark:bg-gray-700 dark:border-gray-600 dark:text-white">
+            <select name="plantType" id="plantTypeSelect" class="w-full p-2 border rounded dark:bg-gray-700 dark:border-gray-600 dark:text-white">
               ${Object.entries(PLANTS_DATA).map(([value, plant]) => 
-                `<option value="${value}">${plant.name}</option>`
+                `<option value="${value}" data-category="${plant.category}">${plant.name}${plant.legalNote ? ' ⚠️' : ''}</option>`
               ).join('')}
             </select>
+          </div>
+          <div>
+            <label class="block text-sm font-medium mb-1 dark:text-gray-200">Location</label>
+            <input type="text" name="location" class="w-full p-2 border rounded dark:bg-gray-700 dark:border-gray-600 dark:text-white" placeholder="e.g., Indoor Tent, Outdoor Garden" value="Default Garden">
+          </div>
+          <div id="plantInfo" class="text-sm text-gray-600 dark:text-gray-400 bg-gray-50 dark:bg-gray-700 p-3 rounded">
+            <!-- Plant information will be displayed here -->
           </div>
         </div>
         
@@ -131,11 +151,69 @@ async function showAddEventModal(date) {
     if (value === 'planting') {
       customFields.style.display = 'none';
       plantingFields.style.display = 'block';
+      updatePlantInfo(); // Show initial plant info
     } else {
       customFields.style.display = 'block';
       plantingFields.style.display = 'none';
     }
   };
+
+  // Add the category filter function
+  window.updatePlantOptions = function(category) {
+    const plantSelect = document.getElementById('plantTypeSelect');
+    const options = plantSelect.querySelectorAll('option');
+    
+    options.forEach(option => {
+      if (category === '' || option.dataset.category === category) {
+        option.style.display = 'block';
+      } else {
+        option.style.display = 'none';
+      }
+    });
+    
+    // Reset selection if current selection is now hidden
+    if (category !== '' && plantSelect.selectedOptions[0]?.dataset.category !== category) {
+      const firstVisibleOption = Array.from(options).find(opt => opt.style.display !== 'none');
+      if (firstVisibleOption) {
+        plantSelect.value = firstVisibleOption.value;
+      }
+    }
+    
+    updatePlantInfo();
+  };
+
+  // Add plant info update function
+  function updatePlantInfo() {
+    const plantSelect = document.getElementById('plantTypeSelect');
+    const plantInfo = document.getElementById('plantInfo');
+    const selectedPlant = PLANTS_DATA[plantSelect.value];
+    
+    if (selectedPlant) {
+      let infoHtml = `<strong>${selectedPlant.name}</strong> (${selectedPlant.category})`;
+      
+      if (selectedPlant.legalNote) {
+        infoHtml += `<div class="mt-2 p-2 bg-yellow-100 dark:bg-yellow-900 border border-yellow-300 dark:border-yellow-700 rounded">
+          <strong>⚠️ Legal Notice:</strong> ${selectedPlant.legalNote}
+        </div>`;
+      }
+      
+      const totalDays = Object.values(selectedPlant.phases).reduce((sum, phase) => sum + phase.days, 0);
+      infoHtml += `<div class="mt-2"><strong>Growing cycle:</strong> ${totalDays} days</div>`;
+      
+      if (selectedPlant.careTips.temperature) {
+        infoHtml += `<div><strong>Temperature:</strong> ${selectedPlant.careTips.temperature}</div>`;
+      }
+      
+      if (selectedPlant.careTips.sunlight) {
+        infoHtml += `<div><strong>Light:</strong> ${selectedPlant.careTips.sunlight}</div>`;
+      }
+      
+      plantInfo.innerHTML = infoHtml;
+    }
+  }
+
+  // Add event listener for plant type changes
+  document.getElementById('plantTypeSelect').addEventListener('change', updatePlantInfo);
 
   const form = document.getElementById('eventForm');
   const cancelBtn = document.getElementById('cancelBtn');
@@ -152,7 +230,8 @@ async function showAddEventModal(date) {
       if (formData.get('eventType') === 'planting') {
         await addPlanting(
           formData.get('plantType'),
-          formData.get('date')
+          formData.get('date'),
+          formData.get('location') || 'Default Garden'
         );
       } else {
         const eventData = {
@@ -181,13 +260,14 @@ async function showEventDetails(event) {
   
   let notesHtml = '';
   let plantingStatus = '';
+  let plantingInfo = '';
   
   if (event.extendedProps.plantingId) {
     const notes = await getPlantNotes(event.extendedProps.plantingId);
     notesHtml = `
       <div class="mt-4">
         <h3 class="font-semibold mb-2 dark:text-white">Notes</h3>
-        <div class="space-y-2">
+        <div class="space-y-2 max-h-32 overflow-y-auto">
           ${notes.map(note => `
             <div class="text-sm bg-gray-50 dark:bg-gray-700 p-2 rounded">
               <div class="text-xs text-gray-500 dark:text-gray-400">${format(new Date(note.date), 'MMM d, yyyy h:mm a')}</div>
@@ -207,6 +287,15 @@ async function showEventDetails(event) {
     const db = await openDB('gardening-calendar');
     const planting = await db.get('plantings', event.extendedProps.plantingId);
     if (planting) {
+      plantingInfo = `
+        <div class="mt-2 text-sm">
+          <strong>Plant:</strong> ${planting.plantName}<br>
+          <strong>Category:</strong> ${planting.category}<br>
+          <strong>Location:</strong> ${planting.location}<br>
+          <strong>Current Phase:</strong> ${planting.currentPhase}
+        </div>
+      `;
+
       plantingStatus = `
         <div class="mt-4">
           <h3 class="font-semibold mb-2 dark:text-white">Status</h3>
@@ -221,7 +310,7 @@ async function showEventDetails(event) {
   }
 
   modal.innerHTML = `
-    <div class="bg-white dark:bg-gray-800 rounded-lg p-6 max-w-md w-full">
+    <div class="bg-white dark:bg-gray-800 rounded-lg p-6 max-w-md w-full max-h-[90vh] overflow-y-auto">
       <div class="flex justify-between items-start mb-4">
         <h2 class="text-xl font-semibold dark:text-white">${event.title}</h2>
         <span class="px-2 py-1 rounded text-sm text-white" style="background-color: ${event.backgroundColor};">
@@ -232,10 +321,11 @@ async function showEventDetails(event) {
         <p class="text-sm">
           <strong>Date:</strong> ${format(new Date(event.start), 'MMMM d, yyyy')}
         </p>
-        <p class="text-sm">
+        ${plantingInfo}
+        <div class="text-sm">
           <strong>Description:</strong><br>
-          ${event.extendedProps.description || 'No description provided'}
-        </p>
+          <div class="mt-1 whitespace-pre-wrap">${event.extendedProps.description || 'No description provided'}</div>
+        </div>
         ${plantingStatus}
         ${notesHtml}
       </div>
@@ -305,3 +395,6 @@ async function deleteEvent(eventId, plantingId) {
     alert('Failed to delete event. Please try again.');
   }
 }
+
+// Make deleteEvent available globally
+window.deleteEvent = deleteEvent;
