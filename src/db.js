@@ -376,8 +376,7 @@ export async function initializeDB() {
       if (oldVersion < 4) {
         // Add new indexes for enhanced plant database
         if (db.objectStoreNames.contains('plantings')) {
-          const tx = db.transaction('plantings', 'readwrite');
-          const store = tx.objectStore('plantings');
+          const store = db.objectStore('plantings');
           if (!store.indexNames.contains('category')) {
             store.createIndex('category', 'category');
           }
