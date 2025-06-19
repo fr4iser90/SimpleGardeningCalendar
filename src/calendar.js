@@ -52,9 +52,19 @@ export async function initializeCalendar() {
 
   calendar.render();
   
+  // Make calendar globally available for other modules
+  window.calendar = calendar;
+  
   // Listen for custom events from the app
   document.addEventListener('showAddEventModal', (e) => {
     showAddEventModal(e.detail.date, e.detail.type);
+  });
+  
+  // Listen for refresh events from other modules
+  document.addEventListener('refreshCalendar', () => {
+    if (calendar && typeof calendar.refetchEvents === 'function') {
+      calendar.refetchEvents();
+    }
   });
   
   return calendar;
