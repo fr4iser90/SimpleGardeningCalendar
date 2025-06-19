@@ -344,7 +344,7 @@ export const PLANTS_DATA = {
 
 export async function initializeDB() {
   const db = await openDB(DB_NAME, DB_VERSION, {
-    upgrade(db, oldVersion, newVersion) {
+    upgrade(db, oldVersion, newVersion, transaction) {
       if (oldVersion < 1) {
         const plantStore = db.createObjectStore('plants', { keyPath: 'id', autoIncrement: true });
         plantStore.createIndex('name', 'name');
@@ -376,7 +376,7 @@ export async function initializeDB() {
       if (oldVersion < 4) {
         // Add new indexes for enhanced plant database
         if (db.objectStoreNames.contains('plantings')) {
-          const store = db.objectStore('plantings');
+          const store = transaction.objectStore('plantings');
           if (!store.indexNames.contains('category')) {
             store.createIndex('category', 'category');
           }
