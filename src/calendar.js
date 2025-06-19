@@ -88,7 +88,7 @@ async function showAddEventModal(date, preselectedType = null) {
       <form id="eventForm" class="space-y-4">
         <div>
           <label class="block text-sm font-medium mb-1 dark:text-gray-200">Event Type</label>
-          <select name="eventType" class="w-full p-2 border rounded dark:bg-gray-700 dark:border-gray-600 dark:text-white" onchange="togglePlantingFields(this.value)">
+          <select name="eventType" id="eventTypeSelect" class="w-full p-2 border rounded dark:bg-gray-700 dark:border-gray-600 dark:text-white">
             <option value="custom" ${eventTypeValue === 'custom' ? 'selected' : ''}>Custom Event</option>
             <option value="planting" ${eventTypeValue === 'planting' ? 'selected' : ''}>Start Planting</option>
           </select>
@@ -112,14 +112,14 @@ async function showAddEventModal(date, preselectedType = null) {
         <div id="plantingFields" style="display: ${eventTypeValue === 'planting' ? 'block' : 'none'};">
           <div>
             <label class="block text-sm font-medium mb-1 dark:text-gray-200">Plant Category</label>
-            <select name="plantCategory" class="w-full p-2 border rounded dark:bg-gray-700 dark:border-gray-600 dark:text-white" onchange="updatePlantOptions(this.value)">
+            <select name="plantCategory" id="plantCategorySelect" class="w-full p-2 border rounded dark:bg-gray-700 dark:border-gray-600 dark:text-white">
               <option value="">All Categories</option>
               ${categoryOptions}
             </select>
           </div>
           <div>
             <label class="block text-sm font-medium mb-1 dark:text-gray-200">Plant Type</label>
-            <select name="plantType" id="plantTypeSelect" class="w-full p-2 border rounded dark:bg-gray-700 dark:border-gray-600 dark:text-white" onchange="updatePlantInfo()">
+            <select name="plantType" id="plantTypeSelect" class="w-full p-2 border rounded dark:bg-gray-700 dark:border-gray-600 dark:text-white">
               ${Object.entries(PLANTS_DATA).map(([value, plant]) => 
                 `<option value="${value}" data-category="${plant.category}">${plant.name}${plant.legalNote ? ' ⚠️' : ''}</option>`
               ).join('')}
@@ -154,8 +154,90 @@ async function showAddEventModal(date, preselectedType = null) {
 
   document.body.appendChild(modal);
 
-  // Add the toggle function
-  window.togglePlantingFields = function(value) {
+  // Get form elements
+  const form = document.getElementById('eventForm');
+  const eventTypeSelect = document.getElementById('eventTypeSelect');
+  const plantCategorySelect = document.getElementById('plantCategorySelect');
+  const plantTypeSelect = document.getElementById('plantTypeSelect');
+  const cancelBtn = document.getElementById('cancelBtn');
+  const saveBtn = document.getElementById('saveBtn');
+
+  // Add event listeners
+  eventTypeSelect.addEventListener('change', function() {
+    togglePlantingFields(this.value);
+  });
+
+  plantCategorySelect.addEventListener('change', function() {
+    updatePlantOptions(this.value);
+  });
+
+  plantTypeSelect.addEventListener('change', function() {
+    updatePlantInfo();
+  });
+
+  cancelBtn.addEventListener('click', () => {
+    document.body.removeChild(modal);
+  });
+
+  // Form submission handler
+  form.addEventListener('submit', async (e) => {
+    e.preventDefault();
+    e.stopPropagation();
+    
+    console.log('Form submitted'); // Debug log
+    
+    const formData = new FormData(form);
+    
+    // Disable save button to prevent double submission
+    saveBtn.disabled = true;
+    saveBtn.textContent = 'Saving...';
+    
+    try {
+      if (formData.get('eventType') === 'planting') {
+        console.log('Adding planting:', {
+          plantType: formData.get('plantType'),
+          date: formData.get('date'),
+          location: formData.get('location')
+        });
+        
+        await addPlanting(
+          formData.get('plantType'),
+          formData.get('date'),
+          formData.get('location') || 'Default Garden'
+        );
+      } else {
+        console.log('Adding custom event');
+        
+        const eventData = {
+          title: formData.get('title'),
+          date: formData.get('date'),
+          type: formData.get('type'),
+          description: formData.get('description')
+        };
+        
+        const db = await openDB('gardening-calendar');
+        await db.add('events', eventData);
+      }
+      
+      console.log('Event saved successfully');
+      
+      document.body.removeChild(modal);
+      calendar.refetchEvents();
+      
+      // Refresh the app sidebar data
+      const refreshEvent = new CustomEvent('refreshSidebar');
+      document.dispatchEvent(refreshEvent);
+      
+    } catch (error) {
+      console.error('Error saving event:', error);
+      alert('Failed to save event. Please try again.');
+      saveBtn.disabled = false;
+      saveBtn.textContent = 'Save';
+    }
+  });
+
+  // Helper functions
+  function togglePlantingFields(value) {
     const customFields = document.getElementById('customFields');
     const plantingFields = document.getElementById('plantingFields');
     
@@ -167,12 +249,10 @@ async function showAddEventModal(date, preselectedType = null) {
       customFields.style.display = 'block';
       plantingFields.style.display = 'none';
     }
-  };
+  }
 
-  // Add the category filter function
-  window.updatePlantOptions = function(category) {
-    const plantSelect = document.getElementById('plantTypeSelect');
-    const options = plantSelect.querySelectorAll('option');
+  function updatePlantOptions(category) {
+    const options = plantTypeSelect.querySelectorAll('option');
     
     options.forEach(option => {
       if (category === '' || option.dataset.category === category) {
@@ -183,21 +263,19 @@ async function showAddEventModal(date, preselectedType = null) {
     });
     
     // Reset selection if current selection is now hidden
-    if (category !== '' && plantSelect.selectedOptions[0]?.dataset.category !== category) {
+    if (category !== '' && plantTypeSelect.selectedOptions[0]?.dataset.category !== category) {
       const firstVisibleOption = Array.from(options).find(opt => opt.style.display !== 'none');
       if (firstVisibleOption) {
-        plantSelect.value = firstVisibleOption.value;
+        plantTypeSelect.value = firstVisibleOption.value;
       }
     }
     
     updatePlantInfo();
-  };
+  }
 
-  // Add plant info update function
-  window.updatePlantInfo = function() {
-    const plantSelect = document.getElementById('plantTypeSelect');
+  function updatePlantInfo() {
     const plantInfo = document.getElementById('plantInfo');
-    const selectedPlant = PLANTS_DATA[plantSelect.value];
+    const selectedPlant = PLANTS_DATA[plantTypeSelect.value];
     
     if (selectedPlant) {
       let infoHtml = `<strong>${selectedPlant.name}</strong> (${selectedPlant.category})`;
@@ -227,62 +305,12 @@ async function showAddEventModal(date, preselectedType = null) {
       
       plantInfo.innerHTML = infoHtml;
     }
-  };
+  }
 
   // Initialize plant info if planting is preselected
   if (eventTypeValue === 'planting') {
     setTimeout(() => updatePlantInfo(), 100);
   }
-
-  const form = document.getElementById('eventForm');
-  const cancelBtn = document.getElementById('cancelBtn');
-  const saveBtn = document.getElementById('saveBtn');
-
-  cancelBtn.addEventListener('click', () => {
-    document.body.removeChild(modal);
-  });
-
-  form.addEventListener('submit', async (e) => {
-    e.preventDefault();
-    const formData = new FormData(form);
-    
-    // Disable save button to prevent double submission
-    saveBtn.disabled = true;
-    saveBtn.textContent = 'Saving...';
-    
-    try {
-      if (formData.get('eventType') === 'planting') {
-        await addPlanting(
-          formData.get('plantType'),
-          formData.get('date'),
-          formData.get('location') || 'Default Garden'
-        );
-      } else {
-        const eventData = {
-          title: formData.get('title'),
-          date: formData.get('date'),
-          type: formData.get('type'),
-          description: formData.get('description')
-        };
-        
-        const db = await openDB('gardening-calendar');
-        await db.add('events', eventData);
-      }
-      
-      document.body.removeChild(modal);
-      calendar.refetchEvents();
-      
-      // Refresh the app sidebar data
-      const refreshEvent = new CustomEvent('refreshSidebar');
-      document.dispatchEvent(refreshEvent);
-      
-    } catch (error) {
-      console.error('Error saving event:', error);
-      alert('Failed to save event. Please try again.');
-      saveBtn.disabled = false;
-      saveBtn.textContent = 'Save';
-    }
-  });
 }
 
 async function showEventDetails(event) {
