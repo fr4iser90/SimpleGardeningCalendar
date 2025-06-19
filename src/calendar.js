@@ -83,7 +83,7 @@ async function showAddEventModal(date, preselectedType = null) {
   const eventTypeValue = preselectedType === 'planting' ? 'planting' : 'custom';
 
   modal.innerHTML = `
-    <div class="bg-white dark:bg-gray-800 rounded-lg p-6 max-w-md w-full max-h-[90vh] overflow-y-auto">
+    <div class="bg-white dark:bg-gray-800 rounded-lg p-6 max-w-lg w-full max-h-[90vh] overflow-y-auto">
       <h2 class="text-xl font-semibold mb-4 dark:text-white">Add Garden Event</h2>
       <form id="eventForm" class="space-y-4">
         <div>
@@ -110,27 +110,99 @@ async function showAddEventModal(date, preselectedType = null) {
         </div>
         
         <div id="plantingFields" style="display: ${eventTypeValue === 'planting' ? 'block' : 'none'};">
-          <div>
-            <label class="block text-sm font-medium mb-1 dark:text-gray-200">Plant Category</label>
-            <select name="plantCategory" id="plantCategorySelect" class="w-full p-2 border rounded dark:bg-gray-700 dark:border-gray-600 dark:text-white">
-              <option value="">All Categories</option>
-              ${categoryOptions}
-            </select>
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+            <div>
+              <label class="block text-sm font-medium mb-1 dark:text-gray-200">Plant Category</label>
+              <select name="plantCategory" id="plantCategorySelect" class="w-full p-2 border rounded dark:bg-gray-700 dark:border-gray-600 dark:text-white">
+                <option value="">All Categories</option>
+                ${categoryOptions}
+              </select>
+            </div>
+            <div>
+              <label class="block text-sm font-medium mb-1 dark:text-gray-200">Plant Type</label>
+              <select name="plantType" id="plantTypeSelect" class="w-full p-2 border rounded dark:bg-gray-700 dark:border-gray-600 dark:text-white" ${eventTypeValue === 'planting' ? 'required' : ''}>
+                ${Object.entries(PLANTS_DATA).map(([value, plant]) => 
+                  `<option value="${value}" data-category="${plant.category}">${plant.name}${plant.legalNote ? ' ⚠️' : ''}</option>`
+                ).join('')}
+              </select>
+            </div>
           </div>
-          <div>
-            <label class="block text-sm font-medium mb-1 dark:text-gray-200">Plant Type</label>
-            <select name="plantType" id="plantTypeSelect" class="w-full p-2 border rounded dark:bg-gray-700 dark:border-gray-600 dark:text-white" ${eventTypeValue === 'planting' ? 'required' : ''}>
-              ${Object.entries(PLANTS_DATA).map(([value, plant]) => 
-                `<option value="${value}" data-category="${plant.category}">${plant.name}${plant.legalNote ? ' ⚠️' : ''}</option>`
-              ).join('')}
-            </select>
+          
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+            <div>
+              <label class="block text-sm font-medium mb-1 dark:text-gray-200">Custom Name (Optional)</label>
+              <input type="text" name="customName" id="customNameField" class="w-full p-2 border rounded dark:bg-gray-700 dark:border-gray-600 dark:text-white" placeholder="e.g., 'My Northern Lights #1'">
+              <div class="text-xs text-gray-500 dark:text-gray-400 mt-1">Give your plant a unique name for easier tracking</div>
+            </div>
+            <div>
+              <label class="block text-sm font-medium mb-1 dark:text-gray-200">Location</label>
+              <input type="text" name="location" class="w-full p-2 border rounded dark:bg-gray-700 dark:border-gray-600 dark:text-white" placeholder="e.g., Indoor Tent, Outdoor Garden" value="Default Garden">
+            </div>
           </div>
-          <div>
-            <label class="block text-sm font-medium mb-1 dark:text-gray-200">Location</label>
-            <input type="text" name="location" class="w-full p-2 border rounded dark:bg-gray-700 dark:border-gray-600 dark:text-white" placeholder="e.g., Indoor Tent, Outdoor Garden" value="Default Garden">
-          </div>
+          
           <div id="plantInfo" class="text-sm text-gray-600 dark:text-gray-400 bg-gray-50 dark:bg-gray-700 p-3 rounded">
             <!-- Plant information will be displayed here -->
+          </div>
+          
+          <div class="border dark:border-gray-600 rounded-lg p-4">
+            <h3 class="font-semibold mb-3 dark:text-white">🗓️ Automatic Reminders</h3>
+            <div class="space-y-3">
+              <div class="flex items-center space-x-2">
+                <input type="checkbox" id="enableWatering" name="enableWatering" checked class="rounded">
+                <label for="enableWatering" class="text-sm dark:text-gray-200">💧 Watering reminders</label>
+              </div>
+              <div id="wateringOptions" class="ml-6 space-y-2">
+                <div class="flex items-center space-x-2">
+                  <label class="text-xs dark:text-gray-300">Interval:</label>
+                  <select name="wateringInterval" class="text-xs p-1 border rounded dark:bg-gray-700 dark:border-gray-600 dark:text-white">
+                    <option value="1">Daily</option>
+                    <option value="2" selected>Every 2 days</option>
+                    <option value="3">Every 3 days</option>
+                    <option value="4">Every 4 days</option>
+                    <option value="7">Weekly</option>
+                  </select>
+                </div>
+              </div>
+              
+              <div class="flex items-center space-x-2">
+                <input type="checkbox" id="enableFertilizing" name="enableFertilizing" checked class="rounded">
+                <label for="enableFertilizing" class="text-sm dark:text-gray-200">🌿 Fertilizing reminders</label>
+              </div>
+              <div id="fertilizingOptions" class="ml-6 space-y-2">
+                <div class="flex items-center space-x-2">
+                  <label class="text-xs dark:text-gray-300">Interval:</label>
+                  <select name="fertilizingInterval" class="text-xs p-1 border rounded dark:bg-gray-700 dark:border-gray-600 dark:text-white">
+                    <option value="7">Weekly</option>
+                    <option value="14" selected>Every 2 weeks</option>
+                    <option value="21">Every 3 weeks</option>
+                    <option value="30">Monthly</option>
+                  </select>
+                </div>
+                <div class="flex items-center space-x-2">
+                  <label class="text-xs dark:text-gray-300">Start after:</label>
+                  <select name="fertilizingDelay" class="text-xs p-1 border rounded dark:bg-gray-700 dark:border-gray-600 dark:text-white">
+                    <option value="0">Immediately</option>
+                    <option value="7" selected>1 week</option>
+                    <option value="14">2 weeks</option>
+                  </select>
+                </div>
+              </div>
+              
+              <div class="flex items-center space-x-2">
+                <input type="checkbox" id="enablePhaseReminders" name="enablePhaseReminders" checked class="rounded">
+                <label for="enablePhaseReminders" class="text-sm dark:text-gray-200">📋 Phase transition reminders</label>
+              </div>
+              
+              <div class="flex items-center space-x-2">
+                <input type="checkbox" id="enableWeeklyChecks" name="enableWeeklyChecks" checked class="rounded">
+                <label for="enableWeeklyChecks" class="text-sm dark:text-gray-200">🔍 Weekly check-ups</label>
+              </div>
+              
+              <div class="flex items-center space-x-2">
+                <input type="checkbox" id="enableHarvestReminder" name="enableHarvestReminder" checked class="rounded">
+                <label for="enableHarvestReminder" class="text-sm dark:text-gray-200">🌾 Harvest reminder</label>
+              </div>
+            </div>
           </div>
         </div>
         
@@ -159,9 +231,16 @@ async function showAddEventModal(date, preselectedType = null) {
   const eventTypeSelect = document.getElementById('eventTypeSelect');
   const plantCategorySelect = document.getElementById('plantCategorySelect');
   const plantTypeSelect = document.getElementById('plantTypeSelect');
+  const customNameField = document.getElementById('customNameField');
   const titleField = document.getElementById('titleField');
   const cancelBtn = document.getElementById('cancelBtn');
   const saveBtn = document.getElementById('saveBtn');
+
+  // Checkbox elements
+  const enableWatering = document.getElementById('enableWatering');
+  const enableFertilizing = document.getElementById('enableFertilizing');
+  const wateringOptions = document.getElementById('wateringOptions');
+  const fertilizingOptions = document.getElementById('fertilizingOptions');
 
   // Add event listeners
   eventTypeSelect.addEventListener('change', function() {
@@ -174,6 +253,20 @@ async function showAddEventModal(date, preselectedType = null) {
 
   plantTypeSelect.addEventListener('change', function() {
     updatePlantInfo();
+    updateCustomNamePlaceholder();
+  });
+
+  customNameField.addEventListener('input', function() {
+    updateCustomNamePlaceholder();
+  });
+
+  // Toggle reminder options
+  enableWatering.addEventListener('change', function() {
+    wateringOptions.style.display = this.checked ? 'block' : 'none';
+  });
+
+  enableFertilizing.addEventListener('change', function() {
+    fertilizingOptions.style.display = this.checked ? 'block' : 'none';
   });
 
   cancelBtn.addEventListener('click', () => {
@@ -185,7 +278,7 @@ async function showAddEventModal(date, preselectedType = null) {
     e.preventDefault();
     e.stopPropagation();
     
-    console.log('Form submitted'); // Debug log
+    console.log('Form submitted');
     
     const formData = new FormData(form);
     
@@ -207,16 +300,32 @@ async function showAddEventModal(date, preselectedType = null) {
     
     try {
       if (eventType === 'planting') {
-        console.log('Adding planting:', {
+        // Collect reminder preferences
+        const reminderOptions = {
+          enableWatering: formData.get('enableWatering') === 'on',
+          wateringInterval: parseInt(formData.get('wateringInterval')) || 2,
+          enableFertilizing: formData.get('enableFertilizing') === 'on',
+          fertilizingInterval: parseInt(formData.get('fertilizingInterval')) || 14,
+          fertilizingDelay: parseInt(formData.get('fertilizingDelay')) || 7,
+          enablePhaseReminders: formData.get('enablePhaseReminders') === 'on',
+          enableWeeklyChecks: formData.get('enableWeeklyChecks') === 'on',
+          enableHarvestReminder: formData.get('enableHarvestReminder') === 'on'
+        };
+
+        console.log('Adding planting with options:', {
           plantType: formData.get('plantType'),
+          customName: formData.get('customName'),
           date: formData.get('date'),
-          location: formData.get('location')
+          location: formData.get('location'),
+          reminderOptions
         });
         
-        await addPlanting(
+        await addPlantingWithOptions(
           formData.get('plantType'),
           formData.get('date'),
-          formData.get('location') || 'Default Garden'
+          formData.get('location') || 'Default Garden',
+          formData.get('customName') || null,
+          reminderOptions
         );
       } else {
         console.log('Adding custom event');
@@ -263,7 +372,8 @@ async function showAddEventModal(date, preselectedType = null) {
       // Add required to plant type when visible
       plantTypeSelect.setAttribute('required', 'required');
       
-      updatePlantInfo(); // Show initial plant info
+      updatePlantInfo();
+      updateCustomNamePlaceholder();
     } else {
       customFields.style.display = 'block';
       plantingFields.style.display = 'none';
@@ -295,6 +405,7 @@ async function showAddEventModal(date, preselectedType = null) {
     }
     
     updatePlantInfo();
+    updateCustomNamePlaceholder();
   }
 
   function updatePlantInfo() {
@@ -331,10 +442,238 @@ async function showAddEventModal(date, preselectedType = null) {
     }
   }
 
+  function updateCustomNamePlaceholder() {
+    const selectedPlant = PLANTS_DATA[plantTypeSelect.value];
+    if (selectedPlant) {
+      const examples = {
+        'Cannabis': `e.g., 'My ${selectedPlant.name} #1'`,
+        'Vegetables': `e.g., 'Kitchen Garden ${selectedPlant.name}'`,
+        'Herbs': `e.g., 'Windowsill ${selectedPlant.name}'`,
+        'Fruits': `e.g., 'Backyard ${selectedPlant.name}'`
+      };
+      customNameField.placeholder = examples[selectedPlant.category] || `e.g., 'My ${selectedPlant.name}'`;
+    }
+  }
+
   // Initialize plant info if planting is preselected
   if (eventTypeValue === 'planting') {
-    setTimeout(() => updatePlantInfo(), 100);
+    setTimeout(() => {
+      updatePlantInfo();
+      updateCustomNamePlaceholder();
+    }, 100);
   }
+}
+
+// Enhanced addPlanting function with custom options
+async function addPlantingWithOptions(plantType, startDate, location, customName, reminderOptions) {
+  const db = await openDB('gardening-calendar');
+  const plantData = PLANTS_DATA[plantType];
+  
+  if (!plantData) {
+    throw new Error(`Plant type ${plantType} not found in database`);
+  }
+  
+  // Use custom name or default to plant name
+  const displayName = customName || plantData.name;
+  
+  // Calculate all phase dates
+  let currentDate = new Date(startDate);
+  const phases = [];
+  let totalDays = 0;
+  
+  for (const [phase, { days, description, care }] of Object.entries(plantData.phases)) {
+    const phaseStartDate = new Date(currentDate);
+    phaseStartDate.setDate(phaseStartDate.getDate() + totalDays);
+    
+    phases.push({
+      name: phase,
+      startDate: phaseStartDate.toISOString().split('T')[0],
+      days,
+      description,
+      care
+    });
+    
+    totalDays += days;
+  }
+  
+  // Calculate harvest/completion date
+  const completionDate = new Date(currentDate);
+  completionDate.setDate(completionDate.getDate() + totalDays);
+  
+  // Add planting record
+  const planting = {
+    plantType,
+    plantName: plantData.name,
+    displayName: displayName,
+    customName: customName,
+    category: plantData.category || 'Other',
+    location,
+    startDate: startDate,
+    completionDate: completionDate.toISOString().split('T')[0],
+    phases,
+    currentPhase: Object.keys(plantData.phases)[0],
+    status: 'active',
+    notes: [],
+    legalNote: plantData.legalNote || null,
+    reminderOptions
+  };
+  
+  const tx = db.transaction(['plantings', 'events'], 'readwrite');
+  const plantingId = await tx.objectStore('plantings').add(planting);
+  
+  // Add planting event
+  let plantingDescription = `Start planting ${displayName}`;
+  if (plantData.legalNote) {
+    plantingDescription += `\n\n⚠️ LEGAL NOTICE: ${plantData.legalNote}`;
+  }
+  plantingDescription += `\n\nCare Tips:\n${Object.entries(plantData.careTips).map(([key, value]) => `- ${key}: ${value}`).join('\n')}`;
+
+  await tx.objectStore('events').add({
+    title: `🌱 Plant ${displayName}`,
+    date: startDate,
+    type: 'planting',
+    description: plantingDescription,
+    plantingId
+  });
+  
+  // Add events based on user preferences
+  for (let i = 0; i < phases.length; i++) {
+    const phase = phases[i];
+    
+    // Add phase transition events
+    if (reminderOptions.enablePhaseReminders) {
+      await tx.objectStore('events').add({
+        title: `${getPhaseEmoji(phase.name)} ${displayName}: ${phase.name} phase`,
+        date: phase.startDate,
+        type: 'maintenance',
+        description: `${phase.description}\n\nCare Instructions:\n${phase.care}`,
+        plantingId
+      });
+    }
+
+    // Add weekly check-ins for longer phases
+    if (reminderOptions.enableWeeklyChecks && phase.days > 14) {
+      const weeklyChecks = Math.floor(phase.days / 7);
+      for (let week = 1; week <= weeklyChecks; week++) {
+        const checkDate = new Date(phase.startDate);
+        checkDate.setDate(checkDate.getDate() + (week * 7));
+        
+        if (checkDate < new Date(completionDate)) {
+          await tx.objectStore('events').add({
+            title: `📋 ${displayName}: Week ${week} check (${phase.name})`,
+            date: checkDate.toISOString().split('T')[0],
+            type: 'maintenance',
+            description: `Weekly check during ${phase.name} phase\n\n${phase.care}\n\nLook for signs of:\n${getPhaseCheckpoints(phase.name, plantData)}`,
+            plantingId
+          });
+        }
+      }
+    }
+
+    // Add watering reminders
+    if (reminderOptions.enableWatering) {
+      let wateringDate = new Date(phase.startDate);
+      const phaseEnd = new Date(wateringDate);
+      phaseEnd.setDate(phaseEnd.getDate() + phase.days);
+
+      while (wateringDate < phaseEnd) {
+        await tx.objectStore('events').add({
+          title: `💧 Water ${displayName}`,
+          date: wateringDate.toISOString().split('T')[0],
+          type: 'watering',
+          description: `${plantData.careTips.watering || 'Check soil moisture and water as needed'}\n\nPhase: ${phase.name}\nCare: ${phase.care}`,
+          plantingId
+        });
+        wateringDate.setDate(wateringDate.getDate() + reminderOptions.wateringInterval);
+      }
+    }
+
+    // Add fertilizing reminders
+    if (reminderOptions.enableFertilizing && phase.days > 14 && 
+        (phase.name === 'vegetative' || phase.name === 'flowering' || phase.name === 'fruiting')) {
+      const fertilizeDate = new Date(phase.startDate);
+      fertilizeDate.setDate(fertilizeDate.getDate() + reminderOptions.fertilizingDelay);
+      
+      const phaseEnd = new Date(phase.startDate);
+      phaseEnd.setDate(phaseEnd.getDate() + phase.days);
+      
+      while (fertilizeDate < phaseEnd) {
+        await tx.objectStore('events').add({
+          title: `🌿 Fertilize ${displayName}`,
+          date: fertilizeDate.toISOString().split('T')[0],
+          type: 'fertilizing',
+          description: `${plantData.careTips.fertilizing || 'Apply appropriate fertilizer'}\n\nPhase: ${phase.name}`,
+          plantingId
+        });
+        fertilizeDate.setDate(fertilizeDate.getDate() + reminderOptions.fertilizingInterval);
+      }
+    }
+  }
+  
+  // Add final harvest/completion event
+  if (reminderOptions.enableHarvestReminder) {
+    const finalPhase = Object.keys(plantData.phases).pop();
+    const eventTitle = finalPhase === 'harvest' ? `🌾 Harvest ${displayName}` : `✅ Complete ${displayName} cycle`;
+    
+    let harvestDescription = `Time to ${finalPhase === 'harvest' ? 'harvest' : 'complete'} your ${displayName}!`;
+    if (plantData.commonProblems && Object.keys(plantData.commonProblems).length > 0) {
+      harvestDescription += `\n\nCommon Problems to Check For:\n${Object.entries(plantData.commonProblems).map(([problem, solution]) => `- ${problem}: ${solution}`).join('\n')}`;
+    }
+    
+    await tx.objectStore('events').add({
+      title: eventTitle,
+      date: completionDate.toISOString().split('T')[0],
+      type: finalPhase === 'harvest' ? 'harvesting' : 'maintenance',
+      description: harvestDescription,
+      plantingId
+    });
+  }
+  
+  await tx.done;
+  return plantingId;
+}
+
+function getPhaseEmoji(phase) {
+  const emojis = {
+    germination: '🌱',
+    sprouting: '🌱',
+    seedling: '🌿',
+    vegetative: '🍃',
+    leafing: '🍃',
+    rooting: '🌿',
+    preflower: '🌸',
+    flowering: '🌸',
+    blooming: '🌺',
+    fruiting: '🍅',
+    tuberization: '🥔',
+    bulking: '🥔',
+    harvest: '🌾',
+    maturation: '🌾',
+    establishment: '🌱',
+    dormancy: '😴'
+  };
+  return emojis[phase] || '📅';
+}
+
+function getPhaseCheckpoints(phase, plantData) {
+  const checkpoints = {
+    'germination': 'Sprouting progress, moisture levels, temperature',
+    'seedling': 'Leaf development, stem strength, pest signs',
+    'vegetative': 'Growth rate, leaf color, branching, training needs',
+    'flowering': 'Flower development, pollination, nutrient needs',
+    'fruiting': 'Fruit set, size development, ripening signs',
+    'harvest': 'Ripeness indicators, harvest timing'
+  };
+  
+  let phaseChecks = checkpoints[phase] || 'General plant health, growth progress';
+  
+  // Add plant-specific problems to watch for
+  if (plantData.commonProblems) {
+    const problems = Object.keys(plantData.commonProblems).slice(0, 3).join(', ');
+    phaseChecks += `\nCommon issues: ${problems}`;
+  }
+  
+  return phaseChecks;
 }
 
 async function showEventDetails(event) {
@@ -370,9 +709,10 @@ async function showEventDetails(event) {
     const db = await openDB('gardening-calendar');
     const planting = await db.get('plantings', event.extendedProps.plantingId);
     if (planting) {
+      const displayName = planting.displayName || planting.plantName;
       plantingInfo = `
         <div class="mt-2 text-sm">
-          <strong>Plant:</strong> ${planting.plantName}<br>
+          <strong>Plant:</strong> ${displayName}${planting.customName ? ` (${planting.plantName})` : ''}<br>
           <strong>Category:</strong> ${planting.category}<br>
           <strong>Location:</strong> ${planting.location}<br>
           <strong>Current Phase:</strong> ${planting.currentPhase}<br>

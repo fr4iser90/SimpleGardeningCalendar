@@ -1,7 +1,7 @@
 import { openDB } from 'idb';
 
 const DB_NAME = 'gardening-calendar';
-const DB_VERSION = 4;
+const DB_VERSION = 5;
 
 export const PLANTS_DATA = {
   // Cannabis varieties
@@ -386,6 +386,19 @@ export async function initializeDB() {
           }
         }
       }
+
+      if (oldVersion < 5) {
+        // Add indexes for custom names and display names
+        if (db.objectStoreNames.contains('plantings')) {
+          const store = transaction.objectStore('plantings');
+          if (!store.indexNames.contains('displayName')) {
+            store.createIndex('displayName', 'displayName');
+          }
+          if (!store.indexNames.contains('customName')) {
+            store.createIndex('customName', 'customName');
+          }
+        }
+      }
     }
   });
 
@@ -428,6 +441,7 @@ export async function addPlanting(plantType, startDate, location = 'Default Gard
   const planting = {
     plantType,
     plantName: plantData.name,
+    displayName: plantData.name,
     category: plantData.category || 'Other',
     location,
     startDate: startDate,

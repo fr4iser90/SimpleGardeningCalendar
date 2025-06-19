@@ -218,12 +218,15 @@ async function showMyPlantsModal() {
       <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
         ${plantings.length === 0 ? 
           '<p class="text-gray-500 dark:text-gray-400 col-span-2 text-center py-8">No active plants yet. Start by adding your first plant!</p>' :
-          plantings.map(planting => `
+          plantings.map(planting => {
+            const displayName = planting.displayName || planting.plantName;
+            return `
             <div class="border dark:border-gray-600 rounded-lg p-4">
               <div class="flex justify-between items-start mb-2">
-                <h3 class="font-semibold dark:text-white">${planting.plantName}</h3>
+                <h3 class="font-semibold dark:text-white">${displayName}</h3>
                 <span class="text-xs px-2 py-1 bg-green-100 dark:bg-green-900 text-green-800 dark:text-green-200 rounded">${planting.category}</span>
               </div>
+              ${planting.customName ? `<div class="text-xs text-gray-500 dark:text-gray-400 mb-1">Plant type: ${planting.plantName}</div>` : ''}
               <div class="text-sm text-gray-600 dark:text-gray-400 space-y-1">
                 <div><strong>Location:</strong> ${planting.location}</div>
                 <div><strong>Started:</strong> ${new Date(planting.startDate).toLocaleDateString()}</div>
@@ -231,7 +234,7 @@ async function showMyPlantsModal() {
                 <div><strong>Expected Completion:</strong> ${new Date(planting.completionDate).toLocaleDateString()}</div>
               </div>
             </div>
-          `).join('')
+          `}).join('')
         }
       </div>
     </div>
@@ -254,10 +257,13 @@ async function showCategoryPlantsModal(category, plantings) {
       <div class="space-y-3">
         ${plantings.length === 0 ? 
           `<p class="text-gray-500 dark:text-gray-400 text-center py-8">No ${category.toLowerCase()} plants yet.</p>` :
-          plantings.map(planting => `
+          plantings.map(planting => {
+            const displayName = planting.displayName || planting.plantName;
+            return `
             <div class="border dark:border-gray-600 rounded-lg p-4 flex justify-between items-center">
               <div>
-                <h3 class="font-semibold dark:text-white">${planting.plantName}</h3>
+                <h3 class="font-semibold dark:text-white">${displayName}</h3>
+                ${planting.customName ? `<div class="text-xs text-gray-500 dark:text-gray-400">Plant type: ${planting.plantName}</div>` : ''}
                 <div class="text-sm text-gray-600 dark:text-gray-400">
                   ${planting.location} • Started ${new Date(planting.startDate).toLocaleDateString()} • ${planting.currentPhase}
                 </div>
@@ -270,7 +276,7 @@ async function showCategoryPlantsModal(category, plantings) {
                 ${planting.status}
               </span>
             </div>
-          `).join('')
+          `}).join('')
         }
       </div>
     </div>
