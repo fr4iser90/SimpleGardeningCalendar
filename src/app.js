@@ -321,13 +321,20 @@ async function showCategoryPlantsModal(category, plantings) {
 // Delete plant and all associated events
 async function deletePlant(plantingId) {
   const { openDB } = await import('idb');
-  const { getPlantNotes } = await import('./db.js');
   
   try {
     const db = await openDB('gardening-calendar');
     
-    // Get planting details for confirmation
-    const planting = await db.get('plantings', plantingId);
+    // Create a single transaction for all operations
+    const storeNames = ['plantings', 'events'];
+    if (db.objectStoreNames.contains('plantNotes')) {
+      storeNames.push('plantNotes');
+    }
+    
+    const tx = db.transaction(storeNames, 'readwrite');
+    
+    // Get planting details for confirmation within the transaction
+    const planting = await tx.objectStore('plantings').get(plantingId);
     if (!planting) {
       alert('❌ Plant not found');
       return;
@@ -335,18 +342,18 @@ async function deletePlant(plantingId) {
     
     const displayName = planting.displayName || planting.plantName;
     
-    // Get count of associated events and notes
-    const events = await db.getAllFromIndex('events', 'plantingId', plantingId);
+    // Get count of associated events and notes within the transaction
+    const events = await tx.objectStore('events').index('plantingId').getAll(plantingId);
     
-    // Check if plantNotes object store exists before trying to access it
     let notes = [];
-    try {
-      if (db.objectStoreNames.contains('plantNotes')) {
-        notes = await getPlantNotes(plantingId);
+    if (db.objectStoreNames.contains('plantNotes')) {
+      try {
+        // Get all notes and filter by plantingId
+        const allNotes = await tx.objectStore('plantNotes').getAll();
+        notes = allNotes.filter(note => note.plantingId === plantingId);
+      } catch (error) {
+        console.warn('Could not access plant notes:', error);
       }
-    } catch (error) {
-      console.warn('Could not access plant notes:', error);
-      // Continue without notes if the object store doesn't exist
     }
     
     // Show detailed confirmation dialog
@@ -364,14 +371,6 @@ Are you sure you want to continue?`;
     if (!confirm(confirmMessage)) {
       return;
     }
-    
-    // Create transaction with only the object stores that exist
-    const storeNames = ['plantings', 'events'];
-    if (db.objectStoreNames.contains('plantNotes')) {
-      storeNames.push('plantNotes');
-    }
-    
-    const tx = db.transaction(storeNames, 'readwrite');
     
     // Delete all events related to this planting
     for (const event of events) {
@@ -413,29 +412,39 @@ Are you sure you want to continue?`;
 // View detailed plant information
 async function viewPlantDetails(plantingId) {
   const { openDB } = await import('idb');
-  const { getPlantNotes, PLANTS_DATA } = await import('./db.js');
+  const { PLANTS_DATA } = await import('./db.js');
   
   try {
     const db = await openDB('gardening-calendar');
-    const planting = await db.get('plantings', plantingId);
     
-    // Check if plantNotes object store exists before trying to access it
-    let notes = [];
-    try {
-      if (db.objectStoreNames.contains('plantNotes')) {
-        notes = await getPlantNotes(plantingId);
-      }
-    } catch (error) {
-      console.warn('Could not access plant notes:', error);
-      // Continue without notes if the object store doesn't exist
+    // Create a single transaction for all read operations
+    const storeNames = ['plantings', 'events'];
+    if (db.objectStoreNames.contains('plantNotes')) {
+      storeNames.push('plantNotes');
     }
     
-    const events = await db.getAllFromIndex('events', 'plantingId', plantingId);
+    const tx = db.transaction(storeNames, 'readonly');
     
+    const planting = await tx.objectStore('plantings').get(plantingId);
     if (!planting) {
       alert('❌ Plant not found');
       return;
     }
+    
+    const events = await tx.objectStore('events').index('plantingId').getAll(plantingId);
+    
+    let notes = [];
+    if (db.objectStoreNames.contains('plantNotes')) {
+      try {
+        // Get all notes and filter by plantingId
+        const allNotes = await tx.objectStore('plantNotes').getAll();
+        notes = allNotes.filter(note => note.plantingId === plantingId);
+      } catch (error) {
+        console.warn('Could not access plant notes:', error);
+      }
+    }
+    
+    await tx.done;
     
     const plantData = PLANTS_DATA[planting.plantType];
     const displayName = planting.displayName || planting.plantName;
