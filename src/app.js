@@ -321,21 +321,16 @@ async function showCategoryPlantsModal(category, plantings) {
 // Delete plant and all associated events
 async function deletePlant(plantingId) {
   const { openDB } = await import('idb');
+  const { deletePlantingAndEvents } = await import('./db.js');
   
   try {
     const db = await openDB('gardening-calendar');
     
-    // Filter store names to only include those that exist in the database
-    const allPossibleStores = ['plantings', 'events', 'plantNotes'];
-    const storesForTransaction = allPossibleStores.filter(storeName => 
-      db.objectStoreNames.contains(storeName)
-    );
-    
-    // Create a transaction only with existing stores
-    const tx = db.transaction(storesForTransaction, 'readwrite');
-    
-    // Get planting details for confirmation within the transaction
+    // Get planting details first for confirmation
+    const tx = db.transaction('plantings', 'readonly');
     const planting = await tx.objectStore('plantings').get(plantingId);
+    await tx.done;
+    
     if (!planting) {
       alert('❌ Plant not found');
       return;
@@ -343,15 +338,20 @@ async function deletePlant(plantingId) {
     
     const displayName = planting.displayName || planting.plantName;
     
-    // Get count of associated events and notes within the transaction
-    const events = await tx.objectStore('events').index('plantingId').getAll(plantingId);
+    // Get count of associated events for confirmation
+    const eventsTx = db.transaction('events', 'readonly');
+    const events = await eventsTx.objectStore('events').index('plantingId').getAll(plantingId);
+    await eventsTx.done;
     
-    let notes = [];
-    if (storesForTransaction.includes('plantNotes')) {
+    // Get count of notes if the object store exists
+    let notesCount = 0;
+    if (db.objectStoreNames.contains('plantNotes')) {
       try {
-        // Get all notes and filter by plantingId
-        const allNotes = await tx.objectStore('plantNotes').getAll();
-        notes = allNotes.filter(note => note.plantingId === plantingId);
+        const notesTx = db.transaction('plantNotes', 'readonly');
+        const allNotes = await notesTx.objectStore('plantNotes').getAll();
+        const notes = allNotes.filter(note => note.plantingId === plantingId);
+        notesCount = notes.length;
+        await notesTx.done;
       } catch (error) {
         console.warn('Could not access plant notes:', error);
       }
@@ -363,7 +363,7 @@ async function deletePlant(plantingId) {
 This will permanently delete:
 • The plant record
 • ${events.length} associated calendar events
-• ${notes.length} plant notes
+• ${notesCount} plant notes
 
 ⚠️ This action cannot be undone!
 
@@ -373,25 +373,14 @@ Are you sure you want to continue?`;
       return;
     }
     
-    // Delete all events related to this planting
-    for (const event of events) {
-      await tx.objectStore('events').delete(event.id);
-    }
-    
-    // Delete all notes if the object store exists
-    if (storesForTransaction.includes('plantNotes')) {
-      for (const note of notes) {
-        await tx.objectStore('plantNotes').delete(note.id);
-      }
-    }
-    
-    // Delete the planting record
-    await tx.objectStore('plantings').delete(plantingId);
-    
-    await tx.done;
+    // Use the existing deletePlantingAndEvents function which properly handles transactions
+    await deletePlantingAndEvents(plantingId);
     
     // Close modal and refresh UI
-    document.querySelector('.fixed').remove();
+    const modal = document.querySelector('.fixed');
+    if (modal) {
+      modal.remove();
+    }
     
     // Refresh calendar and sidebar
     const refreshEvent = new CustomEvent('refreshSidebar');
@@ -418,14 +407,13 @@ async function viewPlantDetails(plantingId) {
   try {
     const db = await openDB('gardening-calendar');
     
-    // Filter store names to only include those that exist in the database
-    const allPossibleStores = ['plantings', 'events', 'plantNotes'];
-    const storesForTransaction = allPossibleStores.filter(storeName => 
-      db.objectStoreNames.contains(storeName)
-    );
+    // Create a single transaction for all read operations
+    const storeNames = ['plantings', 'events'];
+    if (db.objectStoreNames.contains('plantNotes')) {
+      storeNames.push('plantNotes');
+    }
     
-    // Create a transaction only with existing stores
-    const tx = db.transaction(storesForTransaction, 'readonly');
+    const tx = db.transaction(storeNames, 'readonly');
     
     const planting = await tx.objectStore('plantings').get(plantingId);
     if (!planting) {
@@ -436,7 +424,7 @@ async function viewPlantDetails(plantingId) {
     const events = await tx.objectStore('events').index('plantingId').getAll(plantingId);
     
     let notes = [];
-    if (storesForTransaction.includes('plantNotes')) {
+    if (db.objectStoreNames.contains('plantNotes')) {
       try {
         // Get all notes and filter by plantingId
         const allNotes = await tx.objectStore('plantNotes').getAll();
