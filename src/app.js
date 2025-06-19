@@ -337,7 +337,17 @@ async function deletePlant(plantingId) {
     
     // Get count of associated events and notes
     const events = await db.getAllFromIndex('events', 'plantingId', plantingId);
-    const notes = await getPlantNotes(plantingId);
+    
+    // Check if plantNotes object store exists before trying to access it
+    let notes = [];
+    try {
+      if (db.objectStoreNames.contains('plantNotes')) {
+        notes = await getPlantNotes(plantingId);
+      }
+    } catch (error) {
+      console.warn('Could not access plant notes:', error);
+      // Continue without notes if the object store doesn't exist
+    }
     
     // Show detailed confirmation dialog
     const confirmMessage = `🗑️ Delete "${displayName}"?
@@ -355,17 +365,24 @@ Are you sure you want to continue?`;
       return;
     }
     
-    // Delete everything in a transaction
-    const tx = db.transaction(['plantings', 'events', 'plantNotes'], 'readwrite');
+    // Create transaction with only the object stores that exist
+    const storeNames = ['plantings', 'events'];
+    if (db.objectStoreNames.contains('plantNotes')) {
+      storeNames.push('plantNotes');
+    }
+    
+    const tx = db.transaction(storeNames, 'readwrite');
     
     // Delete all events related to this planting
     for (const event of events) {
       await tx.objectStore('events').delete(event.id);
     }
     
-    // Delete all notes
-    for (const note of notes) {
-      await tx.objectStore('plantNotes').delete(note.id);
+    // Delete all notes if the object store exists
+    if (db.objectStoreNames.contains('plantNotes')) {
+      for (const note of notes) {
+        await tx.objectStore('plantNotes').delete(note.id);
+      }
     }
     
     // Delete the planting record
@@ -401,7 +418,18 @@ async function viewPlantDetails(plantingId) {
   try {
     const db = await openDB('gardening-calendar');
     const planting = await db.get('plantings', plantingId);
-    const notes = await getPlantNotes(plantingId);
+    
+    // Check if plantNotes object store exists before trying to access it
+    let notes = [];
+    try {
+      if (db.objectStoreNames.contains('plantNotes')) {
+        notes = await getPlantNotes(plantingId);
+      }
+    } catch (error) {
+      console.warn('Could not access plant notes:', error);
+      // Continue without notes if the object store doesn't exist
+    }
+    
     const events = await db.getAllFromIndex('events', 'plantingId', plantingId);
     
     if (!planting) {
