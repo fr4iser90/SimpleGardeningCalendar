@@ -675,8 +675,14 @@ export async function getAllPlantings() {
 export async function deletePlantingAndEvents(plantingId) {
   const db = await openDB(DB_NAME);
   
+  // Check which object stores exist and create transaction accordingly
+  const storeNames = ['plantings', 'events'];
+  if (db.objectStoreNames.contains('plantNotes')) {
+    storeNames.push('plantNotes');
+  }
+  
   // Delete everything in a transaction
-  const tx = db.transaction(['plantings', 'events', 'plantNotes'], 'readwrite');
+  const tx = db.transaction(storeNames, 'readwrite');
   
   // Delete all events related to this planting
   const events = await tx.objectStore('events').index('plantingId').getAll(plantingId);
@@ -684,10 +690,16 @@ export async function deletePlantingAndEvents(plantingId) {
     await tx.objectStore('events').delete(event.id);
   }
   
-  // Delete all notes
-  const notes = await tx.objectStore('plantNotes').index('plantingId').getAll(plantingId);
-  for (const note of notes) {
-    await tx.objectStore('plantNotes').delete(note.id);
+  // Delete all notes if the object store exists
+  if (db.objectStoreNames.contains('plantNotes')) {
+    try {
+      const notes = await tx.objectStore('plantNotes').index('plantingId').getAll(plantingId);
+      for (const note of notes) {
+        await tx.objectStore('plantNotes').delete(note.id);
+      }
+    } catch (error) {
+      console.warn('Could not delete plant notes:', error);
+    }
   }
   
   // Delete the planting record
