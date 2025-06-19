@@ -667,6 +667,36 @@ export async function getActivePlantings() {
   return db.getAllFromIndex('plantings', 'status', 'active');
 }
 
+export async function getAllPlantings() {
+  const db = await openDB(DB_NAME);
+  return db.getAll('plantings');
+}
+
+export async function deletePlantingAndEvents(plantingId) {
+  const db = await openDB(DB_NAME);
+  
+  // Delete everything in a transaction
+  const tx = db.transaction(['plantings', 'events', 'plantNotes'], 'readwrite');
+  
+  // Delete all events related to this planting
+  const events = await tx.objectStore('events').index('plantingId').getAll(plantingId);
+  for (const event of events) {
+    await tx.objectStore('events').delete(event.id);
+  }
+  
+  // Delete all notes
+  const notes = await tx.objectStore('plantNotes').index('plantingId').getAll(plantingId);
+  for (const note of notes) {
+    await tx.objectStore('plantNotes').delete(note.id);
+  }
+  
+  // Delete the planting record
+  await tx.objectStore('plantings').delete(plantingId);
+  
+  await tx.done;
+  return true;
+}
+
 export async function searchPlants(query) {
   const results = [];
   const lowerQuery = query.toLowerCase();
