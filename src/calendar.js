@@ -144,6 +144,20 @@ async function showAddEventModal(date, preselectedType = null) {
             <!-- Plant information will be displayed here -->
           </div>
           
+          <!-- Phase Customization Section -->
+          <div id="phaseCustomization" class="border dark:border-gray-600 rounded-lg p-4">
+            <h3 class="font-semibold mb-3 dark:text-white">⏱️ Phase Duration (Optional)</h3>
+            <div class="text-xs text-gray-500 dark:text-gray-400 mb-3">
+              Adjust phase durations if your variety differs from standard timing
+            </div>
+            <div id="phaseInputs" class="space-y-2">
+              <!-- Phase inputs will be populated here -->
+            </div>
+            <div class="mt-2 text-xs text-gray-500 dark:text-gray-400">
+              💡 Tip: Cannabis flowering can vary from 6-12 weeks depending on strain
+            </div>
+          </div>
+          
           <div class="border dark:border-gray-600 rounded-lg p-4">
             <h3 class="font-semibold mb-3 dark:text-white">🗓️ Automatic Reminders</h3>
             <div class="space-y-3">
@@ -254,6 +268,7 @@ async function showAddEventModal(date, preselectedType = null) {
   plantTypeSelect.addEventListener('change', function() {
     updatePlantInfo();
     updateCustomNamePlaceholder();
+    updatePhaseInputs();
   });
 
   customNameField.addEventListener('input', function() {
@@ -312,12 +327,25 @@ async function showAddEventModal(date, preselectedType = null) {
           enableHarvestReminder: formData.get('enableHarvestReminder') === 'on'
         };
 
+        // Collect custom phase durations
+        const customPhaseDurations = {};
+        const selectedPlant = PLANTS_DATA[formData.get('plantType')];
+        if (selectedPlant) {
+          for (const phaseName of Object.keys(selectedPlant.phases)) {
+            const customDuration = formData.get(`phase_${phaseName}`);
+            if (customDuration && parseInt(customDuration) > 0) {
+              customPhaseDurations[phaseName] = parseInt(customDuration);
+            }
+          }
+        }
+
         console.log('Adding planting with options:', {
           plantType: formData.get('plantType'),
           customName: formData.get('customName'),
           date: formData.get('date'),
           location: formData.get('location'),
-          reminderOptions
+          reminderOptions,
+          customPhaseDurations
         });
         
         await addPlantingWithOptions(
@@ -325,7 +353,8 @@ async function showAddEventModal(date, preselectedType = null) {
           formData.get('date'),
           formData.get('location') || 'Default Garden',
           formData.get('customName') || null,
-          reminderOptions
+          reminderOptions,
+          customPhaseDurations
         );
       } else {
         console.log('Adding custom event');
@@ -374,6 +403,7 @@ async function showAddEventModal(date, preselectedType = null) {
       
       updatePlantInfo();
       updateCustomNamePlaceholder();
+      updatePhaseInputs();
     } else {
       customFields.style.display = 'block';
       plantingFields.style.display = 'none';
@@ -406,6 +436,7 @@ async function showAddEventModal(date, preselectedType = null) {
     
     updatePlantInfo();
     updateCustomNamePlaceholder();
+    updatePhaseInputs();
   }
 
   function updatePlantInfo() {
@@ -442,6 +473,45 @@ async function showAddEventModal(date, preselectedType = null) {
     }
   }
 
+  function updatePhaseInputs() {
+    const phaseInputs = document.getElementById('phaseInputs');
+    const selectedPlant = PLANTS_DATA[plantTypeSelect.value];
+    
+    if (!selectedPlant) {
+      phaseInputs.innerHTML = '';
+      return;
+    }
+    
+    let inputsHtml = '';
+    
+    for (const [phaseName, phaseData] of Object.entries(selectedPlant.phases)) {
+      const isFloweringPhase = phaseName.toLowerCase().includes('flower') || 
+                              phaseName.toLowerCase().includes('bloom') ||
+                              phaseName.toLowerCase().includes('fruiting');
+      
+      const phaseEmoji = getPhaseEmoji(phaseName);
+      const helpText = getPhaseHelpText(phaseName, selectedPlant.category);
+      
+      inputsHtml += `
+        <div class="flex items-center space-x-2 ${isFloweringPhase ? 'bg-purple-50 dark:bg-purple-900/20 p-2 rounded' : ''}">
+          <label class="text-xs dark:text-gray-300 w-20">${phaseEmoji} ${phaseName}:</label>
+          <input 
+            type="number" 
+            name="phase_${phaseName}" 
+            placeholder="${phaseData.days}" 
+            min="1" 
+            max="365"
+            class="w-16 text-xs p-1 border rounded dark:bg-gray-700 dark:border-gray-600 dark:text-white"
+          >
+          <span class="text-xs text-gray-500 dark:text-gray-400">days (default: ${phaseData.days})</span>
+          ${helpText ? `<span class="text-xs text-gray-400 dark:text-gray-500" title="${helpText}">ℹ️</span>` : ''}
+        </div>
+      `;
+    }
+    
+    phaseInputs.innerHTML = inputsHtml;
+  }
+
   function updateCustomNamePlaceholder() {
     const selectedPlant = PLANTS_DATA[plantTypeSelect.value];
     if (selectedPlant) {
@@ -460,12 +530,29 @@ async function showAddEventModal(date, preselectedType = null) {
     setTimeout(() => {
       updatePlantInfo();
       updateCustomNamePlaceholder();
+      updatePhaseInputs();
     }, 100);
   }
 }
 
-// Enhanced addPlanting function with custom options
-async function addPlantingWithOptions(plantType, startDate, location, customName, reminderOptions) {
+function getPhaseHelpText(phaseName, category) {
+  const helpTexts = {
+    'Cannabis': {
+      'flowering': 'Cannabis flowering varies widely: Indica 6-8 weeks, Sativa 8-12 weeks, Autoflower 4-6 weeks',
+      'vegetative': 'Longer veg = bigger plants. Indoor: 4-8 weeks, Outdoor: depends on season',
+      'preflower': 'Shows sex, usually 1-2 weeks after switching to 12/12'
+    },
+    'Vegetables': {
+      'flowering': 'Varies by variety and growing conditions',
+      'fruiting': 'Time from fruit set to harvest readiness'
+    }
+  };
+  
+  return helpTexts[category]?.[phaseName] || null;
+}
+
+// Enhanced addPlanting function with custom phase durations
+async function addPlantingWithOptions(plantType, startDate, location, customName, reminderOptions, customPhaseDurations = {}) {
   const db = await openDB('gardening-calendar');
   const plantData = PLANTS_DATA[plantType];
   
@@ -476,12 +563,26 @@ async function addPlantingWithOptions(plantType, startDate, location, customName
   // Use custom name or default to plant name
   const displayName = customName || plantData.name;
   
-  // Calculate all phase dates
+  // Create modified plant data with custom phase durations
+  const modifiedPlantData = { ...plantData };
+  modifiedPlantData.phases = { ...plantData.phases };
+  
+  // Apply custom phase durations
+  for (const [phaseName, customDays] of Object.entries(customPhaseDurations)) {
+    if (modifiedPlantData.phases[phaseName]) {
+      modifiedPlantData.phases[phaseName] = {
+        ...modifiedPlantData.phases[phaseName],
+        days: customDays
+      };
+    }
+  }
+  
+  // Calculate all phase dates with custom durations
   let currentDate = new Date(startDate);
   const phases = [];
   let totalDays = 0;
   
-  for (const [phase, { days, description, care }] of Object.entries(plantData.phases)) {
+  for (const [phase, { days, description, care }] of Object.entries(modifiedPlantData.phases)) {
     const phaseStartDate = new Date(currentDate);
     phaseStartDate.setDate(phaseStartDate.getDate() + totalDays);
     
@@ -490,7 +591,8 @@ async function addPlantingWithOptions(plantType, startDate, location, customName
       startDate: phaseStartDate.toISOString().split('T')[0],
       days,
       description,
-      care
+      care,
+      isCustomDuration: customPhaseDurations[phase] ? true : false
     });
     
     totalDays += days;
@@ -511,11 +613,12 @@ async function addPlantingWithOptions(plantType, startDate, location, customName
     startDate: startDate,
     completionDate: completionDate.toISOString().split('T')[0],
     phases,
-    currentPhase: Object.keys(plantData.phases)[0],
+    currentPhase: Object.keys(modifiedPlantData.phases)[0],
     status: 'active',
     notes: [],
     legalNote: plantData.legalNote || null,
-    reminderOptions
+    reminderOptions,
+    customPhaseDurations: Object.keys(customPhaseDurations).length > 0 ? customPhaseDurations : null
   };
   
   const tx = db.transaction(['plantings', 'events'], 'readwrite');
@@ -526,6 +629,17 @@ async function addPlantingWithOptions(plantType, startDate, location, customName
   if (plantData.legalNote) {
     plantingDescription += `\n\n⚠️ LEGAL NOTICE: ${plantData.legalNote}`;
   }
+  
+  // Add custom duration info to description
+  if (Object.keys(customPhaseDurations).length > 0) {
+    plantingDescription += `\n\n🕐 Custom Phase Durations:`;
+    for (const [phase, days] of Object.entries(customPhaseDurations)) {
+      const originalDays = plantData.phases[phase]?.days;
+      plantingDescription += `\n- ${phase}: ${days} days (standard: ${originalDays} days)`;
+    }
+  }
+  
+  plantingDescription += `\n\nTotal cycle: ${totalDays} days (${Math.round(totalDays/7)} weeks)`;
   plantingDescription += `\n\nCare Tips:\n${Object.entries(plantData.careTips).map(([key, value]) => `- ${key}: ${value}`).join('\n')}`;
 
   await tx.objectStore('events').add({
@@ -536,17 +650,22 @@ async function addPlantingWithOptions(plantType, startDate, location, customName
     plantingId
   });
   
-  // Add events based on user preferences
+  // Add events based on user preferences using modified phase data
   for (let i = 0; i < phases.length; i++) {
     const phase = phases[i];
     
     // Add phase transition events
     if (reminderOptions.enablePhaseReminders) {
+      let phaseTitle = `${getPhaseEmoji(phase.name)} ${displayName}: ${phase.name} phase`;
+      if (phase.isCustomDuration) {
+        phaseTitle += ` (${phase.days}d custom)`;
+      }
+      
       await tx.objectStore('events').add({
-        title: `${getPhaseEmoji(phase.name)} ${displayName}: ${phase.name} phase`,
+        title: phaseTitle,
         date: phase.startDate,
         type: 'maintenance',
-        description: `${phase.description}\n\nCare Instructions:\n${phase.care}`,
+        description: `${phase.description}\n\nCare Instructions:\n${phase.care}${phase.isCustomDuration ? `\n\n⏱️ Custom duration: ${phase.days} days` : ''}`,
         plantingId
       });
     }
@@ -612,10 +731,15 @@ async function addPlantingWithOptions(plantType, startDate, location, customName
   
   // Add final harvest/completion event
   if (reminderOptions.enableHarvestReminder) {
-    const finalPhase = Object.keys(plantData.phases).pop();
+    const finalPhase = Object.keys(modifiedPlantData.phases).pop();
     const eventTitle = finalPhase === 'harvest' ? `🌾 Harvest ${displayName}` : `✅ Complete ${displayName} cycle`;
     
     let harvestDescription = `Time to ${finalPhase === 'harvest' ? 'harvest' : 'complete'} your ${displayName}!`;
+    
+    if (Object.keys(customPhaseDurations).length > 0) {
+      harvestDescription += `\n\n⏱️ This plant used custom phase durations.`;
+    }
+    
     if (plantData.commonProblems && Object.keys(plantData.commonProblems).length > 0) {
       harvestDescription += `\n\nCommon Problems to Check For:\n${Object.entries(plantData.commonProblems).map(([problem, solution]) => `- ${problem}: ${solution}`).join('\n')}`;
     }
@@ -710,6 +834,14 @@ async function showEventDetails(event) {
     const planting = await db.get('plantings', event.extendedProps.plantingId);
     if (planting) {
       const displayName = planting.displayName || planting.plantName;
+      let customDurationInfo = '';
+      
+      if (planting.customPhaseDurations) {
+        customDurationInfo = `<div class="text-xs text-purple-600 dark:text-purple-400 mt-1">
+          ⏱️ Custom phase durations applied
+        </div>`;
+      }
+      
       plantingInfo = `
         <div class="mt-2 text-sm">
           <strong>Plant:</strong> ${displayName}${planting.customName ? ` (${planting.plantName})` : ''}<br>
@@ -718,6 +850,7 @@ async function showEventDetails(event) {
           <strong>Current Phase:</strong> ${planting.currentPhase}<br>
           <strong>Started:</strong> ${new Date(planting.startDate).toLocaleDateString()}<br>
           <strong>Expected Completion:</strong> ${new Date(planting.completionDate).toLocaleDateString()}
+          ${customDurationInfo}
         </div>
       `;
 
