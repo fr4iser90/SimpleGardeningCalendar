@@ -9,6 +9,7 @@ export function initializeApp() {
           <h1 class="text-xl font-bold">🌱 Gardening Calendar</h1>
           <div class="flex items-center space-x-4">
             <button id="plantLibraryBtn" class="p-2 hover:bg-green-700 rounded">📚 Plant Library</button>
+            <button id="googleCalendarBtn" class="p-2 hover:bg-green-700 rounded">🗓️ Google Calendar</button>
             <button id="themeToggle" class="p-2 hover:bg-green-700 rounded">🌙</button>
           </div>
         </div>
@@ -99,6 +100,7 @@ function initializeQuickActions() {
   const scheduleTaskBtn = document.getElementById('scheduleTaskBtn');
   const viewPlantsBtn = document.getElementById('viewPlantsBtn');
   const plantLibraryBtn = document.getElementById('plantLibraryBtn');
+  const googleCalendarBtn = document.getElementById('googleCalendarBtn');
 
   addPlantBtn.addEventListener('click', () => {
     // Trigger the calendar's add event modal with planting pre-selected
@@ -119,6 +121,11 @@ function initializeQuickActions() {
 
   plantLibraryBtn.addEventListener('click', () => {
     showPlantLibraryModal();
+  });
+
+  googleCalendarBtn.addEventListener('click', async () => {
+    const { showGoogleCalendarSetup } = await import('./googleCalendarUI.js');
+    showGoogleCalendarSetup();
   });
 }
 

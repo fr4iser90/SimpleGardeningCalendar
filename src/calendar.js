@@ -216,6 +216,11 @@ async function showAddEventModal(date, preselectedType = null) {
                 <input type="checkbox" id="enableHarvestReminder" name="enableHarvestReminder" checked class="rounded">
                 <label for="enableHarvestReminder" class="text-sm dark:text-gray-200">🌾 Harvest reminder</label>
               </div>
+              
+              <div class="flex items-center space-x-2">
+                <input type="checkbox" id="enableGoogleCalendarSync" name="enableGoogleCalendarSync" class="rounded">
+                <label for="enableGoogleCalendarSync" class="text-sm dark:text-gray-200">🗓️ Sync to Google Calendar</label>
+              </div>
             </div>
           </div>
         </div>
@@ -324,7 +329,8 @@ async function showAddEventModal(date, preselectedType = null) {
           fertilizingDelay: parseInt(formData.get('fertilizingDelay')) || 7,
           enablePhaseReminders: formData.get('enablePhaseReminders') === 'on',
           enableWeeklyChecks: formData.get('enableWeeklyChecks') === 'on',
-          enableHarvestReminder: formData.get('enableHarvestReminder') === 'on'
+          enableHarvestReminder: formData.get('enableHarvestReminder') === 'on',
+          enableGoogleCalendarSync: formData.get('enableGoogleCalendarSync') === 'on'
         };
 
         // Collect custom phase durations
@@ -368,6 +374,17 @@ async function showAddEventModal(date, preselectedType = null) {
         
         const db = await openDB('gardening-calendar');
         await db.add('events', eventData);
+        
+        // Try to sync to Google Calendar if enabled
+        const enableGoogleCalendarSync = formData.get('enableGoogleCalendarSync') === 'on';
+        if (enableGoogleCalendarSync) {
+          try {
+            const { autoSyncEvent } = await import('./googleCalendarUI.js');
+            await autoSyncEvent(eventData);
+          } catch (error) {
+            console.warn('Google Calendar sync failed:', error);
+          }
+        }
       }
       
       console.log('Event saved successfully');
@@ -551,7 +568,7 @@ function getPhaseHelpText(phaseName, category) {
   return helpTexts[category]?.[phaseName] || null;
 }
 
-// Enhanced addPlanting function with custom phase durations
+// Enhanced addPlanting function with custom phase durations and Google Calendar sync
 async function addPlantingWithOptions(plantType, startDate, location, customName, reminderOptions, customPhaseDurations = {}) {
   const db = await openDB('gardening-calendar');
   const plantData = PLANTS_DATA[plantType];
@@ -624,6 +641,9 @@ async function addPlantingWithOptions(plantType, startDate, location, customName
   const tx = db.transaction(['plantings', 'events'], 'readwrite');
   const plantingId = await tx.objectStore('plantings').add(planting);
   
+  // Collect all events for potential Google Calendar sync
+  const eventsToSync = [];
+  
   // Add planting event
   let plantingDescription = `Start planting ${displayName}`;
   if (plantData.legalNote) {
@@ -642,13 +662,18 @@ async function addPlantingWithOptions(plantType, startDate, location, customName
   plantingDescription += `\n\nTotal cycle: ${totalDays} days (${Math.round(totalDays/7)} weeks)`;
   plantingDescription += `\n\nCare Tips:\n${Object.entries(plantData.careTips).map(([key, value]) => `- ${key}: ${value}`).join('\n')}`;
 
-  await tx.objectStore('events').add({
+  const plantingEvent = {
     title: `🌱 Plant ${displayName}`,
     date: startDate,
     type: 'planting',
     description: plantingDescription,
     plantingId
-  });
+  };
+  
+  await tx.objectStore('events').add(plantingEvent);
+  if (reminderOptions.enableGoogleCalendarSync) {
+    eventsToSync.push(plantingEvent);
+  }
   
   // Add events based on user preferences using modified phase data
   for (let i = 0; i < phases.length; i++) {
@@ -661,13 +686,18 @@ async function addPlantingWithOptions(plantType, startDate, location, customName
         phaseTitle += ` (${phase.days}d custom)`;
       }
       
-      await tx.objectStore('events').add({
+      const phaseEvent = {
         title: phaseTitle,
         date: phase.startDate,
         type: 'maintenance',
         description: `${phase.description}\n\nCare Instructions:\n${phase.care}${phase.isCustomDuration ? `\n\n⏱️ Custom duration: ${phase.days} days` : ''}`,
         plantingId
-      });
+      };
+      
+      await tx.objectStore('events').add(phaseEvent);
+      if (reminderOptions.enableGoogleCalendarSync) {
+        eventsToSync.push(phaseEvent);
+      }
     }
 
     // Add weekly check-ins for longer phases
@@ -678,13 +708,18 @@ async function addPlantingWithOptions(plantType, startDate, location, customName
         checkDate.setDate(checkDate.getDate() + (week * 7));
         
         if (checkDate < new Date(completionDate)) {
-          await tx.objectStore('events').add({
+          const checkEvent = {
             title: `📋 ${displayName}: Week ${week} check (${phase.name})`,
             date: checkDate.toISOString().split('T')[0],
             type: 'maintenance',
             description: `Weekly check during ${phase.name} phase\n\n${phase.care}\n\nLook for signs of:\n${getPhaseCheckpoints(phase.name, plantData)}`,
             plantingId
-          });
+          };
+          
+          await tx.objectStore('events').add(checkEvent);
+          if (reminderOptions.enableGoogleCalendarSync) {
+            eventsToSync.push(checkEvent);
+          }
         }
       }
     }
@@ -696,13 +731,19 @@ async function addPlantingWithOptions(plantType, startDate, location, customName
       phaseEnd.setDate(phaseEnd.getDate() + phase.days);
 
       while (wateringDate < phaseEnd) {
-        await tx.objectStore('events').add({
+        const wateringEvent = {
           title: `💧 Water ${displayName}`,
           date: wateringDate.toISOString().split('T')[0],
           type: 'watering',
           description: `${plantData.careTips.watering || 'Check soil moisture and water as needed'}\n\nPhase: ${phase.name}\nCare: ${phase.care}`,
           plantingId
-        });
+        };
+        
+        await tx.objectStore('events').add(wateringEvent);
+        if (reminderOptions.enableGoogleCalendarSync) {
+          eventsToSync.push(wateringEvent);
+        }
+        
         wateringDate.setDate(wateringDate.getDate() + reminderOptions.wateringInterval);
       }
     }
@@ -717,13 +758,19 @@ async function addPlantingWithOptions(plantType, startDate, location, customName
       phaseEnd.setDate(phaseEnd.getDate() + phase.days);
       
       while (fertilizeDate < phaseEnd) {
-        await tx.objectStore('events').add({
+        const fertilizeEvent = {
           title: `🌿 Fertilize ${displayName}`,
           date: fertilizeDate.toISOString().split('T')[0],
           type: 'fertilizing',
           description: `${plantData.careTips.fertilizing || 'Apply appropriate fertilizer'}\n\nPhase: ${phase.name}`,
           plantingId
-        });
+        };
+        
+        await tx.objectStore('events').add(fertilizeEvent);
+        if (reminderOptions.enableGoogleCalendarSync) {
+          eventsToSync.push(fertilizeEvent);
+        }
+        
         fertilizeDate.setDate(fertilizeDate.getDate() + reminderOptions.fertilizingInterval);
       }
     }
@@ -744,16 +791,39 @@ async function addPlantingWithOptions(plantType, startDate, location, customName
       harvestDescription += `\n\nCommon Problems to Check For:\n${Object.entries(plantData.commonProblems).map(([problem, solution]) => `- ${problem}: ${solution}`).join('\n')}`;
     }
     
-    await tx.objectStore('events').add({
+    const harvestEvent = {
       title: eventTitle,
       date: completionDate.toISOString().split('T')[0],
       type: finalPhase === 'harvest' ? 'harvesting' : 'maintenance',
       description: harvestDescription,
       plantingId
-    });
+    };
+    
+    await tx.objectStore('events').add(harvestEvent);
+    if (reminderOptions.enableGoogleCalendarSync) {
+      eventsToSync.push(harvestEvent);
+    }
   }
   
   await tx.done;
+  
+  // Sync to Google Calendar if enabled
+  if (reminderOptions.enableGoogleCalendarSync && eventsToSync.length > 0) {
+    try {
+      const { googleCalendar } = await import('./googleCalendar.js');
+      if (googleCalendar.isSignedIn) {
+        const { results, errors } = await googleCalendar.createEvents(eventsToSync);
+        console.log(`Google Calendar sync: ${results.length} events synced, ${errors.length} failed`);
+        
+        if (errors.length > 0) {
+          console.warn('Some events failed to sync to Google Calendar:', errors);
+        }
+      }
+    } catch (error) {
+      console.warn('Google Calendar sync failed:', error);
+    }
+  }
+  
   return plantingId;
 }
 
