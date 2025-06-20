@@ -22,26 +22,79 @@ function formatTemperature(fahrenheitRange) {
   });
 }
 
+export const GROWING_ENVIRONMENTS = {
+  INDOOR: 'indoor',
+  OUTDOOR: 'outdoor',
+  GREENHOUSE: 'greenhouse'
+};
+
+export const SEASONAL_REGIONS = {
+  TEMPERATE_NORTH: 'temperate_north', // Europa, Nordamerika
+  TEMPERATE_SOUTH: 'temperate_south', // Südamerika, Australien
+  TROPICAL: 'tropical',
+  MEDITERRANEAN: 'mediterranean'
+};
+
+// Seasonal planting windows for outdoor growing
+export const SEASONAL_WINDOWS = {
+  temperate_north: {
+    spring: { start: '03-15', end: '05-31', description: 'After last frost' },
+    summer: { start: '06-01', end: '07-31', description: 'Warm season crops' },
+    fall: { start: '08-01', end: '09-30', description: 'Cool season crops' },
+    winter: { start: '10-01', end: '02-28', description: 'Indoor only or cold frames' }
+  },
+  mediterranean: {
+    spring: { start: '02-15', end: '05-31', description: 'Mild spring planting' },
+    summer: { start: '06-01', end: '08-31', description: 'Heat tolerant crops' },
+    fall: { start: '09-01', end: '11-30', description: 'Extended growing season' },
+    winter: { start: '12-01', end: '02-14', description: 'Cool season crops' }
+  }
+};
+
 export const PLANTS_DATA = {
-  // Cannabis varieties
+  // Cannabis varieties with indoor/outdoor variants
   cannabis_indica: {
     name: 'Cannabis Indica',
     category: 'Cannabis',
     legalNote: 'Check local laws before cultivation. This information is for educational purposes only.',
-    phases: {
-      germination: { days: 3, description: 'Seed sprouting', care: 'Keep seeds warm (70-85°F/21-29°C) and moist in dark environment' },
-      seedling: { days: 14, description: 'First true leaves development', care: 'Provide 18-24 hours of light, maintain humidity 65-70%' },
-      vegetative: { days: 35, description: 'Rapid growth phase', care: '18/6 light cycle, high nitrogen feeding, LST training' },
-      preflower: { days: 7, description: 'Sex determination', care: 'Continue vegetative care, identify and remove males' },
-      flowering: { days: 56, description: 'Bud development', care: '12/12 light cycle, phosphorus/potassium feeding, monitor trichomes' },
-      harvest: { days: 7, description: 'Harvest and cure preparation', care: 'Flush nutrients 1-2 weeks before harvest' }
+    environments: {
+      indoor: {
+        phases: {
+          germination: { days: 3, description: 'Seed sprouting', care: 'Keep seeds warm (70-85°F/21-29°C) and moist in dark environment' },
+          seedling: { days: 14, description: 'First true leaves development', care: 'Provide 18-24 hours of light, maintain humidity 65-70%' },
+          vegetative: { days: 35, description: 'Rapid growth phase', care: '18/6 light cycle, high nitrogen feeding, LST training' },
+          preflower: { days: 7, description: 'Sex determination', care: 'Continue vegetative care, identify and remove males' },
+          flowering: { days: 56, description: 'Bud development', care: '12/12 light cycle, phosphorus/potassium feeding, monitor trichomes' },
+          harvest: { days: 7, description: 'Harvest and cure preparation', care: 'Flush nutrients 1-2 weeks before harvest' }
+        }
+      },
+      outdoor: {
+        phases: {
+          germination: { days: 3, description: 'Seed sprouting', care: 'Keep seeds warm and moist, protect from direct sun' },
+          seedling: { days: 21, description: 'Establishing outdoors', care: 'Gradual sun exposure, protect from wind and pests' },
+          vegetative: { days: 90, description: 'Natural light vegetative growth', care: 'Natural sunlight, train for size management, heavy feeding' },
+          preflower: { days: 14, description: 'Natural photoperiod trigger', care: 'Occurs naturally as days shorten, identify males' },
+          flowering: { days: 63, description: 'Outdoor flowering', care: 'Natural light cycle, weather protection, pest monitoring' },
+          harvest: { days: 14, description: 'Outdoor harvest timing', care: 'Weather dependent, check trichomes, quick dry if rain' }
+        },
+        seasonalTiming: {
+          temperate_north: {
+            plantingWindow: { start: '04-15', end: '06-01', description: 'After last frost, before summer solstice' },
+            harvestWindow: { start: '09-15', end: '10-31', description: 'Before first frost' }
+          },
+          mediterranean: {
+            plantingWindow: { start: '03-15', end: '05-15', description: 'Mild spring start' },
+            harvestWindow: { start: '09-01', end: '11-15', description: 'Extended harvest season' }
+          }
+        }
+      }
     },
     careTips: {
       watering: 'Water when top inch of soil is dry, pH 6.0-7.0 in soil, 5.5-6.5 in hydro',
       fertilizing: 'High nitrogen in veg (3-1-2), high phosphorus in flower (1-3-2)',
-      sunlight: '18/6 hours in vegetative, 12/12 hours in flowering',
-      spacing: '2-4 feet apart depending on training method',
-      support: 'SCROG nets, LST, or stakes for heavy branches',
+      sunlight: 'Indoor: 18/6 hours in vegetative, 12/12 hours in flowering. Outdoor: Natural sunlight',
+      spacing: 'Indoor: 2-4 feet apart. Outdoor: 4-8 feet apart for full size',
+      support: 'Indoor: SCROG nets, LST. Outdoor: Strong stakes for wind resistance',
       humidity: '65-70% seedling, 40-50% vegetative, 40-45% flowering',
       temperature: formatTemperature('70-85°F day, 65-80°F night')
     },
@@ -113,12 +166,35 @@ export const PLANTS_DATA = {
   tomatoes: {
     name: 'Tomatoes',
     category: 'Vegetables',
-    phases: {
-      germination: { days: 7, description: 'Seeds sprouting', care: 'Keep soil warm (70-80°F/21-27°C) and moist' },
-      seedling: { days: 21, description: 'Young plant development', care: 'Provide strong light, maintain moisture' },
-      vegetative: { days: 30, description: 'Leaf and stem growth', care: 'Start fertilizing, support stems' },
-      flowering: { days: 20, description: 'Flower development', care: 'Maintain consistent watering, shake plants gently to aid pollination' },
-      fruiting: { days: 45, description: 'Fruit development to harvest', care: 'Regular feeding, watch for pests and disease' }
+    environments: {
+      indoor: {
+        phases: {
+          germination: { days: 7, description: 'Seeds sprouting', care: 'Keep soil warm (70-80°F/21-27°C) and moist' },
+          seedling: { days: 21, description: 'Young plant development', care: 'Provide strong light, maintain moisture' },
+          transplant: { days: 14, description: 'Hardening off period', care: 'Gradually introduce to outdoor conditions' },
+          flowering: { days: 20, description: 'Flower development', care: 'Maintain consistent watering, shake plants gently' },
+          fruiting: { days: 45, description: 'Fruit development to harvest', care: 'Regular feeding, watch for pests and disease' }
+        }
+      },
+      outdoor: {
+        phases: {
+          germination: { days: 7, description: 'Indoor seed starting', care: 'Start indoors 6-8 weeks before last frost' },
+          seedling: { days: 35, description: 'Indoor growing', care: 'Grow indoors until outdoor conditions suitable' },
+          transplant: { days: 14, description: 'Outdoor transplanting', care: 'Transplant after soil warms to 60°F/15°C' },
+          flowering: { days: 25, description: 'Outdoor flowering', care: 'Natural pollination, consistent watering' },
+          fruiting: { days: 60, description: 'Outdoor fruit production', care: 'Weather protection, extended harvest' }
+        },
+        seasonalTiming: {
+          temperate_north: {
+            plantingWindow: { start: '05-15', end: '06-15', description: 'After last frost, soil warm' },
+            harvestWindow: { start: '07-15', end: '10-01', description: 'Until first frost' }
+          },
+          mediterranean: {
+            plantingWindow: { start: '03-15', end: '05-01', description: 'Extended growing season' },
+            harvestWindow: { start: '06-01', end: '11-15', description: 'Long harvest period' }
+          }
+        }
+      }
     },
     careTips: {
       watering: 'Keep soil consistently moist, water deeply 2-3 times per week',
@@ -358,8 +434,133 @@ export const PLANTS_DATA = {
       'Slugs': 'Eat holes in berries - use beer traps or diatomaceous earth',
       'Birds': 'Eat ripe berries - use netting protection'
     }
+  },
+
+  // Add fruit trees
+  apple_tree: {
+    name: 'Apple Tree',
+    category: 'Fruit Trees',
+    environments: {
+      outdoor: {
+        phases: {
+          establishment: { days: 365, description: 'First year root establishment', care: 'Regular watering, weed control, light pruning' },
+          juvenile: { days: 730, description: 'Years 2-3 growth', care: 'Shape pruning, continued care, no fruit expected' },
+          productive: { days: 7300, description: 'Productive years 4-20+', care: 'Annual pruning, pest management, harvest timing' },
+          dormancy: { days: 120, description: 'Winter dormancy period', care: 'Dormant season pruning, pest oil application' }
+        },
+        seasonalTiming: {
+          temperate_north: {
+            plantingWindow: { start: '03-01', end: '05-01', description: 'Early spring before bud break' },
+            harvestWindow: { start: '08-01', end: '10-31', description: 'Variety dependent harvest' },
+            pruningWindow: { start: '01-15', end: '03-15', description: 'Dormant season pruning' }
+          }
+        }
+      }
+    },
+    careTips: {
+      watering: 'Deep weekly watering, 1-2 inches per week during growing season',
+      fertilizing: 'Annual spring fertilizer application, avoid high nitrogen in fall',
+      sunlight: 'Full sun, 6+ hours daily',
+      spacing: '15-20 feet apart for standard trees, 8-12 feet for dwarf',
+      pruning: 'Annual dormant season pruning for shape and disease prevention',
+      pollination: 'Most varieties need cross-pollination with another apple variety',
+      soilPH: '6.0-7.0'
+    },
+    commonProblems: {
+      'Apple Scab': 'Fungal disease - choose resistant varieties, improve air circulation',
+      'Codling Moth': 'Worm in apples - pheromone traps, proper timing of sprays',
+      'Fire Blight': 'Bacterial disease - prune infected branches, avoid high nitrogen',
+      'Biennial Bearing': 'Fruit every other year - thin fruit in heavy years'
+    }
+  },
+
+  cherry_tree: {
+    name: 'Cherry Tree',
+    category: 'Fruit Trees',
+    environments: {
+      outdoor: {
+        phases: {
+          establishment: { days: 365, description: 'First year establishment', care: 'Regular watering, protection from birds' },
+          juvenile: { days: 1095, description: 'Years 2-4 development', care: 'Training pruning, disease prevention' },
+          productive: { days: 5475, description: 'Productive years 5-20', care: 'Harvest timing, bird protection, disease management' },
+          dormancy: { days: 120, description: 'Winter dormancy', care: 'Dormant pruning, trunk protection' }
+        },
+        seasonalTiming: {
+          temperate_north: {
+            plantingWindow: { start: '03-01', end: '04-15', description: 'Early spring planting' },
+            harvestWindow: { start: '06-01', end: '08-15', description: 'Early summer harvest' },
+            pruningWindow: { start: '02-01', end: '03-15', description: 'Late winter pruning' }
+          }
+        }
+      }
+    },
+    careTips: {
+      watering: 'Regular watering but avoid overwatering, good drainage essential',
+      fertilizing: 'Light annual feeding, avoid excess nitrogen',
+      sunlight: 'Full sun exposure',
+      spacing: '20-25 feet apart for sweet cherries, 15-20 feet for sour',
+      pruning: 'Minimal pruning, prune in late winter',
+      pollination: 'Sweet cherries usually need cross-pollination',
+      birdProtection: 'Netting or other bird deterrents essential at harvest'
+    },
+    commonProblems: {
+      'Brown Rot': 'Fungal disease - remove infected fruit, improve air circulation',
+      'Cherry Fruit Fly': 'Maggots in fruit - yellow sticky traps, proper timing',
+      'Bacterial Canker': 'Trunk/branch disease - avoid winter injury, proper pruning',
+      'Birds': 'Fruit theft - netting, scare devices, early harvest'
+    }
   }
 };
+
+// Helper function to get appropriate plant data based on environment
+export function getPlantDataForEnvironment(plantKey, environment = 'indoor') {
+  const plant = PLANTS_DATA[plantKey];
+  if (!plant) return null;
+  
+  // If plant has environment-specific data, use it
+  if (plant.environments && plant.environments[environment]) {
+    return {
+      ...plant,
+      phases: plant.environments[environment].phases,
+      seasonalTiming: plant.environments[environment].seasonalTiming
+    };
+  }
+  
+  // Fallback to original structure for backward compatibility
+  return plant;
+}
+
+// Helper function to check if planting date is appropriate for outdoor plants
+export function validatePlantingDate(plantKey, environment, plantingDate, region = 'temperate_north') {
+  const plant = getPlantDataForEnvironment(plantKey, environment);
+  
+  if (environment !== 'outdoor' || !plant.seasonalTiming) {
+    return { valid: true, message: 'Indoor growing - any time suitable' };
+  }
+  
+  const seasonalTiming = plant.seasonalTiming[region];
+  if (!seasonalTiming || !seasonalTiming.plantingWindow) {
+    return { valid: true, message: 'No seasonal restrictions defined' };
+  }
+  
+  const date = new Date(plantingDate);
+  const month = date.getMonth() + 1;
+  const day = date.getDate();
+  const dateString = `${month.toString().padStart(2, '0')}-${day.toString().padStart(2, '0')}`;
+  
+  const { start, end, description } = seasonalTiming.plantingWindow;
+  
+  // Simple date range check (doesn't handle year boundaries perfectly)
+  if (dateString >= start && dateString <= end) {
+    return { valid: true, message: `Good timing: ${description}` };
+  } else {
+    return { 
+      valid: false, 
+      message: `Consider planting between ${start} and ${end} (${description})`,
+      suggestedWindow: seasonalTiming.plantingWindow
+    };
+  }
+}
 
 export async function initializeDB() {
   const db = await openDB(DB_NAME, DB_VERSION, {

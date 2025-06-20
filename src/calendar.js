@@ -3,11 +3,15 @@ import dayGridPlugin from '@fullcalendar/daygrid';
 import interactionPlugin from '@fullcalendar/interaction';
 import { openDB } from 'idb';
 import { format } from 'date-fns';
-import { PLANTS_DATA, PLANT_CATEGORIES, addPlanting, addPlantNote, getPlantNotes, updatePlantingStatus, searchPlants } from './db';
+import { PLANTS_DATA, PLANT_CATEGORIES, addPlanting, addPlantNote, getPlantNotes, updatePlantingStatus, searchPlants, GROWING_ENVIRONMENTS, SEASONAL_REGIONS, getPlantDataForEnvironment, validatePlantingDate } from './db';
+import { getAvailableTemplates, importGardenTemplate, GARDEN_TEMPLATE_CATEGORIES } from './gardenTemplates.js';
+import { t, getCurrentLanguage, createLanguageSwitcher, updateUITranslations } from './i18n.js';
 
 let calendar;
 
 export async function initializeCalendar() {
+  await initializeDB();
+  
   const calendarEl = document.getElementById('calendar');
   
   calendar = new Calendar(calendarEl, {
@@ -17,36 +21,46 @@ export async function initializeCalendar() {
     headerToolbar: {
       left: 'prev,next today',
       center: 'title',
-      right: 'dayGridMonth'
+      right: 'dayGridMonth,timeGridWeek,timeGridDay'
     },
-    events: async (info, successCallback) => {
+    selectable: true,
+    selectMirror: true,
+    dayMaxEvents: true,
+    weekends: true,
+    select: function(arg) {
+      showAddEventModal(arg.startStr);
+      calendar.unselect();
+    },
+    eventClick: function(arg) {
+      showEventDetails(arg.event);
+    },
+    events: async function(fetchInfo, successCallback, failureCallback) {
       try {
-        const db = await openDB('gardening-calendar');
+        const db = await openDB('GardenCalendar', 1);
         const events = await db.getAll('events');
-        
-        successCallback(events.map(event => ({
+        const formattedEvents = events.map(event => ({
           id: event.id,
           title: event.title,
           start: event.date,
           backgroundColor: getEventColor(event.type),
           borderColor: getEventColor(event.type),
-          textColor: '#ffffff',
           extendedProps: {
-            description: event.description,
             type: event.type,
-            plantingId: event.plantingId
+            description: event.description,
+            plantingId: event.plantingId,
+            phase: event.phase,
+            priority: event.priority,
+            templateCategory: event.templateCategory,
+            templateName: event.templateName,
+            language: event.language,
+            isTemplate: event.isTemplate
           }
-        })));
+        }));
+        successCallback(formattedEvents);
       } catch (error) {
         console.error('Error loading events:', error);
-        successCallback([]);
+        failureCallback(error);
       }
-    },
-    dateClick: (info) => {
-      showAddEventModal(info.dateStr);
-    },
-    eventClick: (info) => {
-      showEventDetails(info.event);
     }
   });
 
@@ -65,6 +79,52 @@ export async function initializeCalendar() {
     if (calendar && typeof calendar.refetchEvents === 'function') {
       calendar.refetchEvents();
     }
+  });
+  
+  // Add control buttons
+  const controls = document.createElement('div');
+  controls.className = 'calendar-controls mb-4 flex flex-wrap gap-2 items-center justify-between';
+  
+  const buttonGroup = document.createElement('div');
+  buttonGroup.className = 'flex flex-wrap gap-2';
+  
+  const addEventBtn = document.createElement('button');
+  addEventBtn.innerHTML = '<i class="fas fa-plus mr-2"></i>' + t('btn.add_event');
+  addEventBtn.className = 'px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600';
+  addEventBtn.onclick = () => showAddEventModal();
+  
+  const addPlantingBtn = document.createElement('button');
+  addPlantingBtn.innerHTML = '<i class="fas fa-seedling mr-2"></i>' + t('btn.add_planting');
+  addPlantingBtn.className = 'px-4 py-2 bg-green-500 text-white rounded hover:bg-green-600';
+  addPlantingBtn.onclick = () => showAddEventModal(null, 'planting');
+
+  // Add Template Import button
+  const templateImportBtn = document.createElement('button');
+  templateImportBtn.innerHTML = '<i class="fas fa-download mr-2"></i>' + t('btn.import_template');
+  templateImportBtn.className = 'px-4 py-2 bg-purple-500 text-white rounded hover:bg-purple-600';
+  templateImportBtn.onclick = () => showTemplateImportModal();
+
+  buttonGroup.appendChild(addEventBtn);
+  buttonGroup.appendChild(addPlantingBtn);
+  buttonGroup.appendChild(templateImportBtn);
+  
+  // Add language switcher
+  const languageSwitcher = createLanguageSwitcher();
+  
+  controls.appendChild(buttonGroup);
+  controls.appendChild(languageSwitcher);
+  
+  calendarEl.parentNode.insertBefore(controls, calendarEl);
+
+  // Listen for language changes
+  document.addEventListener('languageChanged', () => {
+    // Update button texts
+    addEventBtn.innerHTML = '<i class="fas fa-plus mr-2"></i>' + t('btn.add_event');
+    addPlantingBtn.innerHTML = '<i class="fas fa-seedling mr-2"></i>' + t('btn.add_planting');
+    templateImportBtn.innerHTML = '<i class="fas fa-download mr-2"></i>' + t('btn.import_template');
+    
+    // Update other UI elements
+    updateUITranslations();
   });
   
   return calendar;
@@ -88,6 +148,16 @@ async function showAddEventModal(date, preselectedType = null) {
   // Create category options
   const categoryOptions = PLANT_CATEGORIES.map(category => 
     `<option value="${category}">${category}</option>`
+  ).join('');
+
+  // Create environment options
+  const environmentOptions = Object.entries(GROWING_ENVIRONMENTS).map(([key, value]) => 
+    `<option value="${value}">${key.charAt(0) + key.slice(1).toLowerCase()}</option>`
+  ).join('');
+
+  // Create region options
+  const regionOptions = Object.entries(SEASONAL_REGIONS).map(([key, value]) => 
+    `<option value="${value}">${key.replace(/_/g, ' ').replace(/\b\w/g, l => l.toUpperCase())}</option>`
   ).join('');
 
   const eventTypeValue = preselectedType === 'planting' ? 'planting' : 'custom';
@@ -122,6 +192,21 @@ async function showAddEventModal(date, preselectedType = null) {
         <div id="plantingFields" style="display: ${eventTypeValue === 'planting' ? 'block' : 'none'};">
           <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
             <div>
+              <label class="block text-sm font-medium mb-1 dark:text-gray-200">Growing Environment</label>
+              <select name="environment" id="environmentSelect" class="w-full p-2 border rounded dark:bg-gray-700 dark:border-gray-600 dark:text-white">
+                ${environmentOptions}
+              </select>
+            </div>
+            <div id="regionField" style="display: none;">
+              <label class="block text-sm font-medium mb-1 dark:text-gray-200">Climate Region</label>
+              <select name="region" id="regionSelect" class="w-full p-2 border rounded dark:bg-gray-700 dark:border-gray-600 dark:text-white">
+                ${regionOptions}
+              </select>
+            </div>
+          </div>
+          
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+            <div>
               <label class="block text-sm font-medium mb-1 dark:text-gray-200">Plant Category</label>
               <select name="plantCategory" id="plantCategorySelect" class="w-full p-2 border rounded dark:bg-gray-700 dark:border-gray-600 dark:text-white">
                 <option value="">All Categories</option>
@@ -138,6 +223,17 @@ async function showAddEventModal(date, preselectedType = null) {
             </div>
           </div>
           
+          <!-- Seasonal Timing Warning -->
+          <div id="seasonalWarning" class="hidden p-3 bg-yellow-100 dark:bg-yellow-900 border border-yellow-300 dark:border-yellow-700 rounded">
+            <div class="flex items-center">
+              <span class="text-yellow-600 dark:text-yellow-400 mr-2">⚠️</span>
+              <div class="text-sm">
+                <div id="seasonalMessage" class="font-medium"></div>
+                <div id="seasonalDetails" class="text-xs mt-1"></div>
+              </div>
+            </div>
+          </div>
+          
           <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
             <div>
               <label class="block text-sm font-medium mb-1 dark:text-gray-200">Custom Name (Optional)</label>
@@ -146,7 +242,7 @@ async function showAddEventModal(date, preselectedType = null) {
             </div>
             <div>
               <label class="block text-sm font-medium mb-1 dark:text-gray-200">Location</label>
-              <input type="text" name="location" class="w-full p-2 border rounded dark:bg-gray-700 dark:border-gray-600 dark:text-white" placeholder="e.g., Indoor Tent, Outdoor Garden" value="Default Garden">
+              <input type="text" name="location" id="locationField" class="w-full p-2 border rounded dark:bg-gray-700 dark:border-gray-600 dark:text-white" placeholder="e.g., Indoor Tent, Outdoor Garden" value="Default Garden">
             </div>
           </div>
           
@@ -258,12 +354,19 @@ async function showAddEventModal(date, preselectedType = null) {
   // Get form elements
   const form = document.getElementById('eventForm');
   const eventTypeSelect = document.getElementById('eventTypeSelect');
+  const environmentSelect = document.getElementById('environmentSelect');
+  const regionSelect = document.getElementById('regionSelect');
+  const regionField = document.getElementById('regionField');
   const plantCategorySelect = document.getElementById('plantCategorySelect');
   const plantTypeSelect = document.getElementById('plantTypeSelect');
   const customNameField = document.getElementById('customNameField');
   const titleField = document.getElementById('titleField');
+  const locationField = document.getElementById('locationField');
   const cancelBtn = document.getElementById('cancelBtn');
   const saveBtn = document.getElementById('saveBtn');
+  const seasonalWarning = document.getElementById('seasonalWarning');
+  const seasonalMessage = document.getElementById('seasonalMessage');
+  const seasonalDetails = document.getElementById('seasonalDetails');
 
   // Checkbox elements
   const enableWatering = document.getElementById('enableWatering');
@@ -276,6 +379,17 @@ async function showAddEventModal(date, preselectedType = null) {
     togglePlantingFields(this.value);
   });
 
+  environmentSelect.addEventListener('change', function() {
+    updateEnvironmentFields(this.value);
+    updatePlantInfo();
+    updateLocationPlaceholder();
+    checkSeasonalTiming();
+  });
+
+  regionSelect.addEventListener('change', function() {
+    checkSeasonalTiming();
+  });
+
   plantCategorySelect.addEventListener('change', function() {
     updatePlantOptions(this.value);
   });
@@ -284,6 +398,12 @@ async function showAddEventModal(date, preselectedType = null) {
     updatePlantInfo();
     updateCustomNamePlaceholder();
     updatePhaseInputs();
+    checkSeasonalTiming();
+  });
+
+  // Check seasonal timing when date changes
+  document.querySelector('input[name="date"]').addEventListener('change', function() {
+    checkSeasonalTiming();
   });
 
   customNameField.addEventListener('input', function() {
@@ -466,34 +586,64 @@ async function showAddEventModal(date, preselectedType = null) {
     updatePhaseInputs();
   }
 
+  function updateEnvironmentFields(environment) {
+    if (environment === 'outdoor') {
+      regionField.style.display = 'block';
+    } else {
+      regionField.style.display = 'none';
+    }
+  }
+
+  function updateLocationPlaceholder() {
+    const environment = environmentSelect.value;
+    const placeholders = {
+      'indoor': 'e.g., Indoor Tent, Grow Room, Windowsill',
+      'outdoor': 'e.g., Backyard Garden, Raised Bed, Field',
+      'greenhouse': 'e.g., Greenhouse Section A, Hoophouse'
+    };
+    locationField.placeholder = placeholders[environment] || 'e.g., Indoor Tent, Outdoor Garden';
+    
+    // Update default value based on environment
+    if (locationField.value === 'Default Garden') {
+      const defaultValues = {
+        'indoor': 'Indoor Garden',
+        'outdoor': 'Outdoor Garden', 
+        'greenhouse': 'Greenhouse'
+      };
+      locationField.value = defaultValues[environment] || 'Default Garden';
+    }
+  }
+
   function updatePlantInfo() {
     const plantInfo = document.getElementById('plantInfo');
-    const selectedPlant = PLANTS_DATA[plantTypeSelect.value];
+    const environment = environmentSelect.value;
+    const plantData = getPlantDataForEnvironment(plantTypeSelect.value, environment);
     
-    if (selectedPlant) {
-      let infoHtml = `<strong>${selectedPlant.name}</strong> (${selectedPlant.category})`;
+    if (plantData) {
+      let infoHtml = `<strong>${plantData.name}</strong> (${plantData.category}) - ${environment.charAt(0).toUpperCase() + environment.slice(1)} Growing`;
       
-      if (selectedPlant.legalNote) {
+      if (plantData.legalNote) {
         infoHtml += `<div class="mt-2 p-2 bg-yellow-100 dark:bg-yellow-900 border border-yellow-300 dark:border-yellow-700 rounded">
-          <strong>⚠️ Legal Notice:</strong> ${selectedPlant.legalNote}
+          <strong>⚠️ Legal Notice:</strong> ${plantData.legalNote}
         </div>`;
       }
       
-      const totalDays = Object.values(selectedPlant.phases).reduce((sum, phase) => sum + phase.days, 0);
+      const totalDays = Object.values(plantData.phases).reduce((sum, phase) => sum + phase.days, 0);
       infoHtml += `<div class="mt-2"><strong>Growing cycle:</strong> ${totalDays} days (${Math.round(totalDays/7)} weeks)</div>`;
       
       // Show phase breakdown
-      const phaseList = Object.entries(selectedPlant.phases).map(([name, data]) => 
+      const phaseList = Object.entries(plantData.phases).map(([name, data]) => 
         `${name}: ${data.days} days`
       ).join(', ');
       infoHtml += `<div class="mt-1 text-xs"><strong>Phases:</strong> ${phaseList}</div>`;
       
-      if (selectedPlant.careTips.temperature) {
-        infoHtml += `<div><strong>Temperature:</strong> ${selectedPlant.careTips.temperature}</div>`;
+      // Show environment-specific care tips
+      if (plantData.careTips.temperature) {
+        infoHtml += `<div><strong>Temperature:</strong> ${plantData.careTips.temperature}</div>`;
       }
       
-      if (selectedPlant.careTips.sunlight) {
-        infoHtml += `<div><strong>Light:</strong> ${selectedPlant.careTips.sunlight}</div>`;
+      if (plantData.careTips.sunlight) {
+        infoHtml += `<div><strong>Light:</strong> ${plantData.careTips.sunlight}</div>`;
       }
       
       plantInfo.innerHTML = infoHtml;
@@ -502,22 +652,23 @@ async function showAddEventModal(date, preselectedType = null) {
 
   function updatePhaseInputs() {
     const phaseInputs = document.getElementById('phaseInputs');
-    const selectedPlant = PLANTS_DATA[plantTypeSelect.value];
+    const environment = environmentSelect.value;
+    const plantData = getPlantDataForEnvironment(plantTypeSelect.value, environment);
     
-    if (!selectedPlant) {
+    if (!plantData) {
       phaseInputs.innerHTML = '';
       return;
     }
     
     let inputsHtml = '';
     
-    for (const [phaseName, phaseData] of Object.entries(selectedPlant.phases)) {
+    for (const [phaseName, phaseData] of Object.entries(plantData.phases)) {
       const isFloweringPhase = phaseName.toLowerCase().includes('flower') || 
                               phaseName.toLowerCase().includes('bloom') ||
                               phaseName.toLowerCase().includes('fruiting');
       
       const phaseEmoji = getPhaseEmoji(phaseName);
-      const helpText = getPhaseHelpText(phaseName, selectedPlant.category);
+      const helpText = getPhaseHelpText(phaseName, plantData.category, environment);
       
       inputsHtml += `
         <div class="flex items-center space-x-2 ${isFloweringPhase ? 'bg-purple-50 dark:bg-purple-900/20 p-2 rounded' : ''}">
@@ -552,39 +703,98 @@ async function showAddEventModal(date, preselectedType = null) {
     }
   }
 
+  function checkSeasonalTiming() {
+    const environment = environmentSelect.value;
+    const plantType = plantTypeSelect.value;
+    const region = regionSelect.value;
+    const plantingDate = document.querySelector('input[name="date"]').value;
+    
+    if (!plantType || !plantingDate) {
+      seasonalWarning.classList.add('hidden');
+      return;
+    }
+    
+    const validation = validatePlantingDate(plantType, environment, plantingDate, region);
+    
+    if (validation.valid) {
+      if (validation.message !== 'Indoor growing - any time suitable') {
+        seasonalWarning.classList.remove('hidden');
+        seasonalWarning.className = 'p-3 bg-green-100 dark:bg-green-900 border border-green-300 dark:border-green-700 rounded';
+        seasonalMessage.textContent = '✅ Good timing!';
+        seasonalDetails.textContent = validation.message;
+      } else {
+        seasonalWarning.classList.add('hidden');
+      }
+    } else {
+      seasonalWarning.classList.remove('hidden');
+      seasonalWarning.className = 'p-3 bg-yellow-100 dark:bg-yellow-900 border border-yellow-300 dark:border-yellow-700 rounded';
+      seasonalMessage.textContent = '⚠️ Timing Notice';
+      seasonalDetails.textContent = validation.message;
+    }
+  }
+
+  // Initialize environment fields and checks
+  updateEnvironmentFields(environmentSelect.value);
+  updateLocationPlaceholder();
+  
   // Initialize plant info if planting is preselected
   if (eventTypeValue === 'planting') {
     setTimeout(() => {
       updatePlantInfo();
       updateCustomNamePlaceholder();
       updatePhaseInputs();
+      checkSeasonalTiming();
     }, 100);
   }
 }
 
-function getPhaseHelpText(phaseName, category) {
+function getPhaseHelpText(phaseName, category, environment) {
   const helpTexts = {
     'Cannabis': {
-      'flowering': 'Cannabis flowering varies widely: Indica 6-8 weeks, Sativa 8-12 weeks, Autoflower 4-6 weeks',
-      'vegetative': 'Longer veg = bigger plants. Indoor: 4-8 weeks, Outdoor: depends on season',
-      'preflower': 'Shows sex, usually 1-2 weeks after switching to 12/12'
+      indoor: {
+        'flowering': 'Cannabis flowering varies widely: Indica 6-8 weeks, Sativa 8-12 weeks, Autoflower 4-6 weeks',
+        'vegetative': 'Longer veg = bigger plants. Indoor: 4-8 weeks optimal',
+        'preflower': 'Shows sex, usually 1-2 weeks after switching to 12/12'
+      },
+      outdoor: {
+        'flowering': 'Natural flowering triggered by shorter days (usually August-October)',
+        'vegetative': 'Outdoor veg can be 3-4 months, plants get much larger',
+        'preflower': 'Natural photoperiod change triggers flowering'
+      }
     },
     'Vegetables': {
-      'flowering': 'Varies by variety and growing conditions',
-      'fruiting': 'Time from fruit set to harvest readiness'
+      indoor: {
+        'flowering': 'Controlled environment allows year-round growing',
+        'fruiting': 'Hand pollination may be needed indoors'
+      },
+      outdoor: {
+        'flowering': 'Natural pollination by insects and wind',
+        'fruiting': 'Weather dependent - protect from extreme conditions'
+      }
+    },
+    'Fruit Trees': {
+      outdoor: {
+        'establishment': 'First year is critical - regular watering and protection',
+        'dormancy': 'Winter dormancy is natural and necessary for fruit trees'
+      }
     }
   };
   
-  return helpTexts[category]?.[phaseName] || null;
+  return helpTexts[category]?.[environment]?.[phaseName] || null;
 }
 
 // Enhanced addPlanting function with custom phase durations and Google Calendar sync
 async function addPlantingWithOptions(plantType, startDate, location, customName, reminderOptions, customPhaseDurations = {}) {
   const db = await openDB('gardening-calendar');
-  const plantData = PLANTS_DATA[plantType];
+  
+  // Get environment and region from the form
+  const environment = document.querySelector('select[name="environment"]')?.value || 'indoor';
+  const region = document.querySelector('select[name="region"]')?.value || 'temperate_north';
+  
+  const plantData = getPlantDataForEnvironment(plantType, environment);
   
   if (!plantData) {
-    throw new Error(`Plant type ${plantType} not found in database`);
+    throw new Error(`Plant type ${plantType} not found in database for ${environment} environment`);
   }
   
   // Use custom name or default to plant name
@@ -629,7 +839,7 @@ async function addPlantingWithOptions(plantType, startDate, location, customName
   const completionDate = new Date(currentDate);
   completionDate.setDate(completionDate.getDate() + totalDays);
   
-  // Add planting record
+  // Add planting record with environment information
   const planting = {
     plantType,
     plantName: plantData.name,
@@ -637,6 +847,8 @@ async function addPlantingWithOptions(plantType, startDate, location, customName
     customName: customName,
     category: plantData.category || 'Other',
     location,
+    environment, // NEW: Store growing environment
+    region, // NEW: Store climate region
     startDate: startDate,
     completionDate: completionDate.toISOString().split('T')[0],
     phases,
@@ -645,7 +857,8 @@ async function addPlantingWithOptions(plantType, startDate, location, customName
     notes: [],
     legalNote: plantData.legalNote || null,
     reminderOptions,
-    customPhaseDurations: Object.keys(customPhaseDurations).length > 0 ? customPhaseDurations : null
+    customPhaseDurations: Object.keys(customPhaseDurations).length > 0 ? customPhaseDurations : null,
+    seasonalTiming: plantData.seasonalTiming || null // NEW: Store seasonal timing info
   };
   
   const tx = db.transaction(['plantings', 'events'], 'readwrite');
@@ -654,17 +867,24 @@ async function addPlantingWithOptions(plantType, startDate, location, customName
   // Collect all events for potential Google Calendar sync
   const eventsToSync = [];
   
-  // Add planting event
-  let plantingDescription = `Start planting ${displayName}`;
+  // Add planting event with environment info
+  let plantingDescription = `Start ${environment} growing of ${displayName}`;
   if (plantData.legalNote) {
     plantingDescription += `\n\n⚠️ LEGAL NOTICE: ${plantData.legalNote}`;
+  }
+  
+  // Add environment-specific info
+  plantingDescription += `\n\n🌱 Growing Environment: ${environment.charAt(0).toUpperCase() + environment.slice(1)}`;
+  if (environment === 'outdoor' && region) {
+    plantingDescription += `\n🌍 Climate Region: ${region.replace(/_/g, ' ').replace(/\b\w/g, l => l.toUpperCase())}`;
   }
   
   // Add custom duration info to description
   if (Object.keys(customPhaseDurations).length > 0) {
     plantingDescription += `\n\n🕐 Custom Phase Durations:`;
     for (const [phase, days] of Object.entries(customPhaseDurations)) {
-      const originalDays = plantData.phases[phase]?.days;
+      const originalDays = PLANTS_DATA[plantType]?.phases?.[phase]?.days || 
+                          PLANTS_DATA[plantType]?.environments?.[environment]?.phases?.[phase]?.days;
       plantingDescription += `\n- ${phase}: ${days} days (standard: ${originalDays} days)`;
     }
   }
@@ -673,11 +893,12 @@ async function addPlantingWithOptions(plantType, startDate, location, customName
   plantingDescription += `\n\nCare Tips:\n${Object.entries(plantData.careTips).map(([key, value]) => `- ${key}: ${value}`).join('\n')}`;
 
   const plantingEvent = {
-    title: `🌱 Plant ${displayName}`,
+    title: `🌱 Plant ${displayName} (${environment})`,
     date: startDate,
     type: 'planting',
     description: plantingDescription,
-    plantingId
+    plantingId,
+    environment // NEW: Add environment to event
   };
   
   await tx.objectStore('events').add(plantingEvent);
@@ -695,13 +916,17 @@ async function addPlantingWithOptions(plantType, startDate, location, customName
       if (phase.isCustomDuration) {
         phaseTitle += ` (${phase.days}d custom)`;
       }
+      if (environment !== 'indoor') {
+        phaseTitle += ` [${environment}]`;
+      }
       
       const phaseEvent = {
         title: phaseTitle,
         date: phase.startDate,
         type: 'maintenance',
-        description: `${phase.description}\n\nCare Instructions:\n${phase.care}${phase.isCustomDuration ? `\n\n⏱️ Custom duration: ${phase.days} days` : ''}`,
-        plantingId
+        description: `${phase.description}\n\nCare Instructions:\n${phase.care}${phase.isCustomDuration ? `\n\n⏱️ Custom duration: ${phase.days} days` : ''}\n\n🌱 Environment: ${environment}`,
+        plantingId,
+        environment
       };
       
       await tx.objectStore('events').add(phaseEvent);
@@ -710,8 +935,9 @@ async function addPlantingWithOptions(plantType, startDate, location, customName
       }
     }
 
-    // Add weekly check-ins for longer phases
-    if (reminderOptions.enableWeeklyChecks && phase.days > 14) {
+    // Add weekly check-ins for longer phases (adjusted for environment)
+    const minDaysForWeeklyChecks = environment === 'outdoor' ? 21 : 14; // Longer phases outdoor
+    if (reminderOptions.enableWeeklyChecks && phase.days > minDaysForWeeklyChecks) {
       const weeklyChecks = Math.floor(phase.days / 7);
       for (let week = 1; week <= weeklyChecks; week++) {
         const checkDate = new Date(phase.startDate);
@@ -719,11 +945,12 @@ async function addPlantingWithOptions(plantType, startDate, location, customName
         
         if (checkDate < new Date(completionDate)) {
           const checkEvent = {
-            title: `📋 ${displayName}: Week ${week} check (${phase.name})`,
+            title: `📋 ${displayName}: Week ${week} check (${phase.name}) [${environment}]`,
             date: checkDate.toISOString().split('T')[0],
             type: 'maintenance',
-            description: `Weekly check during ${phase.name} phase\n\n${phase.care}\n\nLook for signs of:\n${getPhaseCheckpoints(phase.name, plantData)}`,
-            plantingId
+            description: `Weekly check during ${phase.name} phase\n\n${phase.care}\n\nLook for signs of:\n${getPhaseCheckpoints(phase.name, plantData)}\n\n🌱 Environment: ${environment}`,
+            plantingId,
+            environment
           };
           
           await tx.objectStore('events').add(checkEvent);
@@ -734,19 +961,26 @@ async function addPlantingWithOptions(plantType, startDate, location, customName
       }
     }
 
-    // Add watering reminders
+    // Add watering reminders (adjusted for environment)
     if (reminderOptions.enableWatering) {
       let wateringDate = new Date(phase.startDate);
       const phaseEnd = new Date(wateringDate);
       phaseEnd.setDate(phaseEnd.getDate() + phase.days);
 
+      // Adjust watering interval based on environment
+      let adjustedInterval = reminderOptions.wateringInterval;
+      if (environment === 'outdoor') {
+        adjustedInterval = Math.max(adjustedInterval, 3); // Less frequent outdoor watering
+      }
+
       while (wateringDate < phaseEnd) {
         const wateringEvent = {
-          title: `💧 Water ${displayName}`,
+          title: `💧 Water ${displayName} [${environment}]`,
           date: wateringDate.toISOString().split('T')[0],
           type: 'watering',
-          description: `${plantData.careTips.watering || 'Check soil moisture and water as needed'}\n\nPhase: ${phase.name}\nCare: ${phase.care}`,
-          plantingId
+          description: `${plantData.careTips.watering || 'Check soil moisture and water as needed'}\n\nPhase: ${phase.name}\nCare: ${phase.care}\n\n🌱 Environment: ${environment}${environment === 'outdoor' ? '\n☔ Check weather before watering' : ''}`,
+          plantingId,
+          environment
         };
         
         await tx.objectStore('events').add(wateringEvent);
@@ -754,13 +988,13 @@ async function addPlantingWithOptions(plantType, startDate, location, customName
           eventsToSync.push(wateringEvent);
         }
         
-        wateringDate.setDate(wateringDate.getDate() + reminderOptions.wateringInterval);
+        wateringDate.setDate(wateringDate.getDate() + adjustedInterval);
       }
     }
 
-    // Add fertilizing reminders
+    // Add fertilizing reminders (environment-specific)
     if (reminderOptions.enableFertilizing && phase.days > 14 && 
-        (phase.name === 'vegetative' || phase.name === 'flowering' || phase.name === 'fruiting')) {
+        (phase.name === 'vegetative' || phase.name === 'flowering' || phase.name === 'fruiting' || phase.name === 'productive')) {
       const fertilizeDate = new Date(phase.startDate);
       fertilizeDate.setDate(fertilizeDate.getDate() + reminderOptions.fertilizingDelay);
       
@@ -769,11 +1003,12 @@ async function addPlantingWithOptions(plantType, startDate, location, customName
       
       while (fertilizeDate < phaseEnd) {
         const fertilizeEvent = {
-          title: `🌿 Fertilize ${displayName}`,
+          title: `🌿 Fertilize ${displayName} [${environment}]`,
           date: fertilizeDate.toISOString().split('T')[0],
           type: 'fertilizing',
-          description: `${plantData.careTips.fertilizing || 'Apply appropriate fertilizer'}\n\nPhase: ${phase.name}`,
-          plantingId
+          description: `${plantData.careTips.fertilizing || 'Apply appropriate fertilizer'}\n\nPhase: ${phase.name}\n\n🌱 Environment: ${environment}${environment === 'outdoor' ? '\n🌧️ Avoid fertilizing before heavy rain' : ''}`,
+          plantingId,
+          environment
         };
         
         await tx.objectStore('events').add(fertilizeEvent);
@@ -789,9 +1024,18 @@ async function addPlantingWithOptions(plantType, startDate, location, customName
   // Add final harvest/completion event
   if (reminderOptions.enableHarvestReminder) {
     const finalPhase = Object.keys(modifiedPlantData.phases).pop();
-    const eventTitle = finalPhase === 'harvest' ? `🌾 Harvest ${displayName}` : `✅ Complete ${displayName} cycle`;
+    const eventTitle = finalPhase === 'harvest' ? `🌾 Harvest ${displayName} [${environment}]` : `✅ Complete ${displayName} cycle [${environment}]`;
     
     let harvestDescription = `Time to ${finalPhase === 'harvest' ? 'harvest' : 'complete'} your ${displayName}!`;
+    
+    harvestDescription += `\n\n🌱 Environment: ${environment}`;
+    if (environment === 'outdoor') {
+      harvestDescription += `\n🌤️ Check weather conditions before harvesting`;
+      if (plantData.seasonalTiming && plantData.seasonalTiming[region]?.harvestWindow) {
+        const harvestWindow = plantData.seasonalTiming[region].harvestWindow;
+        harvestDescription += `\n📅 Typical harvest window: ${harvestWindow.start} to ${harvestWindow.end}`;
+      }
+    }
     
     if (Object.keys(customPhaseDurations).length > 0) {
       harvestDescription += `\n\n⏱️ This plant used custom phase durations.`;
@@ -806,7 +1050,8 @@ async function addPlantingWithOptions(plantType, startDate, location, customName
       date: completionDate.toISOString().split('T')[0],
       type: finalPhase === 'harvest' ? 'harvesting' : 'maintenance',
       description: harvestDescription,
-      plantingId
+      plantingId,
+      environment
     };
     
     await tx.objectStore('events').add(harvestEvent);
@@ -1045,3 +1290,209 @@ async function deleteEvent(eventId, plantingId) {
 
 // Make deleteEvent available globally
 window.deleteEvent = deleteEvent;
+
+// Add new function to show template import modal
+function showTemplateImportModal() {
+  const modal = document.createElement('div');
+  modal.className = 'fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50';
+  modal.innerHTML = `
+    <div class="bg-white dark:bg-gray-800 rounded-lg p-6 w-full max-w-md mx-4 max-h-[90vh] overflow-y-auto">
+      <div class="flex justify-between items-center mb-4">
+        <h2 class="text-xl font-bold text-gray-900 dark:text-white" data-i18n="template.modal.title">${t('template.modal.title')}</h2>
+        <button onclick="this.closest('.fixed').remove()" class="text-gray-500 hover:text-gray-700 dark:text-gray-400 dark:hover:text-gray-200">
+          <i class="fas fa-times text-xl"></i>
+        </button>
+      </div>
+      
+      <div class="mb-4 text-sm text-gray-600 dark:text-gray-400" data-i18n="template.modal.description">
+        ${t('template.modal.description')}
+      </div>
+      
+      <div class="mb-4">
+        <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2" data-i18n="template.select.label">
+          ${t('template.select.label')}
+        </label>
+        <select id="templateSelect" class="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-md bg-white dark:bg-gray-700 text-gray-900 dark:text-white">
+          <option value="" data-i18n="template.select.placeholder">${t('template.select.placeholder')}</option>
+        </select>
+      </div>
+      
+      <div class="mb-4">
+        <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2" data-i18n="template.year.label">
+          ${t('template.year.label')}
+        </label>
+        <select id="yearSelect" class="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-md bg-white dark:bg-gray-700 text-gray-900 dark:text-white">
+          <option value="${new Date().getFullYear()}" data-i18n="template.year.current">${new Date().getFullYear()} (${t('template.year.current')})</option>
+          <option value="${new Date().getFullYear() + 1}" data-i18n="template.year.next">${new Date().getFullYear() + 1} (${t('template.year.next')})</option>
+        </select>
+      </div>
+      
+      <div id="templateDescription" class="mb-4 hidden">
+        <div class="bg-blue-50 dark:bg-blue-900/20 border border-blue-200 dark:border-blue-800 rounded-lg p-3">
+          <h4 class="font-medium text-blue-900 dark:text-blue-100 mb-1" data-i18n="template.description.title">${t('template.description.title')}</h4>
+          <p id="templateDescText" class="text-sm text-blue-800 dark:text-blue-200"></p>
+          <p id="templateTaskCount" class="text-xs text-blue-600 dark:text-blue-300 mt-1"></p>
+        </div>
+      </div>
+      
+      <div class="bg-yellow-50 dark:bg-yellow-900/20 border border-yellow-200 dark:border-yellow-800 rounded-lg p-3 mb-4">
+        <div class="flex items-start">
+          <i class="fas fa-info-circle text-yellow-600 dark:text-yellow-400 mr-2 mt-0.5"></i>
+          <div>
+            <h4 class="font-medium text-yellow-900 dark:text-yellow-100 text-sm" data-i18n="template.warning.title">${t('template.warning.title')}</h4>
+            <p class="text-xs text-yellow-800 dark:text-yellow-200" data-i18n="template.warning.text">${t('template.warning.text')}</p>
+          </div>
+        </div>
+      </div>
+      
+      <div class="flex space-x-3">
+        <button onclick="this.closest('.fixed').remove()" class="flex-1 px-4 py-2 border border-gray-300 dark:border-gray-600 text-gray-700 dark:text-gray-300 rounded-md hover:bg-gray-50 dark:hover:bg-gray-700" data-i18n="btn.cancel">
+          ${t('btn.cancel')}
+        </button>
+        <button onclick="importSelectedTemplate()" class="flex-1 px-4 py-2 bg-green-600 hover:bg-green-700 text-white rounded-md disabled:opacity-50 disabled:cursor-not-allowed" id="importBtn" disabled data-i18n="template.import.button">
+          ${t('template.import.button')}
+        </button>
+      </div>
+    </div>
+  `;
+  
+  document.body.appendChild(modal);
+  loadTemplateOptions();
+}
+
+function loadTemplateOptions() {
+  const templateSelect = document.getElementById('templateSelect');
+  const templates = getAvailableTemplates();
+  
+  templates.forEach((template, index) => {
+    const option = document.createElement('option');
+    option.value = index;
+    option.textContent = template.name;
+    templateSelect.appendChild(option);
+  });
+  
+  // Add change handler
+  templateSelect.addEventListener('change', function() {
+    showTemplateDescription(this.value);
+    document.getElementById('importBtn').disabled = this.value === '';
+  });
+}
+
+function showTemplateDescription(templateIndex) {
+  const descriptionDiv = document.getElementById('templateDescription');
+  const descText = document.getElementById('templateDescText');
+  const taskCount = document.getElementById('templateTaskCount');
+  
+  if (templateIndex === '' || templateIndex === null) {
+    descriptionDiv.classList.add('hidden');
+    return;
+  }
+  
+  const templates = getAvailableTemplates();
+  const template = templates[parseInt(templateIndex)];
+  
+  if (template) {
+    descText.textContent = template.description;
+    taskCount.textContent = `${template.tasks.length} ${t('template.task.count')}`;
+    descriptionDiv.classList.remove('hidden');
+  } else {
+    descriptionDiv.classList.add('hidden');
+  }
+}
+
+async function importSelectedTemplate() {
+  const templateSelect = document.getElementById('templateSelect');
+  const yearSelect = document.getElementById('yearSelect');
+  const importBtn = document.getElementById('importBtn');
+  
+  if (templateSelect.value === '') {
+    showNotification(t('template.select.required'), 'error');
+    return;
+  }
+  
+  // Show loading state
+  const originalText = importBtn.textContent;
+  importBtn.textContent = t('template.import.loading');
+  importBtn.disabled = true;
+  
+  try {
+    const templates = getAvailableTemplates();
+    const selectedTemplate = templates[templateSelect.value];
+    const year = parseInt(yearSelect.value);
+    
+    // Import template events
+    const events = await importGardenTemplate(selectedTemplate, year);
+    
+    // Save events to database
+    const db = await openDB('GardenCalendar', 1);
+    const tx = db.transaction('events', 'readwrite');
+    
+    for (const event of events) {
+      await tx.objectStore('events').add({
+        title: event.title,
+        date: event.date,
+        type: event.type,
+        description: event.description,
+        priority: event.priority,
+        templateCategory: event.templateCategory,
+        templateName: event.templateName,
+        language: event.language,
+        isTemplate: event.isTemplate
+      });
+    }
+    
+    await tx.complete;
+    
+    // Refresh calendar
+    calendar.refetchEvents();
+    
+    // Close modal
+    document.querySelector('.fixed').remove();
+    
+    // Show success message
+    showNotification(
+      t('template.import.success', {
+        count: events.length,
+        name: selectedTemplate.name,
+        year: year
+      }),
+      'success'
+    );
+    
+  } catch (error) {
+    console.error('Error importing template:', error);
+    showNotification(t('template.import.error'), 'error');
+  } finally {
+    // Reset button
+    importBtn.textContent = originalText;
+    importBtn.disabled = false;
+  }
+}
+
+function showNotification(message, type = 'info') {
+  const notification = document.createElement('div');
+  const bgColor = type === 'success' ? 'bg-green-500' : type === 'error' ? 'bg-red-500' : 'bg-blue-500';
+  
+  notification.className = `fixed top-4 right-4 ${bgColor} text-white px-6 py-3 rounded-lg shadow-lg z-50 transform transition-all duration-300 translate-x-full`;
+  notification.textContent = message;
+  
+  document.body.appendChild(notification);
+  
+  // Animate in
+  setTimeout(() => {
+    notification.classList.remove('translate-x-full');
+  }, 100);
+  
+  // Auto remove after 5 seconds
+  setTimeout(() => {
+    notification.classList.add('translate-x-full');
+    setTimeout(() => {
+      if (notification.parentNode) {
+        notification.parentNode.removeChild(notification);
+      }
+    }, 300);
+  }, 5000);
+}
+
+// Make functions globally available
+window.importSelectedTemplate = importSelectedTemplate;
