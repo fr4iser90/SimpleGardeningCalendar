@@ -3,6 +3,25 @@ import { openDB } from 'idb';
 const DB_NAME = 'gardening-calendar';
 const DB_VERSION = 5;
 
+// Helper function to convert Fahrenheit to Celsius and format temperature display
+function formatTemperature(fahrenheitRange) {
+  if (!fahrenheitRange || typeof fahrenheitRange !== 'string') return fahrenheitRange;
+  
+  // Match temperature patterns like "70-85°F", "70°F", "85°F", etc.
+  return fahrenheitRange.replace(/(\d+)(?:-(\d+))?°?F/g, (match, temp1, temp2) => {
+    const f1 = parseInt(temp1);
+    const c1 = Math.round((f1 - 32) * 5 / 9);
+    
+    if (temp2) {
+      const f2 = parseInt(temp2);
+      const c2 = Math.round((f2 - 32) * 5 / 9);
+      return `${f1}-${f2}°F (${c1}-${c2}°C)`;
+    } else {
+      return `${f1}°F (${c1}°C)`;
+    }
+  });
+}
+
 export const PLANTS_DATA = {
   // Cannabis varieties
   cannabis_indica: {
@@ -10,7 +29,7 @@ export const PLANTS_DATA = {
     category: 'Cannabis',
     legalNote: 'Check local laws before cultivation. This information is for educational purposes only.',
     phases: {
-      germination: { days: 3, description: 'Seed sprouting', care: 'Keep seeds warm (70-85°F) and moist in dark environment' },
+      germination: { days: 3, description: 'Seed sprouting', care: 'Keep seeds warm (70-85°F/21-29°C) and moist in dark environment' },
       seedling: { days: 14, description: 'First true leaves development', care: 'Provide 18-24 hours of light, maintain humidity 65-70%' },
       vegetative: { days: 35, description: 'Rapid growth phase', care: '18/6 light cycle, high nitrogen feeding, LST training' },
       preflower: { days: 7, description: 'Sex determination', care: 'Continue vegetative care, identify and remove males' },
@@ -24,7 +43,7 @@ export const PLANTS_DATA = {
       spacing: '2-4 feet apart depending on training method',
       support: 'SCROG nets, LST, or stakes for heavy branches',
       humidity: '65-70% seedling, 40-50% vegetative, 40-45% flowering',
-      temperature: '70-85°F day, 65-80°F night'
+      temperature: formatTemperature('70-85°F day, 65-80°F night')
     },
     commonProblems: {
       'Nutrient Burn': 'Yellow/brown leaf tips - reduce feeding concentration',
@@ -39,7 +58,7 @@ export const PLANTS_DATA = {
     category: 'Cannabis',
     legalNote: 'Check local laws before cultivation. This information is for educational purposes only.',
     phases: {
-      germination: { days: 3, description: 'Seed sprouting', care: 'Keep seeds warm (70-85°F) and moist in dark environment' },
+      germination: { days: 3, description: 'Seed sprouting', care: 'Keep seeds warm (70-85°F/21-29°C) and moist in dark environment' },
       seedling: { days: 14, description: 'First true leaves development', care: 'Provide 18-24 hours of light, maintain humidity 65-70%' },
       vegetative: { days: 42, description: 'Extended growth phase', care: '18/6 light cycle, high nitrogen feeding, training for height control' },
       preflower: { days: 7, description: 'Sex determination', care: 'Continue vegetative care, identify and remove males' },
@@ -53,7 +72,7 @@ export const PLANTS_DATA = {
       spacing: '3-6 feet apart, can grow very tall',
       support: 'Strong stakes or SCROG for height management',
       humidity: '65-70% seedling, 40-50% vegetative, 40-45% flowering',
-      temperature: '70-85°F day, 65-80°F night'
+      temperature: formatTemperature('70-85°F day, 65-80°F night')
     },
     commonProblems: {
       'Height Management': 'Can grow very tall - use LST, topping, or SCROG',
@@ -67,7 +86,7 @@ export const PLANTS_DATA = {
     category: 'Cannabis',
     legalNote: 'Check local laws before cultivation. This information is for educational purposes only.',
     phases: {
-      germination: { days: 3, description: 'Seed sprouting', care: 'Keep seeds warm (70-85°F) and moist in dark environment' },
+      germination: { days: 3, description: 'Seed sprouting', care: 'Keep seeds warm (70-85°F/21-29°C) and moist in dark environment' },
       seedling: { days: 10, description: 'First true leaves development', care: 'Provide 18-24 hours of light, gentle care - no transplanting' },
       vegetative: { days: 21, description: 'Rapid early growth', care: '18-24 hours light, light feeding, minimal stress' },
       preflower: { days: 7, description: 'Automatic transition', care: 'Continue same light schedule, begin flower nutrients' },
@@ -81,7 +100,7 @@ export const PLANTS_DATA = {
       spacing: '1-2 feet apart, smaller plants',
       support: 'Minimal training, LST only if needed',
       humidity: '60-65% throughout cycle',
-      temperature: '70-80°F consistent'
+      temperature: formatTemperature('70-80°F consistent')
     },
     commonProblems: {
       'Stunted Growth': 'Stress sensitive - avoid transplanting and heavy training',
@@ -95,7 +114,7 @@ export const PLANTS_DATA = {
     name: 'Tomatoes',
     category: 'Vegetables',
     phases: {
-      germination: { days: 7, description: 'Seeds sprouting', care: 'Keep soil warm (70-80°F) and moist' },
+      germination: { days: 7, description: 'Seeds sprouting', care: 'Keep soil warm (70-80°F/21-27°C) and moist' },
       seedling: { days: 21, description: 'Young plant development', care: 'Provide strong light, maintain moisture' },
       vegetative: { days: 30, description: 'Leaf and stem growth', care: 'Start fertilizing, support stems' },
       flowering: { days: 20, description: 'Flower development', care: 'Maintain consistent watering, shake plants gently to aid pollination' },
@@ -108,7 +127,7 @@ export const PLANTS_DATA = {
       spacing: '18-24 inches apart',
       support: 'Cage or stake plants when 12 inches tall',
       soilPH: '6.0-6.8',
-      temperature: '65-85°F optimal growing range'
+      temperature: formatTemperature('65-85°F optimal growing range')
     },
     commonProblems: {
       'Blossom End Rot': 'Calcium deficiency - maintain consistent watering',
@@ -196,7 +215,7 @@ export const PLANTS_DATA = {
     name: 'Basil',
     category: 'Herbs',
     phases: {
-      germination: { days: 5, description: 'Seeds sprouting', care: 'Keep warm (70-75°F) and moist' },
+      germination: { days: 5, description: 'Seeds sprouting', care: 'Keep warm (70-75°F/21-24°C) and moist' },
       seedling: { days: 14, description: 'First true leaves', care: 'Provide bright light, maintain warmth' },
       vegetative: { days: 30, description: 'Leaf production', care: 'Pinch flowers to encourage leaf growth' },
       flowering: { days: 20, description: 'Flower spike development', care: 'Pinch flowers for continued leaf harvest' },
@@ -221,7 +240,7 @@ export const PLANTS_DATA = {
     name: 'Peppers',
     category: 'Vegetables',
     phases: {
-      germination: { days: 10, description: 'Seeds sprouting', care: 'Keep warm (80-85°F) and moist' },
+      germination: { days: 10, description: 'Seeds sprouting', care: 'Keep warm (80-85°F/27-29°C) and moist' },
       seedling: { days: 21, description: 'Young plant development', care: 'Provide strong light, maintain warmth' },
       vegetative: { days: 35, description: 'Plant establishment', care: 'Gradual hardening off before transplant' },
       flowering: { days: 21, description: 'Flower development', care: 'Maintain consistent moisture and feeding' },
@@ -232,7 +251,7 @@ export const PLANTS_DATA = {
       fertilizing: 'Balanced fertilizer, avoid high nitrogen',
       sunlight: 'Full sun (6-8 hours daily)',
       spacing: '12-18 inches apart',
-      temperature: 'Warm season crop, 70-85°F optimal',
+      temperature: formatTemperature('Warm season crop, 70-85°F optimal'),
       soilPH: '6.0-6.8',
       support: 'Stake or cage for heavy fruiting varieties'
     },
@@ -256,7 +275,7 @@ export const PLANTS_DATA = {
       fertilizing: 'High nitrogen fertilizer for leaf growth',
       sunlight: 'Full sun in cool weather, partial shade in warm weather',
       spacing: '4-6 inches apart',
-      temperature: 'Cool season crop, 50-70°F optimal',
+      temperature: formatTemperature('Cool season crop, 50-70°F optimal'),
       soilPH: '6.0-7.0',
       succession: 'Plant every 2 weeks for continuous harvest'
     },
@@ -294,7 +313,7 @@ export const PLANTS_DATA = {
     name: 'Cucumber',
     category: 'Vegetables',
     phases: {
-      germination: { days: 7, description: 'Seeds sprouting', care: 'Keep warm (70-85°F) and moist' },
+      germination: { days: 7, description: 'Seeds sprouting', care: 'Keep warm (70-85°F/21-29°C) and moist' },
       seedling: { days: 14, description: 'First true leaves', care: 'Provide warmth and adequate light' },
       vegetative: { days: 21, description: 'Vine development', care: 'Begin training on supports' },
       flowering: { days: 14, description: 'Male and female flowers', care: 'Ensure good pollination' },
@@ -305,7 +324,7 @@ export const PLANTS_DATA = {
       fertilizing: 'Balanced fertilizer, side-dress monthly',
       sunlight: 'Full sun (6+ hours daily)',
       spacing: '12-18 inches apart with support, 3 feet apart if sprawling',
-      temperature: 'Warm season crop, 70-85°F optimal',
+      temperature: formatTemperature('Warm season crop, 70-85°F optimal'),
       soilPH: '6.0-6.8',
       support: 'Trellises or cages for vertical growing'
     },
