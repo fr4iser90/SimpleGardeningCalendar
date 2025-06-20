@@ -827,3 +827,11 @@ function showPlantDetailsModal(plant, plantKey) {
     showQuickPlantModal(today);
   };
 }
+
+// Make showMyPlantsModal globally available
+window.showMyPlantsModal = showMyPlantsModal;
+
+// Make other plant functions globally available
+window.deletePlant = deletePlant;
+window.viewPlantDetails = viewPlantDetails;
+window.addPlantNoteQuick = addPlantNoteQuick;
