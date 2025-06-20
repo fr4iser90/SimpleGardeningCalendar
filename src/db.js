@@ -22,6 +22,39 @@ function formatTemperature(fahrenheitRange) {
   });
 }
 
+// Add this function near the top of the file, after the imports
+function formatDateForDisplay(mmddString, language = 'en') {
+  if (!mmddString || !mmddString.includes('-')) return mmddString;
+  
+  const [month, day] = mmddString.split('-');
+  const monthNum = parseInt(month);
+  const dayNum = parseInt(day);
+  
+  // Month names in different languages
+  const monthNames = {
+    en: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'],
+    de: ['Jan', 'Feb', 'Mär', 'Apr', 'Mai', 'Jun', 'Jul', 'Aug', 'Sep', 'Okt', 'Nov', 'Dez'],
+    fr: ['Jan', 'Fév', 'Mar', 'Avr', 'Mai', 'Jun', 'Jul', 'Aoû', 'Sep', 'Oct', 'Nov', 'Déc'],
+    es: ['Ene', 'Feb', 'Mar', 'Abr', 'May', 'Jun', 'Jul', 'Ago', 'Sep', 'Oct', 'Nov', 'Dic'],
+    it: ['Gen', 'Feb', 'Mar', 'Apr', 'Mag', 'Giu', 'Lug', 'Ago', 'Set', 'Ott', 'Nov', 'Dic']
+  };
+  
+  const months = monthNames[language] || monthNames.en;
+  const monthName = months[monthNum - 1];
+  
+  // Format based on language preference
+  if (language === 'de') {
+    // German format: DD. MMM (e.g., "15. Apr")
+    return `${dayNum}. ${monthName}`;
+  } else if (language === 'en') {
+    // English format: MMM DD (e.g., "Apr 15")
+    return `${monthName} ${dayNum}`;
+  } else {
+    // Default format with both for clarity: DD MMM (MM-DD)
+    return `${dayNum} ${monthName} (${mmddString})`;
+  }
+}
+
 export const GROWING_ENVIRONMENTS = {
   INDOOR: 'indoor',
   OUTDOOR: 'outdoor',
@@ -532,23 +565,38 @@ export function getPlantDataForEnvironment(plantKey, environment = 'indoor') {
 
 // Helper function to check if planting date is appropriate for outdoor plants
 export function validatePlantingDate(plantKey, environment, plantingDate, region = 'temperate_north') {
-  const plant = getPlantDataForEnvironment(plantKey, environment);
-  
-  if (environment !== 'outdoor' || !plant.seasonalTiming) {
+  if (environment === 'indoor' || environment === 'greenhouse') {
     return { valid: true, message: 'Indoor growing - any time suitable' };
   }
   
-  const seasonalTiming = plant.seasonalTiming[region];
-  if (!seasonalTiming || !seasonalTiming.plantingWindow) {
-    return { valid: true, message: 'No seasonal restrictions defined' };
+  const plantData = getPlantDataForEnvironment(plantKey, environment);
+  if (!plantData || !plantData.seasonalTiming || !plantData.seasonalTiming[region]) {
+    return { valid: true, message: 'No seasonal restrictions' };
   }
   
-  const date = new Date(plantingDate);
-  const month = date.getMonth() + 1;
-  const day = date.getDate();
-  const dateString = `${month.toString().padStart(2, '0')}-${day.toString().padStart(2, '0')}`;
+  const seasonalTiming = plantData.seasonalTiming[region];
+  const dateString = plantingDate.substring(5); // Get MM-DD from YYYY-MM-DD
   
   const { start, end, description } = seasonalTiming.plantingWindow;
+  
+  // Get current language preference from localStorage or browser
+  let currentLanguage = 'en';
+  try {
+    // Try to get from localStorage first (where i18n system stores it)
+    currentLanguage = localStorage.getItem('garden-calendar-language') || 'en';
+  } catch (error) {
+    // If localStorage fails, try browser language
+    try {
+      const browserLang = navigator.language.split('-')[0];
+      currentLanguage = ['de', 'en', 'fr', 'es', 'it'].includes(browserLang) ? browserLang : 'en';
+    } catch (e) {
+      currentLanguage = 'en';
+    }
+  }
+  
+  // Format dates for display
+  const startFormatted = formatDateForDisplay(start, currentLanguage);
+  const endFormatted = formatDateForDisplay(end, currentLanguage);
   
   // Simple date range check (doesn't handle year boundaries perfectly)
   if (dateString >= start && dateString <= end) {
@@ -556,7 +604,7 @@ export function validatePlantingDate(plantKey, environment, plantingDate, region
   } else {
     return { 
       valid: false, 
-      message: `Consider planting between ${start} and ${end} (${description})`,
+      message: `Consider planting between ${startFormatted} and ${endFormatted} (${description})`,
       suggestedWindow: seasonalTiming.plantingWindow
     };
   }

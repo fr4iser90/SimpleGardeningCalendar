@@ -1,4 +1,9 @@
+import { t, getCurrentLanguage, initializeI18n } from './i18n.js';
+
 export function initializeApp() {
+  // Initialize i18n first
+  initializeI18n();
+  
   const app = document.getElementById('app');
   
   // Create the main layout
@@ -6,9 +11,19 @@ export function initializeApp() {
     <div class="min-h-screen">
       <nav class="bg-green-600 text-white p-4">
         <div class="container mx-auto flex justify-between items-center">
-          <h1 class="text-xl font-bold">🌱 Gardening Calendar</h1>
+          <h1 class="text-xl font-bold">🌱 ${t('app.title')}</h1>
           <div class="flex items-center space-x-4">
-            <button id="plantLibraryBtn" class="p-2 hover:bg-green-700 rounded">📚 Plant Library</button>
+            <div class="flex items-center space-x-2">
+              <span class="text-sm">${t('ui.language')}</span>
+              <select id="languageSelect" class="bg-green-700 text-white p-1 rounded text-sm">
+                <option value="de" ${getCurrentLanguage() === 'de' ? 'selected' : ''}>Deutsch</option>
+                <option value="en" ${getCurrentLanguage() === 'en' ? 'selected' : ''}>English</option>
+                <option value="fr" ${getCurrentLanguage() === 'fr' ? 'selected' : ''}>Français</option>
+                <option value="es" ${getCurrentLanguage() === 'es' ? 'selected' : ''}>Español</option>
+                <option value="it" ${getCurrentLanguage() === 'it' ? 'selected' : ''}>Italiano</option>
+              </select>
+            </div>
+            <button id="plantLibraryBtn" class="p-2 hover:bg-green-700 rounded">📚 ${t('nav.plants')}</button>
             <button id="googleCalendarBtn" class="p-2 hover:bg-green-700 rounded">🗓️ Google Calendar</button>
             <button id="themeToggle" class="p-2 hover:bg-green-700 rounded">🌙</button>
           </div>
@@ -25,39 +40,39 @@ export function initializeApp() {
           
           <div class="space-y-4">
             <section class="bg-white dark:bg-gray-800 p-4 rounded-lg shadow">
-              <h2 class="text-lg font-semibold mb-4 dark:text-white">Quick Actions</h2>
+              <h2 class="text-lg font-semibold mb-4 dark:text-white">${t('ui.quick_actions')}</h2>
               <div class="space-y-2">
                 <button id="addPlantBtn" class="w-full bg-green-500 text-white p-2 rounded hover:bg-green-600">
-                  🌱 Add Plant
+                  🌱 ${t('btn.add_planting')}
                 </button>
                 <button id="scheduleTaskBtn" class="w-full bg-green-500 text-white p-2 rounded hover:bg-green-600">
-                  📅 Schedule Task
+                  📅 ${t('btn.add_event')}
                 </button>
                 <button id="viewPlantsBtn" class="w-full bg-blue-500 text-white p-2 rounded hover:bg-blue-600">
-                  🌿 View My Plants
+                  🌿 ${t('nav.plants')}
                 </button>
               </div>
             </section>
             
             <section class="bg-white dark:bg-gray-800 p-4 rounded-lg shadow">
-              <h2 class="text-lg font-semibold mb-4 dark:text-white">Plant Categories</h2>
+              <h2 class="text-lg font-semibold mb-4 dark:text-white">${t('ui.plant_categories')}</h2>
               <div id="plantCategories" class="space-y-2">
                 <!-- Categories will be populated here -->
               </div>
             </section>
             
             <section class="bg-white dark:bg-gray-800 p-4 rounded-lg shadow">
-              <h2 class="text-lg font-semibold mb-4 dark:text-white">Upcoming Tasks</h2>
+              <h2 class="text-lg font-semibold mb-4 dark:text-white">${t('ui.upcoming_tasks')}</h2>
               <div id="upcomingTasks" class="space-y-2">
                 <!-- Tasks will be populated here -->
               </div>
             </section>
             
             <section class="bg-white dark:bg-gray-800 p-4 rounded-lg shadow">
-              <h2 class="text-lg font-semibold mb-4 dark:text-white">Weather</h2>
+              <h2 class="text-lg font-semibold mb-4 dark:text-white">${t('ui.weather')}</h2>
               <div id="weather" class="text-center dark:text-gray-200">
                 <!-- Weather info will be added here -->
-                <p>Local weather information will appear here</p>
+                <p>${t('ui.weather_info')}</p>
               </div>
             </section>
           </div>
@@ -65,6 +80,16 @@ export function initializeApp() {
       </main>
     </div>
   `;
+
+  // Initialize language selector
+  const languageSelect = document.getElementById('languageSelect');
+  languageSelect.addEventListener('change', async (e) => {
+    const newLanguage = e.target.value;
+    // Use the i18n system's setLanguage function instead of direct localStorage
+    const { setLanguage } = await import('./i18n.js');
+    setLanguage(newLanguage);
+    location.reload(); // Reload to apply new language
+  });
 
   // Initialize theme toggle
   const themeToggle = document.getElementById('themeToggle');
@@ -141,10 +166,14 @@ async function loadPlantCategories() {
     const plantings = await getPlantingsByCategory(category);
     const activeCount = plantings.filter(p => p.status === 'active').length;
     
+    // Get translated category name
+    const categoryKey = category.toLowerCase().replace(/\s+/g, '_').replace(/&/g, '').replace(/\s/g, '');
+    const translatedCategory = t(`plant.category.${categoryKey}`) || category;
+    
     const categoryEl = document.createElement('div');
     categoryEl.className = 'flex justify-between items-center p-2 bg-gray-50 dark:bg-gray-700 rounded cursor-pointer hover:bg-gray-100 dark:hover:bg-gray-600';
     categoryEl.innerHTML = `
-      <span class="dark:text-gray-200">${category}</span>
+      <span class="dark:text-gray-200">${translatedCategory}</span>
       <span class="text-sm text-gray-500 dark:text-gray-400">${activeCount}</span>
     `;
     
@@ -179,7 +208,7 @@ async function loadUpcomingTasks() {
   tasksContainer.innerHTML = '';
   
   if (upcomingEvents.length === 0) {
-    tasksContainer.innerHTML = '<p class="text-gray-500 dark:text-gray-400 text-sm">No upcoming tasks</p>';
+    tasksContainer.innerHTML = `<p class="text-gray-500 dark:text-gray-400 text-sm">${t('ui.no_upcoming_tasks')}</p>`;
     return;
   }
   

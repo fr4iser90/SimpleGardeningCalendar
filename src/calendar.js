@@ -21,7 +21,7 @@ export async function initializeCalendar() {
     headerToolbar: {
       left: 'prev,next today',
       center: 'title',
-      right: 'dayGridMonth,timeGridWeek,timeGridDay'
+      right: ''
     },
     selectable: true,
     selectMirror: true,
@@ -36,7 +36,7 @@ export async function initializeCalendar() {
     },
     events: async function(fetchInfo, successCallback, failureCallback) {
       try {
-        const db = await openDB('GardenCalendar', 1);
+        const db = await openDB('gardening-calendar', 5);
         const events = await db.getAll('events');
         const formattedEvents = events.map(event => ({
           id: event.id,
@@ -83,7 +83,7 @@ export async function initializeCalendar() {
   
   // Add control buttons
   const controls = document.createElement('div');
-  controls.className = 'calendar-controls mb-4 flex flex-wrap gap-2 items-center justify-between';
+  controls.className = 'calendar-controls mb-4 flex flex-wrap gap-2 items-center';
   
   const buttonGroup = document.createElement('div');
   buttonGroup.className = 'flex flex-wrap gap-2';
@@ -108,11 +108,7 @@ export async function initializeCalendar() {
   buttonGroup.appendChild(addPlantingBtn);
   buttonGroup.appendChild(templateImportBtn);
   
-  // Add language switcher
-  const languageSwitcher = createLanguageSwitcher();
-  
   controls.appendChild(buttonGroup);
-  controls.appendChild(languageSwitcher);
   
   calendarEl.parentNode.insertBefore(controls, calendarEl);
 
@@ -145,46 +141,49 @@ async function showAddEventModal(date, preselectedType = null) {
   const modal = document.createElement('div');
   modal.className = 'fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center p-4 z-50';
   
-  // Create category options
-  const categoryOptions = PLANT_CATEGORIES.map(category => 
-    `<option value="${category}">${category}</option>`
-  ).join('');
+  // Create category options with translations
+  const categoryOptions = PLANT_CATEGORIES.map(category => {
+    const translatedCategory = t(`plant.category.${category.toLowerCase().replace(/\s+/g, '_').replace(/&/g, '').replace(/\s/g, '')}`) || category;
+    return `<option value="${category}">${translatedCategory}</option>`;
+  }).join('');
 
-  // Create environment options
-  const environmentOptions = Object.entries(GROWING_ENVIRONMENTS).map(([key, value]) => 
-    `<option value="${value}">${key.charAt(0) + key.slice(1).toLowerCase()}</option>`
-  ).join('');
+  // Create environment options with translations
+  const environmentOptions = Object.entries(GROWING_ENVIRONMENTS).map(([key, value]) => {
+    const translatedEnv = t(`environment.${value}`);
+    return `<option value="${value}">${translatedEnv}</option>`;
+  }).join('');
 
-  // Create region options
-  const regionOptions = Object.entries(SEASONAL_REGIONS).map(([key, value]) => 
-    `<option value="${value}">${key.replace(/_/g, ' ').replace(/\b\w/g, l => l.toUpperCase())}</option>`
-  ).join('');
+  // Create region options with translations
+  const regionOptions = Object.entries(SEASONAL_REGIONS).map(([key, value]) => {
+    const translatedRegion = t(`region.${value}`);
+    return `<option value="${value}">${translatedRegion}</option>`;
+  }).join('');
 
   const eventTypeValue = preselectedType === 'planting' ? 'planting' : 'custom';
 
   modal.innerHTML = `
     <div class="bg-white dark:bg-gray-800 rounded-lg p-6 max-w-lg w-full max-h-[90vh] overflow-y-auto">
-      <h2 class="text-xl font-semibold mb-4 dark:text-white">Add Garden Event</h2>
+      <h2 class="text-xl font-semibold mb-4 dark:text-white">${t('modal.add_event.title')}</h2>
       <form id="eventForm" class="space-y-4">
         <div>
-          <label class="block text-sm font-medium mb-1 dark:text-gray-200">Event Type</label>
+          <label class="block text-sm font-medium mb-1 dark:text-gray-200">${t('modal.event_type.label')}</label>
           <select name="eventType" id="eventTypeSelect" class="w-full p-2 border rounded dark:bg-gray-700 dark:border-gray-600 dark:text-white">
-            <option value="custom" ${eventTypeValue === 'custom' ? 'selected' : ''}>Custom Event</option>
-            <option value="planting" ${eventTypeValue === 'planting' ? 'selected' : ''}>Start Planting</option>
+            <option value="custom" ${eventTypeValue === 'custom' ? 'selected' : ''}>${t('modal.event_type.custom')}</option>
+            <option value="planting" ${eventTypeValue === 'planting' ? 'selected' : ''}>${t('modal.event_type.planting')}</option>
           </select>
         </div>
         
         <div id="customFields" style="display: ${eventTypeValue === 'planting' ? 'none' : 'block'};">
           <div>
-            <label class="block text-sm font-medium mb-1 dark:text-gray-200">Title</label>
+            <label class="block text-sm font-medium mb-1 dark:text-gray-200">${t('modal.title.label')}</label>
             <input type="text" name="title" id="titleField" class="w-full p-2 border rounded dark:bg-gray-700 dark:border-gray-600 dark:text-white" ${eventTypeValue === 'custom' ? 'required' : ''}>
           </div>
           <div>
-            <label class="block text-sm font-medium mb-1 dark:text-gray-200">Type</label>
+            <label class="block text-sm font-medium mb-1 dark:text-gray-200">${t('modal.type.label')}</label>
             <select name="type" class="w-full p-2 border rounded dark:bg-gray-700 dark:border-gray-600 dark:text-white">
-              <option value="maintenance">Maintenance</option>
-              <option value="watering">Watering</option>
-              <option value="fertilizing">Fertilizing</option>
+              <option value="maintenance">${t('task.maintenance')}</option>
+              <option value="watering">${t('task.watering')}</option>
+              <option value="fertilizing">${t('task.fertilizing')}</option>
             </select>
           </div>
         </div>
@@ -192,13 +191,13 @@ async function showAddEventModal(date, preselectedType = null) {
         <div id="plantingFields" style="display: ${eventTypeValue === 'planting' ? 'block' : 'none'};">
           <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
             <div>
-              <label class="block text-sm font-medium mb-1 dark:text-gray-200">Growing Environment</label>
+              <label class="block text-sm font-medium mb-1 dark:text-gray-200">${t('modal.environment.label')}</label>
               <select name="environment" id="environmentSelect" class="w-full p-2 border rounded dark:bg-gray-700 dark:border-gray-600 dark:text-white">
                 ${environmentOptions}
               </select>
             </div>
             <div id="regionField" style="display: none;">
-              <label class="block text-sm font-medium mb-1 dark:text-gray-200">Climate Region</label>
+              <label class="block text-sm font-medium mb-1 dark:text-gray-200">${t('modal.region.label')}</label>
               <select name="region" id="regionSelect" class="w-full p-2 border rounded dark:bg-gray-700 dark:border-gray-600 dark:text-white">
                 ${regionOptions}
               </select>
@@ -207,14 +206,14 @@ async function showAddEventModal(date, preselectedType = null) {
           
           <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
             <div>
-              <label class="block text-sm font-medium mb-1 dark:text-gray-200">Plant Category</label>
+              <label class="block text-sm font-medium mb-1 dark:text-gray-200">${t('modal.plant_category.label')}</label>
               <select name="plantCategory" id="plantCategorySelect" class="w-full p-2 border rounded dark:bg-gray-700 dark:border-gray-600 dark:text-white">
-                <option value="">All Categories</option>
+                <option value="">${t('modal.plant_category.all')}</option>
                 ${categoryOptions}
               </select>
             </div>
             <div>
-              <label class="block text-sm font-medium mb-1 dark:text-gray-200">Plant Type</label>
+              <label class="block text-sm font-medium mb-1 dark:text-gray-200">${t('modal.plant_type.label')}</label>
               <select name="plantType" id="plantTypeSelect" class="w-full p-2 border rounded dark:bg-gray-700 dark:border-gray-600 dark:text-white" ${eventTypeValue === 'planting' ? 'required' : ''}>
                 ${Object.entries(PLANTS_DATA).map(([value, plant]) => 
                   `<option value="${value}" data-category="${plant.category}">${plant.name}${plant.legalNote ? ' ⚠️' : ''}</option>`
@@ -223,127 +222,120 @@ async function showAddEventModal(date, preselectedType = null) {
             </div>
           </div>
           
-          <!-- Seasonal Timing Warning -->
-          <div id="seasonalWarning" class="hidden p-3 bg-yellow-100 dark:bg-yellow-900 border border-yellow-300 dark:border-yellow-700 rounded">
-            <div class="flex items-center">
-              <span class="text-yellow-600 dark:text-yellow-400 mr-2">⚠️</span>
-              <div class="text-sm">
-                <div id="seasonalMessage" class="font-medium"></div>
-                <div id="seasonalDetails" class="text-xs mt-1"></div>
-              </div>
-            </div>
+          <div id="seasonalWarning" class="hidden">
+            <div id="seasonalMessage" class="font-medium"></div>
+            <div id="seasonalDetails" class="text-sm mt-1"></div>
           </div>
           
-          <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-            <div>
-              <label class="block text-sm font-medium mb-1 dark:text-gray-200">Custom Name (Optional)</label>
-              <input type="text" name="customName" id="customNameField" class="w-full p-2 border rounded dark:bg-gray-700 dark:border-gray-600 dark:text-white" placeholder="e.g., 'My Northern Lights #1'">
-              <div class="text-xs text-gray-500 dark:text-gray-400 mt-1">Give your plant a unique name for easier tracking</div>
-            </div>
-            <div>
-              <label class="block text-sm font-medium mb-1 dark:text-gray-200">Location</label>
-              <input type="text" name="location" id="locationField" class="w-full p-2 border rounded dark:bg-gray-700 dark:border-gray-600 dark:text-white" placeholder="e.g., Indoor Tent, Outdoor Garden" value="Default Garden">
-            </div>
+          <div>
+            <label class="block text-sm font-medium mb-1 dark:text-gray-200">${t('modal.custom_name.label')}</label>
+            <input type="text" name="customName" id="customNameField" class="w-full p-2 border rounded dark:bg-gray-700 dark:border-gray-600 dark:text-white">
+            <p class="text-xs text-gray-500 dark:text-gray-400 mt-1">${t('modal.custom_name.help')}</p>
           </div>
           
-          <div id="plantInfo" class="text-sm text-gray-600 dark:text-gray-400 bg-gray-50 dark:bg-gray-700 p-3 rounded">
-            <!-- Plant information will be displayed here -->
+          <div>
+            <label class="block text-sm font-medium mb-1 dark:text-gray-200">${t('modal.location.label')}</label>
+            <input type="text" name="location" id="locationField" value="Default Garden" class="w-full p-2 border rounded dark:bg-gray-700 dark:border-gray-600 dark:text-white">
           </div>
           
-          <!-- Phase Customization Section -->
-          <div id="phaseCustomization" class="border dark:border-gray-600 rounded-lg p-4">
-            <h3 class="font-semibold mb-3 dark:text-white">⏱️ Phase Duration (Optional)</h3>
-            <div class="text-xs text-gray-500 dark:text-gray-400 mb-3">
-              Adjust phase durations if your variety differs from standard timing
-            </div>
-            <div id="phaseInputs" class="space-y-2">
-              <!-- Phase inputs will be populated here -->
-            </div>
-            <div class="mt-2 text-xs text-gray-500 dark:text-gray-400">
-              💡 Tip: Cannabis flowering can vary from 6-12 weeks depending on strain
-            </div>
+          <div id="plantInfo" class="p-3 bg-blue-50 dark:bg-blue-900 rounded border border-blue-200 dark:border-blue-700">
+            <!-- Plant information will be populated here -->
           </div>
           
-          <div class="border dark:border-gray-600 rounded-lg p-4">
-            <h3 class="font-semibold mb-3 dark:text-white">🗓️ Automatic Reminders</h3>
+          <div id="phaseDurationSection" style="display: none;">
+            <h4 class="font-medium mb-2 dark:text-white">${t('modal.phase_duration.title')}</h4>
+            <p class="text-sm text-gray-600 dark:text-gray-400 mb-3">${t('modal.phase_duration.help')}</p>
+            <div id="phaseInputs" class="grid grid-cols-2 gap-3">
+              <!-- Phase duration inputs will be populated here -->
+            </div>
+            <p class="text-xs text-gray-500 dark:text-gray-400 mt-2">${t('modal.phase_duration.tip')}</p>
+          </div>
+          
+          <div>
+            <h4 class="font-medium mb-3 dark:text-white">${t('modal.reminders.title')}</h4>
+            
             <div class="space-y-3">
-              <div class="flex items-center space-x-2">
-                <input type="checkbox" id="enableWatering" name="enableWatering" checked class="rounded">
-                <label for="enableWatering" class="text-sm dark:text-gray-200">💧 Watering reminders</label>
+              <div class="flex items-center">
+                <input type="checkbox" id="enableWatering" name="enableWatering" checked class="mr-2">
+                <label for="enableWatering" class="text-sm dark:text-gray-200">${t('modal.reminders.watering')}</label>
               </div>
               <div id="wateringOptions" class="ml-6 space-y-2">
-                <div class="flex items-center space-x-2">
-                  <label class="text-xs dark:text-gray-300">Interval:</label>
-                  <select name="wateringInterval" class="text-xs p-1 border rounded dark:bg-gray-700 dark:border-gray-600 dark:text-white">
-                    <option value="1">Daily</option>
-                    <option value="2" selected>Every 2 days</option>
-                    <option value="3">Every 3 days</option>
-                    <option value="4">Every 4 days</option>
-                    <option value="7">Weekly</option>
+                <div>
+                  <label class="block text-xs text-gray-600 dark:text-gray-400 mb-1">${t('modal.reminders.watering_interval')}</label>
+                  <select name="wateringInterval" class="w-full p-1 text-sm border rounded dark:bg-gray-700 dark:border-gray-600 dark:text-white">
+                    <option value="1">${t('modal.interval.daily')}</option>
+                    <option value="2">${t('modal.interval.every_2_days')}</option>
+                    <option value="3" selected>${t('modal.interval.every_3_days')}</option>
+                    <option value="4">${t('modal.interval.every_4_days')}</option>
+                    <option value="7">${t('modal.interval.weekly')}</option>
                   </select>
                 </div>
               </div>
               
-              <div class="flex items-center space-x-2">
-                <input type="checkbox" id="enableFertilizing" name="enableFertilizing" checked class="rounded">
-                <label for="enableFertilizing" class="text-sm dark:text-gray-200">🌿 Fertilizing reminders</label>
+              <div class="flex items-center">
+                <input type="checkbox" id="enableFertilizing" name="enableFertilizing" checked class="mr-2">
+                <label for="enableFertilizing" class="text-sm dark:text-gray-200">${t('modal.reminders.fertilizing')}</label>
               </div>
               <div id="fertilizingOptions" class="ml-6 space-y-2">
-                <div class="flex items-center space-x-2">
-                  <label class="text-xs dark:text-gray-300">Interval:</label>
-                  <select name="fertilizingInterval" class="text-xs p-1 border rounded dark:bg-gray-700 dark:border-gray-600 dark:text-white">
-                    <option value="7">Weekly</option>
-                    <option value="14" selected>Every 2 weeks</option>
-                    <option value="21">Every 3 weeks</option>
-                    <option value="30">Monthly</option>
+                <div>
+                  <label class="block text-xs text-gray-600 dark:text-gray-400 mb-1">${t('modal.reminders.fertilizing_interval')}</label>
+                  <select name="fertilizingInterval" class="w-full p-1 text-sm border rounded dark:bg-gray-700 dark:border-gray-600 dark:text-white">
+                    <option value="7">${t('modal.interval.weekly')}</option>
+                    <option value="14" selected>${t('modal.interval.every_2_weeks')}</option>
+                    <option value="21">${t('modal.interval.every_3_weeks')}</option>
+                    <option value="30">${t('modal.interval.monthly')}</option>
                   </select>
                 </div>
-                <div class="flex items-center space-x-2">
-                  <label class="text-xs dark:text-gray-300">Start after:</label>
-                  <select name="fertilizingDelay" class="text-xs p-1 border rounded dark:bg-gray-700 dark:border-gray-600 dark:text-white">
-                    <option value="0">Immediately</option>
-                    <option value="7" selected>1 week</option>
-                    <option value="14">2 weeks</option>
+                <div>
+                  <label class="block text-xs text-gray-600 dark:text-gray-400 mb-1">${t('modal.reminders.fertilizing_delay')}</label>
+                  <select name="fertilizingDelay" class="w-full p-1 text-sm border rounded dark:bg-gray-700 dark:border-gray-600 dark:text-white">
+                    <option value="0">${t('modal.interval.immediately')}</option>
+                    <option value="7" selected>${t('modal.interval.1_week')}</option>
+                    <option value="14">${t('modal.interval.2_weeks')}</option>
                   </select>
                 </div>
               </div>
               
-              <div class="flex items-center space-x-2">
-                <input type="checkbox" id="enablePhaseReminders" name="enablePhaseReminders" checked class="rounded">
-                <label for="enablePhaseReminders" class="text-sm dark:text-gray-200">📋 Phase transition reminders</label>
+              <div class="flex items-center">
+                <input type="checkbox" id="enablePhaseReminders" name="enablePhaseReminders" checked class="mr-2">
+                <label for="enablePhaseReminders" class="text-sm dark:text-gray-200">${t('modal.reminders.phase_transitions')}</label>
               </div>
               
-              <div class="flex items-center space-x-2">
-                <input type="checkbox" id="enableWeeklyChecks" name="enableWeeklyChecks" checked class="rounded">
-                <label for="enableWeeklyChecks" class="text-sm dark:text-gray-200">🔍 Weekly check-ups</label>
+              <div class="flex items-center">
+                <input type="checkbox" id="enableWeeklyChecks" name="enableWeeklyChecks" checked class="mr-2">
+                <label for="enableWeeklyChecks" class="text-sm dark:text-gray-200">${t('modal.reminders.weekly_checks')}</label>
               </div>
               
-              <div class="flex items-center space-x-2">
-                <input type="checkbox" id="enableHarvestReminder" name="enableHarvestReminder" checked class="rounded">
-                <label for="enableHarvestReminder" class="text-sm dark:text-gray-200">🌾 Harvest reminder</label>
+              <div class="flex items-center">
+                <input type="checkbox" id="enableHarvestReminder" name="enableHarvestReminder" checked class="mr-2">
+                <label for="enableHarvestReminder" class="text-sm dark:text-gray-200">${t('modal.reminders.harvest')}</label>
               </div>
               
-              <div class="flex items-center space-x-2">
-                <input type="checkbox" id="enableGoogleCalendarSync" name="enableGoogleCalendarSync" class="rounded">
-                <label for="enableGoogleCalendarSync" class="text-sm dark:text-gray-200">🗓️ Sync to Google Calendar</label>
+              <div class="flex items-center">
+                <input type="checkbox" id="enableGoogleCalendarSync" name="enableGoogleCalendarSync" class="mr-2">
+                <label for="enableGoogleCalendarSync" class="text-sm dark:text-gray-200">${t('modal.reminders.google_sync')}</label>
               </div>
             </div>
           </div>
         </div>
         
         <div>
-          <label class="block text-sm font-medium mb-1 dark:text-gray-200">Date</label>
+          <label class="block text-sm font-medium mb-1 dark:text-gray-200">${t('modal.date.label')}</label>
           <input type="date" name="date" value="${date}" class="w-full p-2 border rounded dark:bg-gray-700 dark:border-gray-600 dark:text-white" required>
         </div>
         
-        <div>
-          <label class="block text-sm font-medium mb-1 dark:text-gray-200">Description</label>
+        <div id="customDescription" style="display: ${eventTypeValue === 'planting' ? 'none' : 'block'};">
+          <label class="block text-sm font-medium mb-1 dark:text-gray-200">${t('modal.description.label')}</label>
           <textarea name="description" class="w-full p-2 border rounded dark:bg-gray-700 dark:border-gray-600 dark:text-white" rows="3"></textarea>
         </div>
         
-        <div class="flex justify-end space-x-2">
-          <button type="button" class="px-4 py-2 text-gray-600 dark:text-gray-300" id="cancelBtn">Cancel</button>
-          <button type="submit" class="px-4 py-2 bg-green-600 text-white rounded hover:bg-green-700" id="saveBtn">Save</button>
+        <div class="flex justify-end space-x-2 pt-4">
+          <button type="button" id="cancelBtn" class="px-4 py-2 bg-gray-300 dark:bg-gray-600 text-gray-700 dark:text-gray-200 rounded hover:bg-gray-400 dark:hover:bg-gray-500">
+            ${t('btn.cancel')}
+          </button>
+          <button type="submit" id="saveBtn" class="px-4 py-2 bg-green-500 text-white rounded hover:bg-green-600">
+            ${t('btn.save')}
+          </button>
         </div>
       </form>
     </div>
@@ -465,9 +457,11 @@ async function showAddEventModal(date, preselectedType = null) {
 
         // Collect custom phase durations
         const customPhaseDurations = {};
-        const selectedPlant = PLANTS_DATA[formData.get('plantType')];
-        if (selectedPlant) {
-          for (const phaseName of Object.keys(selectedPlant.phases)) {
+        const environment = document.querySelector('select[name="environment"]')?.value || 'indoor';
+        const plantData = getPlantDataForEnvironment(formData.get('plantType'), environment);
+        
+        if (plantData && plantData.phases) {
+          for (const phaseName of Object.keys(plantData.phases)) {
             const customDuration = formData.get(`phase_${phaseName}`);
             if (customDuration && parseInt(customDuration) > 0) {
               customPhaseDurations[phaseName] = parseInt(customDuration);
@@ -620,33 +614,82 @@ async function showAddEventModal(date, preselectedType = null) {
     const plantData = getPlantDataForEnvironment(plantTypeSelect.value, environment);
     
     if (plantData) {
-      let infoHtml = `<strong>${plantData.name}</strong> (${plantData.category}) - ${environment.charAt(0).toUpperCase() + environment.slice(1)} Growing`;
+      let infoHtml = `<div class="text-sm">`;
+      infoHtml += `<div class="font-semibold text-blue-800 dark:text-blue-200 mb-2">${PLANTS_DATA[plantTypeSelect.value].name}${PLANTS_DATA[plantTypeSelect.value].legalNote ? ' ⚠️' : ''} (${t(`plant.category.${PLANTS_DATA[plantTypeSelect.value].category.toLowerCase().replace(/\s+/g, '_').replace(/&/g, '').replace(/\s/g, '')}`)}) - ${t(`environment.${environment}`)} ${t('plant.info.growing')}</div>`;
       
-      if (plantData.legalNote) {
-        infoHtml += `<div class="mt-2 p-2 bg-yellow-100 dark:bg-yellow-900 border border-yellow-300 dark:border-yellow-700 rounded">
-          <strong>⚠️ Legal Notice:</strong> ${plantData.legalNote}
-        </div>`;
+      if (PLANTS_DATA[plantTypeSelect.value].legalNote) {
+        infoHtml += `<div class="text-orange-600 dark:text-orange-400 text-xs mb-2">${t('plant.info.legal_notice')} ${PLANTS_DATA[plantTypeSelect.value].legalNote}</div>`;
       }
       
-      const totalDays = Object.values(plantData.phases).reduce((sum, phase) => sum + phase.days, 0);
-      infoHtml += `<div class="mt-2"><strong>Growing cycle:</strong> ${totalDays} days (${Math.round(totalDays/7)} weeks)</div>`;
-      
-      // Show phase breakdown
-      const phaseList = Object.entries(plantData.phases).map(([name, data]) => 
-        `${name}: ${data.days} days`
-      ).join(', ');
-      infoHtml += `<div class="mt-1 text-xs"><strong>Phases:</strong> ${phaseList}</div>`;
-      
-      // Show environment-specific care tips
-      if (plantData.careTips.temperature) {
-        infoHtml += `<div><strong>Temperature:</strong> ${plantData.careTips.temperature}</div>`;
+      if (plantData.growingCycle) {
+        const totalDays = Object.values(plantData.growingCycle).reduce((sum, days) => sum + days, 0);
+        const totalWeeks = Math.round(totalDays / 7);
+        infoHtml += `<div class="mb-1">${t('plant.info.growing_cycle')} ${totalDays} ${t('plant.info.days')} (${totalWeeks} ${t('plant.info.weeks')})</div>`;
+        
+        const phases = Object.entries(plantData.growingCycle).map(([phase, days]) => {
+          const phaseKey = phase.toLowerCase();
+          const phaseName = t(`phase.${phaseKey}`) || phase;
+          return `${phaseName}: ${days} ${t('plant.info.days')}`;
+        }).join(', ');
+        infoHtml += `<div class="mb-1">${t('plant.info.phases')} ${phases}</div>`;
       }
       
-      if (plantData.careTips.sunlight) {
-        infoHtml += `<div><strong>Light:</strong> ${plantData.careTips.sunlight}</div>`;
+      if (plantData.temperature) {
+        infoHtml += `<div class="mb-1">${t('plant.info.temperature')} ${plantData.temperature}</div>`;
       }
       
+      if (plantData.lightRequirements) {
+        infoHtml += `<div class="mb-1">${t('plant.info.light')} ${plantData.lightRequirements}</div>`;
+      }
+      
+      infoHtml += `</div>`;
       plantInfo.innerHTML = infoHtml;
+      
+      // Show/hide phase duration section
+      if (plantData.growingCycle && Object.keys(plantData.growingCycle).length > 0) {
+        const phaseDurationSection = document.getElementById('phaseDurationSection');
+        phaseDurationSection.style.display = 'block';
+        
+        // Populate phase inputs
+        const phaseInputs = document.getElementById('phaseInputs');
+        phaseInputs.innerHTML = '';
+        Object.entries(plantData.growingCycle).forEach(([phase, defaultDays]) => {
+          const phaseKey = phase.toLowerCase();
+          const phaseName = t(`phase.${phaseKey}`) || phase;
+          const phaseIcon = getPhaseIcon(phase);
+          
+          const phaseDiv = document.createElement('div');
+          phaseDiv.className = 'flex items-center space-x-2';
+          phaseDiv.innerHTML = `
+            <label class="text-sm font-medium dark:text-white min-w-0 flex-1">
+              ${phaseIcon} ${phaseName}:
+            </label>
+            <input type="number" 
+                   name="phase_${phase}" 
+                   value="${defaultDays}" 
+                   min="1" 
+                   max="365" 
+                   class="w-16 p-1 text-sm border rounded dark:bg-gray-700 dark:border-gray-600 dark:text-white">
+            <span class="text-xs text-gray-500 dark:text-gray-400">${t('modal.phase_duration.days')}</span>
+            <span class="text-xs text-gray-500 dark:text-gray-400">(${t('modal.phase_duration.default')} ${defaultDays})</span>
+          `;
+          phaseInputs.appendChild(phaseDiv);
+        });
+      } else {
+        const phaseDurationSection = document.getElementById('phaseDurationSection');
+        phaseDurationSection.style.display = 'none';
+      }
+      
+      // Check seasonal timing
+      const dateField = document.querySelector('input[name="date"]');
+      if (dateField && dateField.value) {
+        checkSeasonalTiming(plantTypeSelect.value, environment, dateField.value);
+      }
+    } else {
+      plantInfo.innerHTML = '';
+      seasonalWarning.classList.add('hidden');
+      const phaseDurationSection = document.getElementById('phaseDurationSection');
+      phaseDurationSection.style.display = 'none';
     }
   }
 
@@ -668,7 +711,7 @@ async function showAddEventModal(date, preselectedType = null) {
                               phaseName.toLowerCase().includes('fruiting');
       
       const phaseEmoji = getPhaseEmoji(phaseName);
-      const helpText = getPhaseHelpText(phaseName, plantData.category, environment);
+      const helpText = getPhaseHelpText(phaseName, PLANTS_DATA[plantTypeSelect.value].category, environment);
       
       inputsHtml += `
         <div class="flex items-center space-x-2 ${isFloweringPhase ? 'bg-purple-50 dark:bg-purple-900/20 p-2 rounded' : ''}">
@@ -717,19 +760,19 @@ async function showAddEventModal(date, preselectedType = null) {
     const validation = validatePlantingDate(plantType, environment, plantingDate, region);
     
     if (validation.valid) {
-      if (validation.message !== 'Indoor growing - any time suitable') {
+      if (validation.message === 'Indoor growing - any time suitable' || validation.message === 'No seasonal restrictions') {
+        seasonalWarning.classList.add('hidden');
+      } else {
         seasonalWarning.classList.remove('hidden');
         seasonalWarning.className = 'p-3 bg-green-100 dark:bg-green-900 border border-green-300 dark:border-green-700 rounded';
-        seasonalMessage.textContent = '✅ Good timing!';
-        seasonalDetails.textContent = validation.message;
-      } else {
-        seasonalWarning.classList.add('hidden');
+        seasonalMessage.innerHTML = `<span class="text-green-600 dark:text-green-400 mr-2">✅</span><span class="text-green-800 dark:text-green-200">${t('timing.good')}</span>`;
+        seasonalDetails.innerHTML = `<span class="text-green-700 dark:text-green-300">${validation.message}</span>`;
       }
     } else {
       seasonalWarning.classList.remove('hidden');
       seasonalWarning.className = 'p-3 bg-yellow-100 dark:bg-yellow-900 border border-yellow-300 dark:border-yellow-700 rounded';
-      seasonalMessage.textContent = '⚠️ Timing Notice';
-      seasonalDetails.textContent = validation.message;
+      seasonalMessage.innerHTML = `<span class="text-yellow-600 dark:text-yellow-400 mr-2">⚠️</span><span class="text-yellow-800 dark:text-yellow-200">${t('timing.notice')}</span>`;
+      seasonalDetails.innerHTML = `<span class="text-yellow-700 dark:text-yellow-300">${validation.message}</span>`;
     }
   }
 
@@ -1424,7 +1467,7 @@ async function importSelectedTemplate() {
     const events = await importGardenTemplate(selectedTemplate, year);
     
     // Save events to database
-    const db = await openDB('GardenCalendar', 1);
+    const db = await openDB('gardening-calendar');
     const tx = db.transaction('events', 'readwrite');
     
     for (const event of events) {
@@ -1496,3 +1539,47 @@ function showNotification(message, type = 'info') {
 
 // Make functions globally available
 window.importSelectedTemplate = importSelectedTemplate;
+
+// Helper function to get phase icon
+function getPhaseIcon(phase) {
+  const icons = {
+    'germination': '🌱',
+    'seedling': '🌿',
+    'vegetative': '🍃',
+    'preflower': '🌸',
+    'flowering': '🌸',
+    'harvest': '🌾'
+  };
+  return icons[phase.toLowerCase()] || '🌱';
+}
+
+// Check seasonal timing and show warning if needed
+function checkSeasonalTiming(plantKey, environment, plantingDate) {
+  const seasonalWarning = document.getElementById('seasonalWarning');
+  const seasonalMessage = document.getElementById('seasonalMessage');
+  const seasonalDetails = document.getElementById('seasonalDetails');
+  
+  if (environment === 'indoor' || environment === 'greenhouse') {
+    seasonalWarning.classList.add('hidden');
+    return;
+  }
+  
+  // Use the validation function from db.js
+  const validation = validatePlantingDate(plantKey, environment, plantingDate);
+  
+  if (validation.valid) {
+    if (validation.message === 'Indoor growing - any time suitable' || validation.message === 'No seasonal restrictions') {
+      seasonalWarning.classList.add('hidden');
+    } else {
+      seasonalWarning.classList.remove('hidden');
+      seasonalWarning.className = 'p-3 bg-green-100 dark:bg-green-900 border border-green-300 dark:border-green-700 rounded';
+      seasonalMessage.innerHTML = `<span class="text-green-600 dark:text-green-400 mr-2">✅</span><span class="text-green-800 dark:text-green-200">${t('timing.good')}</span>`;
+      seasonalDetails.innerHTML = `<span class="text-green-700 dark:text-green-300">${validation.message}</span>`;
+    }
+  } else {
+    seasonalWarning.classList.remove('hidden');
+    seasonalWarning.className = 'p-3 bg-yellow-100 dark:bg-yellow-900 border border-yellow-300 dark:border-yellow-700 rounded';
+    seasonalMessage.innerHTML = `<span class="text-yellow-600 dark:text-yellow-400 mr-2">⚠️</span><span class="text-yellow-800 dark:text-yellow-200">${t('timing.notice')}</span>`;
+    seasonalDetails.innerHTML = `<span class="text-yellow-700 dark:text-yellow-300">${validation.message}</span>`;
+  }
+}

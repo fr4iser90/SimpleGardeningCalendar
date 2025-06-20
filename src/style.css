@@ -55,3 +55,52 @@ body {
 .fc-daygrid-event {
   @apply cursor-pointer;
 }
+
+/* Hide duplicate language selectors if any exist */
+.fc-toolbar .language-switcher {
+  display: none !important;
+}
+
+/* Hide FullCalendar view buttons since we only use month view */
+.fc-dayGridMonth-button,
+.fc-timeGridWeek-button, 
+.fc-timeGridDay-button,
+.fc-listWeek-button {
+  display: none !important;
+}
+
+/* Ensure only one language selector is visible */
+.calendar-controls .language-switcher {
+  display: none !important;
+}
+
+/* Clean up calendar header */
+.fc-header-toolbar {
+  margin-bottom: 1rem;
+}
+
+/* Style the main language selector in header */
+#languageSelect {
+  background-color: rgba(34, 197, 94, 0.8);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  color: white;
+  padding: 0.25rem 0.5rem;
+  border-radius: 0.25rem;
+  font-size: 0.875rem;
+}
+
+#languageSelect:focus {
+  outline: none;
+  box-shadow: 0 0 0 2px rgba(255, 255, 255, 0.3);
+}
+
+/* Improve button spacing in calendar controls */
+.calendar-controls {
+  padding: 1rem 0;
+  border-bottom: 1px solid #e5e7eb;
+  margin-bottom: 1rem;
+}
+
+.dark .calendar-controls {
+  border-bottom-color: #374151;
+}
