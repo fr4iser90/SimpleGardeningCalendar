@@ -40,21 +40,6 @@ export function initializeApp() {
           
           <div class="space-y-4">
             <section class="bg-white dark:bg-gray-800 p-4 rounded-lg shadow">
-              <h2 class="text-lg font-semibold mb-4 dark:text-white">${t('ui.quick_actions')}</h2>
-              <div class="space-y-2">
-                <button id="addPlantBtn" class="w-full bg-green-500 text-white p-2 rounded hover:bg-green-600">
-                  🌱 ${t('btn.add_planting')}
-                </button>
-                <button id="scheduleTaskBtn" class="w-full bg-green-500 text-white p-2 rounded hover:bg-green-600">
-                  📅 ${t('btn.add_event')}
-                </button>
-                <button id="viewPlantsBtn" class="w-full bg-blue-500 text-white p-2 rounded hover:bg-blue-600">
-                  🌿 ${t('nav.plants')}
-                </button>
-              </div>
-            </section>
-            
-            <section class="bg-white dark:bg-gray-800 p-4 rounded-lg shadow">
               <h2 class="text-lg font-semibold mb-4 dark:text-white">${t('ui.plant_categories')}</h2>
               <div id="plantCategories" class="space-y-2">
                 <!-- Categories will be populated here -->
@@ -121,28 +106,8 @@ export function initializeApp() {
 }
 
 function initializeQuickActions() {
-  const addPlantBtn = document.getElementById('addPlantBtn');
-  const scheduleTaskBtn = document.getElementById('scheduleTaskBtn');
-  const viewPlantsBtn = document.getElementById('viewPlantsBtn');
   const plantLibraryBtn = document.getElementById('plantLibraryBtn');
   const googleCalendarBtn = document.getElementById('googleCalendarBtn');
-
-  addPlantBtn.addEventListener('click', () => {
-    // Trigger the calendar's add event modal with planting pre-selected
-    const today = new Date().toISOString().split('T')[0];
-    showQuickPlantModal(today);
-  });
-
-  scheduleTaskBtn.addEventListener('click', () => {
-    // Trigger the calendar's add event modal
-    const today = new Date().toISOString().split('T')[0];
-    const event = new CustomEvent('showAddEventModal', { detail: { date: today } });
-    document.dispatchEvent(event);
-  });
-
-  viewPlantsBtn.addEventListener('click', () => {
-    showMyPlantsModal();
-  });
 
   plantLibraryBtn.addEventListener('click', () => {
     showPlantLibraryModal();
@@ -296,6 +261,9 @@ async function showMyPlantsModal() {
   window.viewPlantDetails = viewPlantDetails;
   window.addPlantNote = addPlantNoteQuick;
 }
+
+// Make showMyPlantsModal globally available
+window.showMyPlantsModal = showMyPlantsModal;
 
 async function showCategoryPlantsModal(category, plantings) {
   const modal = document.createElement('div');

@@ -31,11 +31,14 @@ export const TRANSLATIONS = {
     'btn.add_event': 'Termin hinzufügen',
     'btn.add_planting': 'Pflanzung hinzufügen',
     'btn.import_template': 'Gartenplan importieren',
+    'btn.my_plants': 'Meine Pflanzen',
     'btn.save': 'Speichern',
     'btn.cancel': 'Abbrechen',
     'btn.delete': 'Löschen',
     'btn.edit': 'Bearbeiten',
     'btn.close': 'Schließen',
+    'btn.view_details': 'Details anzeigen',
+    'btn.add_note': 'Notiz hinzufügen',
     
     // Add Event Modal
     'modal.add_event.title': 'Gartenereignis hinzufügen',
@@ -202,7 +205,20 @@ export const TRANSLATIONS = {
     'common.error': 'Fehler',
     'common.success': 'Erfolgreich',
     'common.warning': 'Warnung',
-    'common.info': 'Info'
+    'common.info': 'Info',
+    
+    // My Plants Modal
+    'plants.my_active_plants': 'Meine aktiven Pflanzen',
+    'plants.no_active': 'Keine aktiven Pflanzen gefunden',
+    'plants.plant_type': 'Pflanzentyp',
+    'plants.location': 'Standort',
+    'plants.started': 'Gestartet',
+    'plants.current_phase': 'Aktuelle Phase',
+    'plants.expected_completion': 'Erwarteter Abschluss',
+    
+    // Error Messages
+    'error.title': 'Fehler',
+    'error.loading_plants': 'Fehler beim Laden der Pflanzen. Bitte versuchen Sie es erneut.'
   },
   
   en: {
@@ -224,11 +240,14 @@ export const TRANSLATIONS = {
     'btn.add_event': 'Add Event',
     'btn.add_planting': 'Add Planting',
     'btn.import_template': 'Import Garden Plan',
+    'btn.my_plants': 'My Plants',
     'btn.save': 'Save',
     'btn.cancel': 'Cancel',
     'btn.delete': 'Delete',
     'btn.edit': 'Edit',
     'btn.close': 'Close',
+    'btn.view_details': 'View Details',
+    'btn.add_note': 'Add Note',
     
     // Add Event Modal
     'modal.add_event.title': 'Add Garden Event',
@@ -395,7 +414,20 @@ export const TRANSLATIONS = {
     'common.error': 'Error',
     'common.success': 'Success',
     'common.warning': 'Warning',
-    'common.info': 'Info'
+    'common.info': 'Info',
+    
+    // My Plants Modal
+    'plants.my_active_plants': 'My Active Plants',
+    'plants.no_active': 'No active plants found',
+    'plants.plant_type': 'Plant Type',
+    'plants.location': 'Location',
+    'plants.started': 'Started',
+    'plants.current_phase': 'Current Phase',
+    'plants.expected_completion': 'Expected Completion',
+    
+    // Error Messages
+    'error.title': 'Error',
+    'error.loading_plants': 'Error loading plants. Please try again.'
   },
   
   fr: {
@@ -417,11 +449,14 @@ export const TRANSLATIONS = {
     'btn.add_event': 'Ajouter Événement',
     'btn.add_planting': 'Ajouter Plantation',
     'btn.import_template': 'Importer Plan de Jardin',
+    'btn.my_plants': 'Mes Plantes',
     'btn.save': 'Enregistrer',
     'btn.cancel': 'Annuler',
     'btn.delete': 'Supprimer',
     'btn.edit': 'Modifier',
     'btn.close': 'Fermer',
+    'btn.view_details': 'Voir les Détails',
+    'btn.add_note': 'Ajouter une Note',
     
     // Add Event Modal
     'modal.add_event.title': 'Ajouter Événement de Jardin',
@@ -588,7 +623,20 @@ export const TRANSLATIONS = {
     'common.error': 'Erreur',
     'common.success': 'Succès',
     'common.warning': 'Avertissement',
-    'common.info': 'Info'
+    'common.info': 'Info',
+    
+    // My Plants Modal
+    'plants.my_active_plants': 'Mes Plantes Actives',
+    'plants.no_active': 'Aucune plante active trouvée',
+    'plants.plant_type': 'Type de Plante',
+    'plants.location': 'Emplacement',
+    'plants.started': 'Démarré',
+    'plants.current_phase': 'Phase Actuelle',
+    'plants.expected_completion': 'Terminaison Prévue',
+    
+    // Error Messages
+    'error.title': 'Erreur',
+    'error.loading_plants': 'Erreur lors du chargement des plantes. Veuillez réessayer.'
   },
   
   es: {
@@ -610,11 +658,14 @@ export const TRANSLATIONS = {
     'btn.add_event': 'Agregar Evento',
     'btn.add_planting': 'Agregar Plantación',
     'btn.import_template': 'Importar Plan de Jardín',
+    'btn.my_plants': 'Mis Plantas',
     'btn.save': 'Guardar',
     'btn.cancel': 'Cancelar',
     'btn.delete': 'Eliminar',
     'btn.edit': 'Editar',
     'btn.close': 'Cerrar',
+    'btn.view_details': 'Ver Detalles',
+    'btn.add_note': 'Agregar Nota',
     
     // Add Event Modal
     'modal.add_event.title': 'Agregar Evento de Jardín',
@@ -781,7 +832,20 @@ export const TRANSLATIONS = {
     'common.error': 'Error',
     'common.success': 'Éxito',
     'common.warning': 'Advertencia',
-    'common.info': 'Info'
+    'common.info': 'Info',
+    
+    // My Plants Modal
+    'plants.my_active_plants': 'Mis Plantas Activas',
+    'plants.no_active': 'No se encontraron plantas activas',
+    'plants.plant_type': 'Tipo de Planta',
+    'plants.location': 'Ubicación',
+    'plants.started': 'Iniciado',
+    'plants.current_phase': 'Fase Actual',
+    'plants.expected_completion': 'Finalización Esperada',
+    
+    // Error Messages
+    'error.title': 'Error',
+    'error.loading_plants': 'Error al cargar las plantas. Por favor, inténtelo de nuevo.'
   },
   
   it: {
@@ -803,11 +867,14 @@ export const TRANSLATIONS = {
     'btn.add_event': 'Aggiungi Evento',
     'btn.add_planting': 'Aggiungi Piantumazione',
     'btn.import_template': 'Importa Piano Giardino',
+    'btn.my_plants': 'Le Mie Piante',
     'btn.save': 'Salva',
     'btn.cancel': 'Annulla',
     'btn.delete': 'Elimina',
     'btn.edit': 'Modifica',
     'btn.close': 'Chiudi',
+    'btn.view_details': 'Visualizza Dettagli',
+    'btn.add_note': 'Aggiungi Nota',
     
     // Add Event Modal
     'modal.add_event.title': 'Aggiungi Evento Giardino',
@@ -921,8 +988,8 @@ export const TRANSLATIONS = {
     'environment.greenhouse': 'Serra',
     
     // Seasonal Regions
-    'region.temperate_north': 'Temperato Nord',
-    'region.temperate_south': 'Temperato Sud',
+    'region.temperate_north': 'Tempéré Nord',
+    'region.temperate_south': 'Tempéré Sud',
     'region.tropical': 'Tropicale',
     'region.mediterranean': 'Mediterraneo',
     
@@ -974,7 +1041,20 @@ export const TRANSLATIONS = {
     'common.error': 'Errore',
     'common.success': 'Successo',
     'common.warning': 'Avvertimento',
-    'common.info': 'Info'
+    'common.info': 'Info',
+    
+    // My Plants Modal
+    'plants.my_active_plants': 'Le Mie Piante Attive',
+    'plants.no_active': 'Nessuna pianta attiva trovata',
+    'plants.plant_type': 'Tipo di Pianta',
+    'plants.location': 'Posizione',
+    'plants.started': 'Iniziato',
+    'plants.current_phase': 'Fase Attuale',
+    'plants.expected_completion': 'Completamento Previsto',
+    
+    // Error Messages
+    'error.title': 'Errore',
+    'error.loading_plants': 'Errore durante il caricamento delle piante. Per favore riprova.'
   }
 };
 
