@@ -1,7 +1,7 @@
 import { googleCalendar, googleCalendarSettings } from './googleCalendar.js';
 import { openDB } from 'idb';
 
-// Show Google Calendar setup modal
+// Show Google Calendar setup modal with enhanced sync options
 export function showGoogleCalendarSetup() {
   const modal = document.createElement('div');
   modal.className = 'fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center p-4 z-50';
@@ -9,7 +9,7 @@ export function showGoogleCalendarSetup() {
   const settings = googleCalendarSettings.load();
   
   modal.innerHTML = `
-    <div class="bg-white dark:bg-gray-800 rounded-lg p-6 max-w-2xl w-full max-h-[90vh] overflow-y-auto">
+    <div class="bg-white dark:bg-gray-800 rounded-lg p-6 max-w-4xl w-full max-h-[90vh] overflow-y-auto">
       <div class="flex justify-between items-center mb-6">
         <h2 class="text-xl font-semibold dark:text-white">🗓️ Google Calendar Integration</h2>
         <button class="text-gray-500 hover:text-gray-700 dark:text-gray-400 dark:hover:text-gray-200" onclick="this.closest('.fixed').remove()">✕</button>
@@ -41,6 +41,9 @@ export function showGoogleCalendarSetup() {
           </div>
           <div id="userInfo" class="mt-2 text-sm text-gray-600 dark:text-gray-400">
             ${googleCalendar.isSignedIn ? 'Loading user info...' : 'Enter your Client ID below to connect'}
+          </div>
+          <div id="lastSyncInfo" class="mt-1 text-xs text-gray-500 dark:text-gray-400">
+            ${settings.lastSyncTime ? `Last sync: ${new Date(settings.lastSyncTime).toLocaleString()}` : 'Never synced'}
           </div>
         </div>
         
@@ -82,20 +85,68 @@ export function showGoogleCalendarSetup() {
           </select>
         </div>
         
-        <!-- Sync Options -->
+        <!-- Enhanced Sync Options -->
         <div id="syncOptions" style="display: none;" class="border-t pt-4">
           <h3 class="font-semibold mb-3 dark:text-white">⚙️ Sync Settings</h3>
           
-          <div class="space-y-3">
-            <div class="flex items-center space-x-2">
-              <input type="checkbox" id="autoSync" ${settings.autoSync ? 'checked' : ''} class="rounded">
-              <label for="autoSync" class="text-sm dark:text-gray-200">
-                🔄 Automatically sync new events to Google Calendar
-              </label>
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+            <!-- Basic Sync Options -->
+            <div class="space-y-3">
+              <h4 class="font-medium dark:text-gray-200">🔄 Sync Direction</h4>
+              
+              <div class="flex items-center space-x-2">
+                <input type="checkbox" id="autoSync" ${settings.autoSync ? 'checked' : ''} class="rounded">
+                <label for="autoSync" class="text-sm dark:text-gray-200">
+                  📤 Auto-export new events to Google Calendar
+                </label>
+              </div>
+              
+              <div class="flex items-center space-x-2">
+                <input type="checkbox" id="bidirectionalSync" ${settings.bidirectionalSync ? 'checked' : ''} class="rounded">
+                <label for="bidirectionalSync" class="text-sm dark:text-gray-200">
+                  🔄 Bidirectional sync (import changes from Google)
+                </label>
+              </div>
+              
+              <div class="ml-6">
+                <label class="block text-xs dark:text-gray-300 mb-1">Sync frequency:</label>
+                <select id="syncInterval" class="text-sm p-1 border rounded dark:bg-gray-700 dark:border-gray-600 dark:text-white">
+                  <option value="manual" ${settings.syncInterval === 'manual' ? 'selected' : ''}>Manual only</option>
+                  <option value="hourly" ${settings.syncInterval === 'hourly' ? 'selected' : ''}>Every hour</option>
+                  <option value="daily" ${settings.syncInterval === 'daily' ? 'selected' : ''}>Daily</option>
+                </select>
+              </div>
             </div>
             
-            <div class="ml-6 space-y-2">
-              <div class="text-sm font-medium dark:text-gray-200 mb-2">Sync these event types:</div>
+            <!-- Import Settings -->
+            <div class="space-y-3">
+              <h4 class="font-medium dark:text-gray-200">📥 Import Settings</h4>
+              
+              <div>
+                <label class="block text-xs dark:text-gray-300 mb-1">Import time range:</label>
+                <select id="importTimeRange" class="text-sm p-1 border rounded dark:bg-gray-700 dark:border-gray-600 dark:text-white w-full">
+                  <option value="6months" ${settings.importSettings?.importTimeRange === '6months' ? 'selected' : ''}>Last 6 months</option>
+                  <option value="1year" ${settings.importSettings?.importTimeRange === '1year' ? 'selected' : ''}>Last 1 year</option>
+                  <option value="2years" ${settings.importSettings?.importTimeRange === '2years' ? 'selected' : ''}>Last 2 years</option>
+                  <option value="all" ${settings.importSettings?.importTimeRange === 'all' ? 'selected' : ''}>All events</option>
+                </select>
+              </div>
+              
+              <div>
+                <label class="block text-xs dark:text-gray-300 mb-1">Conflict resolution:</label>
+                <select id="conflictResolution" class="text-sm p-1 border rounded dark:bg-gray-700 dark:border-gray-600 dark:text-white w-full">
+                  <option value="newer" ${settings.importSettings?.conflictResolution === 'newer' ? 'selected' : ''}>Use newer version</option>
+                  <option value="local" ${settings.importSettings?.conflictResolution === 'local' ? 'selected' : ''}>Keep local version</option>
+                  <option value="google" ${settings.importSettings?.conflictResolution === 'google' ? 'selected' : ''}>Use Google version</option>
+                </select>
+              </div>
+            </div>
+          </div>
+          
+          <!-- Event Types -->
+          <div class="mt-4">
+            <h4 class="font-medium dark:text-gray-200 mb-2">📋 Sync these event types:</h4>
+            <div class="grid grid-cols-2 md:grid-cols-3 gap-2">
               ${Object.entries(settings.syncTypes).map(([type, enabled]) => `
                 <div class="flex items-center space-x-2">
                   <input type="checkbox" id="sync_${type}" ${enabled ? 'checked' : ''} class="rounded">
@@ -107,13 +158,30 @@ export function showGoogleCalendarSetup() {
             </div>
           </div>
           
-          <div class="mt-4 space-x-2">
-            <button type="button" id="syncAllEventsBtn" class="px-4 py-2 bg-purple-600 text-white rounded hover:bg-purple-700">
-              📤 Sync All Existing Events
-            </button>
+          <!-- Sync Actions -->
+          <div class="mt-6 space-y-2">
+            <div class="flex flex-wrap gap-2">
+              <button type="button" id="syncAllEventsBtn" class="px-4 py-2 bg-purple-600 text-white rounded hover:bg-purple-700">
+                📤 Export All Local Events
+              </button>
+              <button type="button" id="importEventsBtn" class="px-4 py-2 bg-indigo-600 text-white rounded hover:bg-indigo-700">
+                📥 Import from Google Calendar
+              </button>
+              <button type="button" id="bidirectionalSyncBtn" class="px-4 py-2 bg-orange-600 text-white rounded hover:bg-orange-700">
+                🔄 Full Bidirectional Sync
+              </button>
+            </div>
             <button type="button" id="saveSyncSettingsBtn" class="px-4 py-2 bg-green-600 text-white rounded hover:bg-green-700">
               💾 Save Sync Settings
             </button>
+          </div>
+          
+          <!-- Sync Status -->
+          <div id="syncStatus" class="mt-4 p-3 bg-gray-50 dark:bg-gray-700 rounded-lg">
+            <div class="text-sm dark:text-gray-200">
+              <strong>Sync Status:</strong> <span id="syncStatusText">Ready</span>
+            </div>
+            <div id="syncProgress" class="mt-2 text-xs text-gray-500 dark:text-gray-400"></div>
           </div>
         </div>
         
@@ -141,6 +209,8 @@ function initializeGoogleCalendarEventListeners() {
   const connectBtn = document.getElementById('connectBtn');
   const saveSettingsBtn = document.getElementById('saveSettingsBtn');
   const syncAllEventsBtn = document.getElementById('syncAllEventsBtn');
+  const importEventsBtn = document.getElementById('importEventsBtn');
+  const bidirectionalSyncBtn = document.getElementById('bidirectionalSyncBtn');
   const saveSyncSettingsBtn = document.getElementById('saveSyncSettingsBtn');
   const signOutBtn = document.getElementById('signOutBtn');
   
@@ -189,26 +259,34 @@ function initializeGoogleCalendarEventListeners() {
     alert('💾 Settings saved!');
   });
   
-  // Sync all events
+  // Export all events
   syncAllEventsBtn?.addEventListener('click', async () => {
     if (!googleCalendar.isSignedIn) {
       alert('Please connect to Google Calendar first');
       return;
     }
     
-    syncAllEventsBtn.disabled = true;
-    syncAllEventsBtn.textContent = '🔄 Syncing...';
-    
-    try {
-      await syncAllEventsToGoogle();
-      alert('✅ All events synced successfully!');
-    } catch (error) {
-      console.error('Sync failed:', error);
-      alert(`❌ Sync failed: ${error.message}`);
-    } finally {
-      syncAllEventsBtn.disabled = false;
-      syncAllEventsBtn.textContent = '📤 Sync All Existing Events';
+    await performSyncOperation('export', syncAllEventsBtn, '📤 Export All Local Events');
+  });
+  
+  // Import events
+  importEventsBtn?.addEventListener('click', async () => {
+    if (!googleCalendar.isSignedIn) {
+      alert('Please connect to Google Calendar first');
+      return;
     }
+    
+    await performSyncOperation('import', importEventsBtn, '📥 Import from Google Calendar');
+  });
+  
+  // Bidirectional sync
+  bidirectionalSyncBtn?.addEventListener('click', async () => {
+    if (!googleCalendar.isSignedIn) {
+      alert('Please connect to Google Calendar first');
+      return;
+    }
+    
+    await performSyncOperation('bidirectional', bidirectionalSyncBtn, '🔄 Full Bidirectional Sync');
   });
   
   // Save sync settings
@@ -216,7 +294,15 @@ function initializeGoogleCalendarEventListeners() {
     const settings = googleCalendarSettings.load();
     
     settings.autoSync = document.getElementById('autoSync').checked;
+    settings.bidirectionalSync = document.getElementById('bidirectionalSync').checked;
+    settings.syncInterval = document.getElementById('syncInterval').value;
     settings.selectedCalendarId = document.getElementById('calendarSelect').value;
+    
+    // Import settings
+    settings.importSettings = {
+      importTimeRange: document.getElementById('importTimeRange').value,
+      conflictResolution: document.getElementById('conflictResolution').value
+    };
     
     // Update sync types
     Object.keys(settings.syncTypes).forEach(type => {
@@ -245,6 +331,75 @@ function initializeGoogleCalendarEventListeners() {
   // Help functions
   window.showDetailedHelp = () => showDetailedSetupGuide();
   window.showClientIdHelp = () => showClientIdHelp();
+}
+
+// Perform sync operations with progress feedback
+async function performSyncOperation(operation, button, originalText) {
+  const syncStatusText = document.getElementById('syncStatusText');
+  const syncProgress = document.getElementById('syncProgress');
+  
+  button.disabled = true;
+  button.textContent = '🔄 Working...';
+  syncStatusText.textContent = 'Syncing...';
+  
+  try {
+    let result;
+    
+    switch (operation) {
+      case 'export':
+        syncProgress.textContent = 'Exporting local events to Google Calendar...';
+        result = await syncAllEventsToGoogle();
+        alert(`✅ Export complete!\n\n• ${result.synced} events exported\n• ${result.failed} failed`);
+        break;
+        
+      case 'import':
+        syncProgress.textContent = 'Importing events from Google Calendar...';
+        result = await importEventsFromGoogle();
+        alert(`✅ Import complete!\n\n• ${result.imported} events imported\n• ${result.updated} events updated\n• ${result.skipped} events skipped`);
+        break;
+        
+      case 'bidirectional':
+        syncProgress.textContent = 'Performing bidirectional sync...';
+        result = await googleCalendar.performBidirectionalSync();
+        
+        // Update last sync time
+        const settings = googleCalendarSettings.load();
+        settings.lastSyncTime = new Date().toISOString();
+        googleCalendarSettings.save(settings);
+        
+        // Update UI
+        document.getElementById('lastSyncInfo').textContent = `Last sync: ${new Date().toLocaleString()}`;
+        
+        alert(`✅ Bidirectional sync complete!\n\n• ${result.imported} events imported\n• ${result.updated} events updated\n• ${result.exported} events exported\n• ${result.errors.length} errors`);
+        break;
+    }
+    
+    syncStatusText.textContent = 'Sync completed successfully';
+    syncProgress.textContent = '';
+    
+    // Refresh calendar
+    if (window.calendar && typeof window.calendar.refetchEvents === 'function') {
+      window.calendar.refetchEvents();
+    }
+    
+    // Refresh sidebar
+    const refreshEvent = new CustomEvent('refreshSidebar');
+    document.dispatchEvent(refreshEvent);
+    
+  } catch (error) {
+    console.error(`${operation} failed:`, error);
+    syncStatusText.textContent = 'Sync failed';
+    syncProgress.textContent = error.message;
+    alert(`❌ ${operation} failed: ${error.message}`);
+  } finally {
+    button.disabled = false;
+    button.textContent = originalText;
+    
+    setTimeout(() => {
+      syncStatusText.textContent = 'Ready';
+      syncProgress.textContent = '';
+    }, 5000);
+  }
 }
 
 async function updateConnectionStatus() {
@@ -315,7 +470,7 @@ async function loadCalendars() {
   }
 }
 
-// Sync all existing events to Google Calendar
+// Export all existing events to Google Calendar
 async function syncAllEventsToGoogle() {
   const db = await openDB('gardening-calendar');
   const events = await db.getAll('events');
@@ -330,11 +485,109 @@ async function syncAllEventsToGoogle() {
   
   const { results, errors } = await googleCalendar.createEvents(eventsToSync);
   
+  // Update local events with Google event IDs
+  for (let i = 0; i < results.length; i++) {
+    const localEvent = eventsToSync[i];
+    const googleEvent = results[i];
+    
+    if (googleEvent && googleEvent.id) {
+      await db.put('events', {
+        ...localEvent,
+        googleEventId: googleEvent.id,
+        lastModified: new Date().toISOString()
+      });
+    }
+  }
+  
   if (errors.length > 0) {
     console.warn('Some events failed to sync:', errors);
   }
   
   return { synced: results.length, failed: errors.length };
+}
+
+// Import events from Google Calendar
+async function importEventsFromGoogle() {
+  const settings = googleCalendarSettings.load();
+  const importSettings = settings.importSettings || {};
+  
+  // Calculate time range
+  let timeMin = null;
+  let timeMax = null;
+  
+  if (importSettings.importTimeRange !== 'all') {
+    timeMin = new Date();
+    switch (importSettings.importTimeRange) {
+      case '6months':
+        timeMin.setMonth(timeMin.getMonth() - 6);
+        break;
+      case '1year':
+        timeMin.setFullYear(timeMin.getFullYear() - 1);
+        break;
+      case '2years':
+        timeMin.setFullYear(timeMin.getFullYear() - 2);
+        break;
+    }
+    timeMin = timeMin.toISOString();
+    
+    // Set max time to 2 years in future
+    timeMax = new Date();
+    timeMax.setFullYear(timeMax.getFullYear() + 2);
+    timeMax = timeMax.toISOString();
+  }
+  
+  const googleEvents = await googleCalendar.importEvents(timeMin, timeMax);
+  
+  const db = await openDB('gardening-calendar');
+  const localEvents = await db.getAll('events');
+  
+  let imported = 0;
+  let updated = 0;
+  let skipped = 0;
+  
+  for (const googleEvent of googleEvents) {
+    // Check if event already exists locally
+    const existingEvent = localEvents.find(e => 
+      e.googleEventId === googleEvent.googleEventId ||
+      (e.title === googleEvent.title && e.date === googleEvent.date)
+    );
+    
+    if (existingEvent) {
+      // Handle conflict resolution
+      if (importSettings.conflictResolution === 'google' || 
+          (importSettings.conflictResolution === 'newer' && 
+           new Date(googleEvent.lastModified) > new Date(existingEvent.lastModified || 0))) {
+        
+        await db.put('events', {
+          ...existingEvent,
+          title: googleEvent.title,
+          description: googleEvent.description,
+          type: googleEvent.type,
+          plantingId: googleEvent.plantingId,
+          googleEventId: googleEvent.googleEventId,
+          lastModified: googleEvent.lastModified
+        });
+        updated++;
+      } else {
+        skipped++;
+      }
+    } else {
+      // Import new event
+      const newEvent = {
+        title: googleEvent.title,
+        date: googleEvent.date,
+        type: googleEvent.type,
+        description: googleEvent.description,
+        plantingId: googleEvent.plantingId,
+        googleEventId: googleEvent.googleEventId,
+        lastModified: googleEvent.lastModified
+      };
+      await db.add('events', newEvent);
+      imported++;
+    }
+  }
+  
+  return { imported, updated, skipped };
 }
 
 // Auto-sync new event to Google Calendar
@@ -350,7 +603,22 @@ export async function autoSyncEvent(eventData) {
   }
   
   try {
-    await googleCalendar.createEvent(eventData);
+    const googleEvent = await googleCalendar.createEvent(eventData);
+    
+    // Update local event with Google event ID
+    if (eventData.id && googleEvent.id) {
+      const { openDB } = await import('idb');
+      const db = await openDB('gardening-calendar');
+      const localEvent = await db.get('events', eventData.id);
+      if (localEvent) {
+        await db.put('events', {
+          ...localEvent,
+          googleEventId: googleEvent.id,
+          lastModified: new Date().toISOString()
+        });
+      }
+    }
+    
     return true;
   } catch (error) {
     console.error('Auto-sync failed:', error);
@@ -415,12 +683,12 @@ function showDetailedSetupGuide() {
         </div>
         
         <div class="bg-green-50 dark:bg-green-900/20 border border-green-200 dark:border-green-800 rounded p-4">
-          <h3 class="font-semibold text-green-800 dark:text-green-200">✅ Why Only Client ID?</h3>
+          <h3 class="font-semibold text-green-800 dark:text-green-200">🔄 New: Bidirectional Sync Features</h3>
           <ul class="list-disc list-inside space-y-1 mt-2 text-green-700 dark:text-green-300">
-            <li><strong>Simpler Setup:</strong> No API Key needed for OAuth flows</li>
-            <li><strong>More Secure:</strong> OAuth handles authentication securely</li>
-            <li><strong>Better UX:</strong> Users sign in with their Google account</li>
-            <li><strong>Standard Practice:</strong> Most modern apps use this approach</li>
+            <li><strong>Import Events:</strong> Pull gardening events from Google Calendar</li>
+            <li><strong>Conflict Resolution:</strong> Choose how to handle conflicting changes</li>
+            <li><strong>Plant ID Preservation:</strong> Maintains plant relationships when syncing</li>
+            <li><strong>Automatic Sync:</strong> Optional scheduled synchronization</li>
           </ul>
         </div>
         
@@ -432,6 +700,7 @@ function showDetailedSetupGuide() {
             <li>You should see a Google sign-in popup</li>
             <li>Grant calendar permissions</li>
             <li>You should see "Connected" status with your profile</li>
+            <li>Try importing existing events or exporting local events</li>
           </ol>
         </div>
       </div>
@@ -457,10 +726,11 @@ Setup Requirements:
 • For local development: http://localhost:5173
 • Used to request calendar permissions from users
 
-Why no API Key needed?
-• OAuth 2.0 handles authentication securely
-• Client ID is sufficient for calendar access
-• Simpler and more secure than API Key + Client ID`);
+New Sync Features:
+• Events now include metadata for plant tracking
+• Bidirectional sync preserves plant relationships
+• Import/export maintains data integrity
+• Conflict resolution handles simultaneous changes`);
 }
 
 function getTypeEmoji(type) {
