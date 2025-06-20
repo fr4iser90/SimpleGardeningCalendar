@@ -3,7 +3,7 @@ import dayGridPlugin from '@fullcalendar/daygrid';
 import interactionPlugin from '@fullcalendar/interaction';
 import { openDB } from 'idb';
 import { format } from 'date-fns';
-import { PLANTS_DATA, PLANT_CATEGORIES, addPlanting, addPlantNote, getPlantNotes, updatePlantingStatus, searchPlants, GROWING_ENVIRONMENTS, SEASONAL_REGIONS, getPlantDataForEnvironment, validatePlantingDate } from './db';
+import { PLANTS_DATA, PLANT_CATEGORIES, addPlanting, addPlantNote, getPlantNotes, updatePlantingStatus, searchPlants, GROWING_ENVIRONMENTS, SEASONAL_REGIONS, getPlantDataForEnvironment, validatePlantingDate, initializeDB } from './db';
 import { getAvailableTemplates, importGardenTemplate, GARDEN_TEMPLATE_CATEGORIES } from './gardenTemplates.js';
 import { t, getCurrentLanguage, createLanguageSwitcher, updateUITranslations } from './i18n.js';
 

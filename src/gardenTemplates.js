@@ -2,11 +2,11 @@
 // Supports multiple languages with appropriate regional adaptations
 
 import { getCurrentLanguage } from './i18n.js';
-import { getAvailableTemplatesEn } from './gardenTemplates_en.js';
-import { getAvailableTemplatesDe } from './gardenTemplates_de.js';
-import { getAvailableTemplatesFr } from './gardenTemplates_fr.js';
-import { getAvailableTemplatesEs } from './gardenTemplates_es.js';
-import { getAvailableTemplatesIt } from './gardenTemplates_it.js';
+import { getAvailableTemplatesEn, GARDEN_TEMPLATE_CATEGORIES_EN } from './gardenTemplates_en.js';
+import { getAvailableTemplatesDe, GARDEN_TEMPLATE_CATEGORIES_DE } from './gardenTemplates_de.js';
+import { getAvailableTemplatesFr, GARDEN_TEMPLATE_CATEGORIES_FR } from './gardenTemplates_fr.js';
+import { getAvailableTemplatesEs, GARDEN_TEMPLATE_CATEGORIES_ES } from './gardenTemplates_es.js';
+import { getAvailableTemplatesIt, GARDEN_TEMPLATE_CATEGORIES_IT } from './gardenTemplates_it.js';
 
 // Function to get all available templates based on current language
 export function getAvailableTemplates() {
@@ -114,4 +114,34 @@ export function getLocalizedTemplateCategories() {
         COMPLETE_GARDEN: 'Complete Garden'
       }; // English as fallback
   }
-} 
+}
+
+// Export template categories for backward compatibility
+export function getGardenTemplateCategories() {
+  const currentLang = getCurrentLanguage();
+  
+  switch (currentLang) {
+    case 'en':
+      return GARDEN_TEMPLATE_CATEGORIES_EN;
+    case 'de':
+      return GARDEN_TEMPLATE_CATEGORIES_DE;
+    case 'fr':
+      return GARDEN_TEMPLATE_CATEGORIES_FR;
+    case 'es':
+      return GARDEN_TEMPLATE_CATEGORIES_ES;
+    case 'it':
+      return GARDEN_TEMPLATE_CATEGORIES_IT;
+    default:
+      return GARDEN_TEMPLATE_CATEGORIES_EN; // English as fallback
+  }
+}
+
+// For backward compatibility, export the categories
+// This maintains compatibility with existing code
+export const GARDEN_TEMPLATE_CATEGORIES = {
+  ORNAMENTAL: 'ORNAMENTAL',
+  VEGETABLE_FRUIT: 'VEGETABLE_FRUIT',
+  HERB_GARDEN: 'HERB_GARDEN',
+  BALCONY_TERRACE: 'BALCONY_TERRACE',
+  COMPLETE_GARDEN: 'COMPLETE_GARDEN'
+}; 

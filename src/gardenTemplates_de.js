@@ -1,18 +1,18 @@
 // German templates (original)
-export const GARDEN_TEMPLATE_CATEGORIES = {
-  ORNAMENTAL: "Ziergarten",
-  VEGETABLE_FRUIT: "Obst- und Gemüsegarten",
-  HERB_GARDEN: "Kräutergarten",
-  BALCONY_TERRACE: "Balkon & Terrasse",
-  COMPLETE_GARDEN: "Kompletter Garten",
+export const GARDEN_TEMPLATE_CATEGORIES_DE = {
+  ORNAMENTAL: 'ORNAMENTAL',
+  VEGETABLE_FRUIT: 'VEGETABLE_FRUIT',
+  HERB_GARDEN: 'HERB_GARDEN',
+  BALCONY_TERRACE: 'BALCONY_TERRACE',
+  COMPLETE_GARDEN: 'COMPLETE_GARDEN'
 };
 
 // Template for Ornamental Garden (Ziergarten)
-export const ORNAMENTAL_GARDEN_TEMPLATE = {
+export const ORNAMENTAL_GARDEN_TEMPLATE_DE = {
   name: "Ziergarten Jahresplan",
   description:
     "Kompletter Jahreskalender für den Ziergarten mit allen wichtigen Pflegearbeiten",
-  category: GARDEN_TEMPLATE_CATEGORIES.ORNAMENTAL,
+  category: GARDEN_TEMPLATE_CATEGORIES_DE.ORNAMENTAL,
   region: "temperate_north",
   tasks: [
     // Januar
@@ -380,11 +380,11 @@ export const ORNAMENTAL_GARDEN_TEMPLATE = {
 };
 
 // Template for Vegetable and Fruit Garden (Obst- und Gemüsegarten)
-export const VEGETABLE_FRUIT_GARDEN_TEMPLATE = {
+export const VEGETABLE_FRUIT_GARDEN_TEMPLATE_DE = {
   name: "Obst- und Gemüsegarten Jahresplan",
   description:
     "Kompletter Jahreskalender für den Nutzgarten mit Obst und Gemüse",
-  category: GARDEN_TEMPLATE_CATEGORIES.VEGETABLE_FRUIT,
+  category: GARDEN_TEMPLATE_CATEGORIES_DE.VEGETABLE_FRUIT,
   region: "temperate_north",
   tasks: [
     // Januar
@@ -723,10 +723,10 @@ export const VEGETABLE_FRUIT_GARDEN_TEMPLATE = {
 };
 
 // Template for Herb Garden (Kräutergarten)
-export const HERB_GARDEN_TEMPLATE = {
+export const HERB_GARDEN_TEMPLATE_DE = {
   name: "Kräutergarten Jahresplan",
   description: "Spezieller Jahreskalender für die Kräuterzucht",
-  category: GARDEN_TEMPLATE_CATEGORIES.HERB_GARDEN,
+  category: GARDEN_TEMPLATE_CATEGORIES_DE.HERB_GARDEN,
   region: "temperate_north",
   tasks: [
     // März
@@ -824,10 +824,10 @@ export const HERB_GARDEN_TEMPLATE = {
 };
 
 // Template for Balcony & Terrace (Balkon & Terrasse)
-export const BALCONY_TERRACE_TEMPLATE = {
+export const BALCONY_TERRACE_TEMPLATE_DE = {
   name: "Balkon & Terrasse Jahresplan",
   description: "Spezieller Jahreskalender für Balkon- und Terrassengärtnerei",
-  category: GARDEN_TEMPLATE_CATEGORIES.BALCONY_TERRACE,
+  category: GARDEN_TEMPLATE_CATEGORIES_DE.BALCONY_TERRACE,
   region: "temperate_north",
   tasks: [
     // Februar
@@ -1118,11 +1118,11 @@ export const BALCONY_TERRACE_TEMPLATE = {
 };
 
 // Complete Garden Template (Kompletter Garten)
-export const COMPLETE_GARDEN_TEMPLATE = {
+export const COMPLETE_GARDEN_TEMPLATE_DE = {
   name: "Kompletter Garten Jahresplan",
   description:
     "Umfassender Jahreskalender für alle Gartenbereiche: Zier-, Nutz- und Kräutergarten",
-  category: GARDEN_TEMPLATE_CATEGORIES.COMPLETE_GARDEN,
+  category: GARDEN_TEMPLATE_CATEGORIES_DE.COMPLETE_GARDEN,
   region: "temperate_north",
   tasks: [
     // Combine key tasks from all templates
@@ -1462,10 +1462,10 @@ export const COMPLETE_GARDEN_TEMPLATE = {
 // Function to export all German templates
 export function getAvailableTemplatesDe() {
   return [
-    ORNAMENTAL_GARDEN_TEMPLATE,
-    VEGETABLE_FRUIT_GARDEN_TEMPLATE,
-    HERB_GARDEN_TEMPLATE,
-    BALCONY_TERRACE_TEMPLATE,
-    COMPLETE_GARDEN_TEMPLATE,
+    ORNAMENTAL_GARDEN_TEMPLATE_DE,
+    VEGETABLE_FRUIT_GARDEN_TEMPLATE_DE,
+    HERB_GARDEN_TEMPLATE_DE,
+    BALCONY_TERRACE_TEMPLATE_DE,
+    COMPLETE_GARDEN_TEMPLATE_DE,
   ];
 }
