@@ -383,12 +383,11 @@ class GardeningCalendarTester {
 
   // 🗓️ Google Calendar Integration testen
   async testGoogleCalendarIntegration() {
-    console.log('🗓️ Testing Google Calendar Integration...');
+    this.logSuccess('Testing Google Calendar integration...');
     
     try {
-      // Test ob Google Calendar Module geladen werden können
-      const gcModule = await import('./src/services/GoogleCalendar/GoogleCalendarApi.js');
-      const gcUIModule = await import('./src/services/GoogleCalendar/GoogleCalendarUI.js');
+      const gcModule = await import('./src/services/index.js');
+      const modalModule = await import('./src/components/modals/GoogleCalendarSetupModal.js');
       
       this.logSuccess('Google Calendar modules loaded successfully');
       
@@ -398,19 +397,25 @@ class GardeningCalendarTester {
       
       this.logSuccess(`Google Calendar settings: ${Object.keys(settings).length} properties`);
       
-      // Test ob alle notwendigen Funktionen existieren
-      const requiredFunctions = [
-        'showGoogleCalendarSetup',
-        'autoSyncEvent',
-        'syncAllEventsToGoogle',
-        'importEventsFromGoogle'
-      ];
+      // Test if necessary functions exist
+      const requiredFunctions = {
+        'services': ['autoSyncEvent', 'performBidirectionalSync', 'exportLocalEventsToGoogle', 'importGoogleEvents'],
+        'modal': ['renderGoogleCalendarSetupModal']
+      };
       
-      for (const func of requiredFunctions) {
-        if (typeof gcUIModule[func] === 'function' || typeof gcModule[func] === 'function') {
-          this.logSuccess(`Function '${func}' exists`);
+      for (const func of requiredFunctions.services) {
+        if (typeof gcModule[func] === 'function') {
+          this.logSuccess(`Service function '${func}' exists`);
         } else {
-          this.logWarning(`Function '${func}' missing`);
+          this.logWarning(`Service function '${func}' missing`);
+        }
+      }
+
+      for (const func of requiredFunctions.modal) {
+        if (typeof modalModule[func] === 'function') {
+          this.logSuccess(`Modal function '${func}' exists`);
+        } else {
+          this.logWarning(`Modal function '${func}' missing`);
         }
       }
       
@@ -587,4 +592,10 @@ if (typeof module !== 'undefined' && module.exports) {
 // 3. In HTML: <script src="test-script.js"></script> dann runGardenTests()
 
 console.log('🧪 Garden Calendar Test Script loaded!');
-console.log('📝 Run tests with: runGardenTests()'); 
+console.log('📝 Run tests with: runGardenTests()');
+
+// Auto-run tests if running in Node.js
+if (typeof module !== 'undefined' && require.main === module) {
+  console.log('🚀 Auto-running tests in Node.js environment...');
+  runGardenTests();
+}

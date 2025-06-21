@@ -6,7 +6,6 @@
 // Google Calendar Services
 export * from './GoogleCalendar/GoogleCalendarApi.js';
 export * from './GoogleCalendar/GoogleCalendarSync.js';
-export * from './GoogleCalendar/GoogleCalendarUI.js';
 export * from './GoogleCalendar/GoogleCalendarSettings.js';
 
 // Event Service

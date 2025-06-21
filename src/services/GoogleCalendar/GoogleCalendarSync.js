@@ -303,4 +303,30 @@ async function importGoogleEvents() {
   console.log(`[DEBUG] Import results: imported=${imported}, updated=${updated}, skipped=${skipped}`);
   
   return { imported, updated, skipped };
+}
+
+// Auto-sync event when created locally
+export async function autoSyncEvent(eventData) {
+  const settings = googleCalendarSettings.load();
+  if (!settings.autoSync) {
+    console.log('[DEBUG] Auto-sync disabled in settings.');
+    return;
+  }
+  
+  try {
+    const { isSignedIn } = getAuthState();
+    if (!isSignedIn) {
+      console.log('[DEBUG] Auto-sync skipped: not signed in.');
+      return;
+    }
+    
+    const { results, errors } = await createEvents([eventData]);
+    if (errors.length > 0) {
+        console.error('Auto-sync failed for event:', eventData.title, errors[0]);
+    } else {
+        console.log('✅ Event auto-synced to Google Calendar:', results[0].summary);
+    }
+  } catch (error) {
+    console.error('Auto-sync failed:', error);
+  }
 } 

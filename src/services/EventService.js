@@ -1,6 +1,6 @@
 import { openDB } from 'idb';
 import { DB_NAME, DB_VERSION } from '../core/db/connection.js';
-import { autoSyncEvent } from './GoogleCalendar/GoogleCalendarUI.js';
+import { autoSyncEvent } from './GoogleCalendar/GoogleCalendarSync.js';
 import { getEventColor, getEventTypeIcon } from '../utils/eventUtils.js';
 import { formatDate } from '../utils/dateUtils.js';
 import { validateEventData } from '../utils/validators.js';
