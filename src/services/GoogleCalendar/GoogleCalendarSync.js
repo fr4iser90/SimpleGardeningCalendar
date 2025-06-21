@@ -3,6 +3,10 @@ import { openDB } from 'idb';
 import { DB_NAME, DB_VERSION } from '../../core/db/connection.js';
 import { getAuthState } from './GoogleCalendarApi.js';
 import { googleCalendarSettings } from './GoogleCalendarSettings.js';
+import { isGardeningEvent } from '../../utils/eventUtils.js';
+import { formatDate } from '../../utils/dateUtils.js';
+import { validateEventData } from '../../utils/validators.js';
+import { convertToGoogleEvent, convertFromGoogleEvent } from '../../utils/eventUtils.js';
 
 /**
  * Google Calendar Sync Logic
@@ -299,35 +303,4 @@ async function importGoogleEvents() {
   console.log(`[DEBUG] Import results: imported=${imported}, updated=${updated}, skipped=${skipped}`);
   
   return { imported, updated, skipped };
-}
-
-// Helper function to convert local event to Google Calendar format
-function convertToGoogleEvent(eventData) {
-  return {
-    summary: eventData.title,
-    description: eventData.description || '',
-    start: {
-      dateTime: eventData.start,
-      timeZone: Intl.DateTimeFormat().resolvedOptions().timeZone
-    },
-    end: {
-      dateTime: eventData.end,
-      timeZone: Intl.DateTimeFormat().resolvedOptions().timeZone
-    }
-  };
-}
-
-// Helper function to convert Google Calendar event to local format
-function convertFromGoogleEvent(googleEvent) {
-  return {
-    title: googleEvent.summary,
-    description: googleEvent.description || '',
-    start: googleEvent.start.dateTime,
-    end: googleEvent.end.dateTime,
-    type: 'gardening',
-    googleEventId: googleEvent.id,
-    lastModified: new Date().toISOString()
-  };
-}
-
-// Import settings class 
+} 

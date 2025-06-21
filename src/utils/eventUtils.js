@@ -45,3 +45,86 @@ export function isGardeningEvent(event) {
 export function filterEventsByType(events, type) {
   return events.filter(event => event.type === type);
 }
+
+// Konvertiert ein lokales Event ins Google Calendar Format
+export function convertToGoogleEvent(eventData) {
+  const startDate = new Date(eventData.date);
+  const endDate = new Date(startDate);
+  endDate.setHours(endDate.getHours() + 1);
+  
+  const categoryEmojis = {
+    planting: '🌱',
+    watering: '💧',
+    fertilizing: '🌿',
+    harvesting: '🌾',
+    maintenance: '🔧'
+  };
+  
+  const emoji = categoryEmojis[eventData.type] || '📅';
+  const title = `${emoji} ${eventData.title}`;
+  
+  // Add metadata
+  const metadata = {
+    type: eventData.type,
+    localId: eventData.id,
+    plantingId: eventData.plantingId,
+    syncedAt: new Date().toISOString()
+  };
+  
+  const description = `${eventData.description || ''}\n\n[GardeningCalendar:${JSON.stringify(metadata)}]`.trim();
+  
+  return {
+    summary: title,
+    description: description,
+    start: {
+      dateTime: startDate.toISOString(),
+      timeZone: Intl.DateTimeFormat().resolvedOptions().timeZone
+    },
+    end: {
+      dateTime: endDate.toISOString(),
+      timeZone: Intl.DateTimeFormat().resolvedOptions().timeZone
+    }
+  };
+}
+
+// Konvertiert ein Google Calendar Event ins lokale Format
+export function convertFromGoogleEvent(googleEvent) {
+  const summary = googleEvent.summary || '';
+  const description = googleEvent.description || '';
+  
+  // Extract metadata
+  const metadataMatch = description.match(/\[GardeningCalendar:([^\]]+)\]/);
+  let metadata = {};
+  if (metadataMatch) {
+    try {
+      metadata = JSON.parse(metadataMatch[1]);
+    } catch (error) {
+      console.warn('Failed to parse event metadata:', error);
+    }
+  }
+  
+  // Determine event type
+  let type = metadata.type || 'maintenance';
+  if (summary.includes('🌱')) type = 'planting';
+  else if (summary.includes('💧')) type = 'watering';
+  else if (summary.includes('🌿')) type = 'fertilizing';
+  else if (summary.includes('🌾')) type = 'harvesting';
+  
+  const startDate = googleEvent.start?.date || googleEvent.start?.dateTime;
+  const date = startDate ? new Date(startDate).toISOString().split('T')[0] : new Date().toISOString().split('T')[0];
+  
+  const title = summary.replace(/^[🌱💧🌿🌾🔧📅]\s*/, '');
+  const cleanDescription = description.replace(/\[GardeningCalendar:[^\]]+\]/, '').trim();
+  
+  return {
+    id: metadata.localId || null,
+    title,
+    date,
+    type,
+    description: cleanDescription,
+    plantingId: metadata.plantingId || null,
+    googleEventId: googleEvent.id,
+    lastModified: googleEvent.updated,
+    source: 'google'
+  };
+}

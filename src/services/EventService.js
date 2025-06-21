@@ -1,6 +1,10 @@
 import { openDB } from 'idb';
 import { DB_NAME, DB_VERSION } from '../core/db/connection.js';
 import { autoSyncEvent } from './GoogleCalendar/GoogleCalendarUI.js';
+import { getEventColor, getEventTypeIcon } from '../utils/eventUtils.js';
+import { formatDate } from '../utils/dateUtils.js';
+import { validateEventData } from '../utils/validators.js';
+import { getPhaseEmoji } from '../utils/plantUtils.js';
 
 /**
  * Event Service
@@ -108,22 +112,6 @@ export async function getFormattedEvents() {
   }));
 }
 
-// Get event color based on type
-function getEventColor(type) {
-  const colors = {
-    planting: '#10B981', // green
-    watering: '#3B82F6', // blue
-    fertilizing: '#8B5CF6', // purple
-    harvesting: '#F59E0B', // amber
-    maintenance: '#EF4444', // red
-    pruning: '#EC4899', // pink
-    transplanting: '#06B6D4', // cyan
-    pest_control: '#84CC16', // lime
-    default: '#6B7280' // gray
-  };
-  return colors[type] || colors.default;
-}
-
 // Create all events for a new planting
 export async function createPlantingEvents(planting, plantData, phases, completionDate) {
   const db = await openDB(DB_NAME, DB_VERSION);
@@ -174,24 +162,6 @@ export async function createPlantingEvents(planting, plantData, phases, completi
   });
 
   await tx.done;
-}
-
-// Get phase emoji
-function getPhaseEmoji(phaseName) {
-  const emojis = {
-    'seedling': '🌱',
-    'vegetative': '🌿',
-    'flowering': '🌸',
-    'fruiting': '🍅',
-    'harvesting': '🌾',
-    'maintenance': '🔧',
-    'watering': '💧',
-    'fertilizing': '🌱',
-    'pruning': '✂️',
-    'transplanting': '🔄',
-    'pest_control': '🐛'
-  };
-  return emojis[phaseName.toLowerCase()] || '📅';
 }
 
 // Delete planting and all associated events

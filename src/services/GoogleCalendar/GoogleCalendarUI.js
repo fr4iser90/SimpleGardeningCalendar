@@ -2,6 +2,10 @@ import { openDB } from 'idb';
 import { attemptSignIn, signOut, fetchCalendarList, getUserInfo } from './GoogleCalendarApi.js';
 import { performBidirectionalSync, createEvents, importEvents } from './GoogleCalendarSync.js';
 import { googleCalendarSettings } from './GoogleCalendarSettings.js';
+import { getEventTypeIcon, getEventColor } from '../../utils/eventUtils.js';
+import { formatDate } from '../../utils/dateUtils.js';
+import { getPhaseEmoji } from '../../utils/plantUtils.js';
+import { validateEventData } from '../../utils/validators.js';
 
 /**
  * Google Calendar UI Integration
@@ -131,7 +135,7 @@ export function showGoogleCalendarSetup() {
                 <div class="flex items-center space-x-2">
                   <input type="checkbox" id="sync_${type}" ${enabled ? 'checked' : ''} class="rounded">
                   <label for="sync_${type}" class="text-sm dark:text-gray-200 capitalize">
-                    ${getTypeEmoji(type)} ${type}
+                    ${getEventTypeIcon(type)} ${type}
                   </label>
                 </div>
               `).join('')}
@@ -373,22 +377,6 @@ export async function autoSyncEvent(eventData) {
   } catch (error) {
     console.error('Auto-sync failed:', error);
   }
-}
-
-// Helper function to get emoji for event type
-function getTypeEmoji(type) {
-  const emojis = {
-    planting: '🌱',
-    watering: '💧',
-    fertilizing: '🌿',
-    harvesting: '🍅',
-    maintenance: '🔧',
-    pruning: '✂️',
-    transplanting: '🔄',
-    pest_control: '🐛',
-    default: '📅'
-  };
-  return emojis[type] || emojis.default;
 }
 
 // Helper function to show notifications

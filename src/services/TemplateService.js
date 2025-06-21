@@ -8,6 +8,7 @@ import { getAvailableTemplatesFr, GARDEN_TEMPLATE_CATEGORIES_FR } from '../garde
 import { getAvailableTemplatesEs, GARDEN_TEMPLATE_CATEGORIES_ES } from '../gardenTemplates_es.js';
 import { getAvailableTemplatesIt, GARDEN_TEMPLATE_CATEGORIES_IT } from '../gardenTemplates_it.js';
 import { addEvent } from './EventService.js';
+import { validateTemplate } from '../utils/validators.js';
 
 /**
  * Template Service
@@ -165,33 +166,6 @@ export function getTemplateByName(templateName) {
 export function getTemplatesByCategory(category) {
   const templates = getAvailableTemplates();
   return templates.filter(template => template.category === category);
-}
-
-// Validate template data
-export function validateTemplate(templateData) {
-  if (!templateData || typeof templateData !== 'object') {
-    return { isValid: false, error: 'Template data is required' };
-  }
-  
-  if (!templateData.name || typeof templateData.name !== 'string') {
-    return { isValid: false, error: 'Template name is required' };
-  }
-  
-  if (!templateData.category || typeof templateData.category !== 'string') {
-    return { isValid: false, error: 'Template category is required' };
-  }
-  
-  if (!templateData.tasks || !Array.isArray(templateData.tasks)) {
-    return { isValid: false, error: 'Template tasks array is required' };
-  }
-  
-  for (const task of templateData.tasks) {
-    if (!task.title || !task.date || !task.type) {
-      return { isValid: false, error: 'Each task must have title, date, and type' };
-    }
-  }
-  
-  return { isValid: true };
 }
 
 // Get template statistics

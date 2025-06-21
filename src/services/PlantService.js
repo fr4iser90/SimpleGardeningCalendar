@@ -2,6 +2,9 @@ import { openDB } from 'idb';
 import { DB_NAME, DB_VERSION } from '../core/db/connection.js';
 import { getPlantData, getPlantDataForEnvironment, validatePlantingDate } from '../core/db/plants.js';
 import { createPlantingEvents, deleteAllPlantingEvents } from './EventService.js';
+import { getPhaseEmoji, getPlantCategoryName, calculatePhaseSchedule } from '../utils/plantUtils.js';
+import { formatDate } from '../utils/dateUtils.js';
+import { validatePlantingDate as validatePlantingDateUtil } from '../utils/validators.js';
 
 /**
  * Plant Service
@@ -35,7 +38,7 @@ export async function addPlanting(plantType, startDate, location = 'Default Gard
   }
   
   // Validate planting date
-  const validationResult = validatePlantingDate(plantType, startDate);
+  const validationResult = validatePlantingDateUtil(plantType, startDate);
   if (!validationResult.isValid) {
     throw new Error(`Invalid planting date: ${validationResult.reason}`);
   }
@@ -267,7 +270,7 @@ export function getPlantDataForEnvironment(plantType, environment) {
 
 // Validate planting date for a plant type
 export function validatePlantingDate(plantType, date) {
-  return validatePlantingDate(plantType, date);
+  return validatePlantingDateUtil(plantType, date);
 }
 
 // Get plant categories

@@ -1,5 +1,8 @@
 import { t } from '../../i18n.js';
 import { googleCalendarSettings } from './GoogleCalendarSettings.js';
+import { formatDate } from '../../utils/dateUtils.js';
+import { isGardeningEvent, convertToGoogleEvent, convertFromGoogleEvent } from '../../utils/eventUtils.js';
+import { validateEventData } from '../../utils/validators.js';
 
 /**
  * Google Calendar API Calls
@@ -196,22 +199,6 @@ export async function getUserInfo() {
   }
   
   return await response.json();
-}
-
-// Helper function to convert local event to Google Calendar format
-function convertToGoogleEvent(eventData) {
-  return {
-    summary: eventData.title,
-    description: eventData.description || '',
-    start: {
-      dateTime: eventData.start,
-      timeZone: Intl.DateTimeFormat().resolvedOptions().timeZone
-    },
-    end: {
-      dateTime: eventData.end,
-      timeZone: Intl.DateTimeFormat().resolvedOptions().timeZone
-    }
-  };
 }
 
 // Export state getters

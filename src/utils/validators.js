@@ -26,3 +26,30 @@ export function validateEventData(event) {
 export function validateEmail(email) {
   return /^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(email);
 }
+
+// Validate template data
+export function validateTemplate(templateData) {
+  if (!templateData || typeof templateData !== 'object') {
+    return { isValid: false, error: 'Template data is required' };
+  }
+  
+  if (!templateData.name || typeof templateData.name !== 'string') {
+    return { isValid: false, error: 'Template name is required' };
+  }
+  
+  if (!templateData.category || typeof templateData.category !== 'string') {
+    return { isValid: false, error: 'Template category is required' };
+  }
+  
+  if (!templateData.tasks || !Array.isArray(templateData.tasks)) {
+    return { isValid: false, error: 'Template tasks array is required' };
+  }
+  
+  for (const task of templateData.tasks) {
+    if (!task.title || !task.date || !task.type) {
+      return { isValid: false, error: 'Each task must have title, date, and type' };
+    }
+  }
+  
+  return { isValid: true };
+}
