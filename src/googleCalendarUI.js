@@ -56,6 +56,7 @@ export function showGoogleCalendarSetup() {
             </label>
             <input 
               type="text" 
+              id="googleClientId"
               name="clientId" 
               value="${settings.clientId}" 
               class="w-full p-2 border rounded dark:bg-gray-700 dark:border-gray-600 dark:text-white" 
@@ -197,7 +198,7 @@ export function showGoogleCalendarSetup() {
   
   document.body.appendChild(modal);
   
-  // Initialize event listeners
+  // Initialize event listeners with FIXED pattern
   initializeGoogleCalendarEventListeners();
   
   // Update UI based on current state
@@ -207,6 +208,7 @@ export function showGoogleCalendarSetup() {
 function initializeGoogleCalendarEventListeners() {
   const form = document.getElementById('googleCalendarForm');
   const connectBtn = document.getElementById('connectBtn');
+  const clientIdInput = document.getElementById('googleClientId');
   const saveSettingsBtn = document.getElementById('saveSettingsBtn');
   const syncAllEventsBtn = document.getElementById('syncAllEventsBtn');
   const importEventsBtn = document.getElementById('importEventsBtn');
@@ -214,53 +216,70 @@ function initializeGoogleCalendarEventListeners() {
   const saveSyncSettingsBtn = document.getElementById('saveSyncSettingsBtn');
   const signOutBtn = document.getElementById('signOutBtn');
   
-  // Connect to Google Calendar
-  connectBtn?.addEventListener('click', async () => {
-    const formData = new FormData(form);
-    const clientId = formData.get('clientId');
+  // FIXED: Use EXACT shift planner connection pattern
+  console.log('🔧 Setting up Google Calendar with EXACT shift planner pattern...');
+  
+  // Initialize Google Calendar
+  googleCalendar.initialize('temp-client-id').then(() => {
+    console.log('🔧 Google Calendar initialized, setting up connection...');
     
-    if (!clientId) {
-      alert('Please enter your Google Client ID');
-      return;
-    }
-    
-    console.log('🔄 Starting Google Calendar connection...');
-    connectBtn.disabled = true;
-    connectBtn.textContent = '🔄 Connecting...';
-    
-    try {
-      console.log('🔧 Initializing Google Calendar with Client ID:', clientId);
-      await googleCalendar.initialize(clientId);
+    // Use the EXACT shift planner setupGoogleCalendarConnection function
+    googleCalendar.setupGoogleCalendarConnection(clientIdInput, connectBtn, async () => {
+      console.log('🔧 Google Calendar connection successful - updating UI with shift planner pattern...');
       
-      console.log('🔧 Requesting Google sign-in...');
-      await googleCalendar.signIn();
-      
-      console.log('🔧 Sign-in completed, checking status:', {
-        isSignedIn: googleCalendar.isSignedIn,
-        hasAccessToken: !!googleCalendar.accessToken
-      });
-      
-      // Save settings on successful connection
-      const settings = googleCalendarSettings.load();
-      settings.clientId = clientId;
-      googleCalendarSettings.save(settings);
-      
-      console.log('🔧 Updating UI after successful connection...');
-      // Update UI immediately after successful connection
-      await updateConnectionStatus();
-      await loadCalendars();
-      
-      console.log('✅ Google Calendar connection completed successfully');
-      alert('✅ Successfully connected to Google Calendar!');
-      
-    } catch (error) {
-      console.error('❌ Connection failed:', error);
-      alert(`❌ Connection failed: ${error.message}`);
-      
-      // Reset UI on failure
-      connectBtn.disabled = false;
-      connectBtn.textContent = '🔗 Connect to Google Calendar';
-    }
+      try {
+        // Save settings on successful connection
+        const settings = googleCalendarSettings.load();
+        settings.clientId = clientIdInput.value.trim();
+        googleCalendarSettings.save(settings);
+        
+        // Update UI to show connected state - EXACT shift planner pattern
+        connectBtn.textContent = 'Connected';
+        connectBtn.disabled = false;
+        connectBtn.classList.remove('bg-blue-600', 'hover:bg-blue-700');
+        connectBtn.classList.add('bg-green-600', 'hover:bg-green-700');
+        
+        // Update connection status
+        await updateConnectionStatus();
+        
+        // Load calendars - EXACT shift planner pattern
+        const calendars = await googleCalendar.fetchCalendarList();
+        const calendarSelect = document.getElementById('calendarSelect');
+        if (calendarSelect && calendars) {
+          calendarSelect.innerHTML = '';
+          calendars.forEach(cal => {
+            const opt = document.createElement('option');
+            opt.value = cal.id;
+            opt.textContent = cal.summary || cal.id;
+            calendarSelect.appendChild(opt);
+          });
+        }
+        
+        // Show sync options
+        const syncSection = document.getElementById('syncOptions');
+        const calendarSelection = document.getElementById('calendarSelection');
+        const signOutSection = document.getElementById('signOutSection');
+        
+        if (syncSection) syncSection.style.display = 'block';
+        if (calendarSelection) calendarSelection.style.display = 'block';
+        if (signOutSection) signOutSection.style.display = 'block';
+        
+        console.log('✅ Google Calendar UI updated successfully with shift planner pattern');
+        alert('✅ Successfully connected to Google Calendar!');
+        
+      } catch (error) {
+        console.error('Calendar setup error:', error);
+        alert('Error during calendar setup: ' + error.message);
+        
+        // Reset UI on error
+        connectBtn.disabled = false;
+        connectBtn.textContent = 'Connect to Google Calendar';
+        connectBtn.classList.remove('bg-green-600', 'hover:bg-green-700');
+        connectBtn.classList.add('bg-blue-600', 'hover:bg-blue-700');
+      }
+    });
+  }).catch(error => {
+    console.error('Failed to initialize Google Calendar:', error);
   });
   
   // Save settings

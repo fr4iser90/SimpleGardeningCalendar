@@ -1,53 +1,20 @@
 /**
- * Google Calendar API Integration - Using the WORKING pattern from shift planner
- * Simple, direct implementation that actually works!
+ * Google Calendar API Integration - FIXED VERSION using exact shift planner pattern
+ * Solves the "Permission already granted" callback timing issue
  */
 
 let tokenClient = null;
 let accessToken = null;
 let isSignedIn = false;
-let clientId = null;
 
 // Initialize Google Calendar integration
 export async function initialize(googleClientId) {
-  clientId = googleClientId;
-  
   // Load Google Identity Services script if not already loaded
   if (!window.google?.accounts?.oauth2) {
     await loadGoogleIdentityServices();
   }
   
-  console.log('🔧 Creating token client with working pattern...');
-  // Use the EXACT pattern from working shift planner
-  tokenClient = google.accounts.oauth2.initTokenClient({
-    client_id: clientId,
-    scope: 'https://www.googleapis.com/auth/calendar https://www.googleapis.com/auth/calendar.events',
-    callback: async (tokenResponse) => {
-      console.log('🔧 Token response received:', tokenResponse);
-      
-      if (tokenResponse && tokenResponse.access_token) {
-        accessToken = tokenResponse.access_token;
-        isSignedIn = true;
-        console.log('✅ Google Calendar authenticated successfully');
-        
-        // Resolve the promise if it exists
-        if (window.googleCalendarSignInResolve) {
-          window.googleCalendarSignInResolve();
-          window.googleCalendarSignInResolve = null;
-          window.googleCalendarSignInReject = null;
-        }
-      } else {
-        console.error('❌ No access token received:', tokenResponse);
-        if (window.googleCalendarSignInReject) {
-          window.googleCalendarSignInReject(new Error('Failed to get access token'));
-          window.googleCalendarSignInResolve = null;
-          window.googleCalendarSignInReject = null;
-        }
-      }
-    },
-  });
-  
-  console.log('✅ Google Calendar initialized with working pattern');
+  console.log('✅ Google Calendar initialized - ready for connection');
   return true;
 }
 
@@ -67,45 +34,80 @@ function loadGoogleIdentityServices() {
   });
 }
 
-// Sign in to Google Calendar
-export function signIn() {
-  if (!tokenClient) {
-    throw new Error('Google Calendar not initialized');
-  }
+// FIXED: Use EXACT shift planner connection pattern
+export function setupGoogleCalendarConnection(clientIdInput, connectBtn, onSuccessCallback) {
+  if (!connectBtn || !clientIdInput) return;
   
-  return new Promise((resolve, reject) => {
-    console.log('🔧 Setting up sign-in with working pattern...');
-    
-    // Store resolve/reject globally so callback can access them
-    window.googleCalendarSignInResolve = resolve;
-    window.googleCalendarSignInReject = reject;
-    
-    console.log('🔧 Requesting access token with working pattern...');
+  connectBtn.addEventListener('click', async () => {
+    const clientId = clientIdInput.value.trim();
+    if (!clientId) {
+      alert('Please enter your Google Client ID');
+      return;
+    }
+
+    connectBtn.disabled = true;
+    connectBtn.textContent = 'Connecting...';
+    console.log('🔧 Starting Google Calendar connection with EXACT shift planner pattern...');
+
     try {
-      tokenClient.requestAccessToken({ prompt: 'consent' });
+      // EXACT shift planner pattern - create tokenClient in click handler
+      if (!tokenClient) {
+        console.log('🔧 Creating tokenClient with EXACT shift planner pattern...');
+        tokenClient = google.accounts.oauth2.initTokenClient({
+          client_id: clientId,
+          scope: 'https://www.googleapis.com/auth/calendar https://www.googleapis.com/auth/calendar.events',
+          callback: async (tokenResponse) => {
+            console.log('🔧 Token callback triggered with response:', tokenResponse);
+            
+            if (tokenResponse && tokenResponse.access_token) {
+              accessToken = tokenResponse.access_token;
+              isSignedIn = true;
+              console.log('✅ Google Calendar authenticated successfully');
+              
+              // Call success callback exactly like shift planner
+              if (onSuccessCallback) {
+                await onSuccessCallback();
+              }
+            } else {
+              console.error('❌ No access token received:', tokenResponse);
+              alert('Failed to get access token');
+              connectBtn.disabled = false;
+              connectBtn.textContent = 'Connect to Google Calendar';
+            }
+          }
+        });
+      }
+      
+      console.log('🔧 Requesting access token with EXACT shift planner pattern...');
+      // EXACT shift planner pattern - direct requestAccessToken call
+      tokenClient.requestAccessToken();
       console.log('🔧 requestAccessToken called - waiting for callback...');
+      
     } catch (error) {
-      console.error('❌ Error requesting access token:', error);
-      window.googleCalendarSignInResolve = null;
-      window.googleCalendarSignInReject = null;
-      reject(error);
+      console.error('❌ Connection error:', error);
+      connectBtn.disabled = false;
+      connectBtn.textContent = 'Connect to Google Calendar';
+      alert('Connection failed: ' + error.message);
     }
   });
 }
 
-// Sign out
-export async function signOut() {
-  if (accessToken) {
-    google.accounts.oauth2.revoke(accessToken);
-  }
-  isSignedIn = false;
-  accessToken = null;
+// Sign in using the new pattern (wrapper for compatibility)
+export function signIn() {
+  return new Promise((resolve, reject) => {
+    // This is now handled by setupGoogleCalendarConnection
+    if (isSignedIn) {
+      resolve();
+    } else {
+      reject(new Error('Use setupGoogleCalendarConnection instead'));
+    }
+  });
 }
 
-// Get user's calendars
-export async function getCalendars() {
-  if (!isSignedIn) {
-    throw new Error('Not signed in to Google Calendar');
+// EXACT shift planner calendar list function
+export async function fetchCalendarList() {
+  if (!accessToken) {
+    throw new Error('Not authenticated');
   }
   
   const url = 'https://www.googleapis.com/calendar/v3/users/me/calendarList';
@@ -117,6 +119,21 @@ export async function getCalendars() {
   if (!resp.ok) throw new Error('Failed to fetch calendars');
   const data = await resp.json();
   return data.items || [];
+}
+
+// Sign out
+export async function signOut() {
+  if (accessToken) {
+    google.accounts.oauth2.revoke(accessToken);
+  }
+  isSignedIn = false;
+  accessToken = null;
+  tokenClient = null;
+}
+
+// Get user's calendars (compatibility wrapper)
+export async function getCalendars() {
+  return await fetchCalendarList();
 }
 
 // Create an event in Google Calendar
@@ -347,7 +364,9 @@ export const googleCalendar = {
   importEvents,
   getUserInfo,
   performBidirectionalSync,
-  setCalendar: () => {} // Stub for compatibility
+  setCalendar: () => {}, // Stub for compatibility
+  setupGoogleCalendarConnection,
+  fetchCalendarList
 };
 
 // Settings management (simplified)
