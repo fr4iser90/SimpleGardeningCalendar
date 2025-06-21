@@ -190,7 +190,7 @@ function updateGoogleCalendarStatus() {
   const statusDisplay = document.getElementById('googleCalendarStatusDisplay');
   if (!statusDisplay) return;
 
-  let settings = null;
+  let settings = {};
   try {
     const googleCalendarSettings = localStorage.getItem('googleCalendarSettings');
     if (googleCalendarSettings) {
@@ -198,28 +198,42 @@ function updateGoogleCalendarStatus() {
     }
   } catch (error) {
     console.warn('Failed to parse Google Calendar settings:', error);
-    settings = null;
   }
 
   const hasSavedCredentials = !!(settings && settings.userEmail && settings.userEmail.trim());
   const isCurrentlySignedIn = googleCalendar.isSignedIn;
+  const hasSelectedCalendar = !!settings.selectedCalendarId;
 
   if (isCurrentlySignedIn && hasSavedCredentials) {
-    // STATE: Connected and session is active
-    const selectedCalendarId = settings.selectedCalendarId || 'primary';
-    const calendarList = settings.calendarList || {};
-    let calendarName = calendarList[selectedCalendarId];
-
-    // If the ID is 'primary' or we couldn't find a name, find a sensible default.
-    if (selectedCalendarId === 'primary' && settings.userEmail) {
-      calendarName = calendarList[settings.userEmail] || 'Primary Calendar';
-    } else if (!calendarName) {
-      calendarName = selectedCalendarId; // Fallback to ID if no name is found
+    if (!hasSelectedCalendar) {
+      // STATE: Connected, but no calendar selected
+      statusDisplay.innerHTML = `
+        <span class="text-yellow-600 dark:text-yellow-400 flex items-center">
+          <i class="fas fa-exclamation-triangle mr-1"></i>${t('google.status.no_calendar_selected')}
+        </span>
+        <span class="mx-2">|</span>
+        <span class="text-sm">${t('google.error.no_calendar_selected')}</span>
+      `;
+      return;
     }
 
+    const selectedCalendarId = settings.selectedCalendarId;
+    const calendarList = settings.calendarList || {};
+    let calendarName = calendarList[selectedCalendarId] || selectedCalendarId; // Fallback to ID if name not cached
+
     const autoSync = settings.autoSync || false;
-    const syncStatus = autoSync ? t('google.sync_on') : t('google.sync_off');
-    const syncButton = autoSync ? '' : `
+
+    const syncStatusToggle = `
+      <button 
+        class="ml-1 px-2 py-1 text-xs rounded ${autoSync ? 'bg-green-600 text-white' : 'bg-gray-600 text-white'} hover:opacity-80 transition-colors"
+        onclick="toggleGoogleAutoSync()"
+        title="${t('google.toggle_autosync_title')}"
+      >
+        ${autoSync ? t('google.sync_on') : t('google.sync_off')}
+      </button>
+    `;
+
+    const manualSyncButton = autoSync ? '' : `
       <button class="ml-2 px-2 py-1 bg-blue-500 text-white text-xs rounded hover:bg-blue-600" onclick="triggerGoogleCalendarSync()">
         ${t('google.sync_now')}
       </button>
@@ -232,8 +246,9 @@ function updateGoogleCalendarStatus() {
       <span class="mx-2">|</span>
       <span>📅 ${calendarName}</span>
       <span class="mx-2">|</span>
-      <span>${t('google.sync')}: ${syncStatus}</span>
-      ${syncButton}
+      <span>${t('google.sync')}:</span>
+      ${syncStatusToggle}
+      ${manualSyncButton}
     `;
   } else if (hasSavedCredentials && !isCurrentlySignedIn) {
     // STATE: Credentials saved, but session is not active (e.g., after refresh)
@@ -255,6 +270,46 @@ function updateGoogleCalendarStatus() {
   }
 }
 
+// NEW: Function to toggle the auto-sync setting
+window.toggleGoogleAutoSync = async function() {
+  try {
+    const settingsJSON = localStorage.getItem('googleCalendarSettings');
+    let settings = settingsJSON ? JSON.parse(settingsJSON) : {};
+    
+    // SAFETY CHECK: Do not allow enabling auto-sync if no calendar is selected
+    if (!settings.autoSync && !settings.selectedCalendarId) {
+      showNotification(t('google.error.no_calendar_selected'), 'error');
+      return;
+    }
+
+    const wasAutoSyncing = settings.autoSync || false;
+    settings.autoSync = !wasAutoSyncing; // Flip the value
+    
+    localStorage.setItem('googleCalendarSettings', JSON.stringify(settings));
+    
+    const messageKey = settings.autoSync ? 'google.autosync_on_notif' : 'google.autosync_off_notif';
+    showNotification(t(messageKey), 'info');
+
+    // If auto-sync was just turned ON, ask the user if they want to do an initial full sync.
+    if (settings.autoSync && !wasAutoSyncing) {
+      // Find the calendar name for the prompt
+      const selectedCalendarId = settings.selectedCalendarId; // No fallback needed due to safety check
+      const calendarName = settings.calendarList?.[selectedCalendarId] || selectedCalendarId;
+      
+      const doInitialSync = confirm(t('google.initial_sync_prompt', { calendarName }));
+      
+      if (doInitialSync) {
+        await window.triggerGoogleCalendarSync();
+      }
+    }
+
+    updateGoogleCalendarStatus(); // Refresh the UI immediately
+  } catch (error) {
+    console.error('Failed to toggle auto-sync:', error);
+    showNotification('Error changing sync setting', 'error');
+  }
+}
+
 // Make reconnect function available globally
 window.reconnectGoogleCalendar = async function() {
   try {
@@ -272,13 +327,31 @@ window.reconnectGoogleCalendar = async function() {
 
 // Make sync function available globally
 window.triggerGoogleCalendarSync = async function() {
+  const syncBtn = document.querySelector('[onclick="triggerGoogleCalendarSync()"]');
+  if (syncBtn) {
+    syncBtn.disabled = true;
+    syncBtn.textContent = t('common.loading');
+  }
+
   try {
-    const { syncAllEvents } = await import('./googleCalendarUI.js');
-    await syncAllEvents();
-    showNotification('Google Calendar sync completed', 'success');
+    const { performBidirectionalSync } = await import('./googleCalendar.js');
+    const report = await performBidirectionalSync();
+    
+    const message = `${t('google.sync_report_title')}: ${t('google.sync_report_details', {
+      exported: report.exported || 0,
+      imported: report.imported || 0,
+      updated: report.updated || 0,
+    })}`;
+    
+    showNotification(message, 'success');
+    calendar.refetchEvents(); // Refresh calendar to show imported events
+    
   } catch (error) {
     console.error('Sync failed:', error);
-    showNotification('Google Calendar sync failed', 'error');
+    showNotification(t('error.title') + ': ' + (error.message || 'Sync failed'), 'error');
+  } finally {
+    // Restore button state
+    updateGoogleCalendarStatus();
   }
 };
 
@@ -692,16 +765,17 @@ async function showAddEventModal(date, preselectedType = null) {
         };
         
         const db = await openDB('gardening-calendar');
-        await db.add('events', eventData);
+        const eventId = await db.add('events', eventData);
+        eventData.id = eventId; // Add ID for sync
         
-        // Try to sync to Google Calendar if enabled
-        const enableGoogleCalendarSync = formData.get('enableGoogleCalendarSync') === 'on';
-        if (enableGoogleCalendarSync) {
+        // Auto-sync to Google Calendar if enabled
+        const settings = JSON.parse(localStorage.getItem('googleCalendarSettings')) || {};
+        if (settings.autoSync && googleCalendar.isSignedIn) {
           try {
-            const { autoSyncEvent } = await import('./googleCalendarUI.js');
-            await autoSyncEvent(eventData);
+            await googleCalendar.createEvent(eventData);
+            console.log('Auto-synced custom event to Google Calendar');
           } catch (error) {
-            console.warn('Google Calendar sync failed:', error);
+            console.warn('Google Calendar auto-sync for custom event failed:', error);
           }
         }
       }
@@ -1393,20 +1467,18 @@ async function addPlantingWithOptions(plantType, startDate, location, customName
   
   await tx.done;
   
-  // Sync to Google Calendar if enabled
-  if (reminderOptions.enableGoogleCalendarSync && eventsToSync.length > 0) {
+  // Auto-sync to Google Calendar if enabled
+  const settings = JSON.parse(localStorage.getItem('googleCalendarSettings')) || {};
+  if (settings.autoSync && googleCalendar.isSignedIn && eventsToSync.length > 0) {
     try {
-      const { googleCalendar } = await import('./googleCalendar.js');
-      if (googleCalendar.isSignedIn) {
-        const { results, errors } = await googleCalendar.createEvents(eventsToSync);
-        console.log(`Google Calendar sync: ${results.length} events synced, ${errors.length} failed`);
-        
-        if (errors.length > 0) {
-          console.warn('Some events failed to sync to Google Calendar:', errors);
-        }
+      const { results, errors } = await googleCalendar.createEvents(eventsToSync);
+      console.log(`Auto-sync: ${results.length} events synced, ${errors.length} failed`);
+      
+      if (errors.length > 0) {
+        console.warn('Some events failed to auto-sync to Google Calendar:', errors);
       }
     } catch (error) {
-      console.warn('Google Calendar sync failed:', error);
+      console.warn('Google Calendar auto-sync failed:', error);
     }
   }
   

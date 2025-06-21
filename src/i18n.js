@@ -234,7 +234,15 @@ export const TRANSLATIONS = {
     'google.sync_now': 'SYNCHRONISIEREN',
     'google.sync': 'Sync',
     'google.reconnect_success': 'Erfolgreich wieder verbunden!',
-    'google.reconnect_failed': 'Wiederverbindung fehlgeschlagen. Bitte versuchen Sie es erneut.'
+    'google.reconnect_failed': 'Wiederverbindung fehlgeschlagen. Bitte versuchen Sie es erneut.',
+    'google.toggle_autosync_title': 'Klicken zum Umschalten des Auto-Sync',
+    'google.autosync_on_notif': 'Auto-Sync aktiviert',
+    'google.autosync_off_notif': 'Auto-Sync deaktiviert',
+    'google.sync_report_title': 'Sync-Bericht',
+    'google.sync_report_details': '{exported} exportiert, {imported} importiert, {updated} aktualisiert.',
+    'google.initial_sync_prompt': 'Möchten Sie jetzt alle Ihre lokalen Termine mit "{calendarName}" synchronisieren?',
+    'google.error.no_calendar_selected': 'Kein Kalender ausgewählt. Bitte wählen Sie einen in den Google-Einstellungen.',
+    'google.status.no_calendar_selected': 'Kein Kalender ausgewählt'
   },
   
   en: {
@@ -459,7 +467,15 @@ export const TRANSLATIONS = {
     'google.sync_now': 'SYNC',
     'google.sync': 'Sync',
     'google.reconnect_success': 'Successfully reconnected!',
-    'google.reconnect_failed': 'Reconnect failed. Please try again.'
+    'google.reconnect_failed': 'Reconnect failed. Please try again.',
+    'google.toggle_autosync_title': 'Click to toggle auto-sync',
+    'google.autosync_on_notif': 'Auto-sync enabled',
+    'google.autosync_off_notif': 'Auto-sync disabled',
+    'google.sync_report_title': 'Sync Report',
+    'google.sync_report_details': '{exported} exported, {imported} imported, {updated} updated.',
+    'google.initial_sync_prompt': 'Do you want to sync all your local events with "{calendarName}" now?',
+    'google.error.no_calendar_selected': 'No calendar selected. Please choose one in Google Settings.',
+    'google.status.no_calendar_selected': 'No Calendar Selected'
   },
   
   fr: {
@@ -682,9 +698,17 @@ export const TRANSLATIONS = {
     'google.sync_on': 'ON',
     'google.sync_off': 'OFF',
     'google.sync_now': 'SYNCHRONISER',
-    'google.sync': 'Sync',
-    'google.reconnect_success': 'Reconnecté avec succès!',
-    'google.reconnect_failed': 'La reconnexion a échoué. Veuillez réessayer.'
+    'google.sync': 'Sincronizar',
+    'google.reconnect_success': 'Riconnesso con successo!',
+    'google.reconnect_failed': 'Riconnessione non riuscita. Per favore riprova.',
+    'google.toggle_autosync_title': 'Fare clic per attivare/disattivare la sincronizzazione automatica',
+    'google.autosync_on_notif': 'Sincronizzazione automatica attivata',
+    'google.autosync_off_notif': 'Sincronizzazione automatica disattivata',
+    'google.sync_report_title': 'Rapporto di sincronizzazione',
+    'google.sync_report_details': '{exported} exportati, {imported} importati, {updated} aggiornati.',
+    'google.initial_sync_prompt': 'Vuoi sincronizzare tutti i tuoi eventi locali con "{calendarName}" ora?',
+    'google.error.no_calendar_selected': 'Nessun calendario selezionato. Scegline uno nelle impostazioni di Google.',
+    'google.status.no_calendar_selected': 'Nessun calendario selezionato'
   },
   
   es: {
@@ -847,9 +871,9 @@ export const TRANSLATIONS = {
     // Plant Phases
     'phase.germination': 'Germinación',
     'phase.seedling': 'Plántula',
-    'phase.vegetative': 'Vegetativa',
+    'phase.vegetative': 'Végétative',
     'phase.preflower': 'Floración Previa',
-    'phase.flowering': 'Floración',
+    'phase.flowering': 'Floraison',
     'phase.harvest': 'Cosecha',
     
     // Priority Levels
@@ -864,9 +888,9 @@ export const TRANSLATIONS = {
     'month.4': 'Abril',
     'month.5': 'Mago',
     'month.6': 'Junio',
-    'month.7': 'Julio',
+    'month.7': 'Juli',
     'month.8': 'Agosto',
-    'month.9': 'Septiembre',
+    'month.9': 'Settembre',
     'month.10': 'Octubre',
     'month.11': 'Noviembre',
     'month.12': 'Diciembre',
@@ -909,7 +933,15 @@ export const TRANSLATIONS = {
     'google.sync_now': 'SINCRONIZAR',
     'google.sync': 'Sincronizar',
     'google.reconnect_success': '¡Reconectado con éxito!',
-    'google.reconnect_failed': 'La reconexión falló. Por favor, inténtelo de nuevo.'
+    'google.reconnect_failed': 'La reconexión falló. Por favor, inténtelo de nuevo.',
+    'google.toggle_autosync_title': 'Haga clic para alternar la sincronización automática',
+    'google.autosync_on_notif': 'Sincronización automática activada',
+    'google.autosync_off_notif': 'Sincronización automática desactivada',
+    'google.sync_report_title': 'Informe de sincronización',
+    'google.sync_report_details': '{exported} exportados, {imported} importados, {updated} actualizados.',
+    'google.initial_sync_prompt': '¿Desea sincronizar todos sus eventos locales con "{calendarName}" ahora?',
+    'google.error.no_calendar_selected': 'No hay un calendario seleccionado. Por favor, elija uno en la configuración de Google.',
+    'google.status.no_calendar_selected': 'No hay calendario seleccionado'
   },
   
   it: {
@@ -1072,9 +1104,9 @@ export const TRANSLATIONS = {
     // Plant Phases
     'phase.germination': 'Germinazione',
     'phase.seedling': 'Piantolina',
-    'phase.vegetative': 'Vegetativa',
+    'phase.vegetative': 'Végétative',
     'phase.preflower': 'Prima Fioritura',
-    'phase.flowering': 'Fioritura',
+    'phase.flowering': 'Floraison',
     'phase.harvest': 'Raccolta',
     
     // Priority Levels
@@ -1134,7 +1166,15 @@ export const TRANSLATIONS = {
     'google.sync_now': 'SINCRONIZZA',
     'google.sync': 'Sincronizza',
     'google.reconnect_success': 'Riconnesso con successo!',
-    'google.reconnect_failed': 'Riconnessione non riuscita. Per favore riprova.'
+    'google.reconnect_failed': 'Riconnessione non riuscita. Per favore riprova.',
+    'google.toggle_autosync_title': 'Fare clic per attivare/disattivare la sincronizzazione automatica',
+    'google.autosync_on_notif': 'Sincronizzazione automatica attivata',
+    'google.autosync_off_notif': 'Sincronizzazione automatica disattivata',
+    'google.sync_report_title': 'Rapporto di sincronizzazione',
+    'google.sync_report_details': '{exported} exportati, {imported} importati, {updated} aggiornati.',
+    'google.initial_sync_prompt': 'Vuoi sincronizzare tutti i tuoi eventi locali con "{calendarName}" ora?',
+    'google.error.no_calendar_selected': 'Nessun calendario selezionato. Scegline uno nelle impostazioni di Google.',
+    'google.status.no_calendar_selected': 'Nessun calendario selezionato'
   }
 };
 

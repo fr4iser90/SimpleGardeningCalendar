@@ -1,3 +1,7 @@
+import { t } from './i18n.js';
+import { openDB } from 'idb';
+import { DB_NAME, DB_VERSION } from './core/db/connection.js';
+
 /**
  * Google Calendar API Integration - REFACTORED for smart connection flow
  */
@@ -198,13 +202,15 @@ export async function createCalendar(calendarData) {
 
 // Create an event in Google Calendar
 export async function createEvent(eventData) {
-  if (!isSignedIn) {
-    throw new Error('Not signed in to Google Calendar');
-  }
+  if (!isSignedIn) throw new Error('Not signed in to Google Calendar');
   
   const googleEvent = convertToGoogleEvent(eventData);
+  const settings = googleCalendarSettings.load();
+  const calendarId = settings.selectedCalendarId;
+
+  if (!calendarId) throw new Error(t('google.error.no_calendar_selected'));
   
-  const response = await fetch(`https://www.googleapis.com/calendar/v3/calendars/primary/events`, {
+  const response = await fetch(`https://www.googleapis.com/calendar/v3/calendars/${calendarId}/events`, {
     method: 'POST',
     headers: {
       'Authorization': `Bearer ${accessToken}`,
@@ -239,11 +245,14 @@ export async function createEvents(eventsData) {
 
 // Import events from Google Calendar
 export async function importEvents(timeMin = null, timeMax = null) {
-  if (!isSignedIn) {
-    throw new Error('Not signed in to Google Calendar');
-  }
+  if (!isSignedIn) throw new Error('Not signed in to Google Calendar');
+
+  const settings = googleCalendarSettings.load();
+  const calendarId = settings.selectedCalendarId;
+
+  if (!calendarId) throw new Error(t('google.error.no_calendar_selected'));
   
-  let url = `https://www.googleapis.com/calendar/v3/calendars/primary/events?maxResults=2500&singleEvents=true&orderBy=startTime`;
+  let url = `https://www.googleapis.com/calendar/v3/calendars/${calendarId}/events?maxResults=2500&singleEvents=true&orderBy=startTime`;
   
   if (timeMin) {
     url += `&timeMin=${encodeURIComponent(timeMin)}`;
@@ -252,6 +261,8 @@ export async function importEvents(timeMin = null, timeMax = null) {
     url += `&timeMax=${encodeURIComponent(timeMax)}`;
   }
   
+  console.log('[DEBUG] Fetching events from Google Calendar URL:', url);
+  
   const response = await fetch(url, {
     headers: {
       'Authorization': `Bearer ${accessToken}`,
@@ -259,16 +270,24 @@ export async function importEvents(timeMin = null, timeMax = null) {
   });
   
   if (!response.ok) {
-    throw new Error('Failed to fetch events');
+    const errorText = await response.text();
+    console.error('[DEBUG] Google Calendar API error:', response.status, errorText);
+    throw new Error(`Failed to fetch events: ${response.status} ${errorText}`);
   }
   
   const data = await response.json();
+  console.log('[DEBUG] Raw Google Calendar response:', data);
   const events = data.items || [];
+  console.log('[DEBUG] Total events from Google:', events.length);
   
   // Filter for gardening events and convert to our format
-  return events
-    .filter(event => isGardeningEvent(event))
-    .map(event => convertFromGoogleEvent(event));
+  const gardeningEvents = events.filter(event => isGardeningEvent(event));
+  console.log('[DEBUG] Gardening events found:', gardeningEvents.length);
+  
+  const convertedEvents = gardeningEvents.map(event => convertFromGoogleEvent(event));
+  console.log('[DEBUG] Converted events:', convertedEvents.length);
+  
+  return convertedEvents;
 }
 
 // Check if an event is a gardening event
@@ -439,20 +458,83 @@ export async function performBidirectionalSync() {
 
 // Export local events to Google (internal implementation)
 async function exportLocalEventsToGoogle() {
-  // Import IndexedDB dynamically to avoid circular imports
-  const { openDB } = await import('idb');
+  const db = await openDB(DB_NAME, DB_VERSION);
   
-  const db = await openDB('gardening-calendar');
+  // DEBUGGING: Log the number of events found by the sync function
+  const eventCount = await db.count('events');
+  console.log(`[DEBUG] exportLocalEventsToGoogle: Found ${eventCount} events in the database.`);
+
   const events = await db.getAll('events');
   const settings = new GoogleCalendarSettings().load();
   
+  // CHECK: If no calendar is selected, search for existing gardening calendars
+  if (!settings.selectedCalendarId) {
+    console.log('[DEBUG] No calendar selected - searching for existing gardening calendars...');
+    try {
+      const calendars = await fetchCalendarList();
+      
+      // Search for gardening-related calendars by summary name
+      const gardeningKeywords = ['garden', 'gardening', 'plant', '🌱', '🌿', '🌾', '💧', '🔧'];
+      const gardeningCalendars = calendars.filter(cal => 
+        gardeningKeywords.some(keyword => 
+          cal.summary.toLowerCase().includes(keyword.toLowerCase())
+        )
+      );
+      
+      console.log('[DEBUG] Found calendars:', calendars.map(cal => `${cal.summary} (${cal.id})`));
+      console.log('[DEBUG] Gardening calendars found:', gardeningCalendars.map(cal => `${cal.summary} (${cal.id})`));
+      
+      if (gardeningCalendars.length > 0) {
+        // Auto-select the first gardening calendar found
+        const selectedCalendar = gardeningCalendars[0];
+        settings.selectedCalendarId = selectedCalendar.id;
+        settings.calendarList = calendars.reduce((acc, cal) => {
+          acc[cal.id] = cal.summary;
+          return acc;
+        }, {});
+        googleCalendarSettings.save(settings);
+        console.log(`[DEBUG] Auto-selected gardening calendar: ${selectedCalendar.summary} (${selectedCalendar.id})`);
+      } else {
+        // Show user all available calendars
+        const calendarList = calendars.map(cal => `${cal.summary} (${cal.id})`).join('\n');
+        throw new Error(`No gardening calendar found. Please select a calendar from your available calendars:\n\n${calendarList}\n\nYou can complete the Google Calendar setup wizard to choose a calendar.`);
+      }
+    } catch (error) {
+      console.error('[DEBUG] Failed to search for calendars:', error);
+      throw new Error('No calendar selected for sync. Please complete the Google Calendar setup wizard to choose a calendar.');
+    }
+  }
+  
+  // DEBUGGING: Log sync settings and event types
+  console.log('[DEBUG] Sync settings:', settings.syncTypes);
+  console.log('[DEBUG] Selected calendar ID:', settings.selectedCalendarId);
+  
+  // Count events by type for debugging
+  const eventTypeCounts = {};
+  events.forEach(event => {
+    eventTypeCounts[event.type] = (eventTypeCounts[event.type] || 0) + 1;
+  });
+  console.log('[DEBUG] Event type distribution:', eventTypeCounts);
+  
   // Filter events based on sync settings AND skip events that already have googleEventId
-  const eventsToSync = events.filter(event => 
-    settings.syncTypes[event.type] && 
-    !event.googleEventId  // CRITICAL: Skip events already synced to Google!
-  );
+  const eventsToSync = events.filter(event => {
+    const syncTypeEnabled = settings.syncTypes[event.type];
+    const notAlreadySynced = !event.googleEventId;
+    
+    if (!syncTypeEnabled) {
+      console.log(`[DEBUG] Skipping event "${event.title}" - type "${event.type}" not enabled for sync`);
+    }
+    if (!notAlreadySynced) {
+      console.log(`[DEBUG] Skipping event "${event.title}" - already synced to Google (ID: ${event.googleEventId})`);
+    }
+    
+    return syncTypeEnabled && notAlreadySynced;
+  });
+  
+  console.log(`[DEBUG] Events to sync: ${eventsToSync.length} out of ${events.length} total events`);
   
   if (eventsToSync.length === 0) {
+    console.log('[DEBUG] No events to sync - all events either disabled for sync or already synced');
     return { synced: 0, failed: 0 };
   }
   
@@ -482,6 +564,10 @@ async function importGoogleEvents() {
   const settings = new GoogleCalendarSettings().load();
   const importSettings = settings.importSettings || {};
   
+  console.log('[DEBUG] Starting import from Google Calendar...');
+  console.log('[DEBUG] Import settings:', importSettings);
+  console.log('[DEBUG] Selected calendar ID:', settings.selectedCalendarId);
+  
   // Calculate time range
   let timeMin = null;
   let timeMax = null;
@@ -507,11 +593,19 @@ async function importGoogleEvents() {
     timeMax = timeMax.toISOString();
   }
   
-  const googleEvents = await importEvents(timeMin, timeMax);
+  console.log('[DEBUG] Time range for import:', { timeMin, timeMax });
   
-  // Import IndexedDB dynamically
-  const { openDB } = await import('idb');
-  const db = await openDB('gardening-calendar');
+  let googleEvents = [];
+  try {
+    googleEvents = await importEvents(timeMin, timeMax);
+    console.log('[DEBUG] Raw Google events fetched:', googleEvents.length);
+    console.log('[DEBUG] First few Google events:', googleEvents.slice(0, 3));
+  } catch (error) {
+    console.error('[DEBUG] Failed to import events from Google:', error);
+    throw error;
+  }
+  
+  const db = await openDB(DB_NAME, DB_VERSION);
   const localEvents = await db.getAll('events');
   
   let imported = 0;
@@ -560,6 +654,8 @@ async function importGoogleEvents() {
     }
   }
   
+  console.log('[DEBUG] Import results:', { imported, updated, skipped });
+  
   return { imported, updated, skipped };
 }
 
@@ -596,22 +692,15 @@ export class GoogleCalendarSettings {
   }
   
   load() {
-    const stored = localStorage.getItem(this.storageKey);
-    if (stored) {
-      try {
-        return JSON.parse(stored);
-      } catch (error) {
-        console.error('Failed to parse stored settings:', error);
-      }
-    }
-    return {
+    const defaults = {
       clientId: '',
       userEmail: '',
-      selectedCalendarId: 'primary',
+      selectedCalendarId: null, // IMPORTANT: No 'primary' fallback
       autoSync: false,
       bidirectionalSync: false,
       syncInterval: 'manual',
       lastSyncTime: null,
+      calendarList: {},
       syncTypes: {
         planting: true,
         watering: true,
@@ -625,6 +714,19 @@ export class GoogleCalendarSettings {
         conflictResolution: 'newer'
       }
     };
+
+    const stored = localStorage.getItem(this.storageKey);
+    if (stored) {
+      try {
+        const storedSettings = JSON.parse(stored);
+        // Merge defaults with stored settings. Stored settings take precedence.
+        return { ...defaults, ...storedSettings };
+      } catch (error) {
+        console.error('Failed to parse stored settings, returning defaults:', error);
+        return defaults;
+      }
+    }
+    return defaults;
   }
   
   clear() {
