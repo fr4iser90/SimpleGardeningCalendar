@@ -224,27 +224,40 @@ function initializeGoogleCalendarEventListeners() {
       return;
     }
     
+    console.log('🔄 Starting Google Calendar connection...');
     connectBtn.disabled = true;
     connectBtn.textContent = '🔄 Connecting...';
     
     try {
+      console.log('🔧 Initializing Google Calendar with Client ID:', clientId);
       await googleCalendar.initialize(clientId);
+      
+      console.log('🔧 Requesting Google sign-in...');
       await googleCalendar.signIn();
+      
+      console.log('🔧 Sign-in completed, checking status:', {
+        isSignedIn: googleCalendar.isSignedIn,
+        hasAccessToken: !!googleCalendar.accessToken
+      });
       
       // Save settings on successful connection
       const settings = googleCalendarSettings.load();
       settings.clientId = clientId;
       googleCalendarSettings.save(settings);
       
+      console.log('🔧 Updating UI after successful connection...');
+      // Update UI immediately after successful connection
       await updateConnectionStatus();
       await loadCalendars();
       
+      console.log('✅ Google Calendar connection completed successfully');
       alert('✅ Successfully connected to Google Calendar!');
       
     } catch (error) {
-      console.error('Connection failed:', error);
+      console.error('❌ Connection failed:', error);
       alert(`❌ Connection failed: ${error.message}`);
-    } finally {
+      
+      // Reset UI on failure
       connectBtn.disabled = false;
       connectBtn.textContent = '🔗 Connect to Google Calendar';
     }
@@ -409,7 +422,10 @@ async function updateConnectionStatus() {
   const syncOptions = document.getElementById('syncOptions');
   const signOutSection = document.getElementById('signOutSection');
   
-  if (googleCalendar.isSignedIn) {
+  // Check if we're actually signed in
+  const isConnected = googleCalendar.isSignedIn && googleCalendar.accessToken;
+  
+  if (isConnected) {
     statusDiv.className = 'p-3 rounded-lg bg-green-50 dark:bg-green-900/20 border border-green-200 dark:border-green-800';
     statusDiv.querySelector('span:first-child').textContent = '✅';
     statusDiv.querySelector('span:last-child').textContent = 'Connected to Google Calendar';
@@ -420,18 +436,30 @@ async function updateConnectionStatus() {
       if (userInfo) {
         userInfoDiv.innerHTML = `
           <div class="flex items-center space-x-2">
-            <img src="${userInfo.imageUrl}" alt="Profile" class="w-6 h-6 rounded-full">
-            <span>${userInfo.name} (${userInfo.email})</span>
+            ${userInfo.picture ? `<img src="${userInfo.picture}" alt="Profile" class="w-6 h-6 rounded-full">` : ''}
+            <span>${userInfo.name || userInfo.email || 'Connected User'}</span>
           </div>
         `;
+      } else {
+        userInfoDiv.textContent = 'Connected successfully';
       }
     } catch (error) {
+      console.warn('Failed to get user info:', error);
       userInfoDiv.textContent = 'Connected (unable to load user info)';
     }
     
     calendarSelection.style.display = 'block';
     syncOptions.style.display = 'block';
     signOutSection.style.display = 'block';
+    
+    // Hide connect button, show connected state
+    const connectBtn = document.getElementById('connectBtn');
+    if (connectBtn) {
+      connectBtn.textContent = '✅ Connected';
+      connectBtn.disabled = true;
+      connectBtn.classList.remove('bg-blue-600', 'hover:bg-blue-700');
+      connectBtn.classList.add('bg-green-600');
+    }
     
   } else {
     statusDiv.className = 'p-3 rounded-lg bg-gray-50 dark:bg-gray-700 border border-gray-200 dark:border-gray-600';
@@ -442,6 +470,15 @@ async function updateConnectionStatus() {
     calendarSelection.style.display = 'none';
     syncOptions.style.display = 'none';
     signOutSection.style.display = 'none';
+    
+    // Reset connect button
+    const connectBtn = document.getElementById('connectBtn');
+    if (connectBtn) {
+      connectBtn.textContent = '🔗 Connect to Google Calendar';
+      connectBtn.disabled = false;
+      connectBtn.classList.remove('bg-green-600');
+      connectBtn.classList.add('bg-blue-600', 'hover:bg-blue-700');
+    }
   }
 }
 
@@ -471,7 +508,7 @@ async function loadCalendars() {
 }
 
 // Export all existing events to Google Calendar
-async function syncAllEventsToGoogle() {
+export async function syncAllEventsToGoogle() {
   const db = await openDB('gardening-calendar');
   const events = await db.getAll('events');
   const settings = googleCalendarSettings.load();
@@ -507,7 +544,7 @@ async function syncAllEventsToGoogle() {
 }
 
 // Import events from Google Calendar
-async function importEventsFromGoogle() {
+export async function importEventsFromGoogle() {
   const settings = googleCalendarSettings.load();
   const importSettings = settings.importSettings || {};
   
@@ -742,4 +779,88 @@ function getTypeEmoji(type) {
     maintenance: '🔧'
   };
   return emojis[type] || '📅';
+}
+
+// Google Calendar Integration
+export function initGoogleCalendarModal() {
+    const modal = document.getElementById('googleCalendarModal');
+    const openBtn = document.getElementById('googleCalendarBtn');
+    const closeBtn = modal?.querySelector('.close-modal');
+    const connectBtn = document.getElementById('connectGoogleBtn');
+    const clientIdInput = document.getElementById('googleClientId');
+
+    if (!modal || !openBtn) return;
+
+    openBtn.addEventListener('click', () => {
+        modal.style.display = 'block';
+        updateConnectionStatus();
+    });
+
+    if (closeBtn) {
+        closeBtn.addEventListener('click', () => {
+            modal.style.display = 'none';
+        });
+    }
+
+    modal.addEventListener('click', (e) => {
+        if (e.target === modal) {
+            modal.style.display = 'none';
+        }
+    });
+
+    // Use the EXACT shift planner pattern - import the module first
+    console.log('🔄 Starting Google Calendar connection...');
+    
+    // Import the working function from shift planner pattern
+    import('./googleCalendar.js').then(module => {
+        console.log('🔧 Setting up Google Calendar with EXACT shift planner pattern...');
+        
+        // Use the EXACT shift planner setupGoogleCalendarConnection function
+        if (connectBtn && clientIdInput) {
+            module.setupGoogleCalendarConnection(clientIdInput, connectBtn, async () => {
+                console.log('🔧 Google Calendar connection successful - updating UI with shift planner pattern...');
+                
+                try {
+                    // Update UI to show connected state - EXACT shift planner pattern
+                    connectBtn.textContent = 'Verbunden';
+                    connectBtn.disabled = false;
+                    connectBtn.classList.remove('bg-blue-500', 'hover:bg-blue-600');
+                    connectBtn.classList.add('bg-green-500', 'hover:bg-green-600');
+                    
+                    // Show sync options
+                    const syncSection = document.getElementById('syncOptionsSection');
+                    if (syncSection) {
+                        syncSection.style.display = 'block';
+                    }
+                    
+                    // Load calendars - EXACT shift planner pattern
+                    const calendars = await module.fetchCalendarList();
+                    const calendarSelect = document.getElementById('calendarSelect');
+                    if (calendarSelect && calendars) {
+                        calendarSelect.innerHTML = '';
+                        calendars.forEach(cal => {
+                            const opt = document.createElement('option');
+                            opt.value = cal.id;
+                            opt.textContent = cal.summary || cal.id;
+                            calendarSelect.appendChild(opt);
+                        });
+                        calendarSelect.style.display = 'block';
+                        calendarSelect.disabled = false;
+                    }
+                    
+                    console.log('✅ Google Calendar UI updated successfully with shift planner pattern');
+                    
+                } catch (error) {
+                    console.error('Calendar list error:', error);
+                    alert('Fehler beim Abrufen der Kalenderliste.');
+                    connectBtn.disabled = false;
+                    connectBtn.textContent = 'Mit Google verbinden';
+                    connectBtn.classList.remove('bg-green-500', 'hover:bg-green-600');
+                    connectBtn.classList.add('bg-blue-500', 'hover:bg-blue-600');
+                }
+            });
+        }
+    }).catch(error => {
+        console.error('Failed to load Google Calendar module:', error);
+    });
 }

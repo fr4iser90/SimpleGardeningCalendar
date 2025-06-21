@@ -51,7 +51,7 @@ The entire application runs in the browser with zero server dependencies, ensuri
 - Developed an extensible architecture that supports community contributions and custom templates
 
 ## What I learned
-
+i18n multiple language support 
 - **Privacy-First Development**: How to build sophisticated web applications that respect user privacy by processing all data locally
 - **Browser Storage Technologies**: Deep understanding of localStorage and IndexedDB for complex data relationships and efficient querying
 - **Client-Side AI Integration**: Implementing AI features while maintaining privacy through user-controlled API interactions
