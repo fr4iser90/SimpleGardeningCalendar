@@ -1,7 +1,7 @@
 import './style.css';
 import { initializeApp } from './app.js';
-import { initializeCalendar } from './calendar.js';
 import { initializeDB } from './core/db/index.js';
+import { initializeCalendarApp } from './calendar.js';
 
 // Initialize the application
 async function init() {
@@ -9,11 +9,11 @@ async function init() {
     // Initialize database first
     await initializeDB();
     
-    // Initialize the app
+    // Initialize the app shell (layout, theme, sidebar structure, etc.)
     initializeApp();
     
-    // Initialize calendar
-    await initializeCalendar();
+    // Initialize the calendar with its components
+    await initializeCalendarApp();
     
   } catch (error) {
     console.error('Failed to initialize app:', error);
