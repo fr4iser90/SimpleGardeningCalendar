@@ -1000,6 +1000,9 @@ function getPhaseHelpText(phaseName, category, environment) {
 async function addPlantingWithOptions(plantType, startDate, location, customName, reminderOptions, customPhaseDurations = {}) {
   const plantRegistry = getPlantRegistry();
   
+  // Get database connection
+  const db = await openDB('gardening-calendar', 5);
+  
   // Get environment and region from the form
   const environment = document.querySelector('select[name="environment"]')?.value || 'indoor';
   const region = document.querySelector('select[name="region"]')?.value || 'temperate_north';
