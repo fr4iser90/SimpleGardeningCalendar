@@ -59,6 +59,30 @@ async function tokenCallback(tokenResponse) {
       }
       googleCalendarSettings.save(settings);
 
+      // AUTO-INITIAL-SYNC: If user has a calendar selected and auto-sync is enabled, do initial sync
+      if (settings.selectedCalendarId && settings.autoSync) {
+        console.log('🔄 Auto-sync enabled - performing initial sync after reconnection...');
+        try {
+          const report = await performBidirectionalSync();
+          console.log('✅ Initial sync completed:', report);
+          
+          // Show success notification
+          if (typeof showNotification === 'function') {
+            const message = `${t('google.sync_report_title')}: ${t('google.sync_report_details', {
+              exported: report.exported || 0,
+              imported: report.imported || 0,
+              updated: report.updated || 0,
+            })}`;
+            showNotification(message, 'success');
+          }
+        } catch (error) {
+          console.warn('Initial sync failed after reconnection:', error);
+          if (typeof showNotification === 'function') {
+            showNotification(t('google.initial_sync_failed'), 'error');
+          }
+        }
+      }
+
     } catch (error) {
       console.warn('Could not save user email or calendar list:', error);
     }
@@ -613,11 +637,29 @@ async function importGoogleEvents() {
   let skipped = 0;
   
   for (const googleEvent of googleEvents) {
-    // Check if event already exists locally
-    const existingEvent = localEvents.find(e => 
-      e.googleEventId === googleEvent.googleEventId ||
-      (e.title === googleEvent.title && e.date === googleEvent.date)
-    );
+    // Check if event already exists locally - improved detection
+    const existingEvent = localEvents.find(e => {
+      // First check: exact googleEventId match
+      if (e.googleEventId === googleEvent.googleEventId) {
+        return true;
+      }
+      
+      // Second check: same title, date, and type (more reliable for duplicates)
+      if (e.title === googleEvent.title && 
+          e.date === googleEvent.date && 
+          e.type === googleEvent.type) {
+        return true;
+      }
+      
+      // Third check: same plantingId and similar title (for planting-related events)
+      if (e.plantingId && 
+          e.plantingId === googleEvent.plantingId && 
+          e.title.includes(googleEvent.title.split(' ')[0])) {
+        return true;
+      }
+      
+      return false;
+    });
     
     if (existingEvent) {
       // Handle conflict resolution
@@ -635,8 +677,10 @@ async function importGoogleEvents() {
           lastModified: googleEvent.lastModified
         });
         updated++;
+        console.log(`[DEBUG] Updated existing event: ${googleEvent.title}`);
       } else {
         skipped++;
+        console.log(`[DEBUG] Skipped existing event (no update needed): ${googleEvent.title}`);
       }
     } else {
       // Import new event
@@ -651,6 +695,7 @@ async function importGoogleEvents() {
       };
       await db.add('events', newEvent);
       imported++;
+      console.log(`[DEBUG] Imported new event: ${googleEvent.title}`);
     }
   }
   

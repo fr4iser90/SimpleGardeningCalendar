@@ -949,7 +949,7 @@ async function showAddEventModal(date, preselectedType = null) {
         Object.entries(plantData.phases).forEach(([phase, phaseData]) => {
           const phaseKey = phase.toLowerCase();
           const phaseName = t(`phase.${phaseKey}`) || phase;
-          const phaseIcon = getPhaseIcon(phase);
+          const phaseIcon = getPhaseEmoji(phase);
           
           const phaseDiv = document.createElement('div');
           phaseDiv.className = 'flex items-center space-x-2';
