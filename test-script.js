@@ -387,8 +387,8 @@ class GardeningCalendarTester {
     
     try {
       // Test ob Google Calendar Module geladen werden können
-      const gcModule = await import('./src/googleCalendar.js');
-      const gcUIModule = await import('./src/googleCalendarUI.js');
+      const gcModule = await import('./src/services/GoogleCalendar/GoogleCalendarApi.js');
+      const gcUIModule = await import('./src/services/GoogleCalendar/GoogleCalendarUI.js');
       
       this.logSuccess('Google Calendar modules loaded successfully');
       

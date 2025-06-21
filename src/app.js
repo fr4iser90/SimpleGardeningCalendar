@@ -114,7 +114,7 @@ function initializeQuickActions() {
   });
 
   googleCalendarBtn.addEventListener('click', async () => {
-    const { showGoogleCalendarSetup } = await import('./googleCalendarUI.js');
+    const { showGoogleCalendarSetup } = await import('./services/GoogleCalendar/GoogleCalendarUI.js');
     showGoogleCalendarSetup();
   });
 }

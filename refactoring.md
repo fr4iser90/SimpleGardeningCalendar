@@ -122,11 +122,10 @@ src/
 │       └── LoadingSpinner.js    # Loading States (50-100 Zeilen) ❌
 
 ├── services/               # Business Logic Services ❌
-│   ├── GoogleCalendarService.js # Google API (aus googleCalendar.js + googleCalendarUI.js)
-│   │                           # 625 + 1065 = 1690 Zeilen → aufgeteilt:
-│   │                           # - API Calls (400-500 Zeilen) ❌
-│   │                           # - Sync Logic (300-400 Zeilen) ❌
-│   │                           # - UI Integration (300-400 Zeilen) ❌
+│   ├── GoogleCalendar/     # Google Calendar Services (aus googleCalendar.js + googleCalendarUI.js)
+│   │   ├── GoogleCalendarApi.js    # API Calls (400-500 Zeilen) ❌
+│   │   ├── GoogleCalendarSync.js   # Sync Logic (300-400 Zeilen) ❌
+│   │   └── GoogleCalendarUI.js     # UI Integration (300-400 Zeilen) ❌
 │   ├── EventService.js         # Event Business Logic (300-400 Zeilen) ❌
 │   ├── PlantService.js         # Plant Business Logic (300-400 Zeilen) ❌
 │   └── TemplateService.js      # Template Import Logic (200-300 Zeilen) ❌
@@ -270,9 +269,9 @@ export async function getPlantData(plantKey) {
 - [x] **Helper Functions** → utils.js
 
 ### **PHASE 3: SERVICES ERSTELLEN**  
-- [ ] **Google Calendar Logic** → services/
-- [ ] **Business Logic** aus calendar.js → services/
-- [ ] **Template Logic** → services/
+- [x] **Google Calendar Logic** → services/
+- [x] **Business Logic** aus calendar.js → services/
+- [x] **Template Logic** → services/
 
 ### **PHASE 4: UI KOMPONENTEN**
 - [ ] **Modal Dialogs** extrahieren
@@ -305,13 +304,13 @@ export async function getPlantData(plantKey) {
 ### **✅ ABGESCHLOSSEN:**
 - **Phase 1:** Plants Database Aufteilung (100%)
 - **Phase 2:** DB Operations Trennung (100%)
+- **Phase 3:** Services erstellen (100%)
 
 ### **🔄 IN ARBEIT:**
-- **Phase 3:** Services erstellen (0%)
 - **Phase 4:** UI Komponenten (0%)
 - **Phase 5:** Utilities & Styles (0%)
 
 ### **📊 GESAMTFORTSCHRITT:**
-- **Phasen abgeschlossen:** 2/5 (40%)
+- **Phasen abgeschlossen:** 3/5 (60%)
 - **Dateien refactored:** ~25/50 (50%)
 - **Monster-Dateien eliminiert:** 1/8 (12.5%)

@@ -21,7 +21,7 @@ import {
 import { getAvailableTemplates, importGardenTemplate, GARDEN_TEMPLATE_CATEGORIES } from './gardenTemplates.js';
 import { t, getCurrentLanguage, createLanguageSwitcher, updateUITranslations } from './i18n.js';
 import { getPhaseEmoji, getPhaseCheckpoints } from './core/db/utils.js';
-import { googleCalendar } from './googleCalendar.js';
+import * as googleCalendar from './services/GoogleCalendar/GoogleCalendarApi.js';
 
 let calendar;
 
@@ -201,7 +201,7 @@ function updateGoogleCalendarStatus() {
   }
 
   const hasSavedCredentials = !!(settings && settings.userEmail && settings.userEmail.trim());
-  const isCurrentlySignedIn = googleCalendar.isSignedIn;
+  const isCurrentlySignedIn = googleCalendar.getAuthState().isSignedIn;
   const hasSelectedCalendar = !!settings.selectedCalendarId;
 
   if (isCurrentlySignedIn && hasSavedCredentials) {
@@ -313,7 +313,7 @@ window.toggleGoogleAutoSync = async function() {
 // Make reconnect function available globally
 window.reconnectGoogleCalendar = async function() {
   try {
-    const { attemptSignIn } = await import('./googleCalendar.js');
+    const { attemptSignIn } = await import('./services/GoogleCalendar/GoogleCalendarApi.js');
     // Call the new smart sign-in function. 
     // Pass 'true' to allow it to show a popup if interaction is required.
     await attemptSignIn(true);
@@ -334,7 +334,7 @@ window.triggerGoogleCalendarSync = async function() {
   }
 
   try {
-    const { performBidirectionalSync } = await import('./googleCalendar.js');
+    const { performBidirectionalSync } = await import('./services/GoogleCalendar/GoogleCalendarSync.js');
     const report = await performBidirectionalSync();
     
     const message = `${t('google.sync_report_title')}: ${t('google.sync_report_details', {
@@ -770,7 +770,7 @@ async function showAddEventModal(date, preselectedType = null) {
         
         // Auto-sync to Google Calendar if enabled
         const settings = JSON.parse(localStorage.getItem('googleCalendarSettings')) || {};
-        if (settings.autoSync && googleCalendar.isSignedIn) {
+        if (settings.autoSync && googleCalendar.getAuthState().isSignedIn) {
           try {
             await googleCalendar.createEvent(eventData);
             console.log('Auto-synced custom event to Google Calendar');
@@ -1469,7 +1469,7 @@ async function addPlantingWithOptions(plantType, startDate, location, customName
   
   // Auto-sync to Google Calendar if enabled
   const settings = JSON.parse(localStorage.getItem('googleCalendarSettings')) || {};
-  if (settings.autoSync && googleCalendar.isSignedIn && eventsToSync.length > 0) {
+  if (settings.autoSync && googleCalendar.getAuthState().isSignedIn && eventsToSync.length > 0) {
     try {
       const { results, errors } = await googleCalendar.createEvents(eventsToSync);
       console.log(`Auto-sync: ${results.length} events synced, ${errors.length} failed`);
