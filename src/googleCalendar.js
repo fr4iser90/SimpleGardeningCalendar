@@ -158,6 +158,35 @@ export async function getCalendars() {
   return await fetchCalendarList();
 }
 
+// Create a new calendar in Google Calendar
+export async function createCalendar(calendarData) {
+  if (!isSignedIn) {
+    throw new Error('Not signed in to Google Calendar');
+  }
+  
+  const calendarPayload = {
+    summary: calendarData.name,
+    description: calendarData.description || '',
+    timeZone: Intl.DateTimeFormat().resolvedOptions().timeZone
+  };
+  
+  const response = await fetch('https://www.googleapis.com/calendar/v3/calendars', {
+    method: 'POST',
+    headers: {
+      'Authorization': `Bearer ${accessToken}`,
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify(calendarPayload)
+  });
+  
+  if (!response.ok) {
+    const error = await response.text();
+    throw new Error(`Failed to create calendar: ${error}`);
+  }
+  
+  return await response.json();
+}
+
 // Create an event in Google Calendar
 export async function createEvent(eventData) {
   if (!isSignedIn) {
@@ -363,14 +392,166 @@ export async function performBidirectionalSync() {
     throw new Error('Not signed in to Google Calendar');
   }
   
-  // Simple implementation - just return mock results for now
+  let imported = 0, updated = 0, exported = 0;
+  const errors = [];
+  
+  try {
+    // Step 1: Export local events to Google
+    console.log('🔄 Exporting local events to Google...');
+    const exportResult = await exportLocalEventsToGoogle();
+    exported = exportResult.synced;
+    if (exportResult.failed > 0) {
+      errors.push(`${exportResult.failed} events failed to export`);
+    }
+  } catch (error) {
+    console.error('Export failed:', error);
+    errors.push(`Export failed: ${error.message}`);
+  }
+  
+  try {
+    // Step 2: Import events from Google
+    console.log('🔄 Importing events from Google...');
+    const importResult = await importGoogleEvents();
+    imported = importResult.imported;
+    updated = importResult.updated;
+  } catch (error) {
+    console.error('Import failed:', error);
+    errors.push(`Import failed: ${error.message}`);
+  }
+  
   return {
-    imported: 0,
-    updated: 0,
-    exported: 0,
+    imported,
+    updated,
+    exported,
     conflicts: [],
-    errors: []
+    errors
   };
+}
+
+// Export local events to Google (internal implementation)
+async function exportLocalEventsToGoogle() {
+  // Import IndexedDB dynamically to avoid circular imports
+  const { openDB } = await import('idb');
+  
+  const db = await openDB('gardening-calendar');
+  const events = await db.getAll('events');
+  const settings = new GoogleCalendarSettings().load();
+  
+  // Filter events based on sync settings AND skip events that already have googleEventId
+  const eventsToSync = events.filter(event => 
+    settings.syncTypes[event.type] && 
+    !event.googleEventId  // CRITICAL: Skip events already synced to Google!
+  );
+  
+  if (eventsToSync.length === 0) {
+    return { synced: 0, failed: 0 };
+  }
+  
+  console.log(`🔄 Exporting ${eventsToSync.length} NEW events to Google (skipping ${events.length - eventsToSync.length} already synced)`);
+  
+  const { results, errors } = await createEvents(eventsToSync);
+  
+  // Update local events with Google event IDs
+  for (let i = 0; i < results.length; i++) {
+    const localEvent = eventsToSync[i];
+    const googleEvent = results[i];
+    
+    if (googleEvent && googleEvent.id) {
+      await db.put('events', {
+        ...localEvent,
+        googleEventId: googleEvent.id,
+        lastModified: new Date().toISOString()
+      });
+    }
+  }
+  
+  return { synced: results.length, failed: errors.length };
+}
+
+// Import Google events (internal implementation)
+async function importGoogleEvents() {
+  const settings = new GoogleCalendarSettings().load();
+  const importSettings = settings.importSettings || {};
+  
+  // Calculate time range
+  let timeMin = null;
+  let timeMax = null;
+  
+  if (importSettings.importTimeRange !== 'all') {
+    timeMin = new Date();
+    switch (importSettings.importTimeRange) {
+      case '6months':
+        timeMin.setMonth(timeMin.getMonth() - 6);
+        break;
+      case '1year':
+        timeMin.setFullYear(timeMin.getFullYear() - 1);
+        break;
+      case '2years':
+        timeMin.setFullYear(timeMin.getFullYear() - 2);
+        break;
+    }
+    timeMin = timeMin.toISOString();
+    
+    // Set max time to 2 years in future
+    timeMax = new Date();
+    timeMax.setFullYear(timeMax.getFullYear() + 2);
+    timeMax = timeMax.toISOString();
+  }
+  
+  const googleEvents = await importEvents(timeMin, timeMax);
+  
+  // Import IndexedDB dynamically
+  const { openDB } = await import('idb');
+  const db = await openDB('gardening-calendar');
+  const localEvents = await db.getAll('events');
+  
+  let imported = 0;
+  let updated = 0;
+  let skipped = 0;
+  
+  for (const googleEvent of googleEvents) {
+    // Check if event already exists locally
+    const existingEvent = localEvents.find(e => 
+      e.googleEventId === googleEvent.googleEventId ||
+      (e.title === googleEvent.title && e.date === googleEvent.date)
+    );
+    
+    if (existingEvent) {
+      // Handle conflict resolution
+      if (importSettings.conflictResolution === 'google' || 
+          (importSettings.conflictResolution === 'newer' && 
+           new Date(googleEvent.lastModified) > new Date(existingEvent.lastModified || 0))) {
+        
+        await db.put('events', {
+          ...existingEvent,
+          title: googleEvent.title,
+          description: googleEvent.description,
+          type: googleEvent.type,
+          plantingId: googleEvent.plantingId,
+          googleEventId: googleEvent.googleEventId,
+          lastModified: googleEvent.lastModified
+        });
+        updated++;
+      } else {
+        skipped++;
+      }
+    } else {
+      // Import new event
+      const newEvent = {
+        title: googleEvent.title,
+        date: googleEvent.date,
+        type: googleEvent.type,
+        description: googleEvent.description,
+        plantingId: googleEvent.plantingId,
+        googleEventId: googleEvent.googleEventId,
+        lastModified: googleEvent.lastModified
+      };
+      await db.add('events', newEvent);
+      imported++;
+    }
+  }
+  
+  return { imported, updated, skipped };
 }
 
 // Export object with the same interface as the class
@@ -381,6 +562,7 @@ export const googleCalendar = {
   signIn,
   signOut,
   getCalendars,
+  createCalendar,
   createEvent,
   createEvents,
   importEvents,
@@ -390,6 +572,9 @@ export const googleCalendar = {
   setupGoogleCalendarConnection,
   fetchCalendarList
 };
+
+// Export internal sync functions for use by UI
+export { exportLocalEventsToGoogle, importGoogleEvents };
 
 // Settings management (simplified)
 export class GoogleCalendarSettings {
