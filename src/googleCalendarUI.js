@@ -257,6 +257,9 @@ export function showGoogleCalendarSetup() {
   // Initialize event listeners with FIXED pattern
   initializeGoogleCalendarEventListeners();
   
+  // Auto-load saved Client ID and try to reconnect
+  autoLoadAndReconnect();
+  
   // Update UI based on current state
   updateConnectionStatus();
 }
@@ -1073,4 +1076,39 @@ export function initGoogleCalendarModal() {
     }).catch(error => {
         console.error('Failed to load Google Calendar module:', error);
     });
+}
+
+// Auto-load saved Client ID and try to reconnect
+async function autoLoadAndReconnect() {
+  const settings = googleCalendarSettings.load();
+  const clientIdInput = document.getElementById('googleClientId');
+  
+  // The Client ID is already loaded in the HTML template, but let's ensure it's there
+  if (settings.clientId && clientIdInput && !clientIdInput.value) {
+    clientIdInput.value = settings.clientId;
+    console.log('🔄 Loaded saved Client ID into input field');
+  }
+  
+  // If we have a saved Client ID, show a helpful message
+  if (settings.clientId) {
+    console.log('💡 Found saved Client ID - you can click "Connect" to reconnect');
+    
+    // Always update the user info to show we have a saved ID (regardless of connection status)
+    const userInfoDiv = document.getElementById('userInfo');
+    
+    if (userInfoDiv) {
+      // Wait a bit to ensure the connection status is properly determined
+      setTimeout(() => {
+        if (!googleCalendar.isSignedIn) {
+          userInfoDiv.innerHTML = `
+            <div class="text-blue-600 dark:text-blue-400 font-medium">
+              ✨ Saved Client ID found! Click "🔗 Connect to Google Calendar" to reconnect.
+            </div>
+          `;
+        }
+      }, 100);
+    }
+  } else {
+    console.log('💡 No saved Client ID found - user needs to enter one');
+  }
 }
