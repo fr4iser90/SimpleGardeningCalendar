@@ -44,7 +44,7 @@ class GardeningCalendarTester {
     console.log('🔍 Testing Database Connection...');
     
     try {
-      const { openDB } = await import('./src/db.js');
+      const { openDB } = await import('idb');
       const db = await openDB('gardening-calendar', 5);
       
       // Test alle Stores
@@ -68,11 +68,12 @@ class GardeningCalendarTester {
     console.log('🌱 Testing Plant Data...');
     
     try {
-      const { PLANTS_DATA, PLANT_CATEGORIES } = await import('./src/db.js');
+      const { getPlantRegistry, PLANT_CATEGORIES } = await import('./src/core/db/index.js');
+      const plantRegistry = getPlantRegistry();
       
       // Test Pflanzen-Struktur
       let plantCount = 0;
-      for (const [key, plant] of Object.entries(PLANTS_DATA)) {
+      for (const [key, plant] of plantRegistry.entries()) {
         plantCount++;
         const testResult = {
           hasName: !!plant.name,
@@ -115,7 +116,7 @@ class GardeningCalendarTester {
       this.logSuccess(`Found ${plantCount} plants in ${categoryCount} categories`);
       
       // Prüfe ob alle Pflanzen gültige Kategorien haben
-      const invalidCategories = Object.values(PLANTS_DATA)
+      const invalidCategories = Array.from(plantRegistry.values())
         .filter(plant => !PLANT_CATEGORIES.includes(plant.category))
         .map(plant => plant.name);
       
@@ -133,7 +134,7 @@ class GardeningCalendarTester {
     console.log('🌍 Testing Growing Environments...');
     
     try {
-      const { GROWING_ENVIRONMENTS, SEASONAL_REGIONS, getPlantDataForEnvironment } = await import('./src/db.js');
+      const { GROWING_ENVIRONMENTS, SEASONAL_REGIONS, getPlantDataForEnvironment, getPlantRegistry } = await import('./src/core/db/index.js');
       
       const environments = Object.values(GROWING_ENVIRONMENTS);
       const regions = Object.values(SEASONAL_REGIONS);
@@ -142,10 +143,10 @@ class GardeningCalendarTester {
       this.logSuccess(`Found ${regions.length} regions: ${regions.join(', ')}`);
       
       // Test Umgebungs-spezifische Daten
-      const { PLANTS_DATA } = await import('./src/db.js');
+      const plantRegistry = getPlantRegistry();
       let envTestCount = 0;
       
-      for (const [plantKey, plant] of Object.entries(PLANTS_DATA)) {
+      for (const [plantKey, plant] of plantRegistry.entries()) {
         for (const env of environments) {
           const envData = getPlantDataForEnvironment(plantKey, env);
           if (envData) {
@@ -176,7 +177,8 @@ class GardeningCalendarTester {
     console.log('🌿 Testing Plant Creation...');
     
     try {
-      const { PLANTS_DATA, getPlantDataForEnvironment } = await import('./src/db.js');
+      const { getPlantRegistry, getPlantDataForEnvironment } = await import('./src/core/db/index.js');
+      const plantRegistry = getPlantRegistry();
       
       // Test verschiedene Pflanzen-Typen
       const testPlants = [
@@ -263,7 +265,7 @@ class GardeningCalendarTester {
       ];
 
       for (const scenario of testScenarios) {
-        const { getPlantDataForEnvironment } = await import('./src/db.js');
+        const { getPlantDataForEnvironment } = await import('./src/core/db/index.js');
         const plantData = getPlantDataForEnvironment(scenario.plantType, scenario.environment);
         
         if (plantData) {
@@ -304,7 +306,7 @@ class GardeningCalendarTester {
     console.log('⏰ Testing Phase Calculations...');
     
     try {
-      const { getPlantDataForEnvironment } = await import('./src/db.js');
+      const { getPlantDataForEnvironment } = await import('./src/core/db/index.js');
       
       // Test verschiedene Datum-Berechnungen
       const testDates = [
@@ -350,7 +352,7 @@ class GardeningCalendarTester {
     console.log('🌤️ Testing Seasonal Validation...');
     
     try {
-      const { validatePlantingDate } = await import('./src/db.js');
+      const { validatePlantingDate } = await import('./src/core/db/index.js');
       
       const testCases = [
         { plant: 'tomato', env: 'outdoor', date: '2024-03-15', region: 'temperate_north' },
@@ -428,16 +430,18 @@ class GardeningCalendarTester {
       const startTime = performance.now();
       
       // Test große Datenmengen
-      const { PLANTS_DATA } = await import('./src/db.js');
-      const plantCount = Object.keys(PLANTS_DATA).length;
+      const { getPlantRegistry } = await import('./src/core/db/index.js');
+      const plantRegistry = getPlantRegistry();
+      const plantCount = plantRegistry.size;
       
       // Simuliere 100 Pflanzen-Berechnungen
       const iterations = 100;
       const perfStart = performance.now();
       
+      const plantKeys = Array.from(plantRegistry.keys());
       for (let i = 0; i < iterations; i++) {
-        const randomPlant = Object.keys(PLANTS_DATA)[Math.floor(Math.random() * plantCount)];
-        const { getPlantDataForEnvironment } = await import('./src/db.js');
+        const randomPlant = plantKeys[Math.floor(Math.random() * plantCount)];
+        const { getPlantDataForEnvironment } = await import('./src/core/db/index.js');
         getPlantDataForEnvironment(randomPlant, 'indoor');
       }
       

@@ -120,7 +120,7 @@ function initializeQuickActions() {
 }
 
 async function loadPlantCategories() {
-  const { PLANT_CATEGORIES, getPlantingsByCategory } = await import('./db.js');
+  const { PLANT_CATEGORIES, getPlantingsByCategory } = await import('./core/db/index.js');
   const categoriesContainer = document.getElementById('plantCategories');
   
   if (!categoriesContainer) return;
@@ -203,7 +203,7 @@ function showQuickPlantModal(date) {
 }
 
 async function showMyPlantsModal() {
-  const { getActivePlantings } = await import('./db.js');
+  const { getActivePlantings } = await import('./core/db/index.js');
   const plantings = await getActivePlantings();
   
   const modal = document.createElement('div');
@@ -437,7 +437,7 @@ async function deletePlant(plantingId) {
 // View detailed plant information
 async function viewPlantDetails(plantingId) {
   const { openDB } = await import('idb');
-  const { PLANTS_DATA } = await import('./db.js');
+  const { getPlantRegistry } = await import('./core/db/index.js');
   
   try {
     const db = await openDB('gardening-calendar');
@@ -471,7 +471,8 @@ async function viewPlantDetails(plantingId) {
     
     await tx.done;
     
-    const plantData = PLANTS_DATA[planting.plantType];
+    const plantRegistry = getPlantRegistry();
+    const plantData = plantRegistry.get(planting.plantType);
     const displayName = planting.displayName || planting.plantName;
     
     const modal = document.createElement('div');
@@ -614,7 +615,7 @@ async function viewPlantDetails(plantingId) {
     // Make functions available
     window.deletePlant = deletePlant;
     window.saveNote = async function(plantingId) {
-      const { addPlantNote } = await import('./db.js');
+      const { addPlantNote } = await import('./core/db/index.js');
       const noteText = document.getElementById(`newNote_${plantingId}`).value.trim();
       if (noteText) {
         await addPlantNote(plantingId, noteText);
@@ -634,7 +635,7 @@ async function addPlantNoteQuick(plantingId) {
   const noteText = prompt('📝 Add a note for this plant:');
   if (noteText && noteText.trim()) {
     try {
-      const { addPlantNote } = await import('./db.js');
+      const { addPlantNote } = await import('./core/db/index.js');
       await addPlantNote(plantingId, noteText.trim());
       alert('✅ Note added successfully!');
       
@@ -671,7 +672,8 @@ function getPhaseEmoji(phase) {
 }
 
 async function showPlantLibraryModal() {
-  const { PLANTS_DATA, PLANT_CATEGORIES } = await import('./db.js');
+  const { getPlantRegistry, PLANT_CATEGORIES } = await import('./core/db/index.js');
+  const plantRegistry = getPlantRegistry();
   
   const modal = document.createElement('div');
   modal.className = 'fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center p-4 z-50';
@@ -695,7 +697,7 @@ async function showPlantLibraryModal() {
       </div>
       
       <div id="plantLibraryContent" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-        ${Object.entries(PLANTS_DATA).map(([key, plant]) => `
+        ${Array.from(plantRegistry.entries()).map(([key, plant]) => `
           <div class="plant-card border dark:border-gray-600 rounded-lg p-4" data-category="${plant.category}" data-name="${plant.name.toLowerCase()}" data-key="${key}">
             <div class="flex justify-between items-start mb-2">
               <h3 class="font-semibold dark:text-white">${plant.name}</h3>
@@ -744,7 +746,7 @@ async function showPlantLibraryModal() {
   
   // Make showPlantDetails available globally
   window.showPlantDetails = function(plantKey) {
-    const plant = PLANTS_DATA[plantKey];
+    const plant = plantRegistry.get(plantKey);
     showPlantDetailsModal(plant, plantKey);
   };
 }

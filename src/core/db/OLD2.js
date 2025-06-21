@@ -93,7 +93,7 @@ async function testPhase2DBOperations() {
     // Test 6: Migration Bridge
     console.log('6️⃣ Testing Migration Bridge...');
     
-    const bridge = await import('./migration-bridge.js');
+    const bridge = await import('./OLD.js');
     if (!bridge.PLANTS_DATA || typeof bridge.addPlanting !== 'function') {
       throw new Error('Migration bridge exports missing');
     }

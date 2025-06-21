@@ -3,7 +3,21 @@ import dayGridPlugin from '@fullcalendar/daygrid';
 import interactionPlugin from '@fullcalendar/interaction';
 import { openDB } from 'idb';
 import { format } from 'date-fns';
-import { PLANTS_DATA, PLANT_CATEGORIES, addPlanting, addPlantNote, getPlantNotes, updatePlantingStatus, searchPlants, GROWING_ENVIRONMENTS, SEASONAL_REGIONS, getPlantDataForEnvironment, validatePlantingDate, initializeDB } from './db';
+import { 
+  getPlantRegistry, 
+  PLANT_CATEGORIES, 
+  addPlanting, 
+  addPlantNote, 
+  getPlantNotes, 
+  updatePlantingStatus, 
+  searchPlants, 
+  GROWING_ENVIRONMENTS, 
+  SEASONAL_REGIONS, 
+  getPlantDataForEnvironment, 
+  validatePlantingDate, 
+  initializeDB, 
+  getDB 
+} from './core/db/index.js';
 import { getAvailableTemplates, importGardenTemplate, GARDEN_TEMPLATE_CATEGORIES } from './gardenTemplates.js';
 import { t, getCurrentLanguage, createLanguageSwitcher, updateUITranslations } from './i18n.js';
 
@@ -268,7 +282,7 @@ async function showAddEventModal(date, preselectedType = null) {
   const eventTypeValue = preselectedType === 'planting' ? 'planting' : 'custom';
 
   modal.innerHTML = `
-    <div class="bg-white dark:bg-gray-800 rounded-lg p-6 max-w-lg w-full max-h-[90vh] overflow-y-auto">
+    <div class="bg-white dark:bg-gray-800 rounded-lg p-6 max-w-4xl w-full max-h-[90vh] overflow-y-auto">
       <h2 class="text-xl font-semibold mb-4 dark:text-white">${t('modal.add_event.title')}</h2>
       <form id="eventForm" class="space-y-4">
         <div>
@@ -295,7 +309,8 @@ async function showAddEventModal(date, preselectedType = null) {
         </div>
         
         <div id="plantingFields" style="display: ${eventTypeValue === 'planting' ? 'block' : 'none'};">
-          <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+          <!-- Environment and Region Row -->
+          <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
             <div>
               <label class="block text-sm font-medium mb-1 dark:text-gray-200">${t('modal.environment.label')}</label>
               <select name="environment" id="environmentSelect" class="w-full p-2 border rounded dark:bg-gray-700 dark:border-gray-600 dark:text-white">
@@ -308,8 +323,13 @@ async function showAddEventModal(date, preselectedType = null) {
                 ${regionOptions}
               </select>
             </div>
+            <div>
+              <label class="block text-sm font-medium mb-1 dark:text-gray-200">${t('modal.date.label')}</label>
+              <input type="date" name="date" value="${date}" class="w-full p-2 border rounded dark:bg-gray-700 dark:border-gray-600 dark:text-white" required>
+            </div>
           </div>
           
+          <!-- Plant Selection Row -->
           <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
             <div>
               <label class="block text-sm font-medium mb-1 dark:text-gray-200">${t('modal.plant_category.label')}</label>
@@ -318,30 +338,33 @@ async function showAddEventModal(date, preselectedType = null) {
                 ${categoryOptions}
               </select>
             </div>
-            <div>
+            <div class="plant-type-field">
               <label class="block text-sm font-medium mb-1 dark:text-gray-200">${t('modal.plant_type.label')}</label>
-              <select name="plantType" id="plantTypeSelect" class="w-full p-2 border rounded dark:bg-gray-700 dark:border-gray-600 dark:text-white" ${eventTypeValue === 'planting' ? 'required' : ''}>
-                ${Object.entries(PLANTS_DATA).map(([value, plant]) => 
+              <select name="plantType" id="plantTypeSelect" class="w-full p-2 border rounded dark:bg-gray-700 dark:border-gray-600 dark:text-white">
+                <option value="">${t('modal.plant_type.select')}</option>
+                ${Array.from(getPlantRegistry().entries()).map(([value, plant]) => 
                   `<option value="${value}" data-category="${plant.category}">${plant.name}${plant.legalNote ? ' ⚠️' : ''}</option>`
                 ).join('')}
               </select>
             </div>
           </div>
           
+          <!-- Name and Location Row -->
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+            <div>
+              <label class="block text-sm font-medium mb-1 dark:text-gray-200">${t('modal.custom_name.label')}</label>
+              <input type="text" name="customName" id="customNameField" class="w-full p-2 border rounded dark:bg-gray-700 dark:border-gray-600 dark:text-white">
+              <p class="text-xs text-gray-500 dark:text-gray-400 mt-1">${t('modal.custom_name.help')}</p>
+            </div>
+            <div>
+              <label class="block text-sm font-medium mb-1 dark:text-gray-200">${t('modal.location.label')}</label>
+              <input type="text" name="location" id="locationField" value="Default Garden" class="w-full p-2 border rounded dark:bg-gray-700 dark:border-gray-600 dark:text-white">
+            </div>
+          </div>
+          
           <div id="seasonalWarning" class="hidden">
             <div id="seasonalMessage" class="font-medium"></div>
             <div id="seasonalDetails" class="text-sm mt-1"></div>
-          </div>
-          
-          <div>
-            <label class="block text-sm font-medium mb-1 dark:text-gray-200">${t('modal.custom_name.label')}</label>
-            <input type="text" name="customName" id="customNameField" class="w-full p-2 border rounded dark:bg-gray-700 dark:border-gray-600 dark:text-white">
-            <p class="text-xs text-gray-500 dark:text-gray-400 mt-1">${t('modal.custom_name.help')}</p>
-          </div>
-          
-          <div>
-            <label class="block text-sm font-medium mb-1 dark:text-gray-200">${t('modal.location.label')}</label>
-            <input type="text" name="location" id="locationField" value="Default Garden" class="w-full p-2 border rounded dark:bg-gray-700 dark:border-gray-600 dark:text-white">
           </div>
           
           <div id="plantInfo" class="p-3 bg-blue-50 dark:bg-blue-900 rounded border border-blue-200 dark:border-blue-700">
@@ -351,7 +374,7 @@ async function showAddEventModal(date, preselectedType = null) {
           <div id="phaseDurationSection" style="display: none;">
             <h4 class="font-medium mb-2 dark:text-white">${t('modal.phase_duration.title')}</h4>
             <p class="text-sm text-gray-600 dark:text-gray-400 mb-3">${t('modal.phase_duration.help')}</p>
-            <div id="phaseInputs" class="grid grid-cols-2 gap-3">
+            <div id="phaseInputs" class="grid grid-cols-1 md:grid-cols-2 gap-3">
               <!-- Phase duration inputs will be populated here -->
             </div>
             <p class="text-xs text-gray-500 dark:text-gray-400 mt-2">${t('modal.phase_duration.tip')}</p>
@@ -360,74 +383,75 @@ async function showAddEventModal(date, preselectedType = null) {
           <div>
             <h4 class="font-medium mb-3 dark:text-white">${t('modal.reminders.title')}</h4>
             
-            <div class="space-y-3">
-              <div class="flex items-center">
-                <input type="checkbox" id="enableWatering" name="enableWatering" checked class="mr-2">
-                <label for="enableWatering" class="text-sm dark:text-gray-200">${t('modal.reminders.watering')}</label>
-              </div>
-              <div id="wateringOptions" class="ml-6 space-y-2">
-                <div>
-                  <label class="block text-xs text-gray-600 dark:text-gray-400 mb-1">${t('modal.reminders.watering_interval')}</label>
-                  <select name="wateringInterval" class="w-full p-1 text-sm border rounded dark:bg-gray-700 dark:border-gray-600 dark:text-white">
-                    <option value="1">${t('modal.interval.daily')}</option>
-                    <option value="2">${t('modal.interval.every_2_days')}</option>
-                    <option value="3" selected>${t('modal.interval.every_3_days')}</option>
-                    <option value="4">${t('modal.interval.every_4_days')}</option>
-                    <option value="7">${t('modal.interval.weekly')}</option>
-                  </select>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+              <!-- Left Column -->
+              <div class="space-y-3">
+                <div class="flex items-center">
+                  <input type="checkbox" id="enableWatering" name="enableWatering" checked class="mr-2">
+                  <label for="enableWatering" class="text-sm dark:text-gray-200">${t('modal.reminders.watering')}</label>
+                </div>
+                <div id="wateringOptions" class="ml-6 space-y-2">
+                  <div>
+                    <label class="block text-xs text-gray-600 dark:text-gray-400 mb-1">${t('modal.reminders.watering_interval')}</label>
+                    <select name="wateringInterval" class="w-full p-1 text-sm border rounded dark:bg-gray-700 dark:border-gray-600 dark:text-white">
+                      <option value="1">${t('modal.interval.daily')}</option>
+                      <option value="2">${t('modal.interval.every_2_days')}</option>
+                      <option value="3" selected>${t('modal.interval.every_3_days')}</option>
+                      <option value="4">${t('modal.interval.every_4_days')}</option>
+                      <option value="7">${t('modal.interval.weekly')}</option>
+                    </select>
+                  </div>
+                </div>
+                
+                <div class="flex items-center">
+                  <input type="checkbox" id="enableFertilizing" name="enableFertilizing" checked class="mr-2">
+                  <label for="enableFertilizing" class="text-sm dark:text-gray-200">${t('modal.reminders.fertilizing')}</label>
+                </div>
+                <div id="fertilizingOptions" class="ml-6 space-y-2">
+                  <div>
+                    <label class="block text-xs text-gray-600 dark:text-gray-400 mb-1">${t('modal.reminders.fertilizing_interval')}</label>
+                    <select name="fertilizingInterval" class="w-full p-1 text-sm border rounded dark:bg-gray-700 dark:border-gray-600 dark:text-white">
+                      <option value="7">${t('modal.interval.weekly')}</option>
+                      <option value="14" selected>${t('modal.interval.every_2_weeks')}</option>
+                      <option value="21">${t('modal.interval.every_3_weeks')}</option>
+                      <option value="30">${t('modal.interval.monthly')}</option>
+                    </select>
+                  </div>
+                  <div>
+                    <label class="block text-xs text-gray-600 dark:text-gray-400 mb-1">${t('modal.reminders.fertilizing_delay')}</label>
+                    <select name="fertilizingDelay" class="w-full p-1 text-sm border rounded dark:bg-gray-700 dark:border-gray-600 dark:text-white">
+                      <option value="0">${t('modal.interval.immediately')}</option>
+                      <option value="7" selected>${t('modal.interval.1_week')}</option>
+                      <option value="14">${t('modal.interval.2_weeks')}</option>
+                    </select>
+                  </div>
                 </div>
               </div>
               
-              <div class="flex items-center">
-                <input type="checkbox" id="enableFertilizing" name="enableFertilizing" checked class="mr-2">
-                <label for="enableFertilizing" class="text-sm dark:text-gray-200">${t('modal.reminders.fertilizing')}</label>
-              </div>
-              <div id="fertilizingOptions" class="ml-6 space-y-2">
-                <div>
-                  <label class="block text-xs text-gray-600 dark:text-gray-400 mb-1">${t('modal.reminders.fertilizing_interval')}</label>
-                  <select name="fertilizingInterval" class="w-full p-1 text-sm border rounded dark:bg-gray-700 dark:border-gray-600 dark:text-white">
-                    <option value="7">${t('modal.interval.weekly')}</option>
-                    <option value="14" selected>${t('modal.interval.every_2_weeks')}</option>
-                    <option value="21">${t('modal.interval.every_3_weeks')}</option>
-                    <option value="30">${t('modal.interval.monthly')}</option>
-                  </select>
+              <!-- Right Column -->
+              <div class="space-y-3">
+                <div class="flex items-center">
+                  <input type="checkbox" id="enablePhaseReminders" name="enablePhaseReminders" checked class="mr-2">
+                  <label for="enablePhaseReminders" class="text-sm dark:text-gray-200">${t('modal.reminders.phase_transitions')}</label>
                 </div>
-                <div>
-                  <label class="block text-xs text-gray-600 dark:text-gray-400 mb-1">${t('modal.reminders.fertilizing_delay')}</label>
-                  <select name="fertilizingDelay" class="w-full p-1 text-sm border rounded dark:bg-gray-700 dark:border-gray-600 dark:text-white">
-                    <option value="0">${t('modal.interval.immediately')}</option>
-                    <option value="7" selected>${t('modal.interval.1_week')}</option>
-                    <option value="14">${t('modal.interval.2_weeks')}</option>
-                  </select>
+                
+                <div class="flex items-center">
+                  <input type="checkbox" id="enableWeeklyChecks" name="enableWeeklyChecks" checked class="mr-2">
+                  <label for="enableWeeklyChecks" class="text-sm dark:text-gray-200">${t('modal.reminders.weekly_checks')}</label>
                 </div>
-              </div>
-              
-              <div class="flex items-center">
-                <input type="checkbox" id="enablePhaseReminders" name="enablePhaseReminders" checked class="mr-2">
-                <label for="enablePhaseReminders" class="text-sm dark:text-gray-200">${t('modal.reminders.phase_transitions')}</label>
-              </div>
-              
-              <div class="flex items-center">
-                <input type="checkbox" id="enableWeeklyChecks" name="enableWeeklyChecks" checked class="mr-2">
-                <label for="enableWeeklyChecks" class="text-sm dark:text-gray-200">${t('modal.reminders.weekly_checks')}</label>
-              </div>
-              
-              <div class="flex items-center">
-                <input type="checkbox" id="enableHarvestReminder" name="enableHarvestReminder" checked class="mr-2">
-                <label for="enableHarvestReminder" class="text-sm dark:text-gray-200">${t('modal.reminders.harvest')}</label>
-              </div>
-              
-              <div class="flex items-center">
-                <input type="checkbox" id="enableGoogleCalendarSync" name="enableGoogleCalendarSync" checked class="mr-2">
-                <label for="enableGoogleCalendarSync" class="text-sm dark:text-gray-200">${t('modal.reminders.google_sync')}</label>
+                
+                <div class="flex items-center">
+                  <input type="checkbox" id="enableHarvestReminder" name="enableHarvestReminder" checked class="mr-2">
+                  <label for="enableHarvestReminder" class="text-sm dark:text-gray-200">${t('modal.reminders.harvest')}</label>
+                </div>
+                
+                <div class="flex items-center">
+                  <input type="checkbox" id="enableGoogleCalendarSync" name="enableGoogleCalendarSync" checked class="mr-2">
+                  <label for="enableGoogleCalendarSync" class="text-sm dark:text-gray-200">${t('modal.reminders.google_sync')}</label>
+                </div>
               </div>
             </div>
           </div>
-        </div>
-        
-        <div>
-          <label class="block text-sm font-medium mb-1 dark:text-gray-200">${t('modal.date.label')}</label>
-          <input type="date" name="date" value="${date}" class="w-full p-2 border rounded dark:bg-gray-700 dark:border-gray-600 dark:text-white" required>
         </div>
         
         <div id="customDescription" style="display: ${eventTypeValue === 'planting' ? 'none' : 'block'};">
@@ -638,10 +662,12 @@ async function showAddEventModal(date, preselectedType = null) {
   function togglePlantingFields(value) {
     const customFields = document.getElementById('customFields');
     const plantingFields = document.getElementById('plantingFields');
+    const plantTypeField = document.querySelector('.plant-type-field');
     
     if (value === 'planting') {
       customFields.style.display = 'none';
       plantingFields.style.display = 'block';
+      if (plantTypeField) plantTypeField.style.display = 'block';
       
       // Remove required from title field when hidden
       titleField.removeAttribute('required');
@@ -654,6 +680,7 @@ async function showAddEventModal(date, preselectedType = null) {
     } else {
       customFields.style.display = 'block';
       plantingFields.style.display = 'none';
+      if (plantTypeField) plantTypeField.style.display = 'none';
       
       // Add required to title field when visible
       titleField.setAttribute('required', 'required');
@@ -665,7 +692,15 @@ async function showAddEventModal(date, preselectedType = null) {
   function updatePlantOptions(category) {
     const options = plantTypeSelect.querySelectorAll('option');
     
-    options.forEach(option => {
+    // Always show the first "Select plant" option
+    if (options[0] && options[0].value === '') {
+      options[0].style.display = 'block';
+    }
+    
+    // Show/hide plant options based on category
+    options.forEach((option, index) => {
+      if (index === 0) return; // Skip the first "Select plant" option
+      
       if (category === '' || option.dataset.category === category) {
         option.style.display = 'block';
       } else {
@@ -675,10 +710,8 @@ async function showAddEventModal(date, preselectedType = null) {
     
     // Reset selection if current selection is now hidden
     if (category !== '' && plantTypeSelect.selectedOptions[0]?.dataset.category !== category) {
-      const firstVisibleOption = Array.from(options).find(opt => opt.style.display !== 'none');
-      if (firstVisibleOption) {
-        plantTypeSelect.value = firstVisibleOption.value;
-      }
+      // Reset to default "Select plant" option
+      plantTypeSelect.value = '';
     }
     
     updatePlantInfo();
@@ -715,27 +748,36 @@ async function showAddEventModal(date, preselectedType = null) {
   }
 
   function updatePlantInfo() {
+    const plantRegistry = getPlantRegistry();
+    const plantTypeSelect = document.getElementById('plantTypeSelect');
     const plantInfo = document.getElementById('plantInfo');
-    const environment = environmentSelect.value;
+    const environment = document.getElementById('environmentSelect').value;
+    
+    if (!plantTypeSelect.value) {
+      plantInfo.innerHTML = '';
+      return;
+    }
+    
     const plantData = getPlantDataForEnvironment(plantTypeSelect.value, environment);
     
     if (plantData) {
       let infoHtml = `<div class="text-sm">`;
-      infoHtml += `<div class="font-semibold text-blue-800 dark:text-blue-200 mb-2">${PLANTS_DATA[plantTypeSelect.value].name}${PLANTS_DATA[plantTypeSelect.value].legalNote ? ' ⚠️' : ''} (${t(`plant.category.${PLANTS_DATA[plantTypeSelect.value].category.toLowerCase().replace(/\s+/g, '_').replace(/&/g, '').replace(/\s/g, '')}`)}) - ${t(`environment.${environment}`)} ${t('plant.info.growing')}</div>`;
+      infoHtml += `<div class="font-semibold text-blue-800 dark:text-blue-200 mb-2">${plantRegistry.get(plantTypeSelect.value).name}${plantRegistry.get(plantTypeSelect.value).legalNote ? ' ⚠️' : ''} (${t(`plant.category.${plantRegistry.get(plantTypeSelect.value).category.toLowerCase().replace(/\s+/g, '_').replace(/&/g, '').replace(/\s/g, '')}`)}) - ${t(`environment.${environment}`)} ${t('plant.info.growing')}</div>`;
       
-      if (PLANTS_DATA[plantTypeSelect.value].legalNote) {
-        infoHtml += `<div class="text-orange-600 dark:text-orange-400 text-xs mb-2">${t('plant.info.legal_notice')} ${PLANTS_DATA[plantTypeSelect.value].legalNote}</div>`;
+      if (plantRegistry.get(plantTypeSelect.value).legalNote) {
+        infoHtml += `<div class="text-orange-600 dark:text-orange-400 text-xs mb-2">${t('plant.info.legal_notice')} ${plantRegistry.get(plantTypeSelect.value).legalNote}</div>`;
       }
       
-      if (plantData.growingCycle) {
-        const totalDays = Object.values(plantData.growingCycle).reduce((sum, days) => sum + days, 0);
+      if (plantData.phases) {
+        // Calculate total days from phases
+        const totalDays = Object.values(plantData.phases).reduce((sum, phaseData) => sum + phaseData.days, 0);
         const totalWeeks = Math.round(totalDays / 7);
         infoHtml += `<div class="mb-1">${t('plant.info.growing_cycle')} ${totalDays} ${t('plant.info.days')} (${totalWeeks} ${t('plant.info.weeks')})</div>`;
         
-        const phases = Object.entries(plantData.growingCycle).map(([phase, days]) => {
+        const phases = Object.entries(plantData.phases).map(([phase, phaseData]) => {
           const phaseKey = phase.toLowerCase();
           const phaseName = t(`phase.${phaseKey}`) || phase;
-          return `${phaseName}: ${days} ${t('plant.info.days')}`;
+          return `${phaseName}: ${phaseData.days} ${t('plant.info.days')}`;
         }).join(', ');
         infoHtml += `<div class="mb-1">${t('plant.info.phases')} ${phases}</div>`;
       }
@@ -751,15 +793,21 @@ async function showAddEventModal(date, preselectedType = null) {
       infoHtml += `</div>`;
       plantInfo.innerHTML = infoHtml;
       
-      // Show/hide phase duration section
-      if (plantData.growingCycle && Object.keys(plantData.growingCycle).length > 0) {
+      // Show/hide phase duration section - ONLY for indoor/greenhouse environments
+      if (plantData.phases && Object.keys(plantData.phases).length > 0 && (environment === 'indoor' || environment === 'greenhouse')) {
         const phaseDurationSection = document.getElementById('phaseDurationSection');
         phaseDurationSection.style.display = 'block';
+        
+        // Add environment-specific message
+        const phaseTitle = document.querySelector('#phaseDurationSection h4');
+        if (phaseTitle) {
+          phaseTitle.innerHTML = `${t('modal.phase_duration.title')} <span class="text-sm text-blue-600 dark:text-blue-400">(${t(`environment.${environment}`)} ${t('plant.info.only')})</span>`;
+        }
         
         // Populate phase inputs
         const phaseInputs = document.getElementById('phaseInputs');
         phaseInputs.innerHTML = '';
-        Object.entries(plantData.growingCycle).forEach(([phase, defaultDays]) => {
+        Object.entries(plantData.phases).forEach(([phase, phaseData]) => {
           const phaseKey = phase.toLowerCase();
           const phaseName = t(`phase.${phaseKey}`) || phase;
           const phaseIcon = getPhaseIcon(phase);
@@ -772,18 +820,31 @@ async function showAddEventModal(date, preselectedType = null) {
             </label>
             <input type="number" 
                    name="phase_${phase}" 
-                   value="${defaultDays}" 
+                   value="${phaseData.days}" 
                    min="1" 
                    max="365" 
                    class="w-16 p-1 text-sm border rounded dark:bg-gray-700 dark:border-gray-600 dark:text-white">
             <span class="text-xs text-gray-500 dark:text-gray-400">${t('modal.phase_duration.days')}</span>
-            <span class="text-xs text-gray-500 dark:text-gray-400">(${t('modal.phase_duration.default')} ${defaultDays})</span>
+            <span class="text-xs text-gray-500 dark:text-gray-400">(${t('modal.phase_duration.default')} ${phaseData.days})</span>
           `;
           phaseInputs.appendChild(phaseDiv);
         });
       } else {
         const phaseDurationSection = document.getElementById('phaseDurationSection');
         phaseDurationSection.style.display = 'none';
+        
+        // If outdoor, show explanation why phases are not editable
+        if (environment === 'outdoor' && plantData.phases && Object.keys(plantData.phases).length > 0) {
+          // Add outdoor-specific info to plant info
+          infoHtml = infoHtml.replace('</div>', `
+            <div class="mt-2 p-2 bg-yellow-50 dark:bg-yellow-900/20 border border-yellow-200 dark:border-yellow-700 rounded">
+              <div class="text-xs text-yellow-800 dark:text-yellow-200">
+                <strong>🌞 ${t('environment.outdoor')} ${t('plant.info.growing')}:</strong> ${t('plant.info.natural_timing')}
+              </div>
+            </div>
+          </div>`);
+          plantInfo.innerHTML = infoHtml;
+        }
       }
       
       // Check seasonal timing
@@ -817,7 +878,7 @@ async function showAddEventModal(date, preselectedType = null) {
                               phaseName.toLowerCase().includes('fruiting');
       
       const phaseEmoji = getPhaseEmoji(phaseName);
-      const helpText = getPhaseHelpText(phaseName, PLANTS_DATA[plantTypeSelect.value].category, environment);
+      const helpText = getPhaseHelpText(phaseName, getPlantRegistry().get(plantTypeSelect.value).category, environment);
       
       inputsHtml += `
         <div class="flex items-center space-x-2 ${isFloweringPhase ? 'bg-purple-50 dark:bg-purple-900/20 p-2 rounded' : ''}">
@@ -840,7 +901,8 @@ async function showAddEventModal(date, preselectedType = null) {
   }
 
   function updateCustomNamePlaceholder() {
-    const selectedPlant = PLANTS_DATA[plantTypeSelect.value];
+    const plantRegistry = getPlantRegistry();
+    const selectedPlant = plantRegistry.get(plantTypeSelect.value);
     if (selectedPlant) {
       const examples = {
         'Cannabis': `e.g., 'My ${selectedPlant.name} #1'`,
@@ -888,6 +950,8 @@ async function showAddEventModal(date, preselectedType = null) {
   
   // Initialize plant info if planting is preselected
   if (eventTypeValue === 'planting') {
+    // Show all plants initially (no category filter)
+    updatePlantOptions('');
     setTimeout(() => {
       updatePlantInfo();
       updateCustomNamePlaceholder();
@@ -934,7 +998,7 @@ function getPhaseHelpText(phaseName, category, environment) {
 
 // Enhanced addPlanting function with custom phase durations and Google Calendar sync
 async function addPlantingWithOptions(plantType, startDate, location, customName, reminderOptions, customPhaseDurations = {}) {
-  const db = await openDB('gardening-calendar');
+  const plantRegistry = getPlantRegistry();
   
   // Get environment and region from the form
   const environment = document.querySelector('select[name="environment"]')?.value || 'indoor';
@@ -1066,8 +1130,8 @@ async function addPlantingWithOptions(plantType, startDate, location, customName
   if (Object.keys(customPhaseDurations).length > 0) {
     plantingDescription += `\n\n🕐 Custom Phase Durations:`;
     for (const [phase, days] of Object.entries(customPhaseDurations)) {
-      const originalDays = PLANTS_DATA[plantType]?.phases?.[phase]?.days || 
-                          PLANTS_DATA[plantType]?.environments?.[environment]?.phases?.[phase]?.days;
+      const originalDays = plantRegistry.get(plantType)?.phases?.[phase]?.days || 
+                          plantRegistry.get(plantType)?.environments?.[environment]?.phases?.[phase]?.days;
       plantingDescription += `\n- ${phase}: ${days} days (standard: ${originalDays} days)`;
     }
   }

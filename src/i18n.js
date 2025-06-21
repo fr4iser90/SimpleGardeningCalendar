@@ -53,6 +53,7 @@ export const TRANSLATIONS = {
     'modal.plant_category.label': 'Pflanzenkategorie',
     'modal.plant_category.all': 'Alle Kategorien',
     'modal.plant_type.label': 'Pflanzentyp',
+    'modal.plant_type.select': 'Pflanze auswählen...',
     'modal.custom_name.label': 'Benutzerdefinierter Name (Optional)',
     'modal.custom_name.help': 'Geben Sie Ihrer Pflanze einen eindeutigen Namen für einfachere Verfolgung',
     'modal.location.label': 'Standort',
@@ -94,6 +95,8 @@ export const TRANSLATIONS = {
     'plant.info.light': 'Licht:',
     'plant.info.legal_notice': '⚠️ Rechtlicher Hinweis:',
     'plant.info.growing': 'Anbau',
+    'plant.info.only': 'nur',
+    'plant.info.natural_timing': 'Phasen werden von natürlichen Jahreszeiten bestimmt und können nicht angepasst werden',
     
     // Seasonal Timing
     'timing.good': '✅ Gute Zeit!',
@@ -263,6 +266,7 @@ export const TRANSLATIONS = {
     'modal.plant_category.label': 'Plant Category',
     'modal.plant_category.all': 'All Categories',
     'modal.plant_type.label': 'Plant Type',
+    'modal.plant_type.select': 'Select Plant...',
     'modal.custom_name.label': 'Custom Name (Optional)',
     'modal.custom_name.help': 'Give your plant a unique name for easier tracking',
     'modal.location.label': 'Location',
@@ -304,6 +308,8 @@ export const TRANSLATIONS = {
     'plant.info.light': 'Light:',
     'plant.info.legal_notice': '⚠️ Legal Notice:',
     'plant.info.growing': 'Growing',
+    'plant.info.only': 'only',
+    'plant.info.natural_timing': 'Phases are determined by natural seasons and cannot be adjusted',
     
     // Seasonal Timing
     'timing.good': '✅ Good timing!',
@@ -473,6 +479,7 @@ export const TRANSLATIONS = {
     'modal.plant_category.label': 'Catégorie de Plante',
     'modal.plant_category.all': 'Toutes Catégories',
     'modal.plant_type.label': 'Type de Plante',
+    'modal.plant_type.select': 'Sélectionner Plante...',
     'modal.custom_name.label': 'Nom Personnalisé (Optionnel)',
     'modal.custom_name.help': 'Donnez un nom unique à votre plante pour faciliter le suivi',
     'modal.location.label': 'Emplacement',
@@ -514,6 +521,8 @@ export const TRANSLATIONS = {
     'plant.info.light': 'Lumière:',
     'plant.info.legal_notice': '⚠️ Avis Légal:',
     'plant.info.growing': 'Culture',
+    'plant.info.only': 'nur',
+    'plant.info.natural_timing': 'Phases sont déterminées par les saisons naturelles et ne peuvent être ajustées',
     
     // Seasonal Timing
     'timing.good': '✅ Bon timing!',
@@ -634,7 +643,7 @@ export const TRANSLATIONS = {
     'plants.plant_type': 'Type de Plante',
     'plants.location': 'Emplacement',
     'plants.started': 'Démarré',
-    'plants.current_phase': 'Phase Actuelle',
+    'plants.current_phase': 'Fase Actuelle',
     'plants.expected_completion': 'Terminaison Prévue',
     
     // Error Messages
@@ -683,6 +692,7 @@ export const TRANSLATIONS = {
     'modal.plant_category.label': 'Categoría de Planta',
     'modal.plant_category.all': 'Todas las Categorías',
     'modal.plant_type.label': 'Tipo de Planta',
+    'modal.plant_type.select': 'Seleccionar Planta...',
     'modal.custom_name.label': 'Nombre Personalizado (Opcional)',
     'modal.custom_name.help': 'Dale a tu planta un nombre único para facilitar el seguimiento',
     'modal.location.label': 'Ubicación',
@@ -724,6 +734,8 @@ export const TRANSLATIONS = {
     'plant.info.light': 'Luz:',
     'plant.info.legal_notice': '⚠️ Aviso Legal:',
     'plant.info.growing': 'Cultivo',
+    'plant.info.only': 'nur',
+    'plant.info.natural_timing': 'Phases son determinadas por las estaciones naturales y no se pueden ajustar',
     
     // Seasonal Timing
     'timing.good': '✅ ¡Buen momento!',
@@ -893,6 +905,7 @@ export const TRANSLATIONS = {
     'modal.plant_category.label': 'Categoria Pianta',
     'modal.plant_category.all': 'Tutte le Categorie',
     'modal.plant_type.label': 'Tipo di Pianta',
+    'modal.plant_type.select': 'Seleziona Pianta...',
     'modal.custom_name.label': 'Nome Personalizzato (Opzionale)',
     'modal.custom_name.help': 'Dai alla tua pianta un nome unico per facilitare il monitoraggio',
     'modal.location.label': 'Posizione',
@@ -934,6 +947,8 @@ export const TRANSLATIONS = {
     'plant.info.light': 'Luce:',
     'plant.info.legal_notice': '⚠️ Avviso Legale:',
     'plant.info.growing': 'Coltivazione',
+    'plant.info.only': 'nur',
+    'plant.info.natural_timing': 'Phases sono determinate dalle stagioni naturali e non possono essere adattate',
     
     // Seasonal Timing
     'timing.good': '✅ Buon momento!',

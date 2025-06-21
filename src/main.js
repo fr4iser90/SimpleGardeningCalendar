@@ -1,21 +1,34 @@
 import './style.css';
-import { initializeDB } from './db';
-import { initializeApp } from './app';
-import { initializeCalendar } from './calendar';
+import { initializeApp } from './app.js';
+import { initializeCalendar } from './calendar.js';
+import { initializeDB } from './core/db/index.js';
 
 // Initialize the application
 async function init() {
   try {
-    // Initialize IndexedDB
+    // Initialize database first
     await initializeDB();
-
-    // Initialize the application
+    
+    // Initialize the app
     initializeApp();
-
-    // Initialize the calendar
+    
+    // Initialize calendar
     await initializeCalendar();
+    
   } catch (error) {
-    console.error('Failed to initialize application:', error);
+    console.error('Failed to initialize app:', error);
+    document.body.innerHTML = `
+      <div class="min-h-screen flex items-center justify-center bg-red-50">
+        <div class="text-center p-8">
+          <h1 class="text-2xl font-bold text-red-600 mb-4">❌ Initialization Error</h1>
+          <p class="text-gray-700 mb-4">Failed to initialize the gardening calendar.</p>
+          <p class="text-sm text-gray-500">${error.message}</p>
+          <button onclick="location.reload()" class="mt-4 px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600">
+            🔄 Retry
+          </button>
+        </div>
+      </div>
+    `;
   }
 }
 
