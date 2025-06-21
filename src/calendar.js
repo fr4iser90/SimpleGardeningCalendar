@@ -20,6 +20,8 @@ import {
 } from './core/db/index.js';
 import { getAvailableTemplates, importGardenTemplate, GARDEN_TEMPLATE_CATEGORIES } from './gardenTemplates.js';
 import { t, getCurrentLanguage, createLanguageSwitcher, updateUITranslations } from './i18n.js';
+import { getPhaseEmoji, getPhaseCheckpoints } from './core/db/utils.js';
+import { googleCalendar } from './googleCalendar.js';
 
 let calendar;
 
@@ -110,7 +112,11 @@ export async function initializeCalendar() {
   const addPlantingBtn = document.createElement('button');
   addPlantingBtn.innerHTML = '<i class="fas fa-seedling mr-2"></i>' + t('btn.add_planting');
   addPlantingBtn.className = 'px-4 py-2 bg-green-500 text-white rounded hover:bg-green-600';
-  addPlantingBtn.onclick = () => showAddEventModal(null, 'planting');
+  addPlantingBtn.onclick = () => {
+    // Get today's date in YYYY-MM-DD format for the date input
+    const today = new Date().toISOString().split('T')[0];
+    showAddEventModal(today, 'planting');
+  };
 
   // Add Template Import button
   const templateImportBtn = document.createElement('button');
@@ -183,56 +189,86 @@ export async function initializeCalendar() {
 function updateGoogleCalendarStatus() {
   const statusDisplay = document.getElementById('googleCalendarStatusDisplay');
   if (!statusDisplay) return;
-  
-  // Check if Google Calendar is connected by checking the actual storage structure
-  let isConnected = false;
-  let selectedCalendar = null;
-  let autoSync = false;
-  
+
+  let settings = null;
   try {
     const googleCalendarSettings = localStorage.getItem('googleCalendarSettings');
     if (googleCalendarSettings) {
-      const settings = JSON.parse(googleCalendarSettings);
-      // Check if we have user email (indicates successful authentication)
-      isConnected = !!(settings.userEmail && settings.userEmail.trim());
-      selectedCalendar = settings.selectedCalendarId || 'primary';
-      autoSync = settings.autoSync || false;
+      settings = JSON.parse(googleCalendarSettings);
     }
   } catch (error) {
     console.warn('Failed to parse Google Calendar settings:', error);
-    isConnected = false;
+    settings = null;
   }
-  
-  // Also check if Google Calendar API is actually signed in
-  if (window.googleCalendar && window.googleCalendar.isSignedIn) {
-    isConnected = window.googleCalendar.isSignedIn;
-  }
-  
-  if (!isConnected) {
-    statusDisplay.innerHTML = `
-      <span class="text-red-600 dark:text-red-400">
-        <i class="fas fa-times-circle mr-1"></i>Not connected
-      </span>
-    `;
-  } else {
-    const calendarName = selectedCalendar === 'primary' ? 'Primary Calendar' : selectedCalendar;
-    const syncStatus = autoSync ? 'ON' : 'OFF';
+
+  const hasSavedCredentials = !!(settings && settings.userEmail && settings.userEmail.trim());
+  const isCurrentlySignedIn = googleCalendar.isSignedIn;
+
+  if (isCurrentlySignedIn && hasSavedCredentials) {
+    // STATE: Connected and session is active
+    const selectedCalendarId = settings.selectedCalendarId || 'primary';
+    const calendarList = settings.calendarList || {};
+    let calendarName = calendarList[selectedCalendarId];
+
+    // If the ID is 'primary' or we couldn't find a name, find a sensible default.
+    if (selectedCalendarId === 'primary' && settings.userEmail) {
+      calendarName = calendarList[settings.userEmail] || 'Primary Calendar';
+    } else if (!calendarName) {
+      calendarName = selectedCalendarId; // Fallback to ID if no name is found
+    }
+
+    const autoSync = settings.autoSync || false;
+    const syncStatus = autoSync ? t('google.sync_on') : t('google.sync_off');
     const syncButton = autoSync ? '' : `
       <button class="ml-2 px-2 py-1 bg-blue-500 text-white text-xs rounded hover:bg-blue-600" onclick="triggerGoogleCalendarSync()">
-        SYNC
+        ${t('google.sync_now')}
       </button>
     `;
-    
+
     statusDisplay.innerHTML = `
-      <span class="text-green-600 dark:text-green-400">
-        <i class="fas fa-check-circle mr-1"></i>Connected
+      <span class="text-green-600 dark:text-green-400 flex items-center">
+        <i class="fas fa-check-circle mr-1"></i>${t('google.connected')}
       </span>
-      <span class="mx-2">📅 ${calendarName}</span>
-      <span class="mx-2">| Sync ${syncStatus}</span>
+      <span class="mx-2">|</span>
+      <span>📅 ${calendarName}</span>
+      <span class="mx-2">|</span>
+      <span>${t('google.sync')}: ${syncStatus}</span>
       ${syncButton}
+    `;
+  } else if (hasSavedCredentials && !isCurrentlySignedIn) {
+    // STATE: Credentials saved, but session is not active (e.g., after refresh)
+    statusDisplay.innerHTML = `
+      <span class="text-yellow-600 dark:text-yellow-400 flex items-center">
+        <i class="fas fa-link mr-1"></i>${t('google.reconnect_needed')}
+      </span>
+      <button class="ml-2 px-2 py-1 bg-blue-500 text-white text-xs rounded hover:bg-blue-600" onclick="reconnectGoogleCalendar()">
+        ${t('google.reconnect')}
+      </button>
+    `;
+  } else {
+    // STATE: Not connected, no saved credentials
+    statusDisplay.innerHTML = `
+      <span class="text-red-600 dark:text-red-400 flex items-center">
+        <i class="fas fa-times-circle mr-1"></i>${t('google.not_connected')}
+      </span>
     `;
   }
 }
+
+// Make reconnect function available globally
+window.reconnectGoogleCalendar = async function() {
+  try {
+    const { attemptSignIn } = await import('./googleCalendar.js');
+    // Call the new smart sign-in function. 
+    // Pass 'true' to allow it to show a popup if interaction is required.
+    await attemptSignIn(true);
+  } catch (error) {
+    console.error('Google Calendar reconnect failed:', error);
+    // The notification is now handled by the 'googleCalendarStatusChanged' event listener
+    // or shown directly by the UI logic based on the error.
+    showNotification(t('google.reconnect_failed'), 'error');
+  }
+};
 
 // Make sync function available globally
 window.triggerGoogleCalendarSync = async function() {
@@ -255,6 +291,32 @@ function getEventColor(type) {
     maintenance: '#718096'
   };
   return colors[type] || '#2F855A';
+}
+
+// Helper function to format date for German locale
+function formatDateForGerman(dateString) {
+  if (!dateString) {
+    // Return today's date if no date provided
+    return new Date().toISOString().split('T')[0];
+  }
+  
+  // If it's already in YYYY-MM-DD format, return as is
+  if (/^\d{4}-\d{2}-\d{2}$/.test(dateString)) {
+    return dateString;
+  }
+  
+  // Try to parse and format the date
+  try {
+    const date = new Date(dateString);
+    if (isNaN(date.getTime())) {
+      // If parsing fails, return today's date
+      return new Date().toISOString().split('T')[0];
+    }
+    return date.toISOString().split('T')[0];
+  } catch (error) {
+    // If any error occurs, return today's date
+    return new Date().toISOString().split('T')[0];
+  }
 }
 
 async function showAddEventModal(date, preselectedType = null) {
@@ -280,6 +342,9 @@ async function showAddEventModal(date, preselectedType = null) {
   }).join('');
 
   const eventTypeValue = preselectedType === 'planting' ? 'planting' : 'custom';
+
+  // Format the date properly for the input field
+  const formattedDate = formatDateForGerman(date);
 
   modal.innerHTML = `
     <div class="bg-white dark:bg-gray-800 rounded-lg p-6 max-w-4xl w-full max-h-[90vh] overflow-y-auto">
@@ -325,7 +390,7 @@ async function showAddEventModal(date, preselectedType = null) {
             </div>
             <div>
               <label class="block text-sm font-medium mb-1 dark:text-gray-200">${t('modal.date.label')}</label>
-              <input type="date" name="date" value="${date}" class="w-full p-2 border rounded dark:bg-gray-700 dark:border-gray-600 dark:text-white" required>
+              <input type="date" name="date" value="${formattedDate}" class="w-full p-2 border rounded dark:bg-gray-700 dark:border-gray-600 dark:text-white" required>
             </div>
           </div>
           
@@ -1348,49 +1413,6 @@ async function addPlantingWithOptions(plantType, startDate, location, customName
   return plantingId;
 }
 
-function getPhaseEmoji(phase) {
-  const emojis = {
-    germination: '🌱',
-    sprouting: '🌱',
-    seedling: '🌿',
-    vegetative: '🍃',
-    leafing: '🍃',
-    rooting: '🌿',
-    preflower: '🌸',
-    flowering: '🌸',
-    blooming: '🌺',
-    fruiting: '🍅',
-    tuberization: '🥔',
-    bulking: '🥔',
-    harvest: '🌾',
-    maturation: '🌾',
-    establishment: '🌱',
-    dormancy: '😴'
-  };
-  return emojis[phase] || '📅';
-}
-
-function getPhaseCheckpoints(phase, plantData) {
-  const checkpoints = {
-    'germination': 'Sprouting progress, moisture levels, temperature',
-    'seedling': 'Leaf development, stem strength, pest signs',
-    'vegetative': 'Growth rate, leaf color, branching, training needs',
-    'flowering': 'Flower development, pollination, nutrient needs',
-    'fruiting': 'Fruit set, size development, ripening signs',
-    'harvest': 'Ripeness indicators, harvest timing'
-  };
-  
-  let phaseChecks = checkpoints[phase] || 'General plant health, growth progress';
-  
-  // Add plant-specific problems to watch for
-  if (plantData.commonProblems) {
-    const problems = Object.keys(plantData.commonProblems).slice(0, 3).join(', ');
-    phaseChecks += `\nCommon issues: ${problems}`;
-  }
-  
-  return phaseChecks;
-}
-
 async function showEventDetails(event) {
   const modal = document.createElement('div');
   modal.className = 'fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center p-4 z-50';
@@ -1712,8 +1734,11 @@ async function importSelectedTemplate() {
     // Refresh calendar
     calendar.refetchEvents();
     
-    // Close modal
-    document.querySelector('.fixed').remove();
+    // Close modal more robustly
+    const modal = document.querySelector('.fixed');
+    if (modal) {
+      modal.remove();
+    }
     
     // Show success message
     showNotification(
@@ -1762,19 +1787,6 @@ function showNotification(message, type = 'info') {
 
 // Make functions globally available
 window.importSelectedTemplate = importSelectedTemplate;
-
-// Helper function to get phase icon
-function getPhaseIcon(phase) {
-  const icons = {
-    'germination': '🌱',
-    'seedling': '🌿',
-    'vegetative': '🍃',
-    'preflower': '🌸',
-    'flowering': '🌸',
-    'harvest': '🌾'
-  };
-  return icons[phase.toLowerCase()] || '🌱';
-}
 
 // Check seasonal timing and show warning if needed
 function checkSeasonalTiming(plantKey, environment, plantingDate) {

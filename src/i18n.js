@@ -29,7 +29,7 @@ export const TRANSLATIONS = {
     
     // Buttons
     'btn.add_event': 'Termin hinzufügen',
-    'btn.add_planting': 'Pflanzung hinzufügen',
+    'btn.add_planting': 'Pflanze hinzufügen',
     'btn.import_template': 'Gartenplan importieren',
     'btn.my_plants': 'Meine Pflanzen',
     'btn.clear_calendar': 'Kalender leeren',
@@ -222,7 +222,19 @@ export const TRANSLATIONS = {
     
     // Error Messages
     'error.title': 'Fehler',
-    'error.loading_plants': 'Fehler beim Laden der Pflanzen. Bitte versuchen Sie es erneut.'
+    'error.loading_plants': 'Fehler beim Laden der Pflanzen. Bitte versuchen Sie es erneut.',
+    
+    // Google Calendar
+    'google.connected': 'Verbunden',
+    'google.not_connected': 'Nicht verbunden',
+    'google.reconnect_needed': 'Erneut verbinden',
+    'google.reconnect': 'Wiederverbinden',
+    'google.sync_on': 'EIN',
+    'google.sync_off': 'AUS',
+    'google.sync_now': 'SYNCHRONISIEREN',
+    'google.sync': 'Sync',
+    'google.reconnect_success': 'Erfolgreich wieder verbunden!',
+    'google.reconnect_failed': 'Wiederverbindung fehlgeschlagen. Bitte versuchen Sie es erneut.'
   },
   
   en: {
@@ -435,7 +447,19 @@ export const TRANSLATIONS = {
     
     // Error Messages
     'error.title': 'Error',
-    'error.loading_plants': 'Error loading plants. Please try again.'
+    'error.loading_plants': 'Error loading plants. Please try again.',
+    
+    // Google Calendar
+    'google.connected': 'Connected',
+    'google.not_connected': 'Not Connected',
+    'google.reconnect_needed': 'Reconnect needed',
+    'google.reconnect': 'Reconnect',
+    'google.sync_on': 'ON',
+    'google.sync_off': 'OFF',
+    'google.sync_now': 'SYNC',
+    'google.sync': 'Sync',
+    'google.reconnect_success': 'Successfully reconnected!',
+    'google.reconnect_failed': 'Reconnect failed. Please try again.'
   },
   
   fr: {
@@ -648,7 +672,19 @@ export const TRANSLATIONS = {
     
     // Error Messages
     'error.title': 'Erreur',
-    'error.loading_plants': 'Erreur lors du chargement des plantes. Veuillez réessayer.'
+    'error.loading_plants': 'Erreur lors du chargement des plantes. Veuillez réessayer.',
+    
+    // Google Calendar
+    'google.connected': 'Connecté',
+    'google.not_connected': 'Non connecté',
+    'google.reconnect_needed': 'Reconnexion nécessaire',
+    'google.reconnect': 'Reconnecter',
+    'google.sync_on': 'ON',
+    'google.sync_off': 'OFF',
+    'google.sync_now': 'SYNCHRONISER',
+    'google.sync': 'Sync',
+    'google.reconnect_success': 'Reconnecté avec succès!',
+    'google.reconnect_failed': 'La reconnexion a échoué. Veuillez réessayer.'
   },
   
   es: {
@@ -774,7 +810,7 @@ export const TRANSLATIONS = {
     'template.select.required': 'Por favor selecciona un plan de jardín.',
     
     // Garden Categories
-    'garden.ornamental': 'Jardín Ornamental',
+    'garden.ornamental': 'Jardín Ornamentale',
     'garden.vegetable_fruit': 'Jardín de Vegetales y Frutas',
     'garden.herb': 'Jardín de Hierbas',
     'garden.balcony': 'Balcón y Terraza',
@@ -826,7 +862,7 @@ export const TRANSLATIONS = {
     'month.2': 'Febrero',
     'month.3': 'Marzo',
     'month.4': 'Abril',
-    'month.5': 'Mayo',
+    'month.5': 'Mago',
     'month.6': 'Junio',
     'month.7': 'Julio',
     'month.8': 'Agosto',
@@ -861,7 +897,19 @@ export const TRANSLATIONS = {
     
     // Error Messages
     'error.title': 'Error',
-    'error.loading_plants': 'Error al cargar las plantas. Por favor, inténtelo de nuevo.'
+    'error.loading_plants': 'Error al cargar las plantas. Por favor, inténtelo de nuevo.',
+    
+    // Google Calendar
+    'google.connected': 'Conectado',
+    'google.not_connected': 'No conectado',
+    'google.reconnect_needed': 'Necesita reconectar',
+    'google.reconnect': 'Reconectar',
+    'google.sync_on': 'ON',
+    'google.sync_off': 'OFF',
+    'google.sync_now': 'SINCRONIZAR',
+    'google.sync': 'Sincronizar',
+    'google.reconnect_success': '¡Reconectado con éxito!',
+    'google.reconnect_failed': 'La reconexión falló. Por favor, inténtelo de nuevo.'
   },
   
   it: {
@@ -1074,7 +1122,19 @@ export const TRANSLATIONS = {
     
     // Error Messages
     'error.title': 'Errore',
-    'error.loading_plants': 'Errore durante il caricamento delle piante. Per favore riprova.'
+    'error.loading_plants': 'Errore durante il caricamento delle piante. Per favore riprova.',
+    
+    // Google Calendar
+    'google.connected': 'Connesso',
+    'google.not_connected': 'Non connesso',
+    'google.reconnect_needed': 'Riconnessione necessaria',
+    'google.reconnect': 'Riconnetti',
+    'google.sync_on': 'ON',
+    'google.sync_off': 'OFF',
+    'google.sync_now': 'SINCRONIZZA',
+    'google.sync': 'Sincronizza',
+    'google.reconnect_success': 'Riconnesso con successo!',
+    'google.reconnect_failed': 'Riconnessione non riuscita. Per favore riprova.'
   }
 };
 

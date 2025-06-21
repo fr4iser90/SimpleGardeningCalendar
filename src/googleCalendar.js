@@ -1,6 +1,5 @@
 /**
- * Google Calendar API Integration - FIXED VERSION using exact shift planner pattern
- * Solves the "Permission already granted" callback timing issue
+ * Google Calendar API Integration - REFACTORED for smart connection flow
  */
 
 let tokenClient = null;
@@ -9,12 +8,8 @@ let isSignedIn = false;
 
 // Initialize Google Calendar integration
 export async function initialize(googleClientId) {
-  // Load Google Identity Services script if not already loaded
-  if (!window.google?.accounts?.oauth2) {
-    await loadGoogleIdentityServices();
-  }
-  
-  console.log('✅ Google Calendar initialized - ready for connection');
+  await loadGoogleIdentityServices();
+  console.log('✅ Google Calendar GSI script loaded and ready.');
   return true;
 }
 
@@ -34,84 +29,98 @@ function loadGoogleIdentityServices() {
   });
 }
 
-// FIXED: Use EXACT shift planner connection pattern with OPTIMIZATIONS
-export function setupGoogleCalendarConnection(clientIdInput, connectBtn, onSuccessCallback) {
-  if (!connectBtn || !clientIdInput) return;
+// The single, smart callback for the token client
+async function tokenCallback(tokenResponse) {
+  console.log('🔧 Token callback triggered:', tokenResponse);
   
-  connectBtn.addEventListener('click', async () => {
-    const clientId = clientIdInput.value.trim();
-    if (!clientId) {
-      alert('Please enter your Google Client ID');
-      return;
-    }
-
-    connectBtn.disabled = true;
-    connectBtn.textContent = 'Connecting...';
-    console.log('🔧 Starting OPTIMIZED Google Calendar connection...');
-
+  if (tokenResponse && tokenResponse.access_token) {
+    accessToken = tokenResponse.access_token;
+    isSignedIn = true;
+    console.log('✅ Google Calendar authenticated successfully');
+    
     try {
-      // Get saved user info for faster reconnection
-      const settings = new GoogleCalendarSettings().load();
-      const savedUserEmail = settings.userEmail || '';
-      
-      // OPTIMIZED: Create tokenClient with speed optimizations
-      if (!tokenClient) {
-        console.log('🔧 Creating OPTIMIZED tokenClient...');
-        tokenClient = google.accounts.oauth2.initTokenClient({
-          client_id: clientId,
-          scope: 'https://www.googleapis.com/auth/calendar https://www.googleapis.com/auth/calendar.events https://www.googleapis.com/auth/userinfo.email',
-          callback: async (tokenResponse) => {
-            console.log('🔧 Token callback triggered with response:', tokenResponse);
-            
-            if (tokenResponse && tokenResponse.access_token) {
-              accessToken = tokenResponse.access_token;
-              isSignedIn = true;
-              console.log('✅ Google Calendar authenticated successfully');
-              
-              // Save user email for faster future connections
-              try {
-                const userInfo = await getUserInfo();
-                if (userInfo && userInfo.email) {
-                  settings.userEmail = userInfo.email;
-                  new GoogleCalendarSettings().save(settings);
-                  console.log('💾 Saved user email for faster reconnection');
-                }
-              } catch (error) {
-                console.warn('Could not save user email:', error);
-              }
-              
-              // Call success callback exactly like shift planner
-              if (onSuccessCallback) {
-                await onSuccessCallback();
-              }
-            } else {
-              console.error('❌ No access token received:', tokenResponse);
-              alert('Failed to get access token');
-              connectBtn.disabled = false;
-              connectBtn.textContent = 'Connect to Google Calendar';
-            }
-          },
-          // SPEED OPTIMIZATIONS:
-          hint: savedUserEmail, // Pre-fill email if we have it
-          hosted_domain: '', // Allow any domain
-          prompt: '', // Don't force account selection if possible
-        });
+      const userInfo = await getUserInfo();
+      const calendars = await fetchCalendarList(); // Fetch calendar list
+      const settings = googleCalendarSettings.load();
+
+      if (userInfo && userInfo.email) {
+        settings.userEmail = userInfo.email;
       }
-      
-      console.log('🔧 Requesting access token with OPTIMIZATIONS...');
-      // EXACT shift planner pattern - direct requestAccessToken call
-      tokenClient.requestAccessToken({
-        prompt: savedUserEmail ? 'none' : 'select_account' // Skip account selection if we know the user
-      });
-      console.log('🔧 requestAccessToken called - waiting for callback...');
-      
+      if (calendars) {
+        // Store a simple map of ID -> Name for the UI to use
+        settings.calendarList = calendars.reduce((acc, cal) => {
+          acc[cal.id] = cal.summary;
+          return acc;
+        }, {});
+      }
+      googleCalendarSettings.save(settings);
+
     } catch (error) {
-      console.error('❌ Connection error:', error);
-      connectBtn.disabled = false;
-      connectBtn.textContent = 'Connect to Google Calendar';
-      alert('Connection failed: ' + error.message);
+      console.warn('Could not save user email or calendar list:', error);
     }
+    
+    document.dispatchEvent(new CustomEvent('googleCalendarStatusChanged', { detail: { isSignedIn: true } }));
+  } else {
+    console.error('❌ Token request failed:', tokenResponse);
+    isSignedIn = false;
+    document.dispatchEvent(new CustomEvent('googleCalendarStatusChanged', { detail: { isSignedIn: false, error: tokenResponse.error } }));
+  }
+}
+
+// Central function to initialize the client ONCE
+async function initializeClient() {
+  if (tokenClient) return;
+
+  await loadGoogleIdentityServices();
+  const settings = googleCalendarSettings.load();
+  if (!settings.clientId) {
+    throw new Error('Cannot initialize Google Client: Client ID not found in settings.');
+  }
+
+  console.log('🔧 Initializing Google Token Client for the first time...');
+  tokenClient = google.accounts.oauth2.initTokenClient({
+    client_id: settings.clientId,
+    scope: 'https://www.googleapis.com/auth/calendar https://www.googleapis.com/auth/calendar.events https://www.googleapis.com/auth/userinfo.email',
+    callback: tokenCallback,
   });
+}
+
+// NEW UNIFIED & SMART Connect Function
+export async function attemptSignIn(interactive = false) {
+  try {
+    await initializeClient();
+    // Let Google decide if a prompt is needed for interactive sessions.
+    // This provides a smoother experience than forcing 'select_account'.
+    const prompt = interactive ? '' : 'none';
+    console.log(`🚀 Attempting sign-in with prompt: '${prompt}'...`);
+    tokenClient.requestAccessToken({ prompt });
+  } catch (error) {
+    console.error('Sign-in attempt failed:', error);
+    throw error; // Re-throw for the caller
+  }
+}
+
+// DEPRECATED / REPLACED FUNCTIONS - Kept for reference or to be removed
+export function setupGoogleCalendarConnection(clientIdInput, connectBtn, onSuccessCallback) {
+  console.warn('setupGoogleCalendarConnection is deprecated. Use attemptSignIn(true) instead.');
+  if (connectBtn) {
+    connectBtn.addEventListener('click', async () => {
+      connectBtn.disabled = true;
+      connectBtn.textContent = 'Connecting...';
+      try {
+        await attemptSignIn(true);
+        // The 'googleCalendarStatusChanged' event will trigger the onSuccessCallback via the UI layer
+      } catch (e) {
+        connectBtn.disabled = false;
+        connectBtn.textContent = 'Connect to Google Calendar';
+      }
+    });
+  }
+}
+
+export async function reconnect() {
+  console.warn('reconnect is deprecated. Use attemptSignIn(true) instead.');
+  await attemptSignIn(true);
 }
 
 // Sign in using the new pattern (wrapper for compatibility)
