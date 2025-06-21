@@ -1,6 +1,6 @@
 import { openDB } from 'idb';
-import { t } from '../../i18n.js';
-import { getAvailableTemplates, importGardenTemplate } from '../../gardenTemplates.js';
+import { t } from '../../core/i18n/index.js';
+import { getAvailableTemplates, importGardenTemplate } from '../../services/TemplateService.js';
 
 export function showTemplateImportModal() {
   const modal = document.createElement('div');
@@ -114,56 +114,49 @@ async function importSelectedTemplate() {
   const templateSelect = document.getElementById('templateSelect');
   const yearSelect = document.getElementById('yearSelect');
   const importBtn = document.getElementById('importBtn');
-  
+  const modal = document.querySelector('.fixed');
+
   if (templateSelect.value === '') {
     showNotification(t('template.select.required'), 'error');
     return;
   }
-  
+
+  // Check for duplicate import
+  const templates = getAvailableTemplates();
+  const selectedTemplate = templates[templateSelect.value];
+  const year = parseInt(yearSelect.value);
+  const db = await openDB('gardening-calendar');
+  const allEvents = await db.getAll('events');
+  const alreadyImported = allEvents.some(ev => ev.templateName === selectedTemplate.name && ev.date.startsWith(year.toString()));
+  if (alreadyImported) {
+    const confirmMsg = `${t('template.import.success', {count: '', name: selectedTemplate.name, year: year})}\n\n${t('common.warning')}: ${t('template.import.button')}?`;
+    if (!window.confirm(`Gartenplan "${selectedTemplate.name}" für ${year} wurde bereits importiert.\n\nNochmal importieren?`)) {
+      // Modal bleibt offen, Import abgebrochen
+      importBtn.textContent = t('template.import.button');
+      importBtn.disabled = false;
+      return;
+    }
+  }
+
   // Show loading state
   const originalText = importBtn.textContent;
   importBtn.textContent = t('template.import.loading');
   importBtn.disabled = true;
-  
+
   try {
-    const templates = getAvailableTemplates();
-    const selectedTemplate = templates[templateSelect.value];
-    const year = parseInt(yearSelect.value);
-    
     // Import template events
     const events = await importGardenTemplate(selectedTemplate, year);
-    
-    // Save events to database
-    const db = await openDB('gardening-calendar');
-    const tx = db.transaction('events', 'readwrite');
-    
-    for (const event of events) {
-      await tx.objectStore('events').add({
-        title: event.title,
-        date: event.date,
-        type: event.type,
-        description: event.description,
-        priority: event.priority,
-        templateCategory: event.templateCategory,
-        templateName: event.templateName,
-        language: event.language,
-        isTemplate: event.isTemplate
-      });
-    }
-    
-    await tx.complete;
-    
+
     // Refresh calendar
     if (window.calendar) {
       window.calendar.refetchEvents();
     }
-    
-    // Close modal more robustly
-    const modal = document.querySelector('.fixed');
+
+    // Close modal robust
     if (modal) {
       modal.remove();
     }
-    
+
     // Show success message
     showNotification(
       t('template.import.success', {
@@ -173,7 +166,7 @@ async function importSelectedTemplate() {
       }),
       'success'
     );
-    
+
   } catch (error) {
     console.error('Error importing template:', error);
     showNotification(t('template.import.error'), 'error');

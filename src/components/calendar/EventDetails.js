@@ -1,6 +1,6 @@
 import { format } from 'date-fns';
 import { openDB } from 'idb';
-import { t } from '../../i18n.js';
+import { t } from '../../core/i18n/index.js';
 import { getPlantNotes, addPlantNote, updatePlantingStatus } from '../../core/db/index.js';
 
 export async function showEventDetails(event) {

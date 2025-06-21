@@ -3,7 +3,7 @@ import dayGridPlugin from '@fullcalendar/daygrid';
 import interactionPlugin from '@fullcalendar/interaction';
 import { openDB } from 'idb';
 import { getEventColor } from '../../utils/eventUtils.js';
-import { t, updateUITranslations } from '../../i18n.js';
+import { t, updateUITranslations } from '../../core/i18n/index.js';
 import { initializeDB } from '../../core/db/index.js';
 import * as googleCalendar from '../../services/GoogleCalendar/GoogleCalendarApi.js';
 import { performBidirectionalSync } from '../../services/GoogleCalendar/GoogleCalendarSync.js';

@@ -1,0 +1,233 @@
+// Spanish translations for SimpleGardeningCalendar
+export const es = {
+  // UI Elements
+  'app.title': 'Calendario de Jardinería Simple',
+  'nav.calendar': 'Calendario',
+  'nav.plants': 'Plantas',
+  'nav.settings': 'Configuración',
+  'ui.quick_actions': 'Acciones Rápidas',
+  'ui.plant_categories': 'Categorías de Plantas',
+  'ui.upcoming_tasks': 'Tareas Pendientes',
+  'ui.no_upcoming_tasks': 'No hay tareas pendientes',
+  'ui.weather': 'Clima',
+  'ui.weather_info': 'Se mostrarán las informaciones meteorológicas locales aquí',
+  'ui.built_with': 'Construido con',
+  'ui.language': 'Idioma:',
+  
+  // Buttons
+  'btn.add_event': 'Agregar Evento',
+  'btn.add_planting': 'Agregar Plantación',
+  'btn.import_template': 'Importar Plan de Jardín',
+  'btn.my_plants': 'Mis Plantas',
+  'btn.clear_calendar': 'Limpiar Calendario',
+  'btn.save': 'Guardar',
+  'btn.cancel': 'Cancelar',
+  'btn.delete': 'Eliminar',
+  'btn.edit': 'Editar',
+  'btn.close': 'Cerrar',
+  'btn.view_details': 'Ver Detalles',
+  'btn.add_note': 'Agregar Nota',
+  
+  // Add Event Modal
+  'modal.add_event.title': 'Agregar Evento de Jardín',
+  'modal.event_type.label': 'Tipo de Evento',
+  'modal.event_type.custom': 'Evento Personalizado',
+  'modal.event_type.planting': 'Comenzar Plantación',
+  'modal.title.label': 'Título',
+  'modal.type.label': 'Tipo',
+  'modal.environment.label': 'Ambiente de Cultivo',
+  'modal.region.label': 'Región Climática',
+  'modal.plant_category.label': 'Categoría de Planta',
+  'modal.plant_category.all': 'Todas las Categorías',
+  'modal.plant_type.label': 'Tipo de Planta',
+  'modal.plant_type.select': 'Seleccionar Planta...',
+  'modal.custom_name.label': 'Nombre Personalizado (Opcional)',
+  'modal.custom_name.help': 'Dale a tu planta un nombre único para facilitar el seguimiento',
+  'modal.location.label': 'Ubicación',
+  'modal.date.label': 'Fecha',
+  'modal.description.label': 'Descripción',
+  'modal.phase_duration.title': '⏱️ Duración de Fases (Opcional)',
+  'modal.phase_duration.help': 'Ajusta las duraciones de las fases si tu variedad difiere del tiempo estándar',
+  'modal.phase_duration.days': 'días',
+  'modal.phase_duration.default': 'predeterminado:',
+  'modal.phase_duration.tip': '💡 Consejo: La floración del cannabis puede variar de 6-12 semanas según la cepa',
+  'modal.reminders.title': '🗓️ Recordatorios Automáticos',
+  'modal.reminders.watering': '💧 Recordatorios de riego',
+  'modal.reminders.watering_interval': 'Intervalo:',
+  'modal.reminders.fertilizing': '🌿 Recordatorios de fertilización',
+  'modal.reminders.fertilizing_interval': 'Intervalo:',
+  'modal.reminders.fertilizing_delay': 'Comenzar después de:',
+  'modal.reminders.phase_transitions': '📋 Recordatorios de transición de fase',
+  'modal.reminders.weekly_checks': '🔍 Controles semanales',
+  'modal.reminders.harvest': '🌾 Recordatorio de cosecha',
+  'modal.reminders.google_sync': '🗓️ Sincronizar con Google Calendar',
+  'modal.interval.daily': 'Diario',
+  'modal.interval.every_2_days': 'Cada 2 días',
+  'modal.interval.every_3_days': 'Cada 3 días',
+  'modal.interval.every_4_days': 'Cada 4 días',
+  'modal.interval.weekly': 'Semanal',
+  'modal.interval.every_2_weeks': 'Cada 2 semanas',
+  'modal.interval.every_3_weeks': 'Cada 3 semanas',
+  'modal.interval.monthly': 'Mensual',
+  'modal.interval.immediately': 'Inmediatamente',
+  'modal.interval.1_week': '1 semana',
+  'modal.interval.2_weeks': '2 semanas',
+  
+  // Plant Info Display
+  'plant.info.growing_cycle': 'Ciclo de crecimiento:',
+  'plant.info.days': 'días',
+  'plant.info.weeks': 'semanas',
+  'plant.info.phases': 'Fases:',
+  'plant.info.temperature': 'Temperatura:',
+  'plant.info.light': 'Luz:',
+  'plant.info.legal_notice': '⚠️ Aviso Legal:',
+  'plant.info.growing': 'Cultivo',
+  'plant.info.only': 'solo',
+  'plant.info.natural_timing': 'Las fases son determinadas por las estaciones naturales y no se pueden ajustar',
+  
+  // Seasonal Timing
+  'timing.good': '✅ ¡Buen momento!',
+  'timing.notice': '⚠️ Aviso de Tiempo',
+  
+  // Location Placeholders
+  'location.indoor.placeholder': 'ej: Carpa Interior, Cuarto de Cultivo, Alféizar',
+  'location.outdoor.placeholder': 'ej: Jardín Trasero, Cama Elevada, Campo',
+  'location.greenhouse.placeholder': 'ej: Invernadero Sección A, Túnel',
+  'location.default.indoor': 'Jardín Interior',
+  'location.default.outdoor': 'Jardín Exterior',
+  'location.default.greenhouse': 'Invernadero',
+  
+  // Custom Name Examples
+  'custom_name.cannabis': 'ej: "Mi {name} #1"',
+  'custom_name.vegetables': 'ej: "Jardín Cocina {name}"',
+  'custom_name.herbs': 'ej: "Alféizar {name}"',
+  'custom_name.fruits': 'ej: "Jardín {name}"',
+  
+  // Template Import
+  'template.modal.title': 'Importar Plan de Jardín',
+  'template.modal.description': 'Elige un plan de jardín prefabricado para importar automáticamente todas las tareas importantes de jardinería para el año.',
+  'template.select.label': 'Seleccionar Plan de Jardín:',
+  'template.select.placeholder': '-- Por favor selecciona --',
+  'template.year.label': 'Año para Importar:',
+  'template.year.current': 'Año Actual',
+  'template.year.next': 'Próximo Año',
+  'template.warning.title': 'Nota:',
+  'template.warning.text': 'La importación agregará todas las citas del plan de jardín a tu calendario. Las citas existentes no serán sobrescritas.',
+  'template.description.title': 'Descripción:',
+  'template.task.count': 'tareas de jardinería durante todo el año',
+  'template.import.button': 'Importar Plan de Jardín',
+  'template.import.loading': 'Importando...',
+  'template.import.success': '¡Éxito! {count} tareas de jardinería de "{name}" para {year} importadas.',
+  'template.import.error': 'Error al importar el plan de jardín. Por favor intenta de nuevo.',
+  'template.select.required': 'Por favor selecciona un plan de jardín.',
+  
+  // Garden Categories
+  'garden.ornamental': 'Jardín Ornamental',
+  'garden.vegetable_fruit': 'Jardín de Vegetales y Frutas',
+  'garden.herb': 'Jardín de Hierbas',
+  'garden.balcony': 'Balcón y Terraza',
+  'garden.complete': 'Jardín Completo',
+  
+  // Plant Categories
+  'plant.category.vegetables': 'Vegetales',
+  'plant.category.fruits': 'Frutas',
+  'plant.category.herbs': 'Hierbas',
+  'plant.category.flowers': 'Flores',
+  'plant.category.trees': 'Árboles',
+  'plant.category.cannabis': 'Cannabis',
+  'plant.category.fruit_trees': 'Árboles Frutales',
+  
+  // Growing Environments
+  'environment.indoor': 'Interior',
+  'environment.outdoor': 'Exterior',
+  'environment.greenhouse': 'Invernadero',
+  
+  // Seasonal Regions
+  'region.temperate_north': 'Templado Norte',
+  'region.temperate_south': 'Templado Sur',
+  'region.tropical': 'Tropical',
+  'region.mediterranean': 'Mediterráneo',
+  
+  // Task Types
+  'task.planting': 'Plantación',
+  'task.watering': 'Riego',
+  'task.fertilizing': 'Fertilización',
+  'task.pruning': 'Poda',
+  'task.harvesting': 'Cosecha',
+  'task.maintenance': 'Mantenimiento',
+  
+  // Plant Phases
+  'phase.germination': 'Germinación',
+  'phase.seedling': 'Plántula',
+  'phase.vegetative': 'Vegetativo',
+  'phase.preflower': 'Prefloración',
+  'phase.flowering': 'Floración',
+  'phase.harvest': 'Cosecha',
+  
+  // Priority Levels
+  'priority.high': 'Alto',
+  'priority.medium': 'Medio',
+  'priority.low': 'Bajo',
+  
+  // Months
+  'month.1': 'Enero',
+  'month.2': 'Febrero',
+  'month.3': 'Marzo',
+  'month.4': 'Abril',
+  'month.5': 'Mayo',
+  'month.6': 'Junio',
+  'month.7': 'Julio',
+  'month.8': 'Agosto',
+  'month.9': 'Septiembre',
+  'month.10': 'Octubre',
+  'month.11': 'Noviembre',
+  'month.12': 'Diciembre',
+  
+  // Settings
+  'settings.language': 'Idioma',
+  'settings.theme': 'Tema',
+  'settings.notifications': 'Notificaciones',
+  'settings.data': 'Datos',
+  'settings.export': 'Exportar Datos',
+  'settings.import': 'Importar Datos',
+  
+  // Common
+  'common.loading': 'Cargando...',
+  'common.error': 'Error',
+  'common.success': 'Éxito',
+  'common.warning': 'Advertencia',
+  'common.info': 'Info',
+  
+  // My Plants Modal
+  'plants.my_active_plants': 'Mis Plantas Activas',
+  'plants.no_active': 'No se encontraron plantas activas',
+  'plants.plant_type': 'Tipo de Planta',
+  'plants.location': 'Ubicación',
+  'plants.started': 'Iniciado',
+  'plants.current_phase': 'Fase Actual',
+  'plants.expected_completion': 'Finalización Esperada',
+  
+  // Error Messages
+  'error.title': 'Error',
+  'error.loading_plants': 'Error al cargar las plantas. Por favor, inténtelo de nuevo.',
+  
+  // Google Calendar
+  'google.connected': 'Conectado',
+  'google.not_connected': 'No conectado',
+  'google.reconnect_needed': 'Necesita reconectar',
+  'google.reconnect': 'Reconectar',
+  'google.sync_on': 'ON',
+  'google.sync_off': 'OFF',
+  'google.sync_now': 'SINCRONIZAR',
+  'google.sync': 'Sincronizar',
+  'google.reconnect_success': '¡Reconectado con éxito!',
+  'google.reconnect_failed': 'La reconexión falló. Por favor, inténtelo de nuevo.',
+  'google.toggle_autosync_title': 'Haga clic para alternar la sincronización automática',
+  'google.autosync_on_notif': 'Sincronización automática activada',
+  'google.autosync_off_notif': 'Sincronización automática desactivada',
+  'google.sync_report_title': 'Informe de sincronización',
+  'google.sync_report_details': '{exported} exportados, {imported} importados, {updated} actualizados.',
+  'google.initial_sync_prompt': '¿Desea sincronizar todos sus eventos locales con "{calendarName}" ahora?',
+  'google.error.no_calendar_selected': 'No hay un calendario seleccionado. Por favor, elija uno en la configuración de Google.',
+  'google.status.no_calendar_selected': 'No hay calendario seleccionado'
+}; 

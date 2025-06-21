@@ -1,5 +1,5 @@
 import { openDB } from 'idb';
-import { t } from '../../i18n.js';
+import { t } from '../../core/i18n/index.js';
 import { 
   getPlantRegistry, 
   PLANT_CATEGORIES, 

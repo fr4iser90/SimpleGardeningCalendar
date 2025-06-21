@@ -1,4 +1,4 @@
-import { t, getCurrentLanguage, initializeI18n } from './i18n.js';
+import { t, getCurrentLanguage, initializeI18n } from './core/i18n/index.js';
 import { renderAppShell } from './components/app/AppShell.js';
 import { showPlantLibraryModal } from './components/app/PlantLibrary.js';
 import { showMyPlantsModal } from './components/app/PlantsList.js';
@@ -18,7 +18,7 @@ export function initializeApp() {
     isDarkMode,
     onLanguageChange: async (e) => {
       const newLanguage = e.target.value;
-      const { setLanguage } = await import('./i18n.js');
+      const { setLanguage } = await import('./core/i18n/index.js');
       setLanguage(newLanguage);
       location.reload();
     },

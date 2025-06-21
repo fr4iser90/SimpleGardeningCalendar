@@ -1,12 +1,12 @@
 // Garden Calendar Templates - Internationalized system
 // Supports multiple languages with appropriate regional adaptations
 
-import { getCurrentLanguage } from '../i18n.js';
-import { getAvailableTemplatesEn, GARDEN_TEMPLATE_CATEGORIES_EN } from '../gardenTemplates_en.js';
-import { getAvailableTemplatesDe, GARDEN_TEMPLATE_CATEGORIES_DE } from '../gardenTemplates_de.js';
-import { getAvailableTemplatesFr, GARDEN_TEMPLATE_CATEGORIES_FR } from '../gardenTemplates_fr.js';
-import { getAvailableTemplatesEs, GARDEN_TEMPLATE_CATEGORIES_ES } from '../gardenTemplates_es.js';
-import { getAvailableTemplatesIt, GARDEN_TEMPLATE_CATEGORIES_IT } from '../gardenTemplates_it.js';
+import { getCurrentLanguage } from '../core/i18n/index.js';
+import { getAvailableTemplatesEn, GARDEN_TEMPLATE_CATEGORIES_EN } from '../data/templates/en.js';
+import { getAvailableTemplatesDe, GARDEN_TEMPLATE_CATEGORIES_DE } from '../data/templates/de.js';
+import { getAvailableTemplatesFr, GARDEN_TEMPLATE_CATEGORIES_FR } from '../data/templates/fr.js';
+import { getAvailableTemplatesEs, GARDEN_TEMPLATE_CATEGORIES_ES } from '../data/templates/es.js';
+import { getAvailableTemplatesIt, GARDEN_TEMPLATE_CATEGORIES_IT } from '../data/templates/it.js';
 import { addEvent } from './EventService.js';
 import { validateTemplate } from '../utils/validators.js';
 

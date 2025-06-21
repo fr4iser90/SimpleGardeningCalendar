@@ -1,4 +1,4 @@
-import { t } from '../../i18n.js';
+import { t } from '../../core/i18n/index.js';
 import { openDB } from 'idb';
 import { DB_NAME, DB_VERSION } from '../../core/db/connection.js';
 import { getAuthState } from './GoogleCalendarApi.js';

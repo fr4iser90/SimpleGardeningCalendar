@@ -1,4 +1,4 @@
-import { t } from '../../i18n.js';
+import { t } from '../../core/i18n/index.js';
 import { googleCalendarSettings } from './GoogleCalendarSettings.js';
 import { formatDate } from '../../utils/dateUtils.js';
 import { isGardeningEvent, convertToGoogleEvent, convertFromGoogleEvent } from '../../utils/eventUtils.js';
