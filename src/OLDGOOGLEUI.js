@@ -1,4 +1,4 @@
-import { googleCalendar, googleCalendarSettings } from './googleCalendar.js';
+import { googleCalendar, googleCalendarSettings } from './OLDGOOGLE.js';
 import { openDB } from 'idb';
 
 // Show Google Calendar setup modal with enhanced sync options
@@ -790,7 +790,7 @@ export async function syncAllEventsToGoogle() {
   }
   
   // Call the internal export function from googleCalendar module
-  const { exportLocalEventsToGoogle } = await import('./googleCalendar.js');
+  const { exportLocalEventsToGoogle } = await import('./OLDGOOGLE.js');
   return await exportLocalEventsToGoogle();
 }
 
@@ -802,7 +802,7 @@ export async function importEventsFromGoogle() {
   }
   
   // Call the internal import function from googleCalendar module
-  const { importGoogleEvents } = await import('./googleCalendar.js');
+  const { importGoogleEvents } = await import('./OLDGOOGLE.js');
   return await importGoogleEvents();
 }
 
@@ -991,7 +991,7 @@ export function initGoogleCalendarModal() {
     console.log('🔄 Starting Google Calendar connection...');
     
     // Import the working function from shift planner pattern
-    import('./googleCalendar.js').then(module => {
+    import('./OLDGOOGLE.js').then(module => {
         console.log('🔧 Setting up Google Calendar with EXACT shift planner pattern...');
         
         // Use the EXACT shift planner setupGoogleCalendarConnection function
