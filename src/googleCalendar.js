@@ -34,7 +34,7 @@ function loadGoogleIdentityServices() {
   });
 }
 
-// FIXED: Use EXACT shift planner connection pattern
+// FIXED: Use EXACT shift planner connection pattern with OPTIMIZATIONS
 export function setupGoogleCalendarConnection(clientIdInput, connectBtn, onSuccessCallback) {
   if (!connectBtn || !clientIdInput) return;
   
@@ -47,15 +47,19 @@ export function setupGoogleCalendarConnection(clientIdInput, connectBtn, onSucce
 
     connectBtn.disabled = true;
     connectBtn.textContent = 'Connecting...';
-    console.log('🔧 Starting Google Calendar connection with EXACT shift planner pattern...');
+    console.log('🔧 Starting OPTIMIZED Google Calendar connection...');
 
     try {
-      // EXACT shift planner pattern - create tokenClient in click handler
+      // Get saved user info for faster reconnection
+      const settings = new GoogleCalendarSettings().load();
+      const savedUserEmail = settings.userEmail || '';
+      
+      // OPTIMIZED: Create tokenClient with speed optimizations
       if (!tokenClient) {
-        console.log('🔧 Creating tokenClient with EXACT shift planner pattern...');
+        console.log('🔧 Creating OPTIMIZED tokenClient...');
         tokenClient = google.accounts.oauth2.initTokenClient({
           client_id: clientId,
-          scope: 'https://www.googleapis.com/auth/calendar https://www.googleapis.com/auth/calendar.events',
+          scope: 'https://www.googleapis.com/auth/calendar https://www.googleapis.com/auth/calendar.events https://www.googleapis.com/auth/userinfo.email',
           callback: async (tokenResponse) => {
             console.log('🔧 Token callback triggered with response:', tokenResponse);
             
@@ -63,6 +67,18 @@ export function setupGoogleCalendarConnection(clientIdInput, connectBtn, onSucce
               accessToken = tokenResponse.access_token;
               isSignedIn = true;
               console.log('✅ Google Calendar authenticated successfully');
+              
+              // Save user email for faster future connections
+              try {
+                const userInfo = await getUserInfo();
+                if (userInfo && userInfo.email) {
+                  settings.userEmail = userInfo.email;
+                  new GoogleCalendarSettings().save(settings);
+                  console.log('💾 Saved user email for faster reconnection');
+                }
+              } catch (error) {
+                console.warn('Could not save user email:', error);
+              }
               
               // Call success callback exactly like shift planner
               if (onSuccessCallback) {
@@ -74,13 +90,19 @@ export function setupGoogleCalendarConnection(clientIdInput, connectBtn, onSucce
               connectBtn.disabled = false;
               connectBtn.textContent = 'Connect to Google Calendar';
             }
-          }
+          },
+          // SPEED OPTIMIZATIONS:
+          hint: savedUserEmail, // Pre-fill email if we have it
+          hosted_domain: '', // Allow any domain
+          prompt: '', // Don't force account selection if possible
         });
       }
       
-      console.log('🔧 Requesting access token with EXACT shift planner pattern...');
+      console.log('🔧 Requesting access token with OPTIMIZATIONS...');
       // EXACT shift planner pattern - direct requestAccessToken call
-      tokenClient.requestAccessToken();
+      tokenClient.requestAccessToken({
+        prompt: savedUserEmail ? 'none' : 'select_account' // Skip account selection if we know the user
+      });
       console.log('🔧 requestAccessToken called - waiting for callback...');
       
     } catch (error) {
@@ -390,6 +412,7 @@ export class GoogleCalendarSettings {
     }
     return {
       clientId: '',
+      userEmail: '',
       selectedCalendarId: 'primary',
       autoSync: false,
       bidirectionalSync: false,
