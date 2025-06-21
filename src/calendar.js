@@ -325,7 +325,7 @@ async function showAddEventModal(date, preselectedType = null) {
               </div>
               
               <div class="flex items-center">
-                <input type="checkbox" id="enableGoogleCalendarSync" name="enableGoogleCalendarSync" class="mr-2">
+                <input type="checkbox" id="enableGoogleCalendarSync" name="enableGoogleCalendarSync" checked class="mr-2">
                 <label for="enableGoogleCalendarSync" class="text-sm dark:text-gray-200">${t('modal.reminders.google_sync')}</label>
               </div>
             </div>
@@ -892,8 +892,42 @@ async function addPlantingWithOptions(plantType, startDate, location, customName
   }
   
   // Calculate harvest/completion date
-  const completionDate = new Date(currentDate);
-  completionDate.setDate(completionDate.getDate() + totalDays);
+  let completionDate = new Date(currentDate);
+  
+  // For outdoor plants, respect seasonal harvest windows
+  if (environment === 'outdoor' && plantData.seasonalTiming && plantData.seasonalTiming[region]?.harvestWindow) {
+    const harvestWindow = plantData.seasonalTiming[region].harvestWindow;
+    const currentYear = currentDate.getFullYear();
+    
+    // Parse harvest window dates
+    const harvestStart = new Date(`${currentYear}-${harvestWindow.start}`);
+    const harvestEnd = new Date(`${currentYear}-${harvestWindow.end}`);
+    
+    // If harvest end is in next year (like 01-15), adjust the year
+    if (harvestWindow.end.startsWith('01') || harvestWindow.end.startsWith('02')) {
+      harvestEnd.setFullYear(currentYear + 1);
+    }
+    
+    // Calculate based on phase duration
+    const calculatedDate = new Date(currentDate);
+    calculatedDate.setDate(calculatedDate.getDate() + totalDays);
+    
+    // Use the calculated date if it falls within the harvest window
+    if (calculatedDate >= harvestStart && calculatedDate <= harvestEnd) {
+      completionDate = calculatedDate;
+    } else {
+      // If calculated date is before harvest window, use harvest start
+      if (calculatedDate < harvestStart) {
+        completionDate = harvestStart;
+      } else {
+        // If calculated date is after harvest window, use harvest end
+        completionDate = harvestEnd;
+      }
+    }
+  } else {
+    // For indoor/greenhouse or plants without seasonal timing, use phase duration
+    completionDate.setDate(completionDate.getDate() + totalDays);
+  }
   
   // Add planting record with environment information
   const planting = {
@@ -1090,6 +1124,22 @@ async function addPlantingWithOptions(plantType, startDate, location, customName
       if (plantData.seasonalTiming && plantData.seasonalTiming[region]?.harvestWindow) {
         const harvestWindow = plantData.seasonalTiming[region].harvestWindow;
         harvestDescription += `\n📅 Typical harvest window: ${harvestWindow.start} to ${harvestWindow.end}`;
+        
+        // Check if harvest date was adjusted and add notification
+        const calculatedDate = new Date(currentDate);
+        calculatedDate.setDate(calculatedDate.getDate() + totalDays);
+        const harvestStart = new Date(`${currentDate.getFullYear()}-${harvestWindow.start}`);
+        const harvestEnd = new Date(`${currentDate.getFullYear()}-${harvestWindow.end}`);
+        
+        // If harvest end is in next year, adjust the year
+        if (harvestWindow.end.startsWith('01') || harvestWindow.end.startsWith('02')) {
+          harvestEnd.setFullYear(currentDate.getFullYear() + 1);
+        }
+        
+        if (calculatedDate < harvestStart || calculatedDate > harvestEnd) {
+          harvestDescription += `\n\n⚠️ Note: Harvest date adjusted to fit seasonal window`;
+          harvestDescription += `\n   (Original calculation: ${calculatedDate.toLocaleDateString()})`;
+        }
       }
     }
     
