@@ -1151,8 +1151,8 @@ export function createLanguageSwitcher() {
   // Add change handler
   select.addEventListener('change', (e) => {
     setLanguage(e.target.value);
-    // Reload page to apply translations
-    window.location.reload();
+    // Update UI dynamically instead of reloading
+    updateUITranslations();
   });
   
   switcher.appendChild(label);
