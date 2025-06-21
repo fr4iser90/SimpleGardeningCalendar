@@ -515,9 +515,9 @@ async function viewPlantDetails(plantingId) {
             <div class="bg-gray-50 dark:bg-gray-700 rounded-lg p-4">
               <h3 class="font-semibold mb-3 dark:text-white">🌱 Growth Phases</h3>
               <div class="space-y-2">
-                ${planting.phases.map(phase => {
+                ${planting.phases ? Object.entries(planting.phases).map(([phase, data]) => {
                   const isCurrentPhase = phase.name === planting.currentPhase;
-                  const phaseDate = new Date(phase.startDate);
+                  const phaseDate = new Date(data.startDate);
                   const isPast = phaseDate < new Date();
                   
                   return `
@@ -529,7 +529,7 @@ async function viewPlantDetails(plantingId) {
                         <span class="text-lg">${getPhaseEmoji(phase.name)}</span>
                         <div>
                           <div class="font-medium text-sm dark:text-white">${phase.name}</div>
-                          <div class="text-xs text-gray-500 dark:text-gray-400">${phase.days} days</div>
+                          <div class="text-xs text-gray-500 dark:text-gray-400">${data.days} days</div>
                         </div>
                       </div>
                       <div class="text-right">
@@ -538,7 +538,7 @@ async function viewPlantDetails(plantingId) {
                       </div>
                     </div>
                   `;
-                }).join('')}
+                }).join('') : '<div class="text-gray-500 dark:text-gray-400">No phase information available</div>'}
               </div>
             </div>
           </div>
@@ -707,9 +707,9 @@ async function showPlantLibraryModal() {
               </div>
             ` : ''}
             <div class="text-sm text-gray-600 dark:text-gray-400 space-y-1">
-              <div><strong>Growing cycle:</strong> ${Object.values(plant.phases).reduce((sum, phase) => sum + phase.days, 0)} days (${Math.round(Object.values(plant.phases).reduce((sum, phase) => sum + phase.days, 0)/7)} weeks)</div>
-              ${plant.careTips.sunlight ? `<div><strong>Light:</strong> ${plant.careTips.sunlight}</div>` : ''}
-              ${plant.careTips.temperature ? `<div><strong>Temperature:</strong> ${plant.careTips.temperature}</div>` : ''}
+              <div><strong>Growing cycle:</strong> ${plant.phases ? Object.values(plant.phases).reduce((sum, phase) => sum + phase.days, 0) : 0} days (${plant.phases ? Math.round(Object.values(plant.phases).reduce((sum, phase) => sum + phase.days, 0)/7) : 0} weeks)</div>
+              ${plant.careTips && plant.careTips.sunlight ? `<div><strong>Light:</strong> ${plant.careTips.sunlight}</div>` : ''}
+              ${plant.careTips && plant.careTips.temperature ? `<div><strong>Temperature:</strong> ${plant.careTips.temperature}</div>` : ''}
             </div>
             <button onclick="showPlantDetails('${key}')" class="mt-3 w-full bg-green-500 text-white p-2 rounded hover:bg-green-600 text-sm">
               View Details
@@ -770,7 +770,7 @@ function showPlantDetailsModal(plant, plantKey) {
         <div>
           <h3 class="font-semibold mb-2 dark:text-white">Growing Phases</h3>
           <div class="space-y-2">
-            ${Object.entries(plant.phases).map(([phase, data]) => `
+            ${plant.phases ? Object.entries(plant.phases).map(([phase, data]) => `
               <div class="border dark:border-gray-600 rounded p-3">
                 <div class="flex justify-between items-center mb-1">
                   <strong class="dark:text-white">${phase.charAt(0).toUpperCase() + phase.slice(1)}</strong>
@@ -779,19 +779,19 @@ function showPlantDetailsModal(plant, plantKey) {
                 <div class="text-sm text-gray-600 dark:text-gray-400 mb-1">${data.description}</div>
                 <div class="text-sm"><strong>Care:</strong> ${data.care}</div>
               </div>
-            `).join('')}
+            `).join('') : '<div class="text-gray-500 dark:text-gray-400">No phase information available</div>'}
           </div>
         </div>
         
         <div>
           <h3 class="font-semibold mb-2 dark:text-white">Care Tips</h3>
           <div class="grid grid-cols-1 md:grid-cols-2 gap-3">
-            ${Object.entries(plant.careTips).map(([tip, value]) => `
+            ${plant.careTips ? Object.entries(plant.careTips).map(([tip, value]) => `
               <div class="text-sm">
                 <strong class="dark:text-white">${tip.charAt(0).toUpperCase() + tip.slice(1)}:</strong>
                 <div class="text-gray-600 dark:text-gray-400">${value}</div>
               </div>
-            `).join('')}
+            `).join('') : '<div class="text-gray-500 dark:text-gray-400">No care tips available</div>'}
           </div>
         </div>
         

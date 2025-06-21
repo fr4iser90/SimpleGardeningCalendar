@@ -115,14 +115,30 @@ export async function initializeCalendar() {
     }
   };
 
+  // Add Clear Calendar button
+  const clearCalendarBtn = document.createElement('button');
+  clearCalendarBtn.innerHTML = '<i class="fas fa-trash mr-2"></i>' + t('btn.clear_calendar');
+  clearCalendarBtn.className = 'px-4 py-2 bg-red-500 text-white rounded hover:bg-red-600';
+  clearCalendarBtn.onclick = () => showClearCalendarModal();
+
   buttonGroup.appendChild(addEventBtn);
   buttonGroup.appendChild(addPlantingBtn);
   buttonGroup.appendChild(templateImportBtn);
   buttonGroup.appendChild(myPlantsBtn);
+  buttonGroup.appendChild(clearCalendarBtn);
+  
+  // Add Google Calendar status display
+  const googleCalendarStatus = document.createElement('div');
+  googleCalendarStatus.id = 'googleCalendarStatusDisplay';
+  googleCalendarStatus.className = 'ml-4 text-sm text-gray-600 dark:text-gray-400 flex items-center';
+  buttonGroup.appendChild(googleCalendarStatus);
   
   controls.appendChild(buttonGroup);
   
   calendarEl.parentNode.insertBefore(controls, calendarEl);
+
+  // Initialize Google Calendar status display
+  updateGoogleCalendarStatus();
 
   // Listen for language changes
   document.addEventListener('languageChanged', () => {
@@ -131,13 +147,90 @@ export async function initializeCalendar() {
     addPlantingBtn.innerHTML = '<i class="fas fa-seedling mr-2"></i>' + t('btn.add_planting');
     templateImportBtn.innerHTML = '<i class="fas fa-download mr-2"></i>' + t('btn.import_template');
     myPlantsBtn.innerHTML = '<i class="fas fa-leaf mr-2"></i>' + t('btn.my_plants');
+    clearCalendarBtn.innerHTML = '<i class="fas fa-trash mr-2"></i>' + t('btn.clear_calendar');
     
     // Update other UI elements
     updateUITranslations();
+    updateGoogleCalendarStatus();
+  });
+  
+  // Make updateGoogleCalendarStatus globally available for other modules
+  window.updateGoogleCalendarStatus = updateGoogleCalendarStatus;
+  
+  // Listen for Google Calendar status changes
+  document.addEventListener('googleCalendarStatusChanged', () => {
+    updateGoogleCalendarStatus();
   });
   
   return calendar;
 }
+
+// Function to update Google Calendar status display
+function updateGoogleCalendarStatus() {
+  const statusDisplay = document.getElementById('googleCalendarStatusDisplay');
+  if (!statusDisplay) return;
+  
+  // Check if Google Calendar is connected by checking the actual storage structure
+  let isConnected = false;
+  let selectedCalendar = null;
+  let autoSync = false;
+  
+  try {
+    const googleCalendarSettings = localStorage.getItem('googleCalendarSettings');
+    if (googleCalendarSettings) {
+      const settings = JSON.parse(googleCalendarSettings);
+      // Check if we have user email (indicates successful authentication)
+      isConnected = !!(settings.userEmail && settings.userEmail.trim());
+      selectedCalendar = settings.selectedCalendarId || 'primary';
+      autoSync = settings.autoSync || false;
+    }
+  } catch (error) {
+    console.warn('Failed to parse Google Calendar settings:', error);
+    isConnected = false;
+  }
+  
+  // Also check if Google Calendar API is actually signed in
+  if (window.googleCalendar && window.googleCalendar.isSignedIn) {
+    isConnected = window.googleCalendar.isSignedIn;
+  }
+  
+  if (!isConnected) {
+    statusDisplay.innerHTML = `
+      <span class="text-red-600 dark:text-red-400">
+        <i class="fas fa-times-circle mr-1"></i>Not connected
+      </span>
+    `;
+  } else {
+    const calendarName = selectedCalendar === 'primary' ? 'Primary Calendar' : selectedCalendar;
+    const syncStatus = autoSync ? 'ON' : 'OFF';
+    const syncButton = autoSync ? '' : `
+      <button class="ml-2 px-2 py-1 bg-blue-500 text-white text-xs rounded hover:bg-blue-600" onclick="triggerGoogleCalendarSync()">
+        SYNC
+      </button>
+    `;
+    
+    statusDisplay.innerHTML = `
+      <span class="text-green-600 dark:text-green-400">
+        <i class="fas fa-check-circle mr-1"></i>Connected
+      </span>
+      <span class="mx-2">📅 ${calendarName}</span>
+      <span class="mx-2">| Sync ${syncStatus}</span>
+      ${syncButton}
+    `;
+  }
+}
+
+// Make sync function available globally
+window.triggerGoogleCalendarSync = async function() {
+  try {
+    const { syncAllEvents } = await import('./googleCalendarUI.js');
+    await syncAllEvents();
+    showNotification('Google Calendar sync completed', 'success');
+  } catch (error) {
+    console.error('Sync failed:', error);
+    showNotification('Google Calendar sync failed', 'error');
+  }
+};
 
 function getEventColor(type) {
   const colors = {
@@ -1646,3 +1739,109 @@ function checkSeasonalTiming(plantKey, environment, plantingDate) {
     seasonalDetails.innerHTML = `<span class="text-yellow-700 dark:text-yellow-300">${validation.message}</span>`;
   }
 }
+
+// Function to show clear calendar confirmation modal
+function showClearCalendarModal() {
+  const modal = document.createElement('div');
+  modal.className = 'fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50';
+  modal.innerHTML = `
+    <div class="bg-white dark:bg-gray-800 rounded-lg p-6 w-full max-w-md mx-4">
+      <div class="flex justify-between items-center mb-4">
+        <h2 class="text-xl font-bold text-red-600 dark:text-red-400">
+          <i class="fas fa-exclamation-triangle mr-2"></i>Clear Calendar
+        </h2>
+        <button onclick="this.closest('.fixed').remove()" class="text-gray-500 hover:text-gray-700 dark:text-gray-400 dark:hover:text-gray-200">
+          <i class="fas fa-times text-xl"></i>
+        </button>
+      </div>
+      
+      <div class="mb-6 text-gray-700 dark:text-gray-300">
+        <p class="mb-3">⚠️ <strong>Warning:</strong> This action will permanently delete:</p>
+        <ul class="list-disc list-inside space-y-1 text-sm">
+          <li>All calendar events</li>
+          <li>All plantings and their data</li>
+          <li>All plant notes</li>
+          <li>All growth tracking information</li>
+        </ul>
+        <p class="mt-3 text-sm text-red-600 dark:text-red-400">
+          <strong>This action cannot be undone!</strong>
+        </p>
+      </div>
+      
+      <div class="mb-4">
+        <label class="flex items-center">
+          <input type="checkbox" id="confirmClear" class="mr-2">
+          <span class="text-sm dark:text-gray-300">I understand this will delete all my garden data</span>
+        </label>
+      </div>
+      
+      <div class="flex space-x-3">
+        <button onclick="this.closest('.fixed').remove()" class="flex-1 px-4 py-2 border border-gray-300 dark:border-gray-600 text-gray-700 dark:text-gray-300 rounded-md hover:bg-gray-50 dark:hover:bg-gray-700">
+          Cancel
+        </button>
+        <button onclick="clearAllCalendarData()" class="flex-1 px-4 py-2 bg-red-600 hover:bg-red-700 text-white rounded-md disabled:opacity-50 disabled:cursor-not-allowed" id="clearBtn" disabled>
+          Clear All Data
+        </button>
+      </div>
+    </div>
+  `;
+  
+  document.body.appendChild(modal);
+  
+  // Enable/disable clear button based on checkbox
+  const checkbox = document.getElementById('confirmClear');
+  const clearBtn = document.getElementById('clearBtn');
+  
+  checkbox.addEventListener('change', function() {
+    clearBtn.disabled = !this.checked;
+  });
+}
+
+// Function to clear all calendar data
+async function clearAllCalendarData() {
+  const confirmCheckbox = document.getElementById('confirmClear');
+  if (!confirmCheckbox.checked) {
+    alert('Please confirm that you understand this action will delete all data.');
+    return;
+  }
+  
+  const clearBtn = document.getElementById('clearBtn');
+  const originalText = clearBtn.textContent;
+  clearBtn.textContent = 'Clearing...';
+  clearBtn.disabled = true;
+  
+  try {
+    const db = await openDB('gardening-calendar');
+    const tx = db.transaction(['events', 'plantings', 'plantNotes'], 'readwrite');
+    
+    // Clear all stores
+    await tx.objectStore('events').clear();
+    await tx.objectStore('plantings').clear();
+    await tx.objectStore('plantNotes').clear();
+    
+    await tx.done;
+    
+    // Close modal
+    document.querySelector('.fixed').remove();
+    
+    // Refresh calendar
+    calendar.refetchEvents();
+    
+    // Refresh the app sidebar data
+    const refreshEvent = new CustomEvent('refreshSidebar');
+    document.dispatchEvent(refreshEvent);
+    
+    // Show success message
+    showNotification('Calendar cleared successfully', 'success');
+    
+  } catch (error) {
+    console.error('Error clearing calendar:', error);
+    showNotification('Failed to clear calendar', 'error');
+    clearBtn.textContent = originalText;
+    clearBtn.disabled = false;
+  }
+}
+
+// Make functions globally available
+window.showClearCalendarModal = showClearCalendarModal;
+window.clearAllCalendarData = clearAllCalendarData;
