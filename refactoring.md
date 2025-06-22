@@ -94,11 +94,9 @@ src/
 │   ├── validators.js       # Validation Functions (56 Zeilen) ✅
 │   └── notifications.js    # Notification Functions (24 Zeilen) ✅
 └── styles/                # ✅ CSS REFACTORED!
-    ├── main.css           # General Styles (~20 Zeilen) ✅
+    ├── main.css           # Base Styles & Variables (~20 Zeilen) ✅
     ├── calendar.css       # Calendar-specific Styles (~50 Zeilen) ✅
-    ├── themes.css         # Dark/Light Theme Styles (~20 Zeilen) ✅
-    ├── components.css     # (leer) ❌
-    └── modals.css         # (leer) ❌
+    └── themes.css         # Dark/Light Theme Styles (~20 Zeilen) ✅
 ```
 
 **TOTAL: ~12.470 Zeilen Code in allen JS Dateien!**
@@ -200,9 +198,7 @@ src/
 
 ├── styles/                 # CSS Organization (aus style.css) ✅ VOLLSTÄNDIG REFACTORED!
 │   ├── main.css           # Base Styles & Variables (~20 Zeilen) ✅
-│   ├── components.css     # (leer) ❌
 │   ├── calendar.css       # Calendar-specific Styles (~50 Zeilen) ✅
-│   ├── modals.css         # (leer) ❌
 │   └── themes.css         # Dark/Light Theme Styles (~20 Zeilen) ✅
 
 ├── utils/                  # Utility Functions ✅ VOLLSTÄNDIG REFACTORED

@@ -1,12 +1,9 @@
 version: '3.8'
 
 services:
-  web:
-    image: nginx:alpine
+  gardening-calendar-web:
+    build: .
     container_name: gardening-calendar
-    volumes:
-      - ./dist:/usr/share/nginx/html
-      - ./nginx.conf:/etc/nginx/nginx.conf:ro
-    ports:
-      - "8080:80"
+    dns:
+      - 1.1.1.1
     restart: unless-stopped

@@ -259,19 +259,13 @@ export async function batchUpdatePlantings(updates) {
 }
 
 // Get plant data for a specific plant type
-export function getPlantData(plantType) {
-  return getPlantData(plantType);
-}
+// Function is already imported from '../core/db/plants.js'
 
 // Get plant data for specific environment
-export function getPlantDataForEnvironment(plantType, environment) {
-  return getPlantDataForEnvironment(plantType, environment);
-}
+// Function is already imported from '../core/db/plants.js'
 
 // Validate planting date for a plant type
-export function validatePlantingDate(plantType, date) {
-  return validatePlantingDateUtil(plantType, date);
-}
+// Function is already imported from '../core/db/plants.js'
 
 // Get plant categories
 export function getPlantCategories() {

@@ -13,3 +13,37 @@
   --background: #1A202C;
   --text: #F7FAFC;
 }
+
+/* Responsive theme improvements */
+@media (max-width: 768px) {
+  /* Mobile theme adjustments */
+  :root {
+    /* Slightly adjusted colors for better mobile contrast */
+    --primary: #2F855A;
+    --secondary: #48BB78;
+    --accent: #9AE6B4;
+    --background: #F7FAFC;
+    --text: #2D3748;
+  }
+  
+  .dark {
+    /* Dark theme mobile adjustments */
+    --primary: #48BB78;
+    --secondary: #2F855A;
+    --accent: #276749;
+    --background: #1A202C;
+    --text: #F7FAFC;
+  }
+}
+
+@media (max-width: 480px) {
+  /* Small mobile theme adjustments */
+  :root {
+    /* Ensure good contrast on very small screens */
+    --text: #1A202C;
+  }
+  
+  .dark {
+    --text: #F7FAFC;
+  }
+}

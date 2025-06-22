@@ -23,3 +23,46 @@ body {
   outline: none;
   box-shadow: 0 0 0 2px rgba(255, 255, 255, 0.3);
 }
+
+/* Responsive improvements */
+@media (max-width: 768px) {
+  /* Mobile-specific adjustments */
+  body {
+    font-size: 14px;
+  }
+  
+  /* Ensure modals don't overflow on mobile */
+  .modal-content {
+    margin: 1rem;
+    max-width: calc(100vw - 2rem);
+  }
+  
+  /* Better touch targets on mobile */
+  button, select, input {
+    min-height: 44px;
+  }
+  
+  /* Stack grid items on mobile */
+  .grid {
+    grid-template-columns: 1fr !important;
+  }
+}
+
+@media (max-width: 480px) {
+  /* Small mobile adjustments */
+  .p-6 {
+    padding: 1rem;
+  }
+  
+  .max-w-4xl {
+    max-width: 95vw;
+  }
+  
+  .max-w-2xl {
+    max-width: 95vw;
+  }
+  
+  .max-w-md {
+    max-width: 95vw;
+  }
+}

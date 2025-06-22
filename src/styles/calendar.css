@@ -58,3 +58,52 @@
 .dark .calendar-controls {
   border-bottom-color: #374151;
 }
+
+/* Responsive calendar improvements */
+@media (max-width: 768px) {
+  /* Mobile calendar adjustments */
+  .fc-toolbar {
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+  
+  .fc-toolbar-title {
+    font-size: 1.25rem !important;
+  }
+  
+  .fc-button {
+    padding: 0.5rem 0.75rem;
+    font-size: 0.875rem;
+  }
+  
+  /* Better event display on mobile */
+  .fc-daygrid-event {
+    font-size: 0.75rem;
+    padding: 0.125rem 0.25rem;
+  }
+  
+  /* Adjust calendar controls for mobile */
+  .calendar-controls {
+    padding: 0.5rem 0;
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+}
+
+@media (max-width: 480px) {
+  /* Small mobile calendar adjustments */
+  .fc-toolbar-title {
+    font-size: 1rem !important;
+  }
+  
+  .fc-button {
+    padding: 0.375rem 0.5rem;
+    font-size: 0.75rem;
+  }
+  
+  /* Even smaller events on very small screens */
+  .fc-daygrid-event {
+    font-size: 0.625rem;
+    padding: 0.0625rem 0.125rem;
+  }
+}

@@ -131,7 +131,7 @@ export async function importEvents(timeMin = null, timeMax = null) {
 }
 
 // Export local events to Google (internal implementation)
-async function exportLocalEventsToGoogle() {
+export async function exportLocalEventsToGoogle() {
   const db = await openDB(DB_NAME, DB_VERSION);
   
   const eventCount = await db.count('events');
@@ -211,7 +211,7 @@ async function exportLocalEventsToGoogle() {
 }
 
 // Import Google events (internal implementation)
-async function importGoogleEvents() {
+export async function importGoogleEvents() {
   const settings = googleCalendarSettings.load();
   const importSettings = settings.importSettings || {};
   
