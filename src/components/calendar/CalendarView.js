@@ -95,6 +95,7 @@ export async function initializeCalendar() {
   
   // Listen for Google Calendar status changes
   document.addEventListener('googleCalendarStatusChanged', () => {
+    console.log('📊 Status Bar: Received googleCalendarStatusChanged event');
     updateGoogleCalendarStatus();
   });
   
@@ -120,6 +121,15 @@ function updateGoogleCalendarStatus() {
   const isCurrentlySignedIn = googleCalendar.getAuthState().isSignedIn;
   const hasSelectedCalendar = !!settings.selectedCalendarId;
 
+  console.log('📊 Status Bar Debug:', {
+    hasSavedCredentials,
+    isCurrentlySignedIn,
+    hasSelectedCalendar,
+    userEmail: settings.userEmail,
+    selectedCalendarId: settings.selectedCalendarId,
+    organizationType: settings.organizationType
+  });
+
   if (isCurrentlySignedIn && hasSavedCredentials) {
     if (!hasSelectedCalendar) {
       statusDisplay.innerHTML = `
@@ -131,7 +141,21 @@ function updateGoogleCalendarStatus() {
     }
 
     const selectedCalendarId = settings.selectedCalendarId;
-    const calendarName = settings.calendarList?.[selectedCalendarId] || selectedCalendarId;
+    let calendarName = selectedCalendarId;
+    
+    if (settings.createdCalendars && settings.createdCalendars.length > 0) {
+      const foundCalendar = settings.createdCalendars.find(cal => cal.id === selectedCalendarId);
+      if (foundCalendar) {
+        calendarName = foundCalendar.name;
+      }
+    } else if (settings.calendarList && settings.calendarList[selectedCalendarId]) {
+      calendarName = settings.calendarList[selectedCalendarId];
+    }
+    
+    if (calendarName === selectedCalendarId && calendarName.includes('@group.calendar.google.com')) {
+      calendarName = 'Garden Calendar';
+    }
+    
     const autoSync = settings.autoSync || false;
 
     statusDisplay.innerHTML = `
@@ -156,6 +180,7 @@ function updateGoogleCalendarStatus() {
       ` : ''}
     `;
   } else if (hasSavedCredentials && !isCurrentlySignedIn) {
+    console.log('📊 Status Bar: Showing RECONNECT NEEDED');
     statusDisplay.innerHTML = `
       <span class="text-yellow-600 dark:text-yellow-400 flex items-center">
         <i class="fas fa-link mr-1"></i>${t('google.reconnect_needed')}
@@ -165,6 +190,7 @@ function updateGoogleCalendarStatus() {
       </button>
     `;
   } else {
+    console.log('📊 Status Bar: Showing NOT CONNECTED');
     statusDisplay.innerHTML = `
       <span class="text-red-600 dark:text-red-400 flex items-center">
         <i class="fas fa-times-circle mr-1"></i>${t('google.not_connected')}
