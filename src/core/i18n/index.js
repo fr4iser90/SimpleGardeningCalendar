@@ -6,7 +6,7 @@ import { en } from './translations/en.js';
 import { fr } from './translations/fr.js';
 import { es } from './translations/es.js';
 import { it } from './translations/it.js';
-import { updateUITranslations } from './ui/LanguageSwitcher.js';
+import { updateUITranslations } from '../../components/ui/LanguageSwitch.js';
 
 // Supported languages
 export const SUPPORTED_LANGUAGES = {

@@ -3,6 +3,7 @@ import { performBidirectionalSync, exportLocalEventsToGoogle, importGoogleEvents
 import { googleCalendarSettings } from '../../services/GoogleCalendar/GoogleCalendarSettings.js';
 import { getEventTypeIcon } from '../../utils/eventUtils.js';
 import { showNotification } from '../../utils/notifications.js';
+import { showButtonSpinner, hideButtonSpinner, showLoadingSpinner, hideLoadingSpinner } from '../ui/LoadingSpinner.js';
 
 /**
  * Google Calendar Setup Modal
@@ -20,8 +21,7 @@ function showClientIdHelp() {
 }
 
 async function performSyncOperation(operation, button, originalText) {
-  button.disabled = true;
-  button.textContent = '⏳ Processing...';
+  const spinnerId = showButtonSpinner(button, originalText, '⏳ Processing...');
   const syncStatusText = document.getElementById('syncStatusText');
   syncStatusText.textContent = `Running ${operation} sync...`;
 
@@ -59,8 +59,7 @@ async function performSyncOperation(operation, button, originalText) {
     showNotification(`Sync failed: ${error.message}`, 'error');
     syncStatusText.textContent = `Sync failed: ${error.message}`;
   } finally {
-    button.disabled = false;
-    button.textContent = originalText;
+    hideButtonSpinner(button, spinnerId);
   }
 }
 
@@ -131,16 +130,16 @@ function initializeGoogleCalendarEventListeners() {
     settings.clientId = clientId;
     googleCalendarSettings.save(settings);
 
-    connectBtn.disabled = true;
-    connectBtn.textContent = 'Connecting...';
+    const originalText = connectBtn.textContent;
+    const spinnerId = showButtonSpinner(connectBtn, originalText, 'Connecting...');
+    
     try {
       await attemptSignIn(true);
       // Status will be updated by the 'googleCalendarStatusChanged' event listener in GoogleCalendarApi.js
     } catch (e) {
        showNotification(`Connection failed: ${e.message}`, 'error');
     } finally {
-        connectBtn.disabled = false;
-        connectBtn.textContent = '🔗 Connect to Google Calendar';
+        hideButtonSpinner(connectBtn, spinnerId);
     }
   });
   
@@ -179,11 +178,16 @@ function initializeGoogleCalendarEventListeners() {
   
   // Sign out
   signOutBtn?.addEventListener('click', async () => {
+    const originalText = signOutBtn.textContent;
+    const spinnerId = showButtonSpinner(signOutBtn, originalText, 'Signing out...');
+    
     try {
       await signOut();
       showNotification('Signed out successfully', 'success');
     } catch (error) {
       showNotification('Sign out failed: ' + error.message, 'error');
+    } finally {
+      hideButtonSpinner(signOutBtn, spinnerId);
     }
   });
 

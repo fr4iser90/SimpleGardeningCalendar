@@ -11,6 +11,7 @@ import {
 } from '../../core/db/index.js';
 import { getPhaseEmoji, getPhaseCheckpoints } from '../../core/db/utils.js';
 import { formatDateForGerman } from '../../utils/dateUtils.js';
+import { showButtonSpinner, hideButtonSpinner } from '../ui/LoadingSpinner.js';
 
 export async function showAddEventModal(date, preselectedType = null) {
   const modal = document.createElement('div');
@@ -302,13 +303,23 @@ function initializeAddEventModalHandlers(modal) {
     const formData = new FormData(form);
     const eventType = formData.get('eventType');
     
-    if (eventType === 'planting') {
-      await handlePlantingSubmission(formData);
-    } else {
-      await handleCustomEventSubmission(formData);
-    }
+    const originalText = saveBtn.textContent;
+    const spinnerId = showButtonSpinner(saveBtn, originalText, t('modal.saving'));
     
-    modal.remove();
+    try {
+      if (eventType === 'planting') {
+        await handlePlantingSubmission(formData);
+      } else {
+        await handleCustomEventSubmission(formData);
+      }
+      
+      modal.remove();
+    } catch (error) {
+      console.error('Error saving event:', error);
+      showNotification(t('notification.error_saving'), 'error');
+    } finally {
+      hideButtonSpinner(saveBtn, spinnerId);
+    }
   });
 
   // Initialize form state
@@ -496,16 +507,11 @@ async function handlePlantingSubmission(formData) {
     });
   }
   
-  try {
-    await addPlanting(plantType, startDate, location, customName, reminderOptions, customPhaseDurations);
-    showNotification(t('notification.planting_added'), 'success');
-    
-    // Refresh calendar
-    document.dispatchEvent(new CustomEvent('refreshCalendar'));
-  } catch (error) {
-    console.error('Error adding planting:', error);
-    showNotification(t('notification.error_adding_planting'), 'error');
-  }
+  await addPlanting(plantType, startDate, location, customName, reminderOptions, customPhaseDurations);
+  showNotification(t('notification.planting_added'), 'success');
+  
+  // Refresh calendar
+  document.dispatchEvent(new CustomEvent('refreshCalendar'));
 }
 
 async function handleCustomEventSubmission(formData) {
@@ -514,24 +520,19 @@ async function handleCustomEventSubmission(formData) {
   const description = formData.get('description');
   const date = formData.get('date');
   
-  try {
-    const db = await openDB('gardening-calendar', 5);
-    await db.add('events', {
-      title,
-      type,
-      description,
-      date,
-      createdAt: new Date().toISOString()
-    });
-    
-    showNotification(t('notification.event_added'), 'success');
-    
-    // Refresh calendar
-    document.dispatchEvent(new CustomEvent('refreshCalendar'));
-  } catch (error) {
-    console.error('Error adding event:', error);
-    showNotification(t('notification.error_adding_event'), 'error');
-  }
+  const db = await openDB('gardening-calendar', 5);
+  await db.add('events', {
+    title,
+    type,
+    description,
+    date,
+    createdAt: new Date().toISOString()
+  });
+  
+  showNotification(t('notification.event_added'), 'success');
+  
+  // Refresh calendar
+  document.dispatchEvent(new CustomEvent('refreshCalendar'));
 }
 
 function showNotification(message, type = 'info') {

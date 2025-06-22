@@ -1,4 +1,5 @@
 import { openDB } from 'idb';
+import { showButtonSpinner, hideButtonSpinner } from '../ui/LoadingSpinner.js';
 
 export function showClearCalendarModal() {
   const modal = document.createElement('div');
@@ -66,8 +67,7 @@ async function clearAllCalendarData() {
   
   const clearBtn = document.getElementById('clearBtn');
   const originalText = clearBtn.textContent;
-  clearBtn.textContent = 'Clearing...';
-  clearBtn.disabled = true;
+  const spinnerId = showButtonSpinner(clearBtn, originalText, 'Clearing...');
   
   try {
     const db = await openDB('gardening-calendar');
@@ -98,8 +98,8 @@ async function clearAllCalendarData() {
   } catch (error) {
     console.error('Error clearing calendar:', error);
     showNotification('Failed to clear calendar', 'error');
-    clearBtn.textContent = originalText;
-    clearBtn.disabled = false;
+  } finally {
+    hideButtonSpinner(clearBtn, spinnerId);
   }
 }
 

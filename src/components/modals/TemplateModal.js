@@ -1,6 +1,7 @@
 import { openDB } from 'idb';
 import { t } from '../../core/i18n/index.js';
 import { getAvailableTemplates, importGardenTemplate } from '../../services/TemplateService.js';
+import { showButtonSpinner, hideButtonSpinner } from '../ui/LoadingSpinner.js';
 
 export function showTemplateImportModal() {
   const modal = document.createElement('div');
@@ -139,10 +140,9 @@ async function importSelectedTemplate() {
     }
   }
 
-  // Show loading state
+  // Show loading state with spinner
   const originalText = importBtn.textContent;
-  importBtn.textContent = t('template.import.loading');
-  importBtn.disabled = true;
+  const spinnerId = showButtonSpinner(importBtn, originalText, t('template.import.loading'));
 
   try {
     // Import template events
@@ -172,9 +172,8 @@ async function importSelectedTemplate() {
     console.error('Error importing template:', error);
     showNotification(t('template.import.error'), 'error');
   } finally {
-    // Reset button
-    importBtn.textContent = originalText;
-    importBtn.disabled = false;
+    // Reset button with spinner
+    hideButtonSpinner(importBtn, spinnerId);
   }
 }
 
