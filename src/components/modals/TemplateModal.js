@@ -4,12 +4,13 @@ import { getAvailableTemplates, importGardenTemplate } from '../../services/Temp
 
 export function showTemplateImportModal() {
   const modal = document.createElement('div');
+  modal.id = 'template-import-modal';
   modal.className = 'fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50';
   modal.innerHTML = `
     <div class="bg-white dark:bg-gray-800 rounded-lg p-6 w-full max-w-md mx-4 max-h-[90vh] overflow-y-auto">
       <div class="flex justify-between items-center mb-4">
         <h2 class="text-xl font-bold text-gray-900 dark:text-white" data-i18n="template.modal.title">${t('template.modal.title')}</h2>
-        <button onclick="this.closest('.fixed').remove()" class="text-gray-500 hover:text-gray-700 dark:text-gray-400 dark:hover:text-gray-200">
+        <button onclick="document.getElementById('template-import-modal').remove()" class="text-gray-500 hover:text-gray-700 dark:text-gray-400 dark:hover:text-gray-200">
           <i class="fas fa-times text-xl"></i>
         </button>
       </div>
@@ -114,7 +115,7 @@ async function importSelectedTemplate() {
   const templateSelect = document.getElementById('templateSelect');
   const yearSelect = document.getElementById('yearSelect');
   const importBtn = document.getElementById('importBtn');
-  const modal = document.querySelector('.fixed');
+  const modal = document.getElementById('template-import-modal');
 
   if (templateSelect.value === '') {
     showNotification(t('template.select.required'), 'error');
