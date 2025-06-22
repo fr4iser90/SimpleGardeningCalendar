@@ -134,7 +134,7 @@ export async function createCalendar(calendarData) {
   }
   
   const calendarPayload = {
-    summary: calendarData.name,
+    summary: calendarData.summary,
     description: calendarData.description || '',
     timeZone: Intl.DateTimeFormat().resolvedOptions().timeZone
   };
