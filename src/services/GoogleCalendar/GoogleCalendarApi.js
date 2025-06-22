@@ -201,6 +201,25 @@ export async function getUserInfo() {
   return await response.json();
 }
 
+// Fetch details of a specific calendar by ID
+export async function fetchCalendarDetails(calendarId) {
+  if (!accessToken) {
+    throw new Error('Not authenticated');
+  }
+  
+  const response = await fetch(`https://www.googleapis.com/calendar/v3/calendars/${encodeURIComponent(calendarId)}`, {
+    headers: {
+      'Authorization': `Bearer ${accessToken}`
+    }
+  });
+  
+  if (!response.ok) {
+    throw new Error(`Failed to fetch calendar details: ${response.status} ${response.statusText}`);
+  }
+  
+  return await response.json();
+}
+
 // Export state getters
 export function getAuthState() {
   return { isSignedIn, accessToken };
