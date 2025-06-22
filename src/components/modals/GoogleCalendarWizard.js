@@ -1,7 +1,7 @@
 import { googleCalendarSettings } from '../../services/GoogleCalendar/GoogleCalendarSettings.js';
 import { updateConnectionStatus } from './GoogleCalendarSetupModal.js';
 import { showNotification } from '../../utils/notifications.js';
-import { formatCalendarDisplayName, getCalendarTypeIcon, generateCleanupSuggestions } from '../../utils/calendarUtils.js';
+import { getCalendarTypeIcon, generateCleanupSuggestions } from '../../utils/calendarUtils.js';
 
 // Render the calendar wizard HTML section
 export function renderCalendarWizardHTML(settings) {
@@ -296,23 +296,12 @@ async function detectAndShowExistingCalendars() {
         duplicatesWarning.style.display = 'block';
       }
       
-      // Show organized calendar list
-      existingList.innerHTML = Object.entries(groupedCalendars).map(([groupName, calendars]) => `
+      // Show organized calendar list - FIXED: Show only actual calendar names, not confusing group names
+      existingList.innerHTML = gardenCalendars.map(cal => `
         <div class="border border-gray-200 dark:border-gray-600 rounded-lg p-3">
-          <div class="flex items-center space-x-2 mb-2">
-            <span class="text-lg">${getCalendarTypeIcon(calendars[0].detectedType, groupName)}</span>
-            <span class="font-medium dark:text-white">${groupName}</span>
-            ${calendars.length > 1 ? `<span class="text-xs px-2 py-1 bg-orange-100 dark:bg-orange-800 text-orange-800 dark:text-orange-200 rounded">${calendars.length} calendars</span>` : ''}
-          </div>
-          <div class="space-y-1 ml-6">
-            ${calendars.map(cal => `
-              <div class="flex items-center justify-between text-sm">
-                <span class="dark:text-gray-300">${formatCalendarDisplayName(cal)}</span>
-                <span class="text-xs text-gray-500 dark:text-gray-400">
-                  ${cal.primary ? 'Primary' : 'Secondary'}
-                </span>
-              </div>
-            `).join('')}
+          <div class="flex items-center space-x-2">
+            <span class="text-lg">${getCalendarTypeIcon(cal.detectedType || 'general', cal.plantType || cal.activityType || cal.templateType || 'general')}</span>
+            <span class="font-medium dark:text-white">${cal.summary}</span>
           </div>
         </div>
       `).join('');
@@ -442,9 +431,6 @@ async function showCalendarManagementModal() {
         <div class="flex-1">
           <div class="font-medium dark:text-white">${cal.summary}</div>
           <div class="text-sm text-gray-500 dark:text-gray-400">ID: ${cal.id}</div>
-          <div class="text-xs text-gray-400 dark:text-gray-500">
-            ${cal.primary ? 'Primary Calendar' : 'Secondary Calendar'}
-          </div>
         </div>
         <div class="flex gap-2">
           <button 
@@ -704,7 +690,7 @@ async function showDuplicateCleanupModal() {
           <div class="bg-green-50 dark:bg-green-900/20 border border-green-200 dark:border-green-800 rounded p-3">
             <h5 class="font-medium text-green-800 dark:text-green-200 mb-2">✅ Keep This Calendar</h5>
             <div class="text-sm">
-              <div class="font-medium dark:text-white">${formatCalendarDisplayName(suggestion.keep)}</div>
+              <div class="font-medium dark:text-white">${suggestion.keep.summary}</div>
               <div class="text-xs text-gray-500 dark:text-gray-400">${suggestion.keep.id}</div>
             </div>
           </div>
@@ -714,7 +700,7 @@ async function showDuplicateCleanupModal() {
             <div class="space-y-1">
               ${suggestion.delete.map(cal => `
                 <div class="text-sm">
-                  <div class="font-medium dark:text-white">${formatCalendarDisplayName(cal)}</div>
+                  <div class="font-medium dark:text-white">${cal.summary}</div>
                   <div class="text-xs text-gray-500 dark:text-gray-400">${cal.id}</div>
                 </div>
               `).join('')}

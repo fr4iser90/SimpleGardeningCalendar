@@ -182,22 +182,6 @@ export function generateCleanupSuggestions(duplicateGroups) {
 }
 
 /**
- * Format calendar display name for UI
- * @param {Object} calendar - Calendar object
- * @returns {string} - Formatted display name
- */
-export function formatCalendarDisplayName(calendar) {
-  const maxLength = 50;
-  let name = calendar.summary;
-  
-  if (name.length > maxLength) {
-    name = name.substring(0, maxLength - 3) + '...';
-  }
-  
-  return name;
-}
-
-/**
  * Get calendar type icon
  * @param {string} type - Calendar type (plant, activity, template, general)
  * @param {string} subType - Specific subtype
