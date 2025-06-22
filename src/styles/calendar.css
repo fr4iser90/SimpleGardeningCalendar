@@ -1,0 +1,60 @@
+/* FullCalendar customization */
+.fc {
+  @apply h-full;
+}
+
+.fc-theme-standard td, 
+.fc-theme-standard th,
+.fc-theme-standard .fc-scrollgrid {
+  @apply border-gray-200 dark:border-gray-700;
+}
+
+.fc .fc-daygrid-day-number {
+  @apply text-gray-700 dark:text-gray-300;
+}
+
+.fc .fc-toolbar-title {
+  @apply text-gray-800 dark:text-gray-200;
+}
+
+.fc .fc-button {
+  @apply bg-green-600 hover:bg-green-700 focus:ring-green-500;
+}
+
+.fc .fc-button-primary:not(:disabled).fc-button-active,
+.fc .fc-button-primary:not(:disabled):active {
+  @apply bg-green-700;
+}
+
+.fc-daygrid-event {
+  @apply cursor-pointer;
+}
+
+/* Hide duplicate language selectors if any exist */
+.fc-toolbar .language-switcher {
+  display: none !important;
+}
+
+/* Hide FullCalendar view buttons since we only use month view */
+.fc-dayGridMonth-button,
+.fc-timeGridWeek-button, 
+.fc-timeGridDay-button,
+.fc-listWeek-button {
+  display: none !important;
+}
+
+/* Clean up calendar header */
+.fc-header-toolbar {
+  margin-bottom: 1rem;
+}
+
+/* Improve button spacing in calendar controls */
+.calendar-controls {
+  padding: 1rem 0;
+  border-bottom: 1px solid #e5e7eb;
+  margin-bottom: 1rem;
+}
+
+.dark .calendar-controls {
+  border-bottom-color: #374151;
+}

@@ -1,4 +1,8 @@
 import './style.css';
+import './styles/themes.css';
+import './styles/calendar.css';
+import './styles/main.css';
+
 import { initializeApp } from './app.js';
 import { initializeDB } from './core/db/index.js';
 import { initializeCalendarApp } from './calendar.js';
