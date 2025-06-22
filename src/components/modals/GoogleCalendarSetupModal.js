@@ -90,8 +90,39 @@ export async function updateConnectionStatus(showWizard = false) {
         userInfoDiv.textContent = 'Connected (user info unavailable)';
       }
       
-      // Determine if we should show the wizard
-      const hasCalendarSetup = settings.organizationType || settings.selectedCalendarId;
+      // SMART AUTO-DETECTION: If no setup exists, check for existing garden calendars
+      let hasCalendarSetup = settings.organizationType || settings.selectedCalendarId;
+      
+      if (!hasCalendarSetup && !showWizard) {
+        console.log('🔍 No setup found - checking for existing garden calendars...');
+        try {
+          const { detectGardenCalendars } = await import('../../services/GoogleCalendar/GoogleCalendarApi.js');
+          const { gardenCalendars, hasExistingGardenCalendars } = await detectGardenCalendars();
+          
+          if (hasExistingGardenCalendars && gardenCalendars.length > 0) {
+            // Auto-select the first garden calendar found
+            const firstCalendar = gardenCalendars[0];
+            settings.selectedCalendarId = firstCalendar.id;
+            settings.organizationType = 'existing';
+            settings.createdCalendars = gardenCalendars.map(cal => ({
+              id: cal.id,
+              name: cal.summary
+            }));
+            googleCalendarSettings.save(settings);
+            hasCalendarSetup = true;
+            
+            console.log('✅ Auto-detected and configured existing garden calendars:', {
+              selectedCalendar: firstCalendar.summary,
+              totalCalendars: gardenCalendars.length
+            });
+            
+            showNotification(`Auto-detected ${gardenCalendars.length} garden calendar(s). Using "${firstCalendar.summary}" as primary.`, 'success');
+          }
+        } catch (error) {
+          console.error('Failed to auto-detect calendars:', error);
+        }
+      }
+      
       const shouldShowWizard = showWizard || !hasCalendarSetup;
       
       console.log('📋 Calendar Setup Status:', {
