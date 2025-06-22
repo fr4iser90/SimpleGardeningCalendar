@@ -64,7 +64,7 @@ async function performSyncOperation(operation, button, originalText) {
   }
 }
 
-export async function updateConnectionStatus() {
+export async function updateConnectionStatus(showWizard = false) {
   const statusDiv = document.getElementById('connectionStatus');
   const userInfoDiv = document.getElementById('userInfo');
   const syncOptionsDiv = document.getElementById('syncOptions');
@@ -90,10 +90,24 @@ export async function updateConnectionStatus() {
         userInfoDiv.textContent = 'Connected (user info unavailable)';
       }
       
-      if (!settings.organizationType) {
+      // Determine if we should show the wizard
+      const hasCalendarSetup = settings.organizationType || settings.selectedCalendarId;
+      const shouldShowWizard = showWizard || !hasCalendarSetup;
+      
+      console.log('📋 Calendar Setup Status:', {
+        organizationType: settings.organizationType,
+        selectedCalendarId: settings.selectedCalendarId,
+        hasCalendarSetup,
+        showWizard,
+        shouldShowWizard
+      });
+      
+      if (shouldShowWizard) {
+        console.log('🔧 Showing calendar wizard');
         calendarWizard.style.display = 'block';
         syncOptionsDiv.style.display = 'none';
       } else {
+        console.log('⚙️ Showing sync options');
         calendarWizard.style.display = 'none';
         syncOptionsDiv.style.display = 'block';
       }
@@ -202,7 +216,7 @@ function initializeGoogleCalendarEventListeners() {
       delete settings.createdCalendars;
       delete settings.selectedCalendarId;
       googleCalendarSettings.save(settings);
-      updateConnectionStatus(); // This will now show the wizard again
+      updateConnectionStatus(true); // Pass showWizard=true to explicitly show the wizard
       showNotification('Setup has been reset. Please configure your calendars again.', 'info');
     }
   });

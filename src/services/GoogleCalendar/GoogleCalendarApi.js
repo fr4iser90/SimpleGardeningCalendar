@@ -3,6 +3,7 @@ import { googleCalendarSettings } from './GoogleCalendarSettings.js';
 import { formatDate } from '../../utils/dateUtils.js';
 import { isGardeningEvent, convertToGoogleEvent, convertFromGoogleEvent } from '../../utils/eventUtils.js';
 import { validateEventData } from '../../utils/validators.js';
+import { isGardenCalendar, groupSimilarCalendars, findDuplicateGroups } from '../../utils/calendarUtils.js';
 
 /**
  * Google Calendar API Calls
@@ -218,6 +219,50 @@ export async function fetchCalendarDetails(calendarId) {
   }
   
   return await response.json();
+}
+
+// Delete a calendar from Google Calendar
+export async function deleteCalendar(calendarId) {
+  if (!isSignedIn) {
+    throw new Error('Not signed in to Google Calendar');
+  }
+  
+  // Don't allow deletion of primary calendar
+  if (calendarId === 'primary') {
+    throw new Error('Cannot delete primary calendar');
+  }
+  
+  const response = await fetch(`https://www.googleapis.com/calendar/v3/calendars/${encodeURIComponent(calendarId)}`, {
+    method: 'DELETE',
+    headers: {
+      'Authorization': `Bearer ${accessToken}`,
+    }
+  });
+  
+  if (!response.ok) {
+    const error = await response.text();
+    throw new Error(`Failed to delete calendar: ${error}`);
+  }
+  
+  return true;
+}
+
+// Detect existing garden calendars
+export async function detectGardenCalendars() {
+  const calendars = await fetchCalendarList();
+  
+  const gardenCalendars = calendars.filter(isGardenCalendar);
+  const groupedCalendars = groupSimilarCalendars(gardenCalendars);
+  const duplicateGroups = findDuplicateGroups(groupedCalendars);
+  
+  return {
+    allCalendars: calendars,
+    gardenCalendars,
+    groupedCalendars,
+    duplicateGroups,
+    hasExistingGardenCalendars: gardenCalendars.length > 0,
+    hasDuplicates: duplicateGroups.length > 0
+  };
 }
 
 // Export state getters
