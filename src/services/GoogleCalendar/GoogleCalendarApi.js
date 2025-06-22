@@ -249,13 +249,28 @@ export async function deleteCalendar(calendarId) {
 
 // Detect existing garden calendars
 export async function detectGardenCalendars() {
+  console.log('🔍 Starting garden calendar detection...');
   const calendars = await fetchCalendarList();
+  console.log('📋 Total calendars found:', calendars.length);
+  console.log('📋 All calendar names:', calendars.map(cal => cal.summary));
   
-  const gardenCalendars = calendars.filter(isGardenCalendar);
-  const groupedCalendars = groupSimilarCalendars(gardenCalendars);
+  // Fix: Properly handle async isGardenCalendar function
+  const gardenCalendars = [];
+  for (const calendar of calendars) {
+    const isGarden = await isGardenCalendar(calendar);
+    console.log(`🌱 Testing "${calendar.summary}": ${isGarden ? '✅ IS GARDEN' : '❌ NOT GARDEN'}`);
+    if (isGarden) {
+      gardenCalendars.push(calendar);
+    }
+  }
+  
+  console.log('🌱 Garden calendars found:', gardenCalendars.length);
+  console.log('🌱 Garden calendar names:', gardenCalendars.map(cal => cal.summary));
+  
+  const groupedCalendars = await groupSimilarCalendars(gardenCalendars);
   const duplicateGroups = findDuplicateGroups(groupedCalendars);
   
-  return {
+  const result = {
     allCalendars: calendars,
     gardenCalendars,
     groupedCalendars,
@@ -263,6 +278,9 @@ export async function detectGardenCalendars() {
     hasExistingGardenCalendars: gardenCalendars.length > 0,
     hasDuplicates: duplicateGroups.length > 0
   };
+  
+  console.log('🔍 Detection complete:', result);
+  return result;
 }
 
 // Export state getters

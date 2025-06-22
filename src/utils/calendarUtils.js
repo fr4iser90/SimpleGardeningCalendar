@@ -46,9 +46,34 @@ export const PLANT_KEYWORDS = {
  */
 export function isGardenCalendar(calendar) {
   const summary = calendar.summary.toLowerCase();
-  return GARDEN_KEYWORDS.some(keyword => 
-    summary.includes(keyword.toLowerCase())
-  );
+  
+  // Check basic garden keywords
+  if (GARDEN_KEYWORDS.some(keyword => summary.includes(keyword.toLowerCase()))) {
+    return true;
+  }
+  
+  // Check plant-specific keywords
+  for (const [plantType, keywords] of Object.entries(PLANT_KEYWORDS)) {
+    if (keywords.some(keyword => summary.includes(keyword.toLowerCase()))) {
+      return true;
+    }
+  }
+  
+  // Check activity keywords
+  for (const [activityType, keywords] of Object.entries(ACTIVITY_KEYWORDS)) {
+    if (keywords.some(keyword => summary.includes(keyword.toLowerCase()))) {
+      return true;
+    }
+  }
+  
+  // Check template keywords
+  for (const [templateType, keywords] of Object.entries(TEMPLATE_KEYWORDS)) {
+    if (keywords.some(keyword => summary.includes(keyword.toLowerCase()))) {
+      return true;
+    }
+  }
+  
+  return false;
 }
 
 /**
