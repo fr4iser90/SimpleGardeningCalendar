@@ -6,6 +6,8 @@
 export const carrots = {
   name: 'Carrots',
   category: 'Vegetables',
+  emoji: '🥕',
+  alternativeNames: ['carrot', 'zanahoria', 'zanahorias', 'carotte', 'carottes', 'karotte', 'karotten', 'carota', 'carote'],
   phases: {
     germination: { days: 10, description: 'Seeds sprouting', care: 'Keep soil consistently moist, avoid crusting' },
     leafing: { days: 20, description: 'Leaf development', care: 'Thin seedlings to 2 inches apart' },
@@ -25,6 +27,8 @@ export const carrots = {
     'Bitter Taste': 'Environmental stress - maintain consistent growing conditions',
     'Short Roots': 'Soil too compact - loosen soil deeply before planting',
     'Carrot Fly': 'Small flies laying eggs - use row covers or companion plant with onions'
+  },
+  environments: {
   }
 };
 

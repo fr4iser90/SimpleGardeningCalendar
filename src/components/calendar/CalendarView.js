@@ -88,8 +88,7 @@ export async function initializeCalendar() {
   
   // Listen for language changes
   document.addEventListener('languageChanged', () => {
-    // Update other UI elements
-    updateUITranslations();
+
     if (window.updateGoogleCalendarStatus) {
       window.updateGoogleCalendarStatus();
     }

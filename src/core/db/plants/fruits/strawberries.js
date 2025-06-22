@@ -6,6 +6,8 @@
 export const strawberries = {
   name: 'Strawberries',
   category: 'Fruits',
+  emoji: '🍓',
+  alternativeNames: ['strawberry', 'fresa', 'fresas', 'fraise', 'fraises', 'erdbeere', 'erdbeeren', 'fragola', 'fragole'],
   phases: {
     establishment: { days: 30, description: 'Root establishment', care: 'Keep soil moist, remove flowers first year' },
     vegetative: { days: 60, description: 'Runner and leaf production', care: 'Allow runners to establish new plants' },

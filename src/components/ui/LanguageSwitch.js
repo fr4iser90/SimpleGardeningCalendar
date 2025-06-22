@@ -1,7 +1,7 @@
 // Language Switcher UI Component
 // Provides language selection dropdown
 
-import { t, setLanguage, getAvailableLanguages } from '../../core/i18n/index.js';
+import { t, setLanguage, getAvailableLanguages, getCurrentLanguage as getI18nCurrentLanguage } from '../../core/i18n/index.js';
 
 /**
  * LanguageSwitch - UI Component for language switching
@@ -187,7 +187,7 @@ export function updateUITranslations() {
 
 // Get current language
 export function getCurrentLanguage() {
-  return document.documentElement.lang || 'en';
+  return getI18nCurrentLanguage();
 }
 
 // Set language with additional UI updates

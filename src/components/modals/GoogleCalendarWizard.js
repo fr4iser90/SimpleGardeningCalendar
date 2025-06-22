@@ -1,7 +1,8 @@
 import { googleCalendarSettings } from '../../services/GoogleCalendar/GoogleCalendarSettings.js';
 import { updateConnectionStatus } from './GoogleCalendarSetupModal.js';
 import { showNotification } from '../../utils/notifications.js';
-import { getCalendarTypeIcon, generateCleanupSuggestions } from '../../utils/calendarUtils.js';
+import { getCalendarTypeIcon, generateCleanupSuggestions, getLocalizedCalendarName } from '../../utils/calendarUtils.js';
+import { t } from '../../core/i18n/index.js';
 
 // Render the calendar wizard HTML section
 export function renderCalendarWizardHTML(settings) {
@@ -9,28 +10,28 @@ export function renderCalendarWizardHTML(settings) {
     <!-- Calendar Organization Wizard -->
     <div id="calendarWizard" class="space-y-4" style="display: none;">
       <div class="border-t border-gray-200 dark:border-gray-700 pt-6">
-        <h3 class="text-lg font-semibold mb-4 dark:text-white">🗓️ Calendar Organization</h3>
+        <h3 class="text-lg font-semibold mb-4 dark:text-white">🗓️ ${t('google.wizard.title')}</h3>
         
         <!-- Existing Garden Calendars Detection -->
         <div id="existingCalendarsSection" class="bg-yellow-50 dark:bg-yellow-900/20 border border-yellow-200 dark:border-yellow-800 rounded-lg p-4 mb-6" style="display: none;">
           <h4 class="font-medium text-yellow-800 dark:text-yellow-200 mb-3">
-            🔍 Existing Garden Calendars Detected
+            🔍 ${t('google.wizard.existing_detected')}
           </h4>
           
           <!-- Duplicates Warning -->
           <div id="duplicatesWarning" class="bg-red-50 dark:bg-red-900/20 border border-red-200 dark:border-red-800 rounded-lg p-3 mb-4" style="display: none;">
             <div class="flex items-center space-x-2 mb-2">
               <span class="text-red-600 dark:text-red-400">⚠️</span>
-              <span class="font-medium text-red-800 dark:text-red-200">Duplicate Calendars Found!</span>
+              <span class="font-medium text-red-800 dark:text-red-200">${t('google.wizard.duplicates_found')}</span>
             </div>
             <p class="text-sm text-red-700 dark:text-red-300 mb-3">
-              You have multiple calendars for the same garden categories. This can cause confusion and clutter.
+              ${t('google.wizard.duplicates_description')}
             </p>
             <div id="duplicateGroupsList" class="space-y-2 mb-3">
               <!-- Dynamically populated -->
             </div>
             <button id="cleanupDuplicatesBtn" class="px-3 py-1 bg-red-600 text-white rounded hover:bg-red-700 text-sm">
-              🧹 Clean Up Duplicates
+              🧹 ${t('google.wizard.cleanup_duplicates')}
             </button>
           </div>
           
@@ -39,10 +40,10 @@ export function renderCalendarWizardHTML(settings) {
           </div>
           <div class="flex gap-2">
             <button id="manageExistingBtn" class="px-3 py-1 bg-yellow-600 text-white rounded hover:bg-yellow-700 text-sm">
-              🛠️ Manage All Calendars
+              🛠️ ${t('google.wizard.manage_calendars')}
             </button>
             <button id="ignoreExistingBtn" class="px-3 py-1 bg-gray-600 text-white rounded hover:bg-gray-700 text-sm">
-              ⏭️ Continue Anyway
+              ⏭️ ${t('google.wizard.continue_anyway')}
             </button>
           </div>
         </div>
@@ -51,15 +52,14 @@ export function renderCalendarWizardHTML(settings) {
         <div id="duplicateCleanupModal" class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center p-4 z-60" style="display: none;">
           <div class="bg-white dark:bg-gray-800 rounded-lg p-6 max-w-4xl w-full max-h-[80vh] overflow-y-auto">
             <div class="flex justify-between items-center mb-4">
-              <h3 class="text-lg font-semibold dark:text-white">🧹 Clean Up Duplicate Calendars</h3>
+              <h3 class="text-lg font-semibold dark:text-white">🧹 ${t('google.wizard.cleanup_title')}</h3>
               <button id="closeCleanupModal" class="text-gray-500 hover:text-gray-700 dark:text-gray-400 dark:hover:text-gray-200">✕</button>
             </div>
             
             <div class="space-y-4">
               <div class="bg-blue-50 dark:bg-blue-900/20 border border-blue-200 dark:border-blue-800 rounded-lg p-3">
                 <p class="text-sm text-blue-700 dark:text-blue-300">
-                  💡 <strong>Smart Cleanup:</strong> We've detected duplicate calendars for the same garden categories. 
-                  You can keep the best one and remove the duplicates to stay organized.
+                  💡 <strong>${t('google.wizard.cleanup_description')}</strong>
                 </p>
               </div>
               
@@ -69,10 +69,10 @@ export function renderCalendarWizardHTML(settings) {
               
               <div class="flex justify-end gap-2 pt-4 border-t">
                 <button id="cancelCleanupBtn" class="px-4 py-2 bg-gray-600 text-white rounded hover:bg-gray-700">
-                  Cancel
+                  ${t('common.cancel')}
                 </button>
                 <button id="executeCleanupBtn" class="px-4 py-2 bg-red-600 text-white rounded hover:bg-red-700">
-                  🧹 Execute Cleanup
+                  🧹 ${t('google.wizard.execute_cleanup')}
                 </button>
               </div>
             </div>
@@ -83,15 +83,14 @@ export function renderCalendarWizardHTML(settings) {
         <div id="calendarManagementModal" class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center p-4 z-60" style="display: none;">
           <div class="bg-white dark:bg-gray-800 rounded-lg p-6 max-w-2xl w-full max-h-[80vh] overflow-y-auto">
             <div class="flex justify-between items-center mb-4">
-              <h3 class="text-lg font-semibold dark:text-white">🛠️ Manage Garden Calendars</h3>
+              <h3 class="text-lg font-semibold dark:text-white">🛠️ ${t('google.wizard.manage_title')}</h3>
               <button id="closeManagementModal" class="text-gray-500 hover:text-gray-700 dark:text-gray-400 dark:hover:text-gray-200">✕</button>
             </div>
             
             <div class="space-y-4">
               <div class="bg-blue-50 dark:bg-blue-900/20 border border-blue-200 dark:border-blue-800 rounded-lg p-3">
                 <p class="text-sm text-blue-700 dark:text-blue-300">
-                  💡 <strong>Tip:</strong> You can remove duplicate or old garden calendars to keep things organized. 
-                  Be careful - this will permanently delete the calendar and all its events!
+                  💡 <strong>${t('google.wizard.manage_description')}</strong>
                 </p>
               </div>
               
@@ -101,10 +100,10 @@ export function renderCalendarWizardHTML(settings) {
               
               <div class="flex justify-end gap-2 pt-4 border-t">
                 <button id="cancelManagementBtn" class="px-4 py-2 bg-gray-600 text-white rounded hover:bg-gray-700">
-                  Cancel
+                  ${t('common.cancel')}
                 </button>
                 <button id="continueAfterManagementBtn" class="px-4 py-2 bg-green-600 text-white rounded hover:bg-green-700">
-                  Continue Setup
+                  ${t('google.wizard.continue_setup')}
                 </button>
               </div>
             </div>
@@ -112,17 +111,17 @@ export function renderCalendarWizardHTML(settings) {
         </div>
         
         <div class="bg-gray-50 dark:bg-gray-800 p-6 rounded-lg border border-gray-200 dark:border-gray-600">
-          <h4 class="font-medium mb-4 dark:text-white">🌱 How do you want to organize your garden events?</h4>
+          <h4 class="font-medium mb-4 dark:text-white">🌱 ${t('google.wizard.organize_question')}</h4>
           
           <div class="space-y-3">
             <!-- Option 1: Single Gardening Calendar -->
             <label class="flex items-start space-x-3 p-4 border border-gray-200 dark:border-gray-600 rounded-lg hover:bg-blue-50 dark:hover:bg-blue-900/20 cursor-pointer transition-colors">
               <input type="radio" name="calendarOrganization" value="single" checked class="mt-1">
               <div class="flex-1">
-                <div class="font-medium text-gray-900 dark:text-white">🌱 One "Gardening Calendar"</div>
-                <div class="text-sm text-gray-600 dark:text-gray-400">Recommended for beginners - all garden events in one place</div>
+                <div class="font-medium text-gray-900 dark:text-white">🌱 ${t('google.wizard.option_single')}</div>
+                <div class="text-sm text-gray-600 dark:text-gray-400">${t('google.wizard.option_single_desc')}</div>
                 <div id="singleCalendarWarning" class="text-xs text-orange-600 dark:text-orange-400 mt-1" style="display: none;">
-                  ⚠️ Similar calendar already exists - will create new one or use existing
+                  ⚠️ ${t('google.wizard.warning_exists')}
                 </div>
               </div>
             </label>
@@ -131,10 +130,10 @@ export function renderCalendarWizardHTML(settings) {
             <label class="flex items-start space-x-3 p-4 border border-gray-200 dark:border-gray-600 rounded-lg hover:bg-blue-50 dark:hover:bg-blue-900/20 cursor-pointer transition-colors">
               <input type="radio" name="calendarOrganization" value="existing" class="mt-1">
               <div class="flex-1">
-                <div class="font-medium text-gray-900 dark:text-white">📊 Use my existing calendar</div>
-                <div class="text-sm text-gray-600 dark:text-gray-400 mb-2">Mix garden events with your other events</div>
+                <div class="font-medium text-gray-900 dark:text-white">📊 ${t('google.wizard.option_existing')}</div>
+                <div class="text-sm text-gray-600 dark:text-gray-400 mb-2">${t('google.wizard.option_existing_desc')}</div>
                 <select id="existingCalendarSelect" class="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-md dark:bg-gray-700 dark:text-white text-sm" disabled>
-                  <option value="">Select a calendar...</option>
+                  <option value="">${t('google.wizard.select_calendar')}</option>
                 </select>
               </div>
             </label>
@@ -143,11 +142,11 @@ export function renderCalendarWizardHTML(settings) {
             <label class="flex items-start space-x-3 p-4 border border-gray-200 dark:border-gray-600 rounded-lg hover:bg-blue-50 dark:hover:bg-blue-900/20 cursor-pointer transition-colors">
               <input type="radio" name="calendarOrganization" value="by_type" class="mt-1">
               <div class="flex-1">
-                <div class="font-medium text-gray-900 dark:text-white">🏷️ Separate calendars per activity type</div>
-                <div class="text-sm text-gray-600 dark:text-gray-400">Advanced: Planting, Watering, Fertilizing, Harvesting, Maintenance</div>
-                <div class="text-xs text-blue-600 dark:text-blue-400 mt-1">Creates 5 specialized calendars</div>
+                <div class="font-medium text-gray-900 dark:text-white">🏷️ ${t('google.wizard.option_by_type')}</div>
+                <div class="text-sm text-gray-600 dark:text-gray-400">${t('google.wizard.option_by_type_desc')}</div>
+                <div class="text-xs text-blue-600 dark:text-blue-400 mt-1">${t('google.wizard.option_by_type_creates')}</div>
                 <div id="typeCalendarWarning" class="text-xs text-orange-600 dark:text-orange-400 mt-1" style="display: none;">
-                  ⚠️ Some activity calendars already exist - will avoid duplicates
+                  ⚠️ ${t('google.wizard.warning_activity_exists')}
                 </div>
               </div>
             </label>
@@ -156,11 +155,11 @@ export function renderCalendarWizardHTML(settings) {
             <label class="flex items-start space-x-3 p-4 border border-gray-200 dark:border-gray-600 rounded-lg hover:bg-blue-50 dark:hover:bg-blue-900/20 cursor-pointer transition-colors">
               <input type="radio" name="calendarOrganization" value="by_template" class="mt-1">
               <div class="flex-1">
-                <div class="font-medium text-gray-900 dark:text-white">🌿 Separate calendar per garden type</div>
-                <div class="text-sm text-gray-600 dark:text-gray-400">Power user: Vegetables, Herbs, Ornamental, Fruit</div>
-                <div class="text-xs text-blue-600 dark:text-blue-400 mt-1">Creates 4 garden-specific calendars</div>
+                <div class="font-medium text-gray-900 dark:text-white">🌿 ${t('google.wizard.option_by_template')}</div>
+                <div class="text-sm text-gray-600 dark:text-gray-400">${t('google.wizard.option_by_template_desc')}</div>
+                <div class="text-xs text-blue-600 dark:text-blue-400 mt-1">${t('google.wizard.option_by_template_creates')}</div>
                 <div id="templateCalendarWarning" class="text-xs text-orange-600 dark:text-orange-400 mt-1" style="display: none;">
-                  ⚠️ Some garden type calendars already exist - will avoid duplicates
+                  ⚠️ ${t('google.wizard.warning_template_exists')}
                 </div>
               </div>
             </label>
@@ -169,11 +168,11 @@ export function renderCalendarWizardHTML(settings) {
             <label class="flex items-start space-x-3 p-4 border border-gray-200 dark:border-gray-600 rounded-lg hover:bg-blue-50 dark:hover:bg-blue-900/20 cursor-pointer transition-colors">
               <input type="radio" name="calendarOrganization" value="by_plant" class="mt-1">
               <div class="flex-1">
-                <div class="font-medium text-gray-900 dark:text-white">🌱 Separate calendar per individual plant</div>
-                <div class="text-sm text-gray-600 dark:text-gray-400">Ultimate power user: Tomatoes, Carrots, Roses, etc.</div>
-                <div class="text-xs text-purple-600 dark:text-purple-400 mt-1">Creates one calendar for each plant you grow</div>
+                <div class="font-medium text-gray-900 dark:text-white">🌱 ${t('google.wizard.option_by_plant')}</div>
+                <div class="text-sm text-gray-600 dark:text-gray-400">${t('google.wizard.option_by_plant_desc')}</div>
+                <div class="text-xs text-purple-600 dark:text-purple-400 mt-1">${t('google.wizard.option_by_plant_creates')}</div>
                 <div id="plantCalendarWarning" class="text-xs text-orange-600 dark:text-orange-400 mt-1" style="display: none;">
-                  ⚠️ Some plant calendars already exist - will avoid duplicates
+                  ⚠️ ${t('google.wizard.warning_plant_exists')}
                 </div>
               </div>
             </label>
@@ -185,7 +184,7 @@ export function renderCalendarWizardHTML(settings) {
               type="button"
               class="bg-green-500 hover:bg-green-600 text-white px-6 py-2 rounded-md font-medium transition-colors"
             >
-              🚀 Setup My Calendar Organization
+              🚀 ${t('google.wizard.setup_button')}
             </button>
           </div>
         </div>
@@ -242,7 +241,7 @@ export function setupCalendarWizardEventListeners() {
     }
     
     setupCalendarsBtn.disabled = true;
-    setupCalendarsBtn.textContent = '⏳ Setting up calendars...';
+    setupCalendarsBtn.textContent = `⏳ ${t('google.wizard.setting_up_calendars')}`;
     
     try {
       await handleCalendarSetup(selectedOrganization);
@@ -260,7 +259,7 @@ export function setupCalendarWizardEventListeners() {
       alert(`❌ Setup failed: ${error.message}`);
     } finally {
       setupCalendarsBtn.disabled = false;
-      setupCalendarsBtn.textContent = '🚀 Setup My Calendar Organization';
+      setupCalendarsBtn.textContent = `🚀 ${t('google.wizard.setup_button')}`;
     }
   });
   
@@ -269,7 +268,17 @@ export function setupCalendarWizardEventListeners() {
 }
 
 // Detect and show existing garden calendars
+let isDetecting = false;
+
 async function detectAndShowExistingCalendars() {
+  // Prevent multiple simultaneous executions
+  if (isDetecting) {
+    console.log('🔍 Calendar detection already in progress, skipping...');
+    return;
+  }
+  
+  isDetecting = true;
+  
   try {
     const { detectGardenCalendars } = await import('../../services/GoogleCalendar/GoogleCalendarApi.js');
     const { gardenCalendars, groupedCalendars, duplicateGroups, hasExistingGardenCalendars, hasDuplicates } = await detectGardenCalendars();
@@ -316,6 +325,8 @@ async function detectAndShowExistingCalendars() {
     }
   } catch (error) {
     console.error('Failed to detect existing calendars:', error);
+  } finally {
+    isDetecting = false;
   }
 }
 
@@ -528,59 +539,63 @@ async function handleCalendarSetup(organizationType) {
   
   switch (organizationType) {
     case 'single':
-      // Check if a gardening calendar already exists
-      const existingGardeningCal = gardenCalendars.find(cal => 
-        cal.summary.toLowerCase().includes('gardening') || 
-        cal.summary.includes('🌱')
+      const existingSingleCal = gardenCalendars.find(cal => 
+        cal.summary.toLowerCase().includes('garden') || 
+        cal.summary.toLowerCase().includes('garten') ||
+        cal.summary.toLowerCase().includes('jardin')
       );
       
-      if (existingGardeningCal) {
-        const useExisting = confirm(`Found existing gardening calendar: "${existingGardeningCal.summary}"\n\nDo you want to use this existing calendar instead of creating a new one?`);
+      if (existingSingleCal) {
+        const useExisting = confirm(t('google.wizard.confirm_use_existing', { 
+          type: t('google.wizard.option_single'), 
+          name: existingSingleCal.summary 
+        }));
         if (useExisting) {
-          settings.selectedCalendarId = existingGardeningCal.id;
+          settings.selectedCalendarId = existingSingleCal.id;
           settings.organizationType = 'single';
-          settings.createdCalendars = [{ id: existingGardeningCal.id, name: existingGardeningCal.summary }];
           break;
         }
       }
       
-      const gardeningCalendar = await createCalendar({
-        summary: '🌱 Gardening Calendar',
-        description: 'All your gardening tasks and events in one place'
+      const singleCalendar = await createCalendar({ 
+        summary: getLocalizedCalendarName('single', 'garden'), 
+        description: 'All garden events and tasks in one place' 
       });
-      settings.selectedCalendarId = gardeningCalendar.id;
+      settings.selectedCalendarId = singleCalendar.id;
       settings.organizationType = 'single';
-      settings.createdCalendars = [{ id: gardeningCalendar.id, name: gardeningCalendar.summary }];
       break;
       
     case 'existing':
       const selectedCalendarId = document.getElementById('existingCalendarSelect').value;
       if (!selectedCalendarId) {
-        throw new Error('Please select a calendar');
+        showNotification(t('google.error.no_calendar_selected'), 'error');
+        return;
       }
       settings.selectedCalendarId = selectedCalendarId;
       settings.organizationType = 'existing';
       break;
       
     case 'by_type':
-      const currentYear = new Date().getFullYear();
       const activityTypes = [
-        { name: `🌱 Garden: Planting ${currentYear}`, description: 'All planting activities', keyword: 'planting' },
-        { name: `💧 Garden: Watering ${currentYear}`, description: 'Watering schedules and reminders', keyword: 'watering' },
-        { name: `🌿 Garden: Fertilizing ${currentYear}`, description: 'Fertilizing and feeding tasks', keyword: 'fertilizing' },
-        { name: `🌾 Garden: Harvesting ${currentYear}`, description: 'Harvest times and activities', keyword: 'harvesting' },
-        { name: `🔧 Garden: Maintenance ${currentYear}`, description: 'General garden maintenance', keyword: 'maintenance' }
+        { name: getLocalizedCalendarName('activity', 'planting'), description: 'Planting schedules and seed starting', keyword: 'planting' },
+        { name: getLocalizedCalendarName('activity', 'watering'), description: 'Watering schedules and irrigation', keyword: 'watering' },
+        { name: getLocalizedCalendarName('activity', 'fertilizing'), description: 'Fertilizing and soil amendments', keyword: 'fertilizing' },
+        { name: getLocalizedCalendarName('activity', 'harvesting'), description: 'Harvest times and crop collection', keyword: 'harvesting' },
+        { name: getLocalizedCalendarName('activity', 'maintenance'), description: 'Pruning, weeding, and general care', keyword: 'maintenance' }
       ];
       
       const typeCalendars = [];
       for (const type of activityTypes) {
-        // Check if this type already exists
+        // Check if this activity type already exists
         const existingTypeCal = gardenCalendars.find(cal => 
           cal.summary.toLowerCase().includes(type.keyword)
         );
         
         if (existingTypeCal) {
-          const useExisting = confirm(`Found existing ${type.keyword} calendar: "${existingTypeCal.summary}"\n\nDo you want to use this existing calendar?`);
+          const useExisting = confirm(t('google.wizard.confirm_use_existing', { 
+            type: type.keyword, 
+            name: existingTypeCal.summary 
+          }));
           if (useExisting) {
             typeCalendars.push({ id: existingTypeCal.id, name: existingTypeCal.summary, type: type.keyword });
             continue;
@@ -597,10 +612,10 @@ async function handleCalendarSetup(organizationType) {
     
     case 'by_template':
       const gardenTemplates = [
-        { name: `🌸 Ornamental Garden`, description: 'Ornamental garden tasks and care', keyword: 'ornamental' },
-        { name: `🥕 Vegetable Garden`, description: 'Vegetable growing calendar', keyword: 'vegetable' },
-        { name: `🌿 Herb Garden`, description: 'Herb cultivation and harvesting', keyword: 'herb' },
-        { name: `🍎 Fruit Garden`, description: 'Fruit tree and bush care', keyword: 'fruit' }
+        { name: getLocalizedCalendarName('template', 'flowers'), description: 'Ornamental garden tasks and care', keyword: 'ornamental' },
+        { name: getLocalizedCalendarName('template', 'vegetables'), description: 'Vegetable growing calendar', keyword: 'vegetable' },
+        { name: getLocalizedCalendarName('template', 'herbs'), description: 'Herb cultivation and harvesting', keyword: 'herb' },
+        { name: getLocalizedCalendarName('template', 'fruits'), description: 'Fruit tree and bush care', keyword: 'fruit' }
       ];
       
       const templateCalendars = [];
@@ -611,7 +626,10 @@ async function handleCalendarSetup(organizationType) {
         );
         
         if (existingTemplateCal) {
-          const useExisting = confirm(`Found existing ${template.keyword} garden calendar: "${existingTemplateCal.summary}"\n\nDo you want to use this existing calendar?`);
+          const useExisting = confirm(t('google.wizard.confirm_use_existing', { 
+            type: template.keyword, 
+            name: existingTemplateCal.summary 
+          }));
           if (useExisting) {
             templateCalendars.push({ id: existingTemplateCal.id, name: existingTemplateCal.summary, type: template.keyword });
             continue;
@@ -627,12 +645,17 @@ async function handleCalendarSetup(organizationType) {
       break;
     
     case 'by_plant':
-      // This is a placeholder. In a real app, you would get this list from the user's plants.
-      const plants = [
-        { name: `🍅 Tomatoes`, description: 'Tomato planting, care, and harvest schedule', keyword: 'tomato' },
-        { name: `🥕 Carrots`, description: 'Carrot growing and harvesting calendar', keyword: 'carrot' },
-        { name: `🌹 Roses`, description: 'Rose care, pruning, and blooming schedule', keyword: 'rose' }
-      ];
+      // Get plants from database dynamically instead of hardcoded list
+      const { getPlantRegistry } = await import('../../core/db/plants/index.js');
+      const plantRegistry = getPlantRegistry();
+      
+      // Take first 3 plants as examples (in real app, user would select their plants)
+      const samplePlants = Array.from(plantRegistry.entries()).slice(0, 3);
+      const plants = samplePlants.map(([plantKey, plantData]) => ({
+        name: getLocalizedCalendarName('plant', plantKey),
+        description: `${plantData.name} planting, care, and harvest schedule`,
+        keyword: plantKey
+      }));
       
       const plantCalendars = [];
       for (const plant of plants) {
@@ -642,7 +665,10 @@ async function handleCalendarSetup(organizationType) {
         );
         
         if (existingPlantCal) {
-          const useExisting = confirm(`Found existing ${plant.keyword} calendar: "${existingPlantCal.summary}"\n\nDo you want to use this existing calendar?`);
+          const useExisting = confirm(t('google.wizard.confirm_use_existing', { 
+            type: plant.keyword, 
+            name: existingPlantCal.summary 
+          }));
           if (useExisting) {
             plantCalendars.push({ id: existingPlantCal.id, name: existingPlantCal.summary, type: plant.keyword });
             continue;
@@ -680,7 +706,7 @@ async function showDuplicateCleanupModal() {
           <span class="text-lg">${getCalendarTypeIcon(suggestion.type, suggestion.groupName)}</span>
           <h4 class="font-medium dark:text-white">${suggestion.groupName}</h4>
           <span class="text-xs px-2 py-1 bg-red-100 dark:bg-red-800 text-red-800 dark:text-red-200 rounded">
-            ${suggestion.delete.length} to delete
+            ${t('google.wizard.to_delete', { count: suggestion.delete.length })}
           </span>
         </div>
         
@@ -688,7 +714,7 @@ async function showDuplicateCleanupModal() {
         
         <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
           <div class="bg-green-50 dark:bg-green-900/20 border border-green-200 dark:border-green-800 rounded p-3">
-            <h5 class="font-medium text-green-800 dark:text-green-200 mb-2">✅ Keep This Calendar</h5>
+            <h5 class="font-medium text-green-800 dark:text-green-200 mb-2">✅ ${t('google.wizard.keep_calendar')}</h5>
             <div class="text-sm">
               <div class="font-medium dark:text-white">${suggestion.keep.summary}</div>
               <div class="text-xs text-gray-500 dark:text-gray-400">${suggestion.keep.id}</div>
@@ -696,7 +722,7 @@ async function showDuplicateCleanupModal() {
           </div>
           
           <div class="bg-red-50 dark:bg-red-900/20 border border-red-200 dark:border-red-800 rounded p-3">
-            <h5 class="font-medium text-red-800 dark:text-red-200 mb-2">🗑️ Delete These Calendars</h5>
+            <h5 class="font-medium text-red-800 dark:text-red-200 mb-2">🗑️ ${t('google.wizard.delete_calendars')}</h5>
             <div class="space-y-1">
               ${suggestion.delete.map(cal => `
                 <div class="text-sm">
@@ -711,7 +737,7 @@ async function showDuplicateCleanupModal() {
         <div class="mt-3 flex justify-end">
           <label class="flex items-center space-x-2">
             <input type="checkbox" name="cleanupAction" value="${index}" checked class="rounded">
-            <span class="text-sm dark:text-white">Include in cleanup</span>
+            <span class="text-sm dark:text-white">${t('google.wizard.include_cleanup')}</span>
           </label>
         </div>
       </div>
@@ -731,16 +757,16 @@ async function executeCalendarCleanup() {
   const selectedActions = document.querySelectorAll('input[name="cleanupAction"]:checked');
   
   if (selectedActions.length === 0) {
-    showNotification('No cleanup actions selected', 'warning');
+    showNotification(t('google.wizard.no_cleanup_selected'), 'warning');
     return;
   }
   
-  if (!confirm(`Are you sure you want to delete ${Array.from(selectedActions).length} duplicate calendar groups?\n\nThis action cannot be undone!`)) {
+  if (!confirm(t('google.wizard.confirm_cleanup', { count: selectedActions.length }))) {
     return;
   }
   
   executeBtn.disabled = true;
-  executeBtn.textContent = '🧹 Cleaning up...';
+  executeBtn.textContent = t('google.wizard.cleanup_cleaning');
   
   try {
     const { detectGardenCalendars, deleteCalendar } = await import('../../services/GoogleCalendar/GoogleCalendarApi.js');
@@ -765,7 +791,8 @@ async function executeCalendarCleanup() {
       }
     }
     
-    showNotification(`Cleanup complete! Deleted ${deletedCount} calendars${errorCount > 0 ? `, ${errorCount} errors` : ''}`, 'success');
+    const errorSuffix = errorCount > 0 ? t('google.wizard.errors_suffix', { count: errorCount }) : '';
+    showNotification(t('google.wizard.cleanup_complete', { count: deletedCount, errors: errorSuffix }), 'success');
     
     // Close modal and refresh
     document.getElementById('duplicateCleanupModal').style.display = 'none';
@@ -773,9 +800,9 @@ async function executeCalendarCleanup() {
     
   } catch (error) {
     console.error('Failed to execute cleanup:', error);
-    showNotification(`Cleanup failed: ${error.message}`, 'error');
+    showNotification(t('google.wizard.cleanup_failed', { error: error.message }), 'error');
   } finally {
     executeBtn.disabled = false;
-    executeBtn.textContent = '🧹 Execute Cleanup';
+    executeBtn.textContent = `🧹 ${t('google.wizard.execute_cleanup')}`;
   }
 }

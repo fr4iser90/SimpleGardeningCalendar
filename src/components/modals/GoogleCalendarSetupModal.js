@@ -5,21 +5,13 @@ import { getEventTypeIcon } from '../../utils/eventUtils.js';
 import { showNotification } from '../../utils/notifications.js';
 import { showButtonSpinner, hideButtonSpinner, showLoadingSpinner, hideLoadingSpinner } from '../ui/LoadingSpinner.js';
 import { renderCalendarWizardHTML, setupCalendarWizardEventListeners } from './GoogleCalendarWizard.js';
+import { showDetailedHelp } from './GoogleDetailedHelp.js';
+import { t } from '../../core/i18n/index.js';
 
 /**
  * Google Calendar Setup Modal
  * Handles the UI and user interactions for Google Calendar settings.
  */
-
-// These were onclick handlers in the original file, without a definition.
-// Creating stubs to avoid errors. The user can fill them in.
-function showDetailedHelp() {
-  alert('Detailed help instructions would be shown here.');
-}
-
-function showClientIdHelp() {
-  alert('Help for finding the Google Client ID would be shown here.');
-}
 
 async function performSyncOperation(operation, button, originalText) {
   const spinnerId = showButtonSpinner(button, originalText, '⏳ Processing...');
@@ -78,14 +70,14 @@ export async function updateConnectionStatus(showWizard = false) {
     
     if (isSignedIn) {
       statusDiv.className = 'p-3 rounded-lg bg-green-50 dark:bg-green-900/20 border border-green-200 dark:border-green-800';
-      statusDiv.querySelector('.flex').innerHTML = `<span class="text-lg">✅</span><span class="font-medium dark:text-white">Connected to Google Calendar</span>`;
+      statusDiv.querySelector('.flex').innerHTML = `<span class="text-lg">✅</span><span class="font-medium dark:text-white">${t('google.setup.connected')}</span>`;
       userInfoDiv.textContent = 'Loading user info...';
       
       try {
         const userInfo = await getUserInfo();
         settings.userEmail = userInfo.email;
         googleCalendarSettings.save(settings);
-        userInfoDiv.textContent = `Connected as: ${userInfo.email}`;
+        userInfoDiv.textContent = `${t('google.setup.connected_as')} ${userInfo.email}`;
       } catch (error) {
         userInfoDiv.textContent = 'Connected (user info unavailable)';
       }
@@ -276,22 +268,22 @@ export function renderGoogleCalendarSetupModal() {
   modal.innerHTML = `
     <div class="bg-white dark:bg-gray-800 rounded-lg p-6 max-w-4xl w-full max-h-[90vh] overflow-y-auto">
       <div class="flex justify-between items-center mb-6">
-        <h2 class="text-xl font-semibold dark:text-white">🗓️ Google Calendar Integration</h2>
+        <h2 class="text-xl font-semibold dark:text-white">🗓️ ${t('google.setup.title')}</h2>
         <button id="closeGoogleCalendarModal" class="text-gray-500 hover:text-gray-700 dark:text-gray-400 dark:hover:text-gray-200">✕</button>
       </div>
       
       <div class="space-y-6">
         <!-- Help Section -->
         <div class="bg-blue-50 dark:bg-blue-900/20 border border-blue-200 dark:border-blue-800 rounded-lg p-4">
-          <h3 class="font-semibold text-blue-800 dark:text-blue-200 mb-2">📋 Setup Instructions</h3>
+          <h3 class="font-semibold text-blue-800 dark:text-blue-200 mb-2">📋 ${t('google.setup.instructions')}</h3>
           <div class="text-sm text-blue-700 dark:text-blue-300 space-y-2">
-            <p><strong>Step 1:</strong> Go to <a href="https://console.cloud.google.com/" target="_blank" class="underline hover:text-blue-600">Google Cloud Console</a></p>
-            <p><strong>Step 2:</strong> Create a new project or select an existing one</p>
-            <p><strong>Step 3:</strong> Enable the "Google Calendar API"</p>
-            <p><strong>Step 4:</strong> Create "OAuth 2.0 Client ID" credentials</p>
-            <p><strong>Step 5:</strong> Add your domain to "Authorized JavaScript origins"</p>
+            <p><strong>Step 1:</strong> ${t('google.setup.step1')}</p>
+            <p><strong>Step 2:</strong> ${t('google.setup.step2')}</p>
+            <p><strong>Step 3:</strong> ${t('google.setup.step3')}</p>
+            <p><strong>Step 4:</strong> ${t('google.setup.step4')}</p>
+            <p><strong>Step 5:</strong> ${t('google.setup.step5')}</p>
             <button id="showDetailedHelpBtn" class="mt-2 px-3 py-1 bg-blue-600 text-white rounded hover:bg-blue-700 text-xs">
-              📖 Show Detailed Guide
+              📖 ${t('google.setup.detailed_guide')}
             </button>
           </div>
         </div>
@@ -300,13 +292,13 @@ export function renderGoogleCalendarSetupModal() {
         <div id="connectionStatus" class="p-3 rounded-lg bg-gray-50 dark:bg-gray-700 border border-gray-200 dark:border-gray-600">
           <div class="flex items-center space-x-2">
             <span class="text-lg">❌</span>
-            <span class="font-medium dark:text-white">Not Connected</span>
+            <span class="font-medium dark:text-white">${t('google.setup.not_connected')}</span>
           </div>
           <div id="userInfo" class="mt-2 text-sm text-gray-600 dark:text-gray-400">
-            Enter your Client ID below to connect.
+            ${t('google.setup.enter_client_id')}
           </div>
           <div id="lastSyncInfo" class="mt-1 text-xs text-gray-500 dark:text-gray-400">
-            ${settings.lastSyncTime ? `Last sync: ${new Date(settings.lastSyncTime).toLocaleString()}` : 'Never synced'}
+            ${settings.lastSyncTime ? `${t('google.setup.last_sync')} ${new Date(settings.lastSyncTime).toLocaleString()}` : t('google.setup.never_synced')}
           </div>
         </div>
         
@@ -314,8 +306,7 @@ export function renderGoogleCalendarSetupModal() {
         <form id="googleCalendarForm" class="space-y-4" onsubmit="return false;">
           <div>
             <label for="googleClientId" class="block text-sm font-medium mb-1 dark:text-gray-200">
-              🆔 Google Client ID
-              <button type="button" id="showClientIdHelpBtn" class="ml-1 text-blue-500 hover:text-blue-600">ℹ️</button>
+              🆔 ${t('google.setup.client_id_label')}
             </label>
             <input 
               type="text" 
@@ -326,17 +317,14 @@ export function renderGoogleCalendarSetupModal() {
               placeholder="123456789-abc.apps.googleusercontent.com"
               required
             >
-            <div class="text-xs text-gray-500 dark:text-gray-400 mt-1">
-              💡 Only the Client ID is needed - no API Key or Client Secret!
-            </div>
           </div>
           
           <div class="flex space-x-2">
             <button type="button" id="connectBtn" class="px-4 py-2 bg-blue-600 text-white rounded hover:bg-blue-700">
-              🔗 Connect to Google Calendar
+              🔗 ${t('google.setup.connect_button')}
             </button>
             <button type="button" id="saveSettingsBtn" class="px-4 py-2 bg-green-600 text-white rounded hover:bg-green-700">
-              💾 Save Settings
+              💾 ${t('google.setup.save_settings')}
             </button>
           </div>
         </form>
@@ -346,43 +334,43 @@ export function renderGoogleCalendarSetupModal() {
         <!-- Enhanced Sync Options -->
         <div id="syncOptions" style="display: none;" class="border-t pt-4">
           <div class="flex justify-between items-center mb-4">
-            <h3 class="font-semibold dark:text-white">⚙️ Sync Settings</h3>
+            <h3 class="font-semibold dark:text-white">⚙️ ${t('google.setup.sync_settings')}</h3>
             <button id="changeSetupBtn" class="text-sm text-blue-600 dark:text-blue-400 hover:underline">
-              Change Calendar Setup
+              ${t('google.setup.change_setup')}
             </button>
           </div>
           
           <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
             <!-- Basic Sync Options -->
             <div class="space-y-3">
-              <h4 class="font-medium dark:text-gray-200">🔄 Sync Direction</h4>
+              <h4 class="font-medium dark:text-gray-200">🔄 ${t('google.setup.sync_direction')}</h4>
               
               <div class="flex items-center space-x-2">
                 <input type="checkbox" id="autoSync" ${settings.autoSync ? 'checked' : ''} class="rounded">
                 <label for="autoSync" class="text-sm dark:text-gray-200">
-                  📤 Auto-export new events to Google
+                  📤 ${t('google.setup.auto_export')}
                 </label>
               </div>
               
               <div class="flex items-center space-x-2">
                 <input type="checkbox" id="bidirectionalSync" ${settings.bidirectionalSync ? 'checked' : ''} class="rounded">
                 <label for="bidirectionalSync" class="text-sm dark:text-gray-200">
-                  🔄 Bidirectional sync (import & export)
+                  🔄 ${t('google.setup.bidirectional')}
                 </label>
               </div>
             </div>
             
             <!-- Import Settings -->
             <div class="space-y-3">
-              <h4 class="font-medium dark:text-gray-200">📥 Import Settings</h4>
+              <h4 class="font-medium dark:text-gray-200">📥 ${t('google.setup.import_settings')}</h4>
               
               <div>
-                <label for="importTimeRange" class="block text-xs dark:text-gray-300 mb-1">Import time range:</label>
+                <label for="importTimeRange" class="block text-xs dark:text-gray-300 mb-1">${t('google.setup.import_time_range')}</label>
                 <select id="importTimeRange" class="text-sm p-1 border rounded dark:bg-gray-700 dark:border-gray-600 dark:text-white w-full">
-                  <option value="6months" ${settings.importSettings?.importTimeRange === '6months' ? 'selected' : ''}>Last 6 months</option>
-                  <option value="1year" ${settings.importSettings?.importTimeRange === '1year' ? 'selected' : ''}>Last 1 year</option>
-                  <option value="2years" ${settings.importSettings?.importTimeRange === '2years' ? 'selected' : ''}>Last 2 years</option>
-                  <option value="all" ${settings.importSettings?.importTimeRange === 'all' ? 'selected' : ''}>All events</option>
+                  <option value="6months" ${settings.importSettings?.importTimeRange === '6months' ? 'selected' : ''}>${t('google.setup.last_6_months')}</option>
+                  <option value="1year" ${settings.importSettings?.importTimeRange === '1year' ? 'selected' : ''}>${t('google.setup.last_1_year')}</option>
+                  <option value="2years" ${settings.importSettings?.importTimeRange === '2years' ? 'selected' : ''}>${t('google.setup.last_2_years')}</option>
+                  <option value="all" ${settings.importSettings?.importTimeRange === 'all' ? 'selected' : ''}>${t('google.setup.all_events')}</option>
                 </select>
               </div>
             </div>
@@ -390,7 +378,7 @@ export function renderGoogleCalendarSetupModal() {
           
           <!-- Event Types -->
           <div class="mt-4">
-            <h4 class="font-medium dark:text-gray-200 mb-2">📋 Sync these event types:</h4>
+            <h4 class="font-medium dark:text-gray-200 mb-2">📋 ${t('google.setup.sync_event_types')}</h4>
             <div class="grid grid-cols-2 md:grid-cols-3 gap-2">
               ${Object.entries(settings.syncTypes || {}).map(([type, enabled]) => `
                 <div class="flex items-center space-x-2">
@@ -407,24 +395,24 @@ export function renderGoogleCalendarSetupModal() {
           <div class="mt-6 space-y-2">
             <div class="flex flex-wrap gap-2">
               <button type="button" id="syncAllEventsBtn" class="px-4 py-2 bg-purple-600 text-white rounded hover:bg-purple-700">
-                📤 Export All Local Events
+                📤 ${t('google.setup.export_all')}
               </button>
               <button type="button" id="importEventsBtn" class="px-4 py-2 bg-indigo-600 text-white rounded hover:bg-indigo-700">
-                📥 Import from Google Calendar
+                📥 ${t('google.setup.import_from_google')}
               </button>
               <button type="button" id="bidirectionalSyncBtn" class="px-4 py-2 bg-orange-600 text-white rounded hover:bg-orange-700">
-                🔄 Full Bidirectional Sync
+                🔄 ${t('google.setup.full_bidirectional')}
               </button>
             </div>
             <button type="button" id="saveSyncSettingsBtn" class="px-4 py-2 bg-green-600 text-white rounded hover:bg-green-700 mt-2">
-              💾 Save Sync Settings
+              💾 ${t('google.setup.save_sync_settings')}
             </button>
           </div>
           
           <!-- Sync Status -->
           <div id="syncStatus" class="mt-4 p-3 bg-gray-50 dark:bg-gray-700 rounded-lg">
             <div class="text-sm dark:text-gray-200">
-              <strong>Sync Status:</strong> <span id="syncStatusText">Ready</span>
+              <strong>${t('google.setup.sync_status')}</strong> <span id="syncStatusText">${t('google.setup.ready')}</span>
             </div>
           </div>
         </div>
@@ -432,7 +420,7 @@ export function renderGoogleCalendarSetupModal() {
         <!-- Sign Out -->
         <div class="border-t pt-4 mt-6">
           <button type="button" id="signOutBtn" class="px-4 py-2 bg-red-600 text-white rounded hover:bg-red-700">
-            🚪 Sign Out & Revoke Permissions
+            🚪 ${t('google.setup.sign_out')}
           </button>
         </div>
       </div>
@@ -443,7 +431,6 @@ export function renderGoogleCalendarSetupModal() {
 
   modal.querySelector('#closeGoogleCalendarModal').addEventListener('click', () => modal.remove());
   modal.querySelector('#showDetailedHelpBtn').addEventListener('click', () => showDetailedHelp());
-  modal.querySelector('#showClientIdHelpBtn').addEventListener('click', () => showClientIdHelp());
   
   initializeGoogleCalendarEventListeners();
   updateConnectionStatus();
