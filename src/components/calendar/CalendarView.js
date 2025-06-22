@@ -163,7 +163,22 @@ function updateGoogleCalendarStatus() {
         <i class="fas fa-check-circle mr-1"></i>${t('google.connected')}
       </span>
       <span class="mx-2">|</span>
-      <span>📅 ${calendarName}</span>
+      <div class="flex items-center space-x-2">
+        <span>📅</span>
+        ${settings.createdCalendars && settings.createdCalendars.length > 1 ? `
+          <select 
+            id="calendarSwitcher" 
+            class="text-xs px-2 py-1 border rounded dark:bg-gray-700 dark:border-gray-600 dark:text-white"
+            onchange="switchCalendar(this.value)"
+          >
+            ${settings.createdCalendars.map(cal => `
+              <option value="${cal.id}" ${cal.id === selectedCalendarId ? 'selected' : ''}>
+                ${cal.name}
+              </option>
+            `).join('')}
+          </select>
+        ` : `<span>${calendarName}</span>`}
+      </div>
       <span class="mx-2">|</span>
       <span>${t('google.sync')}:</span>
       <button 
@@ -247,6 +262,31 @@ window.triggerGoogleCalendarSync = async function() {
     showNotification(`${t('error.title')}: ${error.message || 'Sync failed'}`, 'error');
   } finally {
     updateGoogleCalendarStatus();
+  }
+};
+
+window.switchCalendar = function(calendarId) {
+  try {
+    const settingsJSON = localStorage.getItem('googleCalendarSettings');
+    let settings = settingsJSON ? JSON.parse(settingsJSON) : {};
+    
+    // Update selected calendar
+    settings.selectedCalendarId = calendarId;
+    localStorage.setItem('googleCalendarSettings', JSON.stringify(settings));
+    
+    // Find calendar name for notification
+    const calendarName = settings.createdCalendars?.find(cal => cal.id === calendarId)?.name || calendarId;
+    
+    showNotification(`Switched to calendar: ${calendarName}`, 'success');
+    updateGoogleCalendarStatus();
+    
+    // Refresh calendar events if needed
+    if (window.calendar) {
+      window.calendar.refetchEvents();
+    }
+  } catch (error) {
+    console.error('Failed to switch calendar:', error);
+    showNotification('Failed to switch calendar', 'error');
   }
 };
 
