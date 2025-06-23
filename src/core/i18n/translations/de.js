@@ -289,6 +289,7 @@ export const de = {
 
   // Google Calendar Setup Modal
   'google.setup.title': 'Google Calendar Integration',
+  'google.setup.subtitle': 'Synchronisiere deinen Gartenkalender mit Google Calendar',
   'google.setup.instructions': 'Setup-Anweisungen',
   'google.setup.step1': 'Gehen Sie zur Google Cloud Console',
   'google.setup.step2': 'Erstellen Sie ein neues Projekt oder wählen Sie ein vorhandenes aus',
@@ -361,4 +362,47 @@ export const de = {
   'common.delete': 'Löschen',
   'common.edit': 'Bearbeiten',
   'common.close': 'Schließen',
+
+  // Import/Export (NEW)
+  'btn.import_calendar': 'Kalender importieren',
+  'btn.export_calendar': 'Kalender exportieren',
+  
+  // Import Modal
+  'import.modal.title': 'Kalender importieren',
+  'import.drag_drop': 'Datei hier hinziehen oder klicken zum Auswählen',
+  'import.supported_formats': 'Unterstützte Formate: JSON, iCal (.ics), CSV',
+  'import.file_detected': 'Datei erkannt: {format}',
+  'import.events_found': '{count} Events gefunden',
+  'import.preview.title': 'Import Vorschau',
+  'import.confirm': 'Import bestätigen',
+  'import.cancel': 'Abbrechen',
+  
+  // Export Modal  
+  'export.modal.title': 'Kalender exportieren',
+  'export.format.label': 'Format auswählen:',
+  'export.format.json': 'JSON (für Re-Import)',
+  'export.format.ical': 'iCal (.ics)',
+  'export.format.csv': 'CSV (Excel)',
+  'export.format.pdf': 'PDF (Drucken)',
+  'export.download': 'Download starten',
+  'export.cancel': 'Abbrechen',
+  
+  // Error Messages
+  'import.error.invalid_file': 'Ungültige Datei',
+  'import.error.unsupported_format': 'Format nicht unterstützt',
+  'import.error.corrupted_data': 'Beschädigte Daten',
+  'import.error.database': 'Datenbank-Fehler beim Import',
+  'import.error.file_too_large': 'Datei zu groß',
+  'export.error.no_data': 'Keine Daten zum Exportieren',
+  'export.error.generation_failed': 'Export-Generierung fehlgeschlagen',
+  
+  // Success Messages
+  'import.success': '{count} Events erfolgreich importiert',
+  'export.success': 'Export erfolgreich erstellt',
+  
+  // Notifications
+  'import.notification.start': 'Import gestartet...',
+  'import.notification.progress': 'Importiere {current}/{total} Events...',
+  'export.notification.start': 'Export wird erstellt...',
+  'export.notification.ready': 'Export bereit zum Download',
 }; 

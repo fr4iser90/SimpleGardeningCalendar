@@ -2,6 +2,8 @@ import { t } from '../../core/i18n/index.js';
 import { showAddEventModal } from '../modals/AddEventModal.js';
 import { showTemplateImportModal } from '../modals/TemplateModal.js';
 import { showClearCalendarModal } from '../modals/ClearDataModal.js';
+import { showImportModal } from '../modals/ImportModal.js';
+import { showExportModal } from '../modals/ExportModal.js';
 
 export function createCalendarControls(calendarEl) {
   // Add control buttons
@@ -42,6 +44,18 @@ export function createCalendarControls(calendarEl) {
     }
   };
 
+  // Add Import Calendar button
+  const importBtn = document.createElement('button');
+  importBtn.innerHTML = '<i class="fas fa-file-import mr-2"></i>' + t('btn.import_calendar');
+  importBtn.className = 'px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600';
+  importBtn.onclick = () => showImportModal();
+
+  // Add Export Calendar button
+  const exportBtn = document.createElement('button');
+  exportBtn.innerHTML = '<i class="fas fa-file-export mr-2"></i>' + t('btn.export_calendar');
+  exportBtn.className = 'px-4 py-2 bg-indigo-500 text-white rounded hover:bg-indigo-600';
+  exportBtn.onclick = () => showExportModal();
+
   // Add Clear Calendar button
   const clearCalendarBtn = document.createElement('button');
   clearCalendarBtn.innerHTML = '<i class="fas fa-trash mr-2"></i>' + t('btn.clear_calendar');
@@ -52,6 +66,8 @@ export function createCalendarControls(calendarEl) {
   buttonGroup.appendChild(addPlantingBtn);
   buttonGroup.appendChild(templateImportBtn);
   buttonGroup.appendChild(myPlantsBtn);
+  buttonGroup.appendChild(importBtn);
+  buttonGroup.appendChild(exportBtn);
   buttonGroup.appendChild(clearCalendarBtn);
   
   // Add Google Calendar status display
@@ -71,6 +87,8 @@ export function createCalendarControls(calendarEl) {
     addPlantingBtn.innerHTML = '<i class="fas fa-seedling mr-2"></i>' + t('btn.add_planting');
     templateImportBtn.innerHTML = '<i class="fas fa-download mr-2"></i>' + t('btn.import_template');
     myPlantsBtn.innerHTML = '<i class="fas fa-leaf mr-2"></i>' + t('btn.my_plants');
+    importBtn.innerHTML = '<i class="fas fa-file-import mr-2"></i>' + t('btn.import_calendar');
+    exportBtn.innerHTML = '<i class="fas fa-file-export mr-2"></i>' + t('btn.export_calendar');
     clearCalendarBtn.innerHTML = '<i class="fas fa-trash mr-2"></i>' + t('btn.clear_calendar');
   });
 
@@ -79,6 +97,8 @@ export function createCalendarControls(calendarEl) {
     addPlantingBtn,
     templateImportBtn,
     myPlantsBtn,
+    importBtn,
+    exportBtn,
     clearCalendarBtn,
     googleCalendarStatus
   };

@@ -76,7 +76,22 @@ function loadTemplateOptions() {
   const templateSelect = document.getElementById('templateSelect');
   const templates = getAvailableTemplates();
   
+  // Debug logging
+  console.log('Loading templates:', templates);
+  console.log('Templates count:', templates.length);
+  
+  if (templates.length === 0) {
+    console.error('No templates available!');
+    // Add a debug option to show the issue
+    const debugOption = document.createElement('option');
+    debugOption.value = 'debug';
+    debugOption.textContent = 'DEBUG: Keine Templates gefunden';
+    templateSelect.appendChild(debugOption);
+    return;
+  }
+  
   templates.forEach((template, index) => {
+    console.log(`Adding template ${index}:`, template.name);
     const option = document.createElement('option');
     option.value = index;
     option.textContent = template.name;
@@ -85,6 +100,7 @@ function loadTemplateOptions() {
   
   // Add change handler
   templateSelect.addEventListener('change', function() {
+    console.log('Template selected:', this.value);
     showTemplateDescription(this.value);
     document.getElementById('importBtn').disabled = this.value === '';
   });

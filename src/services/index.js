@@ -15,4 +15,7 @@ export * from './EventService.js';
 export * from './PlantService.js';
 
 // Template Service
-export * from './TemplateService.js'; 
+export * from './TemplateService.js';
+
+// Import/Export Service
+export * from './ImportExportService.js'; 
