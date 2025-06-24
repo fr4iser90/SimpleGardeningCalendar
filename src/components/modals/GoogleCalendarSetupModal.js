@@ -137,7 +137,12 @@ export async function updateConnectionStatus(showWizard = false) {
       
     } else {
       statusDiv.className = 'p-3 rounded-lg bg-gray-50 dark:bg-gray-700 border border-gray-200 dark:border-gray-600';
-      statusDiv.querySelector('.flex').innerHTML = `<span class="text-lg">❌</span><span class="font-medium dark:text-white">Not Connected</span>`;
+      statusDiv.querySelector('.flex').innerHTML = `
+        <span class="text-lg">❌</span>
+        <img src="https://www.gstatic.com/images/branding/product/1x/calendar_48dp.png" alt="Google Calendar" style="height:1.2em;vertical-align:middle;margin-right:0.5em;">
+        <span class="font-bold mr-1">Google Calendar:</span>
+        <span class="font-medium dark:text-white">${t('google.setup.not_connected')}</span>
+      `;
       userInfoDiv.textContent = 'Enter your Client ID below to connect';
       syncOptionsDiv.style.display = 'none';
       calendarWizard.style.display = 'none';
@@ -292,6 +297,8 @@ export function renderGoogleCalendarSetupModal() {
         <div id="connectionStatus" class="p-3 rounded-lg bg-gray-50 dark:bg-gray-700 border border-gray-200 dark:border-gray-600">
           <div class="flex items-center space-x-2">
             <span class="text-lg">❌</span>
+            <img src="https://www.gstatic.com/images/branding/product/1x/calendar_48dp.png" alt="Google Calendar" style="height:1.2em;vertical-align:middle;margin-right:0.5em;">
+            <span class="font-bold mr-1">Google Calendar:</span>
             <span class="font-medium dark:text-white">${t('google.setup.not_connected')}</span>
           </div>
           <div id="userInfo" class="mt-2 text-sm text-gray-600 dark:text-gray-400">

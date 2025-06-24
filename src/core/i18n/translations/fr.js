@@ -27,6 +27,8 @@ export const fr = {
   'btn.close': 'Fermer',
   'btn.view_details': 'Voir les Détails',
   'btn.add_note': 'Ajouter une Note',
+  'btn.import_calendar': 'Importer Calendrier',
+  'btn.export_calendar': 'Exporter Calendrier',
   
   // Add Event Modal
   'modal.add_event.title': 'Ajouter Événement de Jardin',
@@ -235,6 +237,7 @@ export const fr = {
   'google.initial_sync_prompt': 'Voulez-vous synchroniser tous vos événements locaux avec "{calendarName}" maintenant?',
   'google.error.no_calendar_selected': 'Aucun calendrier sélectionné. Veuillez en choisir un dans les paramètres Google.',
   'google.status.no_calendar_selected': 'Aucun calendrier sélectionné',
+  'google.status.connect_tooltip': 'Cliquez pour connecter Google Calendar',
 
   // Google Calendar Wizard
   'google.wizard.title': 'Organisation du Calendrier',
@@ -360,5 +363,33 @@ export const fr = {
   'common.save': 'Enregistrer',
   'common.delete': 'Supprimer',
   'common.edit': 'Modifier',
-  'common.close': 'Fermer'
+  'common.close': 'Fermer',
+
+  // Import Modal
+  'import.modal.title': 'Importer Calendrier',
+  'import.drag_drop': 'Glissez le fichier ici ou cliquez pour sélectionner',
+  'import.supported_formats': 'Formats supportés : JSON, iCal (.ics), CSV',
+  'import.file_detected': 'Fichier détecté : {format}',
+  'import.events_found': '{count} événements trouvés',
+  'import.preview.title': 'Aperçu de l\'importation',
+  'import.confirm': 'Confirmer l\'importation',
+  'import.cancel': 'Annuler',
+  'import.success': '{count} événements importés avec succès',
+  'import.error.invalid_file': 'Fichier invalide',
+  'import.error.unsupported_format': 'Format non supporté',
+  'import.error.database': 'Erreur de base de données lors de l\'importation',
+
+  // Export Modal
+  'export.modal.title': 'Exporter Calendrier',
+  'export.format.label': 'Sélectionner le format :',
+  'export.format.json': 'JSON',
+  'export.format.json_desc': 'Pour réimporter dans cette application',
+  'export.format.ical': 'iCal (.ics)',
+  'export.format.ical_desc': 'Pour d\'autres applications de calendrier',
+  'export.download': 'Exporter',
+  'export.cancel': 'Annuler',
+  'export.success': 'Exportation créée avec succès',
+  'export.error.no_data': 'Aucune donnée à exporter',
+  'export.error.generation_failed': 'Échec de la génération de l\'exportation',
+  'export.notification.start': 'Création de l\'export...'
 }; 

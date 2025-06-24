@@ -116,10 +116,30 @@ export function updateGoogleCalendarStatus() {
   } else {
     console.log('📊 Status Bar: Showing NOT CONNECTED');
     statusDisplay.innerHTML = `
-      <span class="text-red-600 dark:text-red-400 flex items-center">
+      <button
+        class="text-red-600 dark:text-red-400 flex items-center hover:underline focus:outline-none"
+        style="background:none;border:none;padding:0;cursor:pointer"
+        title="Click to connect Google Calendar"
+        id="googleStatusConnectBtn"
+      >
+        <img src="https://www.gstatic.com/images/branding/product/1x/calendar_48dp.png" alt="Google Calendar" style="height:1.2em;vertical-align:middle;margin-right:0.5em;">
+        <span class="font-bold mr-1">Google Calendar:</span>
         <i class="fas fa-times-circle mr-1"></i>${t('google.not_connected')}
-      </span>
+      </button>
     `;
+    // Button-Handler für Modal-Öffnung
+    const connectBtn = document.getElementById('googleStatusConnectBtn');
+    if (connectBtn) {
+      connectBtn.addEventListener('click', () => {
+        if (window.renderGoogleCalendarSetupModal) {
+          window.renderGoogleCalendarSetupModal();
+        } else {
+          import('../modals/GoogleCalendarSetupModal.js').then(mod => {
+            mod.renderGoogleCalendarSetupModal();
+          });
+        }
+      });
+    }
   }
 }
 

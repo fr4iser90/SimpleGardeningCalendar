@@ -235,6 +235,7 @@ export const de = {
   'google.initial_sync_prompt': 'Möchten Sie jetzt alle Ihre lokalen Termine mit "{calendarName}" synchronisieren?',
   'google.error.no_calendar_selected': 'Kein Kalender ausgewählt. Bitte wählen Sie einen in den Google-Einstellungen.',
   'google.status.no_calendar_selected': 'Kein Kalender ausgewählt',
+  'google.status.connect_tooltip': 'Klicken, um Google Calendar zu verbinden',
 
   // Google Calendar Wizard
   'google.wizard.title': 'Kalender-Organisation',
@@ -394,4 +395,35 @@ export const de = {
   'export.error.no_data': 'Keine Daten zum Exportieren',
   'export.error.generation_failed': 'Export-Generierung fehlgeschlagen',
   'export.notification.start': 'Export wird erstellt...',
+
+  // AppShell.js
+  'nav.google_calendar': 'Google Calendar',
+  'theme.toggle.light': 'Zum Lichtmodus wechseln',
+  'theme.toggle.dark': 'Zum Dunkelmodus wechseln',
+
+  // PlantLibrary.js
+  'plant_library.title': 'Pflanzenbibliothek',
+  'plant_library.search_placeholder': 'Pflanzen suchen...',
+  'plant_library.all_categories': 'Alle Kategorien',
+  'plant_library.view_details': 'Details anzeigen',
+  'plant_library.no_phases': 'Keine Phaseninformationen verfügbar',
+  'plant_library.no_care_tips': 'Keine Pflegetipps verfügbar',
+  'plant_library.common_problems': 'Häufige Probleme',
+  'plant_library.start_growing': 'Diese Pflanze anbauen',
+
+  // PlantsList.js
+  'plants.no_active_yet': 'Noch keine aktiven Pflanzen. Fügen Sie Ihre erste Pflanze hinzu!',
+  'plants.view_details': 'Details anzeigen',
+  'plants.add_note': 'Notiz hinzufügen',
+  'plants.label.type': 'Pflanzentyp',
+  'plants.label.location': 'Standort',
+  'plants.label.started': 'Gestartet',
+  'plants.label.current_phase': 'Aktuelle Phase',
+  'plants.label.expected_completion': 'Erwarteter Abschluss',
+  'plants.delete_button': 'Pflanze und alle Termine löschen',
+  'plants.no_events': 'Noch keine Ereignisse',
+  'plants.no_notes': 'Noch keine Notizen',
+  'plants.save_note': 'Notiz speichern',
+  'plants.delete_confirm': 'Pflanze & alle Termine löschen',
+  'plants.no_category_plants': 'Keine {category} Pflanzen vorhanden.',
 }; 

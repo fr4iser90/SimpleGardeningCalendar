@@ -70,13 +70,13 @@ export function createCalendarControls(calendarEl) {
   buttonGroup.appendChild(exportBtn);
   buttonGroup.appendChild(clearCalendarBtn);
   
-  // Add Google Calendar status display
+  controls.appendChild(buttonGroup);
+
+  // Google Calendar status display immer darunter, mit Abstand
   const googleCalendarStatus = document.createElement('div');
   googleCalendarStatus.id = 'googleCalendarStatusDisplay';
-  googleCalendarStatus.className = 'ml-4 text-sm text-gray-600 dark:text-gray-400 flex items-center';
-  buttonGroup.appendChild(googleCalendarStatus);
-  
-  controls.appendChild(buttonGroup);
+  googleCalendarStatus.className = 'mt-3 text-sm text-gray-600 dark:text-gray-400 flex items-center';
+  controls.appendChild(googleCalendarStatus);
   
   calendarEl.parentNode.insertBefore(controls, calendarEl);
 

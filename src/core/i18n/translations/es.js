@@ -5,6 +5,7 @@ export const es = {
   'nav.calendar': 'Calendario',
   'nav.plants': 'Plantas',
   'nav.settings': 'Configuración',
+  'nav.google_calendar': 'Google Calendar',
   'ui.quick_actions': 'Acciones Rápidas',
   'ui.plant_categories': 'Categorías de Plantas',
   'ui.upcoming_tasks': 'Tareas Pendientes',
@@ -27,6 +28,8 @@ export const es = {
   'btn.close': 'Cerrar',
   'btn.view_details': 'Ver Detalles',
   'btn.add_note': 'Agregar Nota',
+  'btn.import_calendar': 'Importar Calendario',
+  'btn.export_calendar': 'Exportar Calendario',
   
   // Add Event Modal
   'modal.add_event.title': 'Agregar Evento de Jardín',
@@ -235,6 +238,7 @@ export const es = {
   'google.initial_sync_prompt': '¿Desea sincronizar todos sus eventos locales con "{calendarName}" ahora?',
   'google.error.no_calendar_selected': 'No hay un calendario seleccionado. Por favor, elija uno en la configuración de Google.',
   'google.status.no_calendar_selected': 'No hay calendario seleccionado',
+  'google.status.connect_tooltip': 'Haz clic para conectar Google Calendar',
 
   // Google Calendar Wizard
   'google.wizard.title': 'Organización de Calendario',
@@ -361,4 +365,62 @@ export const es = {
   'common.delete': 'Eliminar',
   'common.edit': 'Editar',
   'common.close': 'Cerrar',
+
+  // Import Modal
+  'import.modal.title': 'Importar Calendario',
+  'import.drag_drop': 'Arrastra el archivo aquí o haz clic para seleccionar',
+  'import.supported_formats': 'Formatos soportados: JSON, iCal (.ics), CSV',
+  'import.file_detected': 'Archivo detectado: {format}',
+  'import.events_found': '{count} eventos encontrados',
+  'import.preview.title': 'Vista previa de importación',
+  'import.confirm': 'Confirmar importación',
+  'import.cancel': 'Cancelar',
+  'import.success': '{count} eventos importados correctamente',
+  'import.error.invalid_file': 'Archivo inválido',
+  'import.error.unsupported_format': 'Formato no soportado',
+  'import.error.database': 'Error de base de datos durante la importación',
+
+  // Export Modal
+  'export.modal.title': 'Exportar Calendario',
+  'export.format.label': 'Seleccionar formato:',
+  'export.format.json': 'JSON',
+  'export.format.json_desc': 'Para reimportar en esta aplicación',
+  'export.format.ical': 'iCal (.ics)',
+  'export.format.ical_desc': 'Para otras aplicaciones de calendario',
+  'export.download': 'Exportar',
+  'export.cancel': 'Cancelar',
+  'export.success': 'Exportación creada correctamente',
+  'export.error.no_data': 'No hay datos para exportar',
+  'export.error.generation_failed': 'Error al generar la exportación',
+  'export.notification.start': 'Creando exportación...',
+
+  // AppShell.js
+  'theme.toggle.light': 'Cambiar a modo claro',
+  'theme.toggle.dark': 'Cambiar a modo oscuro',
+
+  // PlantLibrary.js
+  'plant_library.title': 'Biblioteca de Plantas',
+  'plant_library.search_placeholder': 'Buscar plantas...',
+  'plant_library.all_categories': 'Todas las Categorías',
+  'plant_library.view_details': 'Ver Detalles',
+  'plant_library.no_phases': 'No hay información de fases disponible',
+  'plant_library.no_care_tips': 'No hay consejos de cuidado disponibles',
+  'plant_library.common_problems': 'Problemas Comunes',
+  'plant_library.start_growing': 'Comenzar a cultivar esta planta',
+
+  // PlantsList.js
+  'plants.no_active_yet': 'Aún no hay plantas activas. ¡Agrega tu primera planta!',
+  'plants.view_details': 'Ver Detalles',
+  'plants.add_note': 'Agregar Nota',
+  'plants.label.type': 'Tipo de planta',
+  'plants.label.location': 'Ubicación',
+  'plants.label.started': 'Iniciado',
+  'plants.label.current_phase': 'Fase Actual',
+  'plants.label.expected_completion': 'Finalización Esperada',
+  'plants.delete_button': 'Eliminar planta y todos los eventos',
+  'plants.no_events': 'Aún no hay eventos',
+  'plants.no_notes': 'Aún no hay notas',
+  'plants.save_note': 'Guardar Nota',
+  'plants.delete_confirm': 'Eliminar Planta y Todos los Eventos',
+  'plants.no_category_plants': 'No hay plantas de {category}.',
 }; 

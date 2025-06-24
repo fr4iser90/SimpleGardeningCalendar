@@ -5,6 +5,7 @@ export const it = {
   'nav.calendar': 'Calendario',
   'nav.plants': 'Piante',
   'nav.settings': 'Impostazioni',
+  'nav.google_calendar': 'Google Calendar',
   'ui.quick_actions': 'Azioni Rapide',
   'ui.plant_categories': 'Categorie di Piante',
   'ui.upcoming_tasks': 'Attività in Corso',
@@ -27,6 +28,8 @@ export const it = {
   'btn.close': 'Chiudi',
   'btn.view_details': 'Visualizza Dettagli',
   'btn.add_note': 'Aggiungi Nota',
+  'btn.import_calendar': 'Importa Calendario',
+  'btn.export_calendar': 'Esporta Calendario',
   
   // Add Event Modal
   'modal.add_event.title': 'Aggiungi Evento Giardino',
@@ -306,4 +309,65 @@ export const it = {
   'common.delete': 'Elimina',
   'common.edit': 'Modifica',
   'common.close': 'Chiudi',
+
+  // Import Modal
+  'import.modal.title': 'Importa Calendario',
+  'import.drag_drop': 'Trascina il file qui o clicca per selezionare',
+  'import.supported_formats': 'Formati supportati: JSON, iCal (.ics), CSV',
+  'import.file_detected': 'File rilevato: {format}',
+  'import.events_found': '{count} eventi trovati',
+  'import.preview.title': 'Anteprima importazione',
+  'import.confirm': 'Conferma importazione',
+  'import.cancel': 'Annulla',
+  'import.success': '{count} eventi importati con successo',
+  'import.error.invalid_file': 'File non valido',
+  'import.error.unsupported_format': 'Formato non supportato',
+  'import.error.database': 'Errore del database durante l\'importazione',
+
+  // Export Modal
+  'export.modal.title': 'Esporta Calendario',
+  'export.format.label': 'Seleziona formato:',
+  'export.format.json': 'JSON',
+  'export.format.json_desc': 'Per reimportare in questa app',
+  'export.format.ical': 'iCal (.ics)',
+  'export.format.ical_desc': 'Per altre app di calendario',
+  'export.download': 'Esporta',
+  'export.cancel': 'Annulla',
+  'export.success': 'Esportazione creata con successo',
+  'export.error.no_data': 'Nessun dato da esportare',
+  'export.error.generation_failed': 'Errore nella generazione dell\'esportazione',
+  'export.notification.start': 'Creazione esportazione...',
+
+  // GoogleStatusBar.js
+  'google.status.connect_tooltip': 'Clicca per connettere Google Calendar',
+
+  // AppShell.js
+  'theme.toggle.light': 'Passa alla modalità chiara',
+  'theme.toggle.dark': 'Passa alla modalità scura',
+
+  // PlantLibrary.js
+  'plant_library.title': 'Libreria delle Piante',
+  'plant_library.search_placeholder': 'Cerca piante...',
+  'plant_library.all_categories': 'Tutte le Categorie',
+  'plant_library.view_details': 'Visualizza Dettagli',
+  'plant_library.no_phases': 'Nessuna informazione sulle fasi disponibile',
+  'plant_library.no_care_tips': 'Nessun consiglio di cura disponibile',
+  'plant_library.common_problems': 'Problemi Comuni',
+  'plant_library.start_growing': 'Inizia a coltivare questa pianta',
+
+  // PlantsList.js
+  'plants.no_active_yet': 'Nessuna pianta attiva. Aggiungi la tua prima pianta!',
+  'plants.view_details': 'Visualizza Dettagli',
+  'plants.add_note': 'Aggiungi Nota',
+  'plants.label.type': 'Tipo di pianta',
+  'plants.label.location': 'Posizione',
+  'plants.label.started': 'Iniziato',
+  'plants.label.current_phase': 'Fase Attuale',
+  'plants.label.expected_completion': 'Completamento Previsto',
+  'plants.delete_button': 'Elimina pianta e tutti gli eventi',
+  'plants.no_events': 'Nessun evento ancora',
+  'plants.no_notes': 'Nessuna nota ancora',
+  'plants.save_note': 'Salva Nota',
+  'plants.delete_confirm': 'Elimina Pianta e Tutti gli Eventi',
+  'plants.no_category_plants': 'Nessuna pianta {category} disponibile.',
 }; 

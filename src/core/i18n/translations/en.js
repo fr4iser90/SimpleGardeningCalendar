@@ -5,6 +5,7 @@ export const en = {
   'nav.calendar': 'Calendar',
   'nav.plants': 'Plants',
   'nav.settings': 'Settings',
+  'nav.google_calendar': 'Google Calendar',
   'ui.quick_actions': 'Quick Actions',
   'ui.plant_categories': 'Plant Categories',
   'ui.upcoming_tasks': 'Upcoming Tasks',
@@ -27,6 +28,8 @@ export const en = {
   'btn.close': 'Close',
   'btn.view_details': 'View Details',
   'btn.add_note': 'Add Note',
+  'btn.import_calendar': 'Import Calendar',
+  'btn.export_calendar': 'Export Calendar',
   
   // Add Event Modal
   'modal.add_event.title': 'Add Garden Event',
@@ -241,6 +244,7 @@ export const en = {
   'google.initial_sync_prompt': 'Do you want to sync all your local events with "{calendarName}" now?',
   'google.error.no_calendar_selected': 'No calendar selected. Please choose one in Google Settings.',
   'google.status.no_calendar_selected': 'No Calendar Selected',
+  'google.status.connect_tooltip': 'Click to connect Google Calendar',
 
   // Google Calendar Wizard
   'google.wizard.title': 'Calendar Organization',
@@ -359,4 +363,62 @@ export const en = {
 
   // Common UI elements
   'common.cancel': 'Cancel',
+
+  // Import Modal
+  'import.modal.title': 'Import Calendar',
+  'import.drag_drop': 'Drag file here or click to select',
+  'import.supported_formats': 'Supported formats: JSON, iCal (.ics), CSV',
+  'import.file_detected': 'File detected: {format}',
+  'import.events_found': '{count} events found',
+  'import.preview.title': 'Import Preview',
+  'import.confirm': 'Confirm Import',
+  'import.cancel': 'Cancel',
+  'import.success': '{count} events successfully imported',
+  'import.error.invalid_file': 'Invalid file',
+  'import.error.unsupported_format': 'Format not supported',
+  'import.error.database': 'Database error during import',
+
+  // Export Modal
+  'export.modal.title': 'Export Calendar',
+  'export.format.label': 'Select format:',
+  'export.format.json': 'JSON',
+  'export.format.json_desc': 'For re-import into this app',
+  'export.format.ical': 'iCal (.ics)',
+  'export.format.ical_desc': 'For other calendar apps',
+  'export.download': 'Export',
+  'export.cancel': 'Cancel',
+  'export.success': 'Export created successfully',
+  'export.error.no_data': 'No data to export',
+  'export.error.generation_failed': 'Export generation failed',
+  'export.notification.start': 'Creating export...',
+
+  // ThemeToggle.js
+  'theme.toggle.light': 'Switch to Light Mode',
+  'theme.toggle.dark': 'Switch to Dark Mode',
+
+  // PlantLibrary.js
+  'plant_library.title': 'Plant Library',
+  'plant_library.search_placeholder': 'Search plants...',
+  'plant_library.all_categories': 'All Categories',
+  'plant_library.view_details': 'View Details',
+  'plant_library.no_phases': 'No phase information available',
+  'plant_library.no_care_tips': 'No care tips available',
+  'plant_library.common_problems': 'Common Problems',
+  'plant_library.start_growing': 'Start Growing This Plant',
+
+  // PlantsList.js
+  'plants.no_active_yet': 'No active plants yet. Start by adding your first plant!',
+  'plants.view_details': 'View Details',
+  'plants.add_note': 'Add Note',
+  'plants.label.type': 'Plant type',
+  'plants.label.location': 'Location',
+  'plants.label.started': 'Started',
+  'plants.label.current_phase': 'Current Phase',
+  'plants.label.expected_completion': 'Expected Completion',
+  'plants.delete_button': 'Delete plant and all events',
+  'plants.no_events': 'No events yet',
+  'plants.no_notes': 'No notes yet',
+  'plants.save_note': 'Save Note',
+  'plants.delete_confirm': 'Delete Plant & All Events',
+  'plants.no_category_plants': 'No {category} plants yet.',
 }; 
