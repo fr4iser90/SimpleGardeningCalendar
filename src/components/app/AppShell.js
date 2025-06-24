@@ -34,7 +34,7 @@ export function renderAppShell({
               </select>
             </div>
             <button id="plantLibraryBtn" class="p-2 hover:bg-green-700 rounded">📚 ${t('nav.plants')}</button>
-            <button id="googleCalendarBtn" class="p-2 hover:bg-green-700 rounded">🗓️ Google Calendar</button>
+            <button id="googleCalendarBtn" class="p-2 hover:bg-green-700 rounded">🗓️ ${t('nav.google_calendar')}</button>
             <div id="themeToggleContainer"></div>
           </div>
         </div>
@@ -69,7 +69,7 @@ export function renderAppShell({
 
   // Create and append theme toggle
   const themeToggleContainer = document.getElementById('themeToggleContainer');
-  const themeToggle = createThemeToggle(currentTheme, onThemeToggle);
+  const themeToggle = createThemeToggle(currentTheme, onThemeToggle, t);
   themeToggleContainer.appendChild(themeToggle);
 
   // Event listeners for the buttons

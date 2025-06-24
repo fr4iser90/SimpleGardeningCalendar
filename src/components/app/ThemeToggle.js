@@ -1,30 +1,30 @@
 // ThemeToggle.js
 // Dark/Light mode toggle component
 
-export function createThemeToggle(isDarkMode, onThemeToggle) {
+export function createThemeToggle(isDarkMode, onThemeToggle, t) {
   const themeToggle = document.createElement('button');
   themeToggle.id = 'themeToggle';
   themeToggle.className = 'p-2 hover:bg-green-700 rounded';
   themeToggle.textContent = isDarkMode ? '☀️' : '🌙';
-  themeToggle.title = isDarkMode ? 'Switch to Light Mode' : 'Switch to Dark Mode';
+  themeToggle.title = isDarkMode ? t('theme.toggle.light') : t('theme.toggle.dark');
   
   themeToggle.addEventListener('click', onThemeToggle);
   
   return themeToggle;
 }
 
-export function updateThemeToggle(isDarkMode) {
+export function updateThemeToggle(isDarkMode, t) {
   const themeToggle = document.getElementById('themeToggle');
   if (themeToggle) {
     themeToggle.textContent = isDarkMode ? '☀️' : '🌙';
-    themeToggle.title = isDarkMode ? 'Switch to Light Mode' : 'Switch to Dark Mode';
+    themeToggle.title = isDarkMode ? t('theme.toggle.light') : t('theme.toggle.dark');
   }
 }
 
-export function toggleTheme() {
+export function toggleTheme(t) {
   document.documentElement.classList.toggle('dark');
   const isDarkMode = document.documentElement.classList.contains('dark');
-  updateThemeToggle(isDarkMode);
+  updateThemeToggle(isDarkMode, t);
   
   // Save theme preference to localStorage
   localStorage.setItem('theme', isDarkMode ? 'dark' : 'light');

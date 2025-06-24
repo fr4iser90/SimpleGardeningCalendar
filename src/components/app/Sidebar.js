@@ -89,7 +89,7 @@ export async function showCategoryPlantsModal(category, plantings) {
       
       <div class="space-y-3">
         ${plantings.length === 0 ? 
-          `<p class="text-gray-500 dark:text-gray-400 text-center py-8">No ${category.toLowerCase()} plants yet.</p>` :
+          `<p class="text-gray-500 dark:text-gray-400 text-center py-8">${t('plants.no_category_plants', { category })}</p>` :
           plantings.map(planting => {
             const displayName = planting.displayName || planting.plantName;
             return `

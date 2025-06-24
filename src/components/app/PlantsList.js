@@ -8,16 +8,31 @@ export async function showMyPlantsModal() {
   const modal = document.createElement('div');
   modal.className = 'fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center p-4 z-50';
   
+  const myActivePlantsText = t('plants.my_active_plants');
+  const noActiveYetText = t('plants.no_active_yet');
+  const viewDetailsText = t('plants.view_details');
+  const addNoteText = t('plants.add_note');
+  const labelType = t('plants.label.type');
+  const labelLocation = t('plants.label.location');
+  const labelStarted = t('plants.label.started');
+  const labelCurrentPhase = t('plants.label.current_phase');
+  const labelExpectedCompletion = t('plants.label.expected_completion');
+  const deleteButtonText = t('plants.delete_button');
+  const noEventsText = t('plants.no_events');
+  const noNotesText = t('plants.no_notes');
+  const saveNoteText = t('plants.save_note');
+  const deleteConfirmText = t('plants.delete_confirm');
+  
   modal.innerHTML = `
     <div class="bg-white dark:bg-gray-800 rounded-lg p-6 max-w-4xl w-full max-h-[80vh] overflow-y-auto">
       <div class="flex justify-between items-center mb-4">
-        <h2 class="text-xl font-semibold dark:text-white">My Active Plants</h2>
+        <h2 class="text-xl font-semibold dark:text-white">${myActivePlantsText}</h2>
         <button class="text-gray-500 hover:text-gray-700 dark:text-gray-400 dark:hover:text-gray-200" onclick="this.closest('.fixed').remove()">✕</button>
       </div>
       
       <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
         ${plantings.length === 0 ? 
-          '<p class="text-gray-500 dark:text-gray-400 col-span-2 text-center py-8">No active plants yet. Start by adding your first plant!</p>' :
+          `<p class="text-gray-500 dark:text-gray-400 col-span-2 text-center py-8">${noActiveYetText}</p>` :
           plantings.map(planting => {
             const displayName = planting.displayName || planting.plantName;
             return `
@@ -26,24 +41,24 @@ export async function showMyPlantsModal() {
                 <h3 class="font-semibold dark:text-white">${displayName}</h3>
                 <div class="flex items-center space-x-2">
                   <span class="text-xs px-2 py-1 bg-green-100 dark:bg-green-900 text-green-800 dark:text-green-200 rounded">${planting.category}</span>
-                  <button onclick="deletePlant(${planting.id})" class="text-red-500 hover:text-red-700 text-sm p-1 rounded hover:bg-red-50 dark:hover:bg-red-900/20" title="Delete plant and all events">
+                  <button onclick="deletePlant(${planting.id})" class="text-red-500 hover:text-red-700 text-sm p-1 rounded hover:bg-red-50 dark:hover:bg-red-900/20" title="${deleteButtonText}">
                     🗑️
                   </button>
                 </div>
               </div>
-              ${planting.customName ? `<div class="text-xs text-gray-500 dark:text-gray-400 mb-1">Plant type: ${planting.plantName}</div>` : ''}
+              ${planting.customName ? `<div class="text-xs text-gray-500 dark:text-gray-400 mb-1">${labelType}: ${planting.plantName}</div>` : ''}
               <div class="text-sm text-gray-600 dark:text-gray-400 space-y-1">
-                <div><strong>Location:</strong> ${planting.location}</div>
-                <div><strong>Started:</strong> ${new Date(planting.startDate).toLocaleDateString()}</div>
-                <div><strong>Current Phase:</strong> ${planting.currentPhase}</div>
-                <div><strong>Expected Completion:</strong> ${new Date(planting.completionDate).toLocaleDateString()}</div>
+                <div><strong>${labelLocation}:</strong> ${planting.location}</div>
+                <div><strong>${labelStarted}:</strong> ${new Date(planting.startDate).toLocaleDateString()}</div>
+                <div><strong>${labelCurrentPhase}:</strong> ${planting.currentPhase}</div>
+                <div><strong>${labelExpectedCompletion}:</strong> ${new Date(planting.completionDate).toLocaleDateString()}</div>
               </div>
               <div class="mt-3 flex space-x-2">
                 <button onclick="viewPlantDetails(${planting.id})" class="flex-1 bg-blue-500 text-white p-2 rounded hover:bg-blue-600 text-sm">
-                  📋 View Details
+                  ${viewDetailsText}
                 </button>
                 <button onclick="addPlantNote(${planting.id})" class="flex-1 bg-green-500 text-white p-2 rounded hover:bg-green-600 text-sm">
-                  📝 Add Note
+                  ${addNoteText}
                 </button>
               </div>
             </div>
@@ -95,7 +110,7 @@ export async function deletePlant(plantingId) {
     const displayName = planting.displayName || planting.plantName || 'Unknown Plant';
     
     // Simple confirmation
-    if (!confirm(`🗑️ Delete "${displayName}"?\n\nThis will permanently delete the plant and all its events.\n\n⚠️ This action cannot be undone!`)) {
+    if (!confirm(`🗑️ ${deleteConfirmText} "${displayName}"?\n\nThis will permanently delete the plant and all its events.\n\n⚠️ This action cannot be undone!`)) {
       return;
     }
     
@@ -172,7 +187,7 @@ export async function deletePlant(plantingId) {
     }
     
     // Success message with details
-    alert(`✅ "${displayName}" deleted successfully!\n\n• Plant record deleted\n• ${deletedEvents} events deleted\n• ${deletedNotes} notes deleted`);
+    alert(`✅ "${displayName}" ${deleteButtonText} successfully!\n\n• Plant record deleted\n• ${deletedEvents} events deleted\n• ${deletedNotes} notes deleted`);
     
   } catch (error) {
     console.error('Error deleting plant:', error);
@@ -224,6 +239,19 @@ export async function viewPlantDetails(plantingId) {
     const modal = document.createElement('div');
     modal.className = 'fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center p-4 z-50';
     
+    const viewDetailsText = t('plants.view_details');
+    const addNoteText = t('plants.add_note');
+    const labelType = t('plants.label.type');
+    const labelLocation = t('plants.label.location');
+    const labelStarted = t('plants.label.started');
+    const labelCurrentPhase = t('plants.label.current_phase');
+    const labelExpectedCompletion = t('plants.label.expected_completion');
+    const deleteButtonText = t('plants.delete_button');
+    const noEventsText = t('plants.no_events');
+    const noNotesText = t('plants.no_notes');
+    const saveNoteText = t('plants.save_note');
+    const deleteConfirmText = t('plants.delete_confirm');
+    
     modal.innerHTML = `
       <div class="bg-white dark:bg-gray-800 rounded-lg p-6 max-w-4xl w-full max-h-[90vh] overflow-y-auto">
         <div class="flex justify-between items-center mb-6">
@@ -237,18 +265,18 @@ export async function viewPlantDetails(plantingId) {
             <div class="bg-gray-50 dark:bg-gray-700 rounded-lg p-4">
               <h3 class="font-semibold mb-3 dark:text-white">📋 Plant Information</h3>
               <div class="space-y-2 text-sm">
-                <div><strong>Type:</strong> ${planting.plantName}</div>
+                <div><strong>${labelType}:</strong> ${planting.plantName}</div>
                 ${planting.customName ? `<div><strong>Custom Name:</strong> ${planting.customName}</div>` : ''}
                 <div><strong>Category:</strong> ${planting.category}</div>
-                <div><strong>Location:</strong> ${planting.location}</div>
+                <div><strong>${labelLocation}:</strong> ${planting.location}</div>
                 <div><strong>Status:</strong> <span class="px-2 py-1 rounded text-xs ${
                   planting.status === 'active' ? 'bg-green-100 dark:bg-green-900 text-green-800 dark:text-green-200' :
                   planting.status === 'completed' ? 'bg-blue-100 dark:bg-blue-900 text-blue-800 dark:text-blue-200' :
                   'bg-red-100 dark:bg-red-900 text-red-800 dark:text-red-200'
                 }">${planting.status}</span></div>
-                <div><strong>Started:</strong> ${new Date(planting.startDate).toLocaleDateString()}</div>
-                <div><strong>Expected Completion:</strong> ${new Date(planting.completionDate).toLocaleDateString()}</div>
-                <div><strong>Current Phase:</strong> ${planting.currentPhase}</div>
+                <div><strong>${labelStarted}:</strong> ${new Date(planting.startDate).toLocaleDateString()}</div>
+                <div><strong>${labelExpectedCompletion}:</strong> ${new Date(planting.completionDate).toLocaleDateString()}</div>
+                <div><strong>${labelCurrentPhase}:</strong> ${planting.currentPhase}</div>
               </div>
               
               ${planting.legalNote ? `
@@ -302,7 +330,7 @@ export async function viewPlantDetails(plantingId) {
                     <div class="text-gray-500 dark:text-gray-400">${new Date(event.date).toLocaleDateString()}</div>
                   </div>
                 `).join('')}
-                ${events.length === 0 ? '<p class="text-gray-500 dark:text-gray-400 text-sm">No events yet</p>' : ''}
+                ${events.length === 0 ? '<p class="text-gray-500 dark:text-gray-400 text-sm">${noEventsText}</p>' : ''}
               </div>
             </div>
             
@@ -316,13 +344,13 @@ export async function viewPlantDetails(plantingId) {
                     <div class="mt-1 dark:text-white">${note.note}</div>
                   </div>
                 `).join('')}
-                ${notes.length === 0 ? '<p class="text-gray-500 dark:text-gray-400 text-sm">No notes yet</p>' : ''}
+                ${notes.length === 0 ? '<p class="text-gray-500 dark:text-gray-400 text-sm">${noNotesText}</p>' : ''}
               </div>
               
               <div class="mt-3">
-                <textarea id="newNote_${plantingId}" class="w-full p-2 border rounded dark:bg-gray-600 dark:border-gray-500 dark:text-white" rows="2" placeholder="Add a note..."></textarea>
+                <textarea id="newNote_${plantingId}" class="w-full p-2 border rounded dark:bg-gray-600 dark:border-gray-500 dark:text-white" rows="2" placeholder="${addNoteText}..."></textarea>
                 <button onclick="saveNote(${plantingId})" class="mt-1 px-3 py-1 bg-green-600 text-white rounded hover:bg-green-700 text-sm">
-                  💾 Save Note
+                  ${saveNoteText}
                 </button>
               </div>
             </div>
@@ -347,7 +375,7 @@ export async function viewPlantDetails(plantingId) {
         <!-- Action Buttons -->
         <div class="flex justify-between mt-6 pt-4 border-t dark:border-gray-600">
           <button onclick="deletePlant(${plantingId})" class="px-4 py-2 bg-red-600 text-white rounded hover:bg-red-700">
-            🗑️ Delete Plant & All Events
+            ${deleteButtonText} ${deleteButtonText} & All Events
           </button>
           <button onclick="this.closest('.fixed').remove()" class="px-4 py-2 bg-gray-600 text-white rounded hover:bg-gray-700">
             Close
@@ -378,12 +406,12 @@ export async function viewPlantDetails(plantingId) {
 
 // Quick add note function
 export async function addPlantNoteQuick(plantingId) {
-  const noteText = prompt('📝 Add a note for this plant:');
+  const noteText = prompt('📝 ${addNoteText} for this plant:');
   if (noteText && noteText.trim()) {
     try {
       const { addPlantNote } = await import('../../core/db/index.js');
       await addPlantNote(plantingId, noteText.trim());
-      alert('✅ Note added successfully!');
+      alert('✅ ${addNoteText} added successfully!');
       
       // Refresh the modal if it's open
       document.querySelector('.fixed').remove();

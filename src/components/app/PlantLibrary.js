@@ -8,20 +8,29 @@ export async function showPlantLibraryModal() {
   const modal = document.createElement('div');
   modal.className = 'fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center p-4 z-50';
   
+  const plantLibraryTitle = t('plant_library.title');
+  const searchPlaceholder = t('plant_library.search_placeholder');
+  const allCategories = t('plant_library.all_categories');
+  const viewDetailsText = t('plant_library.view_details');
+  const noPhasesText = t('plant_library.no_phases');
+  const noCareTipsText = t('plant_library.no_care_tips');
+  const commonProblemsText = t('plant_library.common_problems');
+  const startGrowingText = t('plant_library.start_growing');
+  
   modal.innerHTML = `
     <div class="bg-white dark:bg-gray-800 rounded-lg p-6 max-w-4xl w-full max-h-[90vh] overflow-y-auto">
       <div class="flex justify-between items-center mb-4">
-        <h2 class="text-xl font-semibold dark:text-white">Plant Library</h2>
+        <h2 class="text-xl font-semibold dark:text-white">${plantLibraryTitle}</h2>
         <button class="text-gray-500 hover:text-gray-700 dark:text-gray-400 dark:hover:text-gray-200" onclick="this.closest('.fixed').remove()">✕</button>
       </div>
       
       <div class="mb-4">
-        <input type="text" id="plantSearch" placeholder="Search plants..." class="w-full p-2 border rounded dark:bg-gray-700 dark:border-gray-600 dark:text-white">
+        <input type="text" id="plantSearch" placeholder="${searchPlaceholder}" class="w-full p-2 border rounded dark:bg-gray-700 dark:border-gray-600 dark:text-white">
       </div>
       
       <div class="mb-4">
         <select id="categoryFilter" class="p-2 border rounded dark:bg-gray-700 dark:border-gray-600 dark:text-white">
-          <option value="">All Categories</option>
+          <option value="">${allCategories}</option>
           ${PLANT_CATEGORIES.map(cat => `<option value="${cat}">${cat}</option>`).join('')}
         </select>
       </div>
@@ -44,7 +53,7 @@ export async function showPlantLibraryModal() {
               ${plant.careTips && plant.careTips.temperature ? `<div><strong>Temperature:</strong> ${plant.careTips.temperature}</div>` : ''}
             </div>
             <button onclick="showPlantDetails('${key}')" class="mt-3 w-full bg-green-500 text-white p-2 rounded hover:bg-green-600 text-sm">
-              View Details
+              ${viewDetailsText}
             </button>
           </div>
         `).join('')}
@@ -111,7 +120,7 @@ export function showPlantDetailsModal(plant, plantKey) {
                 <div class="text-sm text-gray-600 dark:text-gray-400 mb-1">${data.description}</div>
                 <div class="text-sm"><strong>Care:</strong> ${data.care}</div>
               </div>
-            `).join('') : '<div class="text-gray-500 dark:text-gray-400">No phase information available</div>'}
+            `).join('') : '<div class="text-gray-500 dark:text-gray-400">${noPhasesText}</div>'}
           </div>
         </div>
         
@@ -123,13 +132,13 @@ export function showPlantDetailsModal(plant, plantKey) {
                 <strong class="dark:text-white">${tip.charAt(0).toUpperCase() + tip.slice(1)}:</strong>
                 <div class="text-gray-600 dark:text-gray-400">${value}</div>
               </div>
-            `).join('') : '<div class="text-gray-500 dark:text-gray-400">No care tips available</div>'}
+            `).join('') : '<div class="text-gray-500 dark:text-gray-400">${noCareTipsText}</div>'}
           </div>
         </div>
         
         ${plant.commonProblems ? `
           <div>
-            <h3 class="font-semibold mb-2 dark:text-white">Common Problems</h3>
+            <h3 class="font-semibold mb-2 dark:text-white">${commonProblemsText}</h3>
             <div class="space-y-2">
               ${Object.entries(plant.commonProblems).map(([problem, solution]) => `
                 <div class="text-sm">
@@ -143,7 +152,7 @@ export function showPlantDetailsModal(plant, plantKey) {
         
         <div class="flex justify-center">
           <button onclick="startPlanting('${plantKey}')" class="px-6 py-2 bg-green-600 text-white rounded hover:bg-green-700">
-            Start Growing This Plant
+            ${startGrowingText}
           </button>
         </div>
       </div>

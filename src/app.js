@@ -28,7 +28,7 @@ export function initializeApp() {
       renderGoogleCalendarSetupModal();
     },
     onThemeToggle: () => {
-      toggleTheme();
+      toggleTheme(t);
     }
   });
 

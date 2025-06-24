@@ -119,7 +119,7 @@ export function updateGoogleCalendarStatus() {
       <button
         class="text-red-600 dark:text-red-400 flex items-center hover:underline focus:outline-none"
         style="background:none;border:none;padding:0;cursor:pointer"
-        title="Click to connect Google Calendar"
+        title="${t('google.status.connect_tooltip')}"
         id="googleStatusConnectBtn"
       >
         <img src="https://www.gstatic.com/images/branding/product/1x/calendar_48dp.png" alt="Google Calendar" style="height:1.2em;vertical-align:middle;margin-right:0.5em;">
