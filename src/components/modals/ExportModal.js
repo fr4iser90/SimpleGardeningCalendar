@@ -55,31 +55,14 @@ function createExportModal() {
       
       <!-- Format Selection -->
       <div class="mb-6">
-        <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-3">
-          ${t('export.format.label')}
-        </label>
-        <div class="space-y-3">
-          <label class="flex items-center space-x-3 p-4 border border-gray-200 dark:border-gray-600 rounded-lg cursor-pointer hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors">
-            <input type="radio" name="exportFormat" value="JSON" class="text-blue-500" checked>
-            <div class="flex-1">
-              <div class="font-medium text-gray-800 dark:text-gray-200">
-                <i class="fas fa-file-code mr-2 text-blue-500"></i>
-                ${t('export.format.json')}
-              </div>
-              <div class="text-sm text-gray-500 dark:text-gray-400">Komplettes Backup für Re-Import</div>
-            </div>
+        <div class="format-selection">
+          <label for="exportFormat" class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+            ${t('export.format.label')}
           </label>
-          
-          <label class="flex items-center space-x-3 p-4 border border-gray-200 dark:border-gray-600 rounded-lg cursor-pointer opacity-50">
-            <input type="radio" name="exportFormat" value="ICAL" class="text-blue-500" disabled>
-            <div class="flex-1">
-              <div class="font-medium text-gray-400">
-                <i class="fas fa-calendar mr-2"></i>
-                ${t('export.format.ical')} (Coming Soon)
-              </div>
-              <div class="text-sm text-gray-400">Für andere Kalender-Apps</div>
-            </div>
-          </label>
+          <select id="exportFormat" class="w-full p-3 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 bg-white dark:bg-gray-700 text-gray-900 dark:text-gray-100">
+            <option value="json">${t('export.format.json')} - ${t('export.format.json_desc')}</option>
+            <option value="ical">${t('export.format.ical')} - ${t('export.format.ical_desc')}</option>
+          </select>
         </div>
       </div>
       
@@ -135,6 +118,7 @@ function setupExportModalEvents() {
 async function handleExport() {
   const loadingEl = exportModal.querySelector('#exportLoading');
   const exportBtn = exportModal.querySelector('#exportBtn');
+  const formatSelect = exportModal.querySelector('#exportFormat');
   
   try {
     // Show loading state
@@ -142,42 +126,23 @@ async function handleExport() {
     exportBtn.disabled = true;
     
     // Get selected format
-    const formatInput = exportModal.querySelector('input[name="exportFormat"]:checked');
-    const format = formatInput.value;
-    
-    // Export ALL data - no options needed
-    const options = {
-      includePlantings: true,
-      includeNotes: true,
-      includeAllData: true,
-      metadata: {
-        exportedBy: 'SimpleGardeningCalendar',
-        exportType: 'complete',
-        exportDate: new Date().toISOString()
-      }
-    };
+    const format = formatSelect.value.toUpperCase();
     
     // Perform export
-    const result = await ImportExportService.exportData(format, options);
+    const result = await ImportExportService.exportData(format);
     
     // Download file
-    downloadFile(result.data, result.filename, result.mimeType);
+    downloadFile(result.data, result.filename);
     
     // Show success
     showNotification(t('export.success'), 'success');
     
-    // Close modal
+    // Hide modal
     hideExportModal();
     
   } catch (error) {
-    console.error('Export error:', error);
-    
-    if (error.message.includes('No data')) {
-      showNotification(t('export.error.no_data'), 'error');
-    } else {
-      showNotification(t('export.error.generation_failed'), 'error');
-    }
-    
+    console.error('Export failed:', error);
+    showNotification(t('export.error.generation_failed'), 'error');
   } finally {
     // Hide loading state
     loadingEl.classList.add('hidden');

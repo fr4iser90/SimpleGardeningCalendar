@@ -1,7 +1,6 @@
-import './style.css';
-import './styles/themes.css';
-import './styles/calendar.css';
-import './styles/main.css';
+import './styles/main.css';     // First: Tailwind + Base styles
+import './styles/themes.css';   // Second: Theme variables
+import './styles/calendar.css'; // Last: Calendar-specific overrides
 
 import { initializeApp } from './app.js';
 import { initializeDB } from './core/db/index.js';

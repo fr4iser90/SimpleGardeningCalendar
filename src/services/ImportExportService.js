@@ -5,6 +5,7 @@
 
 import { detectFileFormat, validateFile } from '../utils/fileUtils.js';
 import { JsonHandler } from './formats/JsonHandler.js';
+import { ICalHandler } from './formats/ICalHandler.js';
 import { getAllEvents, addEvent } from './EventService.js';
 import { getAllPlantings } from './PlantService.js';
 import { showNotification } from '../utils/notifications.js';
@@ -96,6 +97,9 @@ export class ImportExportService {
     switch (format.toUpperCase()) {
       case 'JSON':
         return JsonHandler;
+      case 'ICAL':
+      case 'ICS':
+        return ICalHandler;
       default:
         return null;
     }
@@ -130,8 +134,8 @@ export class ImportExportService {
    * Handle import conflicts
    */
   static async handleConflicts(data, options = {}) {
-    // For now, simple implementation - in future add conflict resolution UI
-    const conflictStrategy = options.conflictStrategy || 'skip';
+    // Default to 'duplicate' for re-imports to work correctly
+    const conflictStrategy = options.conflictStrategy || 'duplicate';
     
     const existingEvents = await getAllEvents();
     const newEvents = [];
@@ -147,6 +151,7 @@ export class ImportExportService {
         if (conflictStrategy === 'overwrite') {
           newEvents.push(event);
         } else if (conflictStrategy === 'duplicate') {
+          // Add with "(Import)" suffix to distinguish from original
           newEvents.push({ ...event, title: `${event.title} (Import)` });
         } else {
           skippedEvents.push(event);

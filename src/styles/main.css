@@ -1,15 +1,15 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Base body styles */
 body {
   font-family: system-ui, -apple-system, sans-serif;
   color: var(--text);
   background: var(--background);
 }
 
-/* Ensure only one language selector is visible */
-.calendar-controls .language-switcher {
-  display: none !important;
-}
-
-/* Style the main language selector in header */
+/* Main language selector styling */
 #languageSelect {
   background-color: rgba(34, 197, 94, 0.8);
   border: 1px solid rgba(255, 255, 255, 0.2);

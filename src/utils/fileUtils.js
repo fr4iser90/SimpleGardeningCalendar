@@ -20,19 +20,22 @@ export const SUPPORTED_FORMATS = {
 };
 
 /**
- * Detect file format based on extension and content
+ * Detect file format from file extension and content
  */
 export function detectFileFormat(file) {
   const extension = file.name.split('.').pop().toLowerCase();
   
-  // Check by extension first
-  for (const [format, extensions] of Object.entries(SUPPORTED_FORMATS)) {
-    if (extensions.includes(extension)) {
-      return format;
-    }
+  switch (extension) {
+    case 'json':
+      return { format: 'JSON', confidence: 'high' };
+    case 'ics':
+      return { format: 'ICAL', confidence: 'high' };
+    case 'csv':
+      return { format: 'CSV', confidence: 'high' };
+    default:
+      // Try to detect by content if extension is unknown
+      return { format: 'UNKNOWN', confidence: 'low' };
   }
-  
-  return null;
 }
 
 /**

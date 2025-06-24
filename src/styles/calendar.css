@@ -28,10 +28,27 @@
 
 .fc-daygrid-event {
   @apply cursor-pointer;
+  margin: 1px 2px !important;
+  border-radius: 3px !important;
+  font-size: 0.75rem !important;
+  padding: 1px 4px !important;
+  white-space: nowrap !important;
+  overflow: hidden !important;
+  text-overflow: ellipsis !important;
 }
 
-/* Hide duplicate language selectors if any exist */
-.fc-toolbar .language-switcher {
+/* Prevent events from being too wide */
+.fc-daygrid-event-harness {
+  margin: 1px 0 !important;
+}
+
+.fc-event-title {
+  font-weight: normal !important;
+}
+
+/* Hide duplicate language selectors */
+.fc-toolbar .language-switcher,
+.calendar-controls .language-switcher {
   display: none !important;
 }
 
@@ -48,7 +65,7 @@
   margin-bottom: 1rem;
 }
 
-/* Improve button spacing in calendar controls */
+/* Calendar controls styling */
 .calendar-controls {
   padding: 1rem 0;
   border-bottom: 1px solid #e5e7eb;
@@ -78,8 +95,8 @@
   
   /* Better event display on mobile */
   .fc-daygrid-event {
-    font-size: 0.75rem;
-    padding: 0.125rem 0.25rem;
+    font-size: 0.625rem !important;
+    padding: 0.5px 2px !important;
   }
   
   /* Adjust calendar controls for mobile */
@@ -103,7 +120,7 @@
   
   /* Even smaller events on very small screens */
   .fc-daygrid-event {
-    font-size: 0.625rem;
-    padding: 0.0625rem 0.125rem;
+    font-size: 0.5rem !important;
+    padding: 0.25px 1px !important;
   }
 }

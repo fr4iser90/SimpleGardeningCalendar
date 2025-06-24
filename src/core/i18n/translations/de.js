@@ -376,33 +376,22 @@ export const de = {
   'import.preview.title': 'Import Vorschau',
   'import.confirm': 'Import bestätigen',
   'import.cancel': 'Abbrechen',
-  
-  // Export Modal  
-  'export.modal.title': 'Kalender exportieren',
-  'export.format.label': 'Format auswählen:',
-  'export.format.json': 'JSON (für Re-Import)',
-  'export.format.ical': 'iCal (.ics)',
-  'export.format.csv': 'CSV (Excel)',
-  'export.format.pdf': 'PDF (Drucken)',
-  'export.download': 'Download starten',
-  'export.cancel': 'Abbrechen',
-  
-  // Error Messages
+  'import.success': '{count} Events erfolgreich importiert',
   'import.error.invalid_file': 'Ungültige Datei',
   'import.error.unsupported_format': 'Format nicht unterstützt',
-  'import.error.corrupted_data': 'Beschädigte Daten',
   'import.error.database': 'Datenbank-Fehler beim Import',
-  'import.error.file_too_large': 'Datei zu groß',
+  
+  // Export Modal - Flat structure (what the code expects)
+  'export.modal.title': 'Kalender exportieren',
+  'export.format.label': 'Format auswählen:',
+  'export.format.json': 'JSON',
+  'export.format.json_desc': 'Für Re-Import in diese App',
+  'export.format.ical': 'iCal (.ics)',
+  'export.format.ical_desc': 'Für andere Kalender-Apps',
+  'export.download': 'Exportieren',
+  'export.cancel': 'Abbrechen',
+  'export.success': 'Export erfolgreich erstellt',
   'export.error.no_data': 'Keine Daten zum Exportieren',
   'export.error.generation_failed': 'Export-Generierung fehlgeschlagen',
-  
-  // Success Messages
-  'import.success': '{count} Events erfolgreich importiert',
-  'export.success': 'Export erfolgreich erstellt',
-  
-  // Notifications
-  'import.notification.start': 'Import gestartet...',
-  'import.notification.progress': 'Importiere {current}/{total} Events...',
   'export.notification.start': 'Export wird erstellt...',
-  'export.notification.ready': 'Export bereit zum Download',
 }; 
