@@ -459,4 +459,9 @@ export const en = {
   'local.status.switch_error': 'Failed to switch calendar',
   'local.status.load_error': 'Failed to load',
   'local.status.setup_title': '🗓️ Setup local calendars',
+  'local.status.title': 'Local Calendar',
+
+  // Google Calendar Status Bar
+  'google.calendar.name': 'Google Calendar',
+  'google.calendar.fallback_name': 'Garden Calendar',
 }; 

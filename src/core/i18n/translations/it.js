@@ -399,6 +399,7 @@ export const it = {
   'local.status.switch_error': 'Errore nel cambio calendario',
   'local.status.load_error': 'Errore nel caricamento',
   'local.status.setup_title': '🗓️ Configura calendari locali',
+  'local.status.title': 'Calendario Locale',
 
   // Calendar Names
   'calendar.garden': 'Calendario del Giardino',
@@ -413,4 +414,8 @@ export const it = {
   'calendar.ornamental_description': 'Calendario per fiori e piante ornamentali',
   'calendar.fruits': 'Frutteto',
   'calendar.fruits_description': 'Calendario per alberi da frutto e bacche',
+
+  // Google Calendar Status Bar
+  'google.calendar.name': 'Google Calendar',
+  'google.calendar.fallback_name': 'Calendario del Giardino',
 }; 

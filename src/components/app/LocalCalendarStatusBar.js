@@ -20,6 +20,7 @@ export function updateLocalCalendarStatus() {
       } else {
         // Kein Kalender vorhanden, Setup anzeigen
         statusDisplay.innerHTML = `
+          <span class="font-bold mr-2 flex items-center"><span class="text-lg mr-1">🗓️</span>${t('local.status.title')}:</span>
           <button
             class="text-blue-600 dark:text-blue-400 flex items-center hover:underline focus:outline-none"
             style="background:none;border:none;padding:0;cursor:pointer"
@@ -27,7 +28,7 @@ export function updateLocalCalendarStatus() {
             id="localCalendarSetupBtn"
           >
             <span class="text-lg mr-2">🗓️</span>
-            <span class="font-bold mr-1">Lokale Kalender:</span>
+            <span class="font-bold mr-1">${t('local.status.title')}:</span>
             <i class="fas fa-plus-circle mr-1"></i>${t('local.status.setup')}
           </button>
         `;
@@ -57,6 +58,7 @@ export function updateLocalCalendarStatus() {
       const hasMultipleCalendars = allCalendars.length > 1;
       
       statusDisplay.innerHTML = `
+        <span class="font-bold mr-2 flex items-center"><span class="text-lg mr-1">🗓️</span>${t('local.status.title')}:</span>
         <span class="text-green-600 dark:text-green-400 flex items-center">
           <i class="fas fa-check-circle mr-1"></i>${t('local.status.active')}
         </span>
@@ -90,6 +92,7 @@ export function updateLocalCalendarStatus() {
   }).catch(error => {
     console.error('Error loading local calendar status:', error);
     statusDisplay.innerHTML = `
+      <span class="font-bold mr-2 flex items-center"><span class="text-lg mr-1">🗓️</span>${t('local.status.title')}:</span>
       <span class="text-red-600 dark:text-red-400 flex items-center">
         <i class="fas fa-exclamation-triangle mr-1"></i>${t('local.status.load_error')}
       </span>

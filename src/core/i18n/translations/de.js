@@ -464,6 +464,11 @@ export const de = {
   'local.status.switch_error': 'Fehler beim Wechseln des Kalenders',
   'local.status.load_error': 'Fehler beim Laden',
   'local.status.setup_title': '🗓️ Lokale Kalender einrichten',
+  'local.status.title': 'Lokaler Kalender',
+
+  // Google Calendar Status Bar
+  'google.calendar.name': 'Google Calendar',
+  'google.calendar.fallback_name': 'Garten Kalender',
 
   // Local Calendar Setup Modal
   'local.setup.title': 'Lokale Kalender verwalten',

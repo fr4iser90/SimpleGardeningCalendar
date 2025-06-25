@@ -461,4 +461,9 @@ export const es = {
   'local.status.switch_error': 'Error al cambiar de calendario',
   'local.status.load_error': 'Error al cargar',
   'local.status.setup_title': '🗓️ Configurar calendarios locales',
+  'local.status.title': 'Calendario Local',
+
+  // Google Calendar Status Bar
+  'google.calendar.name': 'Google Calendar',
+  'google.calendar.fallback_name': 'Calendario de Jardín',
 }; 

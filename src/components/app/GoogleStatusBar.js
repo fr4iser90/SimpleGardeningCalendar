@@ -40,6 +40,7 @@ export function updateGoogleCalendarStatus() {
   if (isCurrentlySignedIn && hasSavedCredentials) {
     if (!hasSelectedCalendar) {
       statusDisplay.innerHTML = `
+        <span class="font-bold mr-2 flex items-center"><span class="text-lg mr-1">📅</span>${t('google.calendar.name')}:</span>
         <span class="text-yellow-600 dark:text-yellow-400 flex items-center">
           <i class="fas fa-exclamation-triangle mr-1"></i>${t('google.status.no_calendar_selected')}
         </span>
@@ -62,12 +63,13 @@ export function updateGoogleCalendarStatus() {
     
     // If still showing ID, try to load calendar name
     if (calendarName === selectedCalendarId && calendarName.includes('@group.calendar.google.com')) {
-      calendarName = 'Garden Calendar'; // Fallback friendly name
+      calendarName = t('google.calendar.fallback_name'); // Fallback friendly name
     }
     
     const autoSync = settings.autoSync || false;
 
     statusDisplay.innerHTML = `
+      <span class="font-bold mr-2 flex items-center"><span class="text-lg mr-1">📅</span>${t('google.calendar.name')}:</span>
       <span class="text-green-600 dark:text-green-400 flex items-center" title="${settings.userEmail}">
         <i class="fas fa-check-circle mr-1"></i>${t('google.connected')}
       </span>
@@ -106,6 +108,7 @@ export function updateGoogleCalendarStatus() {
   } else if (hasSavedCredentials && !isCurrentlySignedIn) {
     console.log('📊 Google Status Bar: Showing RECONNECT NEEDED');
     statusDisplay.innerHTML = `
+      <span class="font-bold mr-2 flex items-center"><span class="text-lg mr-1">📅</span>${t('google.calendar.name')}:</span>
       <span class="text-yellow-600 dark:text-yellow-400 flex items-center">
         <i class="fas fa-link mr-1"></i>${t('google.reconnect_needed')}
       </span>
@@ -122,8 +125,8 @@ export function updateGoogleCalendarStatus() {
         title="${t('google.status.connect_tooltip')}"
         id="googleStatusConnectBtn"
       >
-        <img src="https://www.gstatic.com/images/branding/product/1x/calendar_48dp.png" alt="Google Calendar" style="height:1.2em;vertical-align:middle;margin-right:0.5em;">
-        <span class="font-bold mr-1">Google Calendar:</span>
+        <img src="https://www.gstatic.com/images/branding/product/1x/calendar_48dp.png" alt="${t('google.calendar.name')}" style="height:1.2em;vertical-align:middle;margin-right:0.5em;">
+        <span class="font-bold mr-1">${t('google.calendar.name')}:</span>
         <i class="fas fa-times-circle mr-1"></i>${t('google.not_connected')}
       </button>
     `;
