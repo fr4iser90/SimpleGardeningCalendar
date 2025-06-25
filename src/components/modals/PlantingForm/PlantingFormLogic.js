@@ -1,12 +1,9 @@
 import { t } from '../../../core/i18n/index.js';
 import { 
   getPlantRegistry, 
-  PLANT_CATEGORIES, 
-  GROWING_ENVIRONMENTS, 
-  SEASONAL_REGIONS, 
-  getPlantDataForEnvironment, 
   validatePlantingDate 
 } from '../../../core/db/index.js';
+import { PLANT_CATEGORIES, GROWING_ENVIRONMENTS, SEASONAL_REGIONS } from '../../../core/db/plants/categories.js';
 import { getPhaseEmoji } from '../../../core/db/utils.js';
 
 /**
@@ -23,21 +20,31 @@ export function createEnvironmentOptions() {
 export function createRegionOptions() {
   return Object.entries(SEASONAL_REGIONS).map(([key, value]) => {
     const translatedRegion = t(`region.${value}`);
-    return `<option value="${translatedRegion}">${translatedRegion}</option>`;
+    return `<option value="${value}">${translatedRegion}</option>`;
   }).join('');
 }
 
 export function createCategoryOptions() {
-  return PLANT_CATEGORIES.map(category => {
+  return Object.values(PLANT_CATEGORIES).map(category => {
     const translatedCategory = t(`plant.category.${category.toLowerCase().replace(/\s+/g, '_').replace(/&/g, '').replace(/\s/g, '')}`) || category;
     return `<option value="${category}">${translatedCategory}</option>`;
   }).join('');
 }
 
-export function createPlantOptions() {
-  return Array.from(getPlantRegistry().entries()).map(([value, plant]) => 
-    `<option value="${value}" data-category="${plant.category}">${plant.name}${plant.legalNote ? ' ⚠️' : ''}</option>`
-  ).join('');
+export function createPlantOptions(environment = 'indoor') {
+  const registry = getPlantRegistry();
+  const plants = Array.from(registry.entries());
+  
+  return plants
+    .filter(([key, plant]) => {
+      // Check if plant supports the selected environment
+      return plant.environments && plant.environments[environment];
+    })
+    .map(([key, plant]) => {
+      const legalNote = plant.legalNote ? ' ⚠️' : '';
+      return `<option value="${key}" data-category="${plant.category}">${plant.name}${legalNote}</option>`;
+    })
+    .join('');
 }
 
 export function updateEnvironmentFields(environment) {
@@ -50,22 +57,31 @@ export function updateEnvironmentFields(environment) {
   }
 }
 
-export function updatePlantOptions(category) {
+export function updatePlantOptions(category, environment = 'indoor') {
   const plantTypeSelect = document.getElementById('plantTypeSelect');
   if (!plantTypeSelect) return;
   
-  const options = plantTypeSelect.querySelectorAll('option[data-category]');
+  const registry = getPlantRegistry();
+  const plants = Array.from(registry.entries());
   
-  options.forEach(option => {
-    if (!category || option.dataset.category === category) {
-      option.style.display = 'block';
-    } else {
-      option.style.display = 'none';
-    }
+  // Clear existing options
+  plantTypeSelect.innerHTML = `<option value="">${t('modal.plant_type.select')}</option>`;
+  
+  // Filter plants by category and environment
+  const filteredPlants = plants.filter(([key, plant]) => {
+    const categoryMatch = !category || plant.category === category;
+    const environmentMatch = plant.environments && plant.environments[environment];
+    return categoryMatch && environmentMatch;
   });
   
-  // Reset selection
-  plantTypeSelect.value = '';
+  // Add filtered options
+  filteredPlants.forEach(([key, plant]) => {
+    const option = document.createElement('option');
+    option.value = key;
+    option.dataset.category = plant.category;
+    option.textContent = plant.name + (plant.legalNote ? ' ⚠️' : '');
+    plantTypeSelect.appendChild(option);
+  });
 }
 
 export function updatePlantInfo() {
@@ -81,23 +97,31 @@ export function updatePlantInfo() {
     return;
   }
 
-  const plantData = getPlantDataForEnvironment(plantTypeSelect.value, environmentSelect?.value || 'indoor');
-  if (!plantData) {
+  const registry = getPlantRegistry();
+  const plantData = registry.get(plantTypeSelect.value);
+  const environment = environmentSelect?.value || 'indoor';
+  
+  if (!plantData || !plantData.environments || !plantData.environments[environment]) {
     plantInfo.style.display = '';
-    plantInfo.innerHTML = '<p class="text-red-500">Plant data not found</p>';
+    plantInfo.innerHTML = '<p class="text-red-500">Plant data not found for this environment</p>';
     return;
   }
 
-  const phases = Object.entries(plantData.phases).map(([phase, data]) => {
+  const envData = plantData.environments[environment];
+  const phases = Object.entries(envData.phases).map(([phase, data]) => {
     const emoji = getPhaseEmoji(phase);
-    return `${emoji} ${phase}: ${data.days} days`;
+    const editable = data.editable ? ' (editable)' : ' (fixed)';
+    return `${emoji} ${phase}: ${data.days} days${editable}`;
   }).join('<br>');
+
+  const totalDays = Object.values(envData.phases).reduce((sum, phase) => sum + phase.days, 0);
 
   plantInfo.style.display = '';
   plantInfo.innerHTML = `
     <h4 class="font-medium mb-2">${plantData.name}</h4>
     <p class="text-sm mb-2"><strong>Category:</strong> ${plantData.category}</p>
-    <p class="text-sm mb-2"><strong>Total Duration:</strong> ${Object.values(plantData.phases).reduce((sum, phase) => sum + phase.days, 0)} days</p>
+    <p class="text-sm mb-2"><strong>Environment:</strong> ${environment}</p>
+    <p class="text-sm mb-2"><strong>Total Duration:</strong> ${totalDays} days</p>
     <div class="text-sm">
       <strong>Phases:</strong><br>
       ${phases}
@@ -118,11 +142,17 @@ export function updatePhaseInputs() {
     return;
   }
   
-  const plantData = getPlantDataForEnvironment(plantTypeSelect.value, environmentSelect?.value || 'indoor');
-  if (!plantData || !plantData.phases) {
+  const registry = getPlantRegistry();
+  const plantData = registry.get(plantTypeSelect.value);
+  const environment = environmentSelect?.value || 'indoor';
+  
+  if (!plantData || !plantData.environments || !plantData.environments[environment]) {
     phaseDurationSection.style.display = 'none';
     return;
   }
+  
+  const envData = plantData.environments[environment];
+  const phases = envData.phases;
   
   // Check if this is an autoflower (no phase editing needed)
   const isAutoflower = plantTypeSelect.value.includes('autoflower');
@@ -143,10 +173,32 @@ export function updatePhaseInputs() {
         </div>
       </div>
     `;
-  } else if (environmentSelect?.value === 'outdoor') {
-    // Outdoor cannabis: Only flowering time is editable
-    const floweringPhase = plantData.phases.flowering;
-    if (floweringPhase) {
+  } else if (environment === 'outdoor') {
+    // Outdoor: Only editable phases can be adjusted
+    const editablePhases = Object.entries(phases).filter(([phase, data]) => data.editable);
+    
+    if (editablePhases.length === 0) {
+      phaseInputs.innerHTML = `
+        <div class="col-span-full p-3 bg-yellow-50 dark:bg-yellow-900 border border-yellow-200 dark:border-yellow-700 rounded">
+          <div class="flex items-start">
+            <span class="text-yellow-600 dark:text-yellow-400 mr-2">🌱</span>
+            <div>
+              <p class="text-sm font-medium text-yellow-800 dark:text-yellow-200 mb-1">
+                Outdoor - Natürliche Jahreszeiten
+              </p>
+              <p class="text-xs text-yellow-700 dark:text-yellow-300">
+                Phasen werden durch natürliche Jahreszeiten bestimmt und können nicht angepasst werden.
+              </p>
+            </div>
+          </div>
+        </div>
+      `;
+    } else {
+      const nonEditablePhases = Object.entries(phases).filter(([phase, data]) => !data.editable);
+      const nonEditableInfo = nonEditablePhases.map(([phase, data]) => 
+        `${getPhaseEmoji(phase)} ${phase}: ${data.days} Tage (fest)`
+      ).join('<br>');
+      
       phaseInputs.innerHTML = `
         <div class="col-span-full p-3 bg-yellow-50 dark:bg-yellow-900 border border-yellow-200 dark:border-yellow-700 rounded mb-3">
           <div class="flex items-start">
@@ -156,21 +208,22 @@ export function updatePhaseInputs() {
                 Outdoor - Natürliche Jahreszeiten
               </p>
               <p class="text-xs text-yellow-700 dark:text-yellow-300">
-                Phasen werden durch natürliche Jahreszeiten bestimmt. Nur die Blütezeit kann je nach Sorte angepasst werden.
+                ${nonEditableInfo}
               </p>
             </div>
           </div>
         </div>
-        <div>
-          <label class="block text-sm font-medium mb-1">🌸 Blütezeit (je nach Sorte 6-12 Wochen)</label>
-          <input type="number" name="phase_flowering" value="${floweringPhase.days}" min="42" max="84" class="w-full p-2 border rounded dark:bg-gray-700 dark:border-gray-600 dark:text-white">
-          <p class="text-xs text-gray-500 dark:text-gray-400 mt-1">Standard: ${floweringPhase.days} Tage (${Math.round(floweringPhase.days/7)} Wochen)</p>
-        </div>
+        ${editablePhases.map(([phase, data]) => `
+          <div>
+            <label class="block text-sm font-medium mb-1">${getPhaseEmoji(phase)} ${phase}</label>
+            <input type="number" name="phase_${phase}" value="${data.days}" min="1" class="w-full p-2 border rounded dark:bg-gray-700 dark:border-gray-600 dark:text-white">
+          </div>
+        `).join('')}
       `;
     }
   } else {
     // Indoor or greenhouse: All phases editable
-    phaseInputs.innerHTML = Object.entries(plantData.phases).map(([phase, data]) => `
+    phaseInputs.innerHTML = Object.entries(phases).map(([phase, data]) => `
       <div>
         <label class="block text-sm font-medium mb-1">${getPhaseEmoji(phase)} ${phase}</label>
         <input type="number" name="phase_${phase}" value="${data.days}" min="1" class="w-full p-2 border rounded dark:bg-gray-700 dark:border-gray-600 dark:text-white">
@@ -188,7 +241,8 @@ export function updateCustomNamePlaceholder() {
   
   if (!plantTypeSelect?.value || !customNameField) return;
   
-  const plantData = getPlantDataForEnvironment(plantTypeSelect.value, 'indoor');
+  const registry = getPlantRegistry();
+  const plantData = registry.get(plantTypeSelect.value);
   if (plantData) {
     customNameField.placeholder = `e.g., "My ${plantData.name}"`;
   } else {
@@ -227,15 +281,28 @@ export function updatePhaseCareInputs() {
   const environmentSelect = document.getElementById('environmentSelect');
   const phaseCareSection = document.getElementById('phaseCareSection');
   const phaseCareInputs = document.getElementById('phaseCareInputs');
+  
   if (!plantTypeSelect?.value || !phaseCareInputs || !phaseCareSection) {
     if (phaseCareSection) phaseCareSection.style.display = 'none';
     return;
   }
+  
+  const registry = getPlantRegistry();
+  const plantData = registry.get(plantTypeSelect.value);
+  const environment = environmentSelect?.value || 'indoor';
+  
+  if (!plantData || !plantData.environments || !plantData.environments[environment]) {
+    phaseCareSection.style.display = 'none';
+    return;
+  }
+  
+  const envData = plantData.environments[environment];
+  const phases = envData.phases;
+  
   phaseCareSection.style.display = '';
-  const plantData = getPlantDataForEnvironment(plantTypeSelect.value, environmentSelect?.value || 'indoor');
-  if (!plantData || !plantData.phases) return;
   const medium = 'soil'; // Default-Medium, kann ggf. dynamisch gemacht werden
-  phaseCareInputs.innerHTML = Object.entries(plantData.phases).map(([phase, data]) => {
+  
+  phaseCareInputs.innerHTML = Object.entries(phases).map(([phase, data]) => {
     // Werte aus soil, fallback auf direktes Feld
     const watering = (data[medium]?.watering?.interval ?? data.watering?.interval) || '';
     const fertilizing = (data[medium]?.fertilizing?.interval ?? data.fertilizing?.interval) || '';
@@ -281,22 +348,31 @@ export function getCustomPhaseDurations(formData) {
   const environment = formData.get('environment');
   
   if (plantType && environment) {
-    const plantData = getPlantDataForEnvironment(plantType, environment);
-    if (plantData && plantData.phases) {
+    const registry = getPlantRegistry();
+    const plantData = registry.get(plantType);
+    
+    if (plantData && plantData.environments && plantData.environments[environment]) {
+      const envData = plantData.environments[environment];
+      const phases = envData.phases;
+      
       const isAutoflower = plantType.includes('autoflower');
       
       if (isAutoflower) {
         // Autoflowers: No custom phase durations needed
         // Phases are automatic and cannot be adjusted
       } else if (environment === 'outdoor') {
-        // Outdoor cannabis: Only flowering time can be adjusted
-        const floweringValue = formData.get('phase_flowering');
-        if (floweringValue) {
-          customPhaseDurations.flowering = parseInt(floweringValue);
-        }
+        // Outdoor: Only editable phases can be adjusted
+        Object.entries(phases).forEach(([phase, data]) => {
+          if (data.editable) {
+            const value = formData.get(`phase_${phase}`);
+            if (value) {
+              customPhaseDurations[phase] = parseInt(value);
+            }
+          }
+        });
       } else {
         // Indoor or greenhouse: All phases can be adjusted
-        Object.keys(plantData.phases).forEach(phase => {
+        Object.keys(phases).forEach(phase => {
           const value = formData.get(`phase_${phase}`);
           if (value) {
             customPhaseDurations[phase] = parseInt(value);

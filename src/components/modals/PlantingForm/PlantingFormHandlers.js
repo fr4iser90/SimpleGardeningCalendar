@@ -46,12 +46,18 @@ export function initializePlantingFormHandlers(formContainer) {
 
   // Add event listeners
   environmentSelect?.addEventListener('change', function() {
-    updateEnvironmentFields(this.value);
+    const environment = this.value;
+    updateEnvironmentFields(environment);
+    // Update plant options when environment changes
+    const category = plantCategorySelect?.value || '';
+    updatePlantOptions(category, environment);
     updatePlantInfo();
   });
 
   plantCategorySelect?.addEventListener('change', function() {
-    updatePlantOptions(this.value);
+    const category = this.value;
+    const environment = environmentSelect?.value || 'indoor';
+    updatePlantOptions(category, environment);
   });
 
   plantTypeSelect?.addEventListener('change', function() {
@@ -66,7 +72,8 @@ export function initializePlantingFormHandlers(formContainer) {
     updateEnvironmentFields(environmentSelect.value);
   }
   if (plantCategorySelect) {
-    updatePlantOptions(plantCategorySelect.value);
+    const environment = environmentSelect?.value || 'indoor';
+    updatePlantOptions(plantCategorySelect.value, environment);
   }
   updatePlantInfo();
 }

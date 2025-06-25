@@ -22,7 +22,7 @@ export function createPlantingForm(date, preselectedPlant = null) {
   const environmentOptions = createEnvironmentOptions();
   const regionOptions = createRegionOptions();
   const categoryOptions = createCategoryOptions();
-  const plantOptions = createPlantOptions();
+  const plantOptions = createPlantOptions('indoor'); // Default to indoor
   
   const formattedDate = formatDateForGerman(date);
   
