@@ -30,7 +30,7 @@ export async function getPlanting(plantingId) {
 }
 
 // Add a new planting with all associated events
-export async function addPlanting(plantType, startDate, location = 'Default Garden', customName = null, reminderOptions = {}, customPhaseDurations = {}) {
+export async function addPlanting(plantType, startDate, location = 'Default Garden', customName = null, reminderOptions = {}, customPhaseDurations = {}, calendarId = null) {
   const plantData = getPlantData(plantType);
   
   if (!plantData) {
@@ -86,7 +86,8 @@ export async function addPlanting(plantType, startDate, location = 'Default Gard
     notes: [],
     legalNote: plantData.legalNote || null,
     reminderOptions,
-    customPhaseDurations
+    customPhaseDurations,
+    calendarId
   };
   
   // Add planting to database

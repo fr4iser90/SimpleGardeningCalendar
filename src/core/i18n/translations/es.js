@@ -195,9 +195,18 @@ export const es = {
   'settings.import': 'Importar Datos',
   
   // Calendar Names
-  'calendar.garden': 'Jardín',
+  'calendar.garden': 'Calendario de Jardín',
   'calendar.gardening': 'Jardinería',
   'calendar.complete': 'Completo',
+  'calendar.garden_description': 'Calendario principal para todos los eventos del jardín',
+  'calendar.vegetables': 'Jardín de Verduras',
+  'calendar.vegetables_description': 'Calendario para verduras y ensaladas',
+  'calendar.herbs': 'Jardín de Hierbas',
+  'calendar.herbs_description': 'Calendario para hierbas y especias',
+  'calendar.ornamental': 'Jardín Ornamental',
+  'calendar.ornamental_description': 'Calendario para flores y plantas ornamentales',
+  'calendar.fruits': 'Jardín de Frutas',
+  'calendar.fruits_description': 'Calendario para árboles frutales y bayas',
   
   // Common
   'common.loading': 'Cargando...',
@@ -426,4 +435,30 @@ export const es = {
   'plants.save_note': 'Guardar Nota',
   'plants.delete_confirm': 'Eliminar Planta y Todos los Eventos',
   'plants.no_category_plants': 'No hay plantas de {category}.',
+
+  // Local Calendar Wizard
+  'local.wizard.title': 'Organización de Calendario Local',
+  'local.wizard.organize_question': '¿Cómo quieres organizar tus eventos de jardín?',
+  'local.wizard.option_single': 'Un "Calendario de Jardín"',
+  'local.wizard.option_single_desc': 'Recomendado para principiantes - todos los eventos en un solo calendario',
+  'local.wizard.option_areas': 'Separar por área de jardín',
+  'local.wizard.option_areas_desc': 'Avanzado - calendarios separados para diferentes áreas del jardín',
+  'local.wizard.option_areas_creates': 'Crea: Huerto, Jardín de Hierbas, Jardín Ornamental, Frutal',
+  'local.wizard.option_custom': 'Calendarios personalizados',
+  'local.wizard.option_custom_desc': 'Experto - crea tus propios calendarios',
+  'local.wizard.option_custom_creates': 'Crea: Jardín de Prueba, Jardín Interior, Jardín de Balcón',
+  'local.wizard.setup_button': 'Configurar calendarios',
+  'local.wizard.setting_up_calendars': 'Configurando calendarios...',
+  'local.wizard.setup_complete': '✅ ¡Configuración de calendarios completa!',
+  'local.wizard.setup_failed': '❌ Error en la configuración',
+  'local.wizard.select_option': 'Por favor selecciona una opción',
+
+  // Local Calendar Status
+  'local.status.active': 'Activo',
+  'local.status.manage': 'Gestionar calendarios',
+  'local.status.setup': 'Configurar calendarios locales',
+  'local.status.switched': 'Cambiado al calendario: {name}',
+  'local.status.switch_error': 'Error al cambiar de calendario',
+  'local.status.load_error': 'Error al cargar',
+  'local.status.setup_title': '🗓️ Configurar calendarios locales',
 }; 

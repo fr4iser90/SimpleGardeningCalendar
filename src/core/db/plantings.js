@@ -16,9 +16,10 @@ import { deleteAllPlantNotes } from './notes.js';
  * @param {string} customName - Custom name for the planting
  * @param {Object} reminderOptions - Reminder options for the planting
  * @param {Object} customPhaseDurations - Custom phase durations for the planting
+ * @param {string} calendarId - Calendar ID for the planting
  * @returns {Promise<number>} Planting ID
  */
-export async function addPlanting(plantType, startDate, location = 'Default Garden', customName = null, reminderOptions = {}, customPhaseDurations = {}) {
+export async function addPlanting(plantType, startDate, location = 'Default Garden', customName = null, reminderOptions = {}, customPhaseDurations = {}, calendarId = null) {
   const plantRegistry = getPlantRegistry();
   const plantData = plantRegistry.get(plantType);
   
@@ -73,7 +74,8 @@ export async function addPlanting(plantType, startDate, location = 'Default Gard
     notes: [],
     legalNote: plantData.legalNote || null,
     reminderOptions, // Store reminder options
-    customPhaseDurations // Store custom phase durations
+    customPhaseDurations, // Store custom phase durations
+    calendarId // NEU: calendarId hinzufügen
   };
   
   // Add planting to database

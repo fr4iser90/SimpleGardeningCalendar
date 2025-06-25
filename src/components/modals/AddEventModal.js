@@ -12,6 +12,7 @@ import {
 import { getPhaseEmoji, getPhaseCheckpoints } from '../../core/db/utils.js';
 import { formatDateForGerman } from '../../utils/dateUtils.js';
 import { showButtonSpinner, hideButtonSpinner } from '../ui/LoadingSpinner.js';
+import { DB_NAME, DB_VERSION } from '../../core/db/connection.js';
 
 export async function showAddEventModal(date, preselectedType = null) {
   const modal = document.createElement('div');
@@ -259,6 +260,58 @@ function initializeAddEventModalHandlers(modal) {
   const enableFertilizing = document.getElementById('enableFertilizing');
   const wateringOptions = document.getElementById('wateringOptions');
   const fertilizingOptions = document.getElementById('fertilizingOptions');
+
+  // Load default settings from localStorage
+  const settings = JSON.parse(localStorage.getItem('localCalendarSettings') || '{}');
+  
+  // Set default values for checkboxes
+  if (enableWatering) {
+    enableWatering.checked = settings.defaultWateringReminders !== false;
+    wateringOptions.style.display = enableWatering.checked ? 'block' : 'none';
+  }
+  
+  if (enableFertilizing) {
+    enableFertilizing.checked = settings.defaultFertilizingReminders !== false;
+    fertilizingOptions.style.display = enableFertilizing.checked ? 'block' : 'none';
+  }
+  
+  // Set other default checkboxes
+  const enablePhaseReminders = document.getElementById('enablePhaseReminders');
+  if (enablePhaseReminders) {
+    enablePhaseReminders.checked = settings.defaultPhaseReminders !== false;
+  }
+  
+  const enableWeeklyChecks = document.getElementById('enableWeeklyChecks');
+  if (enableWeeklyChecks) {
+    enableWeeklyChecks.checked = settings.defaultWeeklyChecks !== false;
+  }
+  
+  const enableHarvestReminder = document.getElementById('enableHarvestReminder');
+  if (enableHarvestReminder) {
+    enableHarvestReminder.checked = settings.defaultHarvestReminders !== false;
+  }
+  
+  // Google Sync is always enabled by default (can be changed per planting)
+  const enableGoogleCalendarSync = document.getElementById('enableGoogleCalendarSync');
+  if (enableGoogleCalendarSync) {
+    enableGoogleCalendarSync.checked = true;
+  }
+  
+  // Set default intervals
+  const wateringIntervalSelect = document.querySelector('select[name="wateringInterval"]');
+  if (wateringIntervalSelect) {
+    wateringIntervalSelect.value = settings.defaultWateringInterval || '3';
+  }
+  
+  const fertilizingIntervalSelect = document.querySelector('select[name="fertilizingInterval"]');
+  if (fertilizingIntervalSelect) {
+    fertilizingIntervalSelect.value = settings.defaultFertilizingInterval || '14';
+  }
+  
+  const fertilizingDelaySelect = document.querySelector('select[name="fertilizingDelay"]');
+  if (fertilizingDelaySelect) {
+    fertilizingDelaySelect.value = settings.defaultFertilizingDelay || '7';
+  }
 
   // Add event listeners
   eventTypeSelect.addEventListener('change', function() {
@@ -525,7 +578,10 @@ async function handlePlantingSubmission(formData) {
   const location = formData.get('location');
   const customName = formData.get('customName');
   const environment = formData.get('environment');
+  const selectedCalendarId = localStorage.getItem('selectedLocalCalendarId');
   
+  console.log('[PLANTING-ADD] Adding planting:', { plantType, startDate, calendarId: selectedCalendarId });
+
   // Collect reminder options
   const reminderOptions = {
     watering: {
@@ -569,7 +625,7 @@ async function handlePlantingSubmission(formData) {
     }
   }
   
-  await addPlanting(plantType, startDate, location, customName, reminderOptions, customPhaseDurations);
+  await addPlanting(plantType, startDate, location, customName, reminderOptions, customPhaseDurations, selectedCalendarId);
   showNotification(t('notification.planting_added'), 'success');
   
   // Refresh calendar
@@ -581,13 +637,17 @@ async function handleCustomEventSubmission(formData) {
   const type = formData.get('type');
   const description = formData.get('description');
   const date = formData.get('date');
-  
-  const db = await openDB('gardening-calendar', 5);
+  const selectedCalendarId = localStorage.getItem('selectedLocalCalendarId');
+
+  console.log('[EVENT-ADD] Adding event:', { title, date, calendarId: selectedCalendarId });
+
+  const db = await openDB(DB_NAME, DB_VERSION);
   await db.add('events', {
     title,
     type,
     description,
     date,
+    calendarId: selectedCalendarId,
     createdAt: new Date().toISOString()
   });
   

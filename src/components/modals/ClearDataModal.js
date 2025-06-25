@@ -1,5 +1,6 @@
 import { openDB } from 'idb';
 import { showButtonSpinner, hideButtonSpinner } from '../ui/LoadingSpinner.js';
+import { DB_NAME, DB_VERSION } from '../../core/db/connection.js';
 
 export function showClearCalendarModal() {
   const modal = document.createElement('div');
@@ -70,7 +71,7 @@ async function clearAllCalendarData() {
   const spinnerId = showButtonSpinner(clearBtn, originalText, 'Clearing...');
   
   try {
-    const db = await openDB('gardening-calendar');
+    const db = await openDB(DB_NAME, DB_VERSION);
     const tx = db.transaction(['events', 'plantings', 'plantNotes'], 'readwrite');
     
     // Clear all stores
@@ -80,8 +81,9 @@ async function clearAllCalendarData() {
     
     await tx.done;
     
-    // Close modal
-    document.querySelector('.fixed').remove();
+    // Modal sicher schließen (auch wenn mehrere offen sind)
+    const modals = document.querySelectorAll('.fixed');
+    modals.forEach(m => m.remove());
     
     // Refresh calendar
     if (window.calendar) {

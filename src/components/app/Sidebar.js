@@ -1,6 +1,9 @@
 // Sidebar.js
 // Sidebar navigation and information display component
 
+import { openDB } from 'idb';
+import { DB_NAME, DB_VERSION } from '../../core/db/connection.js';
+
 export async function loadPlantCategories(t) {
   const { PLANT_CATEGORIES, getPlantingsByCategory } = await import('../../core/db/index.js');
   const categoriesContainer = document.getElementById('plantCategories');
@@ -33,8 +36,7 @@ export async function loadPlantCategories(t) {
 }
 
 export async function loadUpcomingTasks(t) {
-  const { openDB } = await import('idb');
-  const db = await openDB('gardening-calendar');
+  const db = await openDB(DB_NAME, DB_VERSION);
   
   const today = new Date();
   const nextWeek = new Date();
@@ -136,4 +138,19 @@ export function initializeSidebar(t) {
     loadPlantCategories(t);
     loadUpcomingTasks(t);
   });
+}
+
+async function loadSidebarData() {
+  try {
+    const db = await openDB(DB_NAME, DB_VERSION);
+    
+    // Get counts
+    const eventCount = await db.count('events');
+    const plantingCount = await db.count('plantings');
+    const noteCount = await db.count('plantNotes');
+
+    // ... existing code ...
+  } catch (error) {
+    console.error('Error loading sidebar data:', error);
+  }
 }

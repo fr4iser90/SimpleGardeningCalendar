@@ -130,7 +130,8 @@ export async function createPlantingEvents(planting, plantData, phases, completi
     date: planting.startDate,
     type: 'planting',
     description: plantingDescription,
-    plantingId
+    plantingId,
+    calendarId: planting.calendarId
   });
 
   // Add phase events
@@ -145,7 +146,8 @@ export async function createPlantingEvents(planting, plantData, phases, completi
       description: phaseDescription,
       plantingId,
       phase: phase.name,
-      duration: phase.days
+      duration: phase.days,
+      calendarId: planting.calendarId
     });
   }
 
@@ -158,7 +160,8 @@ export async function createPlantingEvents(planting, plantData, phases, completi
     type: 'harvesting',
     description: harvestDescription,
     plantingId,
-    phase: 'harvesting'
+    phase: 'harvesting',
+    calendarId: planting.calendarId
   });
 
   await tx.done;

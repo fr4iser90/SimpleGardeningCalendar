@@ -2,6 +2,7 @@ import { openDB } from 'idb';
 import { t } from '../../core/i18n/index.js';
 import { getAvailableTemplates, importGardenTemplate } from '../../services/TemplateService.js';
 import { showButtonSpinner, hideButtonSpinner } from '../ui/LoadingSpinner.js';
+import { DB_NAME, DB_VERSION } from '../../core/db/connection.js';
 
 export function showTemplateImportModal() {
   const modal = document.createElement('div');
@@ -143,7 +144,7 @@ async function importSelectedTemplate() {
   const templates = getAvailableTemplates();
   const selectedTemplate = templates[templateSelect.value];
   const year = parseInt(yearSelect.value);
-  const db = await openDB('gardening-calendar');
+  const db = await openDB(DB_NAME, DB_VERSION);
   const allEvents = await db.getAll('events');
   const alreadyImported = allEvents.some(ev => ev.templateName === selectedTemplate.name && ev.date.startsWith(year.toString()));
   if (alreadyImported) {

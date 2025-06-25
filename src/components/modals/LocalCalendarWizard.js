@@ -3,7 +3,8 @@ import {
   initializeDefaultCalendars, 
   createGardenTemplateCalendars, 
   createLocalCalendar,
-  getDefaultCalendar 
+  getDefaultCalendar,
+  getAllLocalCalendars
 } from '../../core/db/calendars.js';
 import { showNotification } from '../../utils/notifications.js';
 
@@ -29,12 +30,30 @@ export function renderLocalCalendarWizardHTML() {
             </label>
 
             <!-- Option 2: Garden Areas -->
-            <label class="flex items-start space-x-3 p-4 border border-gray-200 dark:border-gray-600 rounded-lg hover:bg-blue-50 dark:hover:bg-blue-900/20 cursor-pointer transition-colors">
+            <label class="flex items-start space-x-3 p-4 border border-gray-200 dark:border-gray-600 rounded-lg hover:bg-blue-50 dark:hover:bg-blue-900/20 cursor-pointer transition-colors relative">
               <input type="radio" name="localCalendarOrganization" value="areas" class="mt-1">
               <div class="flex-1">
                 <div class="font-medium text-gray-900 dark:text-white">🌿 ${t('local.wizard.option_areas')}</div>
                 <div class="text-sm text-gray-600 dark:text-gray-400">${t('local.wizard.option_areas_desc')}</div>
                 <div class="text-xs text-blue-600 dark:text-blue-400 mt-1">${t('local.wizard.option_areas_creates')}</div>
+                <div id="areaCalendarsCheckboxes" class="mt-2 hidden">
+                  <label class="flex items-center gap-2">
+                    <input type="checkbox" class="area-checkbox" value="vegetables" checked>
+                    ${t('plant.category.vegetables')}
+                  </label>
+                  <label class="flex items-center gap-2">
+                    <input type="checkbox" class="area-checkbox" value="herbs" checked>
+                    ${t('plant.category.herbs')}
+                  </label>
+                  <label class="flex items-center gap-2">
+                    <input type="checkbox" class="area-checkbox" value="flowers" checked>
+                    ${t('plant.category.flowers')}
+                  </label>
+                  <label class="flex items-center gap-2">
+                    <input type="checkbox" class="area-checkbox" value="fruits" checked>
+                    ${t('plant.category.fruits')}
+                  </label>
+                </div>
               </div>
             </label>
 
@@ -108,19 +127,25 @@ export function renderLocalCalendarWizardHTML() {
 }
 
 // Setup Local Calendar Wizard Event Listeners
-export function setupLocalCalendarWizardEventListeners() {
+export async function setupLocalCalendarWizardEventListeners() {
   const setupCalendarsBtn = document.getElementById('setupLocalCalendarsBtn');
   const customCalendarsInputSection = document.getElementById('customCalendarsInputSection');
   const addCustomCalendarBtn = document.getElementById('addCustomCalendarBtn');
   const customCalendarNameInput = document.getElementById('customCalendarNameInput');
   const customCalendarIconInput = document.getElementById('customCalendarIconInput');
   const customCalendarsList = document.getElementById('customCalendarsList');
+  const areaCalendarsCheckboxes = document.getElementById('areaCalendarsCheckboxes');
 
   let customCalendars = [];
 
-  // Zeige das Custom-Eingabefeld nur, wenn Option 3 gewählt ist
+  // Zeige die Checkboxen nur, wenn Option 2 gewählt ist
   document.querySelectorAll('input[name="localCalendarOrganization"]').forEach(radio => {
     radio.addEventListener('change', (e) => {
+      if (e.target.value === 'areas') {
+        areaCalendarsCheckboxes.classList.remove('hidden');
+      } else {
+        areaCalendarsCheckboxes.classList.add('hidden');
+      }
       if (e.target.value === 'custom') {
         customCalendarsInputSection.classList.remove('hidden');
       } else {
@@ -168,10 +193,51 @@ export function setupLocalCalendarWizardEventListeners() {
       return;
     }
 
-    // Bei Option 1: Warnung/Bestätigung anzeigen
-    if (selectedOrganization === 'single') {
-      const confirmReset = confirm('Achtung: Alle bisherigen lokalen Kalender werden gelöscht und durch einen neuen Standardkalender ersetzt. Fortfahren?');
-      if (!confirmReset) {
+    // Prüfe, ob schon Kalender existieren - bei ALLEN Optionen
+    const existingCalendars = await getAllLocalCalendars();
+    if (existingCalendars.length > 0) {
+      const organizationType = selectedOrganization === 'single' ? 'einen Standardkalender' : 
+                              selectedOrganization === 'areas' ? 'Bereichskalender' : 'benutzerdefinierte Kalender';
+      
+      // Create warning modal instead of confirm
+      const warningModal = document.createElement('div');
+      warningModal.className = 'fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center p-4 z-50';
+      warningModal.innerHTML = `
+        <div class="bg-white dark:bg-gray-800 rounded-lg p-6 max-w-md w-full">
+          <div class="flex items-center mb-4">
+            <span class="text-2xl mr-3">⚠️</span>
+            <h3 class="text-lg font-semibold dark:text-white">Kalender-Organisation ändern</h3>
+          </div>
+          <p class="text-gray-600 dark:text-gray-400 mb-6">
+            Achtung: Das Setup löscht alle bestehenden lokalen Kalender und richtet ${organizationType} ein.
+          </p>
+          <div class="flex justify-end space-x-3">
+            <button id="cancelWarningBtn" class="px-4 py-2 bg-gray-300 dark:bg-gray-600 text-gray-700 dark:text-gray-200 rounded hover:bg-gray-400 dark:hover:bg-gray-500">
+              Abbrechen
+            </button>
+            <button id="confirmWarningBtn" class="px-4 py-2 bg-red-600 text-white rounded hover:bg-red-700">
+              Fortfahren
+            </button>
+          </div>
+        </div>
+      `;
+      
+      document.body.appendChild(warningModal);
+      
+      // Wait for user decision
+      const userConfirmed = await new Promise((resolve) => {
+        warningModal.querySelector('#cancelWarningBtn').addEventListener('click', () => {
+          warningModal.remove();
+          resolve(false);
+        });
+        
+        warningModal.querySelector('#confirmWarningBtn').addEventListener('click', () => {
+          warningModal.remove();
+          resolve(true);
+        });
+      });
+      
+      if (!userConfirmed) {
         return;
       }
     }
@@ -182,21 +248,31 @@ export function setupLocalCalendarWizardEventListeners() {
       return;
     }
     
+    // Areas: nur ausgewählte Bereiche als Kalender anlegen
+    if (selectedOrganization === 'areas') {
+      const checkedAreas = Array.from(document.querySelectorAll('.area-checkbox:checked')).map(cb => cb.value);
+      if (checkedAreas.length === 0) {
+        showNotification('Bitte mindestens einen Bereich auswählen.', 'warning');
+        return;
+      }
+    }
+    
     setupCalendarsBtn.disabled = true;
     setupCalendarsBtn.textContent = `⏳ ${t('local.wizard.setting_up_calendars')}`;
     
     try {
       await handleLocalCalendarSetup(selectedOrganization, customCalendars);
       
-      const wizardDiv = document.getElementById('localCalendarWizard');
-      if (wizardDiv) {
-        wizardDiv.style.display = 'none';
-      }
-      
       showNotification(t('local.wizard.setup_complete'), 'success');
       
       // Refresh the view
       document.dispatchEvent(new CustomEvent('localCalendarsUpdated'));
+      
+      // Close the entire modal after organization is complete
+      const modal = document.querySelector('.local-calendar-modal');
+      if (modal) {
+        modal.remove();
+      }
       
     } catch (error) {
       console.error('Local calendar setup failed:', error);
@@ -210,14 +286,14 @@ export function setupLocalCalendarWizardEventListeners() {
 
 // Handle local calendar setup based on selected organization
 async function handleLocalCalendarSetup(organizationType, customCalendars = []) {
-  if (organizationType === 'single') {
-    // Alle bestehenden Kalender löschen (Reset)
-    const { getDB } = await import('../../core/db/connection.js');
-    const db = await getDB();
-    const tx = db.transaction('calendars', 'readwrite');
-    await tx.store.clear();
-    await tx.done;
+  // Immer zuerst alle bestehenden Kalender löschen (Reset)
+  const { getDB } = await import('../../core/db/connection.js');
+  const db = await getDB();
+  const tx = db.transaction('calendars', 'readwrite');
+  await tx.store.clear();
+  await tx.done;
 
+  if (organizationType === 'single') {
     // Jetzt Standardkalender anlegen
     await initializeDefaultCalendars();
 
@@ -232,49 +308,51 @@ async function handleLocalCalendarSetup(organizationType, customCalendars = []) 
     return;
   }
 
-  // Initialize default calendars if needed
-  await initializeDefaultCalendars();
-  
-  switch (organizationType) {
-    case 'areas':
-      // Create garden area calendars
-      const areaCalendarIds = await createGardenTemplateCalendars();
-      
-      // Set the first one as default
-      if (areaCalendarIds.length > 0) {
-        localStorage.setItem('selectedLocalCalendarId', areaCalendarIds[0].toString());
-      }
-      
-      // Store all created calendars
-      localStorage.setItem('localCalendars', JSON.stringify({
-        type: 'areas',
-        calendarIds: areaCalendarIds
-      }));
-      break;
-    
-    case 'custom':
-      // Erstelle alle benutzerdefinierten Kalender
-      const customCalendarIds = [];
-      for (const customCalendar of customCalendars) {
-        const calendarId = await createLocalCalendar(customCalendar);
-        customCalendarIds.push(calendarId);
-      }
-      
-      // Setze den ersten als aktiv
-      if (customCalendarIds.length > 0) {
-        localStorage.setItem('selectedLocalCalendarId', customCalendarIds[0].toString());
-      }
-      
-      // Speichere alle Kalender
-      localStorage.setItem('localCalendars', JSON.stringify({
-        type: 'custom',
-        calendarIds: customCalendarIds
-      }));
-      break;
-    
-    default:
-      throw new Error('Invalid organization type');
+  if (organizationType === 'areas') {
+    // Nur ausgewählte Bereiche als Kalender anlegen
+    const checkedAreas = Array.from(document.querySelectorAll('.area-checkbox:checked')).map(cb => cb.value);
+    const areaTemplates = [
+      { key: 'vegetables', name: t('plant.category.vegetables'), icon: '🥕' },
+      { key: 'herbs', name: t('plant.category.herbs'), icon: '🌿' },
+      { key: 'flowers', name: t('plant.category.flowers'), icon: '🌸' },
+      { key: 'fruits', name: t('plant.category.fruits'), icon: '🍓' }
+    ];
+    const selectedTemplates = areaTemplates.filter(tpl => checkedAreas.includes(tpl.key));
+    const areaCalendarIds = [];
+    for (const tpl of selectedTemplates) {
+      const calendarId = await createLocalCalendar({ name: tpl.name, icon: tpl.icon });
+      areaCalendarIds.push(calendarId);
+    }
+    if (areaCalendarIds.length > 0) {
+      localStorage.setItem('selectedLocalCalendarId', areaCalendarIds[0].toString());
+    }
+    localStorage.setItem('localCalendars', JSON.stringify({
+      type: 'areas',
+      calendarIds: areaCalendarIds
+    }));
+    return;
   }
+
+  if (organizationType === 'custom') {
+    // Erstelle alle benutzerdefinierten Kalender
+    const customCalendarIds = [];
+    for (const customCalendar of customCalendars) {
+      const calendarId = await createLocalCalendar(customCalendar);
+      customCalendarIds.push(calendarId);
+    }
+    // Setze den ersten als aktiv
+    if (customCalendarIds.length > 0) {
+      localStorage.setItem('selectedLocalCalendarId', customCalendarIds[0].toString());
+    }
+    // Speichere alle Kalender
+    localStorage.setItem('localCalendars', JSON.stringify({
+      type: 'custom',
+      calendarIds: customCalendarIds
+    }));
+    return;
+  }
+
+  throw new Error('Invalid organization type');
 }
 
 export default {

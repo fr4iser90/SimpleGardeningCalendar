@@ -9,6 +9,7 @@ import { initializeDefaultCalendars } from '../../core/db/calendars.js';
 import { initializeGoogleStatusBar } from '../app/GoogleStatusBar.js';
 import { initializeLocalCalendarStatusBar } from '../app/LocalCalendarStatusBar.js';
 import { initializeCalendarSwitch } from '../ui/CalendarSwitch.js';
+import { DB_NAME, DB_VERSION } from '../../core/db/connection.js';
 
 let calendar;
 
@@ -42,9 +43,11 @@ export async function initializeCalendar() {
     },
     events: async function(fetchInfo, successCallback, failureCallback) {
       try {
-        const db = await openDB('gardening-calendar', 6);
+        const db = await openDB(DB_NAME, DB_VERSION);
         const events = await db.getAll('events');
-        const formattedEvents = events.map(event => ({
+        const selectedCalendarId = localStorage.getItem('selectedLocalCalendarId');
+        const filteredEvents = events.filter(event => !selectedCalendarId || event.calendarId == selectedCalendarId);
+        const formattedEvents = filteredEvents.map(event => ({
           id: event.id,
           title: event.title,
           start: event.date,

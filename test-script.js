@@ -1,6 +1,8 @@
 // 🧪 Automatisches Test-Script für SimpleGardeningCalendar
 // Einfach in Browser Console eingeben oder als Datei ausführen
 
+import { DB_NAME, DB_VERSION } from './src/core/db/connection.js';
+
 class GardeningCalendarTester {
   constructor() {
     this.results = {
@@ -45,7 +47,7 @@ class GardeningCalendarTester {
     
     try {
       const { openDB } = await import('idb');
-      const db = await openDB('gardening-calendar', 5);
+      const db = await openDB(DB_NAME, DB_VERSION);
       
       // Test alle Stores
       const stores = ['events', 'plantings', 'plantNotes'];

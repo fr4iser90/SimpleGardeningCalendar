@@ -195,9 +195,18 @@ export const en = {
   'settings.import': 'Import Data',
   
   // Calendar Names
-  'calendar.garden': 'Garden',
+  'calendar.garden': 'Garden Calendar',
   'calendar.gardening': 'Gardening',
   'calendar.complete': 'Complete',
+  'calendar.garden_description': 'Main calendar for all garden events',
+  'calendar.vegetables': 'Vegetable Garden',
+  'calendar.vegetables_description': 'Calendar for vegetables and salads',
+  'calendar.herbs': 'Herb Garden',
+  'calendar.herbs_description': 'Calendar for herbs and spices',
+  'calendar.ornamental': 'Ornamental Garden',
+  'calendar.ornamental_description': 'Calendar for flowers and ornamental plants',
+  'calendar.fruits': 'Fruit Garden',
+  'calendar.fruits_description': 'Calendar for fruit trees and berries',
   
   // Common
   'common.loading': 'Loading...',
@@ -424,4 +433,30 @@ export const en = {
   'plants.save_note': 'Save Note',
   'plants.delete_confirm': 'Delete Plant & All Events',
   'plants.no_category_plants': 'No {category} plants yet.',
+
+  // Local Calendar Wizard
+  'local.wizard.title': 'Local Calendar Organization',
+  'local.wizard.organize_question': 'How do you want to organize your garden events?',
+  'local.wizard.option_single': 'One "Garden Calendar"',
+  'local.wizard.option_single_desc': 'Recommended for beginners - all events in one calendar',
+  'local.wizard.option_areas': 'Separate by garden area',
+  'local.wizard.option_areas_desc': 'Advanced - separate calendars for different garden areas',
+  'local.wizard.option_areas_creates': 'Creates: Vegetable, Herb, Ornamental, Fruit Garden',
+  'local.wizard.option_custom': 'Custom calendars',
+  'local.wizard.option_custom_desc': 'Expert - create your own calendars',
+  'local.wizard.option_custom_creates': 'Creates: Test Garden, Indoor Garden, Balcony Garden',
+  'local.wizard.setup_button': 'Setup Calendars',
+  'local.wizard.setting_up_calendars': 'Setting up calendars...',
+  'local.wizard.setup_complete': '✅ Calendar setup complete!',
+  'local.wizard.setup_failed': '❌ Setup failed',
+  'local.wizard.select_option': 'Please select an option',
+
+  // Local Calendar Status
+  'local.status.active': 'Active',
+  'local.status.manage': 'Manage calendars',
+  'local.status.setup': 'Setup local calendars',
+  'local.status.switched': 'Switched to calendar: {name}',
+  'local.status.switch_error': 'Failed to switch calendar',
+  'local.status.load_error': 'Failed to load',
+  'local.status.setup_title': '🗓️ Setup local calendars',
 }; 

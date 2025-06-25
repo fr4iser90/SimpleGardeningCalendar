@@ -194,9 +194,18 @@ export const fr = {
   'settings.import': 'Importer Données',
   
   // Calendar Names
-  'calendar.garden': 'Jardin',
+  'calendar.garden': 'Calendrier de Jardin',
   'calendar.gardening': 'Jardinage',
   'calendar.complete': 'Complet',
+  'calendar.garden_description': 'Calendrier principal pour tous les événements de jardin',
+  'calendar.vegetables': 'Jardin de Légumes',
+  'calendar.vegetables_description': 'Calendrier pour les légumes et salades',
+  'calendar.herbs': 'Jardin d\'Herbes',
+  'calendar.herbs_description': 'Calendrier pour les herbes et épices',
+  'calendar.ornamental': 'Jardin d\'Ornement',
+  'calendar.ornamental_description': 'Calendrier pour les fleurs et plantes ornementales',
+  'calendar.fruits': 'Jardin de Fruits',
+  'calendar.fruits_description': 'Calendrier pour les arbres fruitiers et baies',
   
   // Common
   'common.loading': 'Chargement...',
@@ -404,5 +413,31 @@ export const fr = {
   'plant_library.no_phases': 'Aucune information de phase disponible',
   'plant_library.no_care_tips': 'Aucun conseil de soin disponible',
   'plant_library.common_problems': 'Problèmes Courants',
-  'plant_library.start_growing': 'Commencer à cultiver cette plante'
+  'plant_library.start_growing': 'Commencer à cultiver cette plante',
+
+  // Local Calendar Wizard
+  'local.wizard.title': 'Organisation du calendrier local',
+  'local.wizard.organize_question': 'Comment souhaitez-vous organiser vos événements de jardin ?',
+  'local.wizard.option_single': 'Un "Calendrier de Jardin"',
+  'local.wizard.option_single_desc': 'Recommandé pour les débutants - tous les événements dans un seul calendrier',
+  'local.wizard.option_areas': 'Séparer par zone de jardin',
+  'local.wizard.option_areas_desc': 'Avancé - calendriers séparés pour différentes zones du jardin',
+  'local.wizard.option_areas_creates': 'Crée : Potager, Jardin d’herbes, Jardin d’ornement, Verger',
+  'local.wizard.option_custom': 'Calendriers personnalisés',
+  'local.wizard.option_custom_desc': 'Expert - créez vos propres calendriers',
+  'local.wizard.option_custom_creates': 'Crée : Jardin Test, Jardin Intérieur, Jardin Balcon',
+  'local.wizard.setup_button': 'Configurer les calendriers',
+  'local.wizard.setting_up_calendars': 'Configuration des calendriers...',
+  'local.wizard.setup_complete': '✅ Configuration des calendriers terminée !',
+  'local.wizard.setup_failed': '❌ Échec de la configuration',
+  'local.wizard.select_option': 'Veuillez sélectionner une option',
+
+  // Local Calendar Status
+  'local.status.active': 'Actif',
+  'local.status.manage': 'Gérer les calendriers',
+  'local.status.setup': 'Configurer les calendriers locaux',
+  'local.status.switched': 'Changé pour le calendrier : {name}',
+  'local.status.switch_error': 'Erreur lors du changement de calendrier',
+  'local.status.load_error': 'Erreur de chargement',
+  'local.status.setup_title': '🗓️ Configurer les calendriers locaux',
 }; 

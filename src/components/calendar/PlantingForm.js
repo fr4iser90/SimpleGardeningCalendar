@@ -105,7 +105,7 @@ export function createPlantingForm(date, preselectedPlant = null) {
         <!-- Left Column -->
         <div class="space-y-3">
           <div class="flex items-center">
-            <input type="checkbox" id="enableWatering" name="enableWatering" checked class="mr-2">
+            <input type="checkbox" id="enableWatering" name="enableWatering" class="mr-2">
             <label for="enableWatering" class="text-sm dark:text-gray-200">${t('modal.reminders.watering')}</label>
           </div>
           <div id="wateringOptions" class="ml-6 space-y-2">
@@ -122,7 +122,7 @@ export function createPlantingForm(date, preselectedPlant = null) {
           </div>
           
           <div class="flex items-center">
-            <input type="checkbox" id="enableFertilizing" name="enableFertilizing" checked class="mr-2">
+            <input type="checkbox" id="enableFertilizing" name="enableFertilizing" class="mr-2">
             <label for="enableFertilizing" class="text-sm dark:text-gray-200">${t('modal.reminders.fertilizing')}</label>
           </div>
           <div id="fertilizingOptions" class="ml-6 space-y-2">
@@ -149,22 +149,22 @@ export function createPlantingForm(date, preselectedPlant = null) {
         <!-- Right Column -->
         <div class="space-y-3">
           <div class="flex items-center">
-            <input type="checkbox" id="enablePhaseReminders" name="enablePhaseReminders" checked class="mr-2">
+            <input type="checkbox" id="enablePhaseReminders" name="enablePhaseReminders" class="mr-2">
             <label for="enablePhaseReminders" class="text-sm dark:text-gray-200">${t('modal.reminders.phase_transitions')}</label>
           </div>
           
           <div class="flex items-center">
-            <input type="checkbox" id="enableWeeklyChecks" name="enableWeeklyChecks" checked class="mr-2">
+            <input type="checkbox" id="enableWeeklyChecks" name="enableWeeklyChecks" class="mr-2">
             <label for="enableWeeklyChecks" class="text-sm dark:text-gray-200">${t('modal.reminders.weekly_checks')}</label>
           </div>
           
           <div class="flex items-center">
-            <input type="checkbox" id="enableHarvestReminder" name="enableHarvestReminder" checked class="mr-2">
+            <input type="checkbox" id="enableHarvestReminder" name="enableHarvestReminder" class="mr-2">
             <label for="enableHarvestReminder" class="text-sm dark:text-gray-200">${t('modal.reminders.harvest')}</label>
           </div>
           
           <div class="flex items-center">
-            <input type="checkbox" id="enableGoogleCalendarSync" name="enableGoogleCalendarSync" checked class="mr-2">
+            <input type="checkbox" id="enableGoogleCalendarSync" name="enableGoogleCalendarSync" class="mr-2">
             <label for="enableGoogleCalendarSync" class="text-sm dark:text-gray-200">${t('modal.reminders.google_sync')}</label>
           </div>
         </div>
@@ -216,6 +216,58 @@ function initializePlantingFormHandlers(formContainer) {
   const enableFertilizing = formContainer.querySelector('#enableFertilizing');
   const wateringOptions = formContainer.querySelector('#wateringOptions');
   const fertilizingOptions = formContainer.querySelector('#fertilizingOptions');
+
+  // Load default settings from localStorage
+  const settings = JSON.parse(localStorage.getItem('localCalendarSettings') || '{}');
+  
+  // Set default values for checkboxes
+  if (enableWatering) {
+    enableWatering.checked = settings.defaultWateringReminders !== false;
+    wateringOptions.style.display = enableWatering.checked ? 'block' : 'none';
+  }
+  
+  if (enableFertilizing) {
+    enableFertilizing.checked = settings.defaultFertilizingReminders !== false;
+    fertilizingOptions.style.display = enableFertilizing.checked ? 'block' : 'none';
+  }
+  
+  // Set other default checkboxes
+  const enablePhaseReminders = formContainer.querySelector('#enablePhaseReminders');
+  if (enablePhaseReminders) {
+    enablePhaseReminders.checked = settings.defaultPhaseReminders !== false;
+  }
+  
+  const enableWeeklyChecks = formContainer.querySelector('#enableWeeklyChecks');
+  if (enableWeeklyChecks) {
+    enableWeeklyChecks.checked = settings.defaultWeeklyChecks !== false;
+  }
+  
+  const enableHarvestReminder = formContainer.querySelector('#enableHarvestReminder');
+  if (enableHarvestReminder) {
+    enableHarvestReminder.checked = settings.defaultHarvestReminders !== false;
+  }
+  
+  // Google Sync is always enabled by default (can be changed per planting)
+  const enableGoogleCalendarSync = formContainer.querySelector('#enableGoogleCalendarSync');
+  if (enableGoogleCalendarSync) {
+    enableGoogleCalendarSync.checked = true;
+  }
+  
+  // Set default intervals
+  const wateringIntervalSelect = formContainer.querySelector('select[name="wateringInterval"]');
+  if (wateringIntervalSelect) {
+    wateringIntervalSelect.value = settings.defaultWateringInterval || '3';
+  }
+  
+  const fertilizingIntervalSelect = formContainer.querySelector('select[name="fertilizingInterval"]');
+  if (fertilizingIntervalSelect) {
+    fertilizingIntervalSelect.value = settings.defaultFertilizingInterval || '14';
+  }
+  
+  const fertilizingDelaySelect = formContainer.querySelector('select[name="fertilizingDelay"]');
+  if (fertilizingDelaySelect) {
+    fertilizingDelaySelect.value = settings.defaultFertilizingDelay || '7';
+  }
 
   // Add event listeners
   environmentSelect?.addEventListener('change', function() {

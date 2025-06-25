@@ -1,6 +1,9 @@
 // PlantsList.js
 // Plant management and display component
 
+import { openDB } from 'idb';
+import { DB_NAME, DB_VERSION } from '../../core/db/connection.js';
+
 export async function showMyPlantsModal() {
   const { getActivePlantings } = await import('../../core/db/index.js');
   const plantings = await getActivePlantings();
@@ -85,7 +88,7 @@ export async function deletePlant(plantingId) {
     // Open database with error handling
     let db;
     try {
-      db = await openDB('gardening-calendar');
+      db = await openDB(DB_NAME, DB_VERSION);
     } catch (error) {
       console.error('Could not open database:', error);
       alert('❌ Database connection failed. Please refresh the page and try again.');
@@ -157,10 +160,9 @@ export async function deletePlant(plantingId) {
     // Step 3: Delete the plant itself
     try {
       await db.delete('plantings', plantingId);
+      console.log('✅ Planting deleted successfully');
     } catch (error) {
-      console.error('Could not delete planting:', error);
-      alert('❌ Failed to delete plant. Please try again.');
-      return;
+      console.warn('Could not delete planting:', error);
     }
     
     // Close modal and refresh UI
@@ -450,3 +452,24 @@ window.showMyPlantsModal = showMyPlantsModal;
 window.deletePlant = deletePlant;
 window.viewPlantDetails = viewPlantDetails;
 window.addPlantNoteQuick = addPlantNoteQuick;
+
+// Update plant status
+export async function updatePlantStatus(plantingId, newStatus) {
+  try {
+    const db = await openDB(DB_NAME, DB_VERSION);
+    const planting = await db.get('plantings', plantingId);
+    
+    if (planting) {
+      planting.status = newStatus;
+      await db.put('plantings', planting);
+      
+      // Refresh the plants list
+      await loadPlantsList();
+      
+      showNotification(`Plant status updated to ${newStatus}`, 'success');
+    }
+  } catch (error) {
+    console.error('Error updating plant status:', error);
+    showNotification('Failed to update plant status', 'error');
+  }
+}

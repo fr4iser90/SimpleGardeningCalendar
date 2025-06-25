@@ -2,6 +2,7 @@ import { format } from 'date-fns';
 import { openDB } from 'idb';
 import { t } from '../../core/i18n/index.js';
 import { getPlantNotes, addPlantNote, updatePlantingStatus } from '../../core/db/index.js';
+import { DB_NAME, DB_VERSION } from '../../core/db/connection.js';
 
 export async function showEventDetails(event) {
   const modal = document.createElement('div');
@@ -33,7 +34,7 @@ export async function showEventDetails(event) {
       </div>
     `;
 
-    const db = await openDB('gardening-calendar');
+    const db = await openDB(DB_NAME, DB_VERSION);
     const planting = await db.get('plantings', event.extendedProps.plantingId);
     if (planting) {
       const displayName = planting.displayName || planting.plantName;
@@ -132,7 +133,7 @@ export async function deleteEvent(eventId, plantingId) {
   }
 
   try {
-    const db = await openDB('gardening-calendar');
+    const db = await openDB(DB_NAME, DB_VERSION);
     
     if (plantingId) {
       // Delete all events related to this planting
