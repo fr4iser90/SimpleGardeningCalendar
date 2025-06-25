@@ -104,7 +104,7 @@ export function updateGoogleCalendarStatus() {
       ` : ''}
     `;
   } else if (hasSavedCredentials && !isCurrentlySignedIn) {
-    console.log('📊 Status Bar: Showing RECONNECT NEEDED');
+    console.log('📊 Google Status Bar: Showing RECONNECT NEEDED');
     statusDisplay.innerHTML = `
       <span class="text-yellow-600 dark:text-yellow-400 flex items-center">
         <i class="fas fa-link mr-1"></i>${t('google.reconnect_needed')}
@@ -114,7 +114,7 @@ export function updateGoogleCalendarStatus() {
       </button>
     `;
   } else {
-    console.log('📊 Status Bar: Showing NOT CONNECTED');
+    console.log('📊 Google Status Bar: Showing NOT CONNECTED');
     statusDisplay.innerHTML = `
       <button
         class="text-red-600 dark:text-red-400 flex items-center hover:underline focus:outline-none"
@@ -205,7 +205,7 @@ export function initializeGoogleStatusBar() {
   
   // Listen for Google Calendar status changes
   document.addEventListener('googleCalendarStatusChanged', () => {
-    console.log('📊 Status Bar: Received googleCalendarStatusChanged event');
+    console.log('📊 Google Status Bar: Received googleCalendarStatusChanged event');
     updateGoogleCalendarStatus();
   });
 

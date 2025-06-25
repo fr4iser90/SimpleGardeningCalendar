@@ -1,6 +1,7 @@
 // Main Calendar Module - Now using modular components
 import { initializeCalendar } from './components/calendar/CalendarView.js';
 import { createCalendarControls } from './components/calendar/CalendarActions.js';
+import { initializeLocalCalendarStatusBar } from './components/app/LocalCalendarStatusBar.js';
 
 export async function initializeCalendarApp() {
   const calendarEl = document.getElementById('calendar');
@@ -15,6 +16,7 @@ export async function initializeCalendarApp() {
   if (window.updateGoogleCalendarStatus) {
     window.updateGoogleCalendarStatus();
   }
+  initializeLocalCalendarStatusBar();
 
   return calendar;
 }

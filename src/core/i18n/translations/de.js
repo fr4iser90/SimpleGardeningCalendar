@@ -429,4 +429,30 @@ export const de = {
   'plants.save_note': 'Notiz speichern',
   'plants.delete_confirm': 'Pflanze & alle Termine löschen',
   'plants.no_category_plants': 'Keine {category} Pflanzen vorhanden.',
+
+  // Local Calendar Wizard
+  'local.wizard.title': 'Lokale Kalender-Organisation',
+  'local.wizard.organize_question': 'Wie möchten Sie Ihre Garten-Events organisieren?',
+  'local.wizard.option_single': 'Ein "Garten Kalender"',
+  'local.wizard.option_single_desc': 'Empfohlen für Anfänger - alle Events in einem Kalender',
+  'local.wizard.option_areas': 'Nach Gartenbereichen trennen',
+  'local.wizard.option_areas_desc': 'Fortgeschrittene - separate Kalender für verschiedene Gartenbereiche',
+  'local.wizard.option_areas_creates': 'Erstellt: Gemüse, Kräuter, Ziergarten, Obstgarten',
+  'local.wizard.option_custom': 'Benutzerdefinierte Kalender',
+  'local.wizard.option_custom_desc': 'Experten - erstellen Sie Ihre eigenen Kalender',
+  'local.wizard.option_custom_creates': 'Erstellt: Test Garten, Indoor Garten, Balkon Garten',
+  'local.wizard.setup_button': 'Kalender einrichten',
+  'local.wizard.setting_up_calendars': 'Richte Kalender ein...',
+  'local.wizard.setup_complete': '✅ Kalender-Einrichtung abgeschlossen!',
+  'local.wizard.setup_failed': '❌ Einrichtung fehlgeschlagen',
+  'local.wizard.select_option': 'Bitte wählen Sie eine Option aus',
+
+  // Local Calendar Status Bar
+  'local.status.setup': 'Lokale Kalender einrichten',
+  'local.status.active': 'Aktiv',
+  'local.status.manage': 'Kalender verwalten',
+  'local.status.switched': 'Zu Kalender gewechselt: {name}',
+  'local.status.switch_error': 'Fehler beim Wechseln des Kalenders',
+  'local.status.load_error': 'Fehler beim Laden',
+  'local.status.setup_title': '🗓️ Lokale Kalender einrichten',
 }; 

@@ -5,13 +5,18 @@ import { openDB } from 'idb';
 import { getEventColor } from '../../utils/eventUtils.js';
 import { t, updateUITranslations } from '../../core/i18n/index.js';
 import { initializeDB } from '../../core/db/index.js';
+import { initializeDefaultCalendars } from '../../core/db/calendars.js';
 import { initializeGoogleStatusBar } from '../app/GoogleStatusBar.js';
+import { initializeLocalCalendarStatusBar } from '../app/LocalCalendarStatusBar.js';
 import { initializeCalendarSwitch } from '../ui/CalendarSwitch.js';
 
 let calendar;
 
 export async function initializeCalendar() {
   await initializeDB();
+  
+  // Initialize default local calendars
+  await initializeDefaultCalendars();
   
   const calendarEl = document.getElementById('calendar');
   
@@ -37,7 +42,7 @@ export async function initializeCalendar() {
     },
     events: async function(fetchInfo, successCallback, failureCallback) {
       try {
-        const db = await openDB('gardening-calendar', 5);
+        const db = await openDB('gardening-calendar', 6);
         const events = await db.getAll('events');
         const formattedEvents = events.map(event => ({
           id: event.id,
@@ -54,7 +59,8 @@ export async function initializeCalendar() {
             templateCategory: event.templateCategory,
             templateName: event.templateName,
             language: event.language,
-            isTemplate: event.isTemplate
+            isTemplate: event.isTemplate,
+            calendarId: event.calendarId
           }
         }));
         successCallback(formattedEvents);
@@ -70,8 +76,9 @@ export async function initializeCalendar() {
   // Make calendar globally available for other modules
   window.calendar = calendar;
   
-  // Initialize Google Calendar status bar and calendar switching
+  // Initialize Google Calendar status bar und calendar switching
   initializeGoogleStatusBar();
+  // initializeLocalCalendarStatusBar(); // Entfernt, wird jetzt in calendar.js nach createCalendarControls() aufgerufen
   initializeCalendarSwitch();
   
   // Listen for custom events from the app

@@ -7,7 +7,7 @@ import { openDB } from 'idb';
 
 // Database Configuration
 export const DB_NAME = 'gardening-calendar';
-export const DB_VERSION = 5;
+export const DB_VERSION = 6;
 
 // Growing Environment Constants
 export const GROWING_ENVIRONMENTS = {
@@ -103,6 +103,42 @@ export async function initializeDB() {
             store.createIndex('customName', 'customName');
           }
         }
+      }
+
+      // Version 6: Add calendar index to events and plantings
+      if (oldVersion < 6) {
+        if (db.objectStoreNames.contains('events')) {
+          const eventsStore = transaction.objectStore('events');
+          if (!eventsStore.indexNames.contains('calendarId')) {
+            eventsStore.createIndex('calendarId', 'calendarId');
+          }
+        }
+        if (db.objectStoreNames.contains('plantings')) {
+          const plantingsStore = transaction.objectStore('plantings');
+          if (!plantingsStore.indexNames.contains('calendarId')) {
+            plantingsStore.createIndex('calendarId', 'calendarId');
+          }
+        }
+      }
+
+      // Create notes store
+      if (!db.objectStoreNames.contains('notes')) {
+        const notesStore = db.createObjectStore('notes', { keyPath: 'id', autoIncrement: true });
+        notesStore.createIndex('plantingId', 'plantingId');
+        notesStore.createIndex('date', 'date');
+      }
+
+      // Create calendars store
+      if (!db.objectStoreNames.contains('calendars')) {
+        const calendarsStore = db.createObjectStore('calendars', { keyPath: 'id', autoIncrement: true });
+        calendarsStore.createIndex('name', 'name');
+        calendarsStore.createIndex('type', 'type');
+        calendarsStore.createIndex('isDefault', 'isDefault');
+      }
+
+      // Create settings store
+      if (!db.objectStoreNames.contains('settings')) {
+        const settingsStore = db.createObjectStore('settings', { keyPath: 'key' });
       }
     }
   });

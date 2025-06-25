@@ -72,11 +72,22 @@ export function createCalendarControls(calendarEl) {
   
   controls.appendChild(buttonGroup);
 
-  // Google Calendar status display immer darunter, mit Abstand
+  // Statusleisten-Container für vertikale Anordnung
+  const statusBarContainer = document.createElement('div');
+  statusBarContainer.className = 'w-full flex flex-col gap-1 mt-3';
+
   const googleCalendarStatus = document.createElement('div');
   googleCalendarStatus.id = 'googleCalendarStatusDisplay';
-  googleCalendarStatus.className = 'mt-3 text-sm text-gray-600 dark:text-gray-400 flex items-center';
-  controls.appendChild(googleCalendarStatus);
+  googleCalendarStatus.className = 'text-sm text-gray-600 dark:text-gray-400 flex items-center';
+
+  const localCalendarStatus = document.createElement('div');
+  localCalendarStatus.id = 'localCalendarStatusDisplay';
+  localCalendarStatus.className = 'text-sm text-gray-600 dark:text-gray-400 flex items-center';
+
+  statusBarContainer.appendChild(googleCalendarStatus);
+  statusBarContainer.appendChild(localCalendarStatus);
+
+  controls.appendChild(statusBarContainer);
   
   calendarEl.parentNode.insertBefore(controls, calendarEl);
 
