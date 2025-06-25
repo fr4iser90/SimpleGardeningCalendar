@@ -33,6 +33,21 @@ export const de = {
   
   // Add Event Modal
   'modal.add_event.title': 'Gartenereignis hinzufügen',
+  
+  // Clear Data Modal
+  'modal.clear_data.title': 'Kalender leeren',
+  'modal.clear_data.warning': 'Diese Aktion wird dauerhaft löschen:',
+  'modal.clear_data.delete_events': 'Alle Kalenderereignisse',
+  'modal.clear_data.delete_plantings': 'Alle Pflanzungen und deren Daten',
+  'modal.clear_data.delete_notes': 'Alle Pflanznotizen',
+  'modal.clear_data.delete_tracking': 'Alle Wachstumsverfolgungsinformationen',
+  'modal.clear_data.irreversible': 'Diese Aktion kann nicht rückgängig gemacht werden!',
+  'modal.clear_data.confirm_understanding': 'Ich verstehe, dass dies alle meine Gartendaten löscht',
+  'modal.clear_data.clear_button': 'Alle Daten löschen',
+  'modal.clear_data.confirm_alert': 'Bitte bestätigen Sie, dass Sie verstehen, dass diese Aktion alle Daten löscht.',
+  'modal.clear_data.clearing': 'Lösche...',
+  'modal.clear_data.success_message': 'Kalender erfolgreich geleert',
+  'modal.clear_data.error_message': 'Fehler beim Leeren des Kalenders',
   'modal.event_type.label': 'Ereignistyp',
   'modal.event_type.custom': 'Benutzerdefiniertes Ereignis',
   'modal.event_type.planting': 'Pflanzung beginnen',

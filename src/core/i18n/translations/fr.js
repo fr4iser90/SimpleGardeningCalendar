@@ -32,6 +32,21 @@ export const fr = {
   
   // Add Event Modal
   'modal.add_event.title': 'Ajouter Événement de Jardin',
+  
+  // Clear Data Modal
+  'modal.clear_data.title': 'Vider le Calendrier',
+  'modal.clear_data.warning': 'Cette action supprimera définitivement :',
+  'modal.clear_data.delete_events': 'Tous les événements du calendrier',
+  'modal.clear_data.delete_plantings': 'Toutes les plantations et leurs données',
+  'modal.clear_data.delete_notes': 'Toutes les notes sur les plantes',
+  'modal.clear_data.delete_tracking': 'Toutes les informations de suivi de croissance',
+  'modal.clear_data.irreversible': 'Cette action ne peut pas être annulée !',
+  'modal.clear_data.confirm_understanding': 'Je comprends que cela supprimera toutes mes données de jardin',
+  'modal.clear_data.clear_button': 'Effacer Toutes les Données',
+  'modal.clear_data.confirm_alert': 'Veuillez confirmer que vous comprenez que cette action supprimera toutes les données.',
+  'modal.clear_data.clearing': 'Effacement...',
+  'modal.clear_data.success_message': 'Calendrier vidé avec succès',
+  'modal.clear_data.error_message': 'Échec de la vidange du calendrier',
   'modal.event_type.label': 'Type d\'Événement',
   'modal.event_type.custom': 'Événement Personnalisé',
   'modal.event_type.planting': 'Commencer Plantation',
@@ -446,4 +461,4 @@ export const fr = {
   'google.calendar.name': 'Google Calendar',
   'google.calendar.fallback_name': 'Calendrier de Jardin',
   'google.status.manage_integration': 'Gérer l\'Intégration',
-}; 
+};

@@ -33,6 +33,21 @@ export const en = {
   
   // Add Event Modal
   'modal.add_event.title': 'Add Garden Event',
+  
+  // Clear Data Modal
+  'modal.clear_data.title': 'Clear Calendar',
+  'modal.clear_data.warning': 'This action will permanently delete:',
+  'modal.clear_data.delete_events': 'All calendar events',
+  'modal.clear_data.delete_plantings': 'All plantings and their data',
+  'modal.clear_data.delete_notes': 'All plant notes',
+  'modal.clear_data.delete_tracking': 'All growth tracking information',
+  'modal.clear_data.irreversible': 'This action cannot be undone!',
+  'modal.clear_data.confirm_understanding': 'I understand this will delete all my garden data',
+  'modal.clear_data.clear_button': 'Clear All Data',
+  'modal.clear_data.confirm_alert': 'Please confirm that you understand this action will delete all data.',
+  'modal.clear_data.clearing': 'Clearing...',
+  'modal.clear_data.success_message': 'Calendar cleared successfully',
+  'modal.clear_data.error_message': 'Failed to clear calendar',
   'modal.event_type.label': 'Event Type',
   'modal.event_type.custom': 'Custom Event',
   'modal.event_type.planting': 'Start Planting',
@@ -465,4 +480,4 @@ export const en = {
   // Google Calendar Status Bar
   'google.calendar.name': 'Google Calendar',
   'google.calendar.fallback_name': 'Garden Calendar',
-}; 
+};

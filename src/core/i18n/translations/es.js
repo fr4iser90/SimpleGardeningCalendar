@@ -33,6 +33,21 @@ export const es = {
   
   // Add Event Modal
   'modal.add_event.title': 'Agregar Evento de Jardín',
+  
+  // Clear Data Modal
+  'modal.clear_data.title': 'Limpiar Calendario',
+  'modal.clear_data.warning': 'Esta acción eliminará permanentemente:',
+  'modal.clear_data.delete_events': 'Todos los eventos del calendario',
+  'modal.clear_data.delete_plantings': 'Todas las plantaciones y sus datos',
+  'modal.clear_data.delete_notes': 'Todas las notas de plantas',
+  'modal.clear_data.delete_tracking': 'Toda la información de seguimiento de crecimiento',
+  'modal.clear_data.irreversible': '¡Esta acción no se puede deshacer!',
+  'modal.clear_data.confirm_understanding': 'Entiendo que esto eliminará todos mis datos de jardín',
+  'modal.clear_data.clear_button': 'Limpiar Todos los Datos',
+  'modal.clear_data.confirm_alert': 'Por favor, confirme que entiende que esta acción eliminará todos los datos.',
+  'modal.clear_data.clearing': 'Limpiando...',
+  'modal.clear_data.success_message': 'Calendario limpiado con éxito',
+  'modal.clear_data.error_message': 'Error al limpiar el calendario',
   'modal.event_type.label': 'Tipo de Evento',
   'modal.event_type.custom': 'Evento Personalizado',
   'modal.event_type.planting': 'Comenzar Plantación',
@@ -467,4 +482,4 @@ export const es = {
   'google.calendar.name': 'Google Calendar',
   'google.calendar.fallback_name': 'Calendario de Jardín',
   'google.status.manage_integration': 'Gestionar Integración',
-}; 
+};

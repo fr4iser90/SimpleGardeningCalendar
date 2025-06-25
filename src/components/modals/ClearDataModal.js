@@ -1,6 +1,7 @@
 import { openDB } from 'idb';
 import { showButtonSpinner, hideButtonSpinner } from '../ui/LoadingSpinner.js';
 import { DB_NAME, DB_VERSION } from '../../core/db/connection.js';
+import { t } from '../../core/i18n/index.js';
 
 export function showClearCalendarModal() {
   const modal = document.createElement('div');
@@ -9,7 +10,7 @@ export function showClearCalendarModal() {
     <div class="bg-white dark:bg-gray-800 rounded-lg p-6 w-full max-w-md mx-4">
       <div class="flex justify-between items-center mb-4">
         <h2 class="text-xl font-bold text-red-600 dark:text-red-400">
-          <i class="fas fa-exclamation-triangle mr-2"></i>Clear Calendar
+          <i class="fas fa-exclamation-triangle mr-2"></i>${t('modal.clear_data.title')}
         </h2>
         <button onclick="this.closest('.fixed').remove()" class="text-gray-500 hover:text-gray-700 dark:text-gray-400 dark:hover:text-gray-200">
           <i class="fas fa-times text-xl"></i>
@@ -17,31 +18,31 @@ export function showClearCalendarModal() {
       </div>
       
       <div class="mb-6 text-gray-700 dark:text-gray-300">
-        <p class="mb-3">⚠️ <strong>Warning:</strong> This action will permanently delete:</p>
+        <p class="mb-3">⚠️ <strong>${t('common.warning')}:</strong> ${t('modal.clear_data.warning')}</p>
         <ul class="list-disc list-inside space-y-1 text-sm">
-          <li>All calendar events</li>
-          <li>All plantings and their data</li>
-          <li>All plant notes</li>
-          <li>All growth tracking information</li>
+          <li>${t('modal.clear_data.delete_events')}</li>
+          <li>${t('modal.clear_data.delete_plantings')}</li>
+          <li>${t('modal.clear_data.delete_notes')}</li>
+          <li>${t('modal.clear_data.delete_tracking')}</li>
         </ul>
         <p class="mt-3 text-sm text-red-600 dark:text-red-400">
-          <strong>This action cannot be undone!</strong>
+          <strong>${t('modal.clear_data.irreversible')}</strong>
         </p>
       </div>
       
       <div class="mb-4">
         <label class="flex items-center">
           <input type="checkbox" id="confirmClear" class="mr-2">
-          <span class="text-sm dark:text-gray-300">I understand this will delete all my garden data</span>
+          <span class="text-sm dark:text-gray-300">${t('modal.clear_data.confirm_understanding')}</span>
         </label>
       </div>
       
       <div class="flex space-x-3">
         <button onclick="this.closest('.fixed').remove()" class="flex-1 px-4 py-2 border border-gray-300 dark:border-gray-600 text-gray-700 dark:text-gray-300 rounded-md hover:bg-gray-50 dark:hover:bg-gray-700">
-          Cancel
+          ${t('common.cancel')}
         </button>
         <button onclick="clearAllCalendarData()" class="flex-1 px-4 py-2 bg-red-600 hover:bg-red-700 text-white rounded-md disabled:opacity-50 disabled:cursor-not-allowed" id="clearBtn" disabled>
-          Clear All Data
+          ${t('modal.clear_data.clear_button')}
         </button>
       </div>
     </div>
@@ -62,13 +63,13 @@ export function showClearCalendarModal() {
 async function clearAllCalendarData() {
   const confirmCheckbox = document.getElementById('confirmClear');
   if (!confirmCheckbox.checked) {
-    alert('Please confirm that you understand this action will delete all data.');
+    alert(t('modal.clear_data.confirm_alert'));
     return;
   }
   
   const clearBtn = document.getElementById('clearBtn');
   const originalText = clearBtn.textContent;
-  const spinnerId = showButtonSpinner(clearBtn, originalText, 'Clearing...');
+  const spinnerId = showButtonSpinner(clearBtn, originalText, t('modal.clear_data.clearing'));
   
   try {
     const db = await openDB(DB_NAME, DB_VERSION);
@@ -95,11 +96,11 @@ async function clearAllCalendarData() {
     document.dispatchEvent(refreshEvent);
     
     // Show success message
-    showNotification('Calendar cleared successfully', 'success');
+    showNotification(t('modal.clear_data.success_message'), 'success');
     
   } catch (error) {
     console.error('Error clearing calendar:', error);
-    showNotification('Failed to clear calendar', 'error');
+    showNotification(t('modal.clear_data.error_message'), 'error');
   } finally {
     hideButtonSpinner(clearBtn, spinnerId);
   }
