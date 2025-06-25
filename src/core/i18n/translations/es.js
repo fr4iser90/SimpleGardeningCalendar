@@ -466,4 +466,5 @@ export const es = {
   // Google Calendar Status Bar
   'google.calendar.name': 'Google Calendar',
   'google.calendar.fallback_name': 'Calendario de Jardín',
+  'google.status.manage_integration': 'Gestionar Integración',
 }; 

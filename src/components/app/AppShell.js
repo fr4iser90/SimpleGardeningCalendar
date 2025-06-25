@@ -9,7 +9,6 @@ export function renderAppShell({
   getCurrentLanguage,
   onLanguageChange,
   onPlantLibrary,
-  onGoogleCalendar,
   onThemeToggle,
   isDarkMode
 }) {
@@ -34,7 +33,6 @@ export function renderAppShell({
               </select>
             </div>
             <button id="plantLibraryBtn" class="p-2 hover:bg-green-700 rounded">📚 ${t('nav.plants')}</button>
-            <button id="googleCalendarBtn" class="p-2 hover:bg-green-700 rounded">🗓️ ${t('nav.google_calendar')}</button>
             <div id="themeToggleContainer"></div>
           </div>
         </div>
@@ -75,7 +73,6 @@ export function renderAppShell({
   // Event listeners for the buttons
   document.getElementById('languageSelect').addEventListener('change', onLanguageChange);
   document.getElementById('plantLibraryBtn').addEventListener('click', onPlantLibrary);
-  document.getElementById('googleCalendarBtn').addEventListener('click', onGoogleCalendar);
   
   // Initialize sidebar
   initializeSidebar(t);

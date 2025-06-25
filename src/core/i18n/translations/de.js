@@ -245,6 +245,7 @@ export const de = {
   'google.error.no_calendar_selected': 'Kein Kalender ausgewählt. Bitte wählen Sie einen in den Google-Einstellungen.',
   'google.status.no_calendar_selected': 'Kein Kalender ausgewählt',
   'google.status.connect_tooltip': 'Klicken, um Google Calendar zu verbinden',
+  'google.status.manage_integration': 'Integration verwalten',
 
   // Google Calendar Wizard
   'google.wizard.title': 'Kalender-Organisation',

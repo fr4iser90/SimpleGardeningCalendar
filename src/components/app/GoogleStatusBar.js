@@ -104,6 +104,14 @@ export function updateGoogleCalendarStatus() {
           ${t('google.sync_now')}
         </button>
       ` : ''}
+      <span class="mx-2">|</span>
+      <button 
+        class="text-xs text-blue-600 dark:text-blue-400 hover:underline"
+        onclick="showGoogleCalendarSetup()"
+        title="${t('google.status.manage_integration')}"
+      >
+        <i class="fas fa-cog mr-1"></i>${t('google.status.manage_integration')}
+      </button>
     `;
   } else if (hasSavedCredentials && !isCurrentlySignedIn) {
     console.log('📊 Google Status Bar: Showing RECONNECT NEEDED');
@@ -114,6 +122,14 @@ export function updateGoogleCalendarStatus() {
       </span>
       <button class="ml-2 px-2 py-1 bg-blue-500 text-white text-xs rounded hover:bg-blue-600" onclick="reconnectGoogleCalendar()">
         ${t('google.reconnect')}
+      </button>
+      <span class="mx-2">|</span>
+      <button 
+        class="text-xs text-blue-600 dark:text-blue-400 hover:underline"
+        onclick="showGoogleCalendarSetup()"
+        title="${t('google.status.manage_integration')}"
+      >
+        <i class="fas fa-cog mr-1"></i>${t('google.status.manage_integration')}
       </button>
     `;
   } else {
@@ -129,18 +145,20 @@ export function updateGoogleCalendarStatus() {
         <span class="font-bold mr-1">${t('google.calendar.name')}:</span>
         <i class="fas fa-times-circle mr-1"></i>${t('google.not_connected')}
       </button>
+      <span class="mx-2">|</span>
+      <button 
+        class="text-xs text-blue-600 dark:text-blue-400 hover:underline"
+        onclick="showGoogleCalendarSetup()"
+        title="${t('google.status.manage_integration')}"
+      >
+        <i class="fas fa-cog mr-1"></i>${t('google.status.manage_integration')}
+      </button>
     `;
     // Button-Handler für Modal-Öffnung
     const connectBtn = document.getElementById('googleStatusConnectBtn');
     if (connectBtn) {
       connectBtn.addEventListener('click', () => {
-        if (window.renderGoogleCalendarSetupModal) {
-          window.renderGoogleCalendarSetupModal();
-        } else {
-          import('../modals/GoogleCalendarSetupModal.js').then(mod => {
-            mod.renderGoogleCalendarSetupModal();
-          });
-        }
+        showGoogleCalendarSetup();
       });
     }
   }
@@ -260,6 +278,16 @@ export function initializeGoogleStatusBar() {
       showNotification(`${t('error.title')}: ${error.message || 'Sync failed'}`, 'error');
     } finally {
       updateGoogleCalendarStatus();
+    }
+  };
+
+  window.showGoogleCalendarSetup = function() {
+    if (window.renderGoogleCalendarSetupModal) {
+      window.renderGoogleCalendarSetupModal();
+    } else {
+      import('../modals/GoogleCalendarSetupModal.js').then(mod => {
+        mod.renderGoogleCalendarSetupModal();
+      });
     }
   };
 }
