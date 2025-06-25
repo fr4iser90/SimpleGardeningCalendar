@@ -90,15 +90,16 @@ export function updatePlantInfo() {
 
   const registry = getPlantRegistry();
   const plantData = registry.get(plantTypeSelect.value);
-  const environment = environmentSelect?.value || 'indoor';
+  const environment = environmentSelect?.value || 'environment.indoor';
+  const envKey = environment.replace('environment.', '');
   
-  if (!plantData || !plantData.environments || !plantData.environments[environment]) {
+  if (!plantData || !plantData.environments || !plantData.environments[envKey]) {
     plantInfo.style.display = '';
     plantInfo.innerHTML = '<p class="text-red-500">Plant data not found for this environment</p>';
     return;
   }
 
-  const envData = plantData.environments[environment];
+  const envData = plantData.environments[envKey];
   const phases = Object.entries(envData.phases).map(([phase, data]) => {
     const emoji = getPhaseEmoji(phase);
     const editable = data.editable ? ' (editable)' : ' (fixed)';
@@ -111,7 +112,7 @@ export function updatePlantInfo() {
   plantInfo.innerHTML = `
     <h4 class="font-medium mb-2">${plantData.name}</h4>
     <p class="text-sm mb-2"><strong>Category:</strong> ${plantData.category}</p>
-    <p class="text-sm mb-2"><strong>Environment:</strong> ${environment}</p>
+    <p class="text-sm mb-2"><strong>Environment:</strong> ${envKey}</p>
     <p class="text-sm mb-2"><strong>Total Duration:</strong> ${totalDays} days</p>
     <div class="text-sm">
       <strong>Phases:</strong><br>
@@ -135,14 +136,15 @@ export function updatePhaseInputs() {
   
   const registry = getPlantRegistry();
   const plantData = registry.get(plantTypeSelect.value);
-  const environment = environmentSelect?.value || 'indoor';
+  const environment = environmentSelect?.value || 'environment.indoor';
+  const envKey = environment.replace('environment.', '');
   
-  if (!plantData || !plantData.environments || !plantData.environments[environment]) {
+  if (!plantData || !plantData.environments || !plantData.environments[envKey]) {
     phaseDurationSection.style.display = 'none';
     return;
   }
   
-  const envData = plantData.environments[environment];
+  const envData = plantData.environments[envKey];
   const phases = envData.phases;
   
   // Check if this is an autoflower (no phase editing needed)
@@ -164,7 +166,7 @@ export function updatePhaseInputs() {
         </div>
       </div>
     `;
-  } else if (environment === 'outdoor') {
+  } else if (envKey === 'outdoor') {
     // Outdoor: Only editable phases can be adjusted
     const editablePhases = Object.entries(phases).filter(([phase, data]) => data.editable);
     
