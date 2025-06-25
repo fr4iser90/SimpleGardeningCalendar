@@ -23,10 +23,6 @@ export function initializeApp() {
       location.reload();
     },
     onPlantLibrary: () => showPlantLibraryModal(),
-    onGoogleCalendar: async () => {
-      const { renderGoogleCalendarSetupModal } = await import('./components/modals/GoogleCalendarSetupModal.js');
-      renderGoogleCalendarSetupModal();
-    },
     onThemeToggle: () => {
       toggleTheme(t);
     }
