@@ -4,7 +4,8 @@ import {
   createGardenTemplateCalendars, 
   createLocalCalendar,
   getDefaultCalendar,
-  getAllLocalCalendars
+  getAllLocalCalendars,
+  migrateEventsToNewOrganization
 } from '../../core/db/calendars.js';
 import { showNotification } from '../../utils/notifications.js';
 
@@ -265,6 +266,13 @@ export async function setupLocalCalendarWizardEventListeners() {
       
       showNotification(t('local.wizard.setup_complete'), 'success');
       
+      // Show migration notification if there were events to migrate
+      const { getAllEvents } = await import('../../services/EventService.js');
+      const events = await getAllEvents();
+      if (events.length > 0) {
+        showNotification(`✅ ${events.length} Events wurden automatisch in die neue Kalender-Organisation verschoben!`, 'info');
+      }
+      
       // Refresh the view
       document.dispatchEvent(new CustomEvent('localCalendarsUpdated'));
       
@@ -305,6 +313,9 @@ async function handleLocalCalendarSetup(organizationType, customCalendars = []) 
     } else {
       throw new Error('Standardkalender konnte nicht angelegt werden!');
     }
+    
+    // Migrate existing events to new organization
+    await migrateEventsToNewOrganization('single');
     return;
   }
 
@@ -330,6 +341,9 @@ async function handleLocalCalendarSetup(organizationType, customCalendars = []) 
       type: 'areas',
       calendarIds: areaCalendarIds
     }));
+    
+    // Migrate existing events to new organization
+    await migrateEventsToNewOrganization('areas');
     return;
   }
 
@@ -349,6 +363,9 @@ async function handleLocalCalendarSetup(organizationType, customCalendars = []) 
       type: 'custom',
       calendarIds: customCalendarIds
     }));
+    
+    // Migrate existing events to new organization
+    await migrateEventsToNewOrganization('custom');
     return;
   }
 

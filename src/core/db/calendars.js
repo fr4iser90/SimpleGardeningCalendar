@@ -271,6 +271,135 @@ export async function updateLocalCalendar(calendarId, updates) {
   return tx.done;
 }
 
+/**
+ * Migrate events to new calendar organization
+ * @param {string} organizationType - New organization type ('single', 'areas', 'custom')
+ * @returns {Promise<boolean>} Success status
+ */
+export async function migrateEventsToNewOrganization(organizationType) {
+  const db = await getDB();
+  const tx = db.transaction(['calendars', 'events', 'plantings'], 'readwrite');
+  
+  // Get all calendars
+  const calendars = await tx.objectStore('calendars').getAll();
+  const events = await tx.objectStore('events').getAll();
+  const plantings = await tx.objectStore('plantings').getAll();
+  
+  // Find target calendars based on organization type
+  let targetCalendars = {};
+  
+  switch (organizationType) {
+    case 'single':
+      // All events go to the main garden calendar
+      const mainCalendar = calendars.find(cal => cal.name.includes('Garden') || cal.name.includes('Garten'));
+      if (mainCalendar) {
+        targetCalendars = { default: mainCalendar.id };
+      }
+      break;
+      
+    case 'areas':
+      // Map events to area-specific calendars
+      const areaCalendars = {
+        vegetables: calendars.find(cal => cal.name.includes('Vegetable') || cal.name.includes('Gemüse')),
+        herbs: calendars.find(cal => cal.name.includes('Herb') || cal.name.includes('Kräuter')),
+        ornamental: calendars.find(cal => cal.name.includes('Ornamental') || cal.name.includes('Zier')),
+        fruits: calendars.find(cal => cal.name.includes('Fruit') || cal.name.includes('Obst'))
+      };
+      
+      targetCalendars = {};
+      Object.entries(areaCalendars).forEach(([area, calendar]) => {
+        if (calendar) {
+          targetCalendars[area] = calendar.id;
+        }
+      });
+      break;
+      
+    case 'custom':
+      // Map events to custom calendars (if they exist)
+      const customCalendars = calendars.filter(cal => 
+        !cal.name.includes('Garden') && 
+        !cal.name.includes('Garten') && 
+        !cal.name.includes('Vegetable') && 
+        !cal.name.includes('Herb') && 
+        !cal.name.includes('Ornamental') && 
+        !cal.name.includes('Fruit')
+      );
+      
+      if (customCalendars.length > 0) {
+        targetCalendars = { default: customCalendars[0].id };
+      }
+      break;
+  }
+  
+  // If no target calendars found, use the first available calendar
+  if (Object.keys(targetCalendars).length === 0 && calendars.length > 0) {
+    targetCalendars = { default: calendars[0].id };
+  }
+  
+  // Migrate events based on their type and planting category
+  let migratedCount = 0;
+  
+  for (const event of events) {
+    let targetCalendarId = targetCalendars.default;
+    
+    // Determine target calendar based on event type and planting category
+    if (organizationType === 'areas') {
+      // Find the planting for this event to get its category
+      const planting = plantings.find(p => p.id === event.plantingId);
+      if (planting) {
+        const category = planting.category?.toLowerCase();
+        
+        if (category?.includes('vegetable') && targetCalendars.vegetables) {
+          targetCalendarId = targetCalendars.vegetables;
+        } else if (category?.includes('herb') && targetCalendars.herbs) {
+          targetCalendarId = targetCalendars.herbs;
+        } else if (category?.includes('ornamental') || category?.includes('flower') && targetCalendars.ornamental) {
+          targetCalendarId = targetCalendars.ornamental;
+        } else if (category?.includes('fruit') && targetCalendars.fruits) {
+          targetCalendarId = targetCalendars.fruits;
+        }
+      }
+    }
+    
+    // Update event calendar
+    if (event.calendarId !== targetCalendarId) {
+      event.calendarId = targetCalendarId;
+      await tx.objectStore('events').put(event);
+      migratedCount++;
+    }
+  }
+  
+  // Migrate plantings to the same target calendars
+  for (const planting of plantings) {
+    let targetCalendarId = targetCalendars.default;
+    
+    if (organizationType === 'areas') {
+      const category = planting.category?.toLowerCase();
+      
+      if (category?.includes('vegetable') && targetCalendars.vegetables) {
+        targetCalendarId = targetCalendars.vegetables;
+      } else if (category?.includes('herb') && targetCalendars.herbs) {
+        targetCalendarId = targetCalendars.herbs;
+      } else if (category?.includes('ornamental') || category?.includes('flower') && targetCalendars.ornamental) {
+        targetCalendarId = targetCalendars.ornamental;
+      } else if (category?.includes('fruit') && targetCalendars.fruits) {
+        targetCalendarId = targetCalendars.fruits;
+      }
+    }
+    
+    // Update planting calendar
+    if (planting.calendarId !== targetCalendarId) {
+      planting.calendarId = targetCalendarId;
+      await tx.objectStore('plantings').put(planting);
+    }
+  }
+  
+  await tx.done;
+  
+  console.log(`✅ Migrated ${migratedCount} events to new calendar organization: ${organizationType}`);
+  return true;
+}
+
 export default {
   initializeDefaultCalendars,
   createLocalCalendar,
@@ -282,5 +411,6 @@ export default {
   setDefaultCalendar,
   createGardenTemplateCalendars,
   deleteLocalCalendar,
-  updateLocalCalendar
+  updateLocalCalendar,
+  migrateEventsToNewOrganization
 }; 

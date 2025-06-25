@@ -5,6 +5,7 @@ export const de = {
   'nav.calendar': 'Kalender',
   'nav.plants': 'Pflanzen',
   'nav.settings': 'Einstellungen',
+  'nav.google_calendar': 'Google Calendar',
   'ui.quick_actions': 'Schnellaktionen',
   'ui.plant_categories': 'Pflanzenkategorien',
   'ui.upcoming_tasks': 'Anstehende Aufgaben',
@@ -27,6 +28,8 @@ export const de = {
   'btn.close': 'Schließen',
   'btn.view_details': 'Details anzeigen',
   'btn.add_note': 'Notiz hinzufügen',
+  'btn.import_calendar': 'Kalender importieren',
+  'btn.export_calendar': 'Kalender exportieren',
   
   // Add Event Modal
   'modal.add_event.title': 'Gartenereignis hinzufügen',
@@ -211,6 +214,13 @@ export const de = {
   'common.success': 'Erfolgreich',
   'common.warning': 'Warnung',
   'common.info': 'Info',
+  'common.cancel': 'Abbrechen',
+  'common.confirm': 'Bestätigen',
+  'common.yes': 'Ja',
+  'common.no': 'Nein',
+  'common.ok': 'OK',
+  'common.edit': 'Bearbeiten',
+  'common.close': 'Schließen',
   
   // My Plants Modal
   'plants.my_active_plants': 'Meine aktiven Pflanzen',
@@ -220,6 +230,20 @@ export const de = {
   'plants.started': 'Gestartet',
   'plants.current_phase': 'Aktuelle Phase',
   'plants.expected_completion': 'Erwarteter Abschluss',
+  'plants.no_active_yet': 'Noch keine aktiven Pflanzen. Fügen Sie Ihre erste Pflanze hinzu!',
+  'plants.view_details': 'Details anzeigen',
+  'plants.add_note': 'Notiz hinzufügen',
+  'plants.label.type': 'Pflanzentyp',
+  'plants.label.location': 'Standort',
+  'plants.label.started': 'Gestartet',
+  'plants.label.current_phase': 'Aktuelle Phase',
+  'plants.label.expected_completion': 'Erwarteter Abschluss',
+  'plants.delete_button': 'Pflanze und alle Termine löschen',
+  'plants.no_events': 'Noch keine Ereignisse',
+  'plants.no_notes': 'Noch keine Notizen',
+  'plants.save_note': 'Notiz speichern',
+  'plants.delete_confirm': 'Pflanze & alle Termine löschen',
+  'plants.no_category_plants': 'Keine {category} Pflanzen vorhanden.',
   
   // Error Messages
   'error.title': 'Fehler',
@@ -246,7 +270,9 @@ export const de = {
   'google.status.no_calendar_selected': 'Kein Kalender ausgewählt',
   'google.status.connect_tooltip': 'Klicken, um Google Calendar zu verbinden',
   'google.status.manage_integration': 'Integration verwalten',
-
+  'google.calendar.name': 'Google Calendar',
+  'google.calendar.fallback_name': 'Garten Kalender',
+  
   // Google Calendar Wizard
   'google.wizard.title': 'Kalender-Organisation',
   'google.wizard.existing_detected': 'Vorhandene Garten-Kalender erkannt',
@@ -297,10 +323,9 @@ export const de = {
   'google.wizard.confirm_use_existing': 'Bestehender {type}-Kalender gefunden: "{name}"\n\nMöchten Sie diesen bestehenden Kalender verwenden?',
   'google.wizard.to_delete': '{count} zu löschen',
   'google.wizard.errors_suffix': ', {count} Fehler',
-
+  
   // Google Calendar Setup Modal
   'google.setup.title': 'Google Calendar Integration',
-  'google.setup.subtitle': 'Synchronisiere deinen Gartenkalender mit Google Calendar',
   'google.setup.instructions': 'Setup-Anweisungen',
   'google.setup.step1': 'Gehen Sie zur Google Cloud Console',
   'google.setup.step2': 'Erstellen Sie ein neues Projekt oder wählen Sie ein vorhandenes aus',
@@ -337,7 +362,7 @@ export const de = {
   'google.setup.sync_status': 'Sync-Status:',
   'google.setup.ready': 'Bereit',
   'google.setup.sign_out': 'Abmelden & Berechtigungen widerrufen',
-
+  
   // Google Calendar Detailed Help
   'google.help.overview_title': 'Überblick',
   'google.help.overview_text': 'Diese Anleitung führt Sie durch die Einrichtung der Google Calendar API für Ihren Gartenkalender. Sie benötigen nur eine Client-ID - keine API-Schlüssel oder Geheimnisse.',
@@ -362,21 +387,6 @@ export const de = {
   'google.help.troubleshooting_1': 'Stellen Sie sicher, dass die Google Calendar API aktiviert ist',
   'google.help.troubleshooting_2': 'Überprüfen Sie, ob Ihre Domain korrekt zu den autorisierten Ursprüngen hinzugefügt wurde',
   'google.help.troubleshooting_3': 'Verwenden Sie nur die Client-ID, nicht den Client-Secret',
-
-  // Common UI elements
-  'common.cancel': 'Abbrechen',
-  'common.confirm': 'Bestätigen',
-  'common.yes': 'Ja',
-  'common.no': 'Nein',
-  'common.ok': 'OK',
-  'common.save': 'Speichern',
-  'common.delete': 'Löschen',
-  'common.edit': 'Bearbeiten',
-  'common.close': 'Schließen',
-
-  // Import/Export (NEW)
-  'btn.import_calendar': 'Kalender importieren',
-  'btn.export_calendar': 'Kalender exportieren',
   
   // Import Modal
   'import.modal.title': 'Kalender importieren',
@@ -392,7 +402,7 @@ export const de = {
   'import.error.unsupported_format': 'Format nicht unterstützt',
   'import.error.database': 'Datenbank-Fehler beim Import',
   
-  // Export Modal - Flat structure (what the code expects)
+  // Export Modal
   'export.modal.title': 'Kalender exportieren',
   'export.format.label': 'Format auswählen:',
   'export.format.json': 'JSON',
@@ -405,12 +415,11 @@ export const de = {
   'export.error.no_data': 'Keine Daten zum Exportieren',
   'export.error.generation_failed': 'Export-Generierung fehlgeschlagen',
   'export.notification.start': 'Export wird erstellt...',
-
-  // AppShell.js
-  'nav.google_calendar': 'Google Calendar',
+  
+  // ThemeToggle.js
   'theme.toggle.light': 'Zum Lichtmodus wechseln',
   'theme.toggle.dark': 'Zum Dunkelmodus wechseln',
-
+  
   // PlantLibrary.js
   'plant_library.title': 'Pflanzenbibliothek',
   'plant_library.search_placeholder': 'Pflanzen suchen...',
@@ -423,23 +432,7 @@ export const de = {
   'plant_library.no_care_tips': 'Keine Pflegetipps verfügbar',
   'plant_library.common_problems': 'Häufige Probleme',
   'plant_library.start_growing': 'Diese Pflanze anbauen',
-
-  // PlantsList.js
-  'plants.no_active_yet': 'Noch keine aktiven Pflanzen. Fügen Sie Ihre erste Pflanze hinzu!',
-  'plants.view_details': 'Details anzeigen',
-  'plants.add_note': 'Notiz hinzufügen',
-  'plants.label.type': 'Pflanzentyp',
-  'plants.label.location': 'Standort',
-  'plants.label.started': 'Gestartet',
-  'plants.label.current_phase': 'Aktuelle Phase',
-  'plants.label.expected_completion': 'Erwarteter Abschluss',
-  'plants.delete_button': 'Pflanze und alle Termine löschen',
-  'plants.no_events': 'Noch keine Ereignisse',
-  'plants.no_notes': 'Noch keine Notizen',
-  'plants.save_note': 'Notiz speichern',
-  'plants.delete_confirm': 'Pflanze & alle Termine löschen',
-  'plants.no_category_plants': 'Keine {category} Pflanzen vorhanden.',
-
+  
   // Local Calendar Wizard
   'local.wizard.title': 'Lokale Kalender-Organisation',
   'local.wizard.organize_question': 'Wie möchten Sie Ihre Garten-Events organisieren?',
@@ -456,8 +449,8 @@ export const de = {
   'local.wizard.setup_complete': '✅ Kalender-Einrichtung abgeschlossen!',
   'local.wizard.setup_failed': '❌ Einrichtung fehlgeschlagen',
   'local.wizard.select_option': 'Bitte wählen Sie eine Option aus',
-
-  // Local Calendar Status Bar
+  
+  // Local Calendar Status
   'local.status.active': 'Aktiv',
   'local.status.manage': 'Kalender verwalten',
   'local.status.setup': 'Lokale Kalender einrichten',
@@ -466,11 +459,7 @@ export const de = {
   'local.status.load_error': 'Fehler beim Laden',
   'local.status.setup_title': '🗓️ Lokale Kalender einrichten',
   'local.status.title': 'Lokaler Kalender',
-
-  // Google Calendar Status Bar
-  'google.calendar.name': 'Google Calendar',
-  'google.calendar.fallback_name': 'Garten Kalender',
-
+  
   // Local Calendar Setup Modal
   'local.setup.title': 'Lokale Kalender verwalten',
   'local.setup.current_calendars': 'Aktuelle Kalender',
@@ -501,5 +490,5 @@ export const de = {
   'local.setup.switch_to': 'Wechseln',
   'local.setup.confirm_delete': 'Sind Sie sicher, dass Sie diesen Kalender löschen möchten?',
   'local.setup.calendar_deleted': 'Kalender erfolgreich gelöscht',
-  'local.setup.delete_failed': 'Fehler beim Löschen des Kalenders',
-}; 
+  'local.setup.delete_failed': 'Fehler beim Löschen des Kalenders'
+};
