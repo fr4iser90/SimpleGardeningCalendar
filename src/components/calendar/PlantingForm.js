@@ -98,9 +98,13 @@ export function createPlantingForm(date, preselectedPlant = null) {
       <p class="text-xs text-gray-500 dark:text-gray-400 mt-2">${t('modal.phase_duration.tip')}</p>
     </div>
     
-    <div id="phaseCareSection" class="mt-4">
+    <div id="phaseCareSection" class="mt-4" style="display:none;">
       <h4 class="font-medium mb-3 dark:text-white">${t('modal.reminders.phase_care')}</h4>
-      <div id="phaseCareInputs"></div>
+      <div class="flex gap-4 mb-2">
+        <button type="button" id="markAllWatering" class="px-2 py-1 rounded bg-blue-200 dark:bg-blue-700 text-blue-900 dark:text-blue-100 text-xs">Alle Gieß-Erinnerungen an/aus</button>
+        <button type="button" id="markAllFertilizing" class="px-2 py-1 rounded bg-green-200 dark:bg-green-700 text-green-900 dark:text-green-100 text-xs">Alle Dünger-Erinnerungen an/aus</button>
+      </div>
+      <div id="phaseCareInputs" class="rounded-lg border border-gray-300 dark:border-gray-600 bg-gray-50 dark:bg-gray-800 p-3 space-y-2"></div>
     </div>
     
     <div>
@@ -253,22 +257,29 @@ function updatePlantOptions(category) {
 function updatePlantInfo() {
   const plantTypeSelect = document.getElementById('plantTypeSelect');
   const plantInfo = document.getElementById('plantInfo');
-  if (!plantInfo) return;
-  if (!plantTypeSelect?.value) {
-    plantInfo.style.display = 'none';
-    plantInfo.innerHTML = '';
+  const environmentSelect = document.getElementById('environmentSelect');
+
+  if (!plantTypeSelect?.value || !plantInfo) {
+    if (plantInfo) {
+      plantInfo.style.display = 'none';
+      plantInfo.innerHTML = '';
+    }
     return;
   }
-  plantInfo.style.display = '';
-  const plantData = getPlantDataForEnvironment(plantTypeSelect.value, document.getElementById('environmentSelect')?.value || 'indoor');
+
+  const plantData = getPlantDataForEnvironment(plantTypeSelect.value, environmentSelect?.value || 'indoor');
   if (!plantData) {
+    plantInfo.style.display = '';
     plantInfo.innerHTML = '<p class="text-red-500">Plant data not found</p>';
     return;
   }
+
   const phases = Object.entries(plantData.phases).map(([phase, data]) => {
     const emoji = getPhaseEmoji(phase);
     return `${emoji} ${phase}: ${data.days} days`;
   }).join('<br>');
+
+  plantInfo.style.display = '';
   plantInfo.innerHTML = `
     <h4 class="font-medium mb-2">${plantData.name}</h4>
     <p class="text-sm mb-2"><strong>Category:</strong> ${plantData.category}</p>
@@ -400,8 +411,13 @@ function checkSeasonalTiming() {
 function updatePhaseCareInputs() {
   const plantTypeSelect = document.getElementById('plantTypeSelect');
   const environmentSelect = document.getElementById('environmentSelect');
+  const phaseCareSection = document.getElementById('phaseCareSection');
   const phaseCareInputs = document.getElementById('phaseCareInputs');
-  if (!plantTypeSelect?.value || !phaseCareInputs) return;
+  if (!plantTypeSelect?.value || !phaseCareInputs || !phaseCareSection) {
+    if (phaseCareSection) phaseCareSection.style.display = 'none';
+    return;
+  }
+  phaseCareSection.style.display = '';
   const plantData = getPlantDataForEnvironment(plantTypeSelect.value, environmentSelect?.value || 'indoor');
   if (!plantData || !plantData.phases) return;
   phaseCareInputs.innerHTML = Object.entries(plantData.phases).map(([phase, data]) => {
@@ -412,18 +428,36 @@ function updatePhaseCareInputs() {
       <div class="flex items-center gap-4 mb-2">
         <span class="w-32">${emoji} ${phase}</span>
         <label class="flex items-center gap-1">
-          <input type="checkbox" name="watering_${phase}_enabled" ${watering ? 'checked' : ''}>
+          <input type="checkbox" name="watering_${phase}_enabled" class="accent-blue-500" ${watering ? 'checked' : ''}>
           ${t('modal.reminders.watering')}
         </label>
-        <input type="number" name="watering_${phase}_interval" value="${watering}" min="1" class="w-16 p-1 border rounded ml-1">
+        <input type="number" name="watering_${phase}_interval" value="${watering}" min="1" class="w-16 p-1 border rounded ml-1 dark:bg-gray-700 dark:text-white bg-white text-gray-900">
         <label class="flex items-center gap-1 ml-4">
-          <input type="checkbox" name="fertilizing_${phase}_enabled" ${fertilizing ? 'checked' : ''}>
+          <input type="checkbox" name="fertilizing_${phase}_enabled" class="accent-green-500" ${fertilizing ? 'checked' : ''}>
           ${t('modal.reminders.fertilizing')}
         </label>
-        <input type="number" name="fertilizing_${phase}_interval" value="${fertilizing}" min="1" class="w-16 p-1 border rounded ml-1">
+        <input type="number" name="fertilizing_${phase}_interval" value="${fertilizing}" min="1" class="w-16 p-1 border rounded ml-1 dark:bg-gray-700 dark:text-white bg-white text-gray-900">
       </div>
     `;
   }).join('');
+
+  // MarkAll-Buttons Event-Handler
+  const markAllWatering = document.getElementById('markAllWatering');
+  const markAllFertilizing = document.getElementById('markAllFertilizing');
+  if (markAllWatering) {
+    markAllWatering.onclick = () => {
+      const boxes = phaseCareInputs.querySelectorAll('input[type="checkbox"][name$="_enabled"]:not([name^="fertilizing"])');
+      const allChecked = Array.from(boxes).every(b => b.checked);
+      boxes.forEach(b => b.checked = !allChecked);
+    };
+  }
+  if (markAllFertilizing) {
+    markAllFertilizing.onclick = () => {
+      const boxes = phaseCareInputs.querySelectorAll('input[type="checkbox"][name^="fertilizing"][name$="_enabled"]');
+      const allChecked = Array.from(boxes).every(b => b.checked);
+      boxes.forEach(b => b.checked = !allChecked);
+    };
+  }
 }
 
 export function getPlantingFormData(formContainer) {
