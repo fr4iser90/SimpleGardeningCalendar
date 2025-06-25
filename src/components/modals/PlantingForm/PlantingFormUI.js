@@ -1,5 +1,5 @@
 import { t } from '../../../core/i18n/index.js';
-import { formatDateForGerman } from '../../../utils/dateUtils.js';
+import { formatDate } from '../../../utils/dateUtils.js';
 import { 
   createEnvironmentOptions, 
   createRegionOptions, 
@@ -9,23 +9,24 @@ import {
 } from './PlantingFormLogic.js';
 import { initializePlantingFormHandlers } from './PlantingFormHandlers.js';
 import { autoDetectLocation, CLIMATE_ZONE_DESCRIPTIONS } from '../../../core/db/plants/categories.js';
+import { getDefaultEnvironment } from './PlantingFormUtils.js';
 
 /**
  * PlantingFormUI - Contains UI creation and data extraction functions
  */
 
 export function createPlantingForm(date, preselectedPlant = null) {
-  const formContainer = document.createElement('div');
-  formContainer.id = 'plantingFields';
+  const formContainer = document.createElement('form');
+  formContainer.id = 'plantingForm';
   formContainer.className = 'space-y-4';
   
   // Create form elements
   const environmentOptions = createEnvironmentOptions();
   const regionOptions = createRegionOptions();
   const categoryOptions = createCategoryOptions();
-  const plantOptions = createPlantOptions('indoor'); // Default to indoor
+  const plantOptions = createPlantOptions(getDefaultEnvironment()); // Use utility function
   
-  const formattedDate = formatDateForGerman(date);
+  const formattedDate = formatDate(date);
   
   formContainer.innerHTML = `
     <!-- Environment and Region Row -->

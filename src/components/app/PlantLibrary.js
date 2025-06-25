@@ -47,7 +47,7 @@ export async function showPlantLibraryModal() {
           <label class="block text-sm font-medium mb-1 dark:text-gray-200">${t('plant_library.category_filter')}</label>
           <select id="categoryFilter" class="w-full p-2 border rounded dark:bg-gray-700 dark:border-gray-600 dark:text-white">
             <option value="">${allCategories}</option>
-            ${Object.values(PLANT_CATEGORIES).map(cat => `<option value="${cat}">${cat}</option>`).join('')}
+            ${Object.values(PLANT_CATEGORIES).map(cat => `<option value="${cat}">${t(cat)}</option>`).join('')}
           </select>
         </div>
         
@@ -55,7 +55,7 @@ export async function showPlantLibraryModal() {
           <label class="block text-sm font-medium mb-1 dark:text-gray-200">${t('plant_library.tag_filter')}</label>
           <select id="tagFilter" class="w-full p-2 border rounded dark:bg-gray-700 dark:border-gray-600 dark:text-white">
             <option value="">${allTags}</option>
-            ${Object.values(PLANT_TAGS).map(tag => `<option value="${tag}">${tag}</option>`).join('')}
+            ${Object.values(PLANT_TAGS).map(tag => `<option value="${tag}">${t(tag)}</option>`).join('')}
           </select>
         </div>
       </div>
@@ -75,9 +75,9 @@ export async function showPlantLibraryModal() {
               <div class="flex justify-between items-start mb-2">
                 <h3 class="font-semibold dark:text-white">${plant.name}</h3>
                 <div class="flex flex-col items-end space-y-1">
-                  <span class="text-xs px-2 py-1 bg-gray-100 dark:bg-gray-700 text-gray-800 dark:text-gray-200 rounded">${plant.category}</span>
+                  <span class="text-xs px-2 py-1 bg-gray-100 dark:bg-gray-700 text-gray-800 dark:text-gray-200 rounded">${t(plant.category)}</span>
                   ${(plant.tags || []).map(tag => `
-                    <span class="text-xs px-2 py-1 bg-blue-100 dark:bg-blue-900 text-blue-800 dark:text-blue-200 rounded">${tag}</span>
+                    <span class="text-xs px-2 py-1 bg-blue-100 dark:bg-blue-900 text-blue-800 dark:text-blue-200 rounded">${t(tag)}</span>
                   `).join('')}
                 </div>
               </div>

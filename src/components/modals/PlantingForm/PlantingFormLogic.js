@@ -5,6 +5,13 @@ import {
 } from '../../../core/db/index.js';
 import { PLANT_CATEGORIES, GROWING_ENVIRONMENTS, SEASONAL_REGIONS } from '../../../core/db/plants/categories.js';
 import { getPhaseEmoji } from '../../../core/db/utils.js';
+import { 
+  getEnvironmentKey, 
+  getPlantDataForEnvironment, 
+  getPlantingTips, 
+  isAutoflower, 
+  getDefaultEnvironment 
+} from './PlantingFormUtils.js';
 
 /**
  * PlantingFormLogic - Contains all business logic for the planting form
@@ -19,7 +26,7 @@ export function createEnvironmentOptions() {
 
 export function createRegionOptions() {
   return Object.entries(SEASONAL_REGIONS).map(([key, value]) => {
-    const translatedRegion = t(`region.${value}`);
+    const translatedRegion = t(value);
     return `<option value="${value}">${translatedRegion}</option>`;
   }).join('');
 }
@@ -31,8 +38,8 @@ export function createCategoryOptions() {
   }).join('');
 }
 
-export function createPlantOptions(environment = 'environment.indoor') {
-  const envKey = environment.replace('environment.', '');
+export function createPlantOptions(environment = getDefaultEnvironment()) {
+  const envKey = getEnvironmentKey(environment);
   const registry = getPlantRegistry();
   const plants = Array.from(registry.entries());
   return plants
@@ -47,17 +54,17 @@ export function createPlantOptions(environment = 'environment.indoor') {
 export function updateEnvironmentFields(environment) {
   const regionField = document.getElementById('regionField');
   if (!regionField) return;
-  if (environment === 'outdoor') {
+  if (environment === 'environment.outdoor') {
     regionField.style.display = 'block';
   } else {
     regionField.style.display = 'none';
   }
 }
 
-export function updatePlantOptions(category, environment = 'environment.indoor') {
+export function updatePlantOptions(category, environment = getDefaultEnvironment()) {
   const plantTypeSelect = document.getElementById('plantTypeSelect');
   if (!plantTypeSelect) return;
-  const envKey = environment.replace('environment.', '');
+  const envKey = getEnvironmentKey(environment);
   const registry = getPlantRegistry();
   const plants = Array.from(registry.entries());
   plantTypeSelect.innerHTML = `<option value="">${t('modal.plant_type.select')}</option>`;
@@ -88,18 +95,15 @@ export function updatePlantInfo() {
     return;
   }
 
-  const registry = getPlantRegistry();
-  const plantData = registry.get(plantTypeSelect.value);
-  const environment = environmentSelect?.value || 'environment.indoor';
-  const envKey = environment.replace('environment.', '');
+  const plantEnvData = getPlantDataForEnvironment(plantTypeSelect.value, environmentSelect?.value);
   
-  if (!plantData || !plantData.environments || !plantData.environments[envKey]) {
+  if (!plantEnvData) {
     plantInfo.style.display = '';
     plantInfo.innerHTML = '<p class="text-red-500">Plant data not found for this environment</p>';
     return;
   }
 
-  const envData = plantData.environments[envKey];
+  const { plantData, envData, envKey } = plantEnvData;
   const phases = Object.entries(envData.phases).map(([phase, data]) => {
     const emoji = getPhaseEmoji(phase);
     const editable = data.editable ? ' (editable)' : ' (fixed)';
@@ -134,22 +138,18 @@ export function updatePhaseInputs() {
     return;
   }
   
-  const registry = getPlantRegistry();
-  const plantData = registry.get(plantTypeSelect.value);
-  const environment = environmentSelect?.value || 'environment.indoor';
-  const envKey = environment.replace('environment.', '');
+  const plantEnvData = getPlantDataForEnvironment(plantTypeSelect.value, environmentSelect?.value);
   
-  if (!plantData || !plantData.environments || !plantData.environments[envKey]) {
+  if (!plantEnvData) {
     phaseDurationSection.style.display = 'none';
     return;
   }
   
-  const envData = plantData.environments[envKey];
+  const { plantData, envData, envKey } = plantEnvData;
   const phases = envData.phases;
   
   // Check if this is an autoflower (no phase editing needed)
-  const isAutoflower = plantTypeSelect.value.includes('autoflower');
-  if (isAutoflower) {
+  if (isAutoflower(plantTypeSelect.value)) {
     // Autoflowers don't need phase editing - they flower automatically
     phaseInputs.innerHTML = `
       <div class="col-span-full p-3 bg-blue-50 dark:bg-blue-900 border border-blue-200 dark:border-blue-700 rounded">
@@ -259,8 +259,7 @@ export function checkSeasonalTiming() {
     return;
   }
   
-  const environment = environmentSelect?.value || 'environment.indoor';
-  const envKey = environment.replace('environment.', '');
+  const envKey = getEnvironmentKey(environmentSelect?.value);
   const validation = validatePlantingDate(plantTypeSelect.value, envKey, dateInput.value);
   const region = regionSelect?.value || 'temperate_north';
   
@@ -313,46 +312,6 @@ export function checkSeasonalTiming() {
   }
 }
 
-/**
- * Get planting tips and cutting information for a plant
- * @param {string} plantType - Plant type
- * @param {string} region - Climate region
- * @returns {string} Planting tips
- */
-function getPlantingTips(plantType, region) {
-  const registry = getPlantRegistry();
-  const plantData = registry.get(plantType);
-  
-  if (!plantData) return '';
-  
-  const tips = [];
-  
-  // Add general planting tips
-  if (plantData.category === 'Vegetables') {
-    tips.push('Direktsaat oder Vorkultur möglich');
-  } else if (plantData.category === 'Herbs') {
-    tips.push('Stecklinge oder Samen möglich');
-  } else if (plantData.category === 'Fruits') {
-    tips.push('Containerpflanzen oder wurzelnackte Pflanzen');
-  }
-  
-  // Add cutting information if available
-  if (plantData.cuttingInfo) {
-    tips.push(`Stecklinge: ${plantData.cuttingInfo}`);
-  }
-  
-  // Add region-specific tips
-  if (region === 'mediterranean') {
-    tips.push('Schatten in der Mittagshitze, morgens gießen');
-  } else if (region === 'temperate_north') {
-    tips.push('Nach dem letzten Frost pflanzen, Mulch verwenden');
-  } else if (region === 'tropical') {
-    tips.push('Ganzjährig möglich, auf Regenzeiten achten');
-  }
-  
-  return tips.join('. ');
-}
-
 export function updatePhaseCareInputs() {
   const plantTypeSelect = document.getElementById('plantTypeSelect');
   const environmentSelect = document.getElementById('environmentSelect');
@@ -364,17 +323,14 @@ export function updatePhaseCareInputs() {
     return;
   }
   
-  const registry = getPlantRegistry();
-  const plantData = registry.get(plantTypeSelect.value);
-  const environment = environmentSelect?.value || 'environment.indoor';
-  const envKey = environment.replace('environment.', '');
+  const plantEnvData = getPlantDataForEnvironment(plantTypeSelect.value, environmentSelect?.value);
   
-  if (!plantData || !plantData.environments || !plantData.environments[envKey]) {
+  if (!plantEnvData) {
     phaseCareSection.style.display = 'none';
     return;
   }
   
-  const envData = plantData.environments[envKey];
+  const { envData } = plantEnvData;
   const phases = envData.phases;
   
   phaseCareSection.style.display = '';
@@ -424,7 +380,7 @@ export function getCustomPhaseDurations(formData) {
   const customPhaseDurations = {};
   const plantType = formData.get('plantType');
   const environment = formData.get('environment');
-  const envKey = environment ? environment.replace('environment.', '') : 'indoor';
+  const envKey = getEnvironmentKey(environment);
   
   if (plantType && environment) {
     const registry = getPlantRegistry();
@@ -434,9 +390,7 @@ export function getCustomPhaseDurations(formData) {
       const envData = plantData.environments[envKey];
       const phases = envData.phases;
       
-      const isAutoflower = plantType.includes('autoflower');
-      
-      if (isAutoflower) {
+      if (isAutoflower(plantType)) {
         // Autoflowers: No custom phase durations needed
         // Phases are automatic and cannot be adjusted
       } else if (envKey === 'outdoor') {

@@ -1,4 +1,3 @@
-
 // French translations for SimpleGardeningCalendar
 export const fr = {
     // UI Elements
@@ -507,5 +506,37 @@ export const fr = {
     'google.calendar.name': 'Google Calendar',
     'google.calendar.fallback_name': 'Calendrier de Jardin',
     'google.status.manage_integration': 'Gérer l\'Intégration',
+  
+    // Local Setup
+    'local.setup.title': 'Gérer les calendriers locaux',
+    'local.setup.current_calendars': 'Calendriers actuels',
+    'local.setup.add_calendar': 'Ajouter un nouveau calendrier',
+    'local.setup.default_settings': 'Paramètres par défaut',
+    'local.setup.default_reminders': 'Rappels par défaut',
+    'local.setup.watering_reminders': 'Rappels d\'arrosage',
+    'local.setup.fertilizing_reminders': 'Rappels de fertilisation',
+    'local.setup.phase_reminders': 'Rappels de phase',
+    'local.setup.weekly_checks': 'Vérifications hebdomadaires',
+    'local.setup.harvest_reminders': 'Rappels de récolte',
+    'local.setup.default_intervals': 'Intervalles par défaut',
+    'local.setup.watering_interval': 'Intervalle d\'arrosage :',
+    'local.setup.fertilizing_interval': 'Intervalle de fertilisation :',
+    'local.setup.fertilizing_delay': 'Délai de fertilisation :',
+    'local.setup.calendar_organization': 'Organisation du calendrier',
+    'local.setup.organization_description': 'Modifiez l\'organisation de vos calendriers locaux (Unique, Zones, Personnalisé).',
+    'local.setup.change_organization': 'Changer l\'organisation',
+    'local.setup.save_settings': 'Enregistrer les paramètres',
+    'local.setup.reset_defaults': 'Réinitialiser par défaut',
+    'local.setup.enter_calendar_name': 'Entrez le nom du calendrier :',
+    'local.setup.calendar_added': 'Calendrier ajouté avec succès',
+    'local.setup.calendar_add_failed': 'Échec de l\'ajout du calendrier',
+    'local.setup.settings_saved': 'Paramètres enregistrés',
+    'local.setup.confirm_reset': 'Êtes-vous sûr de vouloir réinitialiser tous les paramètres par défaut ?',
+    'local.setup.reset_complete': 'Paramètres réinitialisés par défaut',
+    'local.setup.no_calendars': 'Aucun calendrier disponible',
+    'local.setup.switch_to': 'Changer',
+    'local.setup.confirm_delete': 'Êtes-vous sûr de vouloir supprimer ce calendrier ?',
+    'local.setup.calendar_deleted': 'Calendrier supprimé avec succès',
+    'local.setup.delete_failed': 'Échec de la suppression du calendrier',
   };
   

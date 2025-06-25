@@ -17,8 +17,7 @@ export async function loadPlantCategories(t) {
     const activeCount = plantings.filter(p => p.status === 'active').length;
     
     // Get translated category name
-    const categoryKey = category.toLowerCase().replace(/\s+/g, '_').replace(/&/g, '').replace(/\s/g, '');
-    const translatedCategory = t(`plant.category.${categoryKey}`) || category;
+    const translatedCategory = t(category) || category;
     
     const categoryEl = document.createElement('div');
     categoryEl.className = 'flex justify-between items-center p-2 bg-gray-50 dark:bg-gray-700 rounded cursor-pointer hover:bg-gray-100 dark:hover:bg-gray-600';

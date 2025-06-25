@@ -1,4 +1,3 @@
-
 // Spanish translations for SimpleGardeningCalendar
 export const es = {
     // UI Elements
@@ -528,5 +527,37 @@ export const es = {
     'google.calendar.name': 'Google Calendar',
     'google.calendar.fallback_name': 'Calendario de Jardín',
     'google.status.manage_integration': 'Gestionar Integración',
+  
+    // Local Setup
+    'local.setup.title': 'Gestionar calendarios locales',
+    'local.setup.current_calendars': 'Calendarios actuales',
+    'local.setup.add_calendar': 'Agregar nuevo calendario',
+    'local.setup.default_settings': 'Configuraciones predeterminadas',
+    'local.setup.default_reminders': 'Recordatorios predeterminados',
+    'local.setup.watering_reminders': 'Recordatorios de riego',
+    'local.setup.fertilizing_reminders': 'Recordatorios de fertilización',
+    'local.setup.phase_reminders': 'Recordatorios de fase',
+    'local.setup.weekly_checks': 'Revisiones semanales',
+    'local.setup.harvest_reminders': 'Recordatorios de cosecha',
+    'local.setup.default_intervals': 'Intervalos predeterminados',
+    'local.setup.watering_interval': 'Intervalo de riego:',
+    'local.setup.fertilizing_interval': 'Intervalo de fertilización:',
+    'local.setup.fertilizing_delay': 'Retraso de fertilización:',
+    'local.setup.calendar_organization': 'Organización del calendario',
+    'local.setup.organization_description': 'Cambia cómo se organizan tus calendarios locales (Único, Áreas, Personalizado).',
+    'local.setup.change_organization': 'Cambiar organización',
+    'local.setup.save_settings': 'Guardar configuraciones',
+    'local.setup.reset_defaults': 'Restablecer valores predeterminados',
+    'local.setup.enter_calendar_name': 'Ingrese el nombre del calendario:',
+    'local.setup.calendar_added': 'Calendario agregado con éxito',
+    'local.setup.calendar_add_failed': 'No se pudo agregar el calendario',
+    'local.setup.settings_saved': 'Configuraciones guardadas',
+    'local.setup.confirm_reset': '¿Está seguro de que desea restablecer todas las configuraciones a los valores predeterminados?',
+    'local.setup.reset_complete': 'Configuraciones restablecidas a los valores predeterminados',
+    'local.setup.no_calendars': 'No hay calendarios disponibles',
+    'local.setup.switch_to': 'Cambiar',
+    'local.setup.confirm_delete': '¿Está seguro de que desea eliminar este calendario?',
+    'local.setup.calendar_deleted': 'Calendario eliminado con éxito',
+    'local.setup.delete_failed': 'No se pudo eliminar el calendario',
   };
   

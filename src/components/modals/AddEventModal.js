@@ -8,6 +8,7 @@ import { createPlantingForm, getPlantingFormData } from './PlantingForm';
 export async function showAddEventModal(date, preselectedType = null) {
   const modal = document.createElement('div');
   modal.className = 'fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center p-4 z-50';
+  modal.selectedDate = date;
 
   const eventTypeValue = preselectedType === 'planting' ? 'planting' : 'custom';
 
@@ -111,12 +112,15 @@ function togglePlantingFields(value) {
   const customFields = document.getElementById('customFields');
   const plantingFields = document.getElementById('plantingFields');
   const titleField = document.getElementById('titleField');
+  const modal = document.querySelector('.fixed.inset-0');
+  const selectedDate = modal?.selectedDate || new Date();
+
   if (value === 'planting') {
     customFields.style.display = 'none';
     plantingFields.style.display = 'block';
     titleField.removeAttribute('required');
-    if (!plantingFields.querySelector('#plantingFields')) {
-      const plantingForm = createPlantingForm(new Date());
+    if (!plantingFields.querySelector('#plantingForm')) {
+      const plantingForm = createPlantingForm(selectedDate);
       plantingFields.appendChild(plantingForm);
     }
   } else {
@@ -127,8 +131,7 @@ function togglePlantingFields(value) {
 }
 
 async function handlePlantingSubmission() {
-  const plantingFields = document.getElementById('plantingFields');
-  const plantingForm = plantingFields.querySelector('#plantingFields');
+  const plantingForm = document.getElementById('plantingForm');
   if (!plantingForm) throw new Error('Planting form not found');
   const plantingData = getPlantingFormData(plantingForm);
   const selectedCalendarId = localStorage.getItem('selectedLocalCalendarId');
