@@ -156,7 +156,9 @@ export function showLocalCalendarWizard() {
     
     // Add close function to window
     window.closeLocalCalendarWizard = () => {
-      modalContainer.style.display = 'none';
+      if (modalContainer && modalContainer.parentNode) {
+        modalContainer.parentNode.removeChild(modalContainer);
+      }
     };
   });
 }

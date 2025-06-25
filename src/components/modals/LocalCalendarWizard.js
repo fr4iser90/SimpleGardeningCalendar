@@ -38,13 +38,56 @@ export function renderLocalCalendarWizardHTML() {
               </div>
             </label>
 
-            <!-- Option 3: Custom Calendars -->
-            <label class="flex items-start space-x-3 p-4 border border-gray-200 dark:border-gray-600 rounded-lg hover:bg-blue-50 dark:hover:bg-blue-900/20 cursor-pointer transition-colors">
+            <!-- Option 3: Custom Calendars (jetzt mit flexibler Eingabe) -->
+            <label class="flex items-start space-x-3 p-4 border border-gray-200 dark:border-gray-600 rounded-lg hover:bg-blue-50 dark:hover:bg-blue-900/20 cursor-pointer transition-colors relative">
               <input type="radio" name="localCalendarOrganization" value="custom" class="mt-1">
               <div class="flex-1">
                 <div class="font-medium text-gray-900 dark:text-white">➕ ${t('local.wizard.option_custom')}</div>
                 <div class="text-sm text-gray-600 dark:text-gray-400">${t('local.wizard.option_custom_desc')}</div>
                 <div class="text-xs text-purple-600 dark:text-purple-400 mt-1">${t('local.wizard.option_custom_creates')}</div>
+                <div id="customCalendarsInputSection" class="mt-3 space-y-2 hidden">
+                  <div class="flex gap-2 items-center">
+                    <select id="customCalendarIconInput" class="p-2 border rounded dark:bg-gray-700 dark:border-gray-600 dark:text-white">
+                      <option value="🌱">🌱</option>
+                      <option value="🌿">🌿</option>
+                      <option value="🌻">🌻</option>
+                      <option value="🌹">🌹</option>
+                      <option value="🌷">🌷</option>
+                      <option value="🌸">🌸</option>
+                      <option value="🌺">🌺</option>
+                      <option value="🌼">🌼</option>
+                      <option value="🌾">🌾</option>
+                      <option value="🌽">🌽</option>
+                      <option value="🥕">🥕</option>
+                      <option value="🍅">🍅</option>
+                      <option value="🥬">🥬</option>
+                      <option value="🥒">🥒</option>
+                      <option value="🫑">🫑</option>
+                      <option value="🧅">🧅</option>
+                      <option value="🧄">🧄</option>
+                      <option value="🥔">🥔</option>
+                      <option value="🍆">🍆</option>
+                      <option value="🌶️">🌶️</option>
+                      <option value="🍓">🍓</option>
+                      <option value="🫐">🫐</option>
+                      <option value="🍇">🍇</option>
+                      <option value="🍎">🍎</option>
+                      <option value="🍐">🍐</option>
+                      <option value="🍑">🍑</option>
+                      <option value="🍒">🍒</option>
+                      <option value="🌳">🌳</option>
+                      <option value="🌲">🌲</option>
+                      <option value="🌴">🌴</option>
+                      <option value="🌵">🌵</option>
+                      <option value="🍄">🍄</option>
+                      <option value="☘️">☘️</option>
+                      <option value="🍀">🍀</option>
+                    </select>
+                    <input type="text" id="customCalendarNameInput" class="p-2 border rounded w-1/2 dark:bg-gray-700 dark:border-gray-600 dark:text-white" placeholder="Kalendername">
+                    <button type="button" id="addCustomCalendarBtn" class="px-3 py-1 bg-green-500 text-white rounded hover:bg-green-600">+</button>
+                  </div>
+                  <div id="customCalendarsList" class="space-y-1"></div>
+                </div>
               </div>
             </label>
           </div>
@@ -67,7 +110,55 @@ export function renderLocalCalendarWizardHTML() {
 // Setup Local Calendar Wizard Event Listeners
 export function setupLocalCalendarWizardEventListeners() {
   const setupCalendarsBtn = document.getElementById('setupLocalCalendarsBtn');
-  
+  const customCalendarsInputSection = document.getElementById('customCalendarsInputSection');
+  const addCustomCalendarBtn = document.getElementById('addCustomCalendarBtn');
+  const customCalendarNameInput = document.getElementById('customCalendarNameInput');
+  const customCalendarIconInput = document.getElementById('customCalendarIconInput');
+  const customCalendarsList = document.getElementById('customCalendarsList');
+
+  let customCalendars = [];
+
+  // Zeige das Custom-Eingabefeld nur, wenn Option 3 gewählt ist
+  document.querySelectorAll('input[name="localCalendarOrganization"]').forEach(radio => {
+    radio.addEventListener('change', (e) => {
+      if (e.target.value === 'custom') {
+        customCalendarsInputSection.classList.remove('hidden');
+      } else {
+        customCalendarsInputSection.classList.add('hidden');
+      }
+    });
+  });
+
+  // Kalender hinzufügen
+  addCustomCalendarBtn?.addEventListener('click', () => {
+    const name = customCalendarNameInput.value.trim();
+    const icon = customCalendarIconInput.value.trim() || '🌱';
+    if (!name) return;
+    customCalendars.push({ name, icon });
+    customCalendarNameInput.value = '';
+    customCalendarIconInput.value = '';
+    renderCustomCalendarsList();
+  });
+
+  // Kalender aus Liste entfernen
+  function renderCustomCalendarsList() {
+    customCalendarsList.innerHTML = customCalendars.map((cal, idx) => `
+      <div class="flex items-center gap-2 bg-gray-100 dark:bg-gray-700 rounded px-2 py-1">
+        <span>${cal.icon}</span>
+        <span>${cal.name}</span>
+        <button type="button" class="ml-auto text-red-500 hover:text-red-700" data-remove-idx="${idx}">✕</button>
+      </div>
+    `).join('');
+    // Remove-Button-Handler
+    customCalendarsList.querySelectorAll('button[data-remove-idx]').forEach(btn => {
+      btn.addEventListener('click', () => {
+        const idx = parseInt(btn.getAttribute('data-remove-idx'));
+        customCalendars.splice(idx, 1);
+        renderCustomCalendarsList();
+      });
+    });
+  }
+
   // Setup calendars button
   setupCalendarsBtn?.addEventListener('click', async () => {
     const selectedOrganization = document.querySelector('input[name="localCalendarOrganization"]:checked')?.value;
@@ -84,12 +175,18 @@ export function setupLocalCalendarWizardEventListeners() {
         return;
       }
     }
+
+    // Bei Option 3: Prüfe, ob mindestens ein Kalender eingegeben wurde
+    if (selectedOrganization === 'custom' && customCalendars.length === 0) {
+      showNotification('Bitte mindestens einen benutzerdefinierten Kalender hinzufügen.', 'warning');
+      return;
+    }
     
     setupCalendarsBtn.disabled = true;
     setupCalendarsBtn.textContent = `⏳ ${t('local.wizard.setting_up_calendars')}`;
     
     try {
-      await handleLocalCalendarSetup(selectedOrganization);
+      await handleLocalCalendarSetup(selectedOrganization, customCalendars);
       
       const wizardDiv = document.getElementById('localCalendarWizard');
       if (wizardDiv) {
@@ -112,7 +209,7 @@ export function setupLocalCalendarWizardEventListeners() {
 }
 
 // Handle local calendar setup based on selected organization
-async function handleLocalCalendarSetup(organizationType) {
+async function handleLocalCalendarSetup(organizationType, customCalendars = []) {
   if (organizationType === 'single') {
     // Alle bestehenden Kalender löschen (Reset)
     const { getDB } = await import('../../core/db/connection.js');
@@ -156,40 +253,19 @@ async function handleLocalCalendarSetup(organizationType) {
       break;
     
     case 'custom':
-      // Create a few example custom calendars
-      const customCalendars = [
-        {
-          name: 'Test Garten',
-          color: '#8B5CF6',
-          icon: '🧪',
-          description: 'Für Experimente und Tests'
-        },
-        {
-          name: 'Indoor Garten',
-          color: '#06B6D4',
-          icon: '🏠',
-          description: 'Für Zimmerpflanzen und Indoor-Anbau'
-        },
-        {
-          name: 'Balkon Garten',
-          color: '#84CC16',
-          icon: '🏢',
-          description: 'Für Balkon- und Terrassenpflanzen'
-        }
-      ];
-      
+      // Erstelle alle benutzerdefinierten Kalender
       const customCalendarIds = [];
       for (const customCalendar of customCalendars) {
         const calendarId = await createLocalCalendar(customCalendar);
         customCalendarIds.push(calendarId);
       }
       
-      // Set the first one as default
+      // Setze den ersten als aktiv
       if (customCalendarIds.length > 0) {
         localStorage.setItem('selectedLocalCalendarId', customCalendarIds[0].toString());
       }
       
-      // Store all created calendars
+      // Speichere alle Kalender
       localStorage.setItem('localCalendars', JSON.stringify({
         type: 'custom',
         calendarIds: customCalendarIds
