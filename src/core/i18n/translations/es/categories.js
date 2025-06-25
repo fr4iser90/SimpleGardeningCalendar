@@ -1,0 +1,136 @@
+// Spanish translations for plant categories and climate zones
+
+export const es = {
+  // Plant Categories
+  'category.vegetables': 'Verduras',
+  'category.herbs': 'Hierbas',
+  'category.fruits': 'Frutas',
+  'category.fruit_trees': 'Árboles frutales',
+  'category.flowers': 'Flores',
+
+  // Plant Tags
+  'tag.root': 'Verdura de raíz',
+  'tag.leafy': 'Verdura de hoja',
+  'tag.legume': 'Legumbre',
+  'tag.spring': 'Primavera',
+  'tag.summer': 'Verano',
+  'tag.fall': 'Otoño',
+  'tag.winter': 'Invierno',
+  'tag.perennial': 'Perenne',
+  'tag.annual': 'Anual',
+  'tag.biennial': 'Bienal',
+  'tag.cannabis': 'Cannabis',
+
+  // Growing Environments
+  'environment.indoor': 'Interior',
+  'environment.outdoor': 'Exterior',
+  'environment.greenhouse': 'Invernadero',
+
+  // Climate Zones
+  'region.temperate_north': 'Zona templada (Norte)',
+  'region.temperate_south': 'Zona templada (Sur)',
+  'region.mediterranean': 'Clima mediterráneo',
+  'region.tropical': 'Clima tropical',
+  'region.subtropical': 'Clima subtropical',
+  'region.continental': 'Clima continental',
+  'region.maritime': 'Clima marítimo',
+  'region.alpine': 'Clima alpino',
+  'region.desert': 'Clima desértico',
+  'region.auto_detect': 'Detección automática',
+
+  // Climate Zone Descriptions
+  'climate.temperate_north.name': 'Zona templada (Norte)',
+  'climate.temperate_north.description': 'Europa, América del Norte, Asia - Clima frío con 4 estaciones',
+  'climate.temperate_north.examples': 'Alemania, Canadá, China del Norte',
+  'climate.temperate_north.characteristics': 'Heladas en invierno, veranos cálidos, precipitaciones moderadas',
+
+  'climate.temperate_south.name': 'Zona templada (Sur)',
+  'climate.temperate_south.description': 'Zonas templadas meridionales - Inviernos más suaves',
+  'climate.temperate_south.examples': 'Sudáfrica, Chile meridional, Sudeste de Australia',
+  'climate.temperate_south.characteristics': 'Inviernos más suaves, veranos cálidos, precipitaciones moderadas',
+
+  'climate.mediterranean.name': 'Clima mediterráneo',
+  'climate.mediterranean.description': 'Veranos calurosos y secos, inviernos suaves y húmedos',
+  'climate.mediterranean.examples': 'Europa del Sur, California, Sudáfrica, Chile',
+  'climate.mediterranean.characteristics': 'Veranos secos, inviernos húmedos, temperaturas suaves',
+
+  'climate.tropical.name': 'Clima tropical',
+  'climate.tropical.description': 'Calor todo el año con alta humedad',
+  'climate.tropical.examples': 'Amazonas, Sudeste Asiático, África Central',
+  'climate.tropical.characteristics': 'Calor todo el año, altas precipitaciones, sin estaciones',
+
+  'climate.subtropical.name': 'Clima subtropical',
+  'climate.subtropical.description': 'Veranos cálidos, inviernos suaves',
+  'climate.subtropical.examples': 'Florida, China del Sur, Norte de Australia',
+  'climate.subtropical.characteristics': 'Veranos calurosos, inviernos suaves, precipitaciones moderadas',
+
+  'climate.continental.name': 'Clima continental',
+  'climate.continental.description': 'Variaciones extremas de temperatura',
+  'climate.continental.examples': 'Medio Oeste USA, Siberia, Mongolia',
+  'climate.continental.characteristics': 'Veranos calurosos, inviernos muy fríos, bajas precipitaciones',
+
+  'climate.maritime.name': 'Clima marítimo',
+  'climate.maritime.description': 'Temperaturas moderadas, alta humedad',
+  'climate.maritime.examples': 'Reino Unido, Nueva Zelanda, Costa del Pacífico',
+  'climate.maritime.characteristics': 'Temperaturas suaves, altas precipitaciones, poco hielo',
+
+  'climate.alpine.name': 'Clima alpino',
+  'climate.alpine.description': 'Clima montañoso con veranos cortos',
+  'climate.alpine.examples': 'Alpes, Montañas Rocosas, Himalaya',
+  'climate.alpine.characteristics': 'Veranos cortos, inviernos largos, mucha nieve',
+
+  'climate.desert.name': 'Clima desértico',
+  'climate.desert.description': 'Muy seco con temperaturas extremas',
+  'climate.desert.examples': 'Sahara, Gobi, Atacama',
+  'climate.desert.characteristics': 'Muy seco, variaciones extremas de temperatura',
+
+  'climate.auto_detect.name': 'Detección automática',
+  'climate.auto_detect.description': 'Detección automática de ubicación basada en dirección IP',
+  'climate.auto_detect.examples': 'Se determinará automáticamente',
+  'climate.auto_detect.characteristics': 'Respetuoso con la privacidad, no requiere entrada manual',
+
+  // Category Metadata
+  'category.vegetables.description': 'Verduras de jardín comunes para producción de alimentos',
+  'category.herbs.description': 'Hierbas culinarias y medicinales',
+  'category.fruits.description': 'Pequeñas plantas frutales y arbustos de bayas',
+  'category.fruit_trees.description': 'Árboles frutales más grandes',
+  'category.flowers.description': 'Flores ornamentales y plantas decorativas',
+
+  // Cannabis Info
+  'cannabis.legal_info': 'Información legal sobre cannabis',
+  'cannabis.medical_legal': 'Cannabis médico legal',
+  'cannabis.recreational_illegal': 'Cannabis recreativo ilegal',
+  'cannabis.decriminalized': 'Despenalizado',
+  'cannabis.fully_legal': 'Completamente legalizado',
+
+  // Country-specific climate information
+  'country.de.climate_info': 'Clima templado con 4 estaciones, heladas en invierno, veranos cálidos',
+  'country.at.climate_info': 'Clima templado, regiones alpinas en el oeste, influencia continental en el este',
+  'country.ch.climate_info': 'Clima templado, regiones alpinas en las montañas, influencia mediterránea en el sur',
+  'country.nl.climate_info': 'Clima marítimo, inviernos suaves, veranos frescos, altas precipitaciones',
+  'country.ca.climate_info': 'Diversas zonas climáticas: costa oeste marítima, interior continental, ártico en el norte',
+  'country.us.climate_info': 'Diversas zonas climáticas: mediterráneo (California), continental (Medio Oeste), subtropical (Florida)',
+  'country.es.climate_info': 'Clima mediterráneo, veranos calurosos y secos, inviernos suaves y húmedos',
+  'country.fr.climate_info': 'Clima templado, influencia mediterránea en el sur, influencias marítimas en el oeste',
+  'country.it.climate_info': 'Clima mediterráneo, regiones alpinas en el norte, subtropical en el sur',
+  'country.pt.climate_info': 'Clima mediterráneo, influencias marítimas, inviernos suaves, veranos cálidos',
+  'country.cz.climate_info': 'Clima templado, influencia continental, inviernos fríos, veranos cálidos',
+  'country.be.climate_info': 'Clima marítimo, temperaturas suaves, altas precipitaciones, poco hielo',
+  'country.uk.climate_info': 'Clima marítimo, inviernos suaves, veranos frescos, altas precipitaciones',
+  'country.au.climate_info': 'Diversas zonas climáticas: tropical (norte), subtropical (este), mediterráneo (sur), desértico (centro)',
+  'country.nz.climate_info': 'Clima marítimo, temperaturas suaves, altas precipitaciones, regiones alpinas en el sur',
+  'country.jp.climate_info': 'Clima templado, subtropical en el sur, regiones alpinas en las montañas',
+  'country.kr.climate_info': 'Clima templado, influencia continental, inviernos fríos, veranos cálidos',
+  'country.th.climate_info': 'Clima tropical, calor todo el año, alta humedad, lluvias monzónicas',
+  'country.uy.climate_info': 'Clima templado (sur), subtropical en el norte, inviernos suaves',
+  'country.mx.climate_info': 'Diversas zonas climáticas: tropical (sur), subtropical (centro), desértico (norte)',
+  'country.br.climate_info': 'Clima tropical, subtropical en el sur, altas precipitaciones en el Amazonas',
+  'country.ar.climate_info': 'Clima templado (sur), subtropical (norte), seco en el oeste',
+  'country.cl.climate_info': 'Diversas zonas climáticas: mediterráneo (centro), desértico (norte), templado (sur)',
+  'country.co.climate_info': 'Clima tropical, regiones alpinas en los Andes, alta humedad',
+  'country.pe.climate_info': 'Diversas zonas climáticas: tropical (este), desértico (costa), alpino (Andes)',
+  'country.ec.climate_info': 'Clima tropical, regiones alpinas en los Andes, alta humedad',
+
+  // Default climate
+  'climate.default': 'Clima templado estándar'
+};
