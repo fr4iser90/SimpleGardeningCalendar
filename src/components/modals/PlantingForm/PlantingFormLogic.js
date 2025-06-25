@@ -12,7 +12,7 @@ import { getPhaseEmoji } from '../../../core/db/utils.js';
 
 export function createEnvironmentOptions() {
   return Object.entries(GROWING_ENVIRONMENTS).map(([key, value]) => {
-    const translatedEnv = t(`environment.${value}`);
+    const translatedEnv = t(value);
     return `<option value="${value}">${translatedEnv}</option>`;
   }).join('');
 }
@@ -26,20 +26,17 @@ export function createRegionOptions() {
 
 export function createCategoryOptions() {
   return Object.values(PLANT_CATEGORIES).map(category => {
-    const translatedCategory = t(`plant.category.${category.toLowerCase().replace(/\s+/g, '_').replace(/&/g, '').replace(/\s/g, '')}`) || category;
+    const translatedCategory = t(category) || category;
     return `<option value="${category}">${translatedCategory}</option>`;
   }).join('');
 }
 
-export function createPlantOptions(environment = 'indoor') {
+export function createPlantOptions(environment = 'environment.indoor') {
+  const envKey = environment.replace('environment.', '');
   const registry = getPlantRegistry();
   const plants = Array.from(registry.entries());
-  
   return plants
-    .filter(([key, plant]) => {
-      // Check if plant supports the selected environment
-      return plant.environments && plant.environments[environment];
-    })
+    .filter(([key, plant]) => plant.environments && plant.environments[envKey])
     .map(([key, plant]) => {
       const legalNote = plant.legalNote ? ' ⚠️' : '';
       return `<option value="${key}" data-category="${plant.category}">${plant.name}${legalNote}</option>`;
@@ -57,24 +54,18 @@ export function updateEnvironmentFields(environment) {
   }
 }
 
-export function updatePlantOptions(category, environment = 'indoor') {
+export function updatePlantOptions(category, environment = 'environment.indoor') {
   const plantTypeSelect = document.getElementById('plantTypeSelect');
   if (!plantTypeSelect) return;
-  
+  const envKey = environment.replace('environment.', '');
   const registry = getPlantRegistry();
   const plants = Array.from(registry.entries());
-  
-  // Clear existing options
   plantTypeSelect.innerHTML = `<option value="">${t('modal.plant_type.select')}</option>`;
-  
-  // Filter plants by category and environment
   const filteredPlants = plants.filter(([key, plant]) => {
     const categoryMatch = !category || plant.category === category;
-    const environmentMatch = plant.environments && plant.environments[environment];
+    const environmentMatch = plant.environments && plant.environments[envKey];
     return categoryMatch && environmentMatch;
   });
-  
-  // Add filtered options
   filteredPlants.forEach(([key, plant]) => {
     const option = document.createElement('option');
     option.value = key;

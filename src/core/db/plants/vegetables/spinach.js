@@ -22,7 +22,8 @@ function formatTemperature(fahrenheitRange) {
 
 export const spinach = {
   name: 'Spinach',
-  category: 'Vegetables',
+  category: 'category.vegetables',
+  emoji: '🥬',
   tags: [PLANT_TAGS.LEAFY, PLANT_TAGS.ANNUAL],
   environments: {
     indoor: {

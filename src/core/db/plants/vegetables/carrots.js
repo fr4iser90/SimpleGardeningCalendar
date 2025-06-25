@@ -7,7 +7,7 @@ import { PLANT_TAGS } from '../categories.js';
 
 export const carrots = {
   name: 'Carrots',
-  category: 'Vegetables',
+  category: 'category.vegetables',
   tags: [PLANT_TAGS.ROOT, PLANT_TAGS.ANNUAL],
   emoji: '🥕',
   environments: {

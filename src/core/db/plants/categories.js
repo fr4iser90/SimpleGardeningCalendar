@@ -4,55 +4,55 @@
  */
 
 export const PLANT_CATEGORIES = {
-  VEGETABLES: 'Vegetables',
-  HERBS: 'Herbs',
-  FRUITS: 'Fruits',
-  FRUIT_TREES: 'Fruit Trees',
-  FLOWERS: 'Flowers',
+  VEGETABLES: 'category.vegetables',
+  HERBS: 'category.herbs',
+  FRUITS: 'category.fruits',
+  FRUIT_TREES: 'category.fruit_trees',
+  FLOWERS: 'category.flowers',
 };
 
 export const PLANT_TAGS = {
-  ROOT: 'Root Vegetable',
-  LEAFY: 'Leafy Green',
-  LEGUME: 'Legume',
-  SPRING: 'Spring',
-  SUMMER: 'Summer',
-  FALL: 'Fall',
-  WINTER: 'Winter',
-  PERENNIAL: 'Perennial',
-  ANNUAL: 'Annual',
-  BIENNIAL: 'Biennial',
-  CANNABIS: 'Cannabis', // Optional, länderabhängig
+  ROOT: 'tag.root',
+  LEAFY: 'tag.leafy',
+  LEGUME: 'tag.legume',
+  SPRING: 'tag.spring',
+  SUMMER: 'tag.summer',
+  FALL: 'tag.fall',
+  WINTER: 'tag.winter',
+  PERENNIAL: 'tag.perennial',
+  ANNUAL: 'tag.annual',
+  BIENNIAL: 'tag.biennial',
+  CANNABIS: 'tag.cannabis', // Optional, country-dependent
 };
 
 export const CATEGORY_METADATA = {
   [PLANT_CATEGORIES.VEGETABLES]: {
-    name: 'Vegetables',
-    description: 'Common garden vegetables for food production',
+    name: 'category.vegetables',
+    description: 'category.vegetables.description',
     icon: '🥕',
     color: '#F59E0B',
   },
   [PLANT_CATEGORIES.HERBS]: {
-    name: 'Herbs',
-    description: 'Culinary and medicinal herbs',
+    name: 'category.herbs',
+    description: 'category.herbs.description',
     icon: '🌱',
     color: '#10B981',
   },
   [PLANT_CATEGORIES.FRUITS]: {
-    name: 'Fruits',
-    description: 'Small fruit plants and berry bushes',
+    name: 'category.fruits',
+    description: 'category.fruits.description',
     icon: '🍓',
     color: '#EF4444',
   },
   [PLANT_CATEGORIES.FRUIT_TREES]: {
-    name: 'Fruit Trees',
-    description: 'Larger fruit-bearing trees',
+    name: 'category.fruit_trees',
+    description: 'category.fruit_trees.description',
     icon: '🍎',
     color: '#DC2626',
   },
   [PLANT_CATEGORIES.FLOWERS]: {
-    name: 'Flowers',
-    description: 'Ornamental flowers and decorative plants',
+    name: 'category.flowers',
+    description: 'category.flowers.description',
     icon: '🌸',
     color: '#EC4899',
   },
@@ -62,185 +62,159 @@ export const CATEGORY_METADATA = {
 export const COUNTRY_SETTINGS = {
   DE: {
     showCannabis: true,
-    cannabisInfo:
-      'Legal for personal use (up to 3 plants, 25g possession) since 2024. Medical cannabis legal since 2017.',
+    cannabisInfo: 'cannabis.de.info',
     climateZone: 'temperate_north',
-    climateInfo: 'Gemäßigtes Klima mit 4 Jahreszeiten, Frost im Winter, warme Sommer'
+    climateInfo: 'country.de.climate_info'
   },
   AT: {
     showCannabis: false,
-    cannabisInfo:
-      'Illegal for recreational use. Medical cannabis available with prescription since 2008.',
+    cannabisInfo: 'cannabis.at.info',
     climateZone: 'temperate_north',
-    climateInfo: 'Gemäßigtes Klima, alpine Regionen im Westen, kontinentaler Einfluss im Osten'
+    climateInfo: 'country.at.climate_info'
   },
   CH: {
     showCannabis: true,
-    cannabisInfo:
-      'Decriminalized (up to 10g). Medical cannabis legal. Several cities allow regulated sales.',
+    cannabisInfo: 'cannabis.ch.info',
     climateZone: 'temperate_north',
-    climateInfo: 'Gemäßigtes Klima, alpine Regionen in den Bergen, mediterraner Einfluss im Süden'
+    climateInfo: 'country.ch.climate_info'
   },
   NL: {
     showCannabis: true,
-    cannabisInfo:
-      'Decriminalized for personal use. Coffee shops allowed to sell small amounts. Medical cannabis legal.',
+    cannabisInfo: 'cannabis.nl.info',
     climateZone: 'maritime',
-    climateInfo: 'Maritimes Klima, milde Winter, kühle Sommer, hohe Niederschläge'
+    climateInfo: 'country.nl.climate_info'
   },
   CA: {
     showCannabis: true,
-    cannabisInfo:
-      'Fully legal for recreational and medical use since 2018. Adults can grow up to 4 plants.',
+    cannabisInfo: 'cannabis.ca.info',
     climateZone: 'temperate_north',
-    climateInfo: 'Verschiedene Klimazonen: maritime Westküste, kontinental im Landesinneren, arktisch im Norden'
+    climateInfo: 'country.ca.climate_info'
   },
   US: {
     showCannabis: false,
-    cannabisInfo:
-      'Federal illegal, but legal in 24 states for recreational use. Medical cannabis legal in 38 states.',
+    cannabisInfo: 'cannabis.us.info',
     climateZone: 'mixed',
-    climateInfo: 'Verschiedene Klimazonen: mediterran (Kalifornien), kontinental (Mittlerer Westen), subtropisch (Florida)'
+    climateInfo: 'country.us.climate_info'
   },
   ES: {
     showCannabis: false,
-    cannabisInfo:
-      'Illegal for recreational use. Medical cannabis legal since 2017. Private cultivation decriminalized.',
+    cannabisInfo: 'cannabis.es.info',
     climateZone: 'mediterranean',
-    climateInfo: 'Mittelmeerklima, heiße trockene Sommer, milde feuchte Winter'
+    climateInfo: 'country.es.climate_info'
   },
   FR: {
     showCannabis: false,
-    cannabisInfo:
-      'Illegal for recreational use. Medical cannabis legal since 2021. CBD products legal.',
+    cannabisInfo: 'cannabis.fr.info',
     climateZone: 'temperate_north',
-    climateInfo: 'Gemäßigtes Klima, mediterraner Einfluss im Süden, maritime Einflüsse im Westen'
+    climateInfo: 'country.fr.climate_info'
   },
   IT: {
     showCannabis: false,
-    cannabisInfo:
-      'Illegal for recreational use. Medical cannabis legal since 2013. CBD products legal.',
+    cannabisInfo: 'cannabis.it.info',
     climateZone: 'mediterranean',
-    climateInfo: 'Mittelmeerklima, alpine Regionen im Norden, subtropisch im Süden'
+    climateInfo: 'country.it.climate_info'
   },
   PT: {
     showCannabis: true,
-    cannabisInfo:
-      'Decriminalized for personal use since 2001. Medical cannabis legal since 2018.',
+    cannabisInfo: 'cannabis.pt.info',
     climateZone: 'mediterranean',
-    climateInfo: 'Mittelmeerklima, maritime Einflüsse, milde Winter, warme Sommer'
+    climateInfo: 'country.pt.climate_info'
   },
   CZ: {
     showCannabis: true,
-    cannabisInfo:
-      'Decriminalized for personal use (up to 15g). Medical cannabis legal since 2013.',
+    cannabisInfo: 'cannabis.cz.info',
     climateZone: 'temperate_north',
-    climateInfo: 'Gemäßigtes Klima, kontinentaler Einfluss, kalte Winter, warme Sommer'
+    climateInfo: 'country.cz.climate_info'
   },
   BE: {
     showCannabis: false,
-    cannabisInfo:
-      'Illegal for recreational use. Medical cannabis legal since 2015. CBD products legal.',
+    cannabisInfo: 'cannabis.be.info',
     climateZone: 'maritime',
-    climateInfo: 'Maritimes Klima, milde Temperaturen, hohe Niederschläge, wenig Frost'
+    climateInfo: 'country.be.climate_info'
   },
   UK: {
     showCannabis: false,
-    cannabisInfo:
-      'Illegal for recreational use. Medical cannabis legal since 2018. CBD products legal.',
+    cannabisInfo: 'cannabis.uk.info',
     climateZone: 'maritime',
-    climateInfo: 'Maritimes Klima, milde Winter, kühle Sommer, hohe Niederschläge'
+    climateInfo: 'country.uk.climate_info'
   },
   AU: {
     showCannabis: false,
-    cannabisInfo:
-      'Illegal federally. Medical cannabis legal in all states. Recreational legal in ACT only.',
+    cannabisInfo: 'cannabis.au.info',
     climateZone: 'mixed',
-    climateInfo: 'Verschiedene Klimazonen: tropisch (Norden), subtropisch (Osten), mediterran (Süden), wüstenhaft (Zentrum)'
+    climateInfo: 'country.au.climate_info'
   },
   NZ: {
     showCannabis: false,
-    cannabisInfo:
-      'Illegal for recreational use. Medical cannabis legal since 2020. Referendum failed in 2020.',
+    cannabisInfo: 'cannabis.nz.info',
     climateZone: 'maritime',
-    climateInfo: 'Maritimes Klima, milde Temperaturen, hohe Niederschläge, alpine Regionen im Süden'
+    climateInfo: 'country.nz.climate_info'
   },
   JP: {
     showCannabis: false,
-    cannabisInfo:
-      'Strictly illegal for recreational use. Medical cannabis very limited. CBD products legal.',
+    cannabisInfo: 'cannabis.jp.info',
     climateZone: 'temperate_north',
-    climateInfo: 'Gemäßigtes Klima, subtropisch im Süden, alpine Regionen in den Bergen'
+    climateInfo: 'country.jp.climate_info'
   },
   KR: {
     showCannabis: false,
-    cannabisInfo:
-      'Illegal for recreational use. Medical cannabis legal since 2018. CBD products legal.',
+    cannabisInfo: 'cannabis.kr.info',
     climateZone: 'temperate_north',
-    climateInfo: 'Gemäßigtes Klima, kontinentaler Einfluss, kalte Winter, warme Sommer'
+    climateInfo: 'country.kr.climate_info'
   },
   TH: {
     showCannabis: true,
-    cannabisInfo:
-      'Decriminalized since 2022. Medical cannabis legal. Recreational use partially allowed.',
+    cannabisInfo: 'cannabis.th.info',
     climateZone: 'tropical',
-    climateInfo: 'Tropisches Klima, ganzjährig warm, hohe Luftfeuchtigkeit, Monsunregen'
+    climateInfo: 'country.th.climate_info'
   },
   UY: {
     showCannabis: true,
-    cannabisInfo:
-      'First country to fully legalize cannabis (2013). Adults can grow up to 6 plants.',
+    cannabisInfo: 'cannabis.uy.info',
     climateZone: 'temperate_south',
-    climateInfo: 'Gemäßigtes Klima (Süd), subtropisch im Norden, milde Winter'
+    climateInfo: 'country.uy.climate_info'
   },
   MX: {
     showCannabis: false,
-    cannabisInfo:
-      'Decriminalized for personal use (up to 5g). Medical cannabis legal. Recreational legalization pending.',
+    cannabisInfo: 'cannabis.mx.info',
     climateZone: 'mixed',
-    climateInfo: 'Verschiedene Klimazonen: tropisch (Süden), subtropisch (Zentrum), wüstenhaft (Norden)'
+    climateInfo: 'country.mx.climate_info'
   },
   BR: {
     showCannabis: false,
-    cannabisInfo:
-      'Illegal for recreational use. Medical cannabis legal since 2019. CBD products legal.',
+    cannabisInfo: 'cannabis.br.info',
     climateZone: 'tropical',
-    climateInfo: 'Tropisches Klima, subtropisch im Süden, hohe Niederschläge im Amazonas'
+    climateInfo: 'country.br.climate_info'
   },
   AR: {
     showCannabis: false,
-    cannabisInfo:
-      'Illegal for recreational use. Medical cannabis legal since 2017. CBD products legal.',
+    cannabisInfo: 'cannabis.ar.info',
     climateZone: 'temperate_south',
-    climateInfo: 'Gemäßigtes Klima (Süden), subtropisch (Norden), trocken im Westen'
+    climateInfo: 'country.ar.climate_info'
   },
   CL: {
     showCannabis: false,
-    cannabisInfo:
-      'Decriminalized for personal use. Medical cannabis legal since 2015. Recreational illegal.',
+    cannabisInfo: 'cannabis.cl.info',
     climateZone: 'mixed',
-    climateInfo: 'Verschiedene Klimazonen: mediterran (Mitte), wüstenhaft (Norden), gemäßigt (Süden)'
+    climateInfo: 'country.cl.climate_info'
   },
   CO: {
     showCannabis: true,
-    cannabisInfo:
-      'Fully legal for recreational and medical use since 2016. Adults can grow up to 20 plants.',
+    cannabisInfo: 'cannabis.co.info',
     climateZone: 'tropical',
-    climateInfo: 'Tropisches Klima, alpine Regionen in den Anden, hohe Luftfeuchtigkeit'
+    climateInfo: 'country.co.climate_info'
   },
   PE: {
     showCannabis: false,
-    cannabisInfo:
-      'Decriminalized for personal use. Medical cannabis legal since 2017. Recreational illegal.',
+    cannabisInfo: 'cannabis.pe.info',
     climateZone: 'mixed',
-    climateInfo: 'Verschiedene Klimazonen: tropisch (Osten), wüstenhaft (Küste), alpine (Anden)'
+    climateInfo: 'country.pe.climate_info'
   },
   EC: {
     showCannabis: false,
-    cannabisInfo:
-      'Decriminalized for personal use (up to 10g). Medical cannabis legal. Recreational illegal.',
+    cannabisInfo: 'cannabis.ec.info',
     climateZone: 'tropical',
-    climateInfo: 'Tropisches Klima, alpine Regionen in den Anden, hohe Luftfeuchtigkeit'
+    climateInfo: 'country.ec.climate_info'
   },
 };
 
@@ -273,91 +247,91 @@ export function getCountryClimateInfo(countryCode) {
   }
   return {
     zone: 'temperate_north',
-    info: 'Standard gemäßigtes Klima',
+    info: 'climate.default',
     description: CLIMATE_ZONE_DESCRIPTIONS.temperate_north
   };
 }
 
 export const GROWING_ENVIRONMENTS = {
-  INDOOR: 'indoor',
-  OUTDOOR: 'outdoor',
-  GREENHOUSE: 'greenhouse'
+  INDOOR: 'environment.indoor',
+  OUTDOOR: 'environment.outdoor',
+  GREENHOUSE: 'environment.greenhouse'
 };
 
 export const SEASONAL_REGIONS = {
-  TEMPERATE_NORTH: 'temperate_north',
-  TEMPERATE_SOUTH: 'temperate_south',
-  MEDITERRANEAN: 'mediterranean',
-  TROPICAL: 'tropical',
-  SUBTROPICAL: 'subtropical',
-  CONTINENTAL: 'continental',
-  MARITIME: 'maritime',
-  ALPINE: 'alpine',
-  DESERT: 'desert',
-  AUTO_DETECT: 'auto_detect'
+  TEMPERATE_NORTH: 'region.temperate_north',
+  TEMPERATE_SOUTH: 'region.temperate_south',
+  MEDITERRANEAN: 'region.mediterranean',
+  TROPICAL: 'region.tropical',
+  SUBTROPICAL: 'region.subtropical',
+  CONTINENTAL: 'region.continental',
+  MARITIME: 'region.maritime',
+  ALPINE: 'region.alpine',
+  DESERT: 'region.desert',
+  AUTO_DETECT: 'region.auto_detect'
 };
 
 // Climate zone descriptions for better UX
 export const CLIMATE_ZONE_DESCRIPTIONS = {
   temperate_north: {
-    name: 'Gemäßigte Zone (Nord)',
-    description: 'Europa, Nordamerika, Asien - Kaltes Klima mit 4 Jahreszeiten',
-    examples: 'Deutschland, Kanada, Nordchina',
-    characteristics: 'Frost im Winter, warme Sommer, moderate Niederschläge'
+    name: 'climate.temperate_north.name',
+    description: 'climate.temperate_north.description',
+    examples: 'climate.temperate_north.examples',
+    characteristics: 'climate.temperate_north.characteristics'
   },
   temperate_south: {
-    name: 'Gemäßigte Zone (Süd)',
-    description: 'Südliche gemäßigte Zonen - Mildere Winter',
-    examples: 'Südafrika, Südchile, Südostaustralien',
-    characteristics: 'Mildere Winter, warme Sommer, moderate Niederschläge'
+    name: 'climate.temperate_south.name',
+    description: 'climate.temperate_south.description',
+    examples: 'climate.temperate_south.examples',
+    characteristics: 'climate.temperate_south.characteristics'
   },
   mediterranean: {
-    name: 'Mittelmeerklima',
-    description: 'Heiße, trockene Sommer, milde, feuchte Winter',
-    examples: 'Südeuropa, Kalifornien, Südafrika, Chile',
-    characteristics: 'Trockene Sommer, feuchte Winter, milde Temperaturen'
+    name: 'climate.mediterranean.name',
+    description: 'climate.mediterranean.description',
+    examples: 'climate.mediterranean.examples',
+    characteristics: 'climate.mediterranean.characteristics'
   },
   tropical: {
-    name: 'Tropisches Klima',
-    description: 'Ganzjährig warm mit hoher Luftfeuchtigkeit',
-    examples: 'Amazonas, Südostasien, Zentralafrika',
-    characteristics: 'Ganzjährig warm, hohe Niederschläge, keine Jahreszeiten'
+    name: 'climate.tropical.name',
+    description: 'climate.tropical.description',
+    examples: 'climate.tropical.examples',
+    characteristics: 'climate.tropical.characteristics'
   },
   subtropical: {
-    name: 'Subtropisches Klima',
-    description: 'Warme Sommer, milde Winter',
-    examples: 'Florida, Südchina, Nordaustralien',
-    characteristics: 'Heiße Sommer, milde Winter, moderate Niederschläge'
+    name: 'climate.subtropical.name',
+    description: 'climate.subtropical.description',
+    examples: 'climate.subtropical.examples',
+    characteristics: 'climate.subtropical.characteristics'
   },
   continental: {
-    name: 'Kontinentales Klima',
-    description: 'Extreme Temperaturschwankungen',
-    examples: 'Mittlerer Westen USA, Sibirien, Mongolei',
-    characteristics: 'Heiße Sommer, sehr kalte Winter, geringe Niederschläge'
+    name: 'climate.continental.name',
+    description: 'climate.continental.description',
+    examples: 'climate.continental.examples',
+    characteristics: 'climate.continental.characteristics'
   },
   maritime: {
-    name: 'Maritimes Klima',
-    description: 'Gemäßigte Temperaturen, hohe Luftfeuchtigkeit',
-    examples: 'Großbritannien, Neuseeland, Pazifikküste',
-    characteristics: 'Milde Temperaturen, hohe Niederschläge, wenig Frost'
+    name: 'climate.maritime.name',
+    description: 'climate.maritime.description',
+    examples: 'climate.maritime.examples',
+    characteristics: 'climate.maritime.characteristics'
   },
   alpine: {
-    name: 'Alpines Klima',
-    description: 'Gebirgsklima mit kurzen Sommern',
-    examples: 'Alpen, Rocky Mountains, Himalaya',
-    characteristics: 'Kurze Sommer, lange Winter, viel Schnee'
+    name: 'climate.alpine.name',
+    description: 'climate.alpine.description',
+    examples: 'climate.alpine.examples',
+    characteristics: 'climate.alpine.characteristics'
   },
   desert: {
-    name: 'Wüstenklima',
-    description: 'Sehr trocken mit extremen Temperaturen',
-    examples: 'Sahara, Gobi, Atacama',
-    characteristics: 'Sehr trocken, extreme Temperaturschwankungen'
+    name: 'climate.desert.name',
+    description: 'climate.desert.description',
+    examples: 'climate.desert.examples',
+    characteristics: 'climate.desert.characteristics'
   },
   auto_detect: {
-    name: 'Automatisch erkennen',
-    description: 'Standort automatisch basierend auf IP-Adresse erkennen',
-    examples: 'Wird automatisch ermittelt',
-    characteristics: 'Datenschutzfreundlich, keine manuelle Eingabe nötig'
+    name: 'climate.auto_detect.name',
+    description: 'climate.auto_detect.description',
+    examples: 'climate.auto_detect.examples',
+    characteristics: 'climate.auto_detect.characteristics'
   }
 };
 
@@ -410,22 +384,23 @@ export async function autoDetectLocation() {
       success: false,
       error: error.message,
       climateZone: 'temperate_north', // Default fallback
-      climateInfo: 'Standard gemäßigtes Klima'
+      climateInfo: 'climate.default'
     };
   }
 }
 
 /**
  * Create enhanced region options with descriptions
+ * @param {Function} translateFunction - Translation function (e.g., t from i18n)
  * @returns {string} HTML for region select with descriptions
  */
-export function createEnhancedRegionOptions() {
+export function createEnhancedRegionOptions(translateFunction) {
   return Object.entries(SEASONAL_REGIONS).map(([key, value]) => {
-    const description = CLIMATE_ZONE_DESCRIPTIONS[value];
-    const translatedName = t(`region.${value}`) || description.name;
+    const description = CLIMATE_ZONE_DESCRIPTIONS[value.replace('region.', '')];
+    const translatedName = translateFunction ? translateFunction(value) : value;
     
     return `
-      <option value="${value}" data-description="${description.description}" data-examples="${description.examples}">
+      <option value="${value.replace('region.', '')}" data-description="${description?.description || ''}" data-examples="${description?.examples || ''}">
         ${translatedName}
       </option>
     `;

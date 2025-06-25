@@ -20,7 +20,8 @@ function formatTemperature(fahrenheitRange) {
 
 export const cucumber = {
   name: 'Cucumber',
-  category: 'Vegetables',
+  category: 'category.vegetables',
+  emoji: '🥒',
   environments: {
     indoor: {
       phases: {

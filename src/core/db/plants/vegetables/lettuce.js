@@ -7,7 +7,8 @@ import { PLANT_TAGS } from '../categories.js';
 
 export const lettuce = {
   name: 'Lettuce',
-  category: 'Vegetables',
+  category: 'category.vegetables',
+  emoji: '🥬',
   tags: [PLANT_TAGS.LEAFY, PLANT_TAGS.ANNUAL],
   environments: {
     indoor: {
