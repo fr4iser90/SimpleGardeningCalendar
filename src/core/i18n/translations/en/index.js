@@ -1,0 +1,9 @@
+import { en as ui } from './ui.js';
+import { en as categories } from './categories.js';
+import { en as plants } from './plants/index.js';
+
+export const en = {
+  ...ui,
+  ...categories,
+  ...plants,
+};

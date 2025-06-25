@@ -1,11 +1,11 @@
 // Internationalization (i18n) System for SimpleGardeningCalendar
 // Modular i18n system with dynamic language loading
 
-import { de } from './translations/de.js';
-import { en } from './translations/en.js';
-import { fr } from './translations/fr.js';
-import { es } from './translations/es.js';
-import { it } from './translations/it.js';
+import { de } from './translations/de/index.js';
+import { en } from './translations/en/index.js';
+import { fr } from './translations/fr/index.js';
+import { es } from './translations/es/index.js';
+import { it } from './translations/it/index.js';
 import { updateUITranslations } from '../../components/ui/LanguageSwitch.js';
 import { COUNTRY_SETTINGS } from '../db/plants/categories.js';
 
