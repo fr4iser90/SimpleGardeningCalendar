@@ -174,9 +174,17 @@ function getIntelligentEventType(phaseName, plantData) {
 function getPhaseMediumData(plantData, phaseName, medium = 'soil') {
   const phases = getPlantPhases(plantData);
   const phaseData = phases[phaseName];
-  if (phaseData?.[medium]) {
+  
+  if (!phaseData) {
+    return {};
+  }
+  
+  // Check if phase has medium-specific data (new structure)
+  if (phaseData[medium]) {
     return phaseData[medium];
   }
+  
+  // Fallback to old structure or direct phase data
   return phaseData || {};
 }
 

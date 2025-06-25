@@ -9,51 +9,449 @@ export const kale = {
   name: 'Kale',
   category: 'Vegetables',
   tags: [PLANT_TAGS.LEAFY, PLANT_TAGS.ANNUAL],
-  phases: {
-    germination: {
-      days: 7,
-      description: 'Seeds sprouting',
-      care: 'Keep cool and moist',
-      watering: {
-        interval: 1,
-        description: 'Keep soil moist during germination',
-      },
-      fertilizing: {
-        interval: 0,
-        description: 'No fertilizing during germination',
+  environments: {
+    indoor: {
+      phases: {
+        germination: {
+          days: 7,
+          description: 'Seeds sprouting',
+          care: 'Keep cool and moist',
+          editable: true,
+          soil: {
+            watering: {
+              interval: 1,
+              description: 'Keep soil moist during germination',
+            },
+            fertilizing: {
+              interval: 0,
+              description: 'No fertilizing during germination',
+            },
+          },
+          hydro: {
+            watering: {
+              interval: 0,
+              description: 'Continuous moisture in rockwool or hydroponic system',
+            },
+            fertilizing: {
+              interval: 0,
+              description: 'No nutrients during germination',
+            },
+          },
+          coco: {
+            watering: {
+              interval: 1,
+              description: 'Keep coco moist during germination',
+            },
+            fertilizing: {
+              interval: 0,
+              description: 'No fertilizing during germination',
+            },
+          },
+        },
+        seedling: {
+          days: 14,
+          description: 'Young plant development',
+          care: 'Provide adequate light',
+          editable: true,
+          soil: {
+            watering: {
+              interval: 2,
+              description: 'Water when top inch of soil is dry',
+            },
+            fertilizing: {
+              interval: 0,
+              description: 'No fertilizing during seedling stage',
+            },
+          },
+          hydro: {
+            watering: {
+              interval: 0,
+              description: 'Continuous flow, low EC',
+            },
+            fertilizing: {
+              interval: 7,
+              description: 'Light nutrients, EC 0.5-0.8',
+            },
+          },
+          coco: {
+            watering: {
+              interval: 1,
+              description: 'Daily watering in coco',
+            },
+            fertilizing: {
+              interval: 7,
+              description: 'Light feeding, EC 0.5-0.8',
+            },
+          },
+        },
+        vegetative: {
+          days: 35,
+          description: 'Leaf production',
+          care: 'Regular feeding for leaf growth',
+          editable: true,
+          soil: {
+            watering: {
+              interval: 3,
+              description: 'Deep watering every 3 days',
+            },
+            fertilizing: {
+              interval: 14,
+              description: 'Fertilize every 2 weeks during vegetative growth',
+            },
+          },
+          hydro: {
+            watering: {
+              interval: 0,
+              description: 'Continuous flow, moderate EC',
+            },
+            fertilizing: {
+              interval: 14,
+              description: 'Balanced nutrients, EC 1.0-1.2',
+            },
+          },
+          coco: {
+            watering: {
+              interval: 1,
+              description: 'Daily watering in coco',
+            },
+            fertilizing: {
+              interval: 14,
+              description: 'Balanced feeding, EC 1.0-1.2',
+            },
+          },
+        },
+        harvest: {
+          days: 30,
+          description: 'Continuous harvest',
+          care: 'Harvest outer leaves, leave center to grow',
+          editable: true,
+          soil: {
+            watering: {
+              interval: 7,
+              description: 'Weekly watering during harvest',
+            },
+            fertilizing: {
+              interval: 21,
+              description: 'Fertilize every 3 weeks during harvest',
+            },
+          },
+          hydro: {
+            watering: {
+              interval: 0,
+              description: 'Continuous flow, moderate EC',
+            },
+            fertilizing: {
+              interval: 21,
+              description: 'Balanced nutrients, EC 1.0-1.2',
+            },
+          },
+          coco: {
+            watering: {
+              interval: 1,
+              description: 'Daily watering in coco',
+            },
+            fertilizing: {
+              interval: 21,
+              description: 'Balanced feeding, EC 1.0-1.2',
+            },
+          },
+        },
       },
     },
-    seedling: {
-      days: 14,
-      description: 'Young plant development',
-      care: 'Provide adequate light',
-      watering: {
-        interval: 2,
-        description: 'Water when top inch of soil is dry',
-      },
-      fertilizing: {
-        interval: 0,
-        description: 'No fertilizing during seedling stage',
+    outdoor: {
+      phases: {
+        germination: {
+          days: 7,
+          description: 'Seeds sprouting',
+          care: 'Keep cool and moist',
+          editable: false,
+          soil: {
+            watering: {
+              interval: 1,
+              description: 'Keep soil moist during germination',
+            },
+            fertilizing: {
+              interval: 0,
+              description: 'No fertilizing during germination',
+            },
+          },
+          hydro: {
+            watering: {
+              interval: 0,
+              description: 'Continuous moisture in rockwool or hydroponic system',
+            },
+            fertilizing: {
+              interval: 0,
+              description: 'No nutrients during germination',
+            },
+          },
+          coco: {
+            watering: {
+              interval: 1,
+              description: 'Keep coco moist during germination',
+            },
+            fertilizing: {
+              interval: 0,
+              description: 'No fertilizing during germination',
+            },
+          },
+        },
+        seedling: {
+          days: 14,
+          description: 'Young plant development',
+          care: 'Provide adequate light',
+          editable: false,
+          soil: {
+            watering: {
+              interval: 2,
+              description: 'Water when top inch of soil is dry',
+            },
+            fertilizing: {
+              interval: 0,
+              description: 'No fertilizing during seedling stage',
+            },
+          },
+          hydro: {
+            watering: {
+              interval: 0,
+              description: 'Continuous flow, low EC',
+            },
+            fertilizing: {
+              interval: 7,
+              description: 'Light nutrients, EC 0.5-0.8',
+            },
+          },
+          coco: {
+            watering: {
+              interval: 1,
+              description: 'Daily watering in coco',
+            },
+            fertilizing: {
+              interval: 7,
+              description: 'Light feeding, EC 0.5-0.8',
+            },
+          },
+        },
+        vegetative: {
+          days: 35,
+          description: 'Leaf production',
+          care: 'Regular feeding for leaf growth',
+          editable: false,
+          soil: {
+            watering: {
+              interval: 3,
+              description: 'Deep watering every 3 days',
+            },
+            fertilizing: {
+              interval: 14,
+              description: 'Fertilize every 2 weeks during vegetative growth',
+            },
+          },
+          hydro: {
+            watering: {
+              interval: 0,
+              description: 'Continuous flow, moderate EC',
+            },
+            fertilizing: {
+              interval: 14,
+              description: 'Balanced nutrients, EC 1.0-1.2',
+            },
+          },
+          coco: {
+            watering: {
+              interval: 1,
+              description: 'Daily watering in coco',
+            },
+            fertilizing: {
+              interval: 14,
+              description: 'Balanced feeding, EC 1.0-1.2',
+            },
+          },
+        },
+        harvest: {
+          days: 30,
+          description: 'Leaf maturation',
+          care: 'Harvest outer leaves, allow center to continue growing',
+          editable: true,
+          soil: {
+            watering: {
+              interval: 7,
+              description: 'Weekly watering during harvest',
+            },
+            fertilizing: {
+              interval: 21,
+              description: 'Fertilize every 3 weeks during harvest',
+            },
+          },
+          hydro: {
+            watering: {
+              interval: 0,
+              description: 'Continuous flow, moderate EC',
+            },
+            fertilizing: {
+              interval: 21,
+              description: 'Balanced nutrients, EC 1.0-1.2',
+            },
+          },
+          coco: {
+            watering: {
+              interval: 1,
+              description: 'Daily watering in coco',
+            },
+            fertilizing: {
+              interval: 21,
+              description: 'Balanced feeding, EC 1.0-1.2',
+            },
+          },
+        },
       },
     },
-    vegetative: {
-      days: 35,
-      description: 'Leaf production',
-      care: 'Regular feeding for leaf growth',
-      watering: { interval: 3, description: 'Deep watering every 3 days' },
-      fertilizing: {
-        interval: 14,
-        description: 'Fertilize every 2 weeks during vegetative growth',
-      },
-    },
-    harvest: {
-      days: 30,
-      description: 'Continuous harvest',
-      care: 'Harvest outer leaves, leave center to grow',
-      watering: { interval: 7, description: 'Weekly watering during harvest' },
-      fertilizing: {
-        interval: 21,
-        description: 'Fertilize every 3 weeks during harvest',
+    greenhouse: {
+      phases: {
+        germination: {
+          days: 7,
+          description: 'Seeds sprouting',
+          care: 'Keep cool and moist',
+          editable: true,
+          soil: {
+            watering: {
+              interval: 1,
+              description: 'Keep soil moist during germination',
+            },
+            fertilizing: {
+              interval: 0,
+              description: 'No fertilizing during germination',
+            },
+          },
+          hydro: {
+            watering: {
+              interval: 0,
+              description: 'Continuous moisture in rockwool or hydroponic system',
+            },
+            fertilizing: {
+              interval: 0,
+              description: 'No nutrients during germination',
+            },
+          },
+          coco: {
+            watering: {
+              interval: 1,
+              description: 'Keep coco moist during germination',
+            },
+            fertilizing: {
+              interval: 0,
+              description: 'No fertilizing during germination',
+            },
+          },
+        },
+        seedling: {
+          days: 14,
+          description: 'Young plant development',
+          care: 'Provide adequate light',
+          editable: true,
+          soil: {
+            watering: {
+              interval: 2,
+              description: 'Water when top inch of soil is dry',
+            },
+            fertilizing: {
+              interval: 0,
+              description: 'No fertilizing during seedling stage',
+            },
+          },
+          hydro: {
+            watering: {
+              interval: 0,
+              description: 'Continuous flow, low EC',
+            },
+            fertilizing: {
+              interval: 7,
+              description: 'Light nutrients, EC 0.5-0.8',
+            },
+          },
+          coco: {
+            watering: {
+              interval: 1,
+              description: 'Daily watering in coco',
+            },
+            fertilizing: {
+              interval: 7,
+              description: 'Light feeding, EC 0.5-0.8',
+            },
+          },
+        },
+        vegetative: {
+          days: 35,
+          description: 'Leaf production',
+          care: 'Regular feeding for leaf growth',
+          editable: true,
+          soil: {
+            watering: {
+              interval: 3,
+              description: 'Deep watering every 3 days',
+            },
+            fertilizing: {
+              interval: 14,
+              description: 'Fertilize every 2 weeks during vegetative growth',
+            },
+          },
+          hydro: {
+            watering: {
+              interval: 0,
+              description: 'Continuous flow, moderate EC',
+            },
+            fertilizing: {
+              interval: 14,
+              description: 'Balanced nutrients, EC 1.0-1.2',
+            },
+          },
+          coco: {
+            watering: {
+              interval: 1,
+              description: 'Daily watering in coco',
+            },
+            fertilizing: {
+              interval: 14,
+              description: 'Balanced feeding, EC 1.0-1.2',
+            },
+          },
+        },
+        harvest: {
+          days: 30,
+          description: 'Continuous harvest',
+          care: 'Harvest outer leaves, leave center to grow',
+          editable: true,
+          soil: {
+            watering: {
+              interval: 7,
+              description: 'Weekly watering during harvest',
+            },
+            fertilizing: {
+              interval: 21,
+              description: 'Fertilize every 3 weeks during harvest',
+            },
+          },
+          hydro: {
+            watering: {
+              interval: 0,
+              description: 'Continuous flow, moderate EC',
+            },
+            fertilizing: {
+              interval: 21,
+              description: 'Balanced nutrients, EC 1.0-1.2',
+            },
+          },
+          coco: {
+            watering: {
+              interval: 1,
+              description: 'Daily watering in coco',
+            },
+            fertilizing: {
+              interval: 21,
+              description: 'Balanced feeding, EC 1.0-1.2',
+            },
+          },
+        },
       },
     },
   },

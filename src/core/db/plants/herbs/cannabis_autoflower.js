@@ -27,57 +27,664 @@ export const cannabis_autoflower = {
   tags: [PLANT_TAGS.CANNABIS, PLANT_TAGS.ANNUAL], // New tag structure
   legalNote:
     'Check local laws before cultivation. This information is for educational purposes only.',
-  phases: {
-    germination: {
-      days: 3,
-      description: 'Seed sprouting',
-      care: 'Keep seeds warm (70-85°F/21-29°C) and moist in dark environment',
-      watering: {
-        interval: 1,
-        description: 'Keep soil moist during germination',
+  environments: {
+    indoor: {
+      phases: {
+        germination: {
+          days: 3,
+          description: 'Seed sprouting',
+          care: 'Keep seeds warm (70-85°F/21-29°C) and moist in dark environment',
+          editable: true,
+          soil: {
+            watering: {
+              interval: 1,
+              description: 'Keep soil moist during germination',
+            },
+            fertilizing: {
+              interval: 0,
+              description: 'No fertilizing during germination',
+            },
+          },
+          hydro: {
+            watering: {
+              interval: 0,
+              description: 'Continuous moisture in rockwool',
+            },
+            fertilizing: {
+              interval: 0,
+              description: 'No nutrients during germination',
+            },
+          },
+          coco: {
+            watering: {
+              interval: 1,
+              description: 'Keep coco moist during germination',
+            },
+            fertilizing: {
+              interval: 0,
+              description: 'No fertilizing during germination',
+            },
+          },
+        },
+        seedling: {
+          days: 10,
+          description: 'First true leaves development',
+          care: 'Provide 18-24 hours of light, gentle care - no transplanting',
+          editable: true,
+          soil: {
+            watering: {
+              interval: 2,
+              description: 'Water every 2 days during seedling stage',
+            },
+            fertilizing: {
+              interval: 0,
+              description: 'No fertilizing during seedling stage',
+            },
+          },
+          hydro: {
+            watering: { interval: 0, description: 'Continuous flow, low EC' },
+            fertilizing: {
+              interval: 7,
+              description: 'Light nutrients, EC 0.5-0.8',
+            },
+          },
+          coco: {
+            watering: { interval: 1, description: 'Daily watering in coco' },
+            fertilizing: {
+              interval: 7,
+              description: 'Light feeding, EC 0.5-0.8',
+            },
+          },
+        },
+        vegetative: {
+          days: 21,
+          description: 'Rapid early growth',
+          care: '18-24 hours light, light feeding, minimal stress',
+          editable: true,
+          soil: {
+            watering: {
+              interval: 2,
+              description: 'Water every 2 days during vegetative growth',
+            },
+            fertilizing: {
+              interval: 7,
+              description: 'Weekly feeding with high nitrogen',
+            },
+          },
+          hydro: {
+            watering: {
+              interval: 0,
+              description: 'Continuous flow, moderate EC',
+            },
+            fertilizing: {
+              interval: 7,
+              description: 'Weekly nutrient change, EC 1.0-1.2',
+            },
+          },
+          coco: {
+            watering: { interval: 1, description: 'Daily watering in coco' },
+            fertilizing: {
+              interval: 7,
+              description: 'Weekly feeding, EC 1.0-1.2',
+            },
+          },
+        },
+        preflower: {
+          days: 7,
+          description: 'Automatic transition',
+          care: 'Continue same light schedule, begin flower nutrients',
+          editable: true,
+          soil: {
+            watering: {
+              interval: 2,
+              description: 'Continue regular watering schedule',
+            },
+            fertilizing: {
+              interval: 7,
+              description: 'Transition to flowering nutrients',
+            },
+          },
+          hydro: {
+            watering: {
+              interval: 0,
+              description: 'Continuous flow, moderate EC',
+            },
+            fertilizing: {
+              interval: 7,
+              description: 'Transition to flowering nutrients',
+            },
+          },
+          coco: {
+            watering: { interval: 1, description: 'Daily watering in coco' },
+            fertilizing: {
+              interval: 7,
+              description: 'Transition to flowering nutrients',
+            },
+          },
+        },
+        flowering: {
+          days: 35,
+          description: 'Fast flowering',
+          care: 'Continue 18-24 hour light, phosphorus/potassium feeding',
+          editable: true,
+          soil: {
+            watering: {
+              interval: 2,
+              description: 'Water every 2 days during flowering',
+            },
+            fertilizing: {
+              interval: 7,
+              description: 'Weekly feeding with bloom nutrients',
+            },
+          },
+          hydro: {
+            watering: {
+              interval: 0,
+              description: 'Continuous flow, higher EC',
+            },
+            fertilizing: {
+              interval: 7,
+              description: 'Weekly nutrient change, EC 1.2-1.5',
+            },
+          },
+          coco: {
+            watering: { interval: 1, description: 'Daily watering in coco' },
+            fertilizing: {
+              interval: 7,
+              description: 'Weekly feeding, EC 1.2-1.5',
+            },
+          },
+        },
+        harvest: {
+          days: 7,
+          description: 'Quick harvest cycle',
+          care: 'Flush nutrients 1 week before harvest',
+          editable: true,
+          soil: {
+            watering: { interval: 1, description: 'Flush with plain water' },
+            fertilizing: {
+              interval: 0,
+              description: 'No fertilizing during flush',
+            },
+          },
+          hydro: {
+            watering: { interval: 0, description: 'Flush with plain water' },
+            fertilizing: {
+              interval: 0,
+              description: 'No nutrients during flush',
+            },
+          },
+          coco: {
+            watering: { interval: 1, description: 'Flush with plain water' },
+            fertilizing: {
+              interval: 0,
+              description: 'No fertilizing during flush',
+            },
+          },
+        },
       },
     },
-    seedling: {
-      days: 10,
-      description: 'First true leaves development',
-      care: 'Provide 18-24 hours of light, gentle care - no transplanting',
-      watering: {
-        interval: 2,
-        description: 'Water every 2 days during seedling stage',
+    outdoor: {
+      phases: {
+        germination: {
+          days: 3,
+          description: 'Seed sprouting',
+          care: 'Keep seeds warm and moist, protect from direct sun',
+          editable: false,
+          soil: {
+            watering: {
+              interval: 1,
+              description: 'Keep soil moist during germination',
+            },
+            fertilizing: {
+              interval: 0,
+              description: 'No fertilizing during germination',
+            },
+          },
+          hydro: {
+            watering: {
+              interval: 0,
+              description: 'Continuous moisture in rockwool',
+            },
+            fertilizing: {
+              interval: 0,
+              description: 'No nutrients during germination',
+            },
+          },
+          coco: {
+            watering: {
+              interval: 1,
+              description: 'Keep coco moist during germination',
+            },
+            fertilizing: {
+              interval: 0,
+              description: 'No fertilizing during germination',
+            },
+          },
+        },
+        seedling: {
+          days: 21,
+          description: 'Establishing outdoors',
+          care: 'Gradual sun exposure, protect from wind and pests',
+          editable: false,
+          soil: {
+            watering: {
+              interval: 2,
+              description: 'Water every 2 days during seedling stage',
+            },
+            fertilizing: {
+              interval: 0,
+              description: 'No fertilizing during seedling establishment',
+            },
+          },
+          hydro: {
+            watering: { interval: 0, description: 'Continuous flow, low EC' },
+            fertilizing: {
+              interval: 7,
+              description: 'Light nutrients, EC 0.5-0.8',
+            },
+          },
+          coco: {
+            watering: { interval: 1, description: 'Daily watering in coco' },
+            fertilizing: {
+              interval: 7,
+              description: 'Light feeding, EC 0.5-0.8',
+            },
+          },
+        },
+        vegetative: {
+          days: 35,
+          description: 'Autoflower vegetative growth',
+          care: 'Natural sunlight, LST training, heavy feeding',
+          editable: false,
+          soil: {
+            watering: {
+              interval: 2,
+              description: 'Water every 2 days during vegetative growth',
+            },
+            fertilizing: {
+              interval: 14,
+              description: 'High nitrogen feeding for vegetative growth',
+            },
+          },
+          hydro: {
+            watering: {
+              interval: 0,
+              description: 'Continuous flow, moderate EC',
+            },
+            fertilizing: {
+              interval: 14,
+              description: 'High nitrogen feeding for vegetative growth',
+            },
+          },
+          coco: {
+            watering: { interval: 1, description: 'Daily watering in coco' },
+            fertilizing: {
+              interval: 14,
+              description: 'High nitrogen feeding for vegetative growth',
+            },
+          },
+        },
+        preflower: {
+          days: 7,
+          description: 'Autoflower transition',
+          care: 'Autoflowering occurs regardless of light cycle',
+          editable: false,
+          soil: {
+            watering: {
+              interval: 2,
+              description: 'Continue regular watering schedule',
+            },
+            fertilizing: {
+              interval: 14,
+              description: 'Transition to flowering nutrients',
+            },
+          },
+          hydro: {
+            watering: { interval: 0, description: 'Continuous flow, moderate EC' },
+            fertilizing: {
+              interval: 14,
+              description: 'Transition to flowering nutrients',
+            },
+          },
+          coco: {
+            watering: { interval: 1, description: 'Daily watering in coco' },
+            fertilizing: {
+              interval: 14,
+              description: 'Transition to flowering nutrients',
+            },
+          },
+        },
+        flowering: {
+          days: 49,
+          description:
+            'Autoflower outdoor flowering (6-10 weeks depending on strain)',
+          care: 'Natural light cycle, weather protection, pest monitoring',
+          editable: true,
+          soil: {
+            watering: {
+              interval: 2,
+              description: 'Water every 2 days during flowering',
+            },
+            fertilizing: {
+              interval: 14,
+              description: 'High phosphorus/potassium feeding for flowering',
+            },
+          },
+          hydro: {
+            watering: {
+              interval: 0,
+              description: 'Continuous flow, higher EC',
+            },
+            fertilizing: {
+              interval: 14,
+              description: 'High phosphorus/potassium feeding for flowering',
+            },
+          },
+          coco: {
+            watering: { interval: 1, description: 'Daily watering in coco' },
+            fertilizing: {
+              interval: 14,
+              description: 'High phosphorus/potassium feeding for flowering',
+            },
+          },
+        },
+        harvest: {
+          days: 7,
+          description: 'Autoflower harvest timing',
+          care: 'Weather dependent, check trichomes, quick dry if rain',
+          editable: false,
+          soil: {
+            watering: {
+              interval: 2,
+              description: 'Flush with plain water 1 week before harvest',
+            },
+            fertilizing: {
+              interval: 0,
+              description: 'No fertilizing during flush and harvest',
+            },
+          },
+          hydro: {
+            watering: {
+              interval: 0,
+              description: 'Flush with plain water 1 week before harvest',
+            },
+            fertilizing: {
+              interval: 0,
+              description: 'No fertilizing during flush and harvest',
+            },
+          },
+          coco: {
+            watering: {
+              interval: 1,
+              description: 'Flush with plain water 1 week before harvest',
+            },
+            fertilizing: {
+              interval: 0,
+              description: 'No fertilizing during flush and harvest',
+            },
+          },
+        },
       },
-    },
-    vegetative: {
-      days: 21,
-      description: 'Rapid early growth',
-      care: '18-24 hours light, light feeding, minimal stress',
-      watering: {
-        interval: 2,
-        description: 'Water every 2 days during vegetative growth',
+      seasonalTiming: {
+        temperate_north: {
+          plantingWindow: {
+            start: '04-15',
+            end: '07-01',
+            description: 'Multiple harvests possible with autoflowers',
+          },
+          harvestWindow: {
+            start: '07-01',
+            end: '10-15',
+            description: 'Multiple harvests throughout season',
+          },
+        },
+        mediterranean: {
+          plantingWindow: {
+            start: '03-15',
+            end: '08-01',
+            description: 'Extended season with multiple harvests',
+          },
+          harvestWindow: {
+            start: '06-01',
+            end: '11-01',
+            description: 'Multiple harvests throughout season',
+          },
+        },
       },
+      naturalTiming:
+        'Autoflowers flower automatically regardless of light cycle. Total cycle is 70-90 days from seed to harvest.',
     },
-    preflower: {
-      days: 7,
-      description: 'Automatic transition',
-      care: 'Continue same light schedule, begin flower nutrients',
-      watering: {
-        interval: 2,
-        description: 'Continue regular watering schedule',
+    greenhouse: {
+      phases: {
+        germination: {
+          days: 3,
+          description: 'Seed sprouting',
+          care: 'Keep seeds warm and moist in controlled environment',
+          editable: true,
+          soil: {
+            watering: {
+              interval: 1,
+              description: 'Keep soil moist during germination',
+            },
+            fertilizing: {
+              interval: 0,
+              description: 'No fertilizing during germination',
+            },
+          },
+          hydro: {
+            watering: {
+              interval: 0,
+              description: 'Continuous moisture in rockwool',
+            },
+            fertilizing: {
+              interval: 0,
+              description: 'No nutrients during germination',
+            },
+          },
+          coco: {
+            watering: {
+              interval: 1,
+              description: 'Keep coco moist during germination',
+            },
+            fertilizing: {
+              interval: 0,
+              description: 'No fertilizing during germination',
+            },
+          },
+        },
+        seedling: {
+          days: 21,
+          description: 'Establishing in greenhouse',
+          care: 'Controlled environment, protect from temperature extremes',
+          editable: true,
+          soil: {
+            watering: {
+              interval: 2,
+              description: 'Water every 2 days during seedling stage',
+            },
+            fertilizing: {
+              interval: 0,
+              description: 'No fertilizing during seedling establishment',
+            },
+          },
+          hydro: {
+            watering: { interval: 0, description: 'Continuous flow, low EC' },
+            fertilizing: {
+              interval: 7,
+              description: 'Light nutrients, EC 0.5-0.8',
+            },
+          },
+          coco: {
+            watering: { interval: 1, description: 'Daily watering in coco' },
+            fertilizing: {
+              interval: 7,
+              description: 'Light feeding, EC 0.5-0.8',
+            },
+          },
+        },
+        vegetative: {
+          days: 35,
+          description: 'Autoflower greenhouse vegetative growth',
+          care: 'Natural light with temperature control, LST training',
+          editable: true,
+          soil: {
+            watering: {
+              interval: 2,
+              description: 'Water every 2 days during vegetative growth',
+            },
+            fertilizing: {
+              interval: 14,
+              description: 'High nitrogen feeding for vegetative growth',
+            },
+          },
+          hydro: {
+            watering: {
+              interval: 0,
+              description: 'Continuous flow, moderate EC',
+            },
+            fertilizing: {
+              interval: 14,
+              description: 'High nitrogen feeding for vegetative growth',
+            },
+          },
+          coco: {
+            watering: { interval: 1, description: 'Daily watering in coco' },
+            fertilizing: {
+              interval: 14,
+              description: 'High nitrogen feeding for vegetative growth',
+            },
+          },
+        },
+        preflower: {
+          days: 7,
+          description: 'Autoflower transition',
+          care: 'Autoflowering occurs regardless of light cycle',
+          editable: true,
+          soil: {
+            watering: {
+              interval: 2,
+              description: 'Continue regular watering schedule',
+            },
+            fertilizing: {
+              interval: 14,
+              description: 'Transition to flowering nutrients',
+            },
+          },
+          hydro: {
+            watering: { interval: 0, description: 'Continuous flow, moderate EC' },
+            fertilizing: {
+              interval: 14,
+              description: 'Transition to flowering nutrients',
+            },
+          },
+          coco: {
+            watering: { interval: 1, description: 'Daily watering in coco' },
+            fertilizing: {
+              interval: 14,
+              description: 'Transition to flowering nutrients',
+            },
+          },
+        },
+        flowering: {
+          days: 49,
+          description:
+            'Autoflower greenhouse flowering (6-10 weeks depending on strain)',
+          care: 'Controlled environment, weather protection, pest monitoring',
+          editable: true,
+          soil: {
+            watering: {
+              interval: 2,
+              description: 'Water every 2 days during flowering',
+            },
+            fertilizing: {
+              interval: 14,
+              description: 'High phosphorus/potassium feeding for flowering',
+            },
+          },
+          hydro: {
+            watering: {
+              interval: 0,
+              description: 'Continuous flow, higher EC',
+            },
+            fertilizing: {
+              interval: 14,
+              description: 'High phosphorus/potassium feeding for flowering',
+            },
+          },
+          coco: {
+            watering: { interval: 1, description: 'Daily watering in coco' },
+            fertilizing: {
+              interval: 14,
+              description: 'High phosphorus/potassium feeding for flowering',
+            },
+          },
+        },
+        harvest: {
+          days: 7,
+          description: 'Autoflower greenhouse harvest timing',
+          care: 'Controlled drying environment, check trichomes',
+          editable: true,
+          soil: {
+            watering: {
+              interval: 2,
+              description: 'Flush with plain water 1 week before harvest',
+            },
+            fertilizing: {
+              interval: 0,
+              description: 'No fertilizing during flush and harvest',
+            },
+          },
+          hydro: {
+            watering: {
+              interval: 0,
+              description: 'Flush with plain water 1 week before harvest',
+            },
+            fertilizing: {
+              interval: 0,
+              description: 'No fertilizing during flush and harvest',
+            },
+          },
+          coco: {
+            watering: {
+              interval: 1,
+              description: 'Flush with plain water 1 week before harvest',
+            },
+            fertilizing: {
+              interval: 0,
+              description: 'No fertilizing during flush and harvest',
+            },
+          },
+        },
       },
-    },
-    flowering: {
-      days: 35,
-      description: 'Fast flowering',
-      care: 'Continue 18-24 hour light, phosphorus/potassium feeding',
-      watering: {
-        interval: 2,
-        description: 'Water every 2 days during flowering',
+      seasonalTiming: {
+        temperate_north: {
+          plantingWindow: {
+            start: '03-01',
+            end: '08-01',
+            description: 'Extended season with greenhouse protection',
+          },
+          harvestWindow: {
+            start: '05-15',
+            end: '11-15',
+            description: 'Multiple harvests with climate control',
+          },
+        },
+        mediterranean: {
+          plantingWindow: {
+            start: '02-15',
+            end: '09-01',
+            description: 'Very extended season possible',
+          },
+          harvestWindow: {
+            start: '05-01',
+            end: '12-01',
+            description: 'Multiple harvests with climate control',
+          },
+        },
       },
-    },
-    harvest: {
-      days: 7,
-      description: 'Quick harvest cycle',
-      care: 'Flush nutrients 1 week before harvest',
-      watering: { interval: 0, description: 'No watering during harvest' },
+      naturalTiming:
+        'Autoflowers flower automatically regardless of light cycle. Greenhouse extends growing season for multiple harvests.',
     },
   },
   careTips: {
@@ -94,174 +701,6 @@ export const cannabis_autoflower = {
       'Stress sensitive - avoid transplanting and heavy training',
     'Nutrient Burn': 'Very sensitive to nutrients - use light feeding',
     'Short Cycle': 'Fast growth - be ready for quick transitions',
-  },
-  outdoor: {
-    phases: {
-      germination: {
-        days: 3,
-        description: 'Seed sprouting',
-        care: 'Keep seeds warm and moist, protect from direct sun',
-        watering: {
-          interval: 1,
-          description: 'Keep soil moist during germination',
-        },
-      },
-      seedling: {
-        days: 21,
-        description: 'Establishing outdoors',
-        care: 'Gradual sun exposure, protect from wind and pests',
-        watering: {
-          interval: 2,
-          description: 'Water every 2 days during seedling stage',
-        },
-      },
-      vegetative: {
-        days: 35,
-        description: 'Autoflower vegetative growth',
-        care: 'Natural sunlight, LST training, heavy feeding',
-        watering: {
-          interval: 2,
-          description: 'Water every 2 days during vegetative growth',
-        },
-      },
-      preflower: {
-        days: 7,
-        description: 'Autoflower transition',
-        care: 'Autoflowering occurs regardless of light cycle',
-        watering: {
-          interval: 2,
-          description: 'Continue regular watering schedule',
-        },
-      },
-      flowering: {
-        days: 49,
-        description:
-          'Autoflower outdoor flowering (6-10 weeks depending on strain)',
-        care: 'Natural light cycle, weather protection, pest monitoring',
-        watering: {
-          interval: 2,
-          description: 'Water every 2 days during flowering',
-        },
-      },
-      harvest: {
-        days: 7,
-        description: 'Autoflower harvest timing',
-        care: 'Weather dependent, check trichomes, quick dry if rain',
-        watering: { interval: 0, description: 'No watering during harvest' },
-      },
-    },
-    seasonalTiming: {
-      temperate_north: {
-        plantingWindow: {
-          start: '04-15',
-          end: '07-01',
-          description: 'Multiple harvests possible with autoflowers',
-        },
-        harvestWindow: {
-          start: '07-01',
-          end: '10-15',
-          description: 'Multiple harvests throughout season',
-        },
-      },
-      mediterranean: {
-        plantingWindow: {
-          start: '03-15',
-          end: '08-01',
-          description: 'Extended season with multiple harvests',
-        },
-        harvestWindow: {
-          start: '06-01',
-          end: '11-01',
-          description: 'Multiple harvests throughout season',
-        },
-      },
-    },
-    naturalTiming:
-      'Autoflowers flower automatically regardless of light cycle. Total cycle is 70-90 days from seed to harvest.',
-  },
-  greenhouse: {
-    phases: {
-      germination: {
-        days: 3,
-        description: 'Seed sprouting',
-        care: 'Keep seeds warm and moist in controlled environment',
-        watering: {
-          interval: 1,
-          description: 'Keep soil moist during germination',
-        },
-      },
-      seedling: {
-        days: 21,
-        description: 'Establishing in greenhouse',
-        care: 'Controlled environment, protect from temperature extremes',
-        watering: {
-          interval: 2,
-          description: 'Water every 2 days during seedling stage',
-        },
-      },
-      vegetative: {
-        days: 35,
-        description: 'Autoflower greenhouse vegetative growth',
-        care: 'Natural light with temperature control, LST training',
-        watering: {
-          interval: 2,
-          description: 'Water every 2 days during vegetative growth',
-        },
-      },
-      preflower: {
-        days: 7,
-        description: 'Autoflower transition',
-        care: 'Autoflowering occurs regardless of light cycle',
-        watering: {
-          interval: 2,
-          description: 'Continue regular watering schedule',
-        },
-      },
-      flowering: {
-        days: 49,
-        description:
-          'Autoflower greenhouse flowering (6-10 weeks depending on strain)',
-        care: 'Controlled environment, weather protection, pest monitoring',
-        watering: {
-          interval: 2,
-          description: 'Water every 2 days during flowering',
-        },
-      },
-      harvest: {
-        days: 7,
-        description: 'Autoflower greenhouse harvest timing',
-        care: 'Controlled drying environment, check trichomes',
-        watering: { interval: 0, description: 'No watering during harvest' },
-      },
-    },
-    seasonalTiming: {
-      temperate_north: {
-        plantingWindow: {
-          start: '03-01',
-          end: '08-01',
-          description: 'Extended season with greenhouse protection',
-        },
-        harvestWindow: {
-          start: '05-15',
-          end: '11-15',
-          description: 'Multiple harvests with climate control',
-        },
-      },
-      mediterranean: {
-        plantingWindow: {
-          start: '02-15',
-          end: '09-01',
-          description: 'Very extended season possible',
-        },
-        harvestWindow: {
-          start: '05-01',
-          end: '12-01',
-          description: 'Multiple harvests with climate control',
-        },
-      },
-    },
-    naturalTiming:
-      'Autoflowers flower automatically regardless of light cycle. Greenhouse extends growing season for multiple harvests.',
   },
 };
 

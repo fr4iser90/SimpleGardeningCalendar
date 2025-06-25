@@ -9,61 +9,611 @@ export const potatoes = {
   name: 'Potatoes',
   category: 'Vegetables',
   tags: [PLANT_TAGS.ROOT, PLANT_TAGS.ANNUAL],
-  phases: {
-    sprouting: {
-      days: 14,
-      description: 'Eye sprouting',
-      care: 'Keep seed potatoes in warm, dark place',
-      watering: {
-        interval: 1,
-        description: 'Keep soil moist during sprouting',
-      },
-      fertilizing: {
-        interval: 0,
-        description: 'No fertilizing during sprouting',
+  environments: {
+    indoor: {
+      phases: {
+        sprouting: {
+          days: 14,
+          description: 'Eye sprouting',
+          care: 'Keep seed potatoes in warm, dark place',
+          editable: true,
+          soil: {
+            watering: {
+              interval: 1,
+              description: 'Keep soil moist during sprouting',
+            },
+            fertilizing: {
+              interval: 0,
+              description: 'No fertilizing during sprouting',
+            },
+          },
+          hydro: {
+            watering: {
+              interval: 0,
+              description: 'Continuous moisture in rockwool or hydroponic system',
+            },
+            fertilizing: {
+              interval: 0,
+              description: 'No nutrients during sprouting',
+            },
+          },
+          coco: {
+            watering: {
+              interval: 1,
+              description: 'Keep coco moist during sprouting',
+            },
+            fertilizing: {
+              interval: 0,
+              description: 'No fertilizing during sprouting',
+            },
+          },
+        },
+        vegetative: {
+          days: 30,
+          description: 'Leaf and stem growth',
+          care: 'Start hilling when plants are 6 inches tall',
+          editable: true,
+          soil: {
+            watering: {
+              interval: 7,
+              description: 'Weekly deep watering',
+            },
+            fertilizing: {
+              interval: 14,
+              description: 'Fertilize every 2 weeks during vegetative growth',
+            },
+          },
+          hydro: {
+            watering: {
+              interval: 0,
+              description: 'Continuous flow, moderate EC',
+            },
+            fertilizing: {
+              interval: 14,
+              description: 'Balanced nutrients, EC 1.0-1.2',
+            },
+          },
+          coco: {
+            watering: {
+              interval: 1,
+              description: 'Daily watering in coco',
+            },
+            fertilizing: {
+              interval: 14,
+              description: 'Balanced feeding, EC 1.0-1.2',
+            },
+          },
+        },
+        tuberization: {
+          days: 40,
+          description: 'Tuber formation',
+          care: 'Hill soil around base every 2-3 weeks',
+          editable: true,
+          soil: {
+            watering: {
+              interval: 7,
+              description: 'Weekly deep watering',
+            },
+            fertilizing: {
+              interval: 21,
+              description: 'Fertilize every 3 weeks during tuberization',
+            },
+          },
+          hydro: {
+            watering: {
+              interval: 0,
+              description: 'Continuous flow, moderate EC',
+            },
+            fertilizing: {
+              interval: 21,
+              description: 'Balanced nutrients, EC 1.0-1.2',
+            },
+          },
+          coco: {
+            watering: {
+              interval: 1,
+              description: 'Daily watering in coco',
+            },
+            fertilizing: {
+              interval: 21,
+              description: 'Balanced feeding, EC 1.0-1.2',
+            },
+          },
+        },
+        bulking: {
+          days: 45,
+          description: 'Tuber growth',
+          care: 'Maintain consistent moisture, continue hilling',
+          editable: true,
+          soil: {
+            watering: {
+              interval: 7,
+              description: 'Weekly deep watering',
+            },
+            fertilizing: {
+              interval: 21,
+              description: 'Fertilize every 3 weeks during bulking',
+            },
+          },
+          hydro: {
+            watering: {
+              interval: 0,
+              description: 'Continuous flow, moderate EC',
+            },
+            fertilizing: {
+              interval: 21,
+              description: 'Balanced nutrients, EC 1.0-1.2',
+            },
+          },
+          coco: {
+            watering: {
+              interval: 1,
+              description: 'Daily watering in coco',
+            },
+            fertilizing: {
+              interval: 21,
+              description: 'Balanced feeding, EC 1.0-1.2',
+            },
+          },
+        },
+        maturation: {
+          days: 20,
+          description: 'Plant dies back, tubers ready',
+          care: 'Reduce watering when plants start yellowing',
+          editable: true,
+          soil: {
+            watering: {
+              interval: 0,
+              description: 'No watering needed during maturation',
+            },
+            fertilizing: {
+              interval: 0,
+              description: 'No fertilizing during maturation',
+            },
+          },
+          hydro: {
+            watering: {
+              interval: 0,
+              description: 'No watering needed during maturation',
+            },
+            fertilizing: {
+              interval: 0,
+              description: 'No nutrients during maturation',
+            },
+          },
+          coco: {
+            watering: {
+              interval: 0,
+              description: 'No watering needed during maturation',
+            },
+            fertilizing: {
+              interval: 0,
+              description: 'No fertilizing during maturation',
+            },
+          },
+        },
+        harvest: {
+          days: 30,
+          description: 'Tuber maturation',
+          care: 'Harvest when foliage dies back',
+          editable: true,
+          soil: {
+            watering: { interval: 7, description: 'Stop watering 1-2 weeks before harvest' },
+            fertilizing: { interval: 0, description: 'No fertilizing before harvest' },
+          },
+          hydro: {
+            watering: { interval: 0, description: 'Flush with plain water before harvest' },
+            fertilizing: { interval: 0, description: 'No nutrients before harvest' },
+          },
+          coco: {
+            watering: { interval: 1, description: 'Daily watering in coco before harvest' },
+            fertilizing: { interval: 0, description: 'No fertilizing before harvest' },
+          },
+        }
       },
     },
-    vegetative: {
-      days: 30,
-      description: 'Leaf and stem growth',
-      care: 'Start hilling when plants are 6 inches tall',
-      watering: { interval: 7, description: 'Weekly deep watering' },
-      fertilizing: {
-        interval: 14,
-        description: 'Fertilize every 2 weeks during vegetative growth',
+    outdoor: {
+      phases: {
+        sprouting: {
+          days: 14,
+          description: 'Eye sprouting',
+          care: 'Keep seed potatoes in warm, dark place',
+          editable: false,
+          soil: {
+            watering: {
+              interval: 1,
+              description: 'Keep soil moist during sprouting',
+            },
+            fertilizing: {
+              interval: 0,
+              description: 'No fertilizing during sprouting',
+            },
+          },
+          hydro: {
+            watering: {
+              interval: 0,
+              description: 'Continuous moisture in rockwool or hydroponic system',
+            },
+            fertilizing: {
+              interval: 0,
+              description: 'No nutrients during sprouting',
+            },
+          },
+          coco: {
+            watering: {
+              interval: 1,
+              description: 'Keep coco moist during sprouting',
+            },
+            fertilizing: {
+              interval: 0,
+              description: 'No fertilizing during sprouting',
+            },
+          },
+        },
+        vegetative: {
+          days: 30,
+          description: 'Leaf and stem growth',
+          care: 'Start hilling when plants are 6 inches tall',
+          editable: false,
+          soil: {
+            watering: {
+              interval: 7,
+              description: 'Weekly deep watering',
+            },
+            fertilizing: {
+              interval: 14,
+              description: 'Fertilize every 2 weeks during vegetative growth',
+            },
+          },
+          hydro: {
+            watering: {
+              interval: 0,
+              description: 'Continuous flow, moderate EC',
+            },
+            fertilizing: {
+              interval: 14,
+              description: 'Balanced nutrients, EC 1.0-1.2',
+            },
+          },
+          coco: {
+            watering: {
+              interval: 1,
+              description: 'Daily watering in coco',
+            },
+            fertilizing: {
+              interval: 14,
+              description: 'Balanced feeding, EC 1.0-1.2',
+            },
+          },
+        },
+        tuberization: {
+          days: 40,
+          description: 'Tuber formation',
+          care: 'Hill soil around base every 2-3 weeks',
+          editable: false,
+          soil: {
+            watering: {
+              interval: 7,
+              description: 'Weekly deep watering',
+            },
+            fertilizing: {
+              interval: 21,
+              description: 'Fertilize every 3 weeks during tuberization',
+            },
+          },
+          hydro: {
+            watering: {
+              interval: 0,
+              description: 'Continuous flow, moderate EC',
+            },
+            fertilizing: {
+              interval: 21,
+              description: 'Balanced nutrients, EC 1.0-1.2',
+            },
+          },
+          coco: {
+            watering: {
+              interval: 1,
+              description: 'Daily watering in coco',
+            },
+            fertilizing: {
+              interval: 21,
+              description: 'Balanced feeding, EC 1.0-1.2',
+            },
+          },
+        },
+        bulking: {
+          days: 45,
+          description: 'Tuber growth',
+          care: 'Maintain consistent moisture, continue hilling',
+          editable: false,
+          soil: {
+            watering: {
+              interval: 7,
+              description: 'Weekly deep watering',
+            },
+            fertilizing: {
+              interval: 21,
+              description: 'Fertilize every 3 weeks during bulking',
+            },
+          },
+          hydro: {
+            watering: {
+              interval: 0,
+              description: 'Continuous flow, moderate EC',
+            },
+            fertilizing: {
+              interval: 21,
+              description: 'Balanced nutrients, EC 1.0-1.2',
+            },
+          },
+          coco: {
+            watering: {
+              interval: 1,
+              description: 'Daily watering in coco',
+            },
+            fertilizing: {
+              interval: 21,
+              description: 'Balanced feeding, EC 1.0-1.2',
+            },
+          },
+        },
+        maturation: {
+          days: 20,
+          description: 'Plant dies back, tubers ready',
+          care: 'Reduce watering when plants start yellowing',
+          editable: false,
+          soil: {
+            watering: {
+              interval: 0,
+              description: 'No watering needed during maturation',
+            },
+            fertilizing: {
+              interval: 0,
+              description: 'No fertilizing during maturation',
+            },
+          },
+          hydro: {
+            watering: {
+              interval: 0,
+              description: 'No watering needed during maturation',
+            },
+            fertilizing: {
+              interval: 0,
+              description: 'No nutrients during maturation',
+            },
+          },
+          coco: {
+            watering: {
+              interval: 0,
+              description: 'No watering needed during maturation',
+            },
+            fertilizing: {
+              interval: 0,
+              description: 'No fertilizing during maturation',
+            },
+          },
+        },
+        harvest: {
+          days: 30,
+          description: 'Tuber maturation',
+          care: 'Harvest when foliage dies back',
+          editable: true,
+          soil: {
+            watering: { interval: 7, description: 'Stop watering 1-2 weeks before harvest' },
+            fertilizing: { interval: 0, description: 'No fertilizing before harvest' },
+          },
+          hydro: {
+            watering: { interval: 0, description: 'Flush with plain water before harvest' },
+            fertilizing: { interval: 0, description: 'No nutrients before harvest' },
+          },
+          coco: {
+            watering: { interval: 1, description: 'Daily watering in coco before harvest' },
+            fertilizing: { interval: 0, description: 'No fertilizing before harvest' },
+          },
+        }
       },
     },
-    tuberization: {
-      days: 40,
-      description: 'Tuber formation',
-      care: 'Hill soil around base every 2-3 weeks',
-      watering: { interval: 7, description: 'Weekly deep watering' },
-      fertilizing: {
-        interval: 21,
-        description: 'Fertilize every 3 weeks during tuberization',
-      },
-    },
-    bulking: {
-      days: 45,
-      description: 'Tuber growth',
-      care: 'Maintain consistent moisture, continue hilling',
-      watering: { interval: 7, description: 'Weekly deep watering' },
-      fertilizing: {
-        interval: 21,
-        description: 'Fertilize every 3 weeks during bulking',
-      },
-    },
-    maturation: {
-      days: 20,
-      description: 'Plant dies back, tubers ready',
-      care: 'Reduce watering when plants start yellowing',
-      watering: {
-        interval: 0,
-        description: 'No watering needed during maturation',
-      },
-      fertilizing: {
-        interval: 0,
-        description: 'No fertilizing during maturation',
+    greenhouse: {
+      phases: {
+        sprouting: {
+          days: 14,
+          description: 'Eye sprouting',
+          care: 'Keep seed potatoes in warm, dark place',
+          editable: true,
+          soil: {
+            watering: {
+              interval: 1,
+              description: 'Keep soil moist during sprouting',
+            },
+            fertilizing: {
+              interval: 0,
+              description: 'No fertilizing during sprouting',
+            },
+          },
+          hydro: {
+            watering: {
+              interval: 0,
+              description: 'Continuous moisture in rockwool or hydroponic system',
+            },
+            fertilizing: {
+              interval: 0,
+              description: 'No nutrients during sprouting',
+            },
+          },
+          coco: {
+            watering: {
+              interval: 1,
+              description: 'Keep coco moist during sprouting',
+            },
+            fertilizing: {
+              interval: 0,
+              description: 'No fertilizing during sprouting',
+            },
+          },
+        },
+        vegetative: {
+          days: 30,
+          description: 'Leaf and stem growth',
+          care: 'Start hilling when plants are 6 inches tall',
+          editable: true,
+          soil: {
+            watering: {
+              interval: 7,
+              description: 'Weekly deep watering',
+            },
+            fertilizing: {
+              interval: 14,
+              description: 'Fertilize every 2 weeks during vegetative growth',
+            },
+          },
+          hydro: {
+            watering: {
+              interval: 0,
+              description: 'Continuous flow, moderate EC',
+            },
+            fertilizing: {
+              interval: 14,
+              description: 'Balanced nutrients, EC 1.0-1.2',
+            },
+          },
+          coco: {
+            watering: {
+              interval: 1,
+              description: 'Daily watering in coco',
+            },
+            fertilizing: {
+              interval: 14,
+              description: 'Balanced feeding, EC 1.0-1.2',
+            },
+          },
+        },
+        tuberization: {
+          days: 40,
+          description: 'Tuber formation',
+          care: 'Hill soil around base every 2-3 weeks',
+          editable: true,
+          soil: {
+            watering: {
+              interval: 7,
+              description: 'Weekly deep watering',
+            },
+            fertilizing: {
+              interval: 21,
+              description: 'Fertilize every 3 weeks during tuberization',
+            },
+          },
+          hydro: {
+            watering: {
+              interval: 0,
+              description: 'Continuous flow, moderate EC',
+            },
+            fertilizing: {
+              interval: 21,
+              description: 'Balanced nutrients, EC 1.0-1.2',
+            },
+          },
+          coco: {
+            watering: {
+              interval: 1,
+              description: 'Daily watering in coco',
+            },
+            fertilizing: {
+              interval: 21,
+              description: 'Balanced feeding, EC 1.0-1.2',
+            },
+          },
+        },
+        bulking: {
+          days: 45,
+          description: 'Tuber growth',
+          care: 'Maintain consistent moisture, continue hilling',
+          editable: true,
+          soil: {
+            watering: {
+              interval: 7,
+              description: 'Weekly deep watering',
+            },
+            fertilizing: {
+              interval: 21,
+              description: 'Fertilize every 3 weeks during bulking',
+            },
+          },
+          hydro: {
+            watering: {
+              interval: 0,
+              description: 'Continuous flow, moderate EC',
+            },
+            fertilizing: {
+              interval: 21,
+              description: 'Balanced nutrients, EC 1.0-1.2',
+            },
+          },
+          coco: {
+            watering: {
+              interval: 1,
+              description: 'Daily watering in coco',
+            },
+            fertilizing: {
+              interval: 21,
+              description: 'Balanced feeding, EC 1.0-1.2',
+            },
+          },
+        },
+        maturation: {
+          days: 20,
+          description: 'Plant dies back, tubers ready',
+          care: 'Reduce watering when plants start yellowing',
+          editable: true,
+          soil: {
+            watering: {
+              interval: 0,
+              description: 'No watering needed during maturation',
+            },
+            fertilizing: {
+              interval: 0,
+              description: 'No fertilizing during maturation',
+            },
+          },
+          hydro: {
+            watering: {
+              interval: 0,
+              description: 'No watering needed during maturation',
+            },
+            fertilizing: {
+              interval: 0,
+              description: 'No nutrients during maturation',
+            },
+          },
+          coco: {
+            watering: {
+              interval: 0,
+              description: 'No watering needed during maturation',
+            },
+            fertilizing: {
+              interval: 0,
+              description: 'No fertilizing during maturation',
+            },
+          },
+        },
+        harvest: {
+          days: 30,
+          description: 'Tuber maturation',
+          care: 'Harvest when foliage dies back',
+          editable: true,
+          soil: {
+            watering: { interval: 7, description: 'Stop watering 1-2 weeks before harvest' },
+            fertilizing: { interval: 0, description: 'No fertilizing before harvest' },
+          },
+          hydro: {
+            watering: { interval: 0, description: 'Flush with plain water before harvest' },
+            fertilizing: { interval: 0, description: 'No nutrients before harvest' },
+          },
+          coco: {
+            watering: { interval: 1, description: 'Daily watering in coco before harvest' },
+            fertilizing: { interval: 0, description: 'No fertilizing before harvest' },
+          },
+        }
       },
     },
   },

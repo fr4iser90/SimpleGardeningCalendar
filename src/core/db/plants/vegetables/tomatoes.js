@@ -22,7 +22,6 @@ export const tomatoes = {
   name: 'Tomatoes',
   category: 'Vegetables',
   emoji: '🍅',
-  alternativeNames: ['tomato', 'tomate', 'tomates', 'pomodoro', 'pomodori'],
   environments: {
     indoor: {
       phases: {
@@ -30,6 +29,7 @@ export const tomatoes = {
           days: 7,
           description: 'Seeds sprouting',
           care: 'Keep soil warm (70-80°F/21-27°C) and moist',
+          editable: true,
           soil: {
             watering: {
               interval: 1,
@@ -65,6 +65,7 @@ export const tomatoes = {
           days: 21,
           description: 'Young plant development',
           care: 'Provide strong light, maintain moisture',
+          editable: true,
           soil: {
             watering: {
               interval: 2,
@@ -95,6 +96,7 @@ export const tomatoes = {
           days: 14,
           description: 'Hardening off period',
           care: 'Gradually introduce to outdoor conditions',
+          editable: true,
           soil: {
             watering: {
               interval: 2,
@@ -127,6 +129,7 @@ export const tomatoes = {
           days: 20,
           description: 'Flower development',
           care: 'Maintain consistent watering, shake plants gently',
+          editable: true,
           soil: {
             watering: {
               interval: 2,
@@ -160,6 +163,7 @@ export const tomatoes = {
           days: 45,
           description: 'Fruit development to harvest',
           care: 'Regular feeding, watch for pests and disease',
+          editable: true,
           soil: {
             watering: {
               interval: 2,
@@ -194,6 +198,7 @@ export const tomatoes = {
           days: 7,
           description: 'Indoor seed starting',
           care: 'Start indoors 6-8 weeks before last frost',
+          editable: false,
           soil: {
             watering: {
               interval: 1,
@@ -229,6 +234,7 @@ export const tomatoes = {
           days: 35,
           description: 'Indoor growing',
           care: 'Grow indoors until outdoor conditions suitable',
+          editable: false,
           soil: {
             watering: {
               interval: 2,
@@ -259,6 +265,7 @@ export const tomatoes = {
           days: 14,
           description: 'Outdoor transplanting',
           care: 'Transplant after soil warms to 60°F/15°C',
+          editable: false,
           soil: {
             watering: {
               interval: 2,
@@ -291,6 +298,7 @@ export const tomatoes = {
           days: 25,
           description: 'Outdoor flowering',
           care: 'Natural pollination, consistent watering',
+          editable: true,
           soil: {
             watering: {
               interval: 3,
@@ -324,6 +332,7 @@ export const tomatoes = {
           days: 60,
           description: 'Outdoor fruit production',
           care: 'Weather protection, extended harvest',
+          editable: true,
           soil: {
             watering: {
               interval: 3,

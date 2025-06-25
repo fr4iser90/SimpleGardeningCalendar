@@ -34,6 +34,7 @@ export const cannabis_indica = {
           days: 3,
           description: 'Seed sprouting',
           care: 'Keep seeds warm (70-85°F/21-29°C) and moist in dark environment',
+          editable: true,
           soil: {
             watering: {
               interval: 1,
@@ -69,6 +70,7 @@ export const cannabis_indica = {
           days: 14,
           description: 'First true leaves development',
           care: 'Provide 18-24 hours of light, maintain humidity 65-70%',
+          editable: true,
           soil: {
             watering: {
               interval: 2,
@@ -98,6 +100,7 @@ export const cannabis_indica = {
           days: 28,
           description: 'Rapid growth phase',
           care: '18/6 light cycle, high nitrogen feeding, training for bushiness',
+          editable: true,
           soil: {
             watering: {
               interval: 2,
@@ -130,6 +133,7 @@ export const cannabis_indica = {
           days: 7,
           description: 'Sex determination',
           care: 'Continue vegetative care, identify and remove males',
+          editable: true,
           soil: {
             watering: {
               interval: 2,
@@ -162,6 +166,7 @@ export const cannabis_indica = {
           days: 56,
           description: 'Flower development and maturation',
           care: '12/12 light cycle, high phosphorus/potassium, lower humidity 40-50%',
+          editable: true,
           soil: {
             watering: {
               interval: 2,
@@ -179,14 +184,14 @@ export const cannabis_indica = {
             },
             fertilizing: {
               interval: 7,
-              description: 'Weekly nutrient change, EC 1.2-1.5',
+              description: 'Weekly nutrient change, EC 1.0-1.2',
             },
           },
           coco: {
             watering: { interval: 1, description: 'Daily watering in coco' },
             fertilizing: {
               interval: 7,
-              description: 'Weekly feeding, EC 1.2-1.5',
+              description: 'Weekly feeding, EC 1.0-1.2',
             },
           },
         },
@@ -194,6 +199,7 @@ export const cannabis_indica = {
           days: 7,
           description: 'Harvest preparation and execution',
           care: 'Flush with plain water, monitor trichomes, harvest at peak potency',
+          editable: true,
           soil: {
             watering: { interval: 1, description: 'Flush with plain water' },
             fertilizing: {
@@ -224,6 +230,7 @@ export const cannabis_indica = {
           days: 3,
           description: 'Seed sprouting',
           care: 'Keep seeds warm and moist, protect from direct sun',
+          editable: false,
           soil: {
             watering: {
               interval: 1,
@@ -259,6 +266,7 @@ export const cannabis_indica = {
           days: 21,
           description: 'Establishing outdoors',
           care: 'Gradual sun exposure, protect from wind and pests',
+          editable: false,
           soil: {
             watering: {
               interval: 2,
@@ -288,6 +296,7 @@ export const cannabis_indica = {
           days: 90,
           description: 'Natural light vegetative growth',
           care: 'Natural sunlight, train for size management, heavy feeding',
+          editable: false,
           soil: {
             watering: {
               interval: 3,
@@ -320,6 +329,7 @@ export const cannabis_indica = {
           days: 14,
           description: 'Natural photoperiod trigger',
           care: 'Occurs naturally as days shorten, identify males',
+          editable: false,
           soil: {
             watering: {
               interval: 3,
@@ -349,6 +359,7 @@ export const cannabis_indica = {
           days: 63,
           description: 'Outdoor flowering (6-12 weeks depending on strain)',
           care: 'Natural light cycle, weather protection, pest monitoring',
+          editable: true,
           soil: {
             watering: {
               interval: 3,
@@ -381,6 +392,7 @@ export const cannabis_indica = {
           days: 14,
           description: 'Outdoor harvest timing',
           care: 'Weather dependent, check trichomes, quick dry if rain',
+          editable: false,
           soil: {
             watering: {
               interval: 3,
@@ -448,6 +460,7 @@ export const cannabis_indica = {
           days: 3,
           description: 'Seed sprouting',
           care: 'Keep seeds warm and moist in controlled environment',
+          editable: true,
           soil: {
             watering: {
               interval: 1,
@@ -483,6 +496,7 @@ export const cannabis_indica = {
           days: 21,
           description: 'Establishing in greenhouse',
           care: 'Controlled environment, protect from temperature extremes',
+          editable: true,
           soil: {
             watering: {
               interval: 2,
@@ -512,6 +526,7 @@ export const cannabis_indica = {
           days: 60,
           description: 'Greenhouse vegetative growth',
           care: 'Natural light with temperature control, heavy feeding',
+          editable: true,
           soil: {
             watering: {
               interval: 3,
@@ -544,6 +559,7 @@ export const cannabis_indica = {
           days: 14,
           description: 'Photoperiod management',
           care: 'Control light hours to trigger flowering, identify males',
+          editable: true,
           soil: {
             watering: {
               interval: 3,
@@ -573,6 +589,7 @@ export const cannabis_indica = {
           days: 63,
           description: 'Greenhouse flowering (6-12 weeks depending on strain)',
           care: 'Controlled environment, weather protection, pest monitoring',
+          editable: true,
           soil: {
             watering: {
               interval: 3,
@@ -605,6 +622,7 @@ export const cannabis_indica = {
           days: 14,
           description: 'Greenhouse harvest timing',
           care: 'Controlled drying environment, check trichomes',
+          editable: true,
           soil: {
             watering: {
               interval: 3,

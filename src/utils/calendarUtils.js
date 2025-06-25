@@ -73,11 +73,6 @@ export function generateDynamicKeywords() {
         keywordList.push(plantData.emoji);
       }
       
-      // Add alternative names/translations
-      if (plantData.alternativeNames) {
-        keywordList.push(...plantData.alternativeNames.map(name => name.toLowerCase()));
-      }
-      
       plantKeywords[plantKey] = keywordList;
     }
   }

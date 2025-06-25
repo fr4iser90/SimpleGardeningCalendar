@@ -24,6 +24,7 @@ import {
 import { basil } from './herbs/index.js';
 import { strawberries } from './fruits/index.js';
 import { apple_tree, cherry_tree } from './fruit-trees/index.js';
+import { lavender, roses, sunflowers } from './flowers/index.js';
 
 // Plant category registry with dynamic imports (for async loading)
 export const PLANT_REGISTRY = {
@@ -80,6 +81,11 @@ export function getPlantRegistry() {
     // Fruit Trees
     if (apple_tree) plantRegistryMap.set('apple_tree', apple_tree);
     if (cherry_tree) plantRegistryMap.set('cherry_tree', cherry_tree);
+
+    // Flowers
+    if (lavender) plantRegistryMap.set('lavender', lavender);
+    if (roses) plantRegistryMap.set('roses', roses);
+    if (sunflowers) plantRegistryMap.set('sunflowers', sunflowers);
   } catch (error) {
     console.error('Failed to initialize plant registry:', error);
   }

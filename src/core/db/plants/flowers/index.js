@@ -3,15 +3,19 @@
  * Ornamental flowers and decorative plants
  */
 
-// Import flower plants here as they are added
-// Example: import { roses } from './roses.js';
+// Import flower plants
+import { lavender } from './lavender.js';
+import { roses } from './roses.js';
+import { sunflowers } from './sunflowers.js';
 
 // Export all flower plants
 export const flowers = {
-  // roses,
-  // tulips,
-  // daisies,
-  // etc.
+  lavender,
+  roses,
+  sunflowers,
 };
+
+// Export individual plants for direct access
+export { lavender, roses, sunflowers };
 
 export default flowers;

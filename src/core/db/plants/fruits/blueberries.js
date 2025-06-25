@@ -1,26 +1,26 @@
 /**
- * Strawberries Plant Data
- * Growing information for Strawberries
+ * Blueberries Plant Data
+ * Growing information for Blueberries
  */
 
 import { PLANT_TAGS } from '../categories.js';
 
-export const strawberries = {
-  name: 'Strawberries',
+export const blueberries = {
+  name: 'Blueberries',
   category: 'Fruits',
   tags: [PLANT_TAGS.PERENNIAL],
-  emoji: '🍓',
+  emoji: '🫐',
   environments: {
     indoor: {
       phases: {
         establishment: {
-          days: 30,
+          days: 90,
           description: 'Root establishment',
-          care: 'Keep soil moist, remove flowers first year',
+          care: 'Remove flowers first year, focus on root development',
           editable: true,
           soil: {
             watering: {
-              interval: 2,
+              interval: 3,
               description: 'Keep soil consistently moist during establishment',
             },
             fertilizing: {
@@ -50,18 +50,18 @@ export const strawberries = {
           },
         },
         vegetative: {
-          days: 60,
-          description: 'Runner and leaf production',
-          care: 'Allow runners to establish new plants',
+          days: 120,
+          description: 'Bush growth and development',
+          care: 'Shape pruning, remove weak growth',
           editable: true,
           soil: {
             watering: {
               interval: 3,
-              description: 'Keep soil consistently moist, avoid overhead watering',
+              description: 'Keep soil consistently moist during vegetative growth',
             },
             fertilizing: {
-              interval: 21,
-              description: 'Balanced fertilizer in spring, avoid high nitrogen',
+              interval: 30,
+              description: 'Acid-loving fertilizer in spring, avoid high nitrogen',
             },
           },
           hydro: {
@@ -70,8 +70,8 @@ export const strawberries = {
               description: 'Continuous flow, moderate EC',
             },
             fertilizing: {
-              interval: 21,
-              description: 'Balanced nutrients, EC 1.0-1.2',
+              interval: 30,
+              description: 'Acid-loving nutrients, EC 1.0-1.2',
             },
           },
           coco: {
@@ -80,8 +80,8 @@ export const strawberries = {
               description: 'Daily watering in coco',
             },
             fertilizing: {
-              interval: 21,
-              description: 'Balanced feeding, EC 1.0-1.2',
+              interval: 30,
+              description: 'Acid-loving feeding, EC 1.0-1.2',
             },
           },
         },
@@ -122,7 +122,7 @@ export const strawberries = {
           },
         },
         fruiting: {
-          days: 30,
+          days: 45,
           description: 'Berry production',
           care: 'Regular watering and feeding during fruiting',
           editable: true,
@@ -132,8 +132,8 @@ export const strawberries = {
               description: 'Regular watering during fruiting, avoid wetting berries',
             },
             fertilizing: {
-              interval: 14,
-              description: 'Light feeding with balanced fertilizer during fruiting',
+              interval: 21,
+              description: 'Light feeding with acid-loving fertilizer during fruiting',
             },
           },
           hydro: {
@@ -142,8 +142,8 @@ export const strawberries = {
               description: 'Continuous flow, moderate EC',
             },
             fertilizing: {
-              interval: 14,
-              description: 'Balanced nutrients, EC 1.0-1.2',
+              interval: 21,
+              description: 'Acid-loving nutrients, EC 1.0-1.2',
             },
           },
           coco: {
@@ -152,15 +152,15 @@ export const strawberries = {
               description: 'Daily watering in coco',
             },
             fertilizing: {
-              interval: 14,
-              description: 'Balanced feeding, EC 1.0-1.2',
+              interval: 21,
+              description: 'Acid-loving feeding, EC 1.0-1.2',
             },
           },
         },
         dormancy: {
           days: 120,
           description: 'Winter rest period',
-          care: 'Mulch for winter protection',
+          care: 'Prune old wood, mulch for winter protection',
           editable: true,
           soil: {
             watering: {
@@ -199,13 +199,13 @@ export const strawberries = {
     outdoor: {
       phases: {
         establishment: {
-          days: 30,
+          days: 90,
           description: 'Root establishment',
-          care: 'Keep soil moist, remove flowers first year',
+          care: 'Remove flowers first year, focus on root development',
           editable: false,
           soil: {
             watering: {
-              interval: 2,
+              interval: 3,
               description: 'Keep soil consistently moist during establishment',
             },
             fertilizing: {
@@ -235,18 +235,18 @@ export const strawberries = {
           },
         },
         vegetative: {
-          days: 60,
-          description: 'Runner and leaf production',
-          care: 'Allow runners to establish new plants',
+          days: 120,
+          description: 'Bush growth and development',
+          care: 'Shape pruning, remove weak growth',
           editable: false,
           soil: {
             watering: {
               interval: 3,
-              description: 'Keep soil consistently moist, avoid overhead watering',
+              description: 'Keep soil consistently moist during vegetative growth',
             },
             fertilizing: {
-              interval: 21,
-              description: 'Balanced fertilizer in spring, avoid high nitrogen',
+              interval: 30,
+              description: 'Acid-loving fertilizer in spring, avoid high nitrogen',
             },
           },
           hydro: {
@@ -255,8 +255,8 @@ export const strawberries = {
               description: 'Continuous flow, moderate EC',
             },
             fertilizing: {
-              interval: 21,
-              description: 'Balanced nutrients, EC 1.0-1.2',
+              interval: 30,
+              description: 'Acid-loving nutrients, EC 1.0-1.2',
             },
           },
           coco: {
@@ -265,8 +265,8 @@ export const strawberries = {
               description: 'Daily watering in coco',
             },
             fertilizing: {
-              interval: 21,
-              description: 'Balanced feeding, EC 1.0-1.2',
+              interval: 30,
+              description: 'Acid-loving feeding, EC 1.0-1.2',
             },
           },
         },
@@ -307,7 +307,7 @@ export const strawberries = {
           },
         },
         fruiting: {
-          days: 30,
+          days: 45,
           description: 'Berry production',
           care: 'Regular watering and feeding during fruiting',
           editable: true,
@@ -317,8 +317,8 @@ export const strawberries = {
               description: 'Regular watering during fruiting, avoid wetting berries',
             },
             fertilizing: {
-              interval: 14,
-              description: 'Light feeding with balanced fertilizer during fruiting',
+              interval: 21,
+              description: 'Light feeding with acid-loving fertilizer during fruiting',
             },
           },
           hydro: {
@@ -327,8 +327,8 @@ export const strawberries = {
               description: 'Continuous flow, moderate EC',
             },
             fertilizing: {
-              interval: 14,
-              description: 'Balanced nutrients, EC 1.0-1.2',
+              interval: 21,
+              description: 'Acid-loving nutrients, EC 1.0-1.2',
             },
           },
           coco: {
@@ -337,15 +337,15 @@ export const strawberries = {
               description: 'Daily watering in coco',
             },
             fertilizing: {
-              interval: 14,
-              description: 'Balanced feeding, EC 1.0-1.2',
+              interval: 21,
+              description: 'Acid-loving feeding, EC 1.0-1.2',
             },
           },
         },
         dormancy: {
           days: 120,
           description: 'Winter rest period',
-          care: 'Mulch for winter protection',
+          care: 'Prune old wood, mulch for winter protection',
           editable: false,
           soil: {
             watering: {
@@ -384,13 +384,13 @@ export const strawberries = {
     greenhouse: {
       phases: {
         establishment: {
-          days: 30,
+          days: 90,
           description: 'Root establishment',
-          care: 'Keep soil moist, remove flowers first year',
+          care: 'Remove flowers first year, focus on root development',
           editable: true,
           soil: {
             watering: {
-              interval: 2,
+              interval: 3,
               description: 'Keep soil consistently moist during establishment',
             },
             fertilizing: {
@@ -420,18 +420,18 @@ export const strawberries = {
           },
         },
         vegetative: {
-          days: 60,
-          description: 'Runner and leaf production',
-          care: 'Allow runners to establish new plants',
+          days: 120,
+          description: 'Bush growth and development',
+          care: 'Shape pruning, remove weak growth',
           editable: true,
           soil: {
             watering: {
               interval: 3,
-              description: 'Keep soil consistently moist, avoid overhead watering',
+              description: 'Keep soil consistently moist during vegetative growth',
             },
             fertilizing: {
-              interval: 21,
-              description: 'Balanced fertilizer in spring, avoid high nitrogen',
+              interval: 30,
+              description: 'Acid-loving fertilizer in spring, avoid high nitrogen',
             },
           },
           hydro: {
@@ -440,8 +440,8 @@ export const strawberries = {
               description: 'Continuous flow, moderate EC',
             },
             fertilizing: {
-              interval: 21,
-              description: 'Balanced nutrients, EC 1.0-1.2',
+              interval: 30,
+              description: 'Acid-loving nutrients, EC 1.0-1.2',
             },
           },
           coco: {
@@ -450,8 +450,8 @@ export const strawberries = {
               description: 'Daily watering in coco',
             },
             fertilizing: {
-              interval: 21,
-              description: 'Balanced feeding, EC 1.0-1.2',
+              interval: 30,
+              description: 'Acid-loving feeding, EC 1.0-1.2',
             },
           },
         },
@@ -492,7 +492,7 @@ export const strawberries = {
           },
         },
         fruiting: {
-          days: 30,
+          days: 45,
           description: 'Berry production',
           care: 'Regular watering and feeding during fruiting',
           editable: true,
@@ -502,8 +502,8 @@ export const strawberries = {
               description: 'Regular watering during fruiting, avoid wetting berries',
             },
             fertilizing: {
-              interval: 14,
-              description: 'Light feeding with balanced fertilizer during fruiting',
+              interval: 21,
+              description: 'Light feeding with acid-loving fertilizer during fruiting',
             },
           },
           hydro: {
@@ -512,8 +512,8 @@ export const strawberries = {
               description: 'Continuous flow, moderate EC',
             },
             fertilizing: {
-              interval: 14,
-              description: 'Balanced nutrients, EC 1.0-1.2',
+              interval: 21,
+              description: 'Acid-loving nutrients, EC 1.0-1.2',
             },
           },
           coco: {
@@ -522,15 +522,15 @@ export const strawberries = {
               description: 'Daily watering in coco',
             },
             fertilizing: {
-              interval: 14,
-              description: 'Balanced feeding, EC 1.0-1.2',
+              interval: 21,
+              description: 'Acid-loving feeding, EC 1.0-1.2',
             },
           },
         },
         dormancy: {
           days: 120,
           description: 'Winter rest period',
-          care: 'Mulch for winter protection',
+          care: 'Prune old wood, mulch for winter protection',
           editable: true,
           soil: {
             watering: {
@@ -569,18 +569,18 @@ export const strawberries = {
   },
   careTips: {
     watering: 'Keep soil consistently moist, avoid overhead watering',
-    fertilizing: 'Balanced fertilizer in spring, avoid high nitrogen',
+    fertilizing: 'Acid-loving fertilizer, pH 4.5-5.5',
     sunlight: 'Full sun (6+ hours daily)',
-    spacing: '12-18 inches apart',
+    spacing: '4-6 feet apart',
     temperature: 'Cool season crop, protect from extreme heat',
-    soilPH: '5.5-6.5',
-    mulching: 'Straw mulch to keep berries clean and retain moisture',
+    soilPH: '4.5-5.5 (acidic soil required)',
+    mulching: 'Pine bark or sawdust mulch to maintain acidity',
   },
   commonProblems: {
-    'Gray Mold': 'Fungal disease on fruit - improve air circulation',
-    Slugs: 'Eat holes in berries - use beer traps or diatomaceous earth',
-    Birds: 'Eat ripe berries - use netting protection',
+    'Iron Deficiency': 'Yellow leaves with green veins - check soil pH',
+    'Birds': 'Eat ripe berries - use netting protection',
+    'Root Rot': 'Fungal disease - improve drainage, avoid overwatering',
   },
 };
 
-export default strawberries;
+export default blueberries; 

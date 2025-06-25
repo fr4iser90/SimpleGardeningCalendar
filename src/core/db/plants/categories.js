@@ -195,6 +195,7 @@ export const COUNTRY_SETTINGS = {
 export const GROWING_ENVIRONMENTS = {
   INDOOR: 'indoor',
   OUTDOOR: 'outdoor',
+  GREENHOUSE: 'greenhouse'
 };
 
 export const SEASONAL_REGIONS = {

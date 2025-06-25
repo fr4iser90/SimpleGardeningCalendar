@@ -16,52 +16,144 @@ export const cherry_tree = {
           days: 365,
           description: 'First year establishment',
           care: 'Regular watering, protection from birds',
-          watering: {
-            interval: 7,
-            description: 'Weekly deep watering during establishment',
+          editable: false,
+          soil: {
+            watering: {
+              interval: 7,
+              description: 'Weekly deep watering during establishment',
+            },
+            fertilizing: {
+              interval: 90,
+              description: 'Fertilize every 3 months during establishment',
+            },
           },
-          fertilizing: {
-            interval: 90,
-            description: 'Fertilize every 3 months during establishment',
+          hydro: {
+            watering: {
+              interval: 0,
+              description: 'Continuous flow, low EC',
+            },
+            fertilizing: {
+              interval: 90,
+              description: 'Light feeding, EC 0.5-0.8',
+            },
+          },
+          coco: {
+            watering: {
+              interval: 7,
+              description: 'Weekly watering in coco',
+            },
+            fertilizing: {
+              interval: 90,
+              description: 'Light feeding, EC 0.5-0.8',
+            },
           },
         },
         juvenile: {
           days: 1095,
           description: 'Years 2-4 development',
           care: 'Training pruning, disease prevention',
-          watering: {
-            interval: 7,
-            description: 'Weekly deep watering during juvenile phase',
+          editable: false,
+          soil: {
+            watering: {
+              interval: 7,
+              description: 'Weekly deep watering during juvenile phase',
+            },
+            fertilizing: {
+              interval: 90,
+              description: 'Fertilize every 3 months during juvenile phase',
+            },
           },
-          fertilizing: {
-            interval: 90,
-            description: 'Fertilize every 3 months during juvenile phase',
+          hydro: {
+            watering: {
+              interval: 0,
+              description: 'Continuous flow, moderate EC',
+            },
+            fertilizing: {
+              interval: 90,
+              description: 'Regular feeding, EC 1.0-1.2',
+            },
+          },
+          coco: {
+            watering: {
+              interval: 7,
+              description: 'Weekly watering in coco',
+            },
+            fertilizing: {
+              interval: 90,
+              description: 'Regular feeding, EC 1.0-1.2',
+            },
           },
         },
         productive: {
           days: 5475,
           description: 'Productive years 5-20',
           care: 'Harvest timing, bird protection, disease management',
-          watering: {
-            interval: 7,
-            description: 'Weekly deep watering during productive years',
+          editable: false,
+          soil: {
+            watering: {
+              interval: 7,
+              description: 'Weekly deep watering during productive years',
+            },
+            fertilizing: {
+              interval: 90,
+              description: 'Fertilize every 3 months during productive years',
+            },
           },
-          fertilizing: {
-            interval: 90,
-            description: 'Fertilize every 3 months during productive years',
+          hydro: {
+            watering: {
+              interval: 0,
+              description: 'Continuous flow, moderate EC',
+            },
+            fertilizing: {
+              interval: 90,
+              description: 'Regular feeding, EC 1.0-1.2',
+            },
+          },
+          coco: {
+            watering: {
+              interval: 7,
+              description: 'Weekly watering in coco',
+            },
+            fertilizing: {
+              interval: 90,
+              description: 'Regular feeding, EC 1.0-1.2',
+            },
           },
         },
         dormancy: {
           days: 120,
           description: 'Winter dormancy',
           care: 'Dormant pruning, trunk protection',
-          watering: {
-            interval: 14,
-            description: 'Minimal watering during dormancy',
+          editable: false,
+          soil: {
+            watering: {
+              interval: 14,
+              description: 'Minimal watering during dormancy',
+            },
+            fertilizing: {
+              interval: 0,
+              description: 'No fertilizing during dormancy',
+            },
           },
-          fertilizing: {
-            interval: 0,
-            description: 'No fertilizing during dormancy',
+          hydro: {
+            watering: {
+              interval: 0,
+              description: 'Minimal flow during dormancy',
+            },
+            fertilizing: {
+              interval: 0,
+              description: 'No nutrients during dormancy',
+            },
+          },
+          coco: {
+            watering: {
+              interval: 14,
+              description: 'Minimal watering during dormancy',
+            },
+            fertilizing: {
+              interval: 0,
+              description: 'No fertilizing during dormancy',
+            },
           },
         },
       },

@@ -420,13 +420,14 @@ function updatePhaseCareInputs() {
   phaseCareSection.style.display = '';
   const plantData = getPlantDataForEnvironment(plantTypeSelect.value, environmentSelect?.value || 'indoor');
   if (!plantData || !plantData.phases) return;
+  const medium = 'soil'; // Default-Medium, kann ggf. dynamisch gemacht werden
   phaseCareInputs.innerHTML = Object.entries(plantData.phases).map(([phase, data]) => {
-    const emoji = getPhaseEmoji(phase);
-    const watering = data.watering?.interval || '';
-    const fertilizing = data.fertilizing?.interval || '';
+    // Werte aus soil, fallback auf direktes Feld
+    const watering = (data[medium]?.watering?.interval ?? data.watering?.interval) || '';
+    const fertilizing = (data[medium]?.fertilizing?.interval ?? data.fertilizing?.interval) || '';
     return `
       <div class="flex items-center gap-4 mb-2">
-        <span class="w-32">${emoji} ${phase}</span>
+        <span class="w-32">${getPhaseEmoji(phase)} ${phase}</span>
         <label class="flex items-center gap-1">
           <input type="checkbox" name="watering_${phase}_enabled" class="accent-blue-500" ${watering ? 'checked' : ''}>
           ${t('modal.reminders.watering')}

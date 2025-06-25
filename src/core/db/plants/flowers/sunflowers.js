@@ -1,20 +1,21 @@
 /**
- * Basil Plant Data
- * Growing information for Basil
+ * Sunflowers Plant Data
+ * Growing information for Sunflowers
  */
 
 import { PLANT_TAGS } from '../categories.js';
 
-export const basil = {
-  name: 'Basil',
-  category: 'Herbs',
+export const sunflowers = {
+  name: 'Sunflowers',
+  category: 'Flowers',
   tags: [PLANT_TAGS.ANNUAL],
+  emoji: '🌻',
   environments: {
     indoor: {
       phases: {
         germination: {
           days: 7,
-          description: 'Seeds sprouting',
+          description: 'Seed sprouting',
           care: 'Keep warm and moist',
           editable: true,
           soil: {
@@ -76,9 +77,9 @@ export const basil = {
           },
         },
         vegetative: {
-          days: 21,
-          description: 'Leaf growth',
-          care: 'Pinch tips for bushiness',
+          days: 30,
+          description: 'Rapid growth phase',
+          care: 'Support tall stems, provide adequate light',
           editable: true,
           soil: {
             watering: {
@@ -106,56 +107,56 @@ export const basil = {
           },
         },
         flowering: {
-          days: 20,
-          description: 'Flower spike development',
-          care: 'Pinch flowers for continued leaf harvest',
+          days: 21,
+          description: 'Flower head development',
+          care: 'Support heavy flower heads, protect from pests',
           editable: true,
           soil: {
             watering: { interval: 3, description: 'Maintain consistent moisture' },
             fertilizing: {
               interval: 21,
-              description: 'Continue light feeding to support leaf production',
+              description: 'Light feeding to support flower development',
             },
           },
           hydro: {
             watering: { interval: 0, description: 'Continuous flow, moderate EC' },
             fertilizing: {
               interval: 21,
-              description: 'Continue light feeding, EC 1.0-1.2',
+              description: 'Light feeding, EC 1.0-1.2',
             },
           },
           coco: {
             watering: { interval: 1, description: 'Daily watering in coco' },
             fertilizing: {
               interval: 21,
-              description: 'Continue light feeding, EC 1.0-1.2',
+              description: 'Light feeding, EC 1.0-1.2',
             },
           },
         },
-        harvest: {
+        seed_development: {
           days: 30,
-          description: 'Continuous harvest',
-          care: 'Harvest leaves regularly, prevent flowering',
+          description: 'Seed maturation',
+          care: 'Protect from birds, allow seeds to mature',
           editable: true,
           soil: {
             watering: { interval: 3, description: 'Keep soil consistently moist' },
             fertilizing: {
-              interval: 14,
-              description: 'Regular feeding to support new growth',
+              interval: 0,
+              description: 'No fertilizing during seed development',
             },
           },
           hydro: {
             watering: { interval: 0, description: 'Continuous flow, moderate EC' },
             fertilizing: {
-              interval: 14,
-              description: 'Regular nutrients, EC 1.0-1.2',
+              interval: 0,
+              description: 'No nutrients during seed development',
             },
           },
           coco: {
             watering: { interval: 1, description: 'Daily watering in coco' },
             fertilizing: {
-              interval: 14,
-              description: 'Regular feeding, EC 1.0-1.2',
+              interval: 0,
+              description: 'No fertilizing during seed development',
             },
           },
         },
@@ -165,7 +166,7 @@ export const basil = {
       phases: {
         germination: {
           days: 7,
-          description: 'Seeds sprouting',
+          description: 'Seed sprouting',
           care: 'Keep warm and moist',
           editable: false,
           soil: {
@@ -227,9 +228,9 @@ export const basil = {
           },
         },
         vegetative: {
-          days: 21,
-          description: 'Leaf growth',
-          care: 'Pinch tips for bushiness',
+          days: 30,
+          description: 'Rapid growth phase',
+          care: 'Support tall stems, provide adequate light',
           editable: false,
           soil: {
             watering: {
@@ -257,56 +258,56 @@ export const basil = {
           },
         },
         flowering: {
-          days: 20,
-          description: 'Flower spike development',
-          care: 'Pinch flowers for continued leaf harvest',
-          editable: false,
+          days: 21,
+          description: 'Flower head development',
+          care: 'Support heavy flower heads, protect from pests',
+          editable: true,
           soil: {
             watering: { interval: 3, description: 'Maintain consistent moisture' },
             fertilizing: {
               interval: 21,
-              description: 'Continue light feeding to support leaf production',
+              description: 'Light feeding to support flower development',
             },
           },
           hydro: {
             watering: { interval: 0, description: 'Continuous flow, moderate EC' },
             fertilizing: {
               interval: 21,
-              description: 'Continue light feeding, EC 1.0-1.2',
+              description: 'Light feeding, EC 1.0-1.2',
             },
           },
           coco: {
             watering: { interval: 1, description: 'Daily watering in coco' },
             fertilizing: {
               interval: 21,
-              description: 'Continue light feeding, EC 1.0-1.2',
+              description: 'Light feeding, EC 1.0-1.2',
             },
           },
         },
-        harvest: {
+        seed_development: {
           days: 30,
-          description: 'Continuous harvest',
-          care: 'Harvest leaves regularly, prevent flowering',
+          description: 'Seed maturation',
+          care: 'Protect from birds, allow seeds to mature',
           editable: true,
           soil: {
             watering: { interval: 3, description: 'Keep soil consistently moist' },
             fertilizing: {
-              interval: 14,
-              description: 'Regular feeding to support new growth',
+              interval: 0,
+              description: 'No fertilizing during seed development',
             },
           },
           hydro: {
             watering: { interval: 0, description: 'Continuous flow, moderate EC' },
             fertilizing: {
-              interval: 14,
-              description: 'Regular nutrients, EC 1.0-1.2',
+              interval: 0,
+              description: 'No nutrients during seed development',
             },
           },
           coco: {
             watering: { interval: 1, description: 'Daily watering in coco' },
             fertilizing: {
-              interval: 14,
-              description: 'Regular feeding, EC 1.0-1.2',
+              interval: 0,
+              description: 'No fertilizing during seed development',
             },
           },
         },
@@ -316,7 +317,7 @@ export const basil = {
       phases: {
         germination: {
           days: 7,
-          description: 'Seeds sprouting',
+          description: 'Seed sprouting',
           care: 'Keep warm and moist',
           editable: true,
           soil: {
@@ -378,9 +379,9 @@ export const basil = {
           },
         },
         vegetative: {
-          days: 21,
-          description: 'Leaf growth',
-          care: 'Pinch tips for bushiness',
+          days: 30,
+          description: 'Rapid growth phase',
+          care: 'Support tall stems, provide adequate light',
           editable: true,
           soil: {
             watering: {
@@ -408,56 +409,56 @@ export const basil = {
           },
         },
         flowering: {
-          days: 20,
-          description: 'Flower spike development',
-          care: 'Pinch flowers for continued leaf harvest',
+          days: 21,
+          description: 'Flower head development',
+          care: 'Support heavy flower heads, protect from pests',
           editable: true,
           soil: {
             watering: { interval: 3, description: 'Maintain consistent moisture' },
             fertilizing: {
               interval: 21,
-              description: 'Continue light feeding to support leaf production',
+              description: 'Light feeding to support flower development',
             },
           },
           hydro: {
             watering: { interval: 0, description: 'Continuous flow, moderate EC' },
             fertilizing: {
               interval: 21,
-              description: 'Continue light feeding, EC 1.0-1.2',
+              description: 'Light feeding, EC 1.0-1.2',
             },
           },
           coco: {
             watering: { interval: 1, description: 'Daily watering in coco' },
             fertilizing: {
               interval: 21,
-              description: 'Continue light feeding, EC 1.0-1.2',
+              description: 'Light feeding, EC 1.0-1.2',
             },
           },
         },
-        harvest: {
+        seed_development: {
           days: 30,
-          description: 'Continuous harvest',
-          care: 'Harvest leaves regularly, prevent flowering',
+          description: 'Seed maturation',
+          care: 'Protect from birds, allow seeds to mature',
           editable: true,
           soil: {
             watering: { interval: 3, description: 'Keep soil consistently moist' },
             fertilizing: {
-              interval: 14,
-              description: 'Regular feeding to support new growth',
+              interval: 0,
+              description: 'No fertilizing during seed development',
             },
           },
           hydro: {
             watering: { interval: 0, description: 'Continuous flow, moderate EC' },
             fertilizing: {
-              interval: 14,
-              description: 'Regular nutrients, EC 1.0-1.2',
+              interval: 0,
+              description: 'No nutrients during seed development',
             },
           },
           coco: {
             watering: { interval: 1, description: 'Daily watering in coco' },
             fertilizing: {
-              interval: 14,
-              description: 'Regular feeding, EC 1.0-1.2',
+              interval: 0,
+              description: 'No fertilizing during seed development',
             },
           },
         },
@@ -468,17 +469,16 @@ export const basil = {
     watering: 'Keep soil moist but not waterlogged',
     fertilizing: 'Light feeding every 2-3 weeks',
     sunlight: 'Full sun (6+ hours daily)',
-    spacing: '6-12 inches apart',
-    temperature: 'Warm weather herb, protect from cold',
-    soilPH: '6.0-7.0',
-    harvesting: 'Pinch leaves regularly to encourage growth',
+    spacing: '1-2 feet apart',
+    temperature: 'Warm weather flower, protect from cold',
+    soilPH: '6.0-7.5',
+    support: 'Stake tall varieties to prevent wind damage',
   },
   commonProblems: {
-    'Fusarium Wilt':
-      'Soil-borne disease - use disease-free soil and rotate crops',
-    Aphids: 'Small insects on new growth - spray with water',
-    Bolting: 'Going to seed too early - pinch flower buds regularly',
+    'Aphids': 'Small insects on new growth - spray with water',
+    'Birds': 'Eat seeds - cover flower heads with netting',
+    'Wind Damage': 'Tall stems break - provide support stakes',
   },
 };
 
-export default basil;
+export default sunflowers; 

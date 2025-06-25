@@ -37,7 +37,12 @@ export async function addPlanting(plantType, startDate, location = 'Default Gard
   // Handle both old and new phase structures
   const plantPhases = plantData.phases || plantData.environments?.indoor?.phases || plantData.environments?.outdoor?.phases || {};
   
-  for (const [phase, { days, description, care }] of Object.entries(plantPhases)) {
+  for (const [phase, phaseData] of Object.entries(plantPhases)) {
+    // Handle new structure with medium-specific data
+    const days = phaseData.days;
+    const description = phaseData.description;
+    const care = phaseData.care;
+    
     // Use custom duration if provided, otherwise use default
     const phaseDays = customPhaseDurations[phase] || days;
     

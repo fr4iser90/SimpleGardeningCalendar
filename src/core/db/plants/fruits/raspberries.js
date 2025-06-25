@@ -1,26 +1,26 @@
 /**
- * Strawberries Plant Data
- * Growing information for Strawberries
+ * Raspberries Plant Data
+ * Growing information for Raspberries
  */
 
 import { PLANT_TAGS } from '../categories.js';
 
-export const strawberries = {
-  name: 'Strawberries',
+export const raspberries = {
+  name: 'Raspberries',
   category: 'Fruits',
   tags: [PLANT_TAGS.PERENNIAL],
-  emoji: '🍓',
+  emoji: '🫐',
   environments: {
     indoor: {
       phases: {
         establishment: {
-          days: 30,
+          days: 60,
           description: 'Root establishment',
-          care: 'Keep soil moist, remove flowers first year',
+          care: 'Remove flowers first year, focus on root development',
           editable: true,
           soil: {
             watering: {
-              interval: 2,
+              interval: 3,
               description: 'Keep soil consistently moist during establishment',
             },
             fertilizing: {
@@ -50,14 +50,14 @@ export const strawberries = {
           },
         },
         vegetative: {
-          days: 60,
-          description: 'Runner and leaf production',
-          care: 'Allow runners to establish new plants',
+          days: 90,
+          description: 'Cane growth and development',
+          care: 'Train canes to trellis, remove weak growth',
           editable: true,
           soil: {
             watering: {
               interval: 3,
-              description: 'Keep soil consistently moist, avoid overhead watering',
+              description: 'Keep soil consistently moist during vegetative growth',
             },
             fertilizing: {
               interval: 21,
@@ -160,7 +160,7 @@ export const strawberries = {
         dormancy: {
           days: 120,
           description: 'Winter rest period',
-          care: 'Mulch for winter protection',
+          care: 'Prune old canes, mulch for winter protection',
           editable: true,
           soil: {
             watering: {
@@ -199,13 +199,13 @@ export const strawberries = {
     outdoor: {
       phases: {
         establishment: {
-          days: 30,
+          days: 60,
           description: 'Root establishment',
-          care: 'Keep soil moist, remove flowers first year',
+          care: 'Remove flowers first year, focus on root development',
           editable: false,
           soil: {
             watering: {
-              interval: 2,
+              interval: 3,
               description: 'Keep soil consistently moist during establishment',
             },
             fertilizing: {
@@ -235,14 +235,14 @@ export const strawberries = {
           },
         },
         vegetative: {
-          days: 60,
-          description: 'Runner and leaf production',
-          care: 'Allow runners to establish new plants',
+          days: 90,
+          description: 'Cane growth and development',
+          care: 'Train canes to trellis, remove weak growth',
           editable: false,
           soil: {
             watering: {
               interval: 3,
-              description: 'Keep soil consistently moist, avoid overhead watering',
+              description: 'Keep soil consistently moist during vegetative growth',
             },
             fertilizing: {
               interval: 21,
@@ -307,9 +307,9 @@ export const strawberries = {
           },
         },
         fruiting: {
-          days: 30,
-          description: 'Berry production',
-          care: 'Regular watering and feeding during fruiting',
+          days: 35,
+          description: 'Berry development',
+          care: 'Regular harvest, protect from birds',
           editable: true,
           soil: {
             watering: {
@@ -345,7 +345,7 @@ export const strawberries = {
         dormancy: {
           days: 120,
           description: 'Winter rest period',
-          care: 'Mulch for winter protection',
+          care: 'Prune old canes, mulch for winter protection',
           editable: false,
           soil: {
             watering: {
@@ -384,13 +384,13 @@ export const strawberries = {
     greenhouse: {
       phases: {
         establishment: {
-          days: 30,
+          days: 60,
           description: 'Root establishment',
-          care: 'Keep soil moist, remove flowers first year',
+          care: 'Remove flowers first year, focus on root development',
           editable: true,
           soil: {
             watering: {
-              interval: 2,
+              interval: 3,
               description: 'Keep soil consistently moist during establishment',
             },
             fertilizing: {
@@ -420,14 +420,14 @@ export const strawberries = {
           },
         },
         vegetative: {
-          days: 60,
-          description: 'Runner and leaf production',
-          care: 'Allow runners to establish new plants',
+          days: 90,
+          description: 'Cane growth and development',
+          care: 'Train canes to trellis, remove weak growth',
           editable: true,
           soil: {
             watering: {
               interval: 3,
-              description: 'Keep soil consistently moist, avoid overhead watering',
+              description: 'Keep soil consistently moist during vegetative growth',
             },
             fertilizing: {
               interval: 21,
@@ -530,7 +530,7 @@ export const strawberries = {
         dormancy: {
           days: 120,
           description: 'Winter rest period',
-          care: 'Mulch for winter protection',
+          care: 'Prune old canes, mulch for winter protection',
           editable: true,
           soil: {
             watering: {
@@ -571,16 +571,16 @@ export const strawberries = {
     watering: 'Keep soil consistently moist, avoid overhead watering',
     fertilizing: 'Balanced fertilizer in spring, avoid high nitrogen',
     sunlight: 'Full sun (6+ hours daily)',
-    spacing: '12-18 inches apart',
+    spacing: '2-3 feet apart',
     temperature: 'Cool season crop, protect from extreme heat',
     soilPH: '5.5-6.5',
-    mulching: 'Straw mulch to keep berries clean and retain moisture',
+    trellising: 'Support canes with trellis or wire system',
   },
   commonProblems: {
+    'Cane Borers': 'Insect damage to canes - remove and destroy affected canes',
     'Gray Mold': 'Fungal disease on fruit - improve air circulation',
-    Slugs: 'Eat holes in berries - use beer traps or diatomaceous earth',
-    Birds: 'Eat ripe berries - use netting protection',
+    'Spider Mites': 'Tiny pests on leaves - increase humidity, use predatory mites',
   },
 };
 
-export default strawberries;
+export default raspberries; 
