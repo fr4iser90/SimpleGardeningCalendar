@@ -259,7 +259,9 @@ export function checkSeasonalTiming() {
     return;
   }
   
-  const validation = validatePlantingDate(plantTypeSelect.value, environmentSelect?.value || 'indoor', dateInput.value);
+  const environment = environmentSelect?.value || 'environment.indoor';
+  const envKey = environment.replace('environment.', '');
+  const validation = validatePlantingDate(plantTypeSelect.value, envKey, dateInput.value);
   const region = regionSelect?.value || 'temperate_north';
   
   if (!validation.isValid) {
@@ -364,14 +366,15 @@ export function updatePhaseCareInputs() {
   
   const registry = getPlantRegistry();
   const plantData = registry.get(plantTypeSelect.value);
-  const environment = environmentSelect?.value || 'indoor';
+  const environment = environmentSelect?.value || 'environment.indoor';
+  const envKey = environment.replace('environment.', '');
   
-  if (!plantData || !plantData.environments || !plantData.environments[environment]) {
+  if (!plantData || !plantData.environments || !plantData.environments[envKey]) {
     phaseCareSection.style.display = 'none';
     return;
   }
   
-  const envData = plantData.environments[environment];
+  const envData = plantData.environments[envKey];
   const phases = envData.phases;
   
   phaseCareSection.style.display = '';
@@ -421,13 +424,14 @@ export function getCustomPhaseDurations(formData) {
   const customPhaseDurations = {};
   const plantType = formData.get('plantType');
   const environment = formData.get('environment');
+  const envKey = environment ? environment.replace('environment.', '') : 'indoor';
   
   if (plantType && environment) {
     const registry = getPlantRegistry();
     const plantData = registry.get(plantType);
     
-    if (plantData && plantData.environments && plantData.environments[environment]) {
-      const envData = plantData.environments[environment];
+    if (plantData && plantData.environments && plantData.environments[envKey]) {
+      const envData = plantData.environments[envKey];
       const phases = envData.phases;
       
       const isAutoflower = plantType.includes('autoflower');
@@ -435,7 +439,7 @@ export function getCustomPhaseDurations(formData) {
       if (isAutoflower) {
         // Autoflowers: No custom phase durations needed
         // Phases are automatic and cannot be adjusted
-      } else if (environment === 'outdoor') {
+      } else if (envKey === 'outdoor') {
         // Outdoor: Only editable phases can be adjusted
         Object.entries(phases).forEach(([phase, data]) => {
           if (data.editable) {
