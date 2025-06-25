@@ -6,9 +6,9 @@
 export const PLANT_CATEGORIES = {
   VEGETABLES: 'Vegetables',
   HERBS: 'Herbs',
-  FRUITS: 'Fruits', 
+  FRUITS: 'Fruits',
   FRUIT_TREES: 'Fruit Trees',
-  FLOWERS: 'Flowers'
+  FLOWERS: 'Flowers',
 };
 
 export const PLANT_TAGS = {
@@ -22,7 +22,7 @@ export const PLANT_TAGS = {
   PERENNIAL: 'Perennial',
   ANNUAL: 'Annual',
   BIENNIAL: 'Biennial',
-  CANNABIS: 'Cannabis'  // Optional, länderabhängig
+  CANNABIS: 'Cannabis', // Optional, länderabhängig
 };
 
 export const CATEGORY_METADATA = {
@@ -30,150 +30,176 @@ export const CATEGORY_METADATA = {
     name: 'Vegetables',
     description: 'Common garden vegetables for food production',
     icon: '🥕',
-    color: '#F59E0B'
+    color: '#F59E0B',
   },
   [PLANT_CATEGORIES.HERBS]: {
     name: 'Herbs',
     description: 'Culinary and medicinal herbs',
     icon: '🌱',
-    color: '#10B981'
+    color: '#10B981',
   },
   [PLANT_CATEGORIES.FRUITS]: {
     name: 'Fruits',
     description: 'Small fruit plants and berry bushes',
     icon: '🍓',
-    color: '#EF4444'
+    color: '#EF4444',
   },
   [PLANT_CATEGORIES.FRUIT_TREES]: {
     name: 'Fruit Trees',
     description: 'Larger fruit-bearing trees',
     icon: '🍎',
-    color: '#DC2626'
+    color: '#DC2626',
   },
   [PLANT_CATEGORIES.FLOWERS]: {
     name: 'Flowers',
     description: 'Ornamental flowers and decorative plants',
     icon: '🌸',
-    color: '#EC4899'
-  }
+    color: '#EC4899',
+  },
 };
 
 // Country-specific settings for cannabis display
 export const COUNTRY_SETTINGS = {
-  'DE': { 
+  DE: {
     showCannabis: true,
-    cannabisInfo: 'Legal for personal use (up to 3 plants, 25g possession) since 2024. Medical cannabis legal since 2017.'
+    cannabisInfo:
+      'Legal for personal use (up to 3 plants, 25g possession) since 2024. Medical cannabis legal since 2017.',
   },
-  'AT': { 
+  AT: {
     showCannabis: false,
-    cannabisInfo: 'Illegal for recreational use. Medical cannabis available with prescription since 2008.'
+    cannabisInfo:
+      'Illegal for recreational use. Medical cannabis available with prescription since 2008.',
   },
-  'CH': { 
+  CH: {
     showCannabis: true,
-    cannabisInfo: 'Decriminalized (up to 10g). Medical cannabis legal. Several cities allow regulated sales.'
+    cannabisInfo:
+      'Decriminalized (up to 10g). Medical cannabis legal. Several cities allow regulated sales.',
   },
-  'NL': { 
+  NL: {
     showCannabis: true,
-    cannabisInfo: 'Decriminalized for personal use. Coffee shops allowed to sell small amounts. Medical cannabis legal.'
+    cannabisInfo:
+      'Decriminalized for personal use. Coffee shops allowed to sell small amounts. Medical cannabis legal.',
   },
-  'CA': { 
+  CA: {
     showCannabis: true,
-    cannabisInfo: 'Fully legal for recreational and medical use since 2018. Adults can grow up to 4 plants.'
+    cannabisInfo:
+      'Fully legal for recreational and medical use since 2018. Adults can grow up to 4 plants.',
   },
-  'US': { 
+  US: {
     showCannabis: false,
-    cannabisInfo: 'Federal illegal, but legal in 24 states for recreational use. Medical cannabis legal in 38 states.'
+    cannabisInfo:
+      'Federal illegal, but legal in 24 states for recreational use. Medical cannabis legal in 38 states.',
   },
-  'ES': { 
+  ES: {
     showCannabis: false,
-    cannabisInfo: 'Illegal for recreational use. Medical cannabis legal since 2017. Private cultivation decriminalized.'
+    cannabisInfo:
+      'Illegal for recreational use. Medical cannabis legal since 2017. Private cultivation decriminalized.',
   },
-  'FR': { 
+  FR: {
     showCannabis: false,
-    cannabisInfo: 'Illegal for recreational use. Medical cannabis legal since 2021. CBD products legal.'
+    cannabisInfo:
+      'Illegal for recreational use. Medical cannabis legal since 2021. CBD products legal.',
   },
-  'IT': { 
+  IT: {
     showCannabis: false,
-    cannabisInfo: 'Illegal for recreational use. Medical cannabis legal since 2013. CBD products legal.'
+    cannabisInfo:
+      'Illegal for recreational use. Medical cannabis legal since 2013. CBD products legal.',
   },
-  'PT': { 
+  PT: {
     showCannabis: true,
-    cannabisInfo: 'Decriminalized for personal use since 2001. Medical cannabis legal since 2018.'
+    cannabisInfo:
+      'Decriminalized for personal use since 2001. Medical cannabis legal since 2018.',
   },
-  'CZ': { 
+  CZ: {
     showCannabis: true,
-    cannabisInfo: 'Decriminalized for personal use (up to 15g). Medical cannabis legal since 2013.'
+    cannabisInfo:
+      'Decriminalized for personal use (up to 15g). Medical cannabis legal since 2013.',
   },
-  'BE': { 
+  BE: {
     showCannabis: false,
-    cannabisInfo: 'Illegal for recreational use. Medical cannabis legal since 2015. CBD products legal.'
+    cannabisInfo:
+      'Illegal for recreational use. Medical cannabis legal since 2015. CBD products legal.',
   },
-  'UK': { 
+  UK: {
     showCannabis: false,
-    cannabisInfo: 'Illegal for recreational use. Medical cannabis legal since 2018. CBD products legal.'
+    cannabisInfo:
+      'Illegal for recreational use. Medical cannabis legal since 2018. CBD products legal.',
   },
-  'AU': { 
+  AU: {
     showCannabis: false,
-    cannabisInfo: 'Illegal federally. Medical cannabis legal in all states. Recreational legal in ACT only.'
+    cannabisInfo:
+      'Illegal federally. Medical cannabis legal in all states. Recreational legal in ACT only.',
   },
-  'NZ': { 
+  NZ: {
     showCannabis: false,
-    cannabisInfo: 'Illegal for recreational use. Medical cannabis legal since 2020. Referendum failed in 2020.'
+    cannabisInfo:
+      'Illegal for recreational use. Medical cannabis legal since 2020. Referendum failed in 2020.',
   },
-  'JP': { 
+  JP: {
     showCannabis: false,
-    cannabisInfo: 'Strictly illegal for recreational use. Medical cannabis very limited. CBD products legal.'
+    cannabisInfo:
+      'Strictly illegal for recreational use. Medical cannabis very limited. CBD products legal.',
   },
-  'KR': { 
+  KR: {
     showCannabis: false,
-    cannabisInfo: 'Illegal for recreational use. Medical cannabis legal since 2018. CBD products legal.'
+    cannabisInfo:
+      'Illegal for recreational use. Medical cannabis legal since 2018. CBD products legal.',
   },
-  'TH': { 
+  TH: {
     showCannabis: true,
-    cannabisInfo: 'Decriminalized since 2022. Medical cannabis legal. Recreational use partially allowed.'
+    cannabisInfo:
+      'Decriminalized since 2022. Medical cannabis legal. Recreational use partially allowed.',
   },
-  'UY': { 
+  UY: {
     showCannabis: true,
-    cannabisInfo: 'First country to fully legalize cannabis (2013). Adults can grow up to 6 plants.'
+    cannabisInfo:
+      'First country to fully legalize cannabis (2013). Adults can grow up to 6 plants.',
   },
-  'MX': { 
+  MX: {
     showCannabis: false,
-    cannabisInfo: 'Decriminalized for personal use (up to 5g). Medical cannabis legal. Recreational legalization pending.'
+    cannabisInfo:
+      'Decriminalized for personal use (up to 5g). Medical cannabis legal. Recreational legalization pending.',
   },
-  'BR': { 
+  BR: {
     showCannabis: false,
-    cannabisInfo: 'Illegal for recreational use. Medical cannabis legal since 2019. CBD products legal.'
+    cannabisInfo:
+      'Illegal for recreational use. Medical cannabis legal since 2019. CBD products legal.',
   },
-  'AR': { 
+  AR: {
     showCannabis: false,
-    cannabisInfo: 'Illegal for recreational use. Medical cannabis legal since 2017. CBD products legal.'
+    cannabisInfo:
+      'Illegal for recreational use. Medical cannabis legal since 2017. CBD products legal.',
   },
-  'CL': { 
+  CL: {
     showCannabis: false,
-    cannabisInfo: 'Decriminalized for personal use. Medical cannabis legal since 2015. Recreational illegal.'
+    cannabisInfo:
+      'Decriminalized for personal use. Medical cannabis legal since 2015. Recreational illegal.',
   },
-  'CO': { 
+  CO: {
     showCannabis: true,
-    cannabisInfo: 'Fully legal for recreational and medical use since 2016. Adults can grow up to 20 plants.'
+    cannabisInfo:
+      'Fully legal for recreational and medical use since 2016. Adults can grow up to 20 plants.',
   },
-  'PE': { 
+  PE: {
     showCannabis: false,
-    cannabisInfo: 'Decriminalized for personal use. Medical cannabis legal since 2017. Recreational illegal.'
+    cannabisInfo:
+      'Decriminalized for personal use. Medical cannabis legal since 2017. Recreational illegal.',
   },
-  'EC': { 
+  EC: {
     showCannabis: false,
-    cannabisInfo: 'Decriminalized for personal use (up to 10g). Medical cannabis legal. Recreational illegal.'
-  }
+    cannabisInfo:
+      'Decriminalized for personal use (up to 10g). Medical cannabis legal. Recreational illegal.',
+  },
 };
 
 export const GROWING_ENVIRONMENTS = {
   INDOOR: 'indoor',
-  OUTDOOR: 'outdoor'
+  OUTDOOR: 'outdoor',
 };
 
 export const SEASONAL_REGIONS = {
   TEMPERATE_NORTH: 'temperate_north',
-  MEDITERRANEAN: 'mediterranean'
+  MEDITERRANEAN: 'mediterranean',
 };
 
-export default PLANT_CATEGORIES; 
+export default PLANT_CATEGORIES;

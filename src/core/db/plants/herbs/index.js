@@ -13,14 +13,9 @@ export const HERBS_PLANTS = {
   basil,
   cannabis_indica,
   cannabis_sativa,
-  cannabis_autoflower
+  cannabis_autoflower,
 };
 
-export {
-  basil,
-  cannabis_indica,
-  cannabis_sativa,
-  cannabis_autoflower
-};
+export { basil, cannabis_indica, cannabis_sativa, cannabis_autoflower };
 
-export default HERBS_PLANTS; 
+export default HERBS_PLANTS;

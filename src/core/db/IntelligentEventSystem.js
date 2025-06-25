@@ -165,6 +165,22 @@ function getIntelligentEventType(phaseName, plantData) {
 }
 
 /**
+ * Hilfsfunktion für Medium-spezifische Werte
+ * @param {Object} plantData - Plant data
+ * @param {string} phaseName - Phase name
+ * @param {string} medium - Medium name
+ * @returns {Object} Medium-specific data
+ */
+function getPhaseMediumData(plantData, phaseName, medium = 'soil') {
+  const phases = getPlantPhases(plantData);
+  const phaseData = phases[phaseName];
+  if (phaseData?.[medium]) {
+    return phaseData[medium];
+  }
+  return phaseData || {};
+}
+
+/**
  * Create intelligent events for a new planting
  * @param {Object} planting - Planting record
  * @param {Object} plantData - Plant data
@@ -263,12 +279,12 @@ export async function createIntelligentPlantingEvents(planting, plantData, phase
 
     // Add watering reminders only if enabled
     if (finalReminderOptions.watering?.enabled) {
-      await createWateringEvents(tx.store, plantData, phase, plantingId, completionDate, finalReminderOptions.watering.interval, planting.calendarId);
+      await createWateringEvents(tx.store, plantData, phase, plantingId, completionDate, finalReminderOptions.watering.interval, planting.calendarId, phase.name, reminderOptions.selectedMedium);
     }
 
     // Add fertilizing reminders only if enabled
     if (finalReminderOptions.fertilizing?.enabled) {
-      await createFertilizingEvents(tx.store, plantData, phase, plantingId, finalReminderOptions.fertilizing, planting.calendarId);
+      await createFertilizingEvents(tx.store, plantData, phase, plantingId, finalReminderOptions.fertilizing, planting.calendarId, phase.name, reminderOptions.selectedMedium);
     }
   }
   
@@ -283,40 +299,35 @@ export async function createIntelligentPlantingEvents(planting, plantData, phase
  * @param {number} plantingId - Planting ID
  * @param {string} completionDate - Completion date
  * @param {number} wateringInterval - Watering interval in days
+ * @param {string} selectedPhase - Selected phase name
+ * @param {string} selectedMedium - Selected medium
  */
-async function createWateringEvents(store, plantData, phase, plantingId, completionDate, wateringInterval, calendarId) {
-  // Use custom interval or fall back to plant-specific default
-  let interval = wateringInterval || getWateringInterval(plantData.category, phase.name);
-  
-  // Adjust watering frequency based on plant type
-  if (plantData.category === 'Fruit Trees' || plantData.category === 'fruit-trees') {
-    // Trees need less frequent watering
-    interval = Math.max(interval, 7); // At least weekly for trees
-  } else if (plantData.category === 'Herbs' && phase.days > 365) {
-    // Long-lived herbs need less frequent watering
-    interval = Math.max(interval, 5);
+async function createWateringEvents(store, plantData, phase, plantingId, completionDate, wateringInterval, calendarId, selectedPhase = null, selectedMedium = null) {
+  // Hole Medium-spezifische Daten
+  const phaseName = selectedPhase || phase.name;
+  const medium = selectedMedium || 'soil';
+  const mediumData = getPhaseMediumData(plantData, phaseName, medium);
+  let interval = wateringInterval;
+  if (!interval && mediumData?.watering?.interval !== undefined) {
+    interval = mediumData.watering.interval;
+  } else if (!interval && phase?.watering?.interval !== undefined) {
+    interval = phase.watering.interval;
+  } else if (!interval && plantData.defaultCare?.watering?.interval) {
+    interval = plantData.defaultCare.watering.interval;
+  } else if (!interval) {
+    interval = getWateringInterval(plantData.category, phaseName);
   }
-  
-  // Skip watering events for very long phases (like tree establishment)
-  if (phase.days > 365) {
-    // For very long phases, only create monthly watering reminders
-    interval = 30;
-  }
-  
+  if (interval === 0) return;
   let wateringDate = new Date(phase.startDate);
   const phaseEnd = new Date(wateringDate);
   phaseEnd.setDate(phaseEnd.getDate() + phase.days);
-
-  // Get phase data for care instructions
-  const plantPhases = getPlantPhases(plantData);
-  const phaseData = plantPhases[phase.name];
-
   while (wateringDate < phaseEnd) {
+    const wateringDescription = mediumData?.watering?.description || phase?.watering?.description || plantData.careTips?.watering || 'Check soil moisture and water as needed';
     await store.add({
       title: `💧 Water ${plantData.name}`,
       date: wateringDate.toISOString().split('T')[0],
       type: 'watering',
-      description: `${plantData.careTips?.watering || 'Check soil moisture and water as needed'}\n\nPhase: ${phase.name}\nCare: ${phaseData?.care || 'Follow general watering guidelines'}`,
+      description: `${wateringDescription}\n\nPhase: ${phaseName}\nCare: ${phase?.care || 'Follow general watering guidelines'}`,
       plantingId,
       calendarId
     });
@@ -331,26 +342,37 @@ async function createWateringEvents(store, plantData, phase, plantingId, complet
  * @param {Object} phase - Phase object
  * @param {number} plantingId - Planting ID
  * @param {Object} fertilizingOptions - Fertilizing options with interval and delay
+ * @param {string} selectedPhase - Selected phase name
+ * @param {string} selectedMedium - Selected medium
  */
-async function createFertilizingEvents(store, plantData, phase, plantingId, fertilizingOptions, calendarId) {
-  if (phase.days > 14 && (phase.name === 'vegetative' || phase.name === 'flowering' || phase.name === 'fruiting' || phase.name === 'productive')) {
+async function createFertilizingEvents(store, plantData, phase, plantingId, fertilizingOptions, calendarId, selectedPhase = null, selectedMedium = null) {
+  const phaseName = selectedPhase || phase.name;
+  const medium = selectedMedium || 'soil';
+  const mediumData = getPhaseMediumData(plantData, phaseName, medium);
+  let interval = fertilizingOptions?.interval;
+  if (!interval && mediumData?.fertilizing?.interval !== undefined) {
+    interval = mediumData.fertilizing.interval;
+  } else if (!interval && phase?.fertilizing?.interval !== undefined) {
+    interval = phase.fertilizing.interval;
+  } else if (!interval && plantData.defaultCare?.fertilizing?.interval) {
+    interval = plantData.defaultCare.fertilizing.interval;
+  } else if (!interval) {
+    interval = 14;
+  }
+  if (interval === 0) return;
+  if (phase.days > 14 && (phaseName === 'vegetative' || phaseName === 'flowering' || phaseName === 'fruiting' || phaseName === 'productive' || phaseName === 'rooting' || phaseName === 'maturing')) {
     const fertilizeDate = new Date(phase.startDate);
-    // Apply delay if specified
     const delay = fertilizingOptions?.delay || 7;
     fertilizeDate.setDate(fertilizeDate.getDate() + delay);
-    
     const phaseEnd = new Date(phase.startDate);
     phaseEnd.setDate(phaseEnd.getDate() + phase.days);
-    
-    // Use custom interval or default to 14 days
-    const interval = fertilizingOptions?.interval || 14;
-    
     while (fertilizeDate < phaseEnd) {
+      const fertilizingDescription = mediumData?.fertilizing?.description || phase?.fertilizing?.description || plantData.careTips?.fertilizing || 'Apply appropriate fertilizer';
       await store.add({
         title: `🌿 Fertilize ${plantData.name}`,
         date: fertilizeDate.toISOString().split('T')[0],
         type: 'fertilizing',
-        description: `${plantData.careTips?.fertilizing || 'Apply appropriate fertilizer'}\n\nPhase: ${phase.name}`,
+        description: `${fertilizingDescription}\n\nPhase: ${phaseName}`,
         plantingId,
         calendarId
       });

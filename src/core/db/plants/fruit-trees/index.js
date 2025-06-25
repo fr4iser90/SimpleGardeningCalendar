@@ -9,12 +9,9 @@ import { cherry_tree } from './cherry.js';
 
 export const FRUIT_TREES_PLANTS = {
   apple_tree,
-  cherry_tree
+  cherry_tree,
 };
 
-export {
-  apple_tree,
-  cherry_tree
-};
+export { apple_tree, cherry_tree };
 
-export default FRUIT_TREES_PLANTS; 
+export default FRUIT_TREES_PLANTS;

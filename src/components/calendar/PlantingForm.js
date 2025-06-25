@@ -308,7 +308,7 @@ function initializePlantingFormHandlers(formContainer) {
 
 function updateEnvironmentFields(environment) {
   const regionField = document.getElementById('regionField');
-  
+  if (!regionField) return;
   if (environment === 'outdoor') {
     regionField.style.display = 'block';
   } else {

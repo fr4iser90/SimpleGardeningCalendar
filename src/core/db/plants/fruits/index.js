@@ -7,11 +7,9 @@
 import { strawberries } from './strawberries.js';
 
 export const FRUITS_PLANTS = {
-  strawberries
+  strawberries,
 };
 
-export {
-  strawberries
-};
+export { strawberries };
 
-export default FRUITS_PLANTS; 
+export default FRUITS_PLANTS;

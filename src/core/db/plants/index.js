@@ -6,8 +6,21 @@
 import { PLANT_CATEGORIES } from './categories.js';
 
 // Import all plant data statically for synchronous access
-import { cannabis_indica, cannabis_sativa, cannabis_autoflower } from './herbs/index.js';
-import { tomatoes, potatoes, carrots, lettuce, peppers, spinach, kale, cucumber } from './vegetables/index.js';
+import {
+  cannabis_indica,
+  cannabis_sativa,
+  cannabis_autoflower,
+} from './herbs/index.js';
+import {
+  tomatoes,
+  potatoes,
+  carrots,
+  lettuce,
+  peppers,
+  spinach,
+  kale,
+  cucumber,
+} from './vegetables/index.js';
 import { basil } from './herbs/index.js';
 import { strawberries } from './fruits/index.js';
 import { apple_tree, cherry_tree } from './fruit-trees/index.js';
@@ -18,7 +31,7 @@ export const PLANT_REGISTRY = {
   [PLANT_CATEGORIES.HERBS]: () => import('./herbs/index.js'),
   [PLANT_CATEGORIES.FRUITS]: () => import('./fruits/index.js'),
   [PLANT_CATEGORIES.FRUIT_TREES]: () => import('./fruit-trees/index.js'),
-  [PLANT_CATEGORIES.FLOWERS]: () => import('./flowers/index.js')
+  [PLANT_CATEGORIES.FLOWERS]: () => import('./flowers/index.js'),
 };
 
 // Cache for loaded plant data
@@ -37,14 +50,17 @@ export function getPlantRegistry() {
 
   // Initialize the registry Map with all plant data
   plantRegistryMap = new Map();
-  
+
   // Add all plants to the registry
   try {
     // Cannabis plants (now part of herbs with tags)
-    if (cannabis_indica) plantRegistryMap.set('cannabis_indica', cannabis_indica);
-    if (cannabis_sativa) plantRegistryMap.set('cannabis_sativa', cannabis_sativa);  
-    if (cannabis_autoflower) plantRegistryMap.set('cannabis_autoflower', cannabis_autoflower);
-    
+    if (cannabis_indica)
+      plantRegistryMap.set('cannabis_indica', cannabis_indica);
+    if (cannabis_sativa)
+      plantRegistryMap.set('cannabis_sativa', cannabis_sativa);
+    if (cannabis_autoflower)
+      plantRegistryMap.set('cannabis_autoflower', cannabis_autoflower);
+
     // Vegetables
     if (tomatoes) plantRegistryMap.set('tomatoes', tomatoes);
     if (potatoes) plantRegistryMap.set('potatoes', potatoes);
@@ -54,21 +70,20 @@ export function getPlantRegistry() {
     if (spinach) plantRegistryMap.set('spinach', spinach);
     if (kale) plantRegistryMap.set('kale', kale);
     if (cucumber) plantRegistryMap.set('cucumber', cucumber);
-    
+
     // Herbs
     if (basil) plantRegistryMap.set('basil', basil);
-    
+
     // Fruits
     if (strawberries) plantRegistryMap.set('strawberries', strawberries);
-    
+
     // Fruit Trees
     if (apple_tree) plantRegistryMap.set('apple_tree', apple_tree);
     if (cherry_tree) plantRegistryMap.set('cherry_tree', cherry_tree);
-    
   } catch (error) {
     console.error('Failed to initialize plant registry:', error);
   }
-  
+
   return plantRegistryMap;
 }
 
@@ -99,7 +114,7 @@ export async function getPlantData(plantKey) {
 
   // Load the category module
   const categoryModule = await PLANT_REGISTRY[category]();
-  
+
   // Get the specific plant data
   const plantData = categoryModule[plantKey];
   if (!plantData) {
@@ -108,7 +123,7 @@ export async function getPlantData(plantKey) {
 
   // Cache the result
   plantCache.set(plantKey, plantData);
-  
+
   return plantData;
 }
 
@@ -139,7 +154,7 @@ export async function getAllPlantKeys() {
 
   // Fallback to dynamic loading
   const allKeys = [];
-  
+
   for (const category of Object.keys(PLANT_REGISTRY)) {
     try {
       const categoryModule = await PLANT_REGISTRY[category]();
@@ -149,7 +164,7 @@ export async function getAllPlantKeys() {
       console.warn(`Failed to load category ${category}:`, error);
     }
   }
-  
+
   return allKeys;
 }
 
@@ -163,7 +178,7 @@ async function findPlantCategory(plantKey) {
     try {
       const categoryModule = await PLANT_REGISTRY[category]();
       const plants = categoryModule.default || categoryModule;
-      
+
       if (plants[plantKey]) {
         return category;
       }
@@ -171,7 +186,7 @@ async function findPlantCategory(plantKey) {
       console.warn(`Failed to check category ${category}:`, error);
     }
   }
-  
+
   return null;
 }
 
@@ -183,33 +198,34 @@ async function findPlantCategory(plantKey) {
 export async function searchPlants(query) {
   const results = [];
   const searchTerm = query.toLowerCase();
-  
+
   // Search in registry first (faster)
   const registry = getPlantRegistry();
   for (const [plantKey, plantData] of registry.entries()) {
-    if (plantData && (
-      plantData.name?.toLowerCase().includes(searchTerm) ||
-      plantData.category?.toLowerCase().includes(searchTerm) ||
-      plantKey.toLowerCase().includes(searchTerm)
-    )) {
+    if (
+      plantData &&
+      (plantData.name?.toLowerCase().includes(searchTerm) ||
+        plantData.category?.toLowerCase().includes(searchTerm) ||
+        plantKey.toLowerCase().includes(searchTerm))
+    ) {
       results.push({
         key: plantKey,
-        ...plantData
+        ...plantData,
       });
     }
   }
-  
+
   // If registry search found results, return them
   if (results.length > 0) {
     return results;
   }
-  
+
   // Fallback to dynamic loading
   for (const category of Object.keys(PLANT_REGISTRY)) {
     try {
       const categoryModule = await PLANT_REGISTRY[category]();
       const plants = categoryModule.default || categoryModule;
-      
+
       for (const [plantKey, plantData] of Object.entries(plants)) {
         if (
           plantData.name?.toLowerCase().includes(searchTerm) ||
@@ -218,7 +234,7 @@ export async function searchPlants(query) {
         ) {
           results.push({
             key: plantKey,
-            ...plantData
+            ...plantData,
           });
         }
       }
@@ -226,7 +242,7 @@ export async function searchPlants(query) {
       console.warn(`Failed to search category ${category}:`, error);
     }
   }
-  
+
   return results;
 }
 
@@ -238,4 +254,4 @@ export function clearPlantCache() {
 }
 
 // Export categories for convenience
-export { PLANT_CATEGORIES } from './categories.js'; 
+export { PLANT_CATEGORIES } from './categories.js';

@@ -20,7 +20,7 @@ export const VEGETABLES_PLANTS = {
   peppers,
   spinach,
   kale,
-  cucumber
+  cucumber,
 };
 
 export {
@@ -31,7 +31,7 @@ export {
   peppers,
   spinach,
   kale,
-  cucumber
+  cucumber,
 };
 
-export default VEGETABLES_PLANTS; 
+export default VEGETABLES_PLANTS;
