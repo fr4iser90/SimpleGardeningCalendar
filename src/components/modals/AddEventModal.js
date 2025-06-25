@@ -3,7 +3,7 @@ import { t } from '../../core/i18n/index.js';
 import { addPlanting } from '../../core/db/index.js';
 import { showButtonSpinner, hideButtonSpinner } from '../ui/LoadingSpinner.js';
 import { DB_NAME, DB_VERSION } from '../../core/db/connection.js';
-import { createPlantingForm, getPlantingFormData } from '../calendar/PlantingForm.js';
+import { createPlantingForm, getPlantingFormData } from './PlantingForm';
 
 export async function showAddEventModal(date, preselectedType = null) {
   const modal = document.createElement('div');
