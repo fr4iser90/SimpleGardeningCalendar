@@ -85,7 +85,7 @@ export function createPlantingForm(date, preselectedPlant = null) {
       <div id="seasonalDetails" class="text-sm mt-1"></div>
     </div>
     
-    <div id="plantInfo" class="p-3 bg-blue-50 dark:bg-blue-900 rounded border border-blue-200 dark:border-blue-700">
+    <div id="plantInfo" style="display:none;" class="p-3 bg-blue-50 dark:bg-blue-900 rounded border border-blue-200 dark:border-blue-700">
       <!-- Plant information will be populated here -->
     </div>
     
@@ -98,71 +98,28 @@ export function createPlantingForm(date, preselectedPlant = null) {
       <p class="text-xs text-gray-500 dark:text-gray-400 mt-2">${t('modal.phase_duration.tip')}</p>
     </div>
     
+    <div id="phaseCareSection" class="mt-4">
+      <h4 class="font-medium mb-3 dark:text-white">${t('modal.reminders.phase_care')}</h4>
+      <div id="phaseCareInputs"></div>
+    </div>
+    
     <div>
       <h4 class="font-medium mb-3 dark:text-white">${t('modal.reminders.title')}</h4>
-      
       <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-        <!-- Left Column -->
-        <div class="space-y-3">
-          <div class="flex items-center">
-            <input type="checkbox" id="enableWatering" name="enableWatering" class="mr-2">
-            <label for="enableWatering" class="text-sm dark:text-gray-200">${t('modal.reminders.watering')}</label>
-          </div>
-          <div id="wateringOptions" class="ml-6 space-y-2">
-            <div>
-              <label class="block text-xs text-gray-600 dark:text-gray-400 mb-1">${t('modal.reminders.watering_interval')}</label>
-              <select name="wateringInterval" class="w-full p-1 text-sm border rounded dark:bg-gray-700 dark:border-gray-600 dark:text-white">
-                <option value="1">${t('modal.interval.daily')}</option>
-                <option value="2">${t('modal.interval.every_2_days')}</option>
-                <option value="3" selected>${t('modal.interval.every_3_days')}</option>
-                <option value="4">${t('modal.interval.every_4_days')}</option>
-                <option value="7">${t('modal.interval.weekly')}</option>
-              </select>
-            </div>
-          </div>
-          
-          <div class="flex items-center">
-            <input type="checkbox" id="enableFertilizing" name="enableFertilizing" class="mr-2">
-            <label for="enableFertilizing" class="text-sm dark:text-gray-200">${t('modal.reminders.fertilizing')}</label>
-          </div>
-          <div id="fertilizingOptions" class="ml-6 space-y-2">
-            <div>
-              <label class="block text-xs text-gray-600 dark:text-gray-400 mb-1">${t('modal.reminders.fertilizing_interval')}</label>
-              <select name="fertilizingInterval" class="w-full p-1 text-sm border rounded dark:bg-gray-700 dark:border-gray-600 dark:text-white">
-                <option value="7">${t('modal.interval.weekly')}</option>
-                <option value="14" selected>${t('modal.interval.every_2_weeks')}</option>
-                <option value="21">${t('modal.interval.every_3_weeks')}</option>
-                <option value="30">${t('modal.interval.monthly')}</option>
-              </select>
-            </div>
-            <div>
-              <label class="block text-xs text-gray-600 dark:text-gray-400 mb-1">${t('modal.reminders.fertilizing_delay')}</label>
-              <select name="fertilizingDelay" class="w-full p-1 text-sm border rounded dark:bg-gray-700 dark:border-gray-600 dark:text-white">
-                <option value="0">${t('modal.interval.immediately')}</option>
-                <option value="7" selected>${t('modal.interval.1_week')}</option>
-                <option value="14">${t('modal.interval.2_weeks')}</option>
-              </select>
-            </div>
-          </div>
-        </div>
-        
         <!-- Right Column -->
         <div class="space-y-3">
           <div class="flex items-center">
             <input type="checkbox" id="enablePhaseReminders" name="enablePhaseReminders" class="mr-2">
             <label for="enablePhaseReminders" class="text-sm dark:text-gray-200">${t('modal.reminders.phase_transitions')}</label>
           </div>
-          
           <div class="flex items-center">
             <input type="checkbox" id="enableWeeklyChecks" name="enableWeeklyChecks" class="mr-2">
             <label for="enableWeeklyChecks" class="text-sm dark:text-gray-200">${t('modal.reminders.weekly_checks')}</label>
           </div>
-          
           <div class="flex items-center">
             <input type="checkbox" id="enableHarvestReminder" name="enableHarvestReminder" class="mr-2">
             <label for="enableHarvestReminder" class="text-sm dark:text-gray-200">${t('modal.reminders.harvest')}</label>
           </div>
-          
           <div class="flex items-center">
             <input type="checkbox" id="enableGoogleCalendarSync" name="enableGoogleCalendarSync" class="mr-2">
             <label for="enableGoogleCalendarSync" class="text-sm dark:text-gray-200">${t('modal.reminders.google_sync')}</label>
@@ -212,26 +169,11 @@ function initializePlantingFormHandlers(formContainer) {
   const plantCategorySelect = formContainer.querySelector('#plantCategorySelect');
   const plantTypeSelect = formContainer.querySelector('#plantTypeSelect');
   const customNameField = formContainer.querySelector('#customNameField');
-  const enableWatering = formContainer.querySelector('#enableWatering');
-  const enableFertilizing = formContainer.querySelector('#enableFertilizing');
-  const wateringOptions = formContainer.querySelector('#wateringOptions');
-  const fertilizingOptions = formContainer.querySelector('#fertilizingOptions');
 
   // Load default settings from localStorage
   const settings = JSON.parse(localStorage.getItem('localCalendarSettings') || '{}');
   
   // Set default values for checkboxes
-  if (enableWatering) {
-    enableWatering.checked = settings.defaultWateringReminders !== false;
-    wateringOptions.style.display = enableWatering.checked ? 'block' : 'none';
-  }
-  
-  if (enableFertilizing) {
-    enableFertilizing.checked = settings.defaultFertilizingReminders !== false;
-    fertilizingOptions.style.display = enableFertilizing.checked ? 'block' : 'none';
-  }
-  
-  // Set other default checkboxes
   const enablePhaseReminders = formContainer.querySelector('#enablePhaseReminders');
   if (enablePhaseReminders) {
     enablePhaseReminders.checked = settings.defaultPhaseReminders !== false;
@@ -252,22 +194,6 @@ function initializePlantingFormHandlers(formContainer) {
   if (enableGoogleCalendarSync) {
     enableGoogleCalendarSync.checked = true;
   }
-  
-  // Set default intervals
-  const wateringIntervalSelect = formContainer.querySelector('select[name="wateringInterval"]');
-  if (wateringIntervalSelect) {
-    wateringIntervalSelect.value = settings.defaultWateringInterval || '3';
-  }
-  
-  const fertilizingIntervalSelect = formContainer.querySelector('select[name="fertilizingInterval"]');
-  if (fertilizingIntervalSelect) {
-    fertilizingIntervalSelect.value = settings.defaultFertilizingInterval || '14';
-  }
-  
-  const fertilizingDelaySelect = formContainer.querySelector('select[name="fertilizingDelay"]');
-  if (fertilizingDelaySelect) {
-    fertilizingDelaySelect.value = settings.defaultFertilizingDelay || '7';
-  }
 
   // Add event listeners
   environmentSelect?.addEventListener('change', function() {
@@ -284,16 +210,6 @@ function initializePlantingFormHandlers(formContainer) {
     updatePhaseInputs();
     updateCustomNamePlaceholder();
     checkSeasonalTiming();
-  });
-
-  // Toggle watering options visibility
-  enableWatering?.addEventListener('change', function() {
-    wateringOptions.style.display = this.checked ? 'block' : 'none';
-  });
-
-  // Toggle fertilizing options visibility
-  enableFertilizing?.addEventListener('change', function() {
-    fertilizingOptions.style.display = this.checked ? 'block' : 'none';
   });
 
   // Initialize form state
@@ -337,26 +253,22 @@ function updatePlantOptions(category) {
 function updatePlantInfo() {
   const plantTypeSelect = document.getElementById('plantTypeSelect');
   const plantInfo = document.getElementById('plantInfo');
-  const environmentSelect = document.getElementById('environmentSelect');
-  
-  if (!plantTypeSelect?.value || !plantInfo) {
-    if (plantInfo) {
-      plantInfo.innerHTML = '<p class="text-gray-500 dark:text-gray-400">Select a plant to see information</p>';
-    }
+  if (!plantInfo) return;
+  if (!plantTypeSelect?.value) {
+    plantInfo.style.display = 'none';
+    plantInfo.innerHTML = '';
     return;
   }
-  
-  const plantData = getPlantDataForEnvironment(plantTypeSelect.value, environmentSelect?.value || 'indoor');
+  plantInfo.style.display = '';
+  const plantData = getPlantDataForEnvironment(plantTypeSelect.value, document.getElementById('environmentSelect')?.value || 'indoor');
   if (!plantData) {
     plantInfo.innerHTML = '<p class="text-red-500">Plant data not found</p>';
     return;
   }
-  
   const phases = Object.entries(plantData.phases).map(([phase, data]) => {
     const emoji = getPhaseEmoji(phase);
     return `${emoji} ${phase}: ${data.days} days`;
   }).join('<br>');
-  
   plantInfo.innerHTML = `
     <h4 class="font-medium mb-2">${plantData.name}</h4>
     <p class="text-sm mb-2"><strong>Category:</strong> ${plantData.category}</p>
@@ -442,6 +354,7 @@ function updatePhaseInputs() {
   }
   
   phaseDurationSection.style.display = 'block';
+  updatePhaseCareInputs();
 }
 
 function updateCustomNamePlaceholder() {
@@ -484,6 +397,35 @@ function checkSeasonalTiming() {
   }
 }
 
+function updatePhaseCareInputs() {
+  const plantTypeSelect = document.getElementById('plantTypeSelect');
+  const environmentSelect = document.getElementById('environmentSelect');
+  const phaseCareInputs = document.getElementById('phaseCareInputs');
+  if (!plantTypeSelect?.value || !phaseCareInputs) return;
+  const plantData = getPlantDataForEnvironment(plantTypeSelect.value, environmentSelect?.value || 'indoor');
+  if (!plantData || !plantData.phases) return;
+  phaseCareInputs.innerHTML = Object.entries(plantData.phases).map(([phase, data]) => {
+    const emoji = getPhaseEmoji(phase);
+    const watering = data.watering?.interval || '';
+    const fertilizing = data.fertilizing?.interval || '';
+    return `
+      <div class="flex items-center gap-4 mb-2">
+        <span class="w-32">${emoji} ${phase}</span>
+        <label class="flex items-center gap-1">
+          <input type="checkbox" name="watering_${phase}_enabled" ${watering ? 'checked' : ''}>
+          ${t('modal.reminders.watering')}
+        </label>
+        <input type="number" name="watering_${phase}_interval" value="${watering}" min="1" class="w-16 p-1 border rounded ml-1">
+        <label class="flex items-center gap-1 ml-4">
+          <input type="checkbox" name="fertilizing_${phase}_enabled" ${fertilizing ? 'checked' : ''}>
+          ${t('modal.reminders.fertilizing')}
+        </label>
+        <input type="number" name="fertilizing_${phase}_interval" value="${fertilizing}" min="1" class="w-16 p-1 border rounded ml-1">
+      </div>
+    `;
+  }).join('');
+}
+
 export function getPlantingFormData(formContainer) {
   const formData = new FormData(formContainer);
   
@@ -495,15 +437,6 @@ export function getPlantingFormData(formContainer) {
     environment: formData.get('environment'),
     region: formData.get('region'),
     reminderOptions: {
-      watering: {
-        enabled: formData.get('enableWatering') === 'on',
-        interval: parseInt(formData.get('wateringInterval')) || 3
-      },
-      fertilizing: {
-        enabled: formData.get('enableFertilizing') === 'on',
-        interval: parseInt(formData.get('fertilizingInterval')) || 14,
-        delay: parseInt(formData.get('fertilizingDelay')) || 7
-      },
       phaseReminders: formData.get('enablePhaseReminders') === 'on',
       weeklyChecks: formData.get('enableWeeklyChecks') === 'on',
       harvestReminder: formData.get('enableHarvestReminder') === 'on',
