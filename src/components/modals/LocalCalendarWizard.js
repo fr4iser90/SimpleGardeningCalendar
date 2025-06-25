@@ -276,6 +276,9 @@ export async function setupLocalCalendarWizardEventListeners() {
       // Refresh the view
       document.dispatchEvent(new CustomEvent('localCalendarsUpdated'));
       
+      // Refresh the calendar to show migrated events
+      document.dispatchEvent(new CustomEvent('refreshCalendar'));
+      
       // Close the entire modal after organization is complete
       const modal = document.querySelector('.local-calendar-modal');
       if (modal) {

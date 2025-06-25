@@ -5,7 +5,9 @@
 
 import { getDB } from './connection.js';
 import { getPlantRegistry } from './plants/index.js';
-import { createPlantingEvents, deleteAllPlantingEvents } from './events.js';
+import { validatePlantingDate as validatePlantingDateUtil } from '../../utils/validators.js';
+import { createIntelligentPlantingEvents } from './IntelligentEventSystem.js';
+import { deleteAllPlantingEvents } from './events.js';
 import { deleteAllPlantNotes } from './notes.js';
 
 /**
@@ -33,7 +35,7 @@ export async function addPlanting(plantType, startDate, location = 'Default Gard
   let totalDays = 0;
   
   // Handle both old and new phase structures
-  const plantPhases = plantData.phases || plantData.environments?.indoor?.phases || {};
+  const plantPhases = plantData.phases || plantData.environments?.indoor?.phases || plantData.environments?.outdoor?.phases || {};
   
   for (const [phase, { days, description, care }] of Object.entries(plantPhases)) {
     // Use custom duration if provided, otherwise use default
@@ -88,7 +90,7 @@ export async function addPlanting(plantType, startDate, location = 'Default Gard
   planting.id = plantingId;
   
   // Create all associated events with reminder options
-  await createPlantingEvents(planting, plantData, phases, completionDate.toISOString(), reminderOptions);
+  await createIntelligentPlantingEvents(planting, plantData, phases, completionDate.toISOString(), reminderOptions);
   
   return plantingId;
 }

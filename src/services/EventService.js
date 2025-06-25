@@ -5,6 +5,7 @@ import { getEventColor, getEventTypeIcon } from '../utils/eventUtils.js';
 import { formatDate } from '../utils/dateUtils.js';
 import { validateEventData } from '../utils/validators.js';
 import { getPhaseEmoji } from '../utils/plantUtils.js';
+import { createIntelligentPlantingEvents } from '../core/db/IntelligentEventSystem.js';
 
 /**
  * Event Service
@@ -114,57 +115,7 @@ export async function getFormattedEvents() {
 
 // Create all events for a new planting
 export async function createPlantingEvents(planting, plantData, phases, completionDate) {
-  const db = await openDB(DB_NAME, DB_VERSION);
-  const tx = db.transaction('events', 'readwrite');
-  const plantingId = planting.id;
-  
-  // Add initial planting event with legal notice if applicable
-  let plantingDescription = `Start planting ${plantData.name}`;
-  if (plantData.legalNote) {
-    plantingDescription += `\n\n⚠️ LEGAL NOTICE: ${plantData.legalNote}`;
-  }
-  plantingDescription += `\n\nCare Tips:\n${Object.entries(plantData.careTips).map(([key, value]) => `- ${key}: ${value}`).join('\n')}`;
-
-  await tx.store.add({
-    title: `🌱 Plant ${plantData.name}`,
-    date: planting.startDate,
-    type: 'planting',
-    description: plantingDescription,
-    plantingId,
-    calendarId: planting.calendarId
-  });
-
-  // Add phase events
-  for (const phase of phases) {
-    const phaseEmoji = getPhaseEmoji(phase.name);
-    const phaseDescription = `${phase.description}\n\nCare Instructions:\n${Object.entries(phase.care).map(([key, value]) => `- ${key}: ${value}`).join('\n')}`;
-    
-    await tx.store.add({
-      title: `${phaseEmoji} ${phase.name} - ${plantData.name}`,
-      date: phase.startDate,
-      type: phase.name.toLowerCase(),
-      description: phaseDescription,
-      plantingId,
-      phase: phase.name,
-      duration: phase.days,
-      calendarId: planting.calendarId
-    });
-  }
-
-  // Add completion/harvest event
-  const harvestDescription = `Harvest time for ${plantData.name}!\n\nHarvesting Tips:\n${Object.entries(plantData.harvestingTips || {}).map(([key, value]) => `- ${key}: ${value}`).join('\n')}`;
-  
-  await tx.store.add({
-    title: `🌾 Harvest ${plantData.name}`,
-    date: completionDate,
-    type: 'harvesting',
-    description: harvestDescription,
-    plantingId,
-    phase: 'harvesting',
-    calendarId: planting.calendarId
-  });
-
-  await tx.done;
+  return await createIntelligentPlantingEvents(planting, plantData, phases, completionDate);
 }
 
 // Delete planting and all associated events

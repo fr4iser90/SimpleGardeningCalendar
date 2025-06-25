@@ -18,6 +18,9 @@ export async function showAddEventModal(date, preselectedType = null) {
   const modal = document.createElement('div');
   modal.className = 'fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center p-4 z-50';
   
+  // Lese Settings aus localStorage
+  const settings = JSON.parse(localStorage.getItem('localCalendarSettings') || '{}');
+
   // Create category options with translations
   const categoryOptions = PLANT_CATEGORIES.map(category => {
     const translatedCategory = t(`plant.category.${category.toLowerCase().replace(/\s+/g, '_').replace(/&/g, '').replace(/\s/g, '')}`) || category;
@@ -235,6 +238,60 @@ export async function showAddEventModal(date, preselectedType = null) {
 
   // Initialize event listeners and form handling
   initializeAddEventModalHandlers(modal);
+
+  // Setze die Standardwerte für die Erinnerungsfelder DIREKT nach dem Rendern
+  setTimeout(() => {
+    // Gieß-Intervall
+    const wateringIntervalSelect = document.querySelector('select[name="wateringInterval"]');
+    if (wateringIntervalSelect && settings.defaultWateringInterval) {
+      wateringIntervalSelect.value = String(settings.defaultWateringInterval);
+      // Fallback: Wenn Wert nicht existiert, setze auf 3
+      if (!Array.from(wateringIntervalSelect.options).some(opt => opt.value === wateringIntervalSelect.value)) {
+        wateringIntervalSelect.value = '3';
+      }
+    }
+    // Gieß-Checkbox
+    const enableWatering = document.getElementById('enableWatering');
+    if (enableWatering && typeof settings.defaultWateringReminders !== 'undefined') {
+      enableWatering.checked = settings.defaultWateringReminders !== false;
+    }
+    // Dünger-Intervall
+    const fertilizingIntervalSelect = document.querySelector('select[name="fertilizingInterval"]');
+    if (fertilizingIntervalSelect && settings.defaultFertilizingInterval) {
+      fertilizingIntervalSelect.value = String(settings.defaultFertilizingInterval);
+      if (!Array.from(fertilizingIntervalSelect.options).some(opt => opt.value === fertilizingIntervalSelect.value)) {
+        fertilizingIntervalSelect.value = '14';
+      }
+    }
+    // Dünger-Checkbox
+    const enableFertilizing = document.getElementById('enableFertilizing');
+    if (enableFertilizing && typeof settings.defaultFertilizingReminders !== 'undefined') {
+      enableFertilizing.checked = settings.defaultFertilizingReminders !== false;
+    }
+    // Dünger-Verzögerung
+    const fertilizingDelaySelect = document.querySelector('select[name="fertilizingDelay"]');
+    if (fertilizingDelaySelect && settings.defaultFertilizingDelay) {
+      fertilizingDelaySelect.value = String(settings.defaultFertilizingDelay);
+      if (!Array.from(fertilizingDelaySelect.options).some(opt => opt.value === fertilizingDelaySelect.value)) {
+        fertilizingDelaySelect.value = '7';
+      }
+    }
+    // Phasenübergang
+    const enablePhaseReminders = document.getElementById('enablePhaseReminders');
+    if (enablePhaseReminders && typeof settings.defaultPhaseReminders !== 'undefined') {
+      enablePhaseReminders.checked = settings.defaultPhaseReminders !== false;
+    }
+    // Wöchentliche Kontrollen
+    const enableWeeklyChecks = document.getElementById('enableWeeklyChecks');
+    if (enableWeeklyChecks && typeof settings.defaultWeeklyChecks !== 'undefined') {
+      enableWeeklyChecks.checked = settings.defaultWeeklyChecks !== false;
+    }
+    // Ernte-Erinnerung
+    const enableHarvestReminder = document.getElementById('enableHarvestReminder');
+    if (enableHarvestReminder && typeof settings.defaultHarvestReminders !== 'undefined') {
+      enableHarvestReminder.checked = settings.defaultHarvestReminders !== false;
+    }
+  }, 0);
 }
 
 function initializeAddEventModalHandlers(modal) {

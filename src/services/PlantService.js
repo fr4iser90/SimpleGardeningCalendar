@@ -1,10 +1,12 @@
 import { openDB } from 'idb';
 import { DB_NAME, DB_VERSION } from '../core/db/connection.js';
 import { getPlantData, getPlantDataForEnvironment, validatePlantingDate } from '../core/db/plants.js';
-import { createPlantingEvents, deleteAllPlantingEvents } from './EventService.js';
+import { createIntelligentPlantingEvents } from '../core/db/IntelligentEventSystem.js';
 import { getPhaseEmoji, getPlantCategoryName, calculatePhaseSchedule } from '../utils/plantUtils.js';
 import { formatDate } from '../utils/dateUtils.js';
 import { validatePlantingDate as validatePlantingDateUtil } from '../utils/validators.js';
+import { getPlantRegistry } from '../core/db/plants/index.js';
+import { deleteAllPlantingEvents } from '../core/db/events.js';
 
 /**
  * Plant Service
@@ -48,7 +50,7 @@ export async function addPlanting(plantType, startDate, location = 'Default Gard
   const phases = [];
   let totalDays = 0;
   
-  for (const [phase, { days, description, care }] of Object.entries(plantData.phases)) {
+  for (const [phase, { days, description, care }] of Object.entries(plantData.phases || plantData.environments?.indoor?.phases || plantData.environments?.outdoor?.phases || {})) {
     // Use custom duration if provided, otherwise use default
     const phaseDays = customPhaseDurations[phase] || days;
     
@@ -81,7 +83,7 @@ export async function addPlanting(plantType, startDate, location = 'Default Gard
     startDate: startDate,
     completionDate: completionDate.toISOString().split('T')[0],
     phases,
-    currentPhase: Object.keys(plantData.phases)[0],
+    currentPhase: Object.keys(plantData.phases || plantData.environments?.indoor?.phases || plantData.environments?.outdoor?.phases || {})[0],
     status: 'active',
     notes: [],
     legalNote: plantData.legalNote || null,
@@ -100,7 +102,7 @@ export async function addPlanting(plantType, startDate, location = 'Default Gard
   planting.id = plantingId;
   
   // Create all associated events
-  await createPlantingEvents(planting, plantData, phases, completionDate.toISOString());
+  await createIntelligentPlantingEvents(planting, plantData, phases, completionDate.toISOString());
   
   return plantingId;
 }
