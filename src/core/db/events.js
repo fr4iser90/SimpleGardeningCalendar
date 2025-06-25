@@ -7,24 +7,49 @@ import { getDB } from './connection.js';
 import { getPhaseEmoji, getWateringInterval, getPhaseCheckpoints } from './utils.js';
 
 /**
+ * Get phases from plant data, handling both old and new structures
+ * @param {Object} plantData - Plant data object
+ * @returns {Object} Phases object
+ */
+function getPlantPhases(plantData) {
+  // Handle new structure: environments.indoor.phases
+  if (plantData.environments?.indoor?.phases) {
+    return plantData.environments.indoor.phases;
+  }
+  
+  // Handle old structure: direct phases
+  if (plantData.phases) {
+    return plantData.phases;
+  }
+  
+  // Fallback: empty phases object
+  console.warn(`No phases found for plant ${plantData.name}`);
+  return {};
+}
+
+/**
  * Create all events for a new planting
  * @param {Object} planting - Planting record
  * @param {Object} plantData - Plant data
  * @param {Array} phases - Calculated phases
  * @param {string} completionDate - Completion date ISO string
+ * @param {Object} reminderOptions - Reminder options
  * @returns {Promise<void>}
  */
-export async function createPlantingEvents(planting, plantData, phases, completionDate) {
+export async function createPlantingEvents(planting, plantData, phases, completionDate, reminderOptions = {}) {
   const db = await getDB();
   const tx = db.transaction('events', 'readwrite');
   const plantingId = planting.id;
+  
+  // Get phases from plant data
+  const plantPhases = getPlantPhases(plantData);
   
   // Add initial planting event with legal notice if applicable
   let plantingDescription = `Start planting ${plantData.name}`;
   if (plantData.legalNote) {
     plantingDescription += `\n\n⚠️ LEGAL NOTICE: ${plantData.legalNote}`;
   }
-  plantingDescription += `\n\nCare Tips:\n${Object.entries(plantData.careTips).map(([key, value]) => `- ${key}: ${value}`).join('\n')}`;
+  plantingDescription += `\n\nCare Tips:\n${Object.entries(plantData.careTips || {}).map(([key, value]) => `- ${key}: ${value}`).join('\n')}`;
 
   await tx.store.add({
     title: `🌱 Plant ${plantData.name}`,
@@ -37,19 +62,24 @@ export async function createPlantingEvents(planting, plantData, phases, completi
   // Add phase transition events with enhanced scheduling
   for (let i = 0; i < phases.length; i++) {
     const phase = phases[i];
-    const phaseData = plantData.phases[phase.name];
+    const phaseData = plantPhases[phase.name];
+    
+    if (!phaseData) {
+      console.warn(`Phase data not found for ${phase.name} in plant ${plantData.name}`);
+      continue;
+    }
     
     // Add phase start event
     await tx.store.add({
       title: `${getPhaseEmoji(phase.name)} ${plantData.name}: ${phase.name} phase`,
       date: phase.startDate,
       type: 'maintenance',
-      description: `${phase.description}\n\nCare Instructions:\n${phase.care}`,
+      description: `${phaseData.description}\n\nCare Instructions:\n${phaseData.care}`,
       plantingId
     });
 
-    // Add weekly check-ins for longer phases (more than 14 days)
-    if (phase.days > 14) {
+    // Add weekly check-ins for longer phases (more than 14 days) if enabled
+    if (reminderOptions.weeklyChecks && phase.days > 14) {
       const weeklyChecks = Math.floor(phase.days / 7);
       for (let week = 1; week <= weeklyChecks; week++) {
         const checkDate = new Date(phase.startDate);
@@ -60,22 +90,28 @@ export async function createPlantingEvents(planting, plantData, phases, completi
             title: `📋 ${plantData.name}: Week ${week} check (${phase.name})`,
             date: checkDate.toISOString().split('T')[0],
             type: 'maintenance',
-            description: `Weekly check during ${phase.name} phase\n\n${phase.care}\n\nLook for signs of:\n${getPhaseCheckpoints(phase.name, plantData)}`,
+            description: `Weekly check during ${phase.name} phase\n\n${phaseData.care}\n\nLook for signs of:\n${getPhaseCheckpoints(phase.name, plantData)}`,
             plantingId
           });
         }
       }
     }
 
-    // Add watering reminders with plant-specific intervals
-    await createWateringEvents(tx.store, plantData, phase, plantingId, completionDate);
+    // Add watering reminders only if enabled
+    if (reminderOptions.watering?.enabled) {
+      await createWateringEvents(tx.store, plantData, phase, plantingId, completionDate, reminderOptions.watering.interval);
+    }
 
-    // Add fertilizing reminders
-    await createFertilizingEvents(tx.store, plantData, phase, plantingId);
+    // Add fertilizing reminders only if enabled
+    if (reminderOptions.fertilizing?.enabled) {
+      await createFertilizingEvents(tx.store, plantData, phase, plantingId, reminderOptions.fertilizing);
+    }
   }
   
-  // Add final harvest/completion event
-  await createHarvestEvent(tx.store, plantData, phases, completionDate, plantingId);
+  // Add final harvest/completion event if enabled
+  if (reminderOptions.harvestReminder !== false) {
+    await createHarvestEvent(tx.store, plantData, phases, completionDate, plantingId);
+  }
   
   await tx.done;
 }
@@ -87,22 +123,28 @@ export async function createPlantingEvents(planting, plantData, phases, completi
  * @param {Object} phase - Phase object
  * @param {number} plantingId - Planting ID
  * @param {string} completionDate - Completion date
+ * @param {number} wateringInterval - Watering interval in days
  */
-async function createWateringEvents(store, plantData, phase, plantingId, completionDate) {
-  let wateringInterval = getWateringInterval(plantData.category, phase.name);
+async function createWateringEvents(store, plantData, phase, plantingId, completionDate, wateringInterval) {
+  // Use custom interval or fall back to plant-specific default
+  const interval = wateringInterval || getWateringInterval(plantData.category, phase.name);
   let wateringDate = new Date(phase.startDate);
   const phaseEnd = new Date(wateringDate);
   phaseEnd.setDate(phaseEnd.getDate() + phase.days);
+
+  // Get phase data for care instructions
+  const plantPhases = getPlantPhases(plantData);
+  const phaseData = plantPhases[phase.name];
 
   while (wateringDate < phaseEnd) {
     await store.add({
       title: `💧 Water ${plantData.name}`,
       date: wateringDate.toISOString().split('T')[0],
       type: 'watering',
-      description: `${plantData.careTips.watering || 'Check soil moisture and water as needed'}\n\nPhase: ${phase.name}\nCare: ${phase.care}`,
+      description: `${plantData.careTips?.watering || 'Check soil moisture and water as needed'}\n\nPhase: ${phase.name}\nCare: ${phaseData?.care || 'Follow general watering guidelines'}`,
       plantingId
     });
-    wateringDate.setDate(wateringDate.getDate() + wateringInterval);
+    wateringDate.setDate(wateringDate.getDate() + interval);
   }
 }
 
@@ -112,24 +154,30 @@ async function createWateringEvents(store, plantData, phase, plantingId, complet
  * @param {Object} plantData - Plant data
  * @param {Object} phase - Phase object
  * @param {number} plantingId - Planting ID
+ * @param {Object} fertilizingOptions - Fertilizing options with interval and delay
  */
-async function createFertilizingEvents(store, plantData, phase, plantingId) {
+async function createFertilizingEvents(store, plantData, phase, plantingId, fertilizingOptions) {
   if (phase.days > 14 && (phase.name === 'vegetative' || phase.name === 'flowering' || phase.name === 'fruiting')) {
     const fertilizeDate = new Date(phase.startDate);
-    fertilizeDate.setDate(fertilizeDate.getDate() + 7); // Start fertilizing after first week
+    // Apply delay if specified
+    const delay = fertilizingOptions?.delay || 7;
+    fertilizeDate.setDate(fertilizeDate.getDate() + delay);
     
     const phaseEnd = new Date(phase.startDate);
     phaseEnd.setDate(phaseEnd.getDate() + phase.days);
+    
+    // Use custom interval or default to 14 days
+    const interval = fertilizingOptions?.interval || 14;
     
     while (fertilizeDate < phaseEnd) {
       await store.add({
         title: `🌿 Fertilize ${plantData.name}`,
         date: fertilizeDate.toISOString().split('T')[0],
         type: 'fertilizing',
-        description: `${plantData.careTips.fertilizing || 'Apply appropriate fertilizer'}\n\nPhase: ${phase.name}`,
+        description: `${plantData.careTips?.fertilizing || 'Apply appropriate fertilizer'}\n\nPhase: ${phase.name}`,
         plantingId
       });
-      fertilizeDate.setDate(fertilizeDate.getDate() + 14); // Every 2 weeks
+      fertilizeDate.setDate(fertilizeDate.getDate() + interval);
     }
   }
 }
@@ -143,7 +191,9 @@ async function createFertilizingEvents(store, plantData, phase, plantingId) {
  * @param {number} plantingId - Planting ID
  */
 async function createHarvestEvent(store, plantData, phases, completionDate, plantingId) {
-  const finalPhase = Object.keys(plantData.phases).pop();
+  // Get phases from plant data
+  const plantPhases = getPlantPhases(plantData);
+  const finalPhase = Object.keys(plantPhases).pop();
   const eventTitle = finalPhase === 'harvest' ? `🌾 Harvest ${plantData.name}` : `✅ Complete ${plantData.name} cycle`;
   
   let harvestDescription = `Time to ${finalPhase === 'harvest' ? 'harvest' : 'complete'} your ${plantData.name}!`;

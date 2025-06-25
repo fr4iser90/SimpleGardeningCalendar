@@ -391,5 +391,18 @@ export const fr = {
   'export.success': 'Exportation créée avec succès',
   'export.error.no_data': 'Aucune donnée à exporter',
   'export.error.generation_failed': 'Échec de la génération de l\'exportation',
-  'export.notification.start': 'Création de l\'export...'
+  'export.notification.start': 'Création de l\'export...',
+
+  // Plant Library
+  'plant_library.title': 'Bibliothèque de Plantes',
+  'plant_library.search_placeholder': 'Rechercher des plantes...',
+  'plant_library.all_categories': 'Toutes les Catégories',
+  'plant_library.all_tags': 'Toutes les Étiquettes',
+  'plant_library.category_filter': 'Filtre de Catégorie',
+  'plant_library.tag_filter': 'Filtre d\'Étiquette',
+  'plant_library.view_details': 'Voir les Détails',
+  'plant_library.no_phases': 'Aucune information de phase disponible',
+  'plant_library.no_care_tips': 'Aucun conseil de soin disponible',
+  'plant_library.common_problems': 'Problèmes Courants',
+  'plant_library.start_growing': 'Commencer à cultiver cette plante'
 }; 

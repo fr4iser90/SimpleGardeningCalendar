@@ -7,6 +7,7 @@ import { fr } from './translations/fr.js';
 import { es } from './translations/es.js';
 import { it } from './translations/it.js';
 import { updateUITranslations } from '../../components/ui/LanguageSwitch.js';
+import { COUNTRY_SETTINGS } from '../db/plants/categories.js';
 
 // Supported languages
 export const SUPPORTED_LANGUAGES = {
@@ -99,4 +100,40 @@ export function getAvailableLanguages() {
 initI18n();
 
 // Export UI functions
-export { updateUITranslations }; 
+export { updateUITranslations };
+
+/**
+ * Get current country code (defaults to browser language or 'DE')
+ * @returns {string} Country code
+ */
+export function getCurrentCountry() {
+  // Try to get from browser language
+  const browserLang = navigator.language || navigator.userLanguage;
+  if (browserLang) {
+    const countryCode = browserLang.split('-')[1] || browserLang.split('_')[1];
+    if (countryCode && COUNTRY_SETTINGS[countryCode.toUpperCase()]) {
+      return countryCode.toUpperCase();
+    }
+  }
+  
+  // Default to DE if no valid country found
+  return 'DE';
+}
+
+/**
+ * Check if cannabis should be shown for current country
+ * @returns {boolean} Whether cannabis should be shown
+ */
+export function shouldShowCannabis() {
+  const country = getCurrentCountry();
+  return COUNTRY_SETTINGS[country]?.showCannabis || false;
+}
+
+/**
+ * Get country-specific settings
+ * @returns {Object} Country settings
+ */
+export function getCountrySettings() {
+  const country = getCurrentCountry();
+  return COUNTRY_SETTINGS[country] || COUNTRY_SETTINGS['DE'];
+} 

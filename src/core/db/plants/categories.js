@@ -4,21 +4,28 @@
  */
 
 export const PLANT_CATEGORIES = {
-  CANNABIS: 'Cannabis',
-  VEGETABLES: 'Vegetables', 
+  VEGETABLES: 'Vegetables',
   HERBS: 'Herbs',
-  FRUITS: 'Fruits',
-  FRUIT_TREES: 'Fruit Trees'
+  FRUITS: 'Fruits', 
+  FRUIT_TREES: 'Fruit Trees',
+  FLOWERS: 'Flowers'
+};
+
+export const PLANT_TAGS = {
+  ROOT: 'Root Vegetable',
+  LEAFY: 'Leafy Green',
+  LEGUME: 'Legume',
+  SPRING: 'Spring',
+  SUMMER: 'Summer',
+  FALL: 'Fall',
+  WINTER: 'Winter',
+  PERENNIAL: 'Perennial',
+  ANNUAL: 'Annual',
+  BIENNIAL: 'Biennial',
+  CANNABIS: 'Cannabis'  // Optional, länderabhängig
 };
 
 export const CATEGORY_METADATA = {
-  [PLANT_CATEGORIES.CANNABIS]: {
-    name: 'Cannabis',
-    description: 'Cannabis varieties with indoor/outdoor growing options',
-    legalNote: 'Check local laws before cultivation. This information is for educational purposes only.',
-    icon: '🌿',
-    color: '#10B981'
-  },
   [PLANT_CATEGORIES.VEGETABLES]: {
     name: 'Vegetables',
     description: 'Common garden vegetables for food production',
@@ -42,7 +49,26 @@ export const CATEGORY_METADATA = {
     description: 'Larger fruit-bearing trees',
     icon: '🍎',
     color: '#DC2626'
+  },
+  [PLANT_CATEGORIES.FLOWERS]: {
+    name: 'Flowers',
+    description: 'Ornamental flowers and decorative plants',
+    icon: '🌸',
+    color: '#EC4899'
   }
+};
+
+// Country-specific settings for cannabis display
+export const COUNTRY_SETTINGS = {
+  'DE': { showCannabis: true },   // ✅ Korrigiert - Cannabis in DE erlaubt!
+  'AT': { showCannabis: false },
+  'CH': { showCannabis: false },
+  'NL': { showCannabis: true },
+  'CA': { showCannabis: true },
+  'US': { showCannabis: false }, // Default, can be overridden by state
+  'ES': { showCannabis: false },
+  'FR': { showCannabis: false },
+  'IT': { showCannabis: false }
 };
 
 export const GROWING_ENVIRONMENTS = {

@@ -3,9 +3,12 @@
  * Growing information for Lettuce
  */
 
+import { PLANT_TAGS } from '../categories.js';
+
 export const lettuce = {
   name: 'Lettuce',
   category: 'Vegetables',
+  tags: [PLANT_TAGS.LEAFY, PLANT_TAGS.ANNUAL],
   phases: {
     germination: { days: 5, description: 'Seeds sprouting', care: 'Keep soil moist and cool' },
     leafing: { days: 20, description: 'Leaf development', care: 'Thin seedlings, maintain moisture' },

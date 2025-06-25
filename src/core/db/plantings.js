@@ -4,7 +4,7 @@
  */
 
 import { getDB } from './connection.js';
-import { getPlantData } from './plants.js';
+import { getPlantRegistry } from './plants/index.js';
 import { createPlantingEvents, deleteAllPlantingEvents } from './events.js';
 import { deleteAllPlantNotes } from './notes.js';
 
@@ -13,33 +13,43 @@ import { deleteAllPlantNotes } from './notes.js';
  * @param {string} plantType - Plant type key
  * @param {string} startDate - Start date (YYYY-MM-DD)
  * @param {string} location - Garden location
+ * @param {string} customName - Custom name for the planting
+ * @param {Object} reminderOptions - Reminder options for the planting
+ * @param {Object} customPhaseDurations - Custom phase durations for the planting
  * @returns {Promise<number>} Planting ID
  */
-export async function addPlanting(plantType, startDate, location = 'Default Garden') {
-  const plantData = getPlantData(plantType);
+export async function addPlanting(plantType, startDate, location = 'Default Garden', customName = null, reminderOptions = {}, customPhaseDurations = {}) {
+  const plantRegistry = getPlantRegistry();
+  const plantData = plantRegistry.get(plantType);
   
   if (!plantData) {
     throw new Error(`Plant type ${plantType} not found in database`);
   }
   
-  // Calculate all phase dates
+  // Calculate all phase dates with custom durations if provided
   let currentDate = new Date(startDate);
   const phases = [];
   let totalDays = 0;
   
-  for (const [phase, { days, description, care }] of Object.entries(plantData.phases)) {
+  // Handle both old and new phase structures
+  const plantPhases = plantData.phases || plantData.environments?.indoor?.phases || {};
+  
+  for (const [phase, { days, description, care }] of Object.entries(plantPhases)) {
+    // Use custom duration if provided, otherwise use default
+    const phaseDays = customPhaseDurations[phase] || days;
+    
     const phaseStartDate = new Date(currentDate);
     phaseStartDate.setDate(phaseStartDate.getDate() + totalDays);
     
     phases.push({
       name: phase,
       startDate: phaseStartDate.toISOString().split('T')[0],
-      days,
+      days: phaseDays,
       description,
       care
     });
     
-    totalDays += days;
+    totalDays += phaseDays;
   }
   
   // Calculate harvest/completion date
@@ -50,16 +60,20 @@ export async function addPlanting(plantType, startDate, location = 'Default Gard
   const planting = {
     plantType,
     plantName: plantData.name,
-    displayName: plantData.name,
+    displayName: customName || plantData.name,
+    customName,
     category: plantData.category || 'Other',
+    tags: plantData.tags || [], // Add tags support
     location,
     startDate: startDate,
     completionDate: completionDate.toISOString().split('T')[0],
     phases,
-    currentPhase: Object.keys(plantData.phases)[0],
+    currentPhase: Object.keys(plantPhases)[0],
     status: 'active',
     notes: [],
-    legalNote: plantData.legalNote || null
+    legalNote: plantData.legalNote || null,
+    reminderOptions, // Store reminder options
+    customPhaseDurations // Store custom phase durations
   };
   
   // Add planting to database
@@ -71,8 +85,8 @@ export async function addPlanting(plantType, startDate, location = 'Default Gard
   // Add the ID to the planting object for event creation
   planting.id = plantingId;
   
-  // Create all associated events
-  await createPlantingEvents(planting, plantData, phases, completionDate.toISOString());
+  // Create all associated events with reminder options
+  await createPlantingEvents(planting, plantData, phases, completionDate.toISOString(), reminderOptions);
   
   return plantingId;
 }

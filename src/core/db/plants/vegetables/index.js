@@ -1,7 +1,6 @@
 /**
  * Vegetables Plants Index
  * Exports all vegetable plants
- * TODO: Split vegetables from db.js in Phase 2
  */
 
 import { tomatoes } from './tomatoes.js';

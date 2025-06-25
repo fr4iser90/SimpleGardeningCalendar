@@ -3,9 +3,12 @@
  * Growing information for Basil
  */
 
+import { PLANT_TAGS } from '../categories.js';
+
 export const basil = {
   name: 'Basil',
   category: 'Herbs',
+  tags: [PLANT_TAGS.ANNUAL],
   phases: {
     germination: { days: 5, description: 'Seeds sprouting', care: 'Keep warm (70-75°F/21-24°C) and moist' },
     seedling: { days: 14, description: 'First true leaves', care: 'Provide bright light, maintain warmth' },

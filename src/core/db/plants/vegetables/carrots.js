@@ -3,9 +3,12 @@
  * Growing information for Carrots
  */
 
+import { PLANT_TAGS } from '../categories.js';
+
 export const carrots = {
   name: 'Carrots',
   category: 'Vegetables',
+  tags: [PLANT_TAGS.ROOT, PLANT_TAGS.ANNUAL],
   emoji: '🥕',
   alternativeNames: ['carrot', 'zanahoria', 'zanahorias', 'carotte', 'carottes', 'karotte', 'karotten', 'carota', 'carote'],
   phases: {

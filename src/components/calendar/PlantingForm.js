@@ -335,12 +335,59 @@ function updatePhaseInputs() {
     return;
   }
   
-  phaseInputs.innerHTML = Object.entries(plantData.phases).map(([phase, data]) => `
-    <div>
-      <label class="block text-sm font-medium mb-1">${getPhaseEmoji(phase)} ${phase}</label>
-      <input type="number" name="phase_${phase}" value="${data.days}" min="1" class="w-full p-2 border rounded dark:bg-gray-700 dark:border-gray-600 dark:text-white">
-    </div>
-  `).join('');
+  // Check if this is an autoflower (no phase editing needed)
+  const isAutoflower = plantTypeSelect.value.includes('autoflower');
+  if (isAutoflower) {
+    // Autoflowers don't need phase editing - they flower automatically
+    phaseInputs.innerHTML = `
+      <div class="col-span-full p-3 bg-blue-50 dark:bg-blue-900 border border-blue-200 dark:border-blue-700 rounded">
+        <div class="flex items-start">
+          <span class="text-blue-600 dark:text-blue-400 mr-2">🌱</span>
+          <div>
+            <p class="text-sm font-medium text-blue-800 dark:text-blue-200 mb-1">
+              Autoflower - Automatische Blüte
+            </p>
+            <p class="text-xs text-blue-700 dark:text-blue-300">
+              Autoflowers blühen automatisch unabhängig vom Lichtzyklus. Phasen können nicht angepasst werden.
+            </p>
+          </div>
+        </div>
+      </div>
+    `;
+  } else if (environmentSelect?.value === 'outdoor') {
+    // Outdoor cannabis: Only flowering time is editable
+    const floweringPhase = plantData.phases.flowering;
+    if (floweringPhase) {
+      phaseInputs.innerHTML = `
+        <div class="col-span-full p-3 bg-yellow-50 dark:bg-yellow-900 border border-yellow-200 dark:border-yellow-700 rounded mb-3">
+          <div class="flex items-start">
+            <span class="text-yellow-600 dark:text-yellow-400 mr-2">🌱</span>
+            <div>
+              <p class="text-sm font-medium text-yellow-800 dark:text-yellow-200 mb-1">
+                Outdoor - Natürliche Jahreszeiten
+              </p>
+              <p class="text-xs text-yellow-700 dark:text-yellow-300">
+                Phasen werden durch natürliche Jahreszeiten bestimmt. Nur die Blütezeit kann je nach Sorte angepasst werden.
+              </p>
+            </div>
+          </div>
+        </div>
+        <div>
+          <label class="block text-sm font-medium mb-1">🌸 Blütezeit (je nach Sorte 6-12 Wochen)</label>
+          <input type="number" name="phase_flowering" value="${floweringPhase.days}" min="42" max="84" class="w-full p-2 border rounded dark:bg-gray-700 dark:border-gray-600 dark:text-white">
+          <p class="text-xs text-gray-500 dark:text-gray-400 mt-1">Standard: ${floweringPhase.days} Tage (${Math.round(floweringPhase.days/7)} Wochen)</p>
+        </div>
+      `;
+    }
+  } else {
+    // Indoor or greenhouse: All phases editable
+    phaseInputs.innerHTML = Object.entries(plantData.phases).map(([phase, data]) => `
+      <div>
+        <label class="block text-sm font-medium mb-1">${getPhaseEmoji(phase)} ${phase}</label>
+        <input type="number" name="phase_${phase}" value="${data.days}" min="1" class="w-full p-2 border rounded dark:bg-gray-700 dark:border-gray-600 dark:text-white">
+      </div>
+    `).join('');
+  }
   
   phaseDurationSection.style.display = 'block';
 }
@@ -422,12 +469,26 @@ function getCustomPhaseDurations(formData) {
   if (plantType && environment) {
     const plantData = getPlantDataForEnvironment(plantType, environment);
     if (plantData && plantData.phases) {
-      Object.keys(plantData.phases).forEach(phase => {
-        const value = formData.get(`phase_${phase}`);
-        if (value) {
-          customPhaseDurations[phase] = parseInt(value);
+      const isAutoflower = plantType.includes('autoflower');
+      
+      if (isAutoflower) {
+        // Autoflowers: No custom phase durations needed
+        // Phases are automatic and cannot be adjusted
+      } else if (environment === 'outdoor') {
+        // Outdoor cannabis: Only flowering time can be adjusted
+        const floweringValue = formData.get('phase_flowering');
+        if (floweringValue) {
+          customPhaseDurations.flowering = parseInt(floweringValue);
         }
-      });
+      } else {
+        // Indoor or greenhouse: All phases can be adjusted
+        Object.keys(plantData.phases).forEach(phase => {
+          const value = formData.get(`phase_${phase}`);
+          if (value) {
+            customPhaseDurations[phase] = parseInt(value);
+          }
+        });
+      }
     }
   }
   

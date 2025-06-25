@@ -3,9 +3,12 @@
  * Growing information for Apple Trees
  */
 
+import { PLANT_TAGS } from '../categories.js';
+
 export const apple_tree = {
   name: 'Apple Tree',
   category: 'Fruit Trees',
+  tags: [PLANT_TAGS.PERENNIAL],
   environments: {
     outdoor: {
       phases: {

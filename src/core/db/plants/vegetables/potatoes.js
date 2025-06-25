@@ -3,9 +3,12 @@
  * Growing information for Potatoes
  */
 
+import { PLANT_TAGS } from '../categories.js';
+
 export const potatoes = {
   name: 'Potatoes',
   category: 'Vegetables',
+  tags: [PLANT_TAGS.ROOT, PLANT_TAGS.ANNUAL],
   phases: {
     sprouting: { days: 14, description: 'Eye sprouting', care: 'Keep seed potatoes in warm, dark place' },
     vegetative: { days: 30, description: 'Leaf and stem growth', care: 'Start hilling when plants are 6 inches tall' },

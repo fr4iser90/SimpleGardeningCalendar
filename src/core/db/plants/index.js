@@ -6,7 +6,7 @@
 import { PLANT_CATEGORIES } from './categories.js';
 
 // Import all plant data statically for synchronous access
-import { cannabis_indica, cannabis_sativa, cannabis_autoflower } from './cannabis/index.js';
+import { cannabis_indica, cannabis_sativa, cannabis_autoflower } from './herbs/index.js';
 import { tomatoes, potatoes, carrots, lettuce, peppers, spinach, kale, cucumber } from './vegetables/index.js';
 import { basil } from './herbs/index.js';
 import { strawberries } from './fruits/index.js';
@@ -14,11 +14,11 @@ import { apple_tree, cherry_tree } from './fruit-trees/index.js';
 
 // Plant category registry with dynamic imports (for async loading)
 export const PLANT_REGISTRY = {
-  [PLANT_CATEGORIES.CANNABIS]: () => import('./cannabis/index.js'),
   [PLANT_CATEGORIES.VEGETABLES]: () => import('./vegetables/index.js'),
   [PLANT_CATEGORIES.HERBS]: () => import('./herbs/index.js'),
   [PLANT_CATEGORIES.FRUITS]: () => import('./fruits/index.js'),
-  [PLANT_CATEGORIES.FRUIT_TREES]: () => import('./fruit-trees/index.js')
+  [PLANT_CATEGORIES.FRUIT_TREES]: () => import('./fruit-trees/index.js'),
+  [PLANT_CATEGORIES.FLOWERS]: () => import('./flowers/index.js')
 };
 
 // Cache for loaded plant data
@@ -40,7 +40,7 @@ export function getPlantRegistry() {
   
   // Add all plants to the registry
   try {
-    // Cannabis plants
+    // Cannabis plants (now part of herbs with tags)
     if (cannabis_indica) plantRegistryMap.set('cannabis_indica', cannabis_indica);
     if (cannabis_sativa) plantRegistryMap.set('cannabis_sativa', cannabis_sativa);  
     if (cannabis_autoflower) plantRegistryMap.set('cannabis_autoflower', cannabis_autoflower);

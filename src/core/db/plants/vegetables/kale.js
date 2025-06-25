@@ -3,9 +3,12 @@
  * Growing information for Kale
  */
 
+import { PLANT_TAGS } from '../categories.js';
+
 export const kale = {
   name: 'Kale',
   category: 'Vegetables',
+  tags: [PLANT_TAGS.LEAFY, PLANT_TAGS.ANNUAL],
   phases: {
     germination: { days: 7, description: 'Seeds sprouting', care: 'Keep cool and moist' },
     seedling: { days: 14, description: 'Young plant development', care: 'Provide adequate light' },

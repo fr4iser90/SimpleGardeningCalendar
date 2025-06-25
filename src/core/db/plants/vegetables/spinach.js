@@ -3,6 +3,8 @@
  * Growing information for Spinach
  */
 
+import { PLANT_TAGS } from '../categories.js';
+
 // Helper function for temperature formatting
 function formatTemperature(fahrenheitRange) {
   if (!fahrenheitRange || typeof fahrenheitRange !== 'string') return fahrenheitRange;
@@ -20,6 +22,7 @@ function formatTemperature(fahrenheitRange) {
 export const spinach = {
   name: 'Spinach',
   category: 'Vegetables',
+  tags: [PLANT_TAGS.LEAFY, PLANT_TAGS.ANNUAL],
   phases: {
     germination: { days: 7, description: 'Seeds sprouting', care: 'Keep cool and moist' },
     leafing: { days: 21, description: 'Leaf development', care: 'Thin seedlings to 4-6 inches apart' },

@@ -3,9 +3,12 @@
  * Growing information for Cherry Trees
  */
 
+import { PLANT_TAGS } from '../categories.js';
+
 export const cherry_tree = {
   name: 'Cherry Tree',
   category: 'Fruit Trees',
+  tags: [PLANT_TAGS.PERENNIAL],
   environments: {
     outdoor: {
       phases: {

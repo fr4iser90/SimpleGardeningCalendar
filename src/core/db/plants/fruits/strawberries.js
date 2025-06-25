@@ -3,9 +3,12 @@
  * Growing information for Strawberries
  */
 
+import { PLANT_TAGS } from '../categories.js';
+
 export const strawberries = {
   name: 'Strawberries',
   category: 'Fruits',
+  tags: [PLANT_TAGS.PERENNIAL],
   emoji: '🍓',
   alternativeNames: ['strawberry', 'fresa', 'fresas', 'fraise', 'fraises', 'erdbeere', 'erdbeeren', 'fragola', 'fragole'],
   phases: {
