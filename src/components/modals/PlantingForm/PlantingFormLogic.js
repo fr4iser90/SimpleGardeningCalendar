@@ -253,6 +253,7 @@ export function updateCustomNamePlaceholder() {
 export function checkSeasonalTiming() {
   const plantTypeSelect = document.getElementById('plantTypeSelect');
   const environmentSelect = document.getElementById('environmentSelect');
+  const regionSelect = document.getElementById('regionSelect');
   const dateInput = document.querySelector('input[name="date"]');
   const seasonalWarning = document.getElementById('seasonalWarning');
   const seasonalMessage = document.getElementById('seasonalMessage');
@@ -266,14 +267,95 @@ export function checkSeasonalTiming() {
   }
   
   const validation = validatePlantingDate(plantTypeSelect.value, environmentSelect?.value || 'indoor', dateInput.value);
+  const region = regionSelect?.value || 'temperate_north';
   
   if (!validation.isValid) {
     seasonalWarning.classList.remove('hidden');
-    if (seasonalMessage) seasonalMessage.textContent = validation.message;
-    if (seasonalDetails) seasonalDetails.textContent = validation.details || '';
+    seasonalWarning.className = 'p-3 bg-yellow-50 dark:bg-yellow-900 border border-yellow-200 dark:border-yellow-700 rounded mb-3';
+    
+    if (seasonalMessage) {
+      seasonalMessage.innerHTML = `
+        <div class="flex items-start">
+          <span class="text-yellow-600 dark:text-yellow-400 mr-2">⚠️</span>
+          <div>
+            <p class="font-medium text-yellow-800 dark:text-yellow-200">${validation.message}</p>
+          </div>
+        </div>
+      `;
+    }
+    
+    if (seasonalDetails) {
+      seasonalDetails.innerHTML = `
+        <div class="mt-2 text-sm text-yellow-700 dark:text-yellow-300">
+          <p><strong>Empfohlene Pflanzzeit:</strong> ${validation.recommendedPeriod || 'Bitte prüfen Sie die Pflanzzeiten für Ihre Region'}</p>
+          ${validation.details ? `<p class="mt-1">${validation.details}</p>` : ''}
+        </div>
+      `;
+    }
   } else {
-    seasonalWarning.classList.add('hidden');
+    seasonalWarning.classList.remove('hidden');
+    seasonalWarning.className = 'p-3 bg-green-50 dark:bg-green-900 border border-green-200 dark:border-green-700 rounded mb-3';
+    
+    if (seasonalMessage) {
+      seasonalMessage.innerHTML = `
+        <div class="flex items-start">
+          <span class="text-green-600 dark:text-green-400 mr-2">✅</span>
+          <div>
+            <p class="font-medium text-green-800 dark:text-green-200">Perfekte Pflanzzeit!</p>
+          </div>
+        </div>
+      `;
+    }
+    
+    if (seasonalDetails) {
+      seasonalDetails.innerHTML = `
+        <div class="mt-2 text-sm text-green-700 dark:text-green-300">
+          <p><strong>Ideal für:</strong> ${validation.recommendedPeriod || 'Aktuelle Jahreszeit'}</p>
+          ${getPlantingTips(plantTypeSelect.value, region) ? `<p class="mt-1"><strong>Tipps:</strong> ${getPlantingTips(plantTypeSelect.value, region)}</p>` : ''}
+        </div>
+      `;
+    }
   }
+}
+
+/**
+ * Get planting tips and cutting information for a plant
+ * @param {string} plantType - Plant type
+ * @param {string} region - Climate region
+ * @returns {string} Planting tips
+ */
+function getPlantingTips(plantType, region) {
+  const registry = getPlantRegistry();
+  const plantData = registry.get(plantType);
+  
+  if (!plantData) return '';
+  
+  const tips = [];
+  
+  // Add general planting tips
+  if (plantData.category === 'Vegetables') {
+    tips.push('Direktsaat oder Vorkultur möglich');
+  } else if (plantData.category === 'Herbs') {
+    tips.push('Stecklinge oder Samen möglich');
+  } else if (plantData.category === 'Fruits') {
+    tips.push('Containerpflanzen oder wurzelnackte Pflanzen');
+  }
+  
+  // Add cutting information if available
+  if (plantData.cuttingInfo) {
+    tips.push(`Stecklinge: ${plantData.cuttingInfo}`);
+  }
+  
+  // Add region-specific tips
+  if (region === 'mediterranean') {
+    tips.push('Schatten in der Mittagshitze, morgens gießen');
+  } else if (region === 'temperate_north') {
+    tips.push('Nach dem letzten Frost pflanzen, Mulch verwenden');
+  } else if (region === 'tropical') {
+    tips.push('Ganzjährig möglich, auf Regenzeiten achten');
+  }
+  
+  return tips.join('. ');
 }
 
 export function updatePhaseCareInputs() {

@@ -8,6 +8,7 @@ import {
   getCustomPhaseDurations 
 } from './PlantingFormLogic.js';
 import { initializePlantingFormHandlers } from './PlantingFormHandlers.js';
+import { autoDetectLocation, CLIMATE_ZONE_DESCRIPTIONS } from '../../../core/db/plants/categories.js';
 
 /**
  * PlantingFormUI - Contains UI creation and data extraction functions
@@ -37,9 +38,15 @@ export function createPlantingForm(date, preselectedPlant = null) {
       </div>
       <div id="regionField" style="display: none;">
         <label class="block text-sm font-medium mb-1 dark:text-gray-200">${t('modal.region.label')}</label>
-        <select name="region" id="regionSelect" class="w-full p-2 border rounded dark:bg-gray-700 dark:border-gray-600 dark:text-white">
-          ${regionOptions}
-        </select>
+        <div class="relative">
+          <select name="region" id="regionSelect" class="w-full p-2 border rounded dark:bg-gray-700 dark:border-gray-600 dark:text-white">
+            ${regionOptions}
+          </select>
+          <button type="button" id="autoDetectBtn" class="absolute right-2 top-1/2 transform -translate-y-1/2 text-blue-600 hover:text-blue-800 dark:text-blue-400 dark:hover:text-blue-200 text-sm">
+            🌍 Auto
+          </button>
+        </div>
+        <div id="regionDescription" class="text-xs text-gray-500 dark:text-gray-400 mt-1 hidden"></div>
       </div>
       <div>
         <label class="block text-sm font-medium mb-1 dark:text-gray-200">${t('modal.date.label')}</label>
@@ -99,8 +106,8 @@ export function createPlantingForm(date, preselectedPlant = null) {
     <div id="phaseCareSection" class="mt-4" style="display:none;">
       <h4 class="font-medium mb-3 dark:text-white">${t('modal.reminders.phase_care')}</h4>
       <div class="flex gap-4 mb-2">
-        <button type="button" id="markAllWatering" class="px-2 py-1 rounded bg-blue-200 dark:bg-blue-700 text-blue-900 dark:text-blue-100 text-xs">Alle Gieß-Erinnerungen an/aus</button>
-        <button type="button" id="markAllFertilizing" class="px-2 py-1 rounded bg-green-200 dark:bg-green-700 text-green-900 dark:text-green-100 text-xs">Alle Dünger-Erinnerungen an/aus</button>
+        <button type="button" id="markAllWatering" class="px-2 py-1 rounded bg-blue-200 dark:bg-blue-700 text-blue-900 dark:text-blue-100 text-xs">${t('modal.reminders.mark_all_watering')}</button>
+        <button type="button" id="markAllFertilizing" class="px-2 py-1 rounded bg-green-200 dark:bg-green-700 text-green-900 dark:text-green-100 text-xs">${t('modal.reminders.mark_all_fertilizing')}</button>
       </div>
       <div id="phaseCareInputs" class="rounded-lg border border-gray-300 dark:border-gray-600 bg-gray-50 dark:bg-gray-800 p-3 space-y-2"></div>
     </div>
@@ -134,7 +141,85 @@ export function createPlantingForm(date, preselectedPlant = null) {
   // Initialize form handlers
   initializePlantingFormHandlers(formContainer);
   
+  // Add auto-detection functionality
+  initializeAutoDetection(formContainer);
+  
   return formContainer;
+}
+
+/**
+ * Initialize auto-detection functionality
+ * @param {HTMLElement} formContainer - Form container element
+ */
+function initializeAutoDetection(formContainer) {
+  const autoDetectBtn = formContainer.querySelector('#autoDetectBtn');
+  const regionSelect = formContainer.querySelector('#regionSelect');
+  const regionDescription = formContainer.querySelector('#regionDescription');
+  
+  if (autoDetectBtn && regionSelect) {
+    autoDetectBtn.addEventListener('click', async () => {
+      const originalText = autoDetectBtn.textContent;
+      autoDetectBtn.textContent = '🔍 Erkennen...';
+      autoDetectBtn.disabled = true;
+      
+      try {
+        const location = await autoDetectLocation();
+        
+        if (location.success) {
+          regionSelect.value = location.climateZone;
+          regionDescription.innerHTML = `
+            <div class="p-2 bg-blue-50 dark:bg-blue-900 rounded border border-blue-200 dark:border-blue-700">
+              <p class="text-xs"><strong>Erkannt:</strong> ${location.city}, ${location.countryName}</p>
+              <p class="text-xs">${location.climateInfo}</p>
+            </div>
+          `;
+          regionDescription.classList.remove('hidden');
+          
+          // Trigger change event to update plant options
+          regionSelect.dispatchEvent(new Event('change'));
+        } else {
+          regionDescription.innerHTML = `
+            <div class="p-2 bg-yellow-50 dark:bg-yellow-900 rounded border border-yellow-200 dark:border-yellow-700">
+              <p class="text-xs text-yellow-700 dark:text-yellow-300">Standort konnte nicht automatisch erkannt werden. Bitte wählen Sie manuell.</p>
+            </div>
+          `;
+          regionDescription.classList.remove('hidden');
+        }
+      } catch (error) {
+        console.error('Auto-detection error:', error);
+        regionDescription.innerHTML = `
+          <div class="p-2 bg-red-50 dark:bg-red-900 rounded border border-red-200 dark:border-red-700">
+            <p class="text-xs text-red-700 dark:text-red-300">Fehler bei der Standorterkennung. Bitte wählen Sie manuell.</p>
+          </div>
+        `;
+        regionDescription.classList.remove('hidden');
+      } finally {
+        autoDetectBtn.textContent = originalText;
+        autoDetectBtn.disabled = false;
+      }
+    });
+  }
+  
+  // Show region description when region changes
+  if (regionSelect && regionDescription) {
+    regionSelect.addEventListener('change', () => {
+      const selectedValue = regionSelect.value;
+      const description = CLIMATE_ZONE_DESCRIPTIONS[selectedValue];
+      
+      if (description) {
+        regionDescription.innerHTML = `
+          <div class="p-2 bg-gray-50 dark:bg-gray-800 rounded border border-gray-200 dark:border-gray-700">
+            <p class="text-xs"><strong>${description.name}</strong></p>
+            <p class="text-xs">${description.description}</p>
+            <p class="text-xs"><em>Beispiele:</em> ${description.examples}</p>
+          </div>
+        `;
+        regionDescription.classList.remove('hidden');
+      } else {
+        regionDescription.classList.add('hidden');
+      }
+    });
+  }
 }
 
 export function getPlantingFormData(formContainer) {

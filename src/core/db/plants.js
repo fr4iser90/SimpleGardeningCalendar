@@ -5,6 +5,7 @@
 
 import { getPlantRegistry } from './plants/index.js';
 import { SEASONAL_WINDOWS } from './connection.js';
+import { t } from '../i18n/index.js';
 
 /**
  * Get appropriate plant data based on environment
@@ -43,19 +44,19 @@ export function getPlantDataForEnvironment(plantKey, environment = 'indoor') {
  */
 export function validatePlantingDate(plantKey, environment, plantingDate, region = 'temperate_north') {
   if (environment !== 'outdoor') {
-    return { isValid: true, message: 'Indoor growing - date flexible' };
+    return { isValid: true, message: t('timing.indoor_growing_date_flexible') };
   }
   
   const plantData = getPlantDataForEnvironment(plantKey, environment);
   if (!plantData || !plantData.seasonalTiming || !plantData.seasonalTiming[region]) {
-    return { isValid: true, message: 'No seasonal restrictions found' };
+    return { isValid: true, message: t('timing.no_seasonal_restrictions_found') };
   }
   
   const seasonal = plantData.seasonalTiming[region];
   const plantingWindow = seasonal.plantingWindow;
   
   if (!plantingWindow) {
-    return { isValid: true, message: 'No planting window specified' };
+    return { isValid: true, message: t('timing.no_planting_window_specified') };
   }
   
   const plantDate = new Date(plantingDate);
@@ -68,12 +69,16 @@ export function validatePlantingDate(plantKey, environment, plantingDate, region
   if (plantDate >= startDate && plantDate <= endDate) {
     return { 
       isValid: true, 
-      message: `Good timing! ${plantingWindow.description}` 
+      message: t('timing.good_timing', { description: t(plantingWindow.description) })
     };
   } else {
     return { 
       isValid: false, 
-      message: `Consider planting between ${plantingWindow.start} and ${plantingWindow.end}. ${plantingWindow.description}` 
+      message: t('timing.consider_planting_between', { 
+        start: plantingWindow.start, 
+        end: plantingWindow.end, 
+        description: t(plantingWindow.description) 
+      })
     };
   }
 }
