@@ -3,6 +3,7 @@
 
 import { openDB } from 'idb';
 import { DB_NAME, DB_VERSION } from '../../core/db/connection.js';
+import { t } from '../../core/i18n/index.js';
 
 export async function showMyPlantsModal() {
   const { getActivePlantings } = await import('../../core/db/index.js');
@@ -283,14 +284,14 @@ export async function viewPlantDetails(plantingId) {
               
               ${planting.legalNote ? `
                 <div class="mt-3 p-3 bg-yellow-100 dark:bg-yellow-900 border border-yellow-300 dark:border-yellow-700 rounded">
-                  <strong>⚠️ Legal Notice:</strong> ${planting.legalNote}
+                  <strong>${t('plant_details.legal_notice')}</strong> ${planting.legalNote}
                 </div>
               ` : ''}
             </div>
             
             <!-- Growth Phases -->
             <div class="bg-gray-50 dark:bg-gray-700 rounded-lg p-4">
-              <h3 class="font-semibold mb-3 dark:text-white">🌱 Growth Phases</h3>
+              <h3 class="font-semibold mb-3 dark:text-white">${t('plants_list.growth_phases')}</h3>
               <div class="space-y-2">
                 ${planting.phases ? Object.entries(planting.phases).map(([phase, data]) => {
                   const isCurrentPhase = phase.name === planting.currentPhase;
@@ -311,11 +312,11 @@ export async function viewPlantDetails(plantingId) {
                       </div>
                       <div class="text-right">
                         <div class="text-sm dark:text-white">${phaseDate.toLocaleDateString()}</div>
-                        ${isCurrentPhase ? '<div class="text-xs text-green-600 dark:text-green-400">Current</div>' : ''}
+                        ${isCurrentPhase ? `<div class="text-xs text-green-600 dark:text-green-400">${t('plants_list.current')}</div>` : ''}
                       </div>
                     </div>
                   `;
-                }).join('') : '<div class="text-gray-500 dark:text-gray-400">No phase information available</div>'}
+                }).join('') : `<div class="text-gray-500 dark:text-gray-400">${t('plants_list.no_phase_info')}</div>`}
               </div>
             </div>
           </div>
@@ -324,7 +325,7 @@ export async function viewPlantDetails(plantingId) {
           <div class="space-y-4">
             <!-- Recent Events -->
             <div class="bg-gray-50 dark:bg-gray-700 rounded-lg p-4">
-              <h3 class="font-semibold mb-3 dark:text-white">📅 Recent Events (${events.length})</h3>
+              <h3 class="font-semibold mb-3 dark:text-white">${t('plants_list.recent_events')} (${events.length})</h3>
               <div class="space-y-2 max-h-40 overflow-y-auto">
                 ${events.slice(0, 10).map(event => `
                   <div class="text-sm p-2 bg-white dark:bg-gray-800 rounded">
@@ -332,13 +333,13 @@ export async function viewPlantDetails(plantingId) {
                     <div class="text-gray-500 dark:text-gray-400">${new Date(event.date).toLocaleDateString()}</div>
                   </div>
                 `).join('')}
-                ${events.length === 0 ? '<p class="text-gray-500 dark:text-gray-400 text-sm">${noEventsText}</p>' : ''}
+                ${events.length === 0 ? `<p class="text-gray-500 dark:text-gray-400 text-sm">${noEventsText}</p>` : ''}
               </div>
             </div>
             
             <!-- Notes -->
             <div class="bg-gray-50 dark:bg-gray-700 rounded-lg p-4">
-              <h3 class="font-semibold mb-3 dark:text-white">📝 Notes (${notes.length})</h3>
+              <h3 class="font-semibold mb-3 dark:text-white">${t('plants_list.notes')} (${notes.length})</h3>
               <div class="space-y-2 max-h-40 overflow-y-auto">
                 ${notes.slice(0, 10).map(note => `
                   <div class="text-sm p-2 bg-white dark:bg-gray-800 rounded">
@@ -346,7 +347,7 @@ export async function viewPlantDetails(plantingId) {
                     <div class="mt-1 dark:text-white">${note.note}</div>
                   </div>
                 `).join('')}
-                ${notes.length === 0 ? '<p class="text-gray-500 dark:text-gray-400 text-sm">${noNotesText}</p>' : ''}
+                ${notes.length === 0 ? `<p class="text-gray-500 dark:text-gray-400 text-sm">${noNotesText}</p>` : ''}
               </div>
               
               <div class="mt-3">
@@ -360,7 +361,7 @@ export async function viewPlantDetails(plantingId) {
             <!-- Care Tips -->
             ${plantData ? `
               <div class="bg-gray-50 dark:bg-gray-700 rounded-lg p-4">
-                <h3 class="font-semibold mb-3 dark:text-white">💡 Care Tips</h3>
+                <h3 class="font-semibold mb-3 dark:text-white">${t('plants_list.care_tips')}</h3>
                 <div class="space-y-2 text-sm">
                   ${Object.entries(plantData.careTips).map(([tip, value]) => `
                     <div>
@@ -380,7 +381,7 @@ export async function viewPlantDetails(plantingId) {
             ${deleteButtonText} ${deleteButtonText} & All Events
           </button>
           <button onclick="this.closest('.fixed').remove()" class="px-4 py-2 bg-gray-600 text-white rounded hover:bg-gray-700">
-            Close
+            ${t('plant_details.close')}
           </button>
         </div>
       </div>
@@ -402,7 +403,7 @@ export async function viewPlantDetails(plantingId) {
     
   } catch (error) {
     console.error('Error viewing plant details:', error);
-    alert('❌ Failed to load plant details');
+    alert(t('plants_list.failed_load_details'));
   }
 }
 

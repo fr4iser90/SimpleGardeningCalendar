@@ -169,13 +169,13 @@ export function showPlantDetailsModal(plant, plantKey) {
       
       ${plant.legalNote ? `
         <div class="mb-4 p-3 bg-yellow-100 dark:bg-yellow-900 border border-yellow-300 dark:border-yellow-700 rounded">
-          <strong>⚠️ Legal Notice:</strong> ${plant.legalNote}
+          <strong>${t('plant_details.legal_notice')}</strong> ${plant.legalNote}
         </div>
       ` : ''}
       
       ${(plant.tags || []).length > 0 ? `
         <div class="mb-4">
-          <h3 class="font-semibold mb-2 dark:text-white">Tags</h3>
+          <h3 class="font-semibold mb-2 dark:text-white">${t('plant_details.tags')}</h3>
           <div class="flex flex-wrap gap-2">
             ${plant.tags.map(tag => `
               <span class="px-2 py-1 bg-blue-100 dark:bg-blue-900 text-blue-800 dark:text-blue-200 rounded text-sm">${tag}</span>
@@ -186,9 +186,9 @@ export function showPlantDetailsModal(plant, plantKey) {
       
       <div class="space-y-6">
         <div>
-          <h3 class="font-semibold mb-2 dark:text-white">Growing Phases</h3>
+          <h3 class="font-semibold mb-2 dark:text-white">${t('plant_details.growing_phases')}</h3>
           <div class="space-y-2">
-            ${Object.keys(plantPhases).length > 0 ? Object.entries(plantPhases).map(([phase, data]) => `
+            ${Object.entries(plantPhases).length > 0 ? Object.entries(plantPhases).map(([phase, data]) => `
               <div class="border dark:border-gray-600 rounded p-3">
                 <div class="flex justify-between items-center mb-1">
                   <strong class="dark:text-white">${phase.charAt(0).toUpperCase() + phase.slice(1)}</strong>
@@ -197,25 +197,25 @@ export function showPlantDetailsModal(plant, plantKey) {
                 <div class="text-sm text-gray-600 dark:text-gray-400 mb-1">${data.description}</div>
                 <div class="text-sm"><strong>Care:</strong> ${data.care}</div>
               </div>
-            `).join('') : '<div class="text-gray-500 dark:text-gray-400">No phases available</div>'}
+            `).join('') : `<div class="text-gray-500 dark:text-gray-400">${t('plant_details.no_phases_available')}</div>`}
           </div>
         </div>
         
         <div>
-          <h3 class="font-semibold mb-2 dark:text-white">Care Tips</h3>
+          <h3 class="font-semibold mb-2 dark:text-white">${t('plant_details.care_tips')}</h3>
           <div class="grid grid-cols-1 md:grid-cols-2 gap-3">
             ${plant.careTips ? Object.entries(plant.careTips).map(([tip, value]) => `
               <div class="text-sm">
                 <strong class="dark:text-white">${tip.charAt(0).toUpperCase() + tip.slice(1)}:</strong>
                 <div class="text-gray-600 dark:text-gray-400">${value}</div>
               </div>
-            `).join('') : '<div class="text-gray-500 dark:text-gray-400">No care tips available</div>'}
+            `).join('') : `<div class="text-gray-500 dark:text-gray-400">${t('plant_details.no_care_tips_available')}</div>`}
           </div>
         </div>
         
         ${plant.commonProblems ? `
           <div>
-            <h3 class="font-semibold mb-2 dark:text-white">Common Problems</h3>
+            <h3 class="font-semibold mb-2 dark:text-white">${t('plant_details.common_problems')}</h3>
             <div class="space-y-2">
               ${Object.entries(plant.commonProblems).map(([problem, solution]) => `
                 <div class="text-sm">
@@ -229,7 +229,7 @@ export function showPlantDetailsModal(plant, plantKey) {
         
         <div class="flex justify-center">
           <button onclick="startPlanting('${plantKey}')" class="px-6 py-2 bg-green-600 text-white rounded hover:bg-green-700">
-            Start Growing
+            ${t('plant_details.start_growing')}
           </button>
         </div>
       </div>

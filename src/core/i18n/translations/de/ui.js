@@ -560,6 +560,26 @@ export const de = {
     'local.setup.switch_to': 'Wechseln',
     'local.setup.confirm_delete': 'Sind Sie sicher, dass Sie diesen Kalender löschen möchten?',
     'local.setup.calendar_deleted': 'Kalender erfolgreich gelöscht',
-    'local.setup.delete_failed': 'Fehler beim Löschen des Kalenders'
+    'local.setup.delete_failed': 'Fehler beim Löschen des Kalenders',
+    
+    // Plant Details Modal
+    'plant_details.legal_notice': '⚠️ Rechtlicher Hinweis:',
+    'plant_details.tags': 'Tags',
+    'plant_details.growing_phases': 'Wachstumsphasen',
+    'plant_details.care_tips': 'Pflegetipps',
+    'plant_details.common_problems': 'Häufige Probleme',
+    'plant_details.start_growing': 'Diese Pflanze anbauen',
+    'plant_details.close': 'Schließen',
+    'plant_details.no_phases_available': 'Keine Phasen verfügbar',
+    'plant_details.no_care_tips_available': 'Keine Pflegetipps verfügbar',
+    
+    // PlantsList Modal
+    'plants_list.growth_phases': '🌱 Wachstumsphasen',
+    'plants_list.recent_events': '📅 Letzte Ereignisse',
+    'plants_list.notes': '📝 Notizen',
+    'plants_list.care_tips': '💡 Pflegetipps',
+    'plants_list.current': 'Aktuell',
+    'plants_list.no_phase_info': 'Keine Phaseninformationen verfügbar',
+    'plants_list.failed_load_details': '❌ Laden der Pflanzendetails fehlgeschlagen'
   };
   

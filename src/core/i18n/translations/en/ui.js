@@ -561,5 +561,25 @@ export const en = {
     'local.setup.confirm_delete': 'Are you sure you want to delete this calendar?',
     'local.setup.calendar_deleted': 'Calendar deleted successfully',
     'local.setup.delete_failed': 'Failed to delete calendar',
-  };
+  
+    // Plant Details Modal
+    'plant_details.legal_notice': '⚠️ Legal Notice:',
+    'plant_details.tags': 'Tags',
+    'plant_details.growing_phases': 'Growing Phases',
+    'plant_details.care_tips': 'Care Tips',
+    'plant_details.common_problems': 'Common Problems',
+    'plant_details.start_growing': 'Start Growing',
+    'plant_details.close': 'Close',
+    'plant_details.no_phases_available': 'No phases available',
+    'plant_details.no_care_tips_available': 'No care tips available',
+    
+    // PlantsList Modal
+    'plants_list.growth_phases': '🌱 Growth Phases',
+    'plants_list.recent_events': '📅 Recent Events',
+    'plants_list.notes': '📝 Notes',
+    'plants_list.care_tips': '💡 Care Tips',
+    'plants_list.current': 'Current',
+    'plants_list.no_phase_info': 'No phase information available',
+    'plants_list.failed_load_details': '❌ Failed to load plant details',
+};
   
