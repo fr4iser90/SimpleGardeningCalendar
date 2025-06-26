@@ -16,7 +16,7 @@ export async function showEventDetails(event) {
     const notes = await getPlantNotes(event.extendedProps.plantingId);
     notesHtml = `
       <div class="mt-4">
-        <h3 class="font-semibold mb-2 dark:text-white">Notes</h3>
+        <h3 class="font-semibold mb-2 dark:text-white">${t('plants_list.notes')}</h3>
         <div class="space-y-2 max-h-32 overflow-y-auto">
           ${notes.map(note => `
             <div class="text-sm bg-gray-50 dark:bg-gray-700 p-2 rounded">
@@ -26,9 +26,9 @@ export async function showEventDetails(event) {
           `).join('')}
         </div>
         <div class="mt-2">
-          <textarea id="newNote" class="w-full p-2 border rounded dark:bg-gray-700 dark:border-gray-600 dark:text-white" rows="2" placeholder="Add a note..."></textarea>
+          <textarea id="newNote" class="w-full p-2 border rounded dark:bg-gray-700 dark:border-gray-600 dark:text-white" rows="2" placeholder="${t('plants.add_note')}..."></textarea>
           <button onclick="addNote(${event.extendedProps.plantingId})" class="mt-1 px-3 py-1 bg-green-600 text-white rounded hover:bg-green-700">
-            Add Note
+            ${t('btn.add_note')}
           </button>
         </div>
       </div>
@@ -76,7 +76,7 @@ export async function showEventDetails(event) {
       <div class="flex justify-between items-start mb-4">
         <h2 class="text-xl font-semibold dark:text-white">${event.title}</h2>
         <span class="px-2 py-1 rounded text-sm text-white" style="background-color: ${event.backgroundColor};">
-          ${event.extendedProps.type}
+          ${t('task.' + event.extendedProps.type)}
         </span>
       </div>
       <div class="space-y-3 dark:text-gray-200">
@@ -93,10 +93,10 @@ export async function showEventDetails(event) {
       </div>
       <div class="flex justify-between mt-6">
         <button class="px-4 py-2 bg-red-600 text-white rounded hover:bg-red-700" onclick="deleteEvent(${event.id}, ${event.extendedProps.plantingId})">
-          Delete
+          ${t('btn.delete')}
         </button>
         <button class="px-4 py-2 text-gray-600 dark:text-gray-300" onclick="this.closest('.fixed').remove()">
-          Close
+          ${t('btn.close')}
         </button>
       </div>
     </div>
