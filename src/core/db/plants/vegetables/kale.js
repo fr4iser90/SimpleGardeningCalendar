@@ -86,7 +86,7 @@ export const kale = {
           },
         },
         vegetative: {
-          days: 35,
+          days: 21,
           description: 'Leaf production',
           care: 'Regular feeding for leaf growth',
           editable: true,
@@ -98,6 +98,42 @@ export const kale = {
             fertilizing: {
               interval: 14,
               description: 'Fertilize every 2 weeks during vegetative growth',
+            },
+          },
+          hydro: {
+            watering: {
+              interval: 0,
+              description: 'Continuous flow, moderate EC',
+            },
+            fertilizing: {
+              interval: 14,
+              description: 'Balanced nutrients, EC 1.0-1.2',
+            },
+          },
+          coco: {
+            watering: {
+              interval: 1,
+              description: 'Daily watering in coco',
+            },
+            fertilizing: {
+              interval: 14,
+              description: 'Balanced feeding, EC 1.0-1.2',
+            },
+          },
+        },
+        leaf_development: {
+          days: 14,
+          description: 'Leaf maturation',
+          care: 'Leaves developing full size and flavor',
+          editable: true,
+          soil: {
+            watering: {
+              interval: 3,
+              description: 'Deep watering every 3 days',
+            },
+            fertilizing: {
+              interval: 14,
+              description: 'Fertilize every 2 weeks during leaf development',
             },
           },
           hydro: {
@@ -234,7 +270,7 @@ export const kale = {
           },
         },
         vegetative: {
-          days: 35,
+          days: 21,
           description: 'Leaf production',
           care: 'Regular feeding for leaf growth',
           editable: false,
@@ -246,6 +282,42 @@ export const kale = {
             fertilizing: {
               interval: 14,
               description: 'Fertilize every 2 weeks during vegetative growth',
+            },
+          },
+          hydro: {
+            watering: {
+              interval: 0,
+              description: 'Continuous flow, moderate EC',
+            },
+            fertilizing: {
+              interval: 14,
+              description: 'Balanced nutrients, EC 1.0-1.2',
+            },
+          },
+          coco: {
+            watering: {
+              interval: 1,
+              description: 'Daily watering in coco',
+            },
+            fertilizing: {
+              interval: 14,
+              description: 'Balanced feeding, EC 1.0-1.2',
+            },
+          },
+        },
+        leaf_development: {
+          days: 14,
+          description: 'Leaf maturation',
+          care: 'Leaves developing full size and flavor',
+          editable: false,
+          soil: {
+            watering: {
+              interval: 3,
+              description: 'Deep watering every 3 days',
+            },
+            fertilizing: {
+              interval: 14,
+              description: 'Fertilize every 2 weeks during leaf development',
             },
           },
           hydro: {
@@ -382,7 +454,7 @@ export const kale = {
           },
         },
         vegetative: {
-          days: 35,
+          days: 21,
           description: 'Leaf production',
           care: 'Regular feeding for leaf growth',
           editable: true,
@@ -394,6 +466,42 @@ export const kale = {
             fertilizing: {
               interval: 14,
               description: 'Fertilize every 2 weeks during vegetative growth',
+            },
+          },
+          hydro: {
+            watering: {
+              interval: 0,
+              description: 'Continuous flow, moderate EC',
+            },
+            fertilizing: {
+              interval: 14,
+              description: 'Balanced nutrients, EC 1.0-1.2',
+            },
+          },
+          coco: {
+            watering: {
+              interval: 1,
+              description: 'Daily watering in coco',
+            },
+            fertilizing: {
+              interval: 14,
+              description: 'Balanced feeding, EC 1.0-1.2',
+            },
+          },
+        },
+        leaf_development: {
+          days: 14,
+          description: 'Leaf maturation',
+          care: 'Leaves developing full size and flavor',
+          editable: true,
+          soil: {
+            watering: {
+              interval: 3,
+              description: 'Deep watering every 3 days',
+            },
+            fertilizing: {
+              interval: 14,
+              description: 'Fertilize every 2 weeks during leaf development',
             },
           },
           hydro: {

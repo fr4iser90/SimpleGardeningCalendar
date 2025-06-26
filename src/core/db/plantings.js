@@ -9,6 +9,7 @@ import { validatePlantingDate as validatePlantingDateUtil } from '../../utils/va
 import { createIntelligentPlantingEvents } from './IntelligentEventSystem.js';
 import { deleteAllPlantingEvents } from './events.js';
 import { deleteAllPlantNotes } from './notes.js';
+import { getTranslatedPlantData } from '../i18n/index.js';
 
 /**
  * Add a new planting with all associated events
@@ -22,8 +23,8 @@ import { deleteAllPlantNotes } from './notes.js';
  * @returns {Promise<number>} Planting ID
  */
 export async function addPlanting(plantType, startDate, location = 'Default Garden', customName = null, reminderOptions = {}, customPhaseDurations = {}, calendarId = null) {
-  const plantRegistry = getPlantRegistry();
-  const plantData = plantRegistry.get(plantType);
+  // Use translated, merged plant data for the current language
+  const plantData = await getTranslatedPlantData(plantType);
   
   if (!plantData) {
     throw new Error(`Plant type ${plantType} not found in database`);
@@ -45,8 +46,16 @@ export async function addPlanting(plantType, startDate, location = 'Default Gard
     
     // Use custom duration if provided, otherwise use default
     const phaseDays = customPhaseDurations[phase] || days;
+    if (!phaseDays || isNaN(phaseDays)) {
+      console.error('Invalid or missing days for phase:', { plantType, phase, phaseData, customPhaseDurations });
+      throw new Error(`Invalid or missing 'days' for phase '${phase}' of plant '${plantType}'.\nCheck your translation files and merging logic!`);
+    }
     
     const phaseStartDate = new Date(currentDate);
+    if (isNaN(phaseStartDate.getTime())) {
+      console.error('Invalid startDate for planting:', { plantType, startDate });
+      throw new Error(`Invalid startDate '${startDate}' for plant '${plantType}'.`);
+    }
     phaseStartDate.setDate(phaseStartDate.getDate() + totalDays);
     
     phases.push({
