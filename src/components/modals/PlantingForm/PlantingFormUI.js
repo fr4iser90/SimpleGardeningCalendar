@@ -225,7 +225,42 @@ function initializeAutoDetection(formContainer) {
 
 export function getPlantingFormData(formContainer) {
   const formData = new FormData(formContainer);
-  
+
+  // Extract per-phase reminders
+  const phaseReminders = {};
+  // Find all phase names by looking for checkbox names
+  for (const [key, value] of formData.entries()) {
+    const wateringMatch = key.match(/^watering_(.+)_enabled$/);
+    const fertilizingMatch = key.match(/^fertilizing_(.+)_enabled$/);
+    if (wateringMatch) {
+      const phase = wateringMatch[1];
+      if (!phaseReminders[phase]) phaseReminders[phase] = {};
+      phaseReminders[phase].watering = true;
+      // Also get interval if present
+      const interval = formData.get(`watering_${phase}_interval`);
+      if (interval) phaseReminders[phase].wateringInterval = parseInt(interval);
+    }
+    if (fertilizingMatch) {
+      const phase = fertilizingMatch[1];
+      if (!phaseReminders[phase]) phaseReminders[phase] = {};
+      phaseReminders[phase].fertilizing = true;
+      const interval = formData.get(`fertilizing_${phase}_interval`);
+      if (interval) phaseReminders[phase].fertilizingInterval = parseInt(interval);
+    }
+  }
+  // Now, for all phases that have no watering/fertilizing, set to false
+  // (Find all phase names by looking for interval fields)
+  for (const [key, value] of formData.entries()) {
+    const phaseMatch = key.match(/^(watering|fertilizing)_(.+)_interval$/);
+    if (phaseMatch) {
+      const type = phaseMatch[1];
+      const phase = phaseMatch[2];
+      if (!phaseReminders[phase]) phaseReminders[phase] = {};
+      if (type === 'watering' && phaseReminders[phase].watering === undefined) phaseReminders[phase].watering = false;
+      if (type === 'fertilizing' && phaseReminders[phase].fertilizing === undefined) phaseReminders[phase].fertilizing = false;
+    }
+  }
+
   return {
     plantType: formData.get('plantType'),
     startDate: formData.get('date'),
@@ -237,7 +272,8 @@ export function getPlantingFormData(formContainer) {
       phaseReminders: formData.get('enablePhaseReminders') === 'on',
       weeklyChecks: formData.get('enableWeeklyChecks') === 'on',
       harvestReminder: formData.get('enableHarvestReminder') === 'on',
-      googleCalendarSync: formData.get('enableGoogleCalendarSync') === 'on'
+      googleCalendarSync: formData.get('enableGoogleCalendarSync') === 'on',
+      phaseCare: phaseReminders
     },
     customPhaseDurations: getCustomPhaseDurations(formData)
   };

@@ -285,15 +285,50 @@ export async function createIntelligentPlantingEvents(planting, plantData, phase
       }
     }
 
-    // Add watering reminders only if enabled
-    if (finalReminderOptions.watering?.enabled) {
-      await createWateringEvents(tx.store, plantData, phase, plantingId, completionDate, finalReminderOptions.watering.interval, planting.calendarId, phase.name, reminderOptions.selectedMedium);
+    // --- NEW: Per-phase reminder logic ---
+    const phaseCare = reminderOptions.phaseCare || {};
+    const careSettings = phaseCare[phase.name] || {};
+    // Watering
+    if (careSettings.watering) {
+      await createWateringEvents(
+        tx.store,
+        plantData,
+        phase,
+        plantingId,
+        completionDate,
+        careSettings.wateringInterval || finalReminderOptions.watering.interval,
+        planting.calendarId,
+        phase.name,
+        reminderOptions.selectedMedium
+      );
     }
+    // Fertilizing
+    if (careSettings.fertilizing) {
+      await createFertilizingEvents(
+        tx.store,
+        plantData,
+        phase,
+        plantingId,
+        {
+          ...finalReminderOptions.fertilizing,
+          interval: careSettings.fertilizingInterval || finalReminderOptions.fertilizing.interval
+        },
+        planting.calendarId,
+        phase.name,
+        reminderOptions.selectedMedium
+      );
+    }
+    // --- END NEW ---
 
+    // --- OLD (remove after migration):
+    // Add watering reminders only if enabled
+    // if (finalReminderOptions.watering?.enabled) {
+    //   await createWateringEvents(tx.store, plantData, phase, plantingId, completionDate, finalReminderOptions.watering.interval, planting.calendarId, phase.name, reminderOptions.selectedMedium);
+    // }
     // Add fertilizing reminders only if enabled
-    if (finalReminderOptions.fertilizing?.enabled) {
-      await createFertilizingEvents(tx.store, plantData, phase, plantingId, finalReminderOptions.fertilizing, planting.calendarId, phase.name, reminderOptions.selectedMedium);
-    }
+    // if (finalReminderOptions.fertilizing?.enabled) {
+    //   await createFertilizingEvents(tx.store, plantData, phase, plantingId, finalReminderOptions.fertilizing, planting.calendarId, phase.name, reminderOptions.selectedMedium);
+    // }
   }
   
   await tx.done;
