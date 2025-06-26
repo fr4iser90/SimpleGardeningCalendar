@@ -4,8 +4,9 @@
  */
 
 import { PLANT_CATEGORIES } from './categories.js';
+import { getTranslatedPlantData, getAllTranslatedPlantData } from '../../i18n/index.js';
 
-// Import all plant data statically for synchronous access
+// Import all plant data statically for synchronous access (fallback)
 import {
   cannabis_indica,
   cannabis_sativa,
@@ -94,7 +95,7 @@ export function getPlantRegistry() {
 }
 
 /**
- * Get plant data by plant key
+ * Get plant data by plant key with translation support
  * @param {string} plantKey - The plant identifier (e.g., 'cannabis_indica')
  * @returns {Promise<Object>} Plant data object
  */
@@ -104,7 +105,14 @@ export async function getPlantData(plantKey) {
     return plantCache.get(plantKey);
   }
 
-  // Try to get from registry first (synchronous)
+  // Try to get translated plant data first
+  const translatedData = await getTranslatedPlantData(plantKey);
+  if (translatedData) {
+    plantCache.set(plantKey, translatedData);
+    return translatedData;
+  }
+
+  // Fallback to original data if no translation available
   const registry = getPlantRegistry();
   if (registry.has(plantKey)) {
     const plantData = registry.get(plantKey);
@@ -134,11 +142,26 @@ export async function getPlantData(plantKey) {
 }
 
 /**
- * Get all plants in a category
+ * Get all plants in a category with translation support
  * @param {string} category - Plant category
  * @returns {Promise<Object>} All plants in category
  */
 export async function getPlantsByCategory(category) {
+  // Try to get translated plants first
+  const allTranslatedPlants = await getAllTranslatedPlantData();
+  const translatedPlantsInCategory = {};
+
+  for (const [plantKey, plantData] of allTranslatedPlants) {
+    if (plantData.category === `category.${category}`) {
+      translatedPlantsInCategory[plantKey] = plantData;
+    }
+  }
+
+  if (Object.keys(translatedPlantsInCategory).length > 0) {
+    return translatedPlantsInCategory;
+  }
+
+  // Fallback to original data
   if (!PLANT_REGISTRY[category]) {
     throw new Error(`Category not found: ${category}`);
   }
@@ -148,11 +171,17 @@ export async function getPlantsByCategory(category) {
 }
 
 /**
- * Get all available plant keys
+ * Get all available plant keys with translation support
  * @returns {Promise<string[]>} Array of all plant keys
  */
 export async function getAllPlantKeys() {
-  // Get from registry first (faster)
+  // Try to get from translated plants first
+  const allTranslatedPlants = await getAllTranslatedPlantData();
+  if (allTranslatedPlants.size > 0) {
+    return Array.from(allTranslatedPlants.keys());
+  }
+
+  // Fallback to original registry
   const registry = getPlantRegistry();
   if (registry.size > 0) {
     return Array.from(registry.keys());
@@ -197,7 +226,7 @@ async function findPlantCategory(plantKey) {
 }
 
 /**
- * Search plants by name or category
+ * Search plants by name or category with translation support
  * @param {string} query - Search query
  * @returns {Promise<Object[]>} Array of matching plants
  */
@@ -205,47 +234,33 @@ export async function searchPlants(query) {
   const results = [];
   const searchTerm = query.toLowerCase();
 
-  // Search in registry first (faster)
-  const registry = getPlantRegistry();
-  for (const [plantKey, plantData] of registry.entries()) {
-    if (
-      plantData &&
-      (plantData.name?.toLowerCase().includes(searchTerm) ||
-        plantData.category?.toLowerCase().includes(searchTerm) ||
-        plantKey.toLowerCase().includes(searchTerm))
-    ) {
+  // Search in translated plants first
+  const allTranslatedPlants = await getAllTranslatedPlantData();
+  for (const [plantKey, plantData] of allTranslatedPlants) {
+    if (plantData.name.toLowerCase().includes(searchTerm) ||
+        plantKey.toLowerCase().includes(searchTerm) ||
+        plantData.category.toLowerCase().includes(searchTerm)) {
       results.push({
         key: plantKey,
-        ...plantData,
+        ...plantData
       });
     }
   }
 
-  // If registry search found results, return them
   if (results.length > 0) {
     return results;
   }
 
-  // Fallback to dynamic loading
-  for (const category of Object.keys(PLANT_REGISTRY)) {
-    try {
-      const categoryModule = await PLANT_REGISTRY[category]();
-      const plants = categoryModule.default || categoryModule;
-
-      for (const [plantKey, plantData] of Object.entries(plants)) {
-        if (
-          plantData.name?.toLowerCase().includes(searchTerm) ||
-          plantData.category?.toLowerCase().includes(searchTerm) ||
-          plantKey.toLowerCase().includes(searchTerm)
-        ) {
-          results.push({
-            key: plantKey,
-            ...plantData,
-          });
-        }
-      }
-    } catch (error) {
-      console.warn(`Failed to search category ${category}:`, error);
+  // Fallback to original data
+  const registry = getPlantRegistry();
+  for (const [plantKey, plantData] of registry) {
+    if (plantData.name.toLowerCase().includes(searchTerm) ||
+        plantKey.toLowerCase().includes(searchTerm) ||
+        plantData.category.toLowerCase().includes(searchTerm)) {
+      results.push({
+        key: plantKey,
+        ...plantData
+      });
     }
   }
 
@@ -253,10 +268,11 @@ export async function searchPlants(query) {
 }
 
 /**
- * Clear plant cache (useful for testing)
+ * Clear plant cache (useful when language changes)
  */
 export function clearPlantCache() {
   plantCache.clear();
+  plantRegistryMap = null;
 }
 
 // Export categories for convenience

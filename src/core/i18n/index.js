@@ -30,6 +30,9 @@ const TRANSLATIONS = {
 // Current language state
 let currentLanguage = 'en'; // Default to English
 
+// Plant translation cache
+const plantTranslationCache = new Map();
+
 // Initialize i18n system
 export function initI18n() {
   // Try to detect language from browser
@@ -66,6 +69,9 @@ export function setLanguage(lang) {
   currentLanguage = lang;
   localStorage.setItem('garden-calendar-language', lang);
   
+  // Clear plant translation cache when language changes
+  plantTranslationCache.clear();
+  
   // Trigger UI update event
   document.dispatchEvent(new CustomEvent('languageChanged', { detail: { language: lang } }));
   
@@ -94,6 +100,164 @@ export function getAvailableLanguages() {
     name,
     isActive: code === currentLanguage
   }));
+}
+
+// Deep merge utility for merging original and translated plant data
+function deepMerge(original, translation) {
+  if (!translation) return original;
+  if (typeof original !== 'object' || typeof translation !== 'object' || original === null || translation === null) {
+    return translation ?? original;
+  }
+  const result = Array.isArray(original) ? [...original] : { ...original };
+  for (const key in translation) {
+    if (
+      translation[key] &&
+      typeof translation[key] === 'object' &&
+      !Array.isArray(translation[key]) &&
+      original[key]
+    ) {
+      result[key] = deepMerge(original[key], translation[key]);
+    } else {
+      result[key] = translation[key];
+    }
+  }
+  return result;
+}
+
+/**
+ * Load translated plant data for the current language
+ * @param {string} plantKey - Plant identifier (e.g., 'tomatoes', 'cannabis_indica')
+ * @returns {Promise<Object|null>} Translated plant data or null if not found
+ */
+export async function getTranslatedPlantData(plantKey) {
+  // Check cache first
+  const cacheKey = `${currentLanguage}:${plantKey}`;
+  if (plantTranslationCache.has(cacheKey)) {
+    return plantTranslationCache.get(cacheKey);
+  }
+
+  // Always get original data for merging
+  const { getPlantRegistry } = await import('../db/plants/index.js');
+  const originalData = getPlantRegistry().get(plantKey);
+  if (!originalData) {
+    console.warn(`Original plant data not found for: ${plantKey}`);
+    return null;
+  }
+
+  try {
+    // Try to load from translation files based on current language
+    const plantCategory = await getPlantCategory(plantKey);
+    if (!plantCategory) {
+      console.warn(`Plant category not found for: ${plantKey}`);
+      plantTranslationCache.set(cacheKey, originalData);
+      return originalData;
+    }
+    // Import the translated plant data
+    const translationModule = await import(`./translations/${currentLanguage}/plants/${plantCategory}/${plantKey}.js`);
+    const translatedData = translationModule.default;
+    if (!translatedData) {
+      plantTranslationCache.set(cacheKey, originalData);
+      return originalData;
+    }
+    // Merge translation into original
+    const merged = deepMerge(originalData, translatedData);
+    plantTranslationCache.set(cacheKey, merged);
+    return merged;
+  } catch (error) {
+    console.warn(`Failed to load translated plant data for ${plantKey} in ${currentLanguage}:`, error);
+    plantTranslationCache.set(cacheKey, originalData);
+    return originalData;
+  }
+}
+
+/**
+ * Get plant category based on plant key
+ * @param {string} plantKey - Plant identifier
+ * @returns {Promise<string|null>} Category name or null
+ */
+async function getPlantCategory(plantKey) {
+  // Define plant categories mapping
+  const plantCategories = {
+    // Cannabis plants
+    'cannabis_indica': 'herbs',
+    'cannabis_sativa': 'herbs',
+    'cannabis_autoflower': 'herbs',
+    'basil': 'herbs',
+    
+    // Vegetables
+    'tomatoes': 'vegetables',
+    'potatoes': 'vegetables',
+    'carrots': 'vegetables',
+    'lettuce': 'vegetables',
+    'peppers': 'vegetables',
+    'spinach': 'vegetables',
+    'kale': 'vegetables',
+    'cucumber': 'vegetables',
+    
+    // Fruits
+    'strawberries': 'fruits',
+    'blueberries': 'fruits',
+    'raspberries': 'fruits',
+    
+    // Fruit Trees
+    'apple': 'fruit-trees',
+    'cherry': 'fruit-trees',
+    
+    // Flowers
+    'lavender': 'flowers',
+    'roses': 'flowers',
+    'sunflowers': 'flowers',
+  };
+
+  return plantCategories[plantKey] || null;
+}
+
+/**
+ * Get all translated plant data for current language
+ * @returns {Promise<Map>} Map of plant key to translated data
+ */
+export async function getAllTranslatedPlantData() {
+  const plantKeys = [
+    // Cannabis plants
+    'cannabis_indica', 'cannabis_sativa', 'cannabis_autoflower', 'basil',
+    // Vegetables
+    'tomatoes', 'potatoes', 'carrots', 'lettuce', 'peppers', 'spinach', 'kale', 'cucumber',
+    // Fruits
+    'strawberries', 'blueberries', 'raspberries',
+    // Fruit Trees
+    'apple', 'cherry',
+    // Flowers
+    'lavender', 'roses', 'sunflowers'
+  ];
+  const { getPlantRegistry } = await import('../db/plants/index.js');
+  const registry = getPlantRegistry();
+  const translatedPlants = new Map();
+  for (const plantKey of plantKeys) {
+    const originalData = registry.get(plantKey);
+    if (!originalData) continue;
+    const cacheKey = `${currentLanguage}:${plantKey}`;
+    if (plantTranslationCache.has(cacheKey)) {
+      translatedPlants.set(plantKey, plantTranslationCache.get(cacheKey));
+      continue;
+    }
+    try {
+      const plantCategory = await getPlantCategory(plantKey);
+      if (!plantCategory) {
+        translatedPlants.set(plantKey, originalData);
+        plantTranslationCache.set(cacheKey, originalData);
+        continue;
+      }
+      const translationModule = await import(`./translations/${currentLanguage}/plants/${plantCategory}/${plantKey}.js`);
+      const translatedData = translationModule.default;
+      const merged = translatedData ? deepMerge(originalData, translatedData) : originalData;
+      translatedPlants.set(plantKey, merged);
+      plantTranslationCache.set(cacheKey, merged);
+    } catch (error) {
+      translatedPlants.set(plantKey, originalData);
+      plantTranslationCache.set(cacheKey, originalData);
+    }
+  }
+  return translatedPlants;
 }
 
 // Initialize on module load

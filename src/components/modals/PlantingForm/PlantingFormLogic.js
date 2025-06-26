@@ -12,6 +12,7 @@ import {
   isAutoflower, 
   getDefaultEnvironment 
 } from './PlantingFormUtils.js';
+import { getAllTranslatedPlantData } from '../../../core/i18n/index.js';
 
 /**
  * PlantingFormLogic - Contains all business logic for the planting form
@@ -38,10 +39,23 @@ export function createCategoryOptions() {
   }).join('');
 }
 
-export function createPlantOptions(environment = getDefaultEnvironment()) {
+export async function createPlantOptions(environment = getDefaultEnvironment()) {
   const envKey = getEnvironmentKey(environment);
-  const registry = getPlantRegistry();
-  const plants = Array.from(registry.entries());
+  
+  // Try to get translated plant data first
+  let plantData = new Map();
+  try {
+    plantData = await getAllTranslatedPlantData();
+    if (plantData.size === 0) {
+      // Fallback to original registry if no translations available
+      plantData = getPlantRegistry();
+    }
+  } catch (error) {
+    console.warn('Failed to load translated plant data, using original registry:', error);
+    plantData = getPlantRegistry();
+  }
+  
+  const plants = Array.from(plantData.entries());
   return plants
     .filter(([key, plant]) => plant.environments && plant.environments[envKey])
     .map(([key, plant]) => {
@@ -61,12 +75,25 @@ export function updateEnvironmentFields(environment) {
   }
 }
 
-export function updatePlantOptions(category, environment = getDefaultEnvironment()) {
+export async function updatePlantOptions(category, environment = getDefaultEnvironment()) {
   const plantTypeSelect = document.getElementById('plantTypeSelect');
   if (!plantTypeSelect) return;
   const envKey = getEnvironmentKey(environment);
-  const registry = getPlantRegistry();
-  const plants = Array.from(registry.entries());
+  
+  // Try to get translated plant data first
+  let plantData = new Map();
+  try {
+    plantData = await getAllTranslatedPlantData();
+    if (plantData.size === 0) {
+      // Fallback to original registry if no translations available
+      plantData = getPlantRegistry();
+    }
+  } catch (error) {
+    console.warn('Failed to load translated plant data, using original registry:', error);
+    plantData = getPlantRegistry();
+  }
+  
+  const plants = Array.from(plantData.entries());
   plantTypeSelect.innerHTML = `<option value="">${t('modal.plant_type.select')}</option>`;
   const filteredPlants = plants.filter(([key, plant]) => {
     const categoryMatch = !category || plant.category === category;
@@ -228,14 +255,28 @@ export function updatePhaseInputs() {
   updatePhaseCareInputs();
 }
 
-export function updateCustomNamePlaceholder() {
+export async function updateCustomNamePlaceholder() {
   const plantTypeSelect = document.getElementById('plantTypeSelect');
   const customNameField = document.getElementById('customNameField');
   
   if (!plantTypeSelect?.value || !customNameField) return;
   
-  const registry = getPlantRegistry();
-  const plantData = registry.get(plantTypeSelect.value);
+  // Try to get translated plant data first
+  let plantData = null;
+  try {
+    const allTranslatedPlants = await getAllTranslatedPlantData();
+    plantData = allTranslatedPlants.get(plantTypeSelect.value);
+    if (!plantData) {
+      // Fallback to original registry if no translation available
+      const registry = getPlantRegistry();
+      plantData = registry.get(plantTypeSelect.value);
+    }
+  } catch (error) {
+    console.warn('Failed to load translated plant data, using original registry:', error);
+    const registry = getPlantRegistry();
+    plantData = registry.get(plantTypeSelect.value);
+  }
+  
   if (plantData) {
     customNameField.placeholder = `e.g., "My ${plantData.name}"`;
   } else {
@@ -416,4 +457,136 @@ export function getCustomPhaseDurations(formData) {
   }
   
   return customPhaseDurations;
+}
+
+export async function createPlantTypeOptions() {
+  // Try to get translated plant data first
+  let plantData = new Map();
+  try {
+    plantData = await getAllTranslatedPlantData();
+    if (plantData.size === 0) {
+      // Fallback to original registry if no translations available
+      plantData = getPlantRegistry();
+    }
+  } catch (error) {
+    console.warn('Failed to load translated plant data, using original registry:', error);
+    plantData = getPlantRegistry();
+  }
+  
+  const options = [];
+  
+  // Group plants by category
+  const categories = {};
+  
+  for (const [plantKey, plantData] of plantData) {
+    const category = plantData.category;
+    if (!categories[category]) {
+      categories[category] = [];
+    }
+    categories[category].push({ key: plantKey, data: plantData });
+  }
+  
+  // Create option groups
+  for (const [category, plants] of Object.entries(categories)) {
+    const categoryName = t(category);
+    options.push(`<optgroup label="${categoryName}">`);
+    
+    for (const plant of plants) {
+      const plantName = plant.data.name;
+      options.push(`<option value="${plant.key}">${plantName}</option>`);
+    }
+    
+    options.push('</optgroup>');
+  }
+  
+  return options.join('');
+}
+
+export async function handlePlantTypeChange(plantType) {
+  if (!plantType) return { phases: [], tips: '' };
+  
+  try {
+    // Get plant data for the default environment
+    const defaultEnv = getDefaultEnvironment(plantType);
+    const envData = await getPlantDataForEnvironment(plantType, defaultEnv);
+    
+    if (!envData) {
+      return { phases: [], tips: '' };
+    }
+    
+    // Get phases
+    const phases = Object.entries(envData.envData.phases || {}).map(([key, phase]) => ({
+      key,
+      name: phase.name,
+      description: phase.description,
+      care: phase.care,
+      emoji: getPhaseEmoji(key)
+    }));
+    
+    // Get planting tips
+    const tips = await getPlantingTips(plantType, defaultEnv);
+    
+    return { phases, tips };
+    
+  } catch (error) {
+    console.error('Error loading plant data:', error);
+    return { phases: [], tips: '' };
+  }
+}
+
+export async function handleEnvironmentChange(plantType, environment) {
+  if (!plantType || !environment) return { phases: [], tips: '' };
+  
+  try {
+    const envData = await getPlantDataForEnvironment(plantType, environment);
+    
+    if (!envData) {
+      return { phases: [], tips: '' };
+    }
+    
+    // Get phases for the new environment
+    const phases = Object.entries(envData.envData.phases || {}).map(([key, phase]) => ({
+      key,
+      name: phase.name,
+      description: phase.description,
+      care: phase.care,
+      emoji: getPhaseEmoji(key)
+    }));
+    
+    // Get planting tips for the new environment
+    const tips = await getPlantingTips(plantType, environment);
+    
+    return { phases, tips };
+    
+  } catch (error) {
+    console.error('Error loading environment data:', error);
+    return { phases: [], tips: '' };
+  }
+}
+
+export function validateForm(formData) {
+  const errors = [];
+  
+  if (!formData.plantType) {
+    errors.push(t('modal.planting.errors.plant_type_required'));
+  }
+  
+  if (!formData.environment) {
+    errors.push(t('modal.planting.errors.environment_required'));
+  }
+  
+  if (!formData.plantingDate) {
+    errors.push(t('modal.planting.errors.date_required'));
+  }
+  
+  if (!formData.region) {
+    errors.push(t('modal.planting.errors.region_required'));
+  }
+  
+  return errors;
+}
+
+export function getDefaultPlantingDate() {
+  const today = new Date();
+  return today.toISOString().split('T')[0];
 }

@@ -1,13 +1,25 @@
 // PlantLibrary.js
 // Plant library and plant details component
 
-import { t } from '../../core/i18n/index.js';
+import { t, getAllTranslatedPlantData } from '../../core/i18n/index.js';
 import { shouldShowCannabis, getCurrentCountry } from '../../core/i18n/index.js';
 import { PLANT_TAGS } from '../../core/db/plants/categories.js';
 
 export async function showPlantLibraryModal() {
   const { getPlantRegistry, PLANT_CATEGORIES } = await import('../../core/db/plants/index.js');
-  const plantRegistry = getPlantRegistry();
+  
+  // Get translated plant data first, fallback to original registry
+  let plantData = new Map();
+  try {
+    plantData = await getAllTranslatedPlantData();
+    if (plantData.size === 0) {
+      // Fallback to original registry if no translations available
+      plantData = getPlantRegistry();
+    }
+  } catch (error) {
+    console.warn('Failed to load translated plant data, using original registry:', error);
+    plantData = getPlantRegistry();
+  }
   
   const modal = document.createElement('div');
   modal.className = 'fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center p-4 z-50';
@@ -23,7 +35,7 @@ export async function showPlantLibraryModal() {
   const startGrowingText = t('plant_library.start_growing');
   
   // Filter plants based on country settings
-  const filteredPlants = Array.from(plantRegistry.entries()).filter(([key, plant]) => {
+  const filteredPlants = Array.from(plantData.entries()).filter(([key, plant]) => {
     // Hide cannabis if not allowed in current country
     if (plant.tags && plant.tags.includes(PLANT_TAGS.CANNABIS) && !shouldShowCannabis()) {
       return false;
@@ -129,7 +141,7 @@ export async function showPlantLibraryModal() {
   
   // Make showPlantDetails available globally
   window.showPlantDetails = function(plantKey) {
-    const plant = plantRegistry.get(plantKey);
+    const plant = plantData.get(plantKey);
     showPlantDetailsModal(plant, plantKey);
   };
 }

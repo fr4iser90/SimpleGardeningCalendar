@@ -66,17 +66,17 @@ export async function showAddEventModal(date, preselectedType = null) {
   document.body.appendChild(modal);
 
   // Initialize event listeners and form handling
-  initializeAddEventModalHandlers(modal);
+  await initializeAddEventModalHandlers(modal);
 }
 
-function initializeAddEventModalHandlers(modal) {
+async function initializeAddEventModalHandlers(modal) {
   const form = document.getElementById('eventForm');
   const eventTypeSelect = document.getElementById('eventTypeSelect');
   const cancelBtn = document.getElementById('cancelBtn');
   const saveBtn = document.getElementById('saveBtn');
 
-  eventTypeSelect.addEventListener('change', function() {
-    togglePlantingFields(this.value);
+  eventTypeSelect.addEventListener('change', async function() {
+    await togglePlantingFields(this.value);
   });
 
   cancelBtn.addEventListener('click', function() {
@@ -105,10 +105,10 @@ function initializeAddEventModalHandlers(modal) {
   });
 
   // Initial state
-  togglePlantingFields(eventTypeSelect.value);
+  await togglePlantingFields(eventTypeSelect.value);
 }
 
-function togglePlantingFields(value) {
+async function togglePlantingFields(value) {
   const customFields = document.getElementById('customFields');
   const plantingFields = document.getElementById('plantingFields');
   const titleField = document.getElementById('titleField');
@@ -120,7 +120,7 @@ function togglePlantingFields(value) {
     plantingFields.style.display = 'block';
     titleField.removeAttribute('required');
     if (!plantingFields.querySelector('#plantingForm')) {
-      const plantingForm = createPlantingForm(selectedDate);
+      const plantingForm = await createPlantingForm(selectedDate);
       plantingFields.appendChild(plantingForm);
     }
   } else {

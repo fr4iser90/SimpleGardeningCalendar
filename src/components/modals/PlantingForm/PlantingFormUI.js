@@ -15,7 +15,7 @@ import { getDefaultEnvironment } from './PlantingFormUtils.js';
  * PlantingFormUI - Contains UI creation and data extraction functions
  */
 
-export function createPlantingForm(date, preselectedPlant = null) {
+export async function createPlantingForm(date, preselectedPlant = null) {
   const formContainer = document.createElement('form');
   formContainer.id = 'plantingForm';
   formContainer.className = 'space-y-4';
@@ -24,7 +24,7 @@ export function createPlantingForm(date, preselectedPlant = null) {
   const environmentOptions = createEnvironmentOptions();
   const regionOptions = createRegionOptions();
   const categoryOptions = createCategoryOptions();
-  const plantOptions = createPlantOptions(getDefaultEnvironment()); // Use utility function
+  const plantOptions = await createPlantOptions(getDefaultEnvironment()); // Await the async function
   
   const formattedDate = formatDate(date);
   

@@ -4,6 +4,7 @@
  */
 
 import { getPlantRegistry } from './plants/index.js';
+import { getTranslatedPlantData } from '../i18n/index.js';
 import { SEASONAL_WINDOWS } from './connection.js';
 import { t } from '../i18n/index.js';
 
@@ -13,7 +14,24 @@ import { t } from '../i18n/index.js';
  * @param {string} environment - Growing environment (indoor/outdoor)
  * @returns {Object|null} Plant data for the specified environment
  */
-export function getPlantDataForEnvironment(plantKey, environment = 'indoor') {
+export async function getPlantDataForEnvironment(plantKey, environment = 'indoor') {
+  // Try to get translated plant data first
+  const translatedData = await getTranslatedPlantData(plantKey);
+  if (translatedData) {
+    // If plant has environment-specific data, return that
+    if (translatedData.environments && translatedData.environments[environment]) {
+      return {
+        ...translatedData,
+        phases: translatedData.environments[environment].phases,
+        seasonalTiming: translatedData.environments[environment].seasonalTiming
+      };
+    }
+    
+    // Otherwise return the base plant data
+    return translatedData;
+  }
+
+  // Fallback to original data
   const plantData = getPlantRegistry().get(plantKey);
   
   if (!plantData) {
@@ -138,11 +156,18 @@ export function getPlantsByCategory(category) {
 }
 
 /**
- * Get plant data by key
+ * Get plant data by key with translation support
  * @param {string} plantKey - Plant key identifier
  * @returns {Object|null} Plant data or null if not found
  */
-export function getPlantData(plantKey) {
+export async function getPlantData(plantKey) {
+  // Try to get translated plant data first
+  const translatedData = await getTranslatedPlantData(plantKey);
+  if (translatedData) {
+    return translatedData;
+  }
+
+  // Fallback to original data
   return getPlantRegistry().get(plantKey) || null;
 }
 
