@@ -1,0 +1,109 @@
+export default {
+  name: "Erdbeeren",
+  category: "category.fruits",
+  tags: ["tag.perennial"],
+  legalNote: "",
+  environments: {
+    indoor: {
+      phases: {
+        establishment: {
+          name: "Etablierung",
+          description: "Wurzelbildung (erste 30 Tage)",
+          care: "Erde feucht halten, Blüten im ersten Jahr entfernen",
+        },
+        vegetative: {
+          name: "Vegetative Phase",
+          description: "Ausbildung von Ausläufern und Blättern",
+          care: "Ausläufer zur Vermehrung nutzen",
+        },
+        flowering: {
+          name: "Blüte",
+          description: "Blütenbildung",
+          care: "Blüten vor Spätfrost schützen",
+        },
+        fruiting: {
+          name: "Fruchtbildung",
+          description: "Beerenproduktion",
+          care: "Regelmäßig gießen und düngen, Beeren trocken halten",
+        },
+        dormancy: {
+          name: "Ruhephase",
+          description: "Winterruhe",
+          care: "Mit Mulch abdecken zum Winterschutz",
+        },
+      },
+    },
+    outdoor: {
+      phases: {
+        establishment: {
+          name: "Etablierung",
+          description: "Wurzelbildung (erste 30 Tage)",
+          care: "Erde feucht halten, Blüten im ersten Jahr entfernen",
+        },
+        vegetative: {
+          name: "Vegetative Phase",
+          description: "Ausbildung von Ausläufern und Blättern",
+          care: "Ausläufer zur Vermehrung nutzen",
+        },
+        flowering: {
+          name: "Blüte",
+          description: "Blütenbildung",
+          care: "Blüten vor Spätfrost schützen",
+        },
+        fruiting: {
+          name: "Fruchtbildung",
+          description: "Beerenproduktion",
+          care: "Regelmäßig gießen und düngen, Beeren trocken halten",
+        },
+        dormancy: {
+          name: "Ruhephase",
+          description: "Winterruhe",
+          care: "Mit Mulch abdecken zum Winterschutz",
+        },
+      },
+    },
+    greenhouse: {
+      phases: {
+        establishment: {
+          name: "Etablierung",
+          description: "Wurzelbildung (erste 30 Tage)",
+          care: "Erde feucht halten, Blüten im ersten Jahr entfernen",
+        },
+        vegetative: {
+          name: "Vegetative Phase",
+          description: "Ausbildung von Ausläufern und Blättern",
+          care: "Ausläufer zur Vermehrung nutzen",
+        },
+        flowering: {
+          name: "Blüte",
+          description: "Blütenbildung",
+          care: "Blüten vor Spätfrost schützen",
+        },
+        fruiting: {
+          name: "Fruchtbildung",
+          description: "Beerenproduktion",
+          care: "Regelmäßig gießen und düngen, Beeren trocken halten",
+        },
+        dormancy: {
+          name: "Ruhephase",
+          description: "Winterruhe",
+          care: "Mit Mulch abdecken zum Winterschutz",
+        },
+      },
+    },
+  },
+  careTips: {
+    watering: "Erde stets feucht halten, aber keine Staunässe",
+    fertilizing: "Im Frühjahr ausgewogen düngen, wenig Stickstoff",
+    sunlight: "Vollsonne (mind. 6 Stunden)",
+    spacing: "30-45 cm Abstand",
+    temperature: "Kühle Kultur, vor Hitze schützen",
+    soilPH: "5,5-6,5",
+    mulching: "Stroh als Mulch hält Beeren sauber und feucht",
+  },
+  commonProblems: {
+    "Grauschimmel": "Pilz an Früchten - Luftzirkulation verbessern",
+    "Schnecken": "Fressen Löcher in Beeren - Schneckenkorn oder Bierfallen",
+    "Vögel": "Fressen reife Beeren - Netze verwenden",
+  },
+};
