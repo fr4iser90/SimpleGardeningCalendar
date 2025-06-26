@@ -19,7 +19,7 @@ export async function showEventDetails(event) {
         <h3 class="font-semibold mb-2 dark:text-white">${t('plants_list.notes')}</h3>
         <div class="space-y-2 max-h-32 overflow-y-auto">
           ${notes.map(note => `
-            <div class="text-sm bg-gray-50 dark:bg-gray-700 p-2 rounded">
+            <div class="text-sm bg-blue-50 dark:bg-blue-900 border border-blue-200 dark:border-blue-700 p-2 rounded">
               <div class="text-xs text-gray-500 dark:text-gray-400">${format(new Date(note.date), 'MMM d, yyyy h:mm a')}</div>
               <div class="mt-1">${note.note}</div>
             </div>
@@ -47,7 +47,7 @@ export async function showEventDetails(event) {
       }
       
       plantingInfo = `
-        <div class="mt-2 text-sm">
+        <div class="p-3 bg-blue-50 dark:bg-blue-900 border border-blue-200 dark:border-blue-700 rounded mt-2 text-sm">
           <strong>Plant:</strong> ${displayName}${planting.customName ? ` (${planting.plantName})` : ''}<br>
           <strong>Category:</strong> ${planting.category}<br>
           <strong>Location:</strong> ${planting.location}<br>
@@ -61,11 +61,13 @@ export async function showEventDetails(event) {
       plantingStatus = `
         <div class="mt-4">
           <h3 class="font-semibold mb-2 dark:text-white">Status</h3>
-          <select id="plantingStatus" class="w-full p-2 border rounded dark:bg-gray-700 dark:border-gray-600 dark:text-white" onchange="updateStatus(${event.extendedProps.plantingId}, this.value)">
-            <option value="active" ${planting.status === 'active' ? 'selected' : ''}>Active</option>
-            <option value="completed" ${planting.status === 'completed' ? 'selected' : ''}>Completed</option>
-            <option value="failed" ${planting.status === 'failed' ? 'selected' : ''}>Failed</option>
-          </select>
+          <div class="p-3 bg-yellow-50 dark:bg-yellow-900 border border-yellow-200 dark:border-yellow-700 rounded">
+            <select id="plantingStatus" class="w-full p-2 border rounded dark:bg-gray-700 dark:border-gray-600 dark:text-white" onchange="updateStatus(${event.extendedProps.plantingId}, this.value)">
+              <option value="active" ${planting.status === 'active' ? 'selected' : ''}>Active</option>
+              <option value="completed" ${planting.status === 'completed' ? 'selected' : ''}>Completed</option>
+              <option value="failed" ${planting.status === 'failed' ? 'selected' : ''}>Failed</option>
+            </select>
+          </div>
         </div>
       `;
     }
@@ -80,11 +82,13 @@ export async function showEventDetails(event) {
         </span>
       </div>
       <div class="space-y-3 dark:text-gray-200">
-        <p class="text-sm">
-          <strong>Date:</strong> ${format(new Date(event.start), 'MMMM d, yyyy')}
-        </p>
+        <div class="p-3 bg-gray-50 dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded">
+          <p class="text-sm">
+            <strong>Date:</strong> ${format(new Date(event.start), 'MMMM d, yyyy')}
+          </p>
+        </div>
         ${plantingInfo}
-        <div class="text-sm">
+        <div class="p-3 bg-green-50 dark:bg-green-900 border border-green-200 dark:border-green-700 rounded text-sm">
           <strong>Description:</strong><br>
           <div class="mt-1 whitespace-pre-wrap">${event.extendedProps.description || 'No description provided'}</div>
         </div>
