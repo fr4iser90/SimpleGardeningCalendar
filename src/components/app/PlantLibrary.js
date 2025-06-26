@@ -33,6 +33,10 @@ export async function showPlantLibraryModal() {
   const noCareTipsText = t('plant_library.no_care_tips');
   const commonProblemsText = t('plant_library.common_problems');
   const startGrowingText = t('plant_library.start_growing');
+  const lightLabel = t('plant_library.light');
+  const temperatureLabel = t('plant_library.temperature');
+  const growingCycleLabel = t('plant_library.growing_cycle');
+  const noGrowingCycleLabel = t('plant_library.no_growing_cycle');
   
   // Filter plants based on country settings
   const filteredPlants = Array.from(plantData.entries()).filter(([key, plant]) => {
@@ -76,7 +80,10 @@ export async function showPlantLibraryModal() {
         ${filteredPlants.map(([key, plant]) => {
           // Handle both old and new phase structures
           const plantPhases = plant.phases || plant.environments?.indoor?.phases || {};
-          const totalDays = Object.values(plantPhases).reduce((sum, phase) => sum + phase.days, 0);
+          const totalDays = Object.values(plantPhases).reduce((sum, phase) => sum + (phase.days || 0), 0);
+          const growingCycleText = totalDays > 0
+            ? `${totalDays} days (${Math.round(totalDays/7)} weeks)`
+            : noGrowingCycleLabel;
           
           return `
             <div class="plant-card border dark:border-gray-600 rounded-lg p-4" 
@@ -99,9 +106,9 @@ export async function showPlantLibraryModal() {
                 </div>
               ` : ''}
               <div class="text-sm text-gray-600 dark:text-gray-400 space-y-1">
-                <div><strong>Growing cycle:</strong> ${totalDays} days (${Math.round(totalDays/7)} weeks)</div>
-                ${plant.careTips && plant.careTips.sunlight ? `<div><strong>Light:</strong> ${plant.careTips.sunlight}</div>` : ''}
-                ${plant.careTips && plant.careTips.temperature ? `<div><strong>Temperature:</strong> ${plant.careTips.temperature}</div>` : ''}
+                <div><strong>${growingCycleLabel}:</strong> ${growingCycleText}</div>
+                ${plant.careTips && plant.careTips.sunlight ? `<div><strong>${lightLabel}:</strong> ${plant.careTips.sunlight}</div>` : ''}
+                ${plant.careTips && plant.careTips.temperature ? `<div><strong>${temperatureLabel}:</strong> ${plant.careTips.temperature}</div>` : ''}
               </div>
               <button onclick="showPlantDetails('${key}')" class="mt-3 w-full bg-green-500 text-white p-2 rounded hover:bg-green-600 text-sm">
                 ${viewDetailsText}

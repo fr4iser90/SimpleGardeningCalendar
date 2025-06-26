@@ -498,6 +498,10 @@ export const de = {
     'plant_library.no_care_tips': 'Keine Pflegetipps verfügbar',
     'plant_library.common_problems': 'Häufige Probleme',
     'plant_library.start_growing': 'Diese Pflanze anbauen',
+    'plant_library.light': 'Licht',
+    'plant_library.temperature': 'Temperatur',
+    'plant_library.growing_cycle': 'Wachstumszyklus',
+    'plant_library.no_growing_cycle': 'Kein Wachstumszyklus',
     
     // Local Calendar Wizard
     'local.wizard.title': 'Lokale Kalender-Organisation',

@@ -478,6 +478,10 @@ export const en = {
     'plant_library.no_care_tips': 'No care tips available',
     'plant_library.common_problems': 'Common Problems',
     'plant_library.start_growing': 'Start Growing This Plant',
+    'plant_library.light': 'Light',
+    'plant_library.temperature': 'Temperature',
+    'plant_library.growing_cycle': 'Growing cycle',
+    'plant_library.no_growing_cycle': 'No growing cycle',
   
     // PlantsList.js
     'plants.no_active_yet': 'No active plants yet. Start by adding your first plant!',

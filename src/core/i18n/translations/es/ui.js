@@ -479,6 +479,10 @@ export const es = {
     'plant_library.no_care_tips': 'No hay consejos de cuidado disponibles',
     'plant_library.common_problems': 'Problemas Comunes',
     'plant_library.start_growing': 'Comenzar a cultivar esta planta',
+    'plant_library.light': 'Luz',
+    'plant_library.temperature': 'Temperatura',
+    'plant_library.growing_cycle': 'Ciclo de crecimiento',
+    'plant_library.no_growing_cycle': 'Sin ciclo de crecimiento',
   
     // PlantsList.js
     'plants.no_active_yet': 'Aún no hay plantas activas. ¡Agrega tu primera planta!',

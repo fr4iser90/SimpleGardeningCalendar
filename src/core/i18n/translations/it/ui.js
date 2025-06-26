@@ -417,6 +417,10 @@ export const it = {
     'plant_library.no_care_tips': 'Nessun consiglio di cura disponibile',
     'plant_library.common_problems': 'Problemi Comuni',
     'plant_library.start_growing': 'Inizia a coltivare questa pianta',
+    'plant_library.light': 'Luce',
+    'plant_library.temperature': 'Temperatura',
+    'plant_library.growing_cycle': 'Ciclo di crescita',
+    'plant_library.no_growing_cycle': 'Nessun ciclo di crescita',
   
     // PlantsList.js
     'plants.no_active_yet': 'Nessuna pianta attiva. Aggiungi la tua prima pianta!',
