@@ -289,6 +289,9 @@ export const de = {
     'calendar.fruits': 'Obstgarten',
     'calendar.fruits_description': 'Kalender für Obstbäume und Beeren',
     'calendar.week_check': 'Woche {week} Kontrolle',
+    'calendar.weekly_check_during_phase': 'Wöchentliche Kontrolle während der {phase}-Phase',
+    'calendar.look_for_signs': 'Achte auf:',
+    'calendar.common_issues': 'Häufige Probleme:',
     
     // Common
     'common.loading': 'Lädt...',

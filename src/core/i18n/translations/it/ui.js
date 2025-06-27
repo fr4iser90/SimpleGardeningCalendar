@@ -490,6 +490,9 @@ export const it = {
     'calendar.fruits': 'Frutteto',
     'calendar.fruits_description': 'Calendario per alberi da frutto e bacche',
     'calendar.week_check': 'Controllo settimana {week}',
+    'calendar.weekly_check_during_phase': 'Controllo settimanale durante la fase {phase}',
+    'calendar.look_for_signs': 'Controlla per:',
+    'calendar.common_issues': 'Problemi comuni:',
   
     // Google Calendar Status Bar
     'google.calendar.name': 'Google Calendar',

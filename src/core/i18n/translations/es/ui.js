@@ -315,6 +315,9 @@ export const es = {
     'calendar.fruits': 'Jardín de Frutas',
     'calendar.fruits_description': 'Calendario para árboles frutales y bayas',
     'calendar.week_check': 'Semana {week} control',
+    'calendar.weekly_check_during_phase': 'Control semanal durante la fase de {phase}',
+    'calendar.look_for_signs': 'Presta atención a:',
+    'calendar.common_issues': 'Problemas comunes:',
     
     // Common
     'common.loading': 'Cargando...',

@@ -279,6 +279,9 @@ export const en = {
     'calendar.fruits': 'Fruit Garden',
     'calendar.fruits_description': 'Calendar for fruit trees and berries',
     'calendar.week_check': 'Week {week} check',
+    'calendar.weekly_check_during_phase': 'Weekly check during {phase} phase',
+    'calendar.look_for_signs': 'Look for signs of:',
+    'calendar.common_issues': 'Common issues:',
     
     // Common
     'common.loading': 'Loading...',
