@@ -75,40 +75,7 @@ export function renderLocalCalendarSetupModal() {
             </div>
 
             <!-- Intervalle -->
-            <div class="space-y-3">
-              <h4 class="font-medium dark:text-gray-200">⏱️ ${t('local.setup.default_intervals')}</h4>
-              
-              <div class="space-y-2">
-                <div>
-                  <label class="block text-xs dark:text-gray-300 mb-1">${t('local.setup.watering_interval')}</label>
-                  <select id="defaultWateringInterval" class="text-sm p-1 border rounded dark:bg-gray-700 dark:border-gray-600 dark:text-white w-full">
-                    <option value="daily">${t('modal.interval.daily')}</option>
-                    <option value="every_2_days" selected>${t('modal.interval.every_2_days')}</option>
-                    <option value="every_3_days">${t('modal.interval.every_3_days')}</option>
-                    <option value="weekly">${t('modal.interval.weekly')}</option>
-                  </select>
-                </div>
-                
-                <div>
-                  <label class="block text-xs dark:text-gray-300 mb-1">${t('local.setup.fertilizing_interval')}</label>
-                  <select id="defaultFertilizingInterval" class="text-sm p-1 border rounded dark:bg-gray-700 dark:border-gray-600 dark:text-white w-full">
-                    <option value="weekly" selected>${t('modal.interval.weekly')}</option>
-                    <option value="every_2_weeks">${t('modal.interval.every_2_weeks')}</option>
-                    <option value="every_3_weeks">${t('modal.interval.every_3_weeks')}</option>
-                    <option value="monthly">${t('modal.interval.monthly')}</option>
-                  </select>
-                </div>
-                
-                <div>
-                  <label class="block text-xs dark:text-gray-300 mb-1">${t('local.setup.fertilizing_delay')}</label>
-                  <select id="defaultFertilizingDelay" class="text-sm p-1 border rounded dark:bg-gray-700 dark:border-gray-600 dark:text-white w-full">
-                    <option value="immediately" selected>${t('modal.interval.immediately')}</option>
-                    <option value="1_week">${t('modal.interval.1_week')}</option>
-                    <option value="2_weeks">${t('modal.interval.2_weeks')}</option>
-                  </select>
-                </div>
-              </div>
-            </div>
+            <!-- Removed: Standard-Intervalle UI (watering, fertilizing, fertilizing delay) -->
           </div>
         </div>
 
@@ -291,11 +258,6 @@ function loadSettings() {
   document.getElementById('defaultPhaseReminders').checked = settings.defaultPhaseReminders !== false;
   document.getElementById('defaultWeeklyChecks').checked = settings.defaultWeeklyChecks !== false;
   document.getElementById('defaultHarvestReminders').checked = settings.defaultHarvestReminders !== false;
-  
-  // Set selects
-  document.getElementById('defaultWateringInterval').value = settings.defaultWateringInterval || 'every_2_days';
-  document.getElementById('defaultFertilizingInterval').value = settings.defaultFertilizingInterval || 'weekly';
-  document.getElementById('defaultFertilizingDelay').value = settings.defaultFertilizingDelay || 'immediately';
 }
 
 function saveSettings() {
@@ -304,10 +266,7 @@ function saveSettings() {
     defaultFertilizingReminders: document.getElementById('defaultFertilizingReminders').checked,
     defaultPhaseReminders: document.getElementById('defaultPhaseReminders').checked,
     defaultWeeklyChecks: document.getElementById('defaultWeeklyChecks').checked,
-    defaultHarvestReminders: document.getElementById('defaultHarvestReminders').checked,
-    defaultWateringInterval: document.getElementById('defaultWateringInterval').value,
-    defaultFertilizingInterval: document.getElementById('defaultFertilizingInterval').value,
-    defaultFertilizingDelay: document.getElementById('defaultFertilizingDelay').value
+    defaultHarvestReminders: document.getElementById('defaultHarvestReminders').checked
   };
   
   localStorage.setItem('localCalendarSettings', JSON.stringify(settings));
