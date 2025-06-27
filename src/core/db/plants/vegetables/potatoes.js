@@ -191,6 +191,7 @@ export const potatoes = {
               interval: 0,
               description: 'No fertilizing during maturation',
             },
+
           },
         },
         harvest: {
@@ -637,3 +638,4 @@ export const potatoes = {
 };
 
 export default potatoes;
+

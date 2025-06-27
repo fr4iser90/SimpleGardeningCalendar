@@ -6,11 +6,6 @@ export default {
   environments: {
     indoor: {
       phases: {
-        planting: {
-          name: "Pflanzung",
-          description: "Kartoffeln in Erde setzen",
-          care: "Augen nach oben, 10-15 cm tief, 30 cm Abstand",
-        },
         sprouting: {
           name: "Austrieb",
           description: "Erste Triebe erscheinen",
@@ -21,15 +16,20 @@ export default {
           description: "Starkes Blattwachstum",
           care: "Regelmäßig gießen, düngen, Erde anhäufeln",
         },
-        flowering: {
-          name: "Blüte",
-          description: "Blütenbildung und Knollenentwicklung",
+        tuberization: {
+          name: "Knollenbildung",
+          description: "Kartoffeln beginnen zu wachsen",
           care: "Gleichmäßig feucht halten, Erde anhäufeln",
         },
-        tuber_development: {
-          name: "Knollenentwicklung",
-          description: "Kartoffeln wachsen unter der Erde",
+        bulking: {
+          name: "Knollenwachstum",
+          description: "Kartoffeln werden größer",
           care: "Gleichmäßig feucht halten, Erde anhäufeln",
+        },
+        maturation: {
+          name: "Reifung",
+          description: "Pflanzen sterben ab, Kartoffeln reifen",
+          care: "Weniger gießen, Pflanzen absterben lassen",
         },
         harvest: {
           name: "Ernte",
@@ -40,11 +40,6 @@ export default {
     },
     outdoor: {
       phases: {
-        planting: {
-          name: "Pflanzung",
-          description: "Kartoffeln in Erde setzen",
-          care: "Augen nach oben, 10-15 cm tief, 30 cm Abstand",
-        },
         sprouting: {
           name: "Austrieb",
           description: "Erste Triebe erscheinen",
@@ -55,15 +50,20 @@ export default {
           description: "Starkes Blattwachstum",
           care: "Regelmäßig gießen, düngen, Erde anhäufeln",
         },
-        flowering: {
-          name: "Blüte",
-          description: "Blütenbildung und Knollenentwicklung",
+        tuberization: {
+          name: "Knollenbildung",
+          description: "Kartoffeln beginnen zu wachsen",
           care: "Gleichmäßig feucht halten, Erde anhäufeln",
         },
-        tuber_development: {
-          name: "Knollenentwicklung",
-          description: "Kartoffeln wachsen unter der Erde",
+        bulking: {
+          name: "Knollenwachstum",
+          description: "Kartoffeln werden größer",
           care: "Gleichmäßig feucht halten, Erde anhäufeln",
+        },
+        maturation: {
+          name: "Reifung",
+          description: "Pflanzen sterben ab, Kartoffeln reifen",
+          care: "Weniger gießen, Pflanzen absterben lassen",
         },
         harvest: {
           name: "Ernte",
@@ -74,11 +74,6 @@ export default {
     },
     greenhouse: {
       phases: {
-        planting: {
-          name: "Pflanzung",
-          description: "Kartoffeln in Erde setzen",
-          care: "Augen nach oben, 10-15 cm tief, 30 cm Abstand",
-        },
         sprouting: {
           name: "Austrieb",
           description: "Erste Triebe erscheinen",
@@ -89,15 +84,20 @@ export default {
           description: "Starkes Blattwachstum",
           care: "Regelmäßig gießen, düngen, Erde anhäufeln",
         },
-        flowering: {
-          name: "Blüte",
-          description: "Blütenbildung und Knollenentwicklung",
+        tuberization: {
+          name: "Knollenbildung",
+          description: "Kartoffeln beginnen zu wachsen",
           care: "Gleichmäßig feucht halten, Erde anhäufeln",
         },
-        tuber_development: {
-          name: "Knollenentwicklung",
-          description: "Kartoffeln wachsen unter der Erde",
+        bulking: {
+          name: "Knollenwachstum",
+          description: "Kartoffeln werden größer",
           care: "Gleichmäßig feucht halten, Erde anhäufeln",
+        },
+        maturation: {
+          name: "Reifung",
+          description: "Pflanzen sterben ab, Kartoffeln reifen",
+          care: "Weniger gießen, Pflanzen absterben lassen",
         },
         harvest: {
           name: "Ernte",

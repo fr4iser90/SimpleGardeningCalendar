@@ -393,9 +393,9 @@ export function updatePhaseCareInputs() {
   phaseCareInputs.innerHTML = Object.entries(phases).map(([phase, data]) => {
     const watering = (data[medium]?.watering?.interval ?? data.watering?.interval) || '';
     const fertilizing = (data[medium]?.fertilizing?.interval ?? data.fertilizing?.interval) || '';
-    // Use user default ONLY if true, else always unchecked
-    const wateringChecked = defaultWatering ? 'checked' : '';
-    const fertilizingChecked = defaultFertilizing ? 'checked' : '';
+    // Checkbox nur aktiv, wenn Einstellung true UND Intervall vorhanden
+    const wateringChecked = (defaultWatering && watering) ? 'checked' : '';
+    const fertilizingChecked = (defaultFertilizing && fertilizing) ? 'checked' : '';
     return `
       <div class="flex items-center gap-4 mb-2">
         <span class="w-32">${getPhaseEmoji(phase)} ${t('phase.' + phase)}</span>

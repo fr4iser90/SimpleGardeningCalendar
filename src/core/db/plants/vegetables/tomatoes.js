@@ -92,6 +92,39 @@ export const tomatoes = {
             },
           },
         },
+        vegetative: {
+          days: 28,
+          description: 'Strong leaf and stem growth',
+          care: 'Regular watering, fertilizing, remove suckers',
+          editable: true,
+          soil: {
+            watering: {
+              interval: 2,
+              description: 'Deep watering when top inch of soil feels dry',
+            },
+            fertilizing: {
+              interval: 14,
+              description: 'Balanced fertilizer, avoid high nitrogen',
+            },
+          },
+          hydro: {
+            watering: {
+              interval: 0,
+              description: 'Continuous flow, moderate EC',
+            },
+            fertilizing: {
+              interval: 14,
+              description: 'Balanced nutrients, EC 1.0-1.2',
+            },
+          },
+          coco: {
+            watering: { interval: 1, description: 'Daily watering in coco' },
+            fertilizing: {
+              interval: 14,
+              description: 'Balanced feeding, EC 1.0-1.2',
+            },
+          },
+        },
         transplant: {
           days: 14,
           description: 'Hardening off period',
@@ -258,6 +291,39 @@ export const tomatoes = {
             fertilizing: {
               interval: 7,
               description: 'Light feeding, EC 0.8-1.0',
+            },
+          },
+        },
+        vegetative: {
+          days: 30,
+          description: 'Outdoor vegetative growth',
+          care: 'Regular watering, fertilizing, remove suckers',
+          editable: false,
+          soil: {
+            watering: {
+              interval: 3,
+              description: 'Deep watering 2-3 times per week',
+            },
+            fertilizing: {
+              interval: 14,
+              description: 'Balanced fertilizer, avoid high nitrogen',
+            },
+          },
+          hydro: {
+            watering: {
+              interval: 0,
+              description: 'Continuous flow, moderate EC',
+            },
+            fertilizing: {
+              interval: 14,
+              description: 'Balanced nutrients, EC 1.0-1.2',
+            },
+          },
+          coco: {
+            watering: { interval: 1, description: 'Daily watering in coco' },
+            fertilizing: {
+              interval: 14,
+              description: 'Balanced feeding, EC 1.0-1.2',
             },
           },
         },

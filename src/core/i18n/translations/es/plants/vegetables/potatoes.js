@@ -6,119 +6,119 @@ export default {
   environments: {
     indoor: {
       phases: {
-        planting: {
-          name: "Plantación",
-          description: "Plantar patatas en el suelo",
-          care: "Ojos hacia arriba, 10-15 cm de profundidad, 30 cm de distancia",
-        },
         sprouting: {
           name: "Brotación",
           description: "Aparecen los primeros brotes",
-          care: "Mantener húmedo, aporcar tierra",
+          care: "Mantener suelo húmedo, comenzar a aporcar",
         },
         vegetative: {
           name: "Fase Vegetativa",
           description: "Fuerte crecimiento de hojas",
-          care: "Riego regular, fertilización, aporcar tierra",
+          care: "Riego regular, fertilización, continuar aporcando",
         },
-        flowering: {
-          name: "Floración",
-          description: "Formación de flores y desarrollo de tubérculos",
-          care: "Mantener húmedo, aporcar tierra",
+        tuberization: {
+          name: "Formación de Tubérculos",
+          description: "Las patatas comienzan a crecer",
+          care: "Mantener suelo húmedo, continuar aporcando",
         },
-        tuber_development: {
-          name: "Desarrollo de Tubérculos",
-          description: "Las patatas crecen bajo tierra",
-          care: "Mantener húmedo, aporcar tierra",
+        bulking: {
+          name: "Crecimiento de Tubérculos",
+          description: "Las patatas se hacen más grandes",
+          care: "Mantener suelo húmedo, continuar aporcando",
+        },
+        maturation: {
+          name: "Maduración",
+          description: "Las plantas se secan, las patatas maduran",
+          care: "Reducir riego, dejar que las plantas se sequen",
         },
         harvest: {
           name: "Cosecha",
-          description: "Patatas listas para cosechar",
-          care: "Cavar suavemente, no dañar",
+          description: "Las patatas están listas para cosechar",
+          care: "Cavar con cuidado, evitar daños",
         },
       },
     },
     outdoor: {
       phases: {
-        planting: {
-          name: "Plantación",
-          description: "Plantar patatas en el suelo",
-          care: "Ojos hacia arriba, 10-15 cm de profundidad, 30 cm de distancia",
-        },
         sprouting: {
           name: "Brotación",
           description: "Aparecen los primeros brotes",
-          care: "Mantener húmedo, aporcar tierra",
+          care: "Mantener suelo húmedo, comenzar a aporcar",
         },
         vegetative: {
           name: "Fase Vegetativa",
           description: "Fuerte crecimiento de hojas",
-          care: "Riego regular, fertilización, aporcar tierra",
+          care: "Riego regular, fertilización, continuar aporcando",
         },
-        flowering: {
-          name: "Floración",
-          description: "Formación de flores y desarrollo de tubérculos",
-          care: "Mantener húmedo, aporcar tierra",
+        tuberization: {
+          name: "Formación de Tubérculos",
+          description: "Las patatas comienzan a crecer",
+          care: "Mantener suelo húmedo, continuar aporcando",
         },
-        tuber_development: {
-          name: "Desarrollo de Tubérculos",
-          description: "Las patatas crecen bajo tierra",
-          care: "Mantener húmedo, aporcar tierra",
+        bulking: {
+          name: "Crecimiento de Tubérculos",
+          description: "Las patatas se hacen más grandes",
+          care: "Mantener suelo húmedo, continuar aporcando",
+        },
+        maturation: {
+          name: "Maduración",
+          description: "Las plantas se secan, las patatas maduran",
+          care: "Reducir riego, dejar que las plantas se sequen",
         },
         harvest: {
           name: "Cosecha",
-          description: "Patatas listas para cosechar",
-          care: "Cavar suavemente, no dañar",
+          description: "Las patatas están listas para cosechar",
+          care: "Cavar con cuidado, evitar daños",
         },
       },
     },
     greenhouse: {
       phases: {
-        planting: {
-          name: "Plantación",
-          description: "Plantar patatas en el suelo",
-          care: "Ojos hacia arriba, 10-15 cm de profundidad, 30 cm de distancia",
-        },
         sprouting: {
           name: "Brotación",
           description: "Aparecen los primeros brotes",
-          care: "Mantener húmedo, aporcar tierra",
+          care: "Mantener suelo húmedo, comenzar a aporcar",
         },
         vegetative: {
           name: "Fase Vegetativa",
           description: "Fuerte crecimiento de hojas",
-          care: "Riego regular, fertilización, aporcar tierra",
+          care: "Riego regular, fertilización, continuar aporcando",
         },
-        flowering: {
-          name: "Floración",
-          description: "Formación de flores y desarrollo de tubérculos",
-          care: "Mantener húmedo, aporcar tierra",
+        tuberization: {
+          name: "Formación de Tubérculos",
+          description: "Las patatas comienzan a crecer",
+          care: "Mantener suelo húmedo, continuar aporcando",
         },
-        tuber_development: {
-          name: "Desarrollo de Tubérculos",
-          description: "Las patatas crecen bajo tierra",
-          care: "Mantener húmedo, aporcar tierra",
+        bulking: {
+          name: "Crecimiento de Tubérculos",
+          description: "Las patatas se hacen más grandes",
+          care: "Mantener suelo húmedo, continuar aporcando",
+        },
+        maturation: {
+          name: "Maduración",
+          description: "Las plantas se secan, las patatas maduran",
+          care: "Reducir riego, dejar que las plantas se sequen",
         },
         harvest: {
           name: "Cosecha",
-          description: "Patatas listas para cosechar",
-          care: "Cavar suavemente, no dañar",
+          description: "Las patatas están listas para cosechar",
+          care: "Cavar con cuidado, evitar daños",
         },
       },
     },
   },
   careTips: {
-    watering: "Mantener húmedo, no demasiado mojado",
-    fertilizing: "Fertilización potásica regular",
-    sunlight: "Sol pleno (mín. 8 horas)",
-    spacing: "Espaciado 30-40 cm",
+    watering: "Mantener suelo húmedo, evitar encharcamiento",
+    fertilizing: "Fertilizante de potasio regular",
+    sunlight: "Sol completo (mín. 8 horas)",
+    spacing: "30-40 cm de separación",
     temperature: "Fresco a cálido, 15-25°C óptimo",
     soilPH: "5.5-6.5",
-    hilling: "Aporcar tierra regularmente para más tubérculos",
+    hilling: "Aporcar regularmente para más tubérculos",
   },
   commonProblems: {
     "Tizón Tardío": "Enfermedad fúngica - variedades resistentes, circulación de aire",
-    "Escarabajo de la Patata": "Comen hojas - recoger a mano, insectos benéficos",
-    "Gusanos de Alambre": "Larvas en tubérculos - malla, consociación",
+    "Escarabajo de la Papa": "Comen hojas - recoger a mano, insectos beneficiosos",
+    "Gusanos de Alambre": "Larvas en tubérculos - malla, cultivo asociado",
   },
 };
