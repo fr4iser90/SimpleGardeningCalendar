@@ -371,26 +371,41 @@ export function updatePhaseCareInputs() {
     return;
   }
   
+  // Read user default reminder settings
+  const settingsRaw = localStorage.getItem('localCalendarSettings');
+  let settings = {};
+  try {
+    settings = JSON.parse(settingsRaw || '{}');
+  } catch (e) {
+    console.warn('Could not parse localCalendarSettings:', settingsRaw);
+    settings = {};
+  }
+  console.log('[PlantingForm] Loaded localCalendarSettings:', settings);
+  const defaultWatering = settings.defaultWateringReminders === true;
+  const defaultFertilizing = settings.defaultFertilizingReminders === true;
+
   const { envData } = plantEnvData;
   const phases = envData.phases;
   
   phaseCareSection.style.display = '';
-  const medium = 'soil'; // Default-Medium, kann ggf. dynamisch gemacht werden
+  const medium = 'soil';
   
   phaseCareInputs.innerHTML = Object.entries(phases).map(([phase, data]) => {
-    // Werte aus soil, fallback auf direktes Feld
     const watering = (data[medium]?.watering?.interval ?? data.watering?.interval) || '';
     const fertilizing = (data[medium]?.fertilizing?.interval ?? data.fertilizing?.interval) || '';
+    // Use user default ONLY if true, else always unchecked
+    const wateringChecked = defaultWatering ? 'checked' : '';
+    const fertilizingChecked = defaultFertilizing ? 'checked' : '';
     return `
       <div class="flex items-center gap-4 mb-2">
         <span class="w-32">${getPhaseEmoji(phase)} ${t('phase.' + phase)}</span>
         <label class="flex items-center gap-1">
-          <input type="checkbox" name="watering_${phase}_enabled" class="accent-blue-500" ${watering ? 'checked' : ''}>
+          <input type="checkbox" name="watering_${phase}_enabled" class="accent-blue-500" ${wateringChecked}>
           ${t('modal.reminders.watering')}
         </label>
         <input type="number" name="watering_${phase}_interval" value="${watering}" min="1" class="w-16 p-1 border rounded ml-1 dark:bg-gray-700 dark:text-white bg-white text-gray-900">
         <label class="flex items-center gap-1 ml-4">
-          <input type="checkbox" name="fertilizing_${phase}_enabled" class="accent-green-500" ${fertilizing ? 'checked' : ''}>
+          <input type="checkbox" name="fertilizing_${phase}_enabled" class="accent-green-500" ${fertilizingChecked}>
           ${t('modal.reminders.fertilizing')}
         </label>
         <input type="number" name="fertilizing_${phase}_interval" value="${fertilizing}" min="1" class="w-16 p-1 border rounded ml-1 dark:bg-gray-700 dark:text-white bg-white text-gray-900">
