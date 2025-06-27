@@ -7,7 +7,7 @@ import { PLANT_TAGS } from '../categories.js';
 
 export const sunflowers = {
   name: 'Sunflowers',
-  category: 'Flowers',
+  category: 'category.flowers',
   tags: [PLANT_TAGS.ANNUAL],
   emoji: '🌻',
   environments: {

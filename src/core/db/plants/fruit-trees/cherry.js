@@ -7,7 +7,7 @@ import { PLANT_TAGS } from '../categories.js';
 
 export const cherry_tree = {
   name: 'Cherry Tree',
-  category: 'Fruit Trees',
+  category: 'category.fruit_trees',
   tags: [PLANT_TAGS.PERENNIAL],
   environments: {
     outdoor: {

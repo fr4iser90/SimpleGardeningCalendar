@@ -94,6 +94,10 @@ export async function updatePlantOptions(category, environment = getDefaultEnvir
   }
   
   const plants = Array.from(plantData.entries());
+  // DEBUG: Log selected category and all plant categories
+  console.log('[updatePlantOptions] Selected category:', category);
+  console.log('[updatePlantOptions] Available plant categories:', plants.map(([k,p]) => p.category));
+
   plantTypeSelect.innerHTML = `<option value="">${t('modal.plant_type.select')}</option>`;
   const filteredPlants = plants.filter(([key, plant]) => {
     const categoryMatch = !category || plant.category === category;

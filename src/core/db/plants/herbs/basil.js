@@ -7,7 +7,7 @@ import { PLANT_TAGS } from '../categories.js';
 
 export const basil = {
   name: 'Basil',
-  category: 'Herbs',
+  category: 'category.herbs',
   tags: [PLANT_TAGS.ANNUAL],
   environments: {
     indoor: {

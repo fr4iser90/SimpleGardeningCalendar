@@ -205,8 +205,8 @@ async function getPlantCategory(plantKey) {
     'raspberries': 'fruits',
     
     // Fruit Trees
-    'apple': 'fruit-trees',
-    'cherry': 'fruit-trees',
+    'apple_tree': 'fruit-trees',
+    'cherry_tree': 'fruit-trees',
     
     // Flowers
     'lavender': 'flowers',
@@ -230,7 +230,7 @@ export async function getAllTranslatedPlantData() {
     // Fruits
     'strawberries', 'blueberries', 'raspberries',
     // Fruit Trees
-    'apple', 'cherry',
+    'apple_tree', 'cherry_tree',
     // Flowers
     'lavender', 'roses', 'sunflowers'
   ];
@@ -262,6 +262,8 @@ export async function getAllTranslatedPlantData() {
       plantTranslationCache.set(cacheKey, originalData);
     }
   }
+  // DEBUG: Ausgabe aller geladenen Pflanzen und Kategorien
+  console.log('[getAllTranslatedPlantData] Loaded:', Array.from(translatedPlants.entries()).map(([k,v]) => `${k}: ${v.category}`));
   return translatedPlants;
 }
 

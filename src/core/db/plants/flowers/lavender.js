@@ -7,7 +7,7 @@ import { PLANT_TAGS } from '../categories.js';
 
 export const lavender = {
   name: 'Lavender',
-  category: 'Flowers',
+  category: 'category.flowers',
   tags: [PLANT_TAGS.PERENNIAL],
   emoji: '🪻',
   environments: {

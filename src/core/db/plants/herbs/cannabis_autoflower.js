@@ -23,7 +23,7 @@ function formatTemperature(fahrenheitRange) {
 
 export const cannabis_autoflower = {
   name: 'Cannabis Autoflower',
-  category: 'Herbs', // Updated category
+  category: 'category.herbs', // Updated category
   tags: [PLANT_TAGS.CANNABIS, PLANT_TAGS.ANNUAL], // New tag structure
   legalNote:
     'Check local laws before cultivation. This information is for educational purposes only.',
