@@ -3,6 +3,8 @@
 
 import { openDB } from 'idb';
 import { DB_NAME, DB_VERSION } from '../../core/db/connection.js';
+import { t } from '../../core/i18n/index.js';
+import { formatDateWithLocale } from '../../core/db/utils.js';
 
 export async function loadPlantCategories(t) {
   const { PLANT_CATEGORIES, getPlantingsByCategory } = await import('../../core/db/index.js');
@@ -66,7 +68,7 @@ export async function loadUpcomingTasks(t) {
     
     const eventDate = new Date(event.date);
     const isToday = eventDate.toDateString() === today.toDateString();
-    const dateStr = isToday ? 'Today' : eventDate.toLocaleDateString();
+    const dateStr = isToday ? 'Today' : formatDateWithLocale(eventDate);
     
     taskEl.innerHTML = `
       <div class="font-medium dark:text-white">${event.title}</div>
@@ -99,7 +101,7 @@ export async function showCategoryPlantsModal(category, plantings) {
                 <h3 class="font-semibold dark:text-white">${displayName}</h3>
                 ${planting.customName ? `<div class="text-xs text-gray-500 dark:text-gray-400">Plant type: ${planting.plantName}</div>` : ''}
                 <div class="text-sm text-gray-600 dark:text-gray-400">
-                  ${planting.location} • Started ${new Date(planting.startDate).toLocaleDateString()} • ${t('phase.' + planting.currentPhase)}
+                  ${planting.location} • Started ${formatDateWithLocale(planting.startDate)} • ${t('phase.' + planting.currentPhase)}
                 </div>
               </div>
               <div class="flex items-center space-x-2">

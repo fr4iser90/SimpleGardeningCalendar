@@ -3,6 +3,7 @@ import { openDB } from 'idb';
 import { t } from '../../core/i18n/index.js';
 import { getPlantNotes, addPlantNote, updatePlantingStatus } from '../../core/db/index.js';
 import { DB_NAME, DB_VERSION } from '../../core/db/connection.js';
+import { formatDateWithLocale } from '../../core/db/utils.js';
 
 export async function showEventDetails(event) {
   const modal = document.createElement('div');
@@ -52,8 +53,8 @@ export async function showEventDetails(event) {
           <strong>${t('event.details.category')}</strong> ${t(planting.category)}<br>
           ${planting.location ? `<strong>${t('event.details.location')}</strong> ${planting.location}<br>` : ''}
           <strong>${t('event.details.current_phase')}</strong> ${t('phase.' + planting.currentPhase)}<br>
-          <strong>${t('event.details.started')}</strong> ${new Date(planting.startDate).toLocaleDateString()}<br>
-          <strong>${t('event.details.expected_completion')}</strong> ${new Date(planting.completionDate).toLocaleDateString()}
+          <strong>${t('event.details.started')}</strong> ${formatDateWithLocale(planting.startDate)}<br>
+          <strong>${t('event.details.expected_completion')}</strong> ${formatDateWithLocale(planting.completionDate)}
           ${customDurationInfo}
         </div>
       `;

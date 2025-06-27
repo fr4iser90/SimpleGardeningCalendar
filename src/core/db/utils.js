@@ -27,14 +27,96 @@ export function formatTemperature(fahrenheitRange) {
 }
 
 /**
- * Format date for display in different languages
+ * Format date for display using locale-aware formatting
  * @param {string} mmddString - Date string in MM-DD format
- * @param {string} language - Language code (en, de, fr, es, it)
+ * @param {string} language - Language code (en, de, fr, es, it) - optional, will auto-detect if not provided
  * @returns {string} Formatted date string
  */
-export function formatDateForDisplay(mmddString, language = 'en') {
+export async function formatDateForDisplay(mmddString, language = null) {
   if (!mmddString || !mmddString.includes('-')) return mmddString;
   
+  // Auto-detect language and country if not provided
+  if (!language) {
+    const { getCurrentLanguage, getCurrentCountry } = await import('../i18n/index.js');
+    language = getCurrentLanguage();
+    const country = getCurrentCountry();
+    
+    // Create locale string (e.g., 'de-DE', 'en-US', 'fr-FR')
+    const locale = `${language}-${country}`;
+    return formatDateWithLocaleMMDD(mmddString, locale);
+  }
+  
+  // Fallback to simple language-based formatting for backward compatibility
+  return formatDateSimple(mmddString, language);
+}
+
+/**
+ * Format a date with proper locale detection
+ * @param {Date|string} date - Date to format
+ * @param {Object} options - Intl.DateTimeFormat options
+ * @returns {string} Formatted date string
+ */
+export function formatDateWithLocale(date, options = {}) {
+  const dateObj = typeof date === 'string' ? new Date(date) : date;
+  
+  // Get current language and country
+  const savedLanguage = localStorage.getItem('preferredLanguage');
+  const browserLang = navigator.language || navigator.userLanguage;
+  let country = 'US'; // Default
+  
+  if (browserLang) {
+    const countryCode = browserLang.split('-')[1] || browserLang.split('_')[1];
+    if (countryCode) {
+      country = countryCode.toUpperCase();
+    }
+  }
+  
+  const language = savedLanguage || browserLang.split('-')[0] || 'en';
+  const locale = `${language}-${country}`;
+  
+  try {
+    return dateObj.toLocaleDateString(locale, options);
+  } catch (error) {
+    // Fallback to simple formatting
+    console.warn(`Locale ${locale} not supported, falling back to simple formatting`);
+    return dateObj.toLocaleDateString(language, options);
+  }
+}
+
+/**
+ * Format date using browser's Intl API for proper regional formatting (MM-DD format)
+ * @param {string} mmddString - Date string in MM-DD format
+ * @param {string} locale - Locale string (e.g., 'de-DE', 'en-US', 'fr-FR')
+ * @returns {string} Formatted date string
+ */
+function formatDateWithLocaleMMDD(mmddString, locale) {
+  const [month, day] = mmddString.split('-').map(Number);
+  
+  // Create a date object (year doesn't matter for display)
+  const date = new Date(2000, month - 1, day);
+  
+  try {
+    // Use Intl.DateTimeFormat for proper regional formatting
+    const formatter = new Intl.DateTimeFormat(locale, {
+      day: 'numeric',
+      month: 'short'
+    });
+    
+    return formatter.format(date);
+  } catch (error) {
+    // Fallback if locale is not supported
+    console.warn(`Locale ${locale} not supported, falling back to simple formatting`);
+    return formatDateSimple(mmddString, locale.split('-')[0]);
+  }
+}
+
+/**
+ * Simple language-based date formatting (fallback)
+ * @param {string} mmddString - Date string in MM-DD format
+ * @param {string} language - Language code
+ * @returns {string} Formatted date string
+ */
+function formatDateSimple(mmddString, language) {
   const [month, day] = mmddString.split('-');
   const monthNum = parseInt(month);
   const dayNum = parseInt(day);
@@ -169,6 +251,7 @@ export async function getPhaseCheckpoints(phase, plantData) {
 export default {
   formatTemperature,
   formatDateForDisplay,
+  formatDateWithLocale,
   getPhaseEmoji,
   getWateringInterval,
   getPhaseCheckpoints

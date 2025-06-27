@@ -4,6 +4,7 @@
 import { openDB } from 'idb';
 import { DB_NAME, DB_VERSION } from '../../core/db/connection.js';
 import { t } from '../../core/i18n/index.js';
+import { formatDateWithLocale } from '../../core/db/utils.js';
 
 export async function showMyPlantsModal() {
   const { getActivePlantings } = await import('../../core/db/index.js');
@@ -53,9 +54,9 @@ export async function showMyPlantsModal() {
               ${planting.customName ? `<div class="text-xs text-gray-500 dark:text-gray-400 mb-1">${labelType}: ${planting.plantName}</div>` : ''}
               <div class="text-sm text-gray-600 dark:text-gray-400 space-y-1">
                 <div><strong>${labelLocation}:</strong> ${planting.location}</div>
-                <div><strong>${labelStarted}:</strong> ${new Date(planting.startDate).toLocaleDateString()}</div>
+                <div><strong>${labelStarted}:</strong> ${formatDateWithLocale(planting.startDate)}</div>
                 <div><strong>${labelCurrentPhase}:</strong> ${t('phase.' + planting.currentPhase)}</div>
-                <div><strong>${labelExpectedCompletion}:</strong> ${new Date(planting.completionDate).toLocaleDateString()}</div>
+                <div><strong>${labelExpectedCompletion}:</strong> ${formatDateWithLocale(planting.completionDate)}</div>
               </div>
               <div class="mt-3 flex space-x-2">
                 <button onclick="viewPlantDetails(${planting.id})" class="flex-1 bg-blue-500 text-white p-2 rounded hover:bg-blue-600 text-sm">
@@ -277,8 +278,8 @@ export async function viewPlantDetails(plantingId) {
                   planting.status === 'completed' ? 'bg-blue-100 dark:bg-blue-900 text-blue-800 dark:text-blue-200' :
                   'bg-red-100 dark:bg-red-900 text-red-800 dark:text-red-200'
                 }">${planting.status}</span></div>
-                <div><strong>${labelStarted}:</strong> ${new Date(planting.startDate).toLocaleDateString()}</div>
-                <div><strong>${labelExpectedCompletion}:</strong> ${new Date(planting.completionDate).toLocaleDateString()}</div>
+                <div><strong>${labelStarted}:</strong> ${formatDateWithLocale(planting.startDate)}</div>
+                <div><strong>${labelExpectedCompletion}:</strong> ${formatDateWithLocale(planting.completionDate)}</div>
                 <div><strong>${labelCurrentPhase}:</strong> ${t('phase.' + planting.currentPhase)}</div>
               </div>
               
@@ -311,7 +312,7 @@ export async function viewPlantDetails(plantingId) {
                         </div>
                       </div>
                       <div class="text-right">
-                        <div class="text-sm dark:text-white">${phaseDate.toLocaleDateString()}</div>
+                        <div class="text-sm dark:text-white">${formatDateWithLocale(phaseDate)}</div>
                         ${isCurrentPhase ? `<div class="text-xs text-green-600 dark:text-green-400">${t('plants_list.current')}</div>` : ''}
                       </div>
                     </div>
@@ -330,7 +331,7 @@ export async function viewPlantDetails(plantingId) {
                 ${events.slice(0, 10).map(event => `
                   <div class="text-sm p-2 bg-white dark:bg-gray-800 rounded">
                     <div class="font-medium dark:text-white">${event.title}</div>
-                    <div class="text-gray-500 dark:text-gray-400">${new Date(event.date).toLocaleDateString()}</div>
+                    <div class="text-gray-500 dark:text-gray-400">${formatDateWithLocale(event.date)}</div>
                   </div>
                 `).join('')}
                 ${events.length === 0 ? `<p class="text-gray-500 dark:text-gray-400 text-sm">${noEventsText}</p>` : ''}
@@ -343,7 +344,7 @@ export async function viewPlantDetails(plantingId) {
               <div class="space-y-2 max-h-40 overflow-y-auto">
                 ${notes.slice(0, 10).map(note => `
                   <div class="text-sm p-2 bg-white dark:bg-gray-800 rounded">
-                    <div class="text-gray-500 dark:text-gray-400 text-xs">${new Date(note.date).toLocaleDateString()}</div>
+                    <div class="text-gray-500 dark:text-gray-400 text-xs">${formatDateWithLocale(note.date)}</div>
                     <div class="mt-1 dark:text-white">${note.note}</div>
                   </div>
                 `).join('')}
