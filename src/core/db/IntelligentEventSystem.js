@@ -49,7 +49,7 @@ function getIntelligentEventTitle(phaseName, plantData, isLastPhase = false) {
   // Special handling for different plant types
   switch (phaseName) {
     case 'harvest':
-      return `🌾 ${phaseLabel} ${plantName}`;
+      return `🌾 ${t('task.harvesting')} ${plantName}`;
     case 'fruiting':
     case 'productive':
     case 'establishment':
@@ -223,7 +223,7 @@ export async function createIntelligentPlantingEvents(planting, plantData, phase
   }
 
   eventsToAdd.push({
-    title: `🌱 Plant ${plantData.name}`,
+    title: `🌱 ${t('task.planting')} ${plantData.name}`,
     date: planting.startDate,
     type: 'planting',
     description: plantingDescription,

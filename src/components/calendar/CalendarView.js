@@ -3,15 +3,30 @@ import dayGridPlugin from '@fullcalendar/daygrid';
 import interactionPlugin from '@fullcalendar/interaction';
 import { openDB } from 'idb';
 import { getEventColor } from '../../utils/eventUtils.js';
-import { t, updateUITranslations } from '../../core/i18n/index.js';
+import { t, updateUITranslations, getCurrentLanguage } from '../../core/i18n/index.js';
 import { initializeDB } from '../../core/db/index.js';
 import { initializeDefaultCalendars } from '../../core/db/calendars.js';
 import { initializeGoogleStatusBar } from '../app/GoogleStatusBar.js';
 import { initializeLocalCalendarStatusBar } from '../app/LocalCalendarStatusBar.js';
 import { initializeCalendarSwitch } from '../ui/CalendarSwitch.js';
 import { DB_NAME, DB_VERSION } from '../../core/db/connection.js';
+import deLocale from '@fullcalendar/core/locales/de';
+import enLocale from '@fullcalendar/core/locales/en-gb';
+import frLocale from '@fullcalendar/core/locales/fr';
+import esLocale from '@fullcalendar/core/locales/es';
+import itLocale from '@fullcalendar/core/locales/it';
 
 let calendar;
+
+function getFullCalendarLocale(lang) {
+  switch (lang) {
+    case 'de': return deLocale;
+    case 'fr': return frLocale;
+    case 'es': return esLocale;
+    case 'it': return itLocale;
+    default: return enLocale;
+  }
+}
 
 export async function initializeCalendar() {
   await initializeDB();
@@ -20,10 +35,13 @@ export async function initializeCalendar() {
   await initializeDefaultCalendars();
   
   const calendarEl = document.getElementById('calendar');
+  const currentLang = getCurrentLanguage();
   
   calendar = new Calendar(calendarEl, {
     plugins: [dayGridPlugin, interactionPlugin],
     initialView: 'dayGridMonth',
+    locale: getFullCalendarLocale(currentLang),
+    locales: [deLocale, enLocale, frLocale, esLocale, itLocale],
     height: 'auto',
     headerToolbar: {
       left: 'prev,next today',
