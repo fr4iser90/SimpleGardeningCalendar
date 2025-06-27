@@ -277,6 +277,7 @@ export const fr = {
     'calendar.ornamental_description': 'Calendrier pour les fleurs et plantes ornementales',
     'calendar.fruits': 'Jardin de Fruits',
     'calendar.fruits_description': 'Calendrier pour les arbres fruitiers et baies',
+    'calendar.week_check': 'Contrôle semaine {week}',
     
     // Common
     'common.loading': 'Chargement...',

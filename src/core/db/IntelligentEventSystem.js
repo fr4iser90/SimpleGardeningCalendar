@@ -44,54 +44,36 @@ function getPlantPhases(plantData) {
 function getIntelligentEventTitle(phaseName, plantData, isLastPhase = false) {
   const phaseEmoji = getPhaseEmoji(phaseName);
   const plantName = plantData.name;
+  const phaseLabel = t('phase.' + phaseName) || phaseName;
   
   // Special handling for different plant types
   switch (phaseName) {
     case 'harvest':
-      return `🌾 Harvest ${plantName}`;
+      return `🌾 ${phaseLabel} ${plantName}`;
     case 'fruiting':
-      return `🍅 ${plantName}: Fruiting phase`;
     case 'productive':
-      return `🌳 ${plantName}: Productive phase`;
     case 'establishment':
-      return `🌱 ${plantName}: Establishment phase`;
     case 'juvenile':
-      return `🌿 ${plantName}: Juvenile growth`;
     case 'dormancy':
-      return `😴 ${plantName}: Dormancy period`;
     case 'germination':
-      return `🌱 Plant ${plantName}`;
     case 'seedling':
-      return `🌱 ${plantName}: Seedling phase`;
     case 'vegetative':
-      return `🌿 ${plantName}: Vegetative growth`;
     case 'flowering':
-      return `🌸 ${plantName}: Flowering phase`;
     case 'leafing':
-      return `🍃 ${plantName}: Leaf development`;
     case 'rooting':
-      return `🌿 ${plantName}: Root development`;
     case 'maturing':
-      return `🌾 ${plantName}: Maturation phase`;
     case 'sprouting':
-      return `🌱 ${plantName}: Sprouting phase`;
     case 'tuberization':
-      return `🥔 ${plantName}: Tuber formation`;
     case 'bulking':
-      return `🥔 ${plantName}: Tuber growth`;
     case 'heading':
-      return `🥬 ${plantName}: Head formation`;
     case 'bolting':
-      return `🌾 ${plantName}: Bolting phase`;
     case 'seed_production':
-      return `🌱 ${plantName}: Seed production`;
     case 'transplant':
-      return `🔄 ${plantName}: Transplant phase`;
     case 'preflower':
-      return `🌸 ${plantName}: Pre-flower phase`;
+      return `${phaseEmoji} ${plantName}: ${phaseLabel}`;
     default:
       // For unknown phases, create a generic title
-      return `${phaseEmoji} ${plantName}: ${phaseName} phase`;
+      return `${phaseEmoji} ${plantName}: ${phaseLabel}`;
   }
 }
 
@@ -283,11 +265,13 @@ export async function createIntelligentPlantingEvents(planting, plantData, phase
         checkDate.setDate(checkDate.getDate() + (week * 7));
         
         if (checkDate < new Date(completionDate)) {
+          const weekCheckLabel = t('calendar.week_check', { week }) || `Week ${week} check`;
+          const phaseLabel = t('phase.' + phase.name) || phase.name;
           await tx.store.add({
-            title: `📋 ${plantData.name}: Week ${week} check (${phase.name})`,
+            title: `📋 ${plantData.name}: ${weekCheckLabel} (${phaseLabel})`,
             date: checkDate.toISOString().split('T')[0],
             type: 'maintenance',
-            description: `Weekly check during ${phase.name} phase\n\n${phaseData.care}\n\nLook for signs of:\n${getPhaseCheckpoints(phase.name, plantData)}`,
+            description: `Weekly check during ${phaseLabel} phase\n\n${phaseData.care}\n\nLook for signs of:\n${getPhaseCheckpoints(phase.name, plantData)}`,
             plantingId,
             calendarId: planting.calendarId
           });

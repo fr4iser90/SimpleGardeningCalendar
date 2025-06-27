@@ -278,6 +278,7 @@ export const en = {
     'calendar.ornamental_description': 'Calendar for flowers and ornamental plants',
     'calendar.fruits': 'Fruit Garden',
     'calendar.fruits_description': 'Calendar for fruit trees and berries',
+    'calendar.week_check': 'Week {week} check',
     
     // Common
     'common.loading': 'Loading...',

@@ -288,6 +288,7 @@ export const de = {
     'calendar.ornamental_description': 'Kalender für Blumen und Zierpflanzen',
     'calendar.fruits': 'Obstgarten',
     'calendar.fruits_description': 'Kalender für Obstbäume und Beeren',
+    'calendar.week_check': 'Woche {week} Kontrolle',
     
     // Common
     'common.loading': 'Lädt...',

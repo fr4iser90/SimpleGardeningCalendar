@@ -314,6 +314,7 @@ export const es = {
     'calendar.ornamental_description': 'Calendario para flores y plantas ornamentales',
     'calendar.fruits': 'Jardín de Frutas',
     'calendar.fruits_description': 'Calendario para árboles frutales y bayas',
+    'calendar.week_check': 'Semana {week} control',
     
     // Common
     'common.loading': 'Cargando...',
