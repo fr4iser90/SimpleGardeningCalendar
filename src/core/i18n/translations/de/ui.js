@@ -249,6 +249,13 @@ export const de = {
     'phase.dormancy': 'Ruhephase',
     'phase.editable': 'bearbeitbar',
     'phase.fixed': 'fest',
+    'phase.sprouting': 'Aussaat/Keimung',
+    'phase.rooting': 'Wurzelbildung',
+    'phase.leafing': 'Blattbildung',
+    'phase.blooming': 'Blütezeit',
+    'phase.tuberization': 'Knollenbildung',
+    'phase.bulking': 'Verdickung',
+    'phase.maturation': 'Reifung',
     
     // Priority Levels
     'priority.high': 'Hoch',

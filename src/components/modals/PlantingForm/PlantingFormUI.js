@@ -1,5 +1,5 @@
 import { t } from '../../../core/i18n/index.js';
-import { formatDate } from '../../../utils/dateUtils.js';
+import { formatDateWithLocale } from '../../../core/db/utils.js';
 import { 
   createEnvironmentOptions, 
   createRegionOptions, 
@@ -26,8 +26,20 @@ export async function createPlantingForm(date, preselectedPlant = null) {
   const categoryOptions = createCategoryOptions();
   const plantOptions = await createPlantOptions(getDefaultEnvironment()); // Await the async function
   
-  const formattedDate = formatDate(date);
-  
+  // Ensure date is in ISO format for input type="date"
+  let isoDate = '';
+  if (date instanceof Date) {
+    isoDate = date.toISOString().split('T')[0];
+  } else if (typeof date === 'string' && date.match(/^\d{4}-\d{2}-\d{2}$/)) {
+    isoDate = date;
+  } else if (typeof date === 'string') {
+    // Try to parse other formats
+    const d = new Date(date);
+    if (!isNaN(d)) isoDate = d.toISOString().split('T')[0];
+  }
+  // Localized preview for the user
+  const localizedDate = formatDateWithLocale(isoDate);
+
   formContainer.innerHTML = `
     <!-- Environment and Region Row -->
     <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
@@ -51,7 +63,8 @@ export async function createPlantingForm(date, preselectedPlant = null) {
       </div>
       <div>
         <label class="block text-sm font-medium mb-1 dark:text-gray-200">${t('modal.date.label')}</label>
-        <input type="date" name="date" value="${formattedDate}" class="w-full p-2 border rounded dark:bg-gray-700 dark:border-gray-600 dark:text-white" required>
+        <input type="date" name="date" value="${isoDate}" class="w-full p-2 border rounded dark:bg-gray-700 dark:border-gray-600 dark:text-white" required>
+        <div class="text-xs text-gray-500 dark:text-gray-400 mt-1">${t('modal.date.label')}: <span id="localizedDatePreview">${localizedDate}</span></div>
       </div>
     </div>
     
@@ -145,6 +158,15 @@ export async function createPlantingForm(date, preselectedPlant = null) {
   // Add auto-detection functionality
   initializeAutoDetection(formContainer);
   
+  // Add live update for localized date preview
+  const dateInput = formContainer.querySelector('input[name="date"]');
+  const localizedDatePreview = formContainer.querySelector('#localizedDatePreview');
+  if (dateInput && localizedDatePreview) {
+    dateInput.addEventListener('input', (e) => {
+      localizedDatePreview.textContent = formatDateWithLocale(e.target.value);
+    });
+  }
+
   return formContainer;
 }
 

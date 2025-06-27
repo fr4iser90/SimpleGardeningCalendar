@@ -240,6 +240,13 @@ export const fr = {
     'phase.fruiting': 'Fructification',
     'phase.harvest': 'Récolte',
     'phase.dormancy': 'Dormance',
+    'phase.sprouting': 'Germination',
+    'phase.rooting': 'Enracinement',
+    'phase.leafing': 'Développement des feuilles',
+    'phase.blooming': 'Floraison',
+    'phase.tuberization': 'Tubérisation',
+    'phase.bulking': 'Grossissement',
+    'phase.maturation': 'Maturation',
     
     // Priority Levels
     'priority.high': 'Élevé',

@@ -241,6 +241,13 @@ export const en = {
     'phase.fruiting': 'Fruiting',
     'phase.harvest': 'Harvest',
     'phase.dormancy': 'Dormancy',
+    'phase.sprouting': 'Sprouting',
+    'phase.rooting': 'Rooting',
+    'phase.leafing': 'Leafing',
+    'phase.blooming': 'Blooming',
+    'phase.tuberization': 'Tuberization',
+    'phase.bulking': 'Bulking',
+    'phase.maturation': 'Maturation',
     
     // Priority Levels
     'priority.high': 'High',
