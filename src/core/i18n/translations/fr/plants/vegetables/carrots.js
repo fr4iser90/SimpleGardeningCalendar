@@ -11,25 +11,25 @@ export default {
           description: "Germination des graines (10-21 jours)",
           care: "Sol humide, 15-20°C",
         },
-        seedling: {
-          name: "Semis",
+        leafing: {
+          name: "Développement des Feuilles",
           description: "Développement des premières feuilles",
-          care: "Emplacement lumineux, maintenir humide",
+          care: "Emplacement lumineux, garder humide",
         },
-        vegetative: {
-          name: "Phase Végétative",
-          description: "Croissance des feuilles et développement racinaire",
-          care: "Arrosage régulier, éclaircir, désherber",
-        },
-        root_development: {
-          name: "Développement Racinaire",
+        rooting: {
+          name: "Développement des Racines",
           description: "Épaississement de la racine de carotte",
-          care: "Maintenir humide, sol meuble",
+          care: "Garder humide, sol meuble",
+        },
+        maturing: {
+          name: "Maturation",
+          description: "Agrandissement de racine et croissance finale",
+          care: "Maintenir humidité uniforme, éviter fissures",
         },
         harvest: {
           name: "Récolte",
-          description: "Carottes prêtes pour la récolte",
-          care: "Arracher délicatement, ne pas abîmer",
+          description: "Les carottes sont prêtes à récolter",
+          care: "Arracher avec précaution, ne pas endommager",
         },
       },
     },
@@ -40,25 +40,25 @@ export default {
           description: "Germination des graines (10-21 jours)",
           care: "Sol humide, 15-20°C",
         },
-        seedling: {
-          name: "Semis",
+        leafing: {
+          name: "Développement des Feuilles",
           description: "Développement des premières feuilles",
-          care: "Emplacement lumineux, maintenir humide",
+          care: "Emplacement lumineux, garder humide",
         },
-        vegetative: {
-          name: "Phase Végétative",
-          description: "Croissance des feuilles et développement racinaire",
-          care: "Arrosage régulier, éclaircir, désherber",
-        },
-        root_development: {
-          name: "Développement Racinaire",
+        rooting: {
+          name: "Développement des Racines",
           description: "Épaississement de la racine de carotte",
-          care: "Maintenir humide, sol meuble",
+          care: "Garder humide, sol meuble",
+        },
+        maturing: {
+          name: "Maturation",
+          description: "Agrandissement de racine et croissance finale",
+          care: "Maintenir humidité uniforme, éviter fissures",
         },
         harvest: {
           name: "Récolte",
-          description: "Carottes prêtes pour la récolte",
-          care: "Arracher délicatement, ne pas abîmer",
+          description: "Les carottes sont prêtes à récolter",
+          care: "Arracher avec précaution, ne pas endommager",
         },
       },
     },
@@ -69,41 +69,41 @@ export default {
           description: "Germination des graines (10-21 jours)",
           care: "Sol humide, 15-20°C",
         },
-        seedling: {
-          name: "Semis",
+        leafing: {
+          name: "Développement des Feuilles",
           description: "Développement des premières feuilles",
-          care: "Emplacement lumineux, maintenir humide",
+          care: "Emplacement lumineux, garder humide",
         },
-        vegetative: {
-          name: "Phase Végétative",
-          description: "Croissance des feuilles et développement racinaire",
-          care: "Arrosage régulier, éclaircir, désherber",
-        },
-        root_development: {
-          name: "Développement Racinaire",
+        rooting: {
+          name: "Développement des Racines",
           description: "Épaississement de la racine de carotte",
-          care: "Maintenir humide, sol meuble",
+          care: "Garder humide, sol meuble",
+        },
+        maturing: {
+          name: "Maturation",
+          description: "Agrandissement de racine et croissance finale",
+          care: "Maintenir humidité uniforme, éviter fissures",
         },
         harvest: {
           name: "Récolte",
-          description: "Carottes prêtes pour la récolte",
-          care: "Arracher délicatement, ne pas abîmer",
+          description: "Les carottes sont prêtes à récolter",
+          care: "Arracher avec précaution, ne pas endommager",
         },
       },
     },
   },
   careTips: {
-    watering: "Maintenir humide, éviter l'engorgement",
+    watering: "Garder humide, éviter l'engorgement",
     fertilizing: "Fertilisation légère, faible azote",
     sunlight: "Plein soleil (min. 8 heures)",
     spacing: "Espacement 5-8 cm",
     temperature: "Frais à chaud, 15-25°C optimal",
     soilPH: "6.0-7.0",
-    soil: "Sol meuble, sablonneux sans cailloux",
+    soil: "Sol meuble, sableux sans pierres",
   },
   commonProblems: {
-    "Mouche de la Carotte": "Asticots dans les racines - filet, culture associée",
-    "Racines Fourchues": "Sol caillouteux - bien préparer le sol",
-    "Épaules Vertes": "Exposées à la lumière - recouvrir de terre",
+    "Mouche de la Carotte": "Asticots dans racines - filet, culture associée",
+    "Racines Fourchues": "Sol pierreux - bien préparer le sol",
+    "Épaules Vertes": "Exposé à la lumière - couvrir avec terre",
   },
 };

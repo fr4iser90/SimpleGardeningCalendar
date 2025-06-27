@@ -21,6 +21,11 @@ export default {
           description: "Strong leaf and stem growth",
           care: "Regular watering, fertilizing, provide support",
         },
+        transplant: {
+          name: "Transplant",
+          description: "Moving to final growing location",
+          care: "Harden off seedlings, plant deep",
+        },
         flowering: {
           name: "Flowering",
           description: "Flower formation and pollination",
@@ -50,6 +55,11 @@ export default {
           description: "Strong leaf and stem growth",
           care: "Regular watering, fertilizing, provide support",
         },
+        transplant: {
+          name: "Transplant",
+          description: "Moving to final growing location",
+          care: "Harden off seedlings, plant deep",
+        },
         flowering: {
           name: "Flowering",
           description: "Flower formation and pollination",
@@ -78,6 +88,11 @@ export default {
           name: "Vegetative Phase",
           description: "Strong leaf and stem growth",
           care: "Regular watering, fertilizing, provide support",
+        },
+        transplant: {
+          name: "Transplant",
+          description: "Moving to final growing location",
+          care: "Harden off seedlings, plant deep",
         },
         flowering: {
           name: "Flowering",

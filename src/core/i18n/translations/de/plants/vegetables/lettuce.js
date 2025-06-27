@@ -11,17 +11,12 @@ export default {
           description: "Samenkeimung (7-14 Tage)",
           care: "Feuchte Erde, 15-20°C, Lichtkeimer",
         },
-        seedling: {
-          name: "Sämling",
+        leafing: {
+          name: "Blattentwicklung",
           description: "Entwicklung der ersten Blätter",
-          care: "Hell stellen, gleichmäßig feucht halten",
+          care: "Helle Lage, gleichmäßig feucht halten",
         },
-        vegetative: {
-          name: "Vegetative Phase",
-          description: "Blattwachstum und Rosettenbildung",
-          care: "Regelmäßig gießen, ausdünnen, Unkraut entfernen",
-        },
-        head_formation: {
+        heading: {
           name: "Kopfbildung",
           description: "Entwicklung des Salatkopfs",
           care: "Gleichmäßig feucht halten, vor Hitze schützen",
@@ -40,17 +35,12 @@ export default {
           description: "Samenkeimung (7-14 Tage)",
           care: "Feuchte Erde, 15-20°C, Lichtkeimer",
         },
-        seedling: {
-          name: "Sämling",
+        leafing: {
+          name: "Blattentwicklung",
           description: "Entwicklung der ersten Blätter",
-          care: "Hell stellen, gleichmäßig feucht halten",
+          care: "Helle Lage, gleichmäßig feucht halten",
         },
-        vegetative: {
-          name: "Vegetative Phase",
-          description: "Blattwachstum und Rosettenbildung",
-          care: "Regelmäßig gießen, ausdünnen, Unkraut entfernen",
-        },
-        head_formation: {
+        heading: {
           name: "Kopfbildung",
           description: "Entwicklung des Salatkopfs",
           care: "Gleichmäßig feucht halten, vor Hitze schützen",
@@ -69,17 +59,12 @@ export default {
           description: "Samenkeimung (7-14 Tage)",
           care: "Feuchte Erde, 15-20°C, Lichtkeimer",
         },
-        seedling: {
-          name: "Sämling",
+        leafing: {
+          name: "Blattentwicklung",
           description: "Entwicklung der ersten Blätter",
-          care: "Hell stellen, gleichmäßig feucht halten",
+          care: "Helle Lage, gleichmäßig feucht halten",
         },
-        vegetative: {
-          name: "Vegetative Phase",
-          description: "Blattwachstum und Rosettenbildung",
-          care: "Regelmäßig gießen, ausdünnen, Unkraut entfernen",
-        },
-        head_formation: {
+        heading: {
           name: "Kopfbildung",
           description: "Entwicklung des Salatkopfs",
           care: "Gleichmäßig feucht halten, vor Hitze schützen",
@@ -93,7 +78,7 @@ export default {
     },
   },
   careTips: {
-    watering: "Gleichmäßig feucht halten, Staunässe vermeiden",
+    watering: "Gleichmäßig feucht halten, nicht zu nass",
     fertilizing: "Leichte Düngung, wenig Stickstoff",
     sunlight: "Vollsonne bis Halbschatten (mind. 6 Stunden)",
     spacing: "20-30 cm Abstand",
@@ -102,7 +87,7 @@ export default {
     bolting: "Vor Hitze schützen, sonst schießt er",
   },
   commonProblems: {
-    "Schießen": "Zu viel Hitze - schattieren, früh ernten",
+    "Schießen": "Zu viel Hitze - Schatten, früh ernten",
     "Schnecken": "Fressen Löcher in Blätter - Schneckenkorn, Bierfallen",
     "Blattläuse": "Kleine Schädlinge - Nützlinge einsetzen, Seifenlösung",
   },

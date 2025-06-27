@@ -11,20 +11,20 @@ export default {
           description: "Germinación de semillas (10-21 días)",
           care: "Suelo húmedo, 15-20°C, germinador de luz",
         },
-        seedling: {
-          name: "Plántula",
+        leafing: {
+          name: "Desarrollo de Hojas",
           description: "Desarrollo de las primeras hojas",
           care: "Ubicación luminosa, mantener húmedo",
         },
-        vegetative: {
-          name: "Fase Vegetativa",
-          description: "Crecimiento de hojas y desarrollo de raíz",
-          care: "Riego regular, aclarar, desmalezar",
-        },
-        root_development: {
+        rooting: {
           name: "Desarrollo de Raíz",
           description: "Desarrollo de la zanahoria",
           care: "Mantener húmedo, suelo suelto",
+        },
+        maturing: {
+          name: "Maduración",
+          description: "Agrandamiento de raíz y crecimiento final",
+          care: "Mantener humedad uniforme, evitar grietas",
         },
         harvest: {
           name: "Cosecha",
@@ -40,20 +40,20 @@ export default {
           description: "Germinación de semillas (10-21 días)",
           care: "Suelo húmedo, 15-20°C, germinador de luz",
         },
-        seedling: {
-          name: "Plántula",
+        leafing: {
+          name: "Desarrollo de Hojas",
           description: "Desarrollo de las primeras hojas",
           care: "Ubicación luminosa, mantener húmedo",
         },
-        vegetative: {
-          name: "Fase Vegetativa",
-          description: "Crecimiento de hojas y desarrollo de raíz",
-          care: "Riego regular, aclarar, desmalezar",
-        },
-        root_development: {
+        rooting: {
           name: "Desarrollo de Raíz",
           description: "Desarrollo de la zanahoria",
           care: "Mantener húmedo, suelo suelto",
+        },
+        maturing: {
+          name: "Maduración",
+          description: "Agrandamiento de raíz y crecimiento final",
+          care: "Mantener humedad uniforme, evitar grietas",
         },
         harvest: {
           name: "Cosecha",
@@ -69,20 +69,20 @@ export default {
           description: "Germinación de semillas (10-21 días)",
           care: "Suelo húmedo, 15-20°C, germinador de luz",
         },
-        seedling: {
-          name: "Plántula",
+        leafing: {
+          name: "Desarrollo de Hojas",
           description: "Desarrollo de las primeras hojas",
           care: "Ubicación luminosa, mantener húmedo",
         },
-        vegetative: {
-          name: "Fase Vegetativa",
-          description: "Crecimiento de hojas y desarrollo de raíz",
-          care: "Riego regular, aclarar, desmalezar",
-        },
-        root_development: {
+        rooting: {
           name: "Desarrollo de Raíz",
           description: "Desarrollo de la zanahoria",
           care: "Mantener húmedo, suelo suelto",
+        },
+        maturing: {
+          name: "Maduración",
+          description: "Agrandamiento de raíz y crecimiento final",
+          care: "Mantener humedad uniforme, evitar grietas",
         },
         harvest: {
           name: "Cosecha",

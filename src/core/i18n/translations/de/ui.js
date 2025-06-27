@@ -635,6 +635,19 @@ export const de = {
 
     // Phase Editing
     'phase.editable': 'bearbeitbar',
-    'phase.fixed': 'fest'
+    'phase.fixed': 'fest',
+
+    // Care Tips
+    'care_tips.watering': 'Gießen',
+    'care_tips.fertilizing': 'Düngen',
+    'care_tips.sunlight': 'Sonnenlicht',
+    'care_tips.spacing': 'Pflanzabstand',
+    'care_tips.temperature': 'Temperatur',
+    'care_tips.soilPH': 'Boden-pH',
+    'care_tips.harvesting': 'Ernte',
+    'care_tips.support': 'Stütze',
+    'care_tips.humidity': 'Luftfeuchtigkeit',
+    'care_tips.soil': 'Boden',
+    'care_tips.hilling': 'Anhäufeln'
   };
   

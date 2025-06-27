@@ -6,105 +6,89 @@ export default {
   environments: {
     indoor: {
       phases: {
-        germination: {
-          name: "Keimung",
-          description: "Samen beginnen zu keimen und Wurzeln bilden sich.",
-          care: "Samen warm (18-24°C) und feucht halten, Licht benötigt.",
-        },
-        seedling: {
-          name: "Sämling",
-          description: "Die junge Pflanze entwickelt die ersten echten Blätter.",
-          care: "Viel Licht, regelmäßig gießen, Staunässe vermeiden.",
+        establishment: {
+          name: "Anwachsen",
+          description: "Wurzelbildung und erstes Wachstum",
+          care: "Erde feucht halten, Stütze geben",
         },
         vegetative: {
-          name: "Wachstum",
-          description: "Schnelles Wachstum von Blättern und Stängeln.",
-          care: "Viel Licht, regelmäßig gießen, für buschiges Wachstum zurückschneiden.",
+          name: "Vegetatives Wachstum",
+          description: "Starkes Blatt- und Stängelwachstum",
+          care: "Regelmäßig gießen, düngen, schneiden",
         },
         flowering: {
           name: "Blüte",
-          description: "Pflanze beginnt zu blühen.",
-          care: "Viel Sonne, regelmäßig gießen, verblühte Blüten entfernen.",
+          description: "Knospenbildung und Blüte",
+          care: "Verblühte Blüten entfernen, Feuchtigkeit halten",
         },
-        harvest: {
-          name: "Ernte",
-          description: "Ernte der Blüten für Schnittblumen.",
-          care: "Blüten ernten wenn sie sich öffnen, für Vasen schneiden.",
+        dormancy: {
+          name: "Ruhephase",
+          description: "Winterruhe",
+          care: "Weniger gießen, vor Frost schützen",
         },
       },
     },
     outdoor: {
       phases: {
-        germination: {
-          name: "Keimung",
-          description: "Samen beginnen zu keimen und Wurzeln bilden sich.",
-          care: "Samen warm und feucht halten, vor Frost schützen.",
-        },
-        seedling: {
-          name: "Sämling",
-          description: "Etablierung im Freien.",
-          care: "Langsam an Sonne gewöhnen, vor Wind schützen.",
+        establishment: {
+          name: "Anwachsen",
+          description: "Wurzelbildung und erstes Wachstum",
+          care: "Erde feucht halten, Stütze geben",
         },
         vegetative: {
-          name: "Wachstum",
-          description: "Schnelles Wachstum im Freien.",
-          care: "Vollsonne, regelmäßig gießen, für buschiges Wachstum zurückschneiden.",
+          name: "Vegetatives Wachstum",
+          description: "Starkes Blatt- und Stängelwachstum",
+          care: "Regelmäßig gießen, düngen, schneiden",
         },
         flowering: {
           name: "Blüte",
-          description: "Pflanze beginnt zu blühen.",
-          care: "Vollsonne, regelmäßig gießen, verblühte Blüten entfernen.",
+          description: "Knospenbildung und Blüte",
+          care: "Verblühte Blüten entfernen, Feuchtigkeit halten",
         },
-        harvest: {
-          name: "Ernte",
-          description: "Ernte der Blüten für Schnittblumen.",
-          care: "Blüten ernten wenn sie sich öffnen, für Vasen schneiden.",
+        dormancy: {
+          name: "Ruhephase",
+          description: "Winterruhe",
+          care: "Weniger gießen, vor Frost schützen",
         },
       },
     },
     greenhouse: {
       phases: {
-        germination: {
-          name: "Keimung",
-          description: "Samen beginnen zu keimen und Wurzeln bilden sich.",
-          care: "Samen warm und feucht im Gewächshaus halten.",
-        },
-        seedling: {
-          name: "Sämling",
-          description: "Etablierung im Gewächshaus.",
-          care: "Kontrollierte Umgebung, regelmäßig gießen.",
+        establishment: {
+          name: "Anwachsen",
+          description: "Wurzelbildung und erstes Wachstum",
+          care: "Erde feucht halten, Stütze geben",
         },
         vegetative: {
-          name: "Wachstum",
-          description: "Schnelles Wachstum im Gewächshaus.",
-          care: "Viel Licht, regelmäßig gießen, für buschiges Wachstum zurückschneiden.",
+          name: "Vegetatives Wachstum",
+          description: "Starkes Blatt- und Stängelwachstum",
+          care: "Regelmäßig gießen, düngen, schneiden",
         },
         flowering: {
           name: "Blüte",
-          description: "Pflanze beginnt zu blühen.",
-          care: "Viel Licht, regelmäßig gießen, verblühte Blüten entfernen.",
+          description: "Knospenbildung und Blüte",
+          care: "Verblühte Blüten entfernen, Feuchtigkeit halten",
         },
-        harvest: {
-          name: "Ernte",
-          description: "Ernte der Blüten für Schnittblumen.",
-          care: "Blüten ernten wenn sie sich öffnen, für Vasen schneiden.",
+        dormancy: {
+          name: "Ruhephase",
+          description: "Winterruhe",
+          care: "Weniger gießen, vor Frost schützen",
         },
       },
     },
   },
   careTips: {
-    watering: "Regelmäßig gießen, Erde feucht aber nicht nass halten.",
-    fertilizing: "Düngung im Frühjahr und Sommer mit Rosendünger.",
-    sunlight: "Vollsonne, mindestens 6 Stunden direkte Sonne.",
-    spacing: "60-90 cm Abstand zwischen Pflanzen.",
-    support: "Stützen für Kletterrosen, normalerweise nicht für Buschrosen.",
-    humidity: "Normale Luftfeuchtigkeit, nicht zu feucht.",
-    temperature: "15-25°C optimal, frosthart bis -20°C.",
+    watering: "Tief gießen, Blätter nicht benetzen",
+    fertilizing: "Rosendünger, ausgewogene Nährstoffe",
+    sunlight: "Vollsonne (mind. 6 Stunden täglich)",
+    spacing: "60-90 cm Abstand",
+    temperature: "Mäßig, 15-25°C optimal",
+    soilPH: "6,0-6,5",
+    pruning: "Im Frühjahr schneiden, totes Holz entfernen",
   },
   commonProblems: {
-    "Echter Mehltau": "Weißer Belag auf Blättern - Luftzirkulation verbessern",
-    "Sternrußtau": "Schwarze Flecken auf Blättern - Fungizid verwenden",
-    "Blattläuse": "Kleine Insekten auf Blättern - mit Wasser abspülen",
-    "Rosenrost": "Orangefarbene Flecken - betroffene Blätter entfernen",
+    "Sternrußtau": "Pilzkrankheit - Luftzirkulation verbessern, Fungizid",
+    "Blattläuse": "Kleine Schädlinge - mit Wasser spritzen, Nützlinge",
+    "Echter Mehltau": "Weißer Belag auf Blättern - Fungizid, Luftzirkulation",
   },
 };

@@ -6,105 +6,89 @@ export default {
   environments: {
     indoor: {
       phases: {
-        germination: {
-          name: "Germination",
-          description: "Seeds begin to sprout and roots emerge.",
-          care: "Keep seeds warm (65-75°F/18-24°C) and moist, light needed.",
-        },
-        seedling: {
-          name: "Seedling",
-          description: "Young plant develops first true leaves.",
-          care: "Lots of light, regular watering, avoid overwatering.",
+        establishment: {
+          name: "Establishment",
+          description: "Root establishment and initial growth",
+          care: "Keep soil moist, provide support",
         },
         vegetative: {
-          name: "Vegetative",
-          description: "Rapid growth of leaves and stems.",
-          care: "Lots of light, regular watering, prune for bushiness.",
+          name: "Vegetative Growth",
+          description: "Strong leaf and stem development",
+          care: "Regular watering, fertilizing, pruning",
         },
         flowering: {
           name: "Flowering",
-          description: "Plant begins to flower.",
-          care: "Lots of sun, regular watering, remove spent flowers.",
+          description: "Bud formation and bloom",
+          care: "Deadhead spent flowers, maintain moisture",
         },
-        harvest: {
-          name: "Harvest",
-          description: "Harvest flowers for cut flowers.",
-          care: "Harvest flowers when they open, cut for vases.",
+        dormancy: {
+          name: "Dormancy",
+          description: "Winter rest period",
+          care: "Reduce watering, protect from frost",
         },
       },
     },
     outdoor: {
       phases: {
-        germination: {
-          name: "Germination",
-          description: "Seeds begin to sprout and roots emerge.",
-          care: "Keep seeds warm and moist, protect from frost.",
-        },
-        seedling: {
-          name: "Seedling",
-          description: "Establishing outdoors.",
-          care: "Gradual sun exposure, protect from wind.",
+        establishment: {
+          name: "Establishment",
+          description: "Root establishment and initial growth",
+          care: "Keep soil moist, provide support",
         },
         vegetative: {
-          name: "Vegetative",
-          description: "Rapid growth outdoors.",
-          care: "Full sun, regular watering, prune for bushiness.",
+          name: "Vegetative Growth",
+          description: "Strong leaf and stem development",
+          care: "Regular watering, fertilizing, pruning",
         },
         flowering: {
           name: "Flowering",
-          description: "Plant begins to flower.",
-          care: "Full sun, regular watering, remove spent flowers.",
+          description: "Bud formation and bloom",
+          care: "Deadhead spent flowers, maintain moisture",
         },
-        harvest: {
-          name: "Harvest",
-          description: "Harvest flowers for cut flowers.",
-          care: "Harvest flowers when they open, cut for vases.",
+        dormancy: {
+          name: "Dormancy",
+          description: "Winter rest period",
+          care: "Reduce watering, protect from frost",
         },
       },
     },
     greenhouse: {
       phases: {
-        germination: {
-          name: "Germination",
-          description: "Seeds begin to sprout and roots emerge.",
-          care: "Keep seeds warm and moist in greenhouse.",
-        },
-        seedling: {
-          name: "Seedling",
-          description: "Establishing in greenhouse.",
-          care: "Controlled environment, regular watering.",
+        establishment: {
+          name: "Establishment",
+          description: "Root establishment and initial growth",
+          care: "Keep soil moist, provide support",
         },
         vegetative: {
-          name: "Vegetative",
-          description: "Rapid growth in greenhouse.",
-          care: "Lots of light, regular watering, prune for bushiness.",
+          name: "Vegetative Growth",
+          description: "Strong leaf and stem development",
+          care: "Regular watering, fertilizing, pruning",
         },
         flowering: {
           name: "Flowering",
-          description: "Plant begins to flower.",
-          care: "Lots of light, regular watering, remove spent flowers.",
+          description: "Bud formation and bloom",
+          care: "Deadhead spent flowers, maintain moisture",
         },
-        harvest: {
-          name: "Harvest",
-          description: "Harvest flowers for cut flowers.",
-          care: "Harvest flowers when they open, cut for vases.",
+        dormancy: {
+          name: "Dormancy",
+          description: "Winter rest period",
+          care: "Reduce watering, protect from frost",
         },
       },
     },
   },
   careTips: {
-    watering: "Water regularly, keep soil moist but not soggy.",
-    fertilizing: "Feed in spring and summer with rose fertilizer.",
-    sunlight: "Full sun, at least 6 hours of direct sun.",
-    spacing: "24-36 inches apart between plants.",
-    support: "Stakes for climbing roses, usually not for bush roses.",
-    humidity: "Normal humidity, not too humid.",
-    temperature: "60-75°F optimal, hardy to -5°F.",
+    watering: "Deep watering, avoid wetting leaves",
+    fertilizing: "Rose fertilizer, balanced nutrients",
+    sunlight: "Full sun (6+ hours daily)",
+    spacing: "60-90 cm spacing",
+    temperature: "Moderate, 15-25°C optimal",
+    soilPH: "6.0-6.5",
+    pruning: "Prune in early spring, remove dead wood",
   },
   commonProblems: {
-    "Powdery Mildew": "White powder on leaves - improve air circulation",
-    "Black Spot": "Black spots on leaves - use fungicide",
-    "Aphids": "Small insects on leaves - rinse with water",
-    "Rose Rust": "Orange spots - remove affected leaves",
+    "Black Spot": "Fungal disease - improve air circulation, fungicide",
+    "Aphids": "Small pests - spray with water, beneficial insects",
+    "Powdery Mildew": "White powder on leaves - fungicide, air circulation",
   },
 };

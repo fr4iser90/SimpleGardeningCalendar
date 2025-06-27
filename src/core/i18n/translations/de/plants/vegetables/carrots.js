@@ -11,20 +11,20 @@ export default {
           description: "Samenkeimung (10-21 Tage)",
           care: "Feuchte Erde, gleichmäßige Temperatur",
         },
-        seedling: {
-          name: "Sämling",
+        leafing: {
+          name: "Blattentwicklung",
           description: "Entwicklung der ersten Blätter",
           care: "Gleichmäßig feucht halten, ausdünnen",
         },
-        vegetative: {
-          name: "Vegetative Phase",
-          description: "Blattwachstum und Wurzelentwicklung",
-          care: "Regelmäßig gießen, Unkraut entfernen",
-        },
-        root_development: {
+        rooting: {
           name: "Wurzelentwicklung",
           description: "Karottenwachstum unter der Erde",
           care: "Gleichmäßig feucht halten, lockere Erde",
+        },
+        maturing: {
+          name: "Reifung",
+          description: "Wurzelvergrößerung und finales Wachstum",
+          care: "Gleichmäßige Feuchtigkeit, Risse vermeiden",
         },
         harvest: {
           name: "Ernte",
@@ -40,20 +40,20 @@ export default {
           description: "Samenkeimung (10-21 Tage)",
           care: "Feuchte Erde, gleichmäßige Temperatur",
         },
-        seedling: {
-          name: "Sämling",
+        leafing: {
+          name: "Blattentwicklung",
           description: "Entwicklung der ersten Blätter",
           care: "Gleichmäßig feucht halten, ausdünnen",
         },
-        vegetative: {
-          name: "Vegetative Phase",
-          description: "Blattwachstum und Wurzelentwicklung",
-          care: "Regelmäßig gießen, Unkraut entfernen",
-        },
-        root_development: {
+        rooting: {
           name: "Wurzelentwicklung",
           description: "Karottenwachstum unter der Erde",
           care: "Gleichmäßig feucht halten, lockere Erde",
+        },
+        maturing: {
+          name: "Reifung",
+          description: "Wurzelvergrößerung und finales Wachstum",
+          care: "Gleichmäßige Feuchtigkeit, Risse vermeiden",
         },
         harvest: {
           name: "Ernte",
@@ -69,20 +69,20 @@ export default {
           description: "Samenkeimung (10-21 Tage)",
           care: "Feuchte Erde, gleichmäßige Temperatur",
         },
-        seedling: {
-          name: "Sämling",
+        leafing: {
+          name: "Blattentwicklung",
           description: "Entwicklung der ersten Blätter",
           care: "Gleichmäßig feucht halten, ausdünnen",
         },
-        vegetative: {
-          name: "Vegetative Phase",
-          description: "Blattwachstum und Wurzelentwicklung",
-          care: "Regelmäßig gießen, Unkraut entfernen",
-        },
-        root_development: {
+        rooting: {
           name: "Wurzelentwicklung",
           description: "Karottenwachstum unter der Erde",
           care: "Gleichmäßig feucht halten, lockere Erde",
+        },
+        maturing: {
+          name: "Reifung",
+          description: "Wurzelvergrößerung und finales Wachstum",
+          care: "Gleichmäßige Feuchtigkeit, Risse vermeiden",
         },
         harvest: {
           name: "Ernte",

@@ -9,27 +9,22 @@ export default {
         germination: {
           name: "Keimung",
           description: "Samenkeimung (7-14 Tage)",
-          care: "Feuchte Erde, 15-20°C",
+          care: "Feuchte Erde, 15-20°C, Lichtkeimer",
         },
-        seedling: {
-          name: "Sämling",
-          description: "Entwicklung der ersten Blätter",
-          care: "Hell stellen, gleichmäßig feucht halten",
-        },
-        vegetative: {
-          name: "Vegetative Phase",
-          description: "Blattwachstum und Rosettenbildung",
-          care: "Regelmäßig gießen, ausdünnen, Unkraut entfernen",
-        },
-        leaf_development: {
+        leafing: {
           name: "Blattentwicklung",
-          description: "Entwicklung der großen Blätter",
-          care: "Gleichmäßig feucht halten, vor Hitze schützen",
+          description: "Entwicklung der ersten Blätter",
+          care: "Helle Lage, gleichmäßig feucht halten",
         },
         harvest: {
           name: "Ernte",
           description: "Spinat ist reif zur Ernte",
-          care: "Äußere Blätter ernten, innere wachsen lassen",
+          care: "Äußere Blätter oder ganze Pflanze ernten",
+        },
+        bolting: {
+          name: "Schießen",
+          description: "Pflanze geht in Samen",
+          care: "Schnell ernten, bevor Blätter bitter werden",
         },
       },
     },
@@ -38,27 +33,22 @@ export default {
         germination: {
           name: "Keimung",
           description: "Samenkeimung (7-14 Tage)",
-          care: "Feuchte Erde, 15-20°C",
+          care: "Feuchte Erde, 15-20°C, Lichtkeimer",
         },
-        seedling: {
-          name: "Sämling",
-          description: "Entwicklung der ersten Blätter",
-          care: "Hell stellen, gleichmäßig feucht halten",
-        },
-        vegetative: {
-          name: "Vegetative Phase",
-          description: "Blattwachstum und Rosettenbildung",
-          care: "Regelmäßig gießen, ausdünnen, Unkraut entfernen",
-        },
-        leaf_development: {
+        leafing: {
           name: "Blattentwicklung",
-          description: "Entwicklung der großen Blätter",
-          care: "Gleichmäßig feucht halten, vor Hitze schützen",
+          description: "Entwicklung der ersten Blätter",
+          care: "Helle Lage, gleichmäßig feucht halten",
         },
         harvest: {
           name: "Ernte",
           description: "Spinat ist reif zur Ernte",
-          care: "Äußere Blätter ernten, innere wachsen lassen",
+          care: "Äußere Blätter oder ganze Pflanze ernten",
+        },
+        bolting: {
+          name: "Schießen",
+          description: "Pflanze geht in Samen",
+          care: "Schnell ernten, bevor Blätter bitter werden",
         },
       },
     },
@@ -67,43 +57,38 @@ export default {
         germination: {
           name: "Keimung",
           description: "Samenkeimung (7-14 Tage)",
-          care: "Feuchte Erde, 15-20°C",
+          care: "Feuchte Erde, 15-20°C, Lichtkeimer",
         },
-        seedling: {
-          name: "Sämling",
-          description: "Entwicklung der ersten Blätter",
-          care: "Hell stellen, gleichmäßig feucht halten",
-        },
-        vegetative: {
-          name: "Vegetative Phase",
-          description: "Blattwachstum und Rosettenbildung",
-          care: "Regelmäßig gießen, ausdünnen, Unkraut entfernen",
-        },
-        leaf_development: {
+        leafing: {
           name: "Blattentwicklung",
-          description: "Entwicklung der großen Blätter",
-          care: "Gleichmäßig feucht halten, vor Hitze schützen",
+          description: "Entwicklung der ersten Blätter",
+          care: "Helle Lage, gleichmäßig feucht halten",
         },
         harvest: {
           name: "Ernte",
           description: "Spinat ist reif zur Ernte",
-          care: "Äußere Blätter ernten, innere wachsen lassen",
+          care: "Äußere Blätter oder ganze Pflanze ernten",
+        },
+        bolting: {
+          name: "Schießen",
+          description: "Pflanze geht in Samen",
+          care: "Schnell ernten, bevor Blätter bitter werden",
         },
       },
     },
   },
   careTips: {
     watering: "Gleichmäßig feucht halten, nicht zu nass",
-    fertilizing: "Leichte Düngung, wenig Stickstoff",
+    fertilizing: "Leichte Düngung, viel Stickstoff",
     sunlight: "Vollsonne bis Halbschatten (mind. 6 Stunden)",
-    spacing: "15-25 cm Abstand",
+    spacing: "10-15 cm Abstand",
     temperature: "Kühl, 15-20°C optimal",
     soilPH: "6,0-7,0",
     bolting: "Vor Hitze schützen, sonst schießt er",
   },
   commonProblems: {
-    "Schießen": "Zu viel Hitze - schattieren, früh ernten",
-    "Schnecken": "Fressen Löcher in Blätter - Schneckenkorn, Bierfallen",
-    "Blattläuse": "Kleine Schädlinge - Nützlinge einsetzen, Seifenlösung",
+    "Schießen": "Zu viel Hitze - Schatten, früh ernten",
+    "Falscher Mehltau": "Pilzkrankheit - Luftzirkulation verbessern",
+    "Minierfliegen": "Gänge in Blättern - betroffene Blätter entfernen",
   },
 };

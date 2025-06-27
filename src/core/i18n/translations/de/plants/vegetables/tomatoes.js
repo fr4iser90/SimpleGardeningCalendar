@@ -13,18 +13,23 @@ export default {
         },
         seedling: {
           name: "Sämling",
-          description: "Wachstum der ersten Blätter",
-          care: "Hell stellen, gleichmäßig feucht halten",
+          description: "Entwicklung der ersten Blätter",
+          care: "Helle Lage, gleichmäßig feucht halten",
         },
         vegetative: {
           name: "Vegetative Phase",
           description: "Starkes Blatt- und Stängelwachstum",
-          care: "Regelmäßig gießen, düngen, Seitentriebe entfernen",
+          care: "Regelmäßig gießen, düngen, Stütze geben",
+        },
+        transplant: {
+          name: "Umpflanzen",
+          description: "Versetzung an den endgültigen Standort",
+          care: "Sämlinge abhärten, tief pflanzen",
         },
         flowering: {
           name: "Blüte",
           description: "Blütenbildung und Bestäubung",
-          care: "Luftzirkulation fördern, Blüten schütteln für Bestäubung",
+          care: "Luftzirkulation fördern, Blüten schütteln",
         },
         fruiting: {
           name: "Fruchtbildung",
@@ -42,18 +47,23 @@ export default {
         },
         seedling: {
           name: "Sämling",
-          description: "Wachstum der ersten Blätter",
-          care: "Hell stellen, gleichmäßig feucht halten",
+          description: "Entwicklung der ersten Blätter",
+          care: "Helle Lage, gleichmäßig feucht halten",
         },
         vegetative: {
           name: "Vegetative Phase",
           description: "Starkes Blatt- und Stängelwachstum",
-          care: "Regelmäßig gießen, düngen, Seitentriebe entfernen",
+          care: "Regelmäßig gießen, düngen, Stütze geben",
+        },
+        transplant: {
+          name: "Umpflanzen",
+          description: "Versetzung an den endgültigen Standort",
+          care: "Sämlinge abhärten, tief pflanzen",
         },
         flowering: {
           name: "Blüte",
           description: "Blütenbildung und Bestäubung",
-          care: "Luftzirkulation fördern, Blüten schütteln für Bestäubung",
+          care: "Luftzirkulation fördern, Blüten schütteln",
         },
         fruiting: {
           name: "Fruchtbildung",
@@ -71,18 +81,23 @@ export default {
         },
         seedling: {
           name: "Sämling",
-          description: "Wachstum der ersten Blätter",
-          care: "Hell stellen, gleichmäßig feucht halten",
+          description: "Entwicklung der ersten Blätter",
+          care: "Helle Lage, gleichmäßig feucht halten",
         },
         vegetative: {
           name: "Vegetative Phase",
           description: "Starkes Blatt- und Stängelwachstum",
-          care: "Regelmäßig gießen, düngen, Seitentriebe entfernen",
+          care: "Regelmäßig gießen, düngen, Stütze geben",
+        },
+        transplant: {
+          name: "Umpflanzen",
+          description: "Versetzung an den endgültigen Standort",
+          care: "Sämlinge abhärten, tief pflanzen",
         },
         flowering: {
           name: "Blüte",
           description: "Blütenbildung und Bestäubung",
-          care: "Luftzirkulation fördern, Blüten schütteln für Bestäubung",
+          care: "Luftzirkulation fördern, Blüten schütteln",
         },
         fruiting: {
           name: "Fruchtbildung",
@@ -93,17 +108,17 @@ export default {
     },
   },
   careTips: {
-    watering: "Gleichmäßig feucht halten, Staunässe vermeiden",
-    fertilizing: "Regelmäßig mit Tomatendünger, wenig Stickstoff",
+    watering: "Gleichmäßig feucht halten, nicht zu nass",
+    fertilizing: "Regelmäßiger Gemüsedünger, ausgewogen",
     sunlight: "Vollsonne (mind. 8 Stunden)",
-    spacing: "60-90 cm Abstand",
-    temperature: "Warm, 18-30°C optimal",
-    soilPH: "6,0-6,8",
+    spacing: "45-60 cm Abstand",
+    temperature: "Warm, 20-30°C optimal",
+    soilPH: "6,0-7,0",
     support: "Stäbe oder Spaliere für Stabilität",
   },
   commonProblems: {
-    "Kraut- und Braunfäule": "Pilzkrankheit - Luftzirkulation verbessern, Blätter trocken halten",
-    "Blattläuse": "Kleine Schädlinge - Nützlinge einsetzen, Seifenlösung",
     "Blütenendfäule": "Kalziummangel - gleichmäßig gießen, pH prüfen",
+    "Blattläuse": "Kleine Schädlinge - Nützlinge einsetzen, Seifenlösung",
+    "Krautfäule": "Pilzkrankheit - Luftzirkulation verbessern, resistente Sorten",
   },
 };

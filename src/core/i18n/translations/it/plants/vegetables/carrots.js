@@ -11,25 +11,25 @@ export default {
           description: "Germinazione dei semi (10-21 giorni)",
           care: "Terreno umido, 15-20°C",
         },
-        seedling: {
-          name: "Semenzale",
+        leafing: {
+          name: "Sviluppo Fogliare",
           description: "Sviluppo delle prime foglie",
           care: "Posizione luminosa, mantenere umido",
         },
-        vegetative: {
-          name: "Fase Vegetativa",
-          description: "Crescita foglie e sviluppo radici",
-          care: "Irrigazione regolare, diradare, diserbare",
-        },
-        root_development: {
-          name: "Sviluppo Radici",
-          description: "Ingrossamento della radice di carota",
+        rooting: {
+          name: "Sviluppo Radicale",
+          description: "Ispessimento della radice di carota",
           care: "Mantenere umido, terreno sciolto",
+        },
+        maturing: {
+          name: "Maturazione",
+          description: "Ingrossamento radice e crescita finale",
+          care: "Mantenere umidità uniforme, evitare spaccature",
         },
         harvest: {
           name: "Raccolta",
-          description: "Carote pronte per la raccolta",
-          care: "Estrarre delicatamente, non danneggiare",
+          description: "Le carote sono pronte per la raccolta",
+          care: "Estrarre con attenzione, non danneggiare",
         },
       },
     },
@@ -40,25 +40,25 @@ export default {
           description: "Germinazione dei semi (10-21 giorni)",
           care: "Terreno umido, 15-20°C",
         },
-        seedling: {
-          name: "Semenzale",
+        leafing: {
+          name: "Sviluppo Fogliare",
           description: "Sviluppo delle prime foglie",
           care: "Posizione luminosa, mantenere umido",
         },
-        vegetative: {
-          name: "Fase Vegetativa",
-          description: "Crescita foglie e sviluppo radici",
-          care: "Irrigazione regolare, diradare, diserbare",
-        },
-        root_development: {
-          name: "Sviluppo Radici",
-          description: "Ingrossamento della radice di carota",
+        rooting: {
+          name: "Sviluppo Radicale",
+          description: "Ispessimento della radice di carota",
           care: "Mantenere umido, terreno sciolto",
+        },
+        maturing: {
+          name: "Maturazione",
+          description: "Ingrossamento radice e crescita finale",
+          care: "Mantenere umidità uniforme, evitare spaccature",
         },
         harvest: {
           name: "Raccolta",
-          description: "Carote pronte per la raccolta",
-          care: "Estrarre delicatamente, non danneggiare",
+          description: "Le carote sono pronte per la raccolta",
+          care: "Estrarre con attenzione, non danneggiare",
         },
       },
     },
@@ -69,25 +69,25 @@ export default {
           description: "Germinazione dei semi (10-21 giorni)",
           care: "Terreno umido, 15-20°C",
         },
-        seedling: {
-          name: "Semenzale",
+        leafing: {
+          name: "Sviluppo Fogliare",
           description: "Sviluppo delle prime foglie",
           care: "Posizione luminosa, mantenere umido",
         },
-        vegetative: {
-          name: "Fase Vegetativa",
-          description: "Crescita foglie e sviluppo radici",
-          care: "Irrigazione regolare, diradare, diserbare",
-        },
-        root_development: {
-          name: "Sviluppo Radici",
-          description: "Ingrossamento della radice di carota",
+        rooting: {
+          name: "Sviluppo Radicale",
+          description: "Ispessimento della radice di carota",
           care: "Mantenere umido, terreno sciolto",
+        },
+        maturing: {
+          name: "Maturazione",
+          description: "Ingrossamento radice e crescita finale",
+          care: "Mantenere umidità uniforme, evitare spaccature",
         },
         harvest: {
           name: "Raccolta",
-          description: "Carote pronte per la raccolta",
-          care: "Estrarre delicatamente, non danneggiare",
+          description: "Le carote sono pronte per la raccolta",
+          care: "Estrarre con attenzione, non danneggiare",
         },
       },
     },
@@ -99,7 +99,7 @@ export default {
     spacing: "Distanza 5-8 cm",
     temperature: "Fresco a caldo, 15-25°C ottimale",
     soilPH: "6.0-7.0",
-    soil: "Terreno sciolto, sabbioso senza sassi",
+    soil: "Terreno sciolto, sabbioso senza pietre",
   },
   commonProblems: {
     "Mosca della Carota": "Larve nelle radici - rete, consociazione",

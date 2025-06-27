@@ -6,105 +6,89 @@ export default {
   environments: {
     indoor: {
       phases: {
-        germination: {
-          name: "Keimung",
-          description: "Samen beginnen zu keimen und Wurzeln bilden sich.",
-          care: "Samen warm (18-24°C) und feucht halten, Licht benötigt.",
-        },
-        seedling: {
-          name: "Sämling",
-          description: "Die junge Pflanze entwickelt die ersten echten Blätter.",
-          care: "Viel Licht, sparsam gießen, Staunässe vermeiden.",
+        establishment: {
+          name: "Anwachsen",
+          description: "Wurzelbildung und erstes Wachstum",
+          care: "Erde feucht halten, gute Drainage",
         },
         vegetative: {
-          name: "Wachstum",
-          description: "Schnelles Wachstum von Blättern und Stängeln.",
-          care: "Viel Licht, mäßig gießen, für buschiges Wachstum zurückschneiden.",
+          name: "Vegetatives Wachstum",
+          description: "Starkes Blatt- und Stängelwachstum",
+          care: "Regelmäßig gießen, Staunässe vermeiden",
         },
         flowering: {
           name: "Blüte",
-          description: "Pflanze beginnt zu blühen.",
-          care: "Viel Sonne, sparsam gießen, Blüten für Duft ernten.",
+          description: "Knospenbildung und Blüte",
+          care: "Blüten ernten wenn Knospen fest sind",
         },
-        harvest: {
-          name: "Ernte",
-          description: "Ernte der Blüten und Blätter.",
-          care: "Blüten ernten wenn sie sich öffnen, zum Trocknen aufhängen.",
+        dormancy: {
+          name: "Ruhephase",
+          description: "Winterruhe",
+          care: "Weniger gießen, vor Frost schützen",
         },
       },
     },
     outdoor: {
       phases: {
-        germination: {
-          name: "Keimung",
-          description: "Samen beginnen zu keimen und Wurzeln bilden sich.",
-          care: "Samen warm und feucht halten, vor Frost schützen.",
-        },
-        seedling: {
-          name: "Sämling",
-          description: "Etablierung im Freien.",
-          care: "Langsam an Sonne gewöhnen, vor Wind schützen.",
+        establishment: {
+          name: "Anwachsen",
+          description: "Wurzelbildung und erstes Wachstum",
+          care: "Erde feucht halten, gute Drainage",
         },
         vegetative: {
-          name: "Wachstum",
-          description: "Schnelles Wachstum im Freien.",
-          care: "Vollsonne, sparsam gießen, für buschiges Wachstum zurückschneiden.",
+          name: "Vegetatives Wachstum",
+          description: "Starkes Blatt- und Stängelwachstum",
+          care: "Regelmäßig gießen, Staunässe vermeiden",
         },
         flowering: {
           name: "Blüte",
-          description: "Pflanze beginnt zu blühen.",
-          care: "Vollsonne, sparsam gießen, Blüten für Duft ernten.",
+          description: "Knospenbildung und Blüte",
+          care: "Blüten ernten wenn Knospen fest sind",
         },
-        harvest: {
-          name: "Ernte",
-          description: "Ernte der Blüten und Blätter.",
-          care: "Blüten ernten wenn sie sich öffnen, zum Trocknen aufhängen.",
+        dormancy: {
+          name: "Ruhephase",
+          description: "Winterruhe",
+          care: "Weniger gießen, vor Frost schützen",
         },
       },
     },
     greenhouse: {
       phases: {
-        germination: {
-          name: "Keimung",
-          description: "Samen beginnen zu keimen und Wurzeln bilden sich.",
-          care: "Samen warm und feucht im Gewächshaus halten.",
-        },
-        seedling: {
-          name: "Sämling",
-          description: "Etablierung im Gewächshaus.",
-          care: "Kontrollierte Umgebung, sparsam gießen.",
+        establishment: {
+          name: "Anwachsen",
+          description: "Wurzelbildung und erstes Wachstum",
+          care: "Erde feucht halten, gute Drainage",
         },
         vegetative: {
-          name: "Wachstum",
-          description: "Schnelles Wachstum im Gewächshaus.",
-          care: "Viel Licht, sparsam gießen, für buschiges Wachstum zurückschneiden.",
+          name: "Vegetatives Wachstum",
+          description: "Starkes Blatt- und Stängelwachstum",
+          care: "Regelmäßig gießen, Staunässe vermeiden",
         },
         flowering: {
           name: "Blüte",
-          description: "Pflanze beginnt zu blühen.",
-          care: "Viel Licht, sparsam gießen, Blüten für Duft ernten.",
+          description: "Knospenbildung und Blüte",
+          care: "Blüten ernten wenn Knospen fest sind",
         },
-        harvest: {
-          name: "Ernte",
-          description: "Ernte der Blüten und Blätter.",
-          care: "Blüten ernten wenn sie sich öffnen, zum Trocknen aufhängen.",
+        dormancy: {
+          name: "Ruhephase",
+          description: "Winterruhe",
+          care: "Weniger gießen, vor Frost schützen",
         },
       },
     },
   },
   careTips: {
-    watering: "Sparsam gießen, Erde zwischen Gießen trocknen lassen.",
-    fertilizing: "Leichte Düngung im Frühjahr mit organischem Dünger.",
-    sunlight: "Vollsonne, mindestens 6 Stunden direkte Sonne.",
-    spacing: "30-60 cm Abstand zwischen Pflanzen.",
-    support: "Normalerweise nicht nötig, kann bei starkem Wind gestützt werden.",
-    humidity: "Niedrige Luftfeuchtigkeit bevorzugt.",
-    temperature: "15-25°C optimal, frosthart bis -15°C.",
+    watering: "Mäßig gießen, gut durchlässige Erde",
+    fertilizing: "Leichte Düngung, wenig Stickstoff",
+    sunlight: "Vollsonne (mind. 6 Stunden täglich)",
+    spacing: "30-60 cm Abstand",
+    temperature: "Mäßig, 15-25°C optimal",
+    soilPH: "6,5-7,5",
+    pruning: "Nach der Blüte schneiden, im Frühjahr formen",
   },
   commonProblems: {
-    "Wurzelfäule": "Gelbe Blätter, welk - weniger gießen, Drainage verbessern",
-    "Echter Mehltau": "Weißer Belag auf Blättern - Luftzirkulation verbessern",
-    "Spinnmilben": "Kleine Netze und Flecken - Luftfeuchtigkeit erhöhen",
-    "Zu viel Wasser": "Welke Blätter - Gießen reduzieren, Drainage verbessern",
+    "Wurzelfäule": "Überwässerung - Drainage verbessern, weniger gießen",
+    "Echter Mehltau": "Pilzkrankheit - Luftzirkulation verbessern",
+    "Blattläuse": "Kleine Schädlinge - mit Wasser spritzen, Nützlinge",
   },
 };

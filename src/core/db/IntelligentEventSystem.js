@@ -6,6 +6,7 @@
 
 import { getDB } from './connection.js';
 import { getPhaseEmoji, getWateringInterval, getPhaseCheckpoints } from './utils.js';
+import { t } from '../i18n/index.js';
 
 /**
  * Get phases from plant data, handling both old and new structures
@@ -102,19 +103,20 @@ function getIntelligentEventTitle(phaseName, plantData, isLastPhase = false) {
  * @returns {string} Event description
  */
 function getIntelligentEventDescription(phaseName, plantData, phaseData) {
-  let description = `${phaseData.description}\n\nCare Instructions:\n${phaseData.care}`;
+  let description = `${phaseData.description}\n\n${t('event.details.description') || 'Care Instructions:'}\n${phaseData.care}`;
   
   // Add plant-specific care tips if available
   if (plantData.careTips) {
-    description += `\n\nGeneral Care Tips:\n`;
+    description += `\n\n${t('plant_details.care_tips') || 'Care Tips:'}\n`;
     Object.entries(plantData.careTips).forEach(([key, value]) => {
-      description += `- ${key}: ${value}\n`;
+      const label = t('care_tips.' + key) || key;
+      description += `- ${label}: ${value}\n`;
     });
   }
   
   // Add common problems for final phases
   if (isFinalPhase(phaseName, plantData) && plantData.commonProblems) {
-    description += `\n\nCommon Problems to Watch For:\n`;
+    description += `\n\n${t('plant_details.common_problems') || 'Common Problems to Watch For:'}\n`;
     Object.entries(plantData.commonProblems).forEach(([problem, solution]) => {
       description += `- ${problem}: ${solution}\n`;
     });
@@ -225,11 +227,17 @@ export async function createIntelligentPlantingEvents(planting, plantData, phase
   const plantPhases = getPlantPhases(plantData);
   
   // Add initial planting event with legal notice if applicable
-  let plantingDescription = `Start planting ${plantData.name}`;
+  let plantingDescription = `${t('event.details.description') || 'Start planting'} ${plantData.name}`;
   if (plantData.legalNote) {
-    plantingDescription += `\n\n⚠️ LEGAL NOTICE: ${plantData.legalNote}`;
+    plantingDescription += `\n\n⚠️ ${t('plant_details.legal_notice') || 'LEGAL NOTICE:'} ${plantData.legalNote}`;
   }
-  plantingDescription += `\n\nCare Tips:\n${Object.entries(plantData.careTips || {}).map(([key, value]) => `- ${key}: ${value}`).join('\n')}`;
+  if (plantData.careTips && Object.keys(plantData.careTips).length > 0) {
+    plantingDescription += `\n\n${t('plant_details.care_tips') || 'Care Tips:'}\n`;
+    Object.entries(plantData.careTips).forEach(([key, value]) => {
+      const label = t('care_tips.' + key) || key;
+      plantingDescription += `- ${label}: ${value}\n`;
+    });
+  }
 
   await tx.store.add({
     title: `🌱 Plant ${plantData.name}`,
@@ -255,15 +263,17 @@ export async function createIntelligentPlantingEvents(planting, plantData, phase
     const eventDescription = getIntelligentEventDescription(phase.name, plantData, phaseData);
     const eventType = getIntelligentEventType(phase.name, plantData);
     
-    // Add phase start event
-    await tx.store.add({
-      title: eventTitle,
-      date: phase.startDate,
-      type: eventType,
-      description: eventDescription,
-      plantingId,
-      calendarId: planting.calendarId
-    });
+    // NUR anlegen, wenn das Datum NICHT dem planting.startDate entspricht:
+    if (phase.startDate !== planting.startDate) {
+      await tx.store.add({
+        title: eventTitle,
+        date: phase.startDate,
+        type: eventType,
+        description: eventDescription,
+        plantingId,
+        calendarId: planting.calendarId
+      });
+    }
 
     // Add weekly check-ins for longer phases (more than 14 days) if enabled
     if (finalReminderOptions.weeklyChecks && phase.days > 14) {

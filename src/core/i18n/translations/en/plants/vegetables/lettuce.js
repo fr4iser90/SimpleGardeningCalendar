@@ -11,17 +11,12 @@ export default {
           description: "Seed germination (7-14 days)",
           care: "Moist soil, 15-20°C, light germinator",
         },
-        seedling: {
-          name: "Seedling",
+        leafing: {
+          name: "Leaf Development",
           description: "First leaves development",
           care: "Bright location, keep evenly moist",
         },
-        vegetative: {
-          name: "Vegetative Phase",
-          description: "Leaf growth and rosette formation",
-          care: "Regular watering, thin out, remove weeds",
-        },
-        head_formation: {
+        heading: {
           name: "Head Formation",
           description: "Development of lettuce head",
           care: "Keep evenly moist, protect from heat",
@@ -40,17 +35,12 @@ export default {
           description: "Seed germination (7-14 days)",
           care: "Moist soil, 15-20°C, light germinator",
         },
-        seedling: {
-          name: "Seedling",
+        leafing: {
+          name: "Leaf Development",
           description: "First leaves development",
           care: "Bright location, keep evenly moist",
         },
-        vegetative: {
-          name: "Vegetative Phase",
-          description: "Leaf growth and rosette formation",
-          care: "Regular watering, thin out, remove weeds",
-        },
-        head_formation: {
+        heading: {
           name: "Head Formation",
           description: "Development of lettuce head",
           care: "Keep evenly moist, protect from heat",
@@ -69,17 +59,12 @@ export default {
           description: "Seed germination (7-14 days)",
           care: "Moist soil, 15-20°C, light germinator",
         },
-        seedling: {
-          name: "Seedling",
+        leafing: {
+          name: "Leaf Development",
           description: "First leaves development",
           care: "Bright location, keep evenly moist",
         },
-        vegetative: {
-          name: "Vegetative Phase",
-          description: "Leaf growth and rosette formation",
-          care: "Regular watering, thin out, remove weeds",
-        },
-        head_formation: {
+        heading: {
           name: "Head Formation",
           description: "Development of lettuce head",
           care: "Keep evenly moist, protect from heat",

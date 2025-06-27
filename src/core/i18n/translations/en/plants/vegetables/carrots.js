@@ -11,20 +11,20 @@ export default {
           description: "Seed germination (10-21 days)",
           care: "Moist soil, 15-20°C",
         },
-        seedling: {
-          name: "Seedling",
+        leafing: {
+          name: "Leaf Development",
           description: "First leaves development",
           care: "Bright location, keep evenly moist",
         },
-        vegetative: {
-          name: "Vegetative Phase",
-          description: "Leaf growth and root development",
-          care: "Regular watering, thin out, remove weeds",
-        },
-        root_development: {
+        rooting: {
           name: "Root Development",
           description: "Carrot root thickening",
           care: "Keep evenly moist, loose soil",
+        },
+        maturing: {
+          name: "Maturation",
+          description: "Root enlargement and final growth",
+          care: "Maintain even moisture to prevent splitting",
         },
         harvest: {
           name: "Harvest",
@@ -40,20 +40,20 @@ export default {
           description: "Seed germination (10-21 days)",
           care: "Moist soil, 15-20°C",
         },
-        seedling: {
-          name: "Seedling",
+        leafing: {
+          name: "Leaf Development",
           description: "First leaves development",
           care: "Bright location, keep evenly moist",
         },
-        vegetative: {
-          name: "Vegetative Phase",
-          description: "Leaf growth and root development",
-          care: "Regular watering, thin out, remove weeds",
-        },
-        root_development: {
+        rooting: {
           name: "Root Development",
           description: "Carrot root thickening",
           care: "Keep evenly moist, loose soil",
+        },
+        maturing: {
+          name: "Maturation",
+          description: "Root enlargement and final growth",
+          care: "Maintain even moisture to prevent splitting",
         },
         harvest: {
           name: "Harvest",
@@ -69,20 +69,20 @@ export default {
           description: "Seed germination (10-21 days)",
           care: "Moist soil, 15-20°C",
         },
-        seedling: {
-          name: "Seedling",
+        leafing: {
+          name: "Leaf Development",
           description: "First leaves development",
           care: "Bright location, keep evenly moist",
         },
-        vegetative: {
-          name: "Vegetative Phase",
-          description: "Leaf growth and root development",
-          care: "Regular watering, thin out, remove weeds",
-        },
-        root_development: {
+        rooting: {
           name: "Root Development",
           description: "Carrot root thickening",
           care: "Keep evenly moist, loose soil",
+        },
+        maturing: {
+          name: "Maturation",
+          description: "Root enlargement and final growth",
+          care: "Maintain even moisture to prevent splitting",
         },
         harvest: {
           name: "Harvest",

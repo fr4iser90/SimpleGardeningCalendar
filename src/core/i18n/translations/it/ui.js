@@ -601,5 +601,18 @@ export const it = {
     // Phase Editing
     'phase.editable': 'modificabile',
     'phase.fixed': 'fisso',
+
+    // Care Tips
+    'care_tips.watering': 'Irrigazione',
+    'care_tips.fertilizing': 'Fertilizzazione',
+    'care_tips.sunlight': 'Luce solare',
+    'care_tips.spacing': 'Distanza',
+    'care_tips.temperature': 'Temperatura',
+    'care_tips.soilPH': 'pH del suolo',
+    'care_tips.harvesting': 'Raccolta',
+    'care_tips.support': 'Supporto',
+    'care_tips.humidity': 'Umidità',
+    'care_tips.soil': 'Suolo',
+    'care_tips.hilling': 'Rincalzatura',
 };
   
