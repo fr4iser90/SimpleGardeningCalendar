@@ -671,6 +671,12 @@ export const de = {
     'care_tips.support': 'Stütze',
     'care_tips.humidity': 'Luftfeuchtigkeit',
     'care_tips.soil': 'Boden',
-    'care_tips.hilling': 'Anhäufeln'
+    'care_tips.hilling': 'Anhäufeln',
+    'care_tips.pruning': 'Jährlicher Winterschnitt für Form und Gesundheit',
+    'care_tips.pollination': 'Meist Fremdbestäubung durch andere Apfelsorten nötig',
+
+    // New translations
+    'care_tips.pruning': 'Jährlicher Winterschnitt für Form und Gesundheit',
+    'care_tips.pollination': 'Meist Fremdbestäubung durch andere Apfelsorten nötig'
   };
   

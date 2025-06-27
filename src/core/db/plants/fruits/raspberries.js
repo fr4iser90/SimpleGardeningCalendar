@@ -7,7 +7,7 @@ import { PLANT_TAGS } from '../categories.js';
 
 export const raspberries = {
   name: 'Raspberries',
-  category: 'Fruits',
+  category: 'category.fruits',
   tags: [PLANT_TAGS.PERENNIAL],
   emoji: '🫐',
   environments: {

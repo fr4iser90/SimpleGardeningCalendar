@@ -660,5 +660,7 @@ export const es = {
     'care_tips.humidity': 'Humedad',
     'care_tips.soil': 'Suelo',
     'care_tips.hilling': 'Aporcado',
+    'care_tips.pruning': 'Poda invernal anual para forma y salud',
+    'care_tips.pollination': 'Principalmente polinización cruzada necesaria con otras variedades de manzanas',
 };
   

@@ -630,5 +630,7 @@ export const it = {
     'care_tips.humidity': 'Umidità',
     'care_tips.soil': 'Suolo',
     'care_tips.hilling': 'Rincalzatura',
+    'care_tips.pruning': 'Potatura invernale annuale per forma e salute',
+    'care_tips.pollination': 'Principalmente impollinazione incrociata necessaria con altre varietà di mele',
 };
   

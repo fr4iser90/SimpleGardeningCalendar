@@ -641,5 +641,7 @@ export const fr = {
     'care_tips.humidity': 'Humidité',
     'care_tips.soil': 'Sol',
     'care_tips.hilling': 'Buttage',
+    'care_tips.pruning': 'Taille hivernale annuelle pour forme et santé',
+    'care_tips.pollination': 'Pollinisation croisée nécessaire avec autres variétés de pommes',
 };
   

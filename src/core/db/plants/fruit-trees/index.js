@@ -7,9 +7,11 @@
 import { apple_tree } from './apple.js';
 import { cherry_tree } from './cherry.js';
 
-export { apple_tree, cherry_tree };
-
-export default {
+export const FRUIT_TREES_PLANTS = {
   apple_tree,
   cherry_tree,
 };
+export { apple_tree, cherry_tree };
+
+export default FRUIT_TREES_PLANTS;
+

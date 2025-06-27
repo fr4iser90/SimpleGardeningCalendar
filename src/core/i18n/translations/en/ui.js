@@ -660,5 +660,7 @@ export const en = {
     'care_tips.humidity': 'Humidity',
     'care_tips.soil': 'Soil',
     'care_tips.hilling': 'Hilling',
+    'care_tips.pruning': 'Annual winter pruning for shape and health',
+    'care_tips.pollination': 'Mostly cross-pollination needed with other apple varieties',
 };
   
