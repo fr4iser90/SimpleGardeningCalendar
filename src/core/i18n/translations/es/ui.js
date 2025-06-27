@@ -269,10 +269,14 @@ export const es = {
     // Plant Phases
     'phase.germination': 'Germinación',
     'phase.seedling': 'Plántula',
+    'phase.establishment': 'Establecimiento',
     'phase.vegetative': 'Vegetativo',
+    'phase.transplant': 'Transplante',
     'phase.preflower': 'Prefloración',
     'phase.flowering': 'Floración',
+    'phase.fruiting': 'Fructificación',
     'phase.harvest': 'Cosecha',
+    'phase.dormancy': 'Dormancia',
     
     // Priority Levels
     'priority.high': 'Alto',

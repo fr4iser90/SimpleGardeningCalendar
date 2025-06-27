@@ -233,10 +233,14 @@ export const it = {
     // Plant Phases
     'phase.germination': 'Germinazione',
     'phase.seedling': 'Piantolina',
+    'phase.establishment': 'Stabilimento',
     'phase.vegetative': 'Vegetativo',
+    'phase.transplant': 'Trapianto',
     'phase.preflower': 'Prefioritura',
     'phase.flowering': 'Fioritura',
+    'phase.fruiting': 'Fruttificazione',
     'phase.harvest': 'Raccolta',
+    'phase.dormancy': 'Dormienza',
     
     // Priority Levels
     'priority.high': 'Alto',

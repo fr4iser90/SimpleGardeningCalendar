@@ -239,12 +239,14 @@ export const de = {
     // Plant Phases
     'phase.germination': 'Keimung',
     'phase.seedling': 'Sämling',
+    'phase.establishment': 'Etablierung',
     'phase.vegetative': 'Vegetativ',
     'phase.transplant': 'Umpflanzen',
     'phase.preflower': 'Vorblüte',
     'phase.flowering': 'Blüte',
     'phase.fruiting': 'Fruchtbildung',
     'phase.harvest': 'Ernte',
+    'phase.dormancy': 'Ruhephase',
     'phase.editable': 'bearbeitbar',
     'phase.fixed': 'fest',
     
@@ -600,7 +602,17 @@ export const de = {
     'plants_list.current': 'Aktuell',
     'plants_list.no_phase_info': 'Keine Phaseninformationen verfügbar',
     'plants_list.failed_load_details': '❌ Laden der Pflanzendetails fehlgeschlagen',
-    
+
+    // Checkpoints for weekly checks
+    'checkpoints.germination': 'Keimfortschritt, Feuchtigkeitsniveau, Temperatur',
+    'checkpoints.seedling': 'Blattentwicklung, Stängelstärke, Schädlingszeichen',
+    'checkpoints.vegetative': 'Wachstumsrate, Blattfarbe, Verzweigung, Trainingsbedarf',
+    'checkpoints.flowering': 'Blütenentwicklung, Bestäubung, Nährstoffbedarf',
+    'checkpoints.fruiting': 'Fruchtansatz, Größenentwicklung, Reifezeichen',
+    'checkpoints.harvest': 'Reifeindikatoren, Erntezeitpunkt',
+    'checkpoints.general': 'Allgemeine Pflanzengesundheit, Wachstumsfortschritt',
+    'checkpoints.common_issues': 'Häufige Probleme',
+
     // Auto-detection functionality
     'modal.auto_detect.detecting': '🔍 Erkennen...',
     'modal.auto_detect.detected': 'Erkannt:',

@@ -182,8 +182,6 @@ function getPhaseMediumData(plantData, phaseName, medium = 'soil') {
  * @returns {Promise<void>}
  */
 export async function createIntelligentPlantingEvents(planting, plantData, phases, completionDate, reminderOptions = {}) {
-  const db = await getDB();
-  const tx = db.transaction('events', 'readwrite');
   const plantingId = planting.id;
   
   // Load default settings from localStorage
@@ -208,6 +206,9 @@ export async function createIntelligentPlantingEvents(planting, plantData, phase
   // Get phases from plant data
   const plantPhases = getPlantPhases(plantData);
   
+  // Collect all events first
+  const eventsToAdd = [];
+  
   // Add initial planting event with legal notice if applicable
   let plantingDescription = `${t('event.details.description') || 'Start planting'} ${plantData.name}`;
   if (plantData.legalNote) {
@@ -221,7 +222,7 @@ export async function createIntelligentPlantingEvents(planting, plantData, phase
     });
   }
 
-  await tx.store.add({
+  eventsToAdd.push({
     title: `🌱 Plant ${plantData.name}`,
     date: planting.startDate,
     type: 'planting',
@@ -247,7 +248,7 @@ export async function createIntelligentPlantingEvents(planting, plantData, phase
     
     // NUR anlegen, wenn das Datum NICHT dem planting.startDate entspricht:
     if (phase.startDate !== planting.startDate) {
-      await tx.store.add({
+      eventsToAdd.push({
         title: eventTitle,
         date: phase.startDate,
         type: eventType,
@@ -267,11 +268,26 @@ export async function createIntelligentPlantingEvents(planting, plantData, phase
         if (checkDate < new Date(completionDate)) {
           const weekCheckLabel = t('calendar.week_check', { week }) || `Week ${week} check`;
           const phaseLabel = t('phase.' + phase.name) || phase.name;
-          await tx.store.add({
+          const weekCheckDesc = t('calendar.weekly_check_during_phase', { phase: phaseLabel }) || `Weekly check during ${phaseLabel} phase`;
+          const lookForSigns = t('calendar.look_for_signs') || 'Look for signs of:';
+          
+          // Get the phase checkpoints (now async)
+          const phaseCheckpoints = await getPhaseCheckpoints(phase.name, plantData);
+          
+          let description = `${weekCheckDesc}\n\n${phaseData.care}\n\n${lookForSigns}\n${phaseCheckpoints}`;
+          
+          // Use translated common problems from plantData (which should already be translated)
+          if (plantData.commonProblems && Object.keys(plantData.commonProblems).length > 0) {
+            description += `\n\n${t('plant_details.common_problems') || 'Common Problems to Watch For:'}\n`;
+            Object.entries(plantData.commonProblems).forEach(([problem, solution]) => {
+              description += `- ${problem}: ${solution}\n`;
+            });
+          }
+          eventsToAdd.push({
             title: `📋 ${plantData.name}: ${weekCheckLabel} (${phaseLabel})`,
             date: checkDate.toISOString().split('T')[0],
             type: 'maintenance',
-            description: `Weekly check during ${phaseLabel} phase\n\n${phaseData.care}\n\nLook for signs of:\n${getPhaseCheckpoints(phase.name, plantData)}`,
+            description,
             plantingId,
             calendarId: planting.calendarId
           });
@@ -284,8 +300,7 @@ export async function createIntelligentPlantingEvents(planting, plantData, phase
     const careSettings = phaseCare[phase.name] || {};
     // Watering
     if (careSettings.watering) {
-      await createWateringEvents(
-        tx.store,
+      const wateringEvents = await createWateringEventsData(
         plantData,
         phase,
         plantingId,
@@ -295,11 +310,11 @@ export async function createIntelligentPlantingEvents(planting, plantData, phase
         phase.name,
         reminderOptions.selectedMedium
       );
+      eventsToAdd.push(...wateringEvents);
     }
     // Fertilizing
     if (careSettings.fertilizing) {
-      await createFertilizingEvents(
-        tx.store,
+      const fertilizingEvents = await createFertilizingEventsData(
         plantData,
         phase,
         plantingId,
@@ -311,26 +326,24 @@ export async function createIntelligentPlantingEvents(planting, plantData, phase
         phase.name,
         reminderOptions.selectedMedium
       );
+      eventsToAdd.push(...fertilizingEvents);
     }
     // --- END NEW ---
-
-    // --- OLD (remove after migration):
-    // Add watering reminders only if enabled
-    // if (finalReminderOptions.watering?.enabled) {
-    //   await createWateringEvents(tx.store, plantData, phase, plantingId, completionDate, finalReminderOptions.watering.interval, planting.calendarId, phase.name, reminderOptions.selectedMedium);
-    // }
-    // Add fertilizing reminders only if enabled
-    // if (finalReminderOptions.fertilizing?.enabled) {
-    //   await createFertilizingEvents(tx.store, plantData, phase, plantingId, finalReminderOptions.fertilizing, planting.calendarId, phase.name, reminderOptions.selectedMedium);
-    // }
+  }
+  
+  // Now write all events to database in a single transaction
+  const db = await getDB();
+  const tx = db.transaction('events', 'readwrite');
+  
+  for (const event of eventsToAdd) {
+    await tx.store.add(event);
   }
   
   await tx.done;
 }
 
 /**
- * Create watering events for a phase
- * @param {Object} store - Transaction store
+ * Create watering events data for a phase (returns array of events)
  * @param {Object} plantData - Plant data
  * @param {Object} phase - Phase object
  * @param {number} plantingId - Planting ID
@@ -338,8 +351,11 @@ export async function createIntelligentPlantingEvents(planting, plantData, phase
  * @param {number} wateringInterval - Watering interval in days
  * @param {string} selectedPhase - Selected phase name
  * @param {string} selectedMedium - Selected medium
+ * @returns {Promise<Array>} Array of watering events
  */
-async function createWateringEvents(store, plantData, phase, plantingId, completionDate, wateringInterval, calendarId, selectedPhase = null, selectedMedium = null) {
+async function createWateringEventsData(plantData, phase, plantingId, completionDate, wateringInterval, calendarId, selectedPhase = null, selectedMedium = null) {
+  const events = [];
+  
   // Hole Medium-spezifische Daten
   const phaseName = selectedPhase || phase.name;
   const medium = selectedMedium || 'soil';
@@ -354,13 +370,15 @@ async function createWateringEvents(store, plantData, phase, plantingId, complet
   } else if (!interval) {
     interval = getWateringInterval(plantData.category, phaseName);
   }
-  if (interval === 0) return;
+  if (interval === 0) return events;
+  
   let wateringDate = new Date(phase.startDate);
   const phaseEnd = new Date(wateringDate);
   phaseEnd.setDate(phaseEnd.getDate() + phase.days);
+  
   while (wateringDate < phaseEnd) {
     const wateringDescription = mediumData?.watering?.description || phase?.watering?.description || plantData.careTips?.watering || 'Check soil moisture and water as needed';
-    await store.add({
+    events.push({
       title: `💧 Water ${plantData.name}`,
       date: wateringDate.toISOString().split('T')[0],
       type: 'watering',
@@ -370,19 +388,23 @@ async function createWateringEvents(store, plantData, phase, plantingId, complet
     });
     wateringDate.setDate(wateringDate.getDate() + interval);
   }
+  
+  return events;
 }
 
 /**
- * Create fertilizing events for a phase
- * @param {Object} store - Transaction store
+ * Create fertilizing events data for a phase (returns array of events)
  * @param {Object} plantData - Plant data
  * @param {Object} phase - Phase object
  * @param {number} plantingId - Planting ID
  * @param {Object} fertilizingOptions - Fertilizing options with interval and delay
  * @param {string} selectedPhase - Selected phase name
  * @param {string} selectedMedium - Selected medium
+ * @returns {Promise<Array>} Array of fertilizing events
  */
-async function createFertilizingEvents(store, plantData, phase, plantingId, fertilizingOptions, calendarId, selectedPhase = null, selectedMedium = null) {
+async function createFertilizingEventsData(plantData, phase, plantingId, fertilizingOptions, calendarId, selectedPhase = null, selectedMedium = null) {
+  const events = [];
+  
   const phaseName = selectedPhase || phase.name;
   const medium = selectedMedium || 'soil';
   const mediumData = getPhaseMediumData(plantData, phaseName, medium);
@@ -396,16 +418,18 @@ async function createFertilizingEvents(store, plantData, phase, plantingId, fert
   } else if (!interval) {
     interval = 14;
   }
-  if (interval === 0) return;
+  if (interval === 0) return events;
+  
   if (phase.days > 14 && (phaseName === 'vegetative' || phaseName === 'flowering' || phaseName === 'fruiting' || phaseName === 'productive' || phaseName === 'rooting' || phaseName === 'maturing')) {
     const fertilizeDate = new Date(phase.startDate);
     const delay = fertilizingOptions?.delay || 7;
     fertilizeDate.setDate(fertilizeDate.getDate() + delay);
     const phaseEnd = new Date(phase.startDate);
     phaseEnd.setDate(phaseEnd.getDate() + phase.days);
+    
     while (fertilizeDate < phaseEnd) {
       const fertilizingDescription = mediumData?.fertilizing?.description || phase?.fertilizing?.description || plantData.careTips?.fertilizing || 'Apply appropriate fertilizer';
-      await store.add({
+      events.push({
         title: `🌿 Fertilize ${plantData.name}`,
         date: fertilizeDate.toISOString().split('T')[0],
         type: 'fertilizing',
@@ -415,6 +439,43 @@ async function createFertilizingEvents(store, plantData, phase, plantingId, fert
       });
       fertilizeDate.setDate(fertilizeDate.getDate() + interval);
     }
+  }
+  
+  return events;
+}
+
+/**
+ * Create watering events for a phase (legacy function - now uses data function)
+ * @param {Object} store - Transaction store
+ * @param {Object} plantData - Plant data
+ * @param {Object} phase - Phase object
+ * @param {number} plantingId - Planting ID
+ * @param {string} completionDate - Completion date
+ * @param {number} wateringInterval - Watering interval in days
+ * @param {string} selectedPhase - Selected phase name
+ * @param {string} selectedMedium - Selected medium
+ */
+async function createWateringEvents(store, plantData, phase, plantingId, completionDate, wateringInterval, calendarId, selectedPhase = null, selectedMedium = null) {
+  const events = await createWateringEventsData(plantData, phase, plantingId, completionDate, wateringInterval, calendarId, selectedPhase, selectedMedium);
+  for (const event of events) {
+    await store.add(event);
+  }
+}
+
+/**
+ * Create fertilizing events for a phase (legacy function - now uses data function)
+ * @param {Object} store - Transaction store
+ * @param {Object} plantData - Plant data
+ * @param {Object} phase - Phase object
+ * @param {number} plantingId - Planting ID
+ * @param {Object} fertilizingOptions - Fertilizing options with interval and delay
+ * @param {string} selectedPhase - Selected phase name
+ * @param {string} selectedMedium - Selected medium
+ */
+async function createFertilizingEvents(store, plantData, phase, plantingId, fertilizingOptions, calendarId, selectedPhase = null, selectedMedium = null) {
+  const events = await createFertilizingEventsData(plantData, phase, plantingId, fertilizingOptions, calendarId, selectedPhase, selectedMedium);
+  for (const event of events) {
+    await store.add(event);
   }
 }
 

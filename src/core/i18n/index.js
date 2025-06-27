@@ -35,20 +35,24 @@ const plantTranslationCache = new Map();
 
 // Initialize i18n system
 export function initI18n() {
-  // Try to detect language from browser
-  const browserLang = navigator.language.split('-')[0];
-  const savedLang = localStorage.getItem('garden-calendar-language');
-  
-  // Priority: saved > browser > default
-  if (savedLang && SUPPORTED_LANGUAGES[savedLang]) {
-    currentLanguage = savedLang;
-  } else if (SUPPORTED_LANGUAGES[browserLang]) {
-    currentLanguage = browserLang;
+  // Load preferred language from localStorage
+  const savedLanguage = localStorage.getItem('preferredLanguage');
+  if (savedLanguage && Object.keys(SUPPORTED_LANGUAGES).includes(savedLanguage)) {
+    currentLanguage = savedLanguage;
   } else {
-    currentLanguage = 'en'; // Default fallback to English
+    // Try to detect from browser language
+    const browserLang = navigator.language || navigator.userLanguage;
+    const langCode = browserLang.split('-')[0];
+    if (Object.keys(SUPPORTED_LANGUAGES).includes(langCode)) {
+      currentLanguage = langCode;
+    }
   }
   
-  console.log(`🌍 Language initialized: ${currentLanguage} (${SUPPORTED_LANGUAGES[currentLanguage]})`);
+  // Clear plant translation cache on init
+  clearPlantTranslationCache();
+  
+  // Update UI translations
+  updateUITranslations();
 }
 
 // Export alias for compatibility
@@ -59,23 +63,23 @@ export function getCurrentLanguage() {
   return currentLanguage;
 }
 
-// Set language
+/**
+ * Set the current language
+ * @param {string} lang - Language code (en, de, es, fr, it)
+ */
 export function setLanguage(lang) {
-  if (!SUPPORTED_LANGUAGES[lang]) {
-    console.warn(`Language ${lang} not supported. Available: ${Object.keys(SUPPORTED_LANGUAGES).join(', ')}`);
-    return false;
+  if (Object.keys(SUPPORTED_LANGUAGES).includes(lang)) {
+    currentLanguage = lang;
+    localStorage.setItem('preferredLanguage', lang);
+    
+    // Clear plant translation cache when language changes
+    clearPlantTranslationCache();
+    
+    // Update UI translations
+    updateUITranslations();
+  } else {
+    console.warn(`Unsupported language: ${lang}`);
   }
-  
-  currentLanguage = lang;
-  localStorage.setItem('garden-calendar-language', lang);
-  
-  // Clear plant translation cache when language changes
-  plantTranslationCache.clear();
-  
-  // Trigger UI update event
-  document.dispatchEvent(new CustomEvent('languageChanged', { detail: { language: lang } }));
-  
-  return true;
 }
 
 // Translate function with parameter substitution
@@ -114,7 +118,8 @@ function deepMerge(original, translation) {
       translation[key] &&
       typeof translation[key] === 'object' &&
       !Array.isArray(translation[key]) &&
-      original[key]
+      original[key] &&
+      key !== 'commonProblems' // Special handling for commonProblems - replace completely
     ) {
       result[key] = deepMerge(original[key], translation[key]);
     } else {
@@ -300,4 +305,12 @@ export function shouldShowCannabis() {
 export function getCountrySettings() {
   const country = getCurrentCountry();
   return COUNTRY_SETTINGS[country] || COUNTRY_SETTINGS['DE'];
+}
+
+/**
+ * Clear the plant translation cache
+ * Useful when switching languages or when cache contains stale data
+ */
+export function clearPlantTranslationCache() {
+  plantTranslationCache.clear();
 } 

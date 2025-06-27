@@ -131,22 +131,36 @@ export function getWateringInterval(category, phase) {
  * @param {Object} plantData - Plant data object
  * @returns {string} Checkpoint description
  */
-export function getPhaseCheckpoints(phase, plantData) {
-  const checkpoints = {
-    'germination': 'Sprouting progress, moisture levels, temperature',
-    'seedling': 'Leaf development, stem strength, pest signs',
-    'vegetative': 'Growth rate, leaf color, branching, training needs',
-    'flowering': 'Flower development, pollination, nutrient needs',
-    'fruiting': 'Fruit set, size development, ripening signs',
-    'harvest': 'Ripeness indicators, harvest timing'
-  };
+export async function getPhaseCheckpoints(phase, plantData) {
+  // Import translation function dynamically to avoid circular imports
+  const { t } = await import('../i18n/index.js');
   
-  let phaseChecks = checkpoints[phase] || 'General plant health, growth progress';
+  // Get the actual phase data from the plant
+  const phases = plantData.phases || plantData.environments?.indoor?.phases || plantData.environments?.outdoor?.phases || {};
+  const phaseData = phases[phase];
+  
+  // Use the actual phase description and care from the database
+  let phaseChecks = '';
+  
+  if (phaseData) {
+    if (phaseData.description) {
+      phaseChecks += phaseData.description;
+    }
+    if (phaseData.care) {
+      if (phaseChecks) phaseChecks += '\n';
+      phaseChecks += phaseData.care;
+    }
+  }
+  
+  // Fallback if no phase data found
+  if (!phaseChecks) {
+    phaseChecks = t('checkpoints.general') || 'General plant health, growth progress';
+  }
   
   // Add plant-specific problems to watch for
   if (plantData.commonProblems) {
     const problems = Object.keys(plantData.commonProblems).slice(0, 3).join(', ');
-    phaseChecks += `\nCommon issues: ${problems}`;
+    phaseChecks += `\n${t('checkpoints.common_issues') || 'Common issues'}: ${problems}`;
   }
   
   return phaseChecks;
