@@ -42,30 +42,30 @@ export async function showEventDetails(event) {
       
       if (planting.customPhaseDurations) {
         customDurationInfo = `<div class="text-xs text-purple-600 dark:text-purple-400 mt-1">
-          ⏱️ Custom phase durations applied
+          ${t('event.details.custom_phase_durations')}
         </div>`;
       }
       
       plantingInfo = `
         <div class="p-3 bg-blue-50 dark:bg-blue-900 border border-blue-200 dark:border-blue-700 rounded mt-2 text-sm">
-          <strong>Plant:</strong> ${displayName}${planting.customName ? ` (${planting.plantName})` : ''}<br>
-          <strong>Category:</strong> ${planting.category}<br>
-          <strong>Location:</strong> ${planting.location}<br>
-          <strong>Current Phase:</strong> ${planting.currentPhase}<br>
-          <strong>Started:</strong> ${new Date(planting.startDate).toLocaleDateString()}<br>
-          <strong>Expected Completion:</strong> ${new Date(planting.completionDate).toLocaleDateString()}
+          <strong>${t('event.details.plant')}</strong> ${displayName}${planting.customName ? ` (${planting.plantName})` : ''}<br>
+          <strong>${t('event.details.category')}</strong> ${planting.category}<br>
+          <strong>${t('event.details.location')}</strong> ${planting.location}<br>
+          <strong>${t('event.details.current_phase')}</strong> ${t('phase.' + planting.currentPhase)}<br>
+          <strong>${t('event.details.started')}</strong> ${new Date(planting.startDate).toLocaleDateString()}<br>
+          <strong>${t('event.details.expected_completion')}</strong> ${new Date(planting.completionDate).toLocaleDateString()}
           ${customDurationInfo}
         </div>
       `;
 
       plantingStatus = `
         <div class="mt-4">
-          <h3 class="font-semibold mb-2 dark:text-white">Status</h3>
+          <h3 class="font-semibold mb-2 dark:text-white">${t('planting.status.title')}</h3>
           <div class="p-3 bg-yellow-50 dark:bg-yellow-900 border border-yellow-200 dark:border-yellow-700 rounded">
             <select id="plantingStatus" class="w-full p-2 border rounded dark:bg-gray-700 dark:border-gray-600 dark:text-white" onchange="updateStatus(${event.extendedProps.plantingId}, this.value)">
-              <option value="active" ${planting.status === 'active' ? 'selected' : ''}>Active</option>
-              <option value="completed" ${planting.status === 'completed' ? 'selected' : ''}>Completed</option>
-              <option value="failed" ${planting.status === 'failed' ? 'selected' : ''}>Failed</option>
+              <option value="active" ${planting.status === 'active' ? 'selected' : ''}>${t('planting.status.active')}</option>
+              <option value="completed" ${planting.status === 'completed' ? 'selected' : ''}>${t('planting.status.completed')}</option>
+              <option value="failed" ${planting.status === 'failed' ? 'selected' : ''}>${t('planting.status.failed')}</option>
             </select>
           </div>
         </div>
@@ -84,13 +84,13 @@ export async function showEventDetails(event) {
       <div class="space-y-3 dark:text-gray-200">
         <div class="p-3 bg-gray-50 dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded">
           <p class="text-sm">
-            <strong>Date:</strong> ${format(new Date(event.start), 'MMMM d, yyyy')}
+            <strong>${t('event.details.date')}</strong> ${format(new Date(event.start), 'MMMM d, yyyy')}
           </p>
         </div>
         ${plantingInfo}
         <div class="p-3 bg-green-50 dark:bg-green-900 border border-green-200 dark:border-green-700 rounded text-sm">
-          <strong>Description:</strong><br>
-          <div class="mt-1 whitespace-pre-wrap">${event.extendedProps.description || 'No description provided'}</div>
+          <strong>${t('event.details.description')}</strong><br>
+          <div class="mt-1 whitespace-pre-wrap">${event.extendedProps.description || t('event.details.no_description')}</div>
         </div>
         ${plantingStatus}
         ${notesHtml}
@@ -132,7 +132,7 @@ export async function showEventDetails(event) {
 }
 
 export async function deleteEvent(eventId, plantingId) {
-  if (!confirm('Are you sure you want to delete this event?')) {
+  if (!confirm(t('planting.delete.confirm'))) {
     return;
   }
 
@@ -171,7 +171,7 @@ export async function deleteEvent(eventId, plantingId) {
     
   } catch (error) {
     console.error('Error deleting event:', error);
-    alert('Failed to delete event. Please try again.');
+    alert(t('planting.delete.error'));
   }
 }
 

@@ -105,6 +105,16 @@ export const it = {
     'plant.info.growing': 'Coltivazione',
     'plant.info.only': 'solo',
     'plant.info.natural_timing': 'Le fasi sono determinate dalle stagioni naturali e non possono essere adattate',
+    'plant.info.category': 'Categoria:',
+    'plant.info.environment': 'Ambiente:',
+    'plant.info.total_duration': 'Durata totale:',
+    'plant.info.autoflower.title': 'Autofiorente - Fioritura automatica',
+    'plant.info.autoflower.description': 'Le autofiorenti fioriscono automaticamente indipendentemente dal ciclo di luce. Le fasi non possono essere modificate.',
+    'plant.info.outdoor.title': 'Esterno - Stagioni naturali',
+    'plant.info.outdoor.description': 'Le fasi sono determinate dalle stagioni naturali e non possono essere modificate.',
+    'plant.info.outdoor.fixed': 'fisso',
+    'plant.info.recommended_planting_time': 'Periodo di piantagione consigliato:',
+    'plant.info.check_planting_times': 'Verifica i periodi di piantagione per la tua regione',
     
     // Seasonal Timing
     'timing.good': '✅ Buon momento!',
@@ -151,6 +161,7 @@ export const it = {
     'timing.no_planting_window_specified': 'Nessuna finestra di piantagione specificata',
     'timing.consider_planting_between': 'Considerare la piantagione tra {start} e {end}. {description}',
     'timing.good_timing': 'Buon momento! {description}',
+    'timing.current_season': 'Stagione attuale',
     
     // Location Placeholders
     'location.indoor.placeholder': 'es: Tenda Indoor, Grow Room, Davanzale',
@@ -535,5 +546,60 @@ export const it = {
     'plants_list.current': 'Attuale',
     'plants_list.no_phase_info': 'Nessuna informazione di fase disponibile',
     'plants_list.failed_load_details': '❌ Impossibile caricare i dettagli della pianta',
+
+    // Auto-detection functionality
+    'modal.auto_detect.detecting': '🔍 Rilevamento...',
+    'modal.auto_detect.detected': 'Rilevato:',
+    'modal.auto_detect.location_error': 'La posizione non può essere rilevata automaticamente. Seleziona manualmente.',
+    'modal.auto_detect.detection_error': 'Errore nel rilevamento della posizione. Seleziona manualmente.',
+    'modal.auto_detect.examples': 'Esempi:',
+
+    // Event Details
+    'event.details.plant': 'Pianta:',
+    'event.details.category': 'Categoria:',
+    'event.details.location': 'Posizione:',
+    'event.details.current_phase': 'Fase attuale:',
+    'event.details.started': 'Iniziato:',
+    'event.details.expected_completion': 'Completamento previsto:',
+    'event.details.date': 'Data:',
+    'event.details.description': 'Descrizione:',
+    'event.details.no_description': 'Nessuna descrizione fornita',
+    'event.details.custom_phase_durations': '⏱️ Durate di fase personalizzate applicate',
+
+    // Planting Status
+    'planting.status.title': 'Stato',
+    'planting.status.active': 'Attivo',
+    'planting.status.completed': 'Completato',
+    'planting.status.failed': 'Fallito',
+    'planting.delete.confirm': 'Sei sicuro di voler eliminare questo evento?',
+    'planting.delete.error': 'Errore nell\'eliminazione dell\'evento. Riprova.',
+
+    // Plant Info Display
+    'plant.info.category': 'Categoria:',
+    'plant.info.environment': 'Ambiente:',
+    'plant.info.total_duration': 'Durata totale:',
+    'plant.info.autoflower.title': 'Autofiorente - Fioritura automatica',
+    'plant.info.autoflower.description': 'Le autofiorenti fioriscono automaticamente indipendentemente dal ciclo di luce. Le fasi non possono essere modificate.',
+    'plant.info.outdoor.title': 'Esterno - Stagioni naturali',
+    'plant.info.outdoor.description': 'Le fasi sono determinate dalle stagioni naturali e non possono essere modificate.',
+    'plant.info.outdoor.fixed': 'fisso',
+    'plant.info.recommended_planting_time': 'Periodo di piantagione consigliato:',
+    'plant.info.check_planting_times': 'Verifica i periodi di piantagione per la tua regione',
+
+    // Seasonal Timing
+    'timing.current_season': 'Stagione attuale',
+
+    // Planting Tips
+    'planting.tips.vegetables': 'Semina diretta o pre-coltivazione possibile',
+    'planting.tips.herbs': 'Talee o semi possibili',
+    'planting.tips.fruits': 'Piante in contenitore o a radice nuda',
+    'planting.tips.cuttings': 'Talee:',
+    'planting.tips.mediterranean': 'Ombra durante il caldo di mezzogiorno, annaffiare al mattino',
+    'planting.tips.temperate_north': 'Piantare dopo l\'ultima gelata, usare pacciamatura',
+    'planting.tips.tropical': 'Possibile tutto l\'anno, attenzione alle stagioni delle piogge',
+
+    // Phase Editing
+    'phase.editable': 'modificabile',
+    'phase.fixed': 'fisso',
 };
   

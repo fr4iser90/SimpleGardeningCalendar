@@ -94,6 +94,33 @@ export const es = {
     'modal.interval.1_week': '1 semana',
     'modal.interval.2_weeks': '2 semanas',
     
+    // Auto-detection functionality
+    'modal.auto_detect.detecting': '🔍 Detectando...',
+    'modal.auto_detect.detected': 'Detectado:',
+    'modal.auto_detect.location_error': 'Ubicación no pudo ser detectada automáticamente. Por favor selecciona manualmente.',
+    'modal.auto_detect.detection_error': 'Error en la detección de ubicación. Por favor selecciona manualmente.',
+    'modal.auto_detect.examples': 'Ejemplos:',
+    
+    // Event Details
+    'event.details.plant': 'Planta:',
+    'event.details.category': 'Categoría:',
+    'event.details.location': 'Ubicación:',
+    'event.details.current_phase': 'Fase Actual:',
+    'event.details.started': 'Iniciado:',
+    'event.details.expected_completion': 'Finalización Esperada:',
+    'event.details.date': 'Fecha:',
+    'event.details.description': 'Descripción:',
+    'event.details.no_description': 'No se proporcionó descripción',
+    'event.details.custom_phase_durations': '⏱️ Duración de fases personalizada aplicada',
+    
+    // Planting Status
+    'planting.status.title': 'Estado',
+    'planting.status.active': 'Activo',
+    'planting.status.completed': 'Completado',
+    'planting.status.failed': 'Fallido',
+    'planting.delete.confirm': '¿Estás seguro de que quieres eliminar este evento?',
+    'planting.delete.error': 'Error al eliminar el evento. Por favor intenta de nuevo.',
+    
     // Plant Info Display
     'plant.info.growing_cycle': 'Ciclo de crecimiento:',
     'plant.info.days': 'días',
@@ -105,6 +132,16 @@ export const es = {
     'plant.info.growing': 'Cultivo',
     'plant.info.only': 'solo',
     'plant.info.natural_timing': 'Las fases son determinadas por las estaciones naturales y no se pueden ajustar',
+    'plant.info.category': 'Categoría:',
+    'plant.info.environment': 'Ambiente:',
+    'plant.info.total_duration': 'Duración Total:',
+    'plant.info.autoflower.title': 'Autoflower - Floración Automática',
+    'plant.info.autoflower.description': 'Los autoflowers florecen automáticamente independientemente del ciclo de luz. Las fases no se pueden ajustar.',
+    'plant.info.outdoor.title': 'Exterior - Estaciones Naturales',
+    'plant.info.outdoor.description': 'Las fases están determinadas por las estaciones naturales y no se pueden ajustar.',
+    'plant.info.outdoor.fixed': 'fijo',
+    'plant.info.recommended_planting_time': 'Tiempo de plantación recomendado:',
+    'plant.info.check_planting_times': 'Por favor verifique los tiempos de plantación para su región',
     
     // Seasonal Timing
     'timing.good': '✅ ¡Buen momento!',
@@ -151,6 +188,16 @@ export const es = {
     'timing.no_planting_window_specified': 'No se especificó ventana de plantación',
     'timing.consider_planting_between': 'Considere plantar entre {start} y {end}. {description}',
     'timing.good_timing': '¡Buen momento! {description}',
+    'timing.current_season': 'Temporada actual',
+    
+    // Planting Tips
+    'planting.tips.vegetables': 'Siembra directa o cultivo previo posible',
+    'planting.tips.herbs': 'Esquejes o semillas posibles',
+    'planting.tips.fruits': 'Plantas en contenedor o raíz desnuda',
+    'planting.tips.cuttings': 'Esquejes:',
+    'planting.tips.mediterranean': 'Sombra en el calor del mediodía, regar por la mañana',
+    'planting.tips.temperate_north': 'Plantar después de la última helada, usar mantillo',
+    'planting.tips.tropical': 'Posible todo el año, prestar atención a las temporadas de lluvia',
     
     // Location Placeholders
     'location.indoor.placeholder': 'ej: Carpa Interior, Cuarto de Cultivo, Alféizar',
@@ -583,5 +630,9 @@ export const es = {
     'plants_list.current': 'Actual',
     'plants_list.no_phase_info': 'No hay información de fases disponible',
     'plants_list.failed_load_details': '❌ Error al cargar detalles de la planta',
+    
+    // Phase Editing
+    'phase.editable': 'editable',
+    'phase.fixed': 'fijo',
 };
   

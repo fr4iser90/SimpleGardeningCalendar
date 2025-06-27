@@ -104,6 +104,16 @@ export const fr = {
     'plant.info.growing': 'Culture',
     'plant.info.only': 'seulement',
     'plant.info.natural_timing': 'Phases sont déterminées par les saisons naturelles et ne peuvent être ajustées',
+    'plant.info.category': 'Catégorie :',
+    'plant.info.environment': 'Environnement :',
+    'plant.info.total_duration': 'Durée totale :',
+    'plant.info.autoflower.title': 'Autofloraison - Floraison automatique',
+    'plant.info.autoflower.description': 'Les autofloraisons fleurissent automatiquement, indépendamment du cycle lumineux. Les phases ne peuvent pas être ajustées.',
+    'plant.info.outdoor.title': 'Extérieur - Saisons naturelles',
+    'plant.info.outdoor.description': 'Les phases sont déterminées par les saisons naturelles et ne peuvent pas être ajustées.',
+    'plant.info.outdoor.fixed': 'fixe',
+    'plant.info.recommended_planting_time': 'Période de plantation recommandée :',
+    'plant.info.check_planting_times': 'Veuillez vérifier les périodes de plantation pour votre région',
     
     // Seasonal Timing
     'timing.good': '✅ Bon timing!',
@@ -150,6 +160,7 @@ export const fr = {
     'timing.no_planting_window_specified': 'Aucune fenêtre de plantation spécifiée',
     'timing.consider_planting_between': 'Envisagez de planter entre {start} et {end}. {description}',
     'timing.good_timing': 'Bon timing! {description}',
+    'timing.current_season': 'Saison actuelle',
     
     // Location Placeholders
     'location.indoor.placeholder': 'ex: Tente de Culture, Salle de Culture, Rebord de Fenêtre',
@@ -562,5 +573,45 @@ export const fr = {
     'plants_list.current': 'Actuel',
     'plants_list.no_phase_info': 'Aucune information de phase disponible',
     'plants_list.failed_load_details': '❌ Échec du chargement des détails de la plante',
+
+    // Auto-detection functionality
+    'modal.auto_detect.detecting': '🔍 Détection...',
+    'modal.auto_detect.detected': 'Détecté :',
+    'modal.auto_detect.location_error': 'La localisation n\'a pas pu être détectée automatiquement. Veuillez sélectionner manuellement.',
+    'modal.auto_detect.detection_error': 'Erreur lors de la détection de la localisation. Veuillez sélectionner manuellement.',
+    'modal.auto_detect.examples': 'Exemples :',
+
+    // Event Details
+    'event.details.plant': 'Plante :',
+    'event.details.category': 'Catégorie :',
+    'event.details.location': 'Emplacement :',
+    'event.details.current_phase': 'Phase actuelle :',
+    'event.details.started': 'Commencé :',
+    'event.details.expected_completion': 'Fin prévue :',
+    'event.details.date': 'Date :',
+    'event.details.description': 'Description :',
+    'event.details.no_description': 'Aucune description fournie',
+    'event.details.custom_phase_durations': '⏱️ Durées de phase personnalisées appliquées',
+
+    // Planting Status
+    'planting.status.title': 'Statut',
+    'planting.status.active': 'Actif',
+    'planting.status.completed': 'Terminé',
+    'planting.status.failed': 'Échoué',
+    'planting.delete.confirm': 'Êtes-vous sûr de vouloir supprimer cet événement ?',
+    'planting.delete.error': 'Erreur lors de la suppression de l\'événement. Veuillez réessayer.',
+
+    // Planting Tips
+    'planting.tips.vegetables': 'Semis direct ou pré-culture possible',
+    'planting.tips.herbs': 'Boutures ou graines possibles',
+    'planting.tips.fruits': 'Plantes en conteneur ou à racines nues',
+    'planting.tips.cuttings': 'Boutures :',
+    'planting.tips.mediterranean': 'Ombre pendant la chaleur de midi, arroser le matin',
+    'planting.tips.temperate_north': 'Planter après les dernières gelées, utiliser du paillis',
+    'planting.tips.tropical': 'Possible toute l\'année, attention aux saisons des pluies',
+
+    // Phase Editing
+    'phase.editable': 'modifiable',
+    'phase.fixed': 'fixe',
 };
   

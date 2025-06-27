@@ -105,6 +105,16 @@ export const en = {
     'plant.info.growing': 'Growing',
     'plant.info.only': 'only',
     'plant.info.natural_timing': 'Phases are determined by natural seasons and cannot be adjusted',
+    'plant.info.category': 'Category:',
+    'plant.info.environment': 'Environment:',
+    'plant.info.total_duration': 'Total Duration:',
+    'plant.info.autoflower.title': 'Autoflower - Automatic Flowering',
+    'plant.info.autoflower.description': 'Autoflowers flower automatically regardless of light cycle. Phases cannot be adjusted.',
+    'plant.info.outdoor.title': 'Outdoor - Natural Seasons',
+    'plant.info.outdoor.description': 'Phases are determined by natural seasons and cannot be adjusted.',
+    'plant.info.outdoor.fixed': 'fixed',
+    'plant.info.recommended_planting_time': 'Recommended planting time:',
+    'plant.info.check_planting_times': 'Please check planting times for your region',
     
     // Seasonal Timing
     'timing.good': '✅ Good timing!',
@@ -151,6 +161,7 @@ export const en = {
     'timing.no_planting_window_specified': 'No planting window specified',
     'timing.consider_planting_between': 'Consider planting between {start} and {end}. {description}',
     'timing.good_timing': 'Good timing! {description}',
+    'timing.current_season': 'Current season',
     
     // Location Placeholders
     'location.indoor.placeholder': 'e.g., Indoor Tent, Grow Room, Windowsill',
@@ -581,5 +592,45 @@ export const en = {
     'plants_list.current': 'Current',
     'plants_list.no_phase_info': 'No phase information available',
     'plants_list.failed_load_details': '❌ Failed to load plant details',
+
+    // Auto-detection functionality
+    'modal.auto_detect.detecting': '🔍 Detecting...',
+    'modal.auto_detect.detected': 'Detected:',
+    'modal.auto_detect.location_error': 'Location could not be detected automatically. Please select manually.',
+    'modal.auto_detect.detection_error': 'Error detecting location. Please select manually.',
+    'modal.auto_detect.examples': 'Examples:',
+
+    // Event Details
+    'event.details.plant': 'Plant:',
+    'event.details.category': 'Category:',
+    'event.details.location': 'Location:',
+    'event.details.current_phase': 'Current Phase:',
+    'event.details.started': 'Started:',
+    'event.details.expected_completion': 'Expected Completion:',
+    'event.details.date': 'Date:',
+    'event.details.description': 'Description:',
+    'event.details.no_description': 'No description provided',
+    'event.details.custom_phase_durations': '⏱️ Custom phase durations applied',
+
+    // Planting Status
+    'planting.status.title': 'Status',
+    'planting.status.active': 'Active',
+    'planting.status.completed': 'Completed',
+    'planting.status.failed': 'Failed',
+    'planting.delete.confirm': 'Are you sure you want to delete this event?',
+    'planting.delete.error': 'Failed to delete event. Please try again.',
+
+    // Planting Tips
+    'planting.tips.vegetables': 'Direct seeding or pre-cultivation possible',
+    'planting.tips.herbs': 'Cuttings or seeds possible',
+    'planting.tips.fruits': 'Container or bare root plants',
+    'planting.tips.cuttings': 'Cuttings:',
+    'planting.tips.mediterranean': 'Shade during midday heat, water in the morning',
+    'planting.tips.temperate_north': 'Plant after last frost, use mulch',
+    'planting.tips.tropical': 'Possible year-round, pay attention to rainy seasons',
+
+    // Phase Editing
+    'phase.editable': 'editable',
+    'phase.fixed': 'fixed',
 };
   

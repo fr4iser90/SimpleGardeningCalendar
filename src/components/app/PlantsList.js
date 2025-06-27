@@ -54,7 +54,7 @@ export async function showMyPlantsModal() {
               <div class="text-sm text-gray-600 dark:text-gray-400 space-y-1">
                 <div><strong>${labelLocation}:</strong> ${planting.location}</div>
                 <div><strong>${labelStarted}:</strong> ${new Date(planting.startDate).toLocaleDateString()}</div>
-                <div><strong>${labelCurrentPhase}:</strong> ${planting.currentPhase}</div>
+                <div><strong>${labelCurrentPhase}:</strong> ${t('phase.' + planting.currentPhase)}</div>
                 <div><strong>${labelExpectedCompletion}:</strong> ${new Date(planting.completionDate).toLocaleDateString()}</div>
               </div>
               <div class="mt-3 flex space-x-2">
@@ -279,7 +279,7 @@ export async function viewPlantDetails(plantingId) {
                 }">${planting.status}</span></div>
                 <div><strong>${labelStarted}:</strong> ${new Date(planting.startDate).toLocaleDateString()}</div>
                 <div><strong>${labelExpectedCompletion}:</strong> ${new Date(planting.completionDate).toLocaleDateString()}</div>
-                <div><strong>${labelCurrentPhase}:</strong> ${planting.currentPhase}</div>
+                <div><strong>${labelCurrentPhase}:</strong> ${t('phase.' + planting.currentPhase)}</div>
               </div>
               
               ${planting.legalNote ? `
@@ -306,7 +306,7 @@ export async function viewPlantDetails(plantingId) {
                       <div class="flex items-center space-x-2">
                         <span class="text-lg">${getPhaseEmoji(phase.name)}</span>
                         <div>
-                          <div class="font-medium text-sm dark:text-white">${phase.name}</div>
+                          <div class="font-medium text-sm dark:text-white">${t('phase.' + phase.name)}</div>
                           <div class="text-xs text-gray-500 dark:text-gray-400">${data.days} days</div>
                         </div>
                       </div>

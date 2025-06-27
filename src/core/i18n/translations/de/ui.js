@@ -105,6 +105,16 @@ export const de = {
     'plant.info.growing': 'Anbau',
     'plant.info.only': 'nur',
     'plant.info.natural_timing': 'Phasen werden von natürlichen Jahreszeiten bestimmt und können nicht angepasst werden',
+    'plant.info.category': 'Kategorie:',
+    'plant.info.environment': 'Umgebung:',
+    'plant.info.total_duration': 'Gesamtdauer:',
+    'plant.info.autoflower.title': 'Autoflower - Automatische Blüte',
+    'plant.info.autoflower.description': 'Autoflowers blühen automatisch unabhängig vom Lichtzyklus. Phasen können nicht angepasst werden.',
+    'plant.info.outdoor.title': 'Außenbereich - Natürliche Jahreszeiten',
+    'plant.info.outdoor.description': 'Phasen werden durch natürliche Jahreszeiten bestimmt und können nicht angepasst werden.',
+    'plant.info.outdoor.fixed': 'fest',
+    'plant.info.recommended_planting_time': 'Empfohlene Pflanzzeit:',
+    'plant.info.check_planting_times': 'Bitte prüfen Sie die Pflanzzeiten für Ihre Region',
     
     // Seasonal Timing
     'timing.good': '✅ Gute Zeit!',
@@ -151,6 +161,7 @@ export const de = {
     'timing.no_planting_window_specified': 'Kein Pflanzfenster angegeben',
     'timing.consider_planting_between': 'Erwägen Sie die Pflanzung zwischen {start} und {end}. {description}',
     'timing.good_timing': 'Gute Zeit! {description}',
+    'timing.current_season': 'Aktuelle Jahreszeit',
     
     // Location Placeholders
     'location.indoor.placeholder': 'z.B. Growzelt, Growraum, Fensterbank',
@@ -232,6 +243,8 @@ export const de = {
     'phase.preflower': 'Vorblüte',
     'phase.flowering': 'Blüte',
     'phase.harvest': 'Ernte',
+    'phase.editable': 'bearbeitbar',
+    'phase.fixed': 'fest',
     
     // Priority Levels
     'priority.high': 'Hoch',
@@ -580,6 +593,46 @@ export const de = {
     'plants_list.care_tips': '💡 Pflegetipps',
     'plants_list.current': 'Aktuell',
     'plants_list.no_phase_info': 'Keine Phaseninformationen verfügbar',
-    'plants_list.failed_load_details': '❌ Laden der Pflanzendetails fehlgeschlagen'
+    'plants_list.failed_load_details': '❌ Laden der Pflanzendetails fehlgeschlagen',
+    
+    // Auto-detection functionality
+    'modal.auto_detect.detecting': '🔍 Erkennen...',
+    'modal.auto_detect.detected': 'Erkannt:',
+    'modal.auto_detect.location_error': 'Standort konnte nicht automatisch erkannt werden. Bitte wählen Sie manuell.',
+    'modal.auto_detect.detection_error': 'Fehler bei der Standorterkennung. Bitte wählen Sie manuell.',
+    'modal.auto_detect.examples': 'Beispiele:',
+
+    // Event Details
+    'event.details.plant': 'Pflanze:',
+    'event.details.category': 'Kategorie:',
+    'event.details.location': 'Standort:',
+    'event.details.current_phase': 'Aktuelle Phase:',
+    'event.details.started': 'Gestartet:',
+    'event.details.expected_completion': 'Erwarteter Abschluss:',
+    'event.details.date': 'Datum:',
+    'event.details.description': 'Beschreibung:',
+    'event.details.no_description': 'Keine Beschreibung vorhanden',
+    'event.details.custom_phase_durations': '⏱️ Benutzerdefinierte Phasendauern angewendet',
+
+    // Planting Status
+    'planting.status.title': 'Status',
+    'planting.status.active': 'Aktiv',
+    'planting.status.completed': 'Abgeschlossen',
+    'planting.status.failed': 'Fehlgeschlagen',
+    'planting.delete.confirm': 'Sind Sie sicher, dass Sie dieses Ereignis löschen möchten?',
+    'planting.delete.error': 'Fehler beim Löschen des Ereignisses. Bitte versuchen Sie es erneut.',
+
+    // Planting Tips
+    'planting.tips.vegetables': 'Direktsaat oder Vorkultur möglich',
+    'planting.tips.herbs': 'Stecklinge oder Samen möglich',
+    'planting.tips.fruits': 'Container- oder wurzelnackte Pflanzen',
+    'planting.tips.cuttings': 'Stecklinge:',
+    'planting.tips.mediterranean': 'Schatten in der Mittagshitze, morgens gießen',
+    'planting.tips.temperate_north': 'Nach dem letzten Frost pflanzen, Mulch verwenden',
+    'planting.tips.tropical': 'Ganzjährig möglich, auf Regenzeiten achten',
+
+    // Phase Editing
+    'phase.editable': 'bearbeitbar',
+    'phase.fixed': 'fest'
   };
   

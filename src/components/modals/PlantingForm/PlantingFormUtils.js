@@ -3,6 +3,7 @@
  */
 
 import { getPlantRegistry } from '../../../core/db/plants/index.js';
+import { t } from '../../../core/i18n/index.js';
 
 /**
  * Extract environment key from environment value (removes 'environment.' prefix)
@@ -51,25 +52,25 @@ export function getPlantingTips(plantType, region) {
   
   // Add general planting tips
   if (plantData.category === 'Vegetables') {
-    tips.push('Direktsaat oder Vorkultur möglich');
+    tips.push(t('planting.tips.vegetables'));
   } else if (plantData.category === 'Herbs') {
-    tips.push('Stecklinge oder Samen möglich');
+    tips.push(t('planting.tips.herbs'));
   } else if (plantData.category === 'Fruits') {
-    tips.push('Containerpflanzen oder wurzelnackte Pflanzen');
+    tips.push(t('planting.tips.fruits'));
   }
   
   // Add cutting information if available
   if (plantData.cuttingInfo) {
-    tips.push(`Stecklinge: ${plantData.cuttingInfo}`);
+    tips.push(`${t('planting.tips.cuttings')} ${plantData.cuttingInfo}`);
   }
   
   // Add region-specific tips
   if (region === 'mediterranean') {
-    tips.push('Schatten in der Mittagshitze, morgens gießen');
+    tips.push(t('planting.tips.mediterranean'));
   } else if (region === 'temperate_north') {
-    tips.push('Nach dem letzten Frost pflanzen, Mulch verwenden');
+    tips.push(t('planting.tips.temperate_north'));
   } else if (region === 'tropical') {
-    tips.push('Ganzjährig möglich, auf Regenzeiten achten');
+    tips.push(t('planting.tips.tropical'));
   }
   
   return tips.join('. ');

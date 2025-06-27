@@ -133,8 +133,8 @@ export function updatePlantInfo() {
   const { plantData, envData, envKey } = plantEnvData;
   const phases = Object.entries(envData.phases).map(([phase, data]) => {
     const emoji = getPhaseEmoji(phase);
-    const editable = data.editable ? ' (editable)' : ' (fixed)';
-    return `${emoji} ${phase}: ${data.days} days${editable}`;
+    const editable = data.editable ? ` (${t('phase.editable')})` : ` (${t('phase.fixed')})`;
+    return `${emoji} ${t('phase.' + phase)}: ${data.days} ${t('plant.info.days')}${editable}`;
   }).join('<br>');
 
   const totalDays = Object.values(envData.phases).reduce((sum, phase) => sum + phase.days, 0);
@@ -142,11 +142,11 @@ export function updatePlantInfo() {
   plantInfo.style.display = '';
   plantInfo.innerHTML = `
     <h4 class="font-medium mb-2">${plantData.name}</h4>
-    <p class="text-sm mb-2"><strong>Category:</strong> ${plantData.category}</p>
-    <p class="text-sm mb-2"><strong>Environment:</strong> ${envKey}</p>
-    <p class="text-sm mb-2"><strong>Total Duration:</strong> ${totalDays} days</p>
+    <p class="text-sm mb-2"><strong>${t('plant.info.category')}</strong> ${plantData.category}</p>
+    <p class="text-sm mb-2"><strong>${t('plant.info.environment')}</strong> ${envKey}</p>
+    <p class="text-sm mb-2"><strong>${t('plant.info.total_duration')}</strong> ${totalDays} ${t('plant.info.days')}</p>
     <div class="text-sm">
-      <strong>Phases:</strong><br>
+      <strong>${t('plant.info.phases')}</strong><br>
       ${phases}
     </div>
   `;
@@ -184,10 +184,10 @@ export function updatePhaseInputs() {
           <span class="text-blue-600 dark:text-blue-400 mr-2">🌱</span>
           <div>
             <p class="text-sm font-medium text-blue-800 dark:text-blue-200 mb-1">
-              Autoflower - Automatische Blüte
+              ${t('plant.info.autoflower.title')}
             </p>
             <p class="text-xs text-blue-700 dark:text-blue-300">
-              Autoflowers blühen automatisch unabhängig vom Lichtzyklus. Phasen können nicht angepasst werden.
+              ${t('plant.info.autoflower.description')}
             </p>
           </div>
         </div>
@@ -204,10 +204,10 @@ export function updatePhaseInputs() {
             <span class="text-yellow-600 dark:text-yellow-400 mr-2">🌱</span>
             <div>
               <p class="text-sm font-medium text-yellow-800 dark:text-yellow-200 mb-1">
-                Outdoor - Natürliche Jahreszeiten
+                ${t('plant.info.outdoor.title')}
               </p>
               <p class="text-xs text-yellow-700 dark:text-yellow-300">
-                Phasen werden durch natürliche Jahreszeiten bestimmt und können nicht angepasst werden.
+                ${t('plant.info.outdoor.description')}
               </p>
             </div>
           </div>
@@ -216,7 +216,7 @@ export function updatePhaseInputs() {
     } else {
       const nonEditablePhases = Object.entries(phases).filter(([phase, data]) => !data.editable);
       const nonEditableInfo = nonEditablePhases.map(([phase, data]) => 
-        `${getPhaseEmoji(phase)} ${phase}: ${data.days} Tage (fest)`
+        `${getPhaseEmoji(phase)} ${t('phase.' + phase)}: ${data.days} ${t('plant.info.days')} (${t('plant.info.outdoor.fixed')})`
       ).join('<br>');
       
       phaseInputs.innerHTML = `
@@ -225,7 +225,7 @@ export function updatePhaseInputs() {
             <span class="text-yellow-600 dark:text-yellow-400 mr-2">🌱</span>
             <div>
               <p class="text-sm font-medium text-yellow-800 dark:text-yellow-200 mb-1">
-                Outdoor - Natürliche Jahreszeiten
+                ${t('plant.info.outdoor.title')}
               </p>
               <p class="text-xs text-yellow-700 dark:text-yellow-300">
                 ${nonEditableInfo}
@@ -235,7 +235,7 @@ export function updatePhaseInputs() {
         </div>
         ${editablePhases.map(([phase, data]) => `
           <div>
-            <label class="block text-sm font-medium mb-1">${getPhaseEmoji(phase)} ${phase}</label>
+            <label class="block text-sm font-medium mb-1">${getPhaseEmoji(phase)} ${t('phase.' + phase)}</label>
             <input type="number" name="phase_${phase}" value="${data.days}" min="1" class="w-full p-2 border rounded dark:bg-gray-700 dark:border-gray-600 dark:text-white">
           </div>
         `).join('')}
@@ -245,7 +245,7 @@ export function updatePhaseInputs() {
     // Indoor or greenhouse: All phases editable
     phaseInputs.innerHTML = Object.entries(phases).map(([phase, data]) => `
       <div>
-        <label class="block text-sm font-medium mb-1">${getPhaseEmoji(phase)} ${phase}</label>
+        <label class="block text-sm font-medium mb-1">${getPhaseEmoji(phase)} ${t('phase.' + phase)}</label>
         <input type="number" name="phase_${phase}" value="${data.days}" min="1" class="w-full p-2 border rounded dark:bg-gray-700 dark:border-gray-600 dark:text-white">
       </div>
     `).join('');
@@ -322,7 +322,7 @@ export function checkSeasonalTiming() {
     if (seasonalDetails) {
       seasonalDetails.innerHTML = `
         <div class="mt-2 text-sm text-yellow-700 dark:text-yellow-300">
-          <p><strong>Empfohlene Pflanzzeit:</strong> ${validation.recommendedPeriod || 'Bitte prüfen Sie die Pflanzzeiten für Ihre Region'}</p>
+          <p><strong>${t('plant.info.recommended_planting_time')}</strong> ${validation.recommendedPeriod || t('plant.info.check_planting_times')}</p>
           ${validation.details ? `<p class="mt-1">${validation.details}</p>` : ''}
         </div>
       `;
@@ -336,7 +336,7 @@ export function checkSeasonalTiming() {
         <div class="flex items-start">
           <span class="text-green-600 dark:text-green-400 mr-2">✅</span>
           <div>
-            <p class="font-medium text-green-800 dark:text-green-200">Perfekte Pflanzzeit!</p>
+            <p class="font-medium text-green-800 dark:text-green-200">${t('timing.perfect')}</p>
           </div>
         </div>
       `;
@@ -345,8 +345,8 @@ export function checkSeasonalTiming() {
     if (seasonalDetails) {
       seasonalDetails.innerHTML = `
         <div class="mt-2 text-sm text-green-700 dark:text-green-300">
-          <p><strong>Ideal für:</strong> ${validation.recommendedPeriod || 'Aktuelle Jahreszeit'}</p>
-          ${getPlantingTips(plantTypeSelect.value, region) ? `<p class="mt-1"><strong>Tipps:</strong> ${getPlantingTips(plantTypeSelect.value, region)}</p>` : ''}
+          <p><strong>${t('timing.ideal_for')}:</strong> ${validation.recommendedPeriod || t('timing.current_season')}</p>
+          ${getPlantingTips(plantTypeSelect.value, region) ? `<p class="mt-1"><strong>${t('timing.tips')}:</strong> ${getPlantingTips(plantTypeSelect.value, region)}</p>` : ''}
         </div>
       `;
     }
@@ -383,7 +383,7 @@ export function updatePhaseCareInputs() {
     const fertilizing = (data[medium]?.fertilizing?.interval ?? data.fertilizing?.interval) || '';
     return `
       <div class="flex items-center gap-4 mb-2">
-        <span class="w-32">${getPhaseEmoji(phase)} ${phase}</span>
+        <span class="w-32">${getPhaseEmoji(phase)} ${t('phase.' + phase)}</span>
         <label class="flex items-center gap-1">
           <input type="checkbox" name="watering_${phase}_enabled" class="accent-blue-500" ${watering ? 'checked' : ''}>
           ${t('modal.reminders.watering')}

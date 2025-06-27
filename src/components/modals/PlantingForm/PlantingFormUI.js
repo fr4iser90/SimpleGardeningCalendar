@@ -80,10 +80,6 @@ export async function createPlantingForm(date, preselectedPlant = null) {
         <input type="text" name="customName" id="customNameField" class="w-full p-2 border rounded dark:bg-gray-700 dark:border-gray-600 dark:text-white">
         <p class="text-xs text-gray-500 dark:text-gray-400 mt-1">${t('modal.custom_name.help')}</p>
       </div>
-      <div>
-        <label class="block text-sm font-medium mb-1 dark:text-gray-200">${t('modal.location.label')}</label>
-        <input type="text" name="location" id="locationField" value="Default Garden" class="w-full p-2 border rounded dark:bg-gray-700 dark:border-gray-600 dark:text-white">
-      </div>
     </div>
     
     <div id="seasonalWarning" class="hidden">
@@ -160,7 +156,7 @@ function initializeAutoDetection(formContainer) {
   if (autoDetectBtn && regionSelect) {
     autoDetectBtn.addEventListener('click', async () => {
       const originalText = autoDetectBtn.textContent;
-      autoDetectBtn.textContent = '🔍 Erkennen...';
+      autoDetectBtn.textContent = t('modal.auto_detect.detecting');
       autoDetectBtn.disabled = true;
       
       try {
@@ -170,7 +166,7 @@ function initializeAutoDetection(formContainer) {
           regionSelect.value = location.climateZone;
           regionDescription.innerHTML = `
             <div class="p-2 bg-blue-50 dark:bg-blue-900 rounded border border-blue-200 dark:border-blue-700">
-              <p class="text-xs"><strong>Erkannt:</strong> ${location.city}, ${location.countryName}</p>
+              <p class="text-xs"><strong>${t('modal.auto_detect.detected')}</strong> ${location.city}, ${location.countryName}</p>
               <p class="text-xs">${location.climateInfo}</p>
             </div>
           `;
@@ -181,7 +177,7 @@ function initializeAutoDetection(formContainer) {
         } else {
           regionDescription.innerHTML = `
             <div class="p-2 bg-yellow-50 dark:bg-yellow-900 rounded border border-yellow-200 dark:border-yellow-700">
-              <p class="text-xs text-yellow-700 dark:text-yellow-300">Standort konnte nicht automatisch erkannt werden. Bitte wählen Sie manuell.</p>
+              <p class="text-xs text-yellow-700 dark:text-yellow-300">${t('modal.auto_detect.location_error')}</p>
             </div>
           `;
           regionDescription.classList.remove('hidden');
@@ -190,7 +186,7 @@ function initializeAutoDetection(formContainer) {
         console.error('Auto-detection error:', error);
         regionDescription.innerHTML = `
           <div class="p-2 bg-red-50 dark:bg-red-900 rounded border border-red-200 dark:border-red-700">
-            <p class="text-xs text-red-700 dark:text-red-300">Fehler bei der Standorterkennung. Bitte wählen Sie manuell.</p>
+            <p class="text-xs text-red-700 dark:text-red-300">${t('modal.auto_detect.detection_error')}</p>
           </div>
         `;
         regionDescription.classList.remove('hidden');
@@ -212,7 +208,7 @@ function initializeAutoDetection(formContainer) {
           <div class="p-2 bg-gray-50 dark:bg-gray-800 rounded border border-gray-200 dark:border-gray-700">
             <p class="text-xs"><strong>${description.name}</strong></p>
             <p class="text-xs">${description.description}</p>
-            <p class="text-xs"><em>Beispiele:</em> ${description.examples}</p>
+            <p class="text-xs"><em>${t('modal.auto_detect.examples')}</em> ${description.examples}</p>
           </div>
         `;
         regionDescription.classList.remove('hidden');
