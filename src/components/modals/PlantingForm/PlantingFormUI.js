@@ -80,6 +80,10 @@ export async function createPlantingForm(date, preselectedPlant = null) {
         <input type="text" name="customName" id="customNameField" class="w-full p-2 border rounded dark:bg-gray-700 dark:border-gray-600 dark:text-white">
         <p class="text-xs text-gray-500 dark:text-gray-400 mt-1">${t('modal.custom_name.help')}</p>
       </div>
+      <div>
+        <label class="block text-sm font-medium mb-1 dark:text-gray-200">${t('modal.location.label')}</label>
+        <input type="text" name="location" id="locationField" class="w-full p-2 border rounded dark:bg-gray-700 dark:border-gray-600 dark:text-white">
+      </div>
     </div>
     
     <div id="seasonalWarning" class="hidden">
