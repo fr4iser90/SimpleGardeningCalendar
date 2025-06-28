@@ -4,6 +4,7 @@
  */
 
 import { PLANT_TAGS } from '../categories.js';
+import { createProblemRefs } from '../problems.js';
 
 export const kale = {
   name: 'kale.name',
@@ -298,11 +299,7 @@ export const kale = {
     soilPH: 'kale.careTips.soilPH',
     harvesting: 'kale.careTips.harvesting',
   },
-  commonProblems: {
-    cabbageWorms: 'kale.commonProblems.cabbageWorms',
-    aphids: 'kale.commonProblems.aphids',
-    clubroot: 'kale.commonProblems.clubroot',
-  },
+  commonProblems: createProblemRefs(['aphids', 'downyMildew', 'cabbageWorm'], 'vegetables'),
 };
 
 export default kale;

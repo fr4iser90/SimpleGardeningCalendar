@@ -4,6 +4,7 @@
  */
 
 import { PLANT_TAGS } from '../categories.js';
+import { createProblemRefs } from '../problems.js';
 
 export const peppers = {
   name: 'peppers.name',
@@ -298,11 +299,7 @@ export const peppers = {
     soilPH: 'peppers.careTips.soilPH',
     support: 'peppers.careTips.support',
   },
-  commonProblems: {
-    blossomEndRot: 'peppers.commonProblems.blossomEndRot',
-    sunscald: 'peppers.commonProblems.sunscald',
-    pepperMaggot: 'peppers.commonProblems.pepperMaggot',
-  },
+  commonProblems: createProblemRefs(['blossomEndRot', 'lateBlight', 'powderyMildew'], 'vegetables'),
 };
 
 export default peppers;

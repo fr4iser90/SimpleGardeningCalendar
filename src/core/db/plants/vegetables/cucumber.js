@@ -4,7 +4,7 @@
  */
 
 import { PLANT_TAGS } from '../categories.js';
-
+import { createProblemRefs } from '../problems.js';
 export const cucumber = {
   name: 'cucumber.name',
   category: 'category.vegetables',
@@ -298,11 +298,7 @@ export const cucumber = {
     soilPH: 'cucumber.careTips.soilPH',
     support: 'cucumber.careTips.support',
   },
-  commonProblems: {
-    powderyMildew: 'cucumber.commonProblems.powderyMildew',
-    cucumberBeetles: 'cucumber.commonProblems.cucumberBeetles',
-    bitterFruit: 'cucumber.commonProblems.bitterFruit',
-  },
+  commonProblems: createProblemRefs(['powderyMildew', 'downyMildew', 'cucumberBeetle'], 'vegetables'),
 };
 
 export default cucumber;

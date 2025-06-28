@@ -4,6 +4,7 @@
  */
 
 import { PLANT_TAGS } from '../categories.js';
+import { createProblemRefs } from '../problems.js';
 
 export const apple_tree = {
   name: 'apple_tree.name',
@@ -204,12 +205,7 @@ export const apple_tree = {
     pollination: 'apple_tree.careTips.pollination',
     soilPH: 'apple_tree.careTips.soilPH',
   },
-  commonProblems: {
-    'Apple Scab': 'apple_tree.commonProblems.appleScab',
-    'Codling Moth': 'apple_tree.commonProblems.codlingMoth',
-    'Fire Blight': 'apple_tree.commonProblems.fireBlight',
-    'Biennial Bearing': 'apple_tree.commonProblems.biennialBearing',
-  },
+  commonProblems: createProblemRefs(['rootRot', 'powderyMildew', 'birds'], 'fruits'),
 };
 
 export default apple_tree;

@@ -7,7 +7,7 @@ import { PLANT_TAGS } from '../categories.js';
 import { createProblemRefs } from '../problems.js';
 
 export const sage = {
-  name: 'plants.herbs.sage.name',
+  name: 'sage.name',
   category: 'category.herbs',
   tags: [PLANT_TAGS.PERENNIAL, PLANT_TAGS.PHOTOPERIOD],
   emoji: '🌿',
@@ -16,145 +16,145 @@ export const sage = {
       phases: {
         germination: {
           days: 14,
-          description: 'plants.herbs.sage.phases.germination.description',
-          care: 'plants.herbs.sage.phases.germination.care',
+          description: 'sage.phases.germination.description',
+          care: 'sage.phases.germination.care',
           editable: true,
           soil: {
             watering: {
               interval: 1,
-              description: 'plants.herbs.sage.phases.germination.soil.watering.description',
+              description: 'sage.phases.germination.soil.watering.description',
             },
             fertilizing: {
               interval: 0,
-              description: 'plants.herbs.sage.phases.germination.soil.fertilizing.description',
+              description: 'sage.phases.germination.soil.fertilizing.description',
             },
           },
           hydro: {
             watering: {
               interval: 0,
-              description: 'plants.herbs.sage.phases.germination.hydro.watering.description',
+              description: 'sage.phases.germination.hydro.watering.description',
             },
             fertilizing: {
               interval: 0,
-              description: 'plants.herbs.sage.phases.germination.hydro.fertilizing.description',
+              description: 'sage.phases.germination.hydro.fertilizing.description',
             },
           },
           coco: {
             watering: {
               interval: 1,
-              description: 'plants.herbs.sage.phases.germination.coco.watering.description',
+              description: 'sage.phases.germination.coco.watering.description',
             },
             fertilizing: {
               interval: 0,
-              description: 'plants.herbs.sage.phases.germination.coco.fertilizing.description',
+              description: 'sage.phases.germination.coco.fertilizing.description',
             },
           },
         },
         seedling: {
           days: 28,
-          description: 'plants.herbs.sage.phases.seedling.description',
-          care: 'plants.herbs.sage.phases.seedling.care',
+          description: 'sage.phases.seedling.description',
+          care: 'sage.phases.seedling.care',
           editable: true,
           soil: {
             watering: {
               interval: 3,
-              description: 'plants.herbs.sage.phases.seedling.soil.watering.description',
+              description: 'sage.phases.seedling.soil.watering.description',
             },
             fertilizing: {
               interval: 0,
-              description: 'plants.herbs.sage.phases.seedling.soil.fertilizing.description',
+              description: 'sage.phases.seedling.soil.fertilizing.description',
             },
           },
           hydro: {
             watering: { 
               interval: 0, 
-              description: 'plants.herbs.sage.phases.seedling.hydro.watering.description' 
+              description: 'sage.phases.seedling.hydro.watering.description' 
             },
             fertilizing: {
               interval: 7,
-              description: 'plants.herbs.sage.phases.seedling.hydro.fertilizing.description',
+              description: 'sage.phases.seedling.hydro.fertilizing.description',
             },
           },
           coco: {
             watering: { 
               interval: 1, 
-              description: 'plants.herbs.sage.phases.seedling.coco.watering.description' 
+              description: 'sage.phases.seedling.coco.watering.description' 
             },
             fertilizing: { 
               interval: 7, 
-              description: 'plants.herbs.sage.phases.seedling.coco.fertilizing.description' 
+              description: 'sage.phases.seedling.coco.fertilizing.description' 
             },
           },
         },
         vegetative: {
           days: 40,
-          description: 'plants.herbs.sage.phases.vegetative.description',
-          care: 'plants.herbs.sage.phases.vegetative.care',
+          description: 'sage.phases.vegetative.description',
+          care: 'sage.phases.vegetative.care',
           editable: true,
           soil: {
             watering: {
               interval: 4,
-              description: 'plants.herbs.sage.phases.vegetative.soil.watering.description',
+              description: 'sage.phases.vegetative.soil.watering.description',
             },
             fertilizing: {
               interval: 21,
-              description: 'plants.herbs.sage.phases.vegetative.soil.fertilizing.description',
+              description: 'sage.phases.vegetative.soil.fertilizing.description',
             },
           },
           hydro: {
             watering: { 
               interval: 0, 
-              description: 'plants.herbs.sage.phases.vegetative.hydro.watering.description' 
+              description: 'sage.phases.vegetative.hydro.watering.description' 
             },
             fertilizing: {
               interval: 21,
-              description: 'plants.herbs.sage.phases.vegetative.hydro.fertilizing.description',
+              description: 'sage.phases.vegetative.hydro.fertilizing.description',
             },
           },
           coco: {
             watering: { 
               interval: 2, 
-              description: 'plants.herbs.sage.phases.vegetative.coco.watering.description' 
+              description: 'sage.phases.vegetative.coco.watering.description' 
             },
             fertilizing: {
               interval: 21,
-              description: 'plants.herbs.sage.phases.vegetative.coco.fertilizing.description',
+              description: 'sage.phases.vegetative.coco.fertilizing.description',
             },
           },
         },
         harvest: {
           days: 90,
-          description: 'plants.herbs.sage.phases.harvest.description',
-          care: 'plants.herbs.sage.phases.harvest.care',
+          description: 'sage.phases.harvest.description',
+          care: 'sage.phases.harvest.care',
           editable: true,
           soil: {
             watering: { 
               interval: 4, 
-              description: 'plants.herbs.sage.phases.harvest.soil.watering.description' 
+              description: 'sage.phases.harvest.soil.watering.description' 
             },
             fertilizing: {
               interval: 21,
-              description: 'plants.herbs.sage.phases.harvest.soil.fertilizing.description',
+              description: 'sage.phases.harvest.soil.fertilizing.description',
             },
           },
           hydro: {
             watering: { 
               interval: 0, 
-              description: 'plants.herbs.sage.phases.harvest.hydro.watering.description' 
+              description: 'sage.phases.harvest.hydro.watering.description' 
             },
             fertilizing: {
               interval: 21,
-              description: 'plants.herbs.sage.phases.harvest.hydro.fertilizing.description',
+              description: 'sage.phases.harvest.hydro.fertilizing.description',
             },
           },
           coco: {
             watering: { 
               interval: 2, 
-              description: 'plants.herbs.sage.phases.harvest.coco.watering.description' 
+              description: 'sage.phases.harvest.coco.watering.description' 
             },
             fertilizing: {
               interval: 21,
-              description: 'plants.herbs.sage.phases.harvest.coco.fertilizing.description',
+              description: 'sage.phases.harvest.coco.fertilizing.description',
             },
           },
         },
@@ -164,145 +164,145 @@ export const sage = {
       phases: {
         germination: {
           days: 14,
-          description: 'plants.herbs.sage.phases.germination.description',
-          care: 'plants.herbs.sage.phases.germination.care',
+          description: 'sage.phases.germination.description',
+          care: 'sage.phases.germination.care',
           editable: false,
           soil: {
             watering: {
               interval: 1,
-              description: 'plants.herbs.sage.phases.germination.soil.watering.description',
+              description: 'sage.phases.germination.soil.watering.description',
             },
             fertilizing: {
               interval: 0,
-              description: 'plants.herbs.sage.phases.germination.soil.fertilizing.description',
+              description: 'sage.phases.germination.soil.fertilizing.description',
             },
           },
           hydro: {
             watering: {
               interval: 0,
-              description: 'plants.herbs.sage.phases.germination.hydro.watering.description',
+              description: 'sage.phases.germination.hydro.watering.description',
             },
             fertilizing: {
               interval: 0,
-              description: 'plants.herbs.sage.phases.germination.hydro.fertilizing.description',
+              description: 'sage.phases.germination.hydro.fertilizing.description',
             },
           },
           coco: {
             watering: {
               interval: 1,
-              description: 'plants.herbs.sage.phases.germination.coco.watering.description',
+              description: 'sage.phases.germination.coco.watering.description',
             },
             fertilizing: {
               interval: 0,
-              description: 'plants.herbs.sage.phases.germination.coco.fertilizing.description',
+              description: 'sage.phases.germination.coco.fertilizing.description',
             },
           },
         },
         seedling: {
           days: 28,
-          description: 'plants.herbs.sage.phases.seedling.description',
-          care: 'plants.herbs.sage.phases.seedling.care',
+          description: 'sage.phases.seedling.description',
+          care: 'sage.phases.seedling.care',
           editable: false,
           soil: {
             watering: {
               interval: 3,
-              description: 'plants.herbs.sage.phases.seedling.soil.watering.description',
+              description: 'sage.phases.seedling.soil.watering.description',
             },
             fertilizing: {
               interval: 0,
-              description: 'plants.herbs.sage.phases.seedling.soil.fertilizing.description',
+              description: 'sage.phases.seedling.soil.fertilizing.description',
             },
           },
           hydro: {
             watering: { 
               interval: 0, 
-              description: 'plants.herbs.sage.phases.seedling.hydro.watering.description' 
+              description: 'sage.phases.seedling.hydro.watering.description' 
             },
             fertilizing: {
               interval: 7,
-              description: 'plants.herbs.sage.phases.seedling.hydro.fertilizing.description',
+              description: 'sage.phases.seedling.hydro.fertilizing.description',
             },
           },
           coco: {
             watering: { 
               interval: 1, 
-              description: 'plants.herbs.sage.phases.seedling.coco.watering.description' 
+              description: 'sage.phases.seedling.coco.watering.description' 
             },
             fertilizing: { 
               interval: 7, 
-              description: 'plants.herbs.sage.phases.seedling.coco.fertilizing.description' 
+              description: 'sage.phases.seedling.coco.fertilizing.description' 
             },
           },
         },
         vegetative: {
           days: 40,
-          description: 'plants.herbs.sage.phases.vegetative.description',
-          care: 'plants.herbs.sage.phases.vegetative.care',
+          description: 'sage.phases.vegetative.description',
+          care: 'sage.phases.vegetative.care',
           editable: false,
           soil: {
             watering: {
               interval: 4,
-              description: 'plants.herbs.sage.phases.vegetative.soil.watering.description',
+              description: 'sage.phases.vegetative.soil.watering.description',
             },
             fertilizing: {
               interval: 21,
-              description: 'plants.herbs.sage.phases.vegetative.soil.fertilizing.description',
+              description: 'sage.phases.vegetative.soil.fertilizing.description',
             },
           },
           hydro: {
             watering: { 
               interval: 0, 
-              description: 'plants.herbs.sage.phases.vegetative.hydro.watering.description' 
+              description: 'sage.phases.vegetative.hydro.watering.description' 
             },
             fertilizing: {
               interval: 21,
-              description: 'plants.herbs.sage.phases.vegetative.hydro.fertilizing.description',
+              description: 'sage.phases.vegetative.hydro.fertilizing.description',
             },
           },
           coco: {
             watering: { 
               interval: 2, 
-              description: 'plants.herbs.sage.phases.vegetative.coco.watering.description' 
+              description: 'sage.phases.vegetative.coco.watering.description' 
             },
             fertilizing: {
               interval: 21,
-              description: 'plants.herbs.sage.phases.vegetative.coco.fertilizing.description',
+              description: 'sage.phases.vegetative.coco.fertilizing.description',
             },
           },
         },
         harvest: {
           days: 90,
-          description: 'plants.herbs.sage.phases.harvest.description',
-          care: 'plants.herbs.sage.phases.harvest.care',
+          description: 'sage.phases.harvest.description',
+          care: 'sage.phases.harvest.care',
           editable: true,
           soil: {
             watering: { 
               interval: 4, 
-              description: 'plants.herbs.sage.phases.harvest.soil.watering.description' 
+              description: 'sage.phases.harvest.soil.watering.description' 
             },
             fertilizing: {
               interval: 21,
-              description: 'plants.herbs.sage.phases.harvest.soil.fertilizing.description',
+              description: 'sage.phases.harvest.soil.fertilizing.description',
             },
           },
           hydro: {
             watering: { 
               interval: 0, 
-              description: 'plants.herbs.sage.phases.harvest.hydro.watering.description' 
+              description: 'sage.phases.harvest.hydro.watering.description' 
             },
             fertilizing: {
               interval: 21,
-              description: 'plants.herbs.sage.phases.harvest.hydro.fertilizing.description',
+              description: 'sage.phases.harvest.hydro.fertilizing.description',
             },
           },
           coco: {
             watering: { 
               interval: 2, 
-              description: 'plants.herbs.sage.phases.harvest.coco.watering.description' 
+              description: 'sage.phases.harvest.coco.watering.description' 
             },
             fertilizing: {
               interval: 21,
-              description: 'plants.herbs.sage.phases.harvest.coco.fertilizing.description',
+              description: 'sage.phases.harvest.coco.fertilizing.description',
             },
           },
         },
@@ -312,24 +312,24 @@ export const sage = {
           plantingWindow: {
             start: '04-15',
             end: '06-01',
-            description: 'plants.herbs.sage.seasonalTiming.temperate_north.plantingWindow.description',
+            description: 'sage.seasonalTiming.temperate_north.plantingWindow.description',
           },
           harvestWindow: {
             start: '06-15',
             end: '10-31',
-            description: 'plants.herbs.sage.seasonalTiming.temperate_north.harvestWindow.description',
+            description: 'sage.seasonalTiming.temperate_north.harvestWindow.description',
           },
         },
         mediterranean: {
           plantingWindow: {
             start: '03-15',
             end: '05-15',
-            description: 'plants.herbs.sage.seasonalTiming.mediterranean.plantingWindow.description',
+            description: 'sage.seasonalTiming.mediterranean.plantingWindow.description',
           },
           harvestWindow: {
             start: '05-15',
             end: '11-30',
-            description: 'plants.herbs.sage.seasonalTiming.mediterranean.harvestWindow.description',
+            description: 'sage.seasonalTiming.mediterranean.harvestWindow.description',
           },
         },
       },
@@ -338,145 +338,145 @@ export const sage = {
       phases: {
         germination: {
           days: 14,
-          description: 'plants.herbs.sage.phases.germination.description',
-          care: 'plants.herbs.sage.phases.germination.care',
+          description: 'sage.phases.germination.description',
+          care: 'sage.phases.germination.care',
           editable: true,
           soil: {
             watering: {
               interval: 1,
-              description: 'plants.herbs.sage.phases.germination.soil.watering.description',
+              description: 'sage.phases.germination.soil.watering.description',
             },
             fertilizing: {
               interval: 0,
-              description: 'plants.herbs.sage.phases.germination.soil.fertilizing.description',
+              description: 'sage.phases.germination.soil.fertilizing.description',
             },
           },
           hydro: {
             watering: {
               interval: 0,
-              description: 'plants.herbs.sage.phases.germination.hydro.watering.description',
+              description: 'sage.phases.germination.hydro.watering.description',
             },
             fertilizing: {
               interval: 0,
-              description: 'plants.herbs.sage.phases.germination.hydro.fertilizing.description',
+              description: 'sage.phases.germination.hydro.fertilizing.description',
             },
           },
           coco: {
             watering: {
               interval: 1,
-              description: 'plants.herbs.sage.phases.germination.coco.watering.description',
+              description: 'sage.phases.germination.coco.watering.description',
             },
             fertilizing: {
               interval: 0,
-              description: 'plants.herbs.sage.phases.germination.coco.fertilizing.description',
+              description: 'sage.phases.germination.coco.fertilizing.description',
             },
           },
         },
         seedling: {
           days: 28,
-          description: 'plants.herbs.sage.phases.seedling.description',
-          care: 'plants.herbs.sage.phases.seedling.care',
+          description: 'sage.phases.seedling.description',
+          care: 'sage.phases.seedling.care',
           editable: true,
           soil: {
             watering: {
               interval: 3,
-              description: 'plants.herbs.sage.phases.seedling.soil.watering.description',
+              description: 'sage.phases.seedling.soil.watering.description',
             },
             fertilizing: {
               interval: 0,
-              description: 'plants.herbs.sage.phases.seedling.soil.fertilizing.description',
+              description: 'sage.phases.seedling.soil.fertilizing.description',
             },
           },
           hydro: {
             watering: { 
               interval: 0, 
-              description: 'plants.herbs.sage.phases.seedling.hydro.watering.description' 
+              description: 'sage.phases.seedling.hydro.watering.description' 
             },
             fertilizing: {
               interval: 7,
-              description: 'plants.herbs.sage.phases.seedling.hydro.fertilizing.description',
+              description: 'sage.phases.seedling.hydro.fertilizing.description',
             },
           },
           coco: {
             watering: { 
               interval: 1, 
-              description: 'plants.herbs.sage.phases.seedling.coco.watering.description' 
+              description: 'sage.phases.seedling.coco.watering.description' 
             },
             fertilizing: { 
               interval: 7, 
-              description: 'plants.herbs.sage.phases.seedling.coco.fertilizing.description' 
+              description: 'sage.phases.seedling.coco.fertilizing.description' 
             },
           },
         },
         vegetative: {
           days: 40,
-          description: 'plants.herbs.sage.phases.vegetative.description',
-          care: 'plants.herbs.sage.phases.vegetative.care',
+          description: 'sage.phases.vegetative.description',
+          care: 'sage.phases.vegetative.care',
           editable: true,
           soil: {
             watering: {
               interval: 4,
-              description: 'plants.herbs.sage.phases.vegetative.soil.watering.description',
+              description: 'sage.phases.vegetative.soil.watering.description',
             },
             fertilizing: {
               interval: 21,
-              description: 'plants.herbs.sage.phases.vegetative.soil.fertilizing.description',
+              description: 'sage.phases.vegetative.soil.fertilizing.description',
             },
           },
           hydro: {
             watering: { 
               interval: 0, 
-              description: 'plants.herbs.sage.phases.vegetative.hydro.watering.description' 
+              description: 'sage.phases.vegetative.hydro.watering.description' 
             },
             fertilizing: {
               interval: 21,
-              description: 'plants.herbs.sage.phases.vegetative.hydro.fertilizing.description',
+              description: 'sage.phases.vegetative.hydro.fertilizing.description',
             },
           },
           coco: {
             watering: { 
               interval: 2, 
-              description: 'plants.herbs.sage.phases.vegetative.coco.watering.description' 
+              description: 'sage.phases.vegetative.coco.watering.description' 
             },
             fertilizing: {
               interval: 21,
-              description: 'plants.herbs.sage.phases.vegetative.coco.fertilizing.description',
+              description: 'sage.phases.vegetative.coco.fertilizing.description',
             },
           },
         },
         harvest: {
           days: 90,
-          description: 'plants.herbs.sage.phases.harvest.description',
-          care: 'plants.herbs.sage.phases.harvest.care',
+          description: 'sage.phases.harvest.description',
+          care: 'sage.phases.harvest.care',
           editable: true,
           soil: {
             watering: { 
               interval: 4, 
-              description: 'plants.herbs.sage.phases.harvest.soil.watering.description' 
+              description: 'sage.phases.harvest.soil.watering.description' 
             },
             fertilizing: {
               interval: 21,
-              description: 'plants.herbs.sage.phases.harvest.soil.fertilizing.description',
+              description: 'sage.phases.harvest.soil.fertilizing.description',
             },
           },
           hydro: {
             watering: { 
               interval: 0, 
-              description: 'plants.herbs.sage.phases.harvest.hydro.watering.description' 
+              description: 'sage.phases.harvest.hydro.watering.description' 
             },
             fertilizing: {
               interval: 21,
-              description: 'plants.herbs.sage.phases.harvest.hydro.fertilizing.description',
+              description: 'sage.phases.harvest.hydro.fertilizing.description',
             },
           },
           coco: {
             watering: { 
               interval: 2, 
-              description: 'plants.herbs.sage.phases.harvest.coco.watering.description' 
+              description: 'sage.phases.harvest.coco.watering.description' 
             },
             fertilizing: {
               interval: 21,
-              description: 'plants.herbs.sage.phases.harvest.coco.fertilizing.description',
+              description: 'sage.phases.harvest.coco.fertilizing.description',
             },
           },
         },
@@ -484,13 +484,13 @@ export const sage = {
     },
   },
   careTips: {
-    watering: 'plants.herbs.sage.careTips.watering',
-    fertilizing: 'plants.herbs.sage.careTips.fertilizing',
-    sunlight: 'plants.herbs.sage.careTips.sunlight',
-    spacing: 'plants.herbs.sage.careTips.spacing',
-    temperature: 'plants.herbs.sage.careTips.temperature',
-    soilPH: 'plants.herbs.sage.careTips.soilPH',
-    harvesting: 'plants.herbs.sage.careTips.harvesting',
+    watering: 'sage.careTips.watering',
+    fertilizing: 'sage.careTips.fertilizing',
+    sunlight: 'sage.careTips.sunlight',
+    spacing: 'sage.careTips.spacing',
+    temperature: 'sage.careTips.temperature',
+    soilPH: 'sage.careTips.soilPH',
+    harvesting: 'sage.careTips.harvesting',
   },
   commonProblems: createProblemRefs(['rootRot', 'leggyGrowth', 'winterDamage'], 'herbs'),
 };

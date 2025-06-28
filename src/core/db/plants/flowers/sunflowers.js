@@ -4,6 +4,7 @@
  */
 
 import { PLANT_TAGS } from '../categories.js';
+import { createProblemRefs } from '../problems.js';
 
 export const sunflowers = {
   name: 'sunflowers.name',
@@ -505,11 +506,7 @@ export const sunflowers = {
     soilPH: 'sunflowers.careTips.soilPH',
     support: 'sunflowers.careTips.support',
   },
-  commonProblems: {
-    'Aphids': 'sunflowers.commonProblems.aphids',
-    'Birds': 'sunflowers.commonProblems.birds',
-    'Wind Damage': 'sunflowers.commonProblems.windDamage',
-  },
+  commonProblems: createProblemRefs(['downyMildew', 'birds', 'sclerotinia'], 'flowers'),
 };
 
 export default sunflowers; 

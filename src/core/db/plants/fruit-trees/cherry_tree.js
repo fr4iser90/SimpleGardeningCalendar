@@ -4,6 +4,7 @@
  */
 
 import { PLANT_TAGS } from '../categories.js';
+import { createProblemRefs } from '../problems.js';
 
 export const cherry_tree = {
   name: 'cherry_tree.name',
@@ -204,12 +205,7 @@ export const cherry_tree = {
     pollination: 'cherry_tree.careTips.pollination',
     birdProtection: 'cherry_tree.careTips.birdProtection',
   },
-  commonProblems: {
-    'Brown Rot': 'cherry_tree.commonProblems.brownRot',
-    'Cherry Fruit Fly': 'cherry_tree.commonProblems.cherryFruitFly',
-    'Bacterial Canker': 'cherry_tree.commonProblems.bacterialCanker',
-    Birds: 'cherry_tree.commonProblems.birds',
-  },
+  commonProblems: createProblemRefs(['rootRot', 'powderyMildew', 'birds'], 'fruits'),
 };
 
 export default cherry_tree;

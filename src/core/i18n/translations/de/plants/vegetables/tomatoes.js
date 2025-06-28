@@ -59,8 +59,4 @@ export default {
   "tomatoes.careTips.temperature": "65-85°F optimaler Anbaubereich (18-29°C)",
   "tomatoes.careTips.soilPH": "6.0-6.8",
   "tomatoes.careTips.pruning": "Geiztriebe entfernen, Pflanzen stützen",
-  "tomatoes.commonProblems.blossomEndRot": "Kalziummangel - gleichmäßiges Gießen aufrechterhalten",
-  "tomatoes.commonProblems.earlyBlight": "Braune Flecken auf Blättern - Fungizid verwenden",
-  "tomatoes.commonProblems.lateBlight": "Graue Flecken - sofort entfernen und Fungizid verwenden",
-  "tomatoes.commonProblems.aphids": "Kleine grüne Insekten - mit Seifenwasser besprühen",
 };

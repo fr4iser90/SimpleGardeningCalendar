@@ -4,6 +4,7 @@
  */
 
 import { PLANT_TAGS } from '../categories.js';
+import { createProblemRefs } from '../problems.js';
 
 export const spinach = {
   name: 'spinach.name',
@@ -251,11 +252,7 @@ export const spinach = {
     soilPH: 'spinach.careTips.soilPH',
     succession: 'spinach.careTips.succession',
   },
-  commonProblems: {
-    bolting: 'spinach.commonProblems.bolting',
-    downyMildew: 'spinach.commonProblems.downyMildew',
-    leafMiners: 'spinach.commonProblems.leafMiners',
-  },
+  commonProblems: createProblemRefs(['downyMildew', 'bolting', 'leafMiner'], 'vegetables'),
 };
 
 export default spinach;

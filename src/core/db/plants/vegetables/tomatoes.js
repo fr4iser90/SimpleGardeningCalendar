@@ -4,8 +4,7 @@
  */
 
 import { PLANT_TAGS } from '../categories.js';
-
-
+import { createProblemRefs } from '../problems.js';
 
 export const tomatoes = {
   name: 'tomatoes.name',
@@ -709,12 +708,7 @@ export const tomatoes = {
     soilPH: 'tomatoes.careTips.soilPH',
     pruning: 'tomatoes.careTips.pruning',
   },
-  commonProblems: {
-    'Blossom End Rot': 'tomatoes.commonProblems.blossomEndRot',
-    'Early Blight': 'tomatoes.commonProblems.earlyBlight',
-    'Late Blight': 'tomatoes.commonProblems.lateBlight',
-    'Aphids': 'tomatoes.commonProblems.aphids',
-  },
+  commonProblems: createProblemRefs(['blight', 'powderyMildew', 'lateBlight'], 'vegetables'),
 };
 
 export default tomatoes;

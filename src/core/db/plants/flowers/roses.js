@@ -4,6 +4,7 @@
  */
 
 import { PLANT_TAGS } from '../categories.js';
+import { createProblemRefs } from '../problems.js';
 
 export const roses = {
   name: 'roses.name',
@@ -469,11 +470,7 @@ export const roses = {
     soilPH: 'roses.careTips.soilPH',
     pruning: 'roses.careTips.pruning',
   },
-  commonProblems: {
-    'Black Spot': 'roses.commonProblems.blackSpot',
-    'Aphids': 'roses.commonProblems.aphids',
-    'Powdery Mildew': 'roses.commonProblems.powderyMildew',
-  },
+  commonProblems: createProblemRefs(['powderyMildew', 'aphids', 'blackSpot'], 'flowers'),
 };
 
 export default roses; 

@@ -4,6 +4,7 @@
  */
 
 import { PLANT_TAGS } from '../categories.js';
+import { createProblemRefs } from '../problems.js';
 
 export const lettuce = {
   name: 'lettuce.name',
@@ -250,12 +251,7 @@ export const lettuce = {
     temperature: 'lettuce.careTips.temperature',
     soilPH: 'lettuce.careTips.soilPH',
   },
-  commonProblems: {
-    bolting: 'lettuce.commonProblems.bolting',
-    tipBurn: 'lettuce.commonProblems.tipBurn',
-    bitterLeaves: 'lettuce.commonProblems.bitterLeaves',
-    aphids: 'lettuce.commonProblems.aphids',
-  },
+  commonProblems: createProblemRefs(['bolting', 'aphids', 'downyMildew'], 'vegetables'),
 };
 
 export default lettuce;

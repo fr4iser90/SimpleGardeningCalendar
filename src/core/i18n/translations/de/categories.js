@@ -20,6 +20,8 @@ export const de = {
   'tag.annual': 'Einjährig',
   'tag.biennial': 'Zweijährig',
   'tag.cannabis': 'Cannabis',
+  'tag.photoperiod': 'Photoperiodisch',
+  'tag.autoflowering': 'Autoflowering',
 
   // Anbauumgebungen
   'environment.indoor': 'Innen',

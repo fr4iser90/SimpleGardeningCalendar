@@ -51,7 +51,4 @@ export default {
   'basil.careTips.temperature': 'Optimale Temperatur 21-27°C. Basilikum ist frostempfindlich.',
   'basil.careTips.soilPH': 'Bevorzugt leicht sauren bis neutralen Boden (pH 6,0-7,5).',
   'basil.careTips.harvesting': 'Blätter regelmäßig ernten für buschiges Wachstum. Blütenknospen für besten Geschmack entfernen.',
-  'basil.commonProblems.fusariumWilt': 'Gelbe Blätter und Welke - betroffene Pflanzen entfernen, Drainage verbessern.',
-  'basil.commonProblems.aphids': 'Kleine grüne Insekten auf Blättern - mit Wasser abspülen oder Insektizidseife verwenden.',
-  'basil.commonProblems.bolting': 'Frühe Blüte bei heißem Wetter - Blüten entfernen, Schatten spenden.',
 };

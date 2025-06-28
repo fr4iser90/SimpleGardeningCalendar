@@ -88,6 +88,10 @@ export default {
   'problems.herbs.invasiveGrowth.description': 'Die Pflanze breitet sich schnell aus und übernimmt andere Bereiche.',
   'problems.herbs.invasiveGrowth.solutions': 'Pflanzen Sie in Behältern. Schneiden Sie regelmäßig, um das Wachstum zu kontrollieren.',
   
+  'problems.herbs.fusariumWilt.name': 'Fusarium-Welke',
+  'problems.herbs.fusariumWilt.description': 'Pilzkrankheit, die Welken und Vergilben der Blätter verursacht.',
+  'problems.herbs.fusariumWilt.solutions': 'Entfernen Sie infizierte Pflanzen. Verwenden Sie resistente Sorten und Fungizide.',
+  
   'problems.cannabis.stuntedGrowth.name': 'Verkümmertes Wachstum',
   'problems.cannabis.stuntedGrowth.description': 'Die Pflanze wächst nicht wie erwartet aufgrund verschiedener Stressfaktoren.',
   'problems.cannabis.stuntedGrowth.solutions': 'Überprüfen Sie Licht, Wasser und Nährstoffe. Stellen Sie sicher, dass keine Schädlinge vorhanden sind.',
@@ -154,5 +158,49 @@ export default {
   
   'problems.flowers.thrips.name': 'Thripse',
   'problems.flowers.thrips.description': 'Kleine Insekten, die Blüten und Blätter schädigen.',
-  'problems.flowers.thrips.solutions': 'Verwenden Sie Insektizide. Führen Sie natürliche Feinde wie Raubmilben ein.'
+  'problems.flowers.thrips.solutions': 'Verwenden Sie Insektizide. Führen Sie natürliche Feinde wie Raubmilben ein.',
+  
+  'problems.flowers.blackSpot.name': 'Schwarzer Fleck',
+  'problems.flowers.blackSpot.description': 'Pilzkrankheit, die schwarze Flecken auf Blättern und Stängeln verursacht.',
+  'problems.flowers.blackSpot.solutions': 'Entfernen Sie infizierte Blätter. Verwenden Sie Fungizide. Verbessern Sie die Luftzirkulation.',
+  
+  'problems.flowers.sclerotinia.name': 'Sclerotinia-Fäule',
+  'problems.flowers.sclerotinia.description': 'Pilzkrankheit, die weiße, watteartige Schimmelbildung verursacht.',
+  'problems.flowers.sclerotinia.solutions': 'Entfernen Sie infizierte Pflanzen. Verbessern Sie die Drainage. Rotieren Sie die Kulturen.',
+  
+  'problems.vegetables.downyMildew.name': 'Falscher Mehltau',
+  'problems.vegetables.downyMildew.description': 'Pilzkrankheit, die gelbe Flecken auf der Oberseite und grauen Schimmel auf der Unterseite der Blätter verursacht.',
+  'problems.vegetables.downyMildew.solutions': 'Verbessern Sie die Luftzirkulation. Verwenden Sie Fungizide. Vermeiden Sie Überkopf-Bewässerung.',
+  
+  'problems.vegetables.blight.name': 'Kraut- und Knollenfäule',
+  'problems.vegetables.blight.description': 'Pilzkrankheit, die braune Flecken auf Blättern und Stängeln verursacht.',
+  'problems.vegetables.blight.solutions': 'Verwenden Sie resistente Sorten. Entfernen Sie infizierte Pflanzen. Verwenden Sie Fungizide.',
+  
+  'problems.vegetables.lateBlight.name': 'Späte Kraut- und Knollenfäule',
+  'problems.vegetables.lateBlight.description': 'Aggressive Pilzkrankheit, die schnell Pflanzen zerstört.',
+  'problems.vegetables.lateBlight.solutions': 'Verwenden Sie resistente Sorten. Entfernen Sie sofort infizierte Pflanzen. Verwenden Sie vorbeugende Fungizide.',
+  
+  'problems.vegetables.scab.name': 'Schorf',
+  'problems.vegetables.scab.description': 'Pilzkrankheit, die raue, korkige Flecken auf Wurzeln und Knollen verursacht.',
+  'problems.vegetables.scab.solutions': 'Verwenden Sie resistente Sorten. Halten Sie den pH-Wert niedrig. Rotieren Sie die Kulturen.',
+  
+  'problems.vegetables.wireworm.name': 'Drahtwurm',
+  'problems.vegetables.wireworm.description': 'Larven von Schnellkäfern, die Wurzeln und Knollen fressen.',
+  'problems.vegetables.wireworm.solutions': 'Verwenden Sie Fallen. Rotieren Sie die Kulturen. Entfernen Sie Unkraut.',
+  
+  'problems.vegetables.cucumberBeetle.name': 'Gurkenkäfer',
+  'problems.vegetables.cucumberBeetle.description': 'Käfer, die Blätter fressen und Bakterienwelke übertragen.',
+  'problems.vegetables.cucumberBeetle.solutions': 'Verwenden Sie Insektizide. Decken Sie Pflanzen mit Netzen ab. Entfernen Sie Unkraut.',
+  
+  'problems.vegetables.leafMiner.name': 'Blattminierer',
+  'problems.vegetables.leafMiner.description': 'Larven, die Tunnel in Blättern fressen.',
+  'problems.vegetables.leafMiner.solutions': 'Entfernen Sie befallene Blätter. Verwenden Sie Insektizide. Verwenden Sie Fallen.',
+  
+  'problems.vegetables.cabbageWorm.name': 'Kohlweißling',
+  'problems.vegetables.cabbageWorm.description': 'Raupe, die Löcher in Blätter frisst.',
+  'problems.vegetables.cabbageWorm.solutions': 'Verwenden Sie Bacillus thuringiensis. Decken Sie Pflanzen mit Netzen ab. Entfernen Sie Eier und Raupen.',
+  
+  'problems.herbs.fusariumWilt.name': 'Fusarium-Welke',
+  'problems.herbs.fusariumWilt.description': 'Pilzkrankheit, die Welken und Absterben der Pflanze verursacht.',
+  'problems.herbs.fusariumWilt.solutions': 'Verwenden Sie resistente Sorten. Entfernen Sie infizierte Pflanzen. Sterilisieren Sie Werkzeuge.',
 };

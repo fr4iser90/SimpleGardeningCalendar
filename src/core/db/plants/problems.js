@@ -54,8 +54,8 @@ export const COMMON_PROBLEMS = {
   },
   grayMold: {
     name: 'problems.common.grayMold.name',
-    description: 'problems.common.grayMildew.description',
-    solutions: 'problems.common.grayMildew.solutions',
+    description: 'problems.common.grayMold.description',
+    solutions: 'problems.common.grayMold.solutions',
   },
   
   // Pest issues
@@ -216,6 +216,46 @@ export const VEGETABLE_PROBLEMS = {
     description: 'problems.vegetables.cracking.description',
     solutions: 'problems.vegetables.cracking.solutions',
   },
+  downyMildew: {
+    name: 'problems.vegetables.downyMildew.name',
+    description: 'problems.vegetables.downyMildew.description',
+    solutions: 'problems.vegetables.downyMildew.solutions',
+  },
+  blight: {
+    name: 'problems.vegetables.blight.name',
+    description: 'problems.vegetables.blight.description',
+    solutions: 'problems.vegetables.blight.solutions',
+  },
+  lateBlight: {
+    name: 'problems.vegetables.lateBlight.name',
+    description: 'problems.vegetables.lateBlight.description',
+    solutions: 'problems.vegetables.lateBlight.solutions',
+  },
+  scab: {
+    name: 'problems.vegetables.scab.name',
+    description: 'problems.vegetables.scab.description',
+    solutions: 'problems.vegetables.scab.solutions',
+  },
+  wireworm: {
+    name: 'problems.vegetables.wireworm.name',
+    description: 'problems.vegetables.wireworm.description',
+    solutions: 'problems.vegetables.wireworm.solutions',
+  },
+  cucumberBeetle: {
+    name: 'problems.vegetables.cucumberBeetle.name',
+    description: 'problems.vegetables.cucumberBeetle.description',
+    solutions: 'problems.vegetables.cucumberBeetle.solutions',
+  },
+  leafMiner: {
+    name: 'problems.vegetables.leafMiner.name',
+    description: 'problems.vegetables.leafMiner.description',
+    solutions: 'problems.vegetables.leafMiner.solutions',
+  },
+  cabbageWorm: {
+    name: 'problems.vegetables.cabbageWorm.name',
+    description: 'problems.vegetables.cabbageWorm.description',
+    solutions: 'problems.vegetables.cabbageWorm.solutions',
+  },
 };
 
 // Flower-specific problems
@@ -235,6 +275,16 @@ export const FLOWER_PROBLEMS = {
     name: 'problems.flowers.thrips.name',
     description: 'problems.flowers.thrips.description',
     solutions: 'problems.flowers.thrips.solutions',
+  },
+  blackSpot: {
+    name: 'problems.flowers.blackSpot.name',
+    description: 'problems.flowers.blackSpot.description',
+    solutions: 'problems.flowers.blackSpot.solutions',
+  },
+  sclerotinia: {
+    name: 'problems.flowers.sclerotinia.name',
+    description: 'problems.flowers.sclerotinia.description',
+    solutions: 'problems.flowers.sclerotinia.solutions',
   },
 };
 

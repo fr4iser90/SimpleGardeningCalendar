@@ -4,6 +4,7 @@
  */
 
 import { PLANT_TAGS } from '../categories.js';
+import { createProblemRefs } from '../problems.js';
 
 export const potatoes = {
   name: 'potatoes.name',
@@ -344,12 +345,7 @@ export const potatoes = {
     soil: 'potatoes.careTips.soil',
     hilling: 'potatoes.careTips.hilling',
   },
-  commonProblems: {
-    scab: 'potatoes.commonProblems.scab',
-    hollowHeart: 'potatoes.commonProblems.hollowHeart',
-    greenTubers: 'potatoes.commonProblems.greenTubers',
-    coloradoPotatoBeetle: 'potatoes.commonProblems.coloradoPotatoBeetle',
-  },
+  commonProblems: createProblemRefs(['blight', 'scab', 'wireworm'], 'vegetables'),
 };
 
 export default potatoes;
