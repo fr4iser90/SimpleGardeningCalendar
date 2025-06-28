@@ -16,145 +16,145 @@ export const parsley = {
       phases: {
         germination: {
           days: 21,
-          description: 'parsley.phases.germination.description',
-          care: 'parsley.phases.germination.care',
+          description: 'parsley.environments.indoor.phases.germination.description',
+          care: 'parsley.environments.indoor.phases.germination.care',
           editable: true,
           soil: {
             watering: {
               interval: 1,
-              description: 'parsley.phases.germination.soil.watering.description',
+              description: 'parsley.environments.indoor.phases.germination.soil.watering.description',
             },
             fertilizing: {
               interval: 0,
-              description: 'parsley.phases.germination.soil.fertilizing.description',
+              description: 'parsley.environments.indoor.phases.germination.soil.fertilizing.description',
             },
           },
           hydro: {
             watering: {
               interval: 0,
-              description: 'parsley.phases.germination.hydro.watering.description',
+              description: 'parsley.environments.indoor.phases.germination.hydro.watering.description',
             },
             fertilizing: {
               interval: 0,
-              description: 'parsley.phases.germination.hydro.fertilizing.description',
+              description: 'parsley.environments.indoor.phases.germination.hydro.fertilizing.description',
             },
           },
           coco: {
             watering: {
               interval: 1,
-              description: 'parsley.phases.germination.coco.watering.description',
+              description: 'parsley.environments.indoor.phases.germination.coco.watering.description',
             },
             fertilizing: {
               interval: 0,
-              description: 'parsley.phases.germination.coco.fertilizing.description',
+              description: 'parsley.environments.indoor.phases.germination.coco.fertilizing.description',
             },
           },
         },
         seedling: {
           days: 28,
-          description: 'parsley.phases.seedling.description',
-          care: 'parsley.phases.seedling.care',
+          description: 'parsley.environments.indoor.phases.seedling.description',
+          care: 'parsley.environments.indoor.phases.seedling.care',
           editable: true,
           soil: {
             watering: {
               interval: 2,
-              description: 'parsley.phases.seedling.soil.watering.description',
+              description: 'parsley.environments.indoor.phases.seedling.soil.watering.description',
             },
             fertilizing: {
               interval: 0,
-              description: 'parsley.phases.seedling.soil.fertilizing.description',
+              description: 'parsley.environments.indoor.phases.seedling.soil.fertilizing.description',
             },
           },
           hydro: {
             watering: { 
               interval: 0, 
-              description: 'parsley.phases.seedling.hydro.watering.description' 
+              description: 'parsley.environments.indoor.phases.seedling.hydro.watering.description' 
             },
             fertilizing: {
               interval: 7,
-              description: 'parsley.phases.seedling.hydro.fertilizing.description',
+              description: 'parsley.environments.indoor.phases.seedling.hydro.fertilizing.description',
             },
           },
           coco: {
             watering: { 
               interval: 1, 
-              description: 'parsley.phases.seedling.coco.watering.description' 
+              description: 'parsley.environments.indoor.phases.seedling.coco.watering.description' 
             },
             fertilizing: { 
               interval: 7, 
-              description: 'parsley.phases.seedling.coco.fertilizing.description' 
+              description: 'parsley.environments.indoor.phases.seedling.coco.fertilizing.description' 
             },
           },
         },
         vegetative: {
           days: 45,
-          description: 'parsley.phases.vegetative.description',
-          care: 'parsley.phases.vegetative.care',
+          description: 'parsley.environments.indoor.phases.vegetative.description',
+          care: 'parsley.environments.indoor.phases.vegetative.care',
           editable: true,
           soil: {
             watering: {
               interval: 2,
-              description: 'parsley.phases.vegetative.soil.watering.description',
+              description: 'parsley.environments.indoor.phases.vegetative.soil.watering.description',
             },
             fertilizing: {
               interval: 14,
-              description: 'parsley.phases.vegetative.soil.fertilizing.description',
+              description: 'parsley.environments.indoor.phases.vegetative.soil.fertilizing.description',
             },
           },
           hydro: {
             watering: { 
               interval: 0, 
-              description: 'parsley.phases.vegetative.hydro.watering.description' 
+              description: 'parsley.environments.indoor.phases.vegetative.hydro.watering.description' 
             },
             fertilizing: {
               interval: 14,
-              description: 'parsley.phases.vegetative.hydro.fertilizing.description',
+              description: 'parsley.environments.indoor.phases.vegetative.hydro.fertilizing.description',
             },
           },
           coco: {
             watering: { 
               interval: 1, 
-              description: 'parsley.phases.vegetative.coco.watering.description' 
+              description: 'parsley.environments.indoor.phases.vegetative.coco.watering.description' 
             },
             fertilizing: {
               interval: 14,
-              description: 'parsley.phases.vegetative.coco.fertilizing.description',
+              description: 'parsley.environments.indoor.phases.vegetative.coco.fertilizing.description',
             },
           },
         },
         harvest: {
           days: 90,
-          description: 'parsley.phases.harvest.description',
-          care: 'parsley.phases.harvest.care',
+          description: 'parsley.environments.indoor.phases.harvest.description',
+          care: 'parsley.environments.indoor.phases.harvest.care',
           editable: true,
           soil: {
             watering: { 
               interval: 2, 
-              description: 'parsley.phases.harvest.soil.watering.description' 
+              description: 'parsley.environments.indoor.phases.harvest.soil.watering.description' 
             },
             fertilizing: {
               interval: 14,
-              description: 'parsley.phases.harvest.soil.fertilizing.description',
+              description: 'parsley.environments.indoor.phases.harvest.soil.fertilizing.description',
             },
           },
           hydro: {
             watering: { 
               interval: 0, 
-              description: 'parsley.phases.harvest.hydro.watering.description' 
+              description: 'parsley.environments.indoor.phases.harvest.hydro.watering.description' 
             },
             fertilizing: {
               interval: 14,
-              description: 'parsley.phases.harvest.hydro.fertilizing.description',
+              description: 'parsley.environments.indoor.phases.harvest.hydro.fertilizing.description',
             },
           },
           coco: {
             watering: { 
               interval: 1, 
-              description: 'parsley.phases.harvest.coco.watering.description' 
+              description: 'parsley.environments.indoor.phases.harvest.coco.watering.description' 
             },
             fertilizing: {
               interval: 14,
-              description: 'parsley.phases.harvest.coco.fertilizing.description',
+              description: 'parsley.environments.indoor.phases.harvest.coco.fertilizing.description',
             },
           },
         },
@@ -164,145 +164,145 @@ export const parsley = {
       phases: {
         germination: {
           days: 21,
-          description: 'parsley.phases.germination.description',
-          care: 'parsley.phases.germination.care',
+          description: 'parsley.environments.outdoor.phases.germination.description',
+          care: 'parsley.environments.outdoor.phases.germination.care',
           editable: false,
           soil: {
             watering: {
               interval: 1,
-              description: 'parsley.phases.germination.soil.watering.description',
+              description: 'parsley.environments.outdoor.phases.germination.soil.watering.description',
             },
             fertilizing: {
               interval: 0,
-              description: 'parsley.phases.germination.soil.fertilizing.description',
+              description: 'parsley.environments.outdoor.phases.germination.soil.fertilizing.description',
             },
           },
           hydro: {
             watering: {
               interval: 0,
-              description: 'parsley.phases.germination.hydro.watering.description',
+              description: 'parsley.environments.outdoor.phases.germination.hydro.watering.description',
             },
             fertilizing: {
               interval: 0,
-              description: 'parsley.phases.germination.hydro.fertilizing.description',
+              description: 'parsley.environments.outdoor.phases.germination.hydro.fertilizing.description',
             },
           },
           coco: {
             watering: {
               interval: 1,
-              description: 'parsley.phases.germination.coco.watering.description',
+              description: 'parsley.environments.outdoor.phases.germination.coco.watering.description',
             },
             fertilizing: {
               interval: 0,
-              description: 'parsley.phases.germination.coco.fertilizing.description',
+              description: 'parsley.environments.outdoor.phases.germination.coco.fertilizing.description',
             },
           },
         },
         seedling: {
           days: 28,
-          description: 'parsley.phases.seedling.description',
-          care: 'parsley.phases.seedling.care',
+          description: 'parsley.environments.outdoor.phases.seedling.description',
+          care: 'parsley.environments.outdoor.phases.seedling.care',
           editable: false,
           soil: {
             watering: {
               interval: 2,
-              description: 'parsley.phases.seedling.soil.watering.description',
+              description: 'parsley.environments.outdoor.phases.seedling.soil.watering.description',
             },
             fertilizing: {
               interval: 0,
-              description: 'parsley.phases.seedling.soil.fertilizing.description',
+              description: 'parsley.environments.outdoor.phases.seedling.soil.fertilizing.description',
             },
           },
           hydro: {
-            watering: { 
-              interval: 0, 
-              description: 'parsley.phases.seedling.hydro.watering.description' 
+            watering: {
+              interval: 0,
+              description: 'parsley.environments.outdoor.phases.seedling.hydro.watering.description',
             },
             fertilizing: {
               interval: 7,
-              description: 'parsley.phases.seedling.hydro.fertilizing.description',
+              description: 'parsley.environments.outdoor.phases.seedling.hydro.fertilizing.description',
             },
           },
           coco: {
-            watering: { 
-              interval: 1, 
-              description: 'parsley.phases.seedling.coco.watering.description' 
+            watering: {
+              interval: 1,
+              description: 'parsley.environments.outdoor.phases.seedling.coco.watering.description',
             },
-            fertilizing: { 
-              interval: 7, 
-              description: 'parsley.phases.seedling.coco.fertilizing.description' 
+            fertilizing: {
+              interval: 7,
+              description: 'parsley.environments.outdoor.phases.seedling.coco.fertilizing.description',
             },
           },
         },
         vegetative: {
           days: 45,
-          description: 'parsley.phases.vegetative.description',
-          care: 'parsley.phases.vegetative.care',
+          description: 'parsley.environments.outdoor.phases.vegetative.description',
+          care: 'parsley.environments.outdoor.phases.vegetative.care',
           editable: false,
           soil: {
             watering: {
               interval: 2,
-              description: 'parsley.phases.vegetative.soil.watering.description',
+              description: 'parsley.environments.outdoor.phases.vegetative.soil.watering.description',
             },
             fertilizing: {
               interval: 14,
-              description: 'parsley.phases.vegetative.soil.fertilizing.description',
+              description: 'parsley.environments.outdoor.phases.vegetative.soil.fertilizing.description',
             },
           },
           hydro: {
-            watering: { 
-              interval: 0, 
-              description: 'parsley.phases.vegetative.hydro.watering.description' 
+            watering: {
+              interval: 0,
+              description: 'parsley.environments.outdoor.phases.vegetative.hydro.watering.description',
             },
             fertilizing: {
               interval: 14,
-              description: 'parsley.phases.vegetative.hydro.fertilizing.description',
+              description: 'parsley.environments.outdoor.phases.vegetative.hydro.fertilizing.description',
             },
           },
           coco: {
-            watering: { 
-              interval: 1, 
-              description: 'parsley.phases.vegetative.coco.watering.description' 
+            watering: {
+              interval: 1,
+              description: 'parsley.environments.outdoor.phases.vegetative.coco.watering.description',
             },
             fertilizing: {
               interval: 14,
-              description: 'parsley.phases.vegetative.coco.fertilizing.description',
+              description: 'parsley.environments.outdoor.phases.vegetative.coco.fertilizing.description',
             },
           },
         },
         harvest: {
           days: 90,
-          description: 'parsley.phases.harvest.description',
-          care: 'parsley.phases.harvest.care',
-          editable: true,
+          description: 'parsley.environments.outdoor.phases.harvest.description',
+          care: 'parsley.environments.outdoor.phases.harvest.care',
+          editable: false,
           soil: {
-            watering: { 
-              interval: 2, 
-              description: 'parsley.phases.harvest.soil.watering.description' 
+            watering: {
+              interval: 2,
+              description: 'parsley.environments.outdoor.phases.harvest.soil.watering.description',
             },
             fertilizing: {
               interval: 14,
-              description: 'parsley.phases.harvest.soil.fertilizing.description',
+              description: 'parsley.environments.outdoor.phases.harvest.soil.fertilizing.description',
             },
           },
           hydro: {
-            watering: { 
-              interval: 0, 
-              description: 'parsley.phases.harvest.hydro.watering.description' 
+            watering: {
+              interval: 0,
+              description: 'parsley.environments.outdoor.phases.harvest.hydro.watering.description',
             },
             fertilizing: {
               interval: 14,
-              description: 'parsley.phases.harvest.hydro.fertilizing.description',
+              description: 'parsley.environments.outdoor.phases.harvest.hydro.fertilizing.description',
             },
           },
           coco: {
-            watering: { 
-              interval: 1, 
-              description: 'parsley.phases.harvest.coco.watering.description' 
+            watering: {
+              interval: 1,
+              description: 'parsley.environments.outdoor.phases.harvest.coco.watering.description',
             },
             fertilizing: {
               interval: 14,
-              description: 'parsley.phases.harvest.coco.fertilizing.description',
+              description: 'parsley.environments.outdoor.phases.harvest.coco.fertilizing.description',
             },
           },
         },
@@ -310,26 +310,26 @@ export const parsley = {
       seasonalTiming: {
         temperate_north: {
           plantingWindow: {
-            start: '04-01',
+            start: '03-01',
             end: '07-01',
-            description: 'parsley.seasonalTiming.temperate_north.plantingWindow.description',
+            description: 'parsley.environments.outdoor.seasonalTiming.temperate_north.plantingWindow.description',
           },
           harvestWindow: {
-            start: '06-01',
+            start: '05-01',
             end: '11-30',
-            description: 'parsley.seasonalTiming.temperate_north.harvestWindow.description',
+            description: 'parsley.environments.outdoor.seasonalTiming.temperate_north.harvestWindow.description',
           },
         },
         mediterranean: {
           plantingWindow: {
-            start: '03-01',
+            start: '02-01',
             end: '08-01',
-            description: 'parsley.seasonalTiming.mediterranean.plantingWindow.description',
+            description: 'parsley.environments.outdoor.seasonalTiming.mediterranean.plantingWindow.description',
           },
           harvestWindow: {
-            start: '05-01',
+            start: '04-01',
             end: '12-31',
-            description: 'parsley.seasonalTiming.mediterranean.harvestWindow.description',
+            description: 'parsley.environments.outdoor.seasonalTiming.mediterranean.harvestWindow.description',
           },
         },
       },
@@ -338,146 +338,172 @@ export const parsley = {
       phases: {
         germination: {
           days: 21,
-          description: 'parsley.phases.germination.description',
-          care: 'parsley.phases.germination.care',
+          description: 'parsley.environments.greenhouse.phases.germination.description',
+          care: 'parsley.environments.greenhouse.phases.germination.care',
           editable: true,
           soil: {
             watering: {
               interval: 1,
-              description: 'parsley.phases.germination.soil.watering.description',
+              description: 'parsley.environments.greenhouse.phases.germination.soil.watering.description',
             },
             fertilizing: {
               interval: 0,
-              description: 'parsley.phases.germination.soil.fertilizing.description',
+              description: 'parsley.environments.greenhouse.phases.germination.soil.fertilizing.description',
             },
           },
           hydro: {
             watering: {
               interval: 0,
-              description: 'parsley.phases.germination.hydro.watering.description',
+              description: 'parsley.environments.greenhouse.phases.germination.hydro.watering.description',
             },
             fertilizing: {
               interval: 0,
-              description: 'parsley.phases.germination.hydro.fertilizing.description',
+              description: 'parsley.environments.greenhouse.phases.germination.hydro.fertilizing.description',
             },
           },
           coco: {
             watering: {
               interval: 1,
-              description: 'parsley.phases.germination.coco.watering.description',
+              description: 'parsley.environments.greenhouse.phases.germination.coco.watering.description',
             },
             fertilizing: {
               interval: 0,
-              description: 'parsley.phases.germination.coco.fertilizing.description',
+              description: 'parsley.environments.greenhouse.phases.germination.coco.fertilizing.description',
             },
           },
         },
         seedling: {
           days: 28,
-          description: 'parsley.phases.seedling.description',
-          care: 'parsley.phases.seedling.care',
+          description: 'parsley.environments.greenhouse.phases.seedling.description',
+          care: 'parsley.environments.greenhouse.phases.seedling.care',
           editable: true,
           soil: {
             watering: {
               interval: 2,
-              description: 'parsley.phases.seedling.soil.watering.description',
+              description: 'parsley.environments.greenhouse.phases.seedling.soil.watering.description',
             },
             fertilizing: {
               interval: 0,
-              description: 'parsley.phases.seedling.soil.fertilizing.description',
+              description: 'parsley.environments.greenhouse.phases.seedling.soil.fertilizing.description',
             },
           },
           hydro: {
-            watering: { 
-              interval: 0, 
-              description: 'parsley.phases.seedling.hydro.watering.description' 
+            watering: {
+              interval: 0,
+              description: 'parsley.environments.greenhouse.phases.seedling.hydro.watering.description',
             },
             fertilizing: {
               interval: 7,
-              description: 'parsley.phases.seedling.hydro.fertilizing.description',
+              description: 'parsley.environments.greenhouse.phases.seedling.hydro.fertilizing.description',
             },
           },
           coco: {
-            watering: { 
-              interval: 1, 
-              description: 'parsley.phases.seedling.coco.watering.description' 
+            watering: {
+              interval: 1,
+              description: 'parsley.environments.greenhouse.phases.seedling.coco.watering.description',
             },
-            fertilizing: { 
-              interval: 7, 
-              description: 'parsley.phases.seedling.coco.fertilizing.description' 
+            fertilizing: {
+              interval: 7,
+              description: 'parsley.environments.greenhouse.phases.seedling.coco.fertilizing.description',
             },
           },
         },
         vegetative: {
           days: 45,
-          description: 'parsley.phases.vegetative.description',
-          care: 'parsley.phases.vegetative.care',
+          description: 'parsley.environments.greenhouse.phases.vegetative.description',
+          care: 'parsley.environments.greenhouse.phases.vegetative.care',
           editable: true,
           soil: {
             watering: {
               interval: 2,
-              description: 'parsley.phases.vegetative.soil.watering.description',
+              description: 'parsley.environments.greenhouse.phases.vegetative.soil.watering.description',
             },
             fertilizing: {
               interval: 14,
-              description: 'parsley.phases.vegetative.soil.fertilizing.description',
+              description: 'parsley.environments.greenhouse.phases.vegetative.soil.fertilizing.description',
             },
           },
           hydro: {
-            watering: { 
-              interval: 0, 
-              description: 'parsley.phases.vegetative.hydro.watering.description' 
+            watering: {
+              interval: 0,
+              description: 'parsley.environments.greenhouse.phases.vegetative.hydro.watering.description',
             },
             fertilizing: {
               interval: 14,
-              description: 'parsley.phases.vegetative.hydro.fertilizing.description',
+              description: 'parsley.environments.greenhouse.phases.vegetative.hydro.fertilizing.description',
             },
           },
           coco: {
-            watering: { 
-              interval: 1, 
-              description: 'parsley.phases.vegetative.coco.watering.description' 
+            watering: {
+              interval: 1,
+              description: 'parsley.environments.greenhouse.phases.vegetative.coco.watering.description',
             },
             fertilizing: {
               interval: 14,
-              description: 'parsley.phases.vegetative.coco.fertilizing.description',
+              description: 'parsley.environments.greenhouse.phases.vegetative.coco.fertilizing.description',
             },
           },
         },
         harvest: {
           days: 90,
-          description: 'parsley.phases.harvest.description',
-          care: 'parsley.phases.harvest.care',
+          description: 'parsley.environments.greenhouse.phases.harvest.description',
+          care: 'parsley.environments.greenhouse.phases.harvest.care',
           editable: true,
           soil: {
-            watering: { 
-              interval: 2, 
-              description: 'parsley.phases.harvest.soil.watering.description' 
+            watering: {
+              interval: 2,
+              description: 'parsley.environments.greenhouse.phases.harvest.soil.watering.description',
             },
             fertilizing: {
               interval: 14,
-              description: 'parsley.phases.harvest.soil.fertilizing.description',
+              description: 'parsley.environments.greenhouse.phases.harvest.soil.fertilizing.description',
             },
           },
           hydro: {
-            watering: { 
-              interval: 0, 
-              description: 'parsley.phases.harvest.hydro.watering.description' 
+            watering: {
+              interval: 0,
+              description: 'parsley.environments.greenhouse.phases.harvest.hydro.watering.description',
             },
             fertilizing: {
               interval: 14,
-              description: 'parsley.phases.harvest.hydro.fertilizing.description',
+              description: 'parsley.environments.greenhouse.phases.harvest.hydro.fertilizing.description',
             },
           },
           coco: {
-            watering: { 
-              interval: 1, 
-              description: 'parsley.phases.harvest.coco.watering.description' 
+            watering: {
+              interval: 1,
+              description: 'parsley.environments.greenhouse.phases.harvest.coco.watering.description',
             },
             fertilizing: {
               interval: 14,
-              description: 'parsley.phases.harvest.coco.fertilizing.description',
+              description: 'parsley.environments.greenhouse.phases.harvest.coco.fertilizing.description',
             },
+          },
+        },
+      },
+      seasonalTiming: {
+        temperate_north: {
+          plantingWindow: {
+            start: '03-01',
+            end: '07-01',
+            description: 'parsley.environments.greenhouse.seasonalTiming.temperate_north.plantingWindow.description',
+          },
+          harvestWindow: {
+            start: '05-01',
+            end: '11-30',
+            description: 'parsley.environments.greenhouse.seasonalTiming.temperate_north.harvestWindow.description',
+          },
+        },
+        mediterranean: {
+          plantingWindow: {
+            start: '02-01',
+            end: '08-01',
+            description: 'parsley.environments.greenhouse.seasonalTiming.mediterranean.plantingWindow.description',
+          },
+          harvestWindow: {
+            start: '04-01',
+            end: '12-31',
+            description: 'parsley.environments.greenhouse.seasonalTiming.mediterranean.harvestWindow.description',
           },
         },
       },
