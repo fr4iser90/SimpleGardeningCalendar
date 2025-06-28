@@ -81,6 +81,7 @@ export function getLocalizedTemplateCategories() {
         ORNAMENTAL: 'Ornamental Garden',
         VEGETABLE_FRUIT: 'Vegetable & Fruit Garden',
         HERB_GARDEN: 'Herb Garden',
+        FRUIT_GARDEN: 'Fruit Garden',
         BALCONY_TERRACE: 'Balcony & Terrace',
         COMPLETE_GARDEN: 'Complete Garden'
       };
@@ -89,6 +90,7 @@ export function getLocalizedTemplateCategories() {
         ORNAMENTAL: 'Jardin d\'Ornement',
         VEGETABLE_FRUIT: 'Potager & Verger',
         HERB_GARDEN: 'Jardin d\'Herbes Aromatiques',
+        FRUIT_GARDEN: 'Jardin de Fruits',
         BALCONY_TERRACE: 'Balcon & Terrasse',
         COMPLETE_GARDEN: 'Jardin Complet'
       };
@@ -97,6 +99,7 @@ export function getLocalizedTemplateCategories() {
         ORNAMENTAL: 'Jardín Ornamental',
         VEGETABLE_FRUIT: 'Huerto & Frutales',
         HERB_GARDEN: 'Jardín de Hierbas',
+        FRUIT_GARDEN: 'Jardín de Frutas',
         BALCONY_TERRACE: 'Balcón & Terraza',
         COMPLETE_GARDEN: 'Jardín Completo'
       };
@@ -105,6 +108,7 @@ export function getLocalizedTemplateCategories() {
         ORNAMENTAL: 'Giardino Ornamentale',
         VEGETABLE_FRUIT: 'Orto & Frutteto',
         HERB_GARDEN: 'Giardino delle Erbe',
+        FRUIT_GARDEN: 'Giardino delle Frutte',
         BALCONY_TERRACE: 'Balcone & Terrazza',
         COMPLETE_GARDEN: 'Giardino Completo'
       };
@@ -113,6 +117,7 @@ export function getLocalizedTemplateCategories() {
         ORNAMENTAL: 'Ziergarten',
         VEGETABLE_FRUIT: 'Obst- und Gemüsegarten',
         HERB_GARDEN: 'Kräutergarten',
+        FRUIT_GARDEN: 'Obstgarten',
         BALCONY_TERRACE: 'Balkon & Terrasse',
         COMPLETE_GARDEN: 'Kompletter Garten'
       };
@@ -121,6 +126,7 @@ export function getLocalizedTemplateCategories() {
         ORNAMENTAL: 'Ornamental Garden',
         VEGETABLE_FRUIT: 'Vegetable & Fruit Garden',
         HERB_GARDEN: 'Herb Garden',
+        FRUIT_GARDEN: 'Fruit Garden',
         BALCONY_TERRACE: 'Balcony & Terrace',
         COMPLETE_GARDEN: 'Complete Garden'
       }; // English as fallback
@@ -152,6 +158,7 @@ export const GARDEN_TEMPLATE_CATEGORIES = {
   ORNAMENTAL: 'ORNAMENTAL',
   VEGETABLE_FRUIT: 'VEGETABLE_FRUIT',
   HERB_GARDEN: 'HERB_GARDEN',
+  FRUIT_GARDEN: 'FRUIT_GARDEN',
   BALCONY_TERRACE: 'BALCONY_TERRACE',
   COMPLETE_GARDEN: 'COMPLETE_GARDEN'
 };
