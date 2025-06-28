@@ -107,7 +107,7 @@ export async function showCategoryPlantsModal(category, plantings) {
   modal.innerHTML = `
     <div class="bg-white dark:bg-gray-800 rounded-lg p-6 max-w-4xl w-full max-h-[80vh] overflow-y-auto">
       <div class="flex justify-between items-center mb-4">
-        <h2 class="text-xl font-semibold dark:text-white">${category} Plants</h2>
+        <h2 class="text-xl font-semibold dark:text-white">${t('plants.category_title', { category })}</h2>
         <button class="text-gray-500 hover:text-gray-700 dark:text-gray-400 dark:hover:text-gray-200" onclick="this.closest('.fixed').remove()">✕</button>
       </div>
       

@@ -346,6 +346,7 @@ export const es = {
     'plants.started': 'Iniciado',
     'plants.current_phase': 'Fase Actual',
     'plants.expected_completion': 'Finalización Esperada',
+    'plants.category_title': 'Plantas {category}',
     
     // Error Messages
     'error.title': 'Error',
@@ -657,6 +658,9 @@ export const es = {
     'plants_list.current': 'Actual',
     'plants_list.no_phase_info': 'No hay información de fases disponible',
     'plants_list.failed_load_details': '❌ Error al cargar detalles de la planta',
+    'plants_list.plant_information': '📋 Información de la planta',
+    'plants_list.category_label': 'Categoría',
+    'plants_list.custom_name_label': 'Nombre personalizado',
     
     // Phase Editing
     'phase.editable': 'editable',

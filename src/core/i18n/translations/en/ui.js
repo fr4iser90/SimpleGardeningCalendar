@@ -316,6 +316,7 @@ export const en = {
     'plants.started': 'Started',
     'plants.current_phase': 'Current Phase',
     'plants.expected_completion': 'Expected Completion',
+    'plants.category_title': '{category} Plants',
     
     // Error Messages
     'error.title': 'Error',
@@ -619,6 +620,9 @@ export const en = {
     'plants_list.current': 'Current',
     'plants_list.no_phase_info': 'No phase information available',
     'plants_list.failed_load_details': '❌ Failed to load plant details',
+    'plants_list.plant_information': '📋 Plant Information',
+    'plants_list.category_label': 'Category',
+    'plants_list.custom_name_label': 'Custom Name',
 
     // Auto-detection functionality
     'modal.auto_detect.detecting': '🔍 Detecting...',

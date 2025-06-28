@@ -267,17 +267,12 @@ export async function viewPlantDetails(plantingId) {
           <!-- Plant Information -->
           <div class="space-y-4">
             <div class="bg-gray-50 dark:bg-gray-700 rounded-lg p-4">
-              <h3 class="font-semibold mb-3 dark:text-white">📋 Plant Information</h3>
+              <h3 class="font-semibold mb-3 dark:text-white">${t('plants_list.plant_information')}</h3>
               <div class="space-y-2 text-sm">
                 <div><strong>${labelType}:</strong> ${planting.plantName}</div>
-                ${planting.customName ? `<div><strong>Custom Name:</strong> ${planting.customName}</div>` : ''}
-                <div><strong>Category:</strong> ${planting.category}</div>
+                ${planting.customName ? `<div><strong>${t('plants_list.custom_name_label')}:</strong> ${planting.customName}</div>` : ''}
+                <div><strong>${t('plants_list.category_label')}:</strong> ${planting.category}</div>
                 <div><strong>${labelLocation}:</strong> ${planting.location}</div>
-                <div><strong>Status:</strong> <span class="px-2 py-1 rounded text-xs ${
-                  planting.status === 'active' ? 'bg-green-100 dark:bg-green-900 text-green-800 dark:text-green-200' :
-                  planting.status === 'completed' ? 'bg-blue-100 dark:bg-blue-900 text-blue-800 dark:text-blue-200' :
-                  'bg-red-100 dark:bg-red-900 text-red-800 dark:text-red-200'
-                }">${planting.status}</span></div>
                 <div><strong>${labelStarted}:</strong> ${formatDateWithLocale(planting.startDate)}</div>
                 <div><strong>${labelExpectedCompletion}:</strong> ${formatDateWithLocale(planting.completionDate)}</div>
                 <div><strong>${labelCurrentPhase}:</strong> ${t('phase.' + planting.currentPhase)}</div>

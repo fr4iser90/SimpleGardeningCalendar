@@ -339,6 +339,7 @@ export const de = {
     'plants.save_note': 'Notiz speichern',
     'plants.delete_confirm': 'Pflanze & alle Termine löschen',
     'plants.no_category_plants': 'Keine {category} Pflanzen vorhanden.',
+    'plants.category_title': '{category} Pflanzen',
     
     // Error Messages
     'error.title': 'Fehler',
@@ -668,6 +669,9 @@ export const de = {
     'plants_list.current': 'Aktuell',
     'plants_list.no_phase_info': 'Keine Phaseninformationen verfügbar',
     'plants_list.failed_load_details': '❌ Laden der Pflanzendetails fehlgeschlagen',
+    'plants_list.plant_information': '📋 Pflanzeninformation',
+    'plants_list.category_label': 'Kategorie',
+    'plants_list.custom_name_label': 'Benutzername',
 
     // Checkpoints for weekly checks
     'checkpoints.germination': 'Keimfortschritt, Feuchtigkeitsniveau, Temperatur',

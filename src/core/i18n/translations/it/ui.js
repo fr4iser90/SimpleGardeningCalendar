@@ -472,6 +472,9 @@ export const it = {
     'plants.save_note': 'Salva Nota',
     'plants.delete_confirm': 'Elimina Pianta e Tutti gli Eventi',
     'plants.no_category_plants': 'Nessuna pianta {category} disponibile.',
+    'plants_list.plant_information': '📋 Informazioni sulla pianta',
+    'plants_list.category_label': 'Categoria',
+    'plants_list.custom_name_label': 'Nome personalizzato',
   
     // Local Calendar Wizard
     'local.wizard.title': 'Organizzazione Calendario Locale',
@@ -669,5 +672,7 @@ export const it = {
     'google.quota.modal.opened_google_calendar': 'Google Calendar aperto',
     'google.quota.modal.setup_calendars': 'Configura Calendari',
     'google.quota.modal.calendar_creation.wait_hours_info': 'Se anche la creazione manuale non funziona, attendi alcune ore e riprova. Google rimuoverà automaticamente il limite dopo un po\' di tempo.',
+
+    'plants.category_title': 'Piante {category}',
 };
   

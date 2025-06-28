@@ -309,6 +309,7 @@ export const fr = {
     'plants.started': 'Démarré',
     'plants.current_phase': 'Phase Actuelle',
     'plants.expected_completion': 'Terminaison Prévue',
+    'plants.category_title': 'Plantes {category}',
     
     // Error Messages
     'error.title': 'Erreur',
@@ -602,6 +603,9 @@ export const fr = {
     'plants_list.current': 'Actuel',
     'plants_list.no_phase_info': 'Aucune information de phase disponible',
     'plants_list.failed_load_details': '❌ Échec du chargement des détails de la plante',
+    'plants_list.plant_information': '📋 Informations sur la plante',
+    'plants_list.category_label': 'Catégorie',
+    'plants_list.custom_name_label': 'Nom personnalisé',
 
     // Auto-detection functionality
     'modal.auto_detect.detecting': '🔍 Détection...',
