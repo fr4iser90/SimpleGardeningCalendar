@@ -14,6 +14,7 @@ export const it = {
     'ui.weather_info': 'Le informazioni meteo locali verranno visualizzate qui',
     'ui.built_with': 'Costruito con',
     'ui.language': 'Lingua:',
+    'ui.show_all_calendars': 'Mostra tutti i calendari',
     
     // Buttons
     'btn.add_event': 'Aggiungi Evento',

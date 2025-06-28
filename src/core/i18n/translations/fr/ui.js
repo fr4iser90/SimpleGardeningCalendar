@@ -13,6 +13,7 @@ export const fr = {
     'ui.weather_info': 'Les informations météorologiques locales seront affichées ici',
     'ui.built_with': 'Construit avec',
     'ui.language': 'Langue:',
+    'ui.show_all_calendars': 'Afficher tous les calendriers',
     
     // Buttons
     'btn.add_event': 'Ajouter Événement',

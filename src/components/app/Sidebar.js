@@ -38,43 +38,64 @@ export async function loadPlantCategories(t) {
 
 export async function loadUpcomingTasks(t) {
   const db = await openDB(DB_NAME, DB_VERSION);
-  
   const today = new Date();
   const nextWeek = new Date();
   nextWeek.setDate(today.getDate() + 7);
-  
+
+  // Umschalter-Status aus LocalStorage holen (default: false)
+  const showAllCalendars = localStorage.getItem('showAllCalendarsForTasks') === 'true';
+  const selectedCalendarId = localStorage.getItem('selectedLocalCalendarId');
+
   const events = await db.getAll('events');
-  const upcomingEvents = events
+  // Filter je nach Umschalter
+  const filteredEvents = showAllCalendars
+    ? events
+    : events.filter(event => !selectedCalendarId || event.calendarId == selectedCalendarId);
+
+  const upcomingEvents = filteredEvents
     .filter(event => {
       const eventDate = new Date(event.date);
       return eventDate >= today && eventDate <= nextWeek;
     })
     .sort((a, b) => new Date(a.date) - new Date(b.date))
     .slice(0, 5);
-  
+
   const tasksContainer = document.getElementById('upcomingTasks');
   if (!tasksContainer) return;
-  
+
+  // Umschalter-Checkbox einfügen (falls noch nicht vorhanden)
+  let toggleId = 'showAllCalendarsForTasksToggle';
+  if (!document.getElementById(toggleId)) {
+    const toggleDiv = document.createElement('div');
+    toggleDiv.className = 'mb-2 flex items-center';
+    toggleDiv.innerHTML = `
+      <input type="checkbox" id="${toggleId}" class="mr-2" ${showAllCalendars ? 'checked' : ''}>
+      <label for="${toggleId}" class="text-xs text-gray-600 dark:text-gray-300 cursor-pointer">${t('ui.show_all_calendars')}</label>
+    `;
+    tasksContainer.parentNode.insertBefore(toggleDiv, tasksContainer);
+    document.getElementById(toggleId).addEventListener('change', (e) => {
+      localStorage.setItem('showAllCalendarsForTasks', e.target.checked ? 'true' : 'false');
+      loadUpcomingTasks(t);
+    });
+  }
+
   tasksContainer.innerHTML = '';
-  
+
   if (upcomingEvents.length === 0) {
     tasksContainer.innerHTML = `<p class="text-gray-500 dark:text-gray-400 text-sm">${t('ui.no_upcoming_tasks')}</p>`;
     return;
   }
-  
+
   upcomingEvents.forEach(event => {
     const taskEl = document.createElement('div');
     taskEl.className = 'text-sm p-2 bg-gray-50 dark:bg-gray-700 rounded';
-    
     const eventDate = new Date(event.date);
     const isToday = eventDate.toDateString() === today.toDateString();
     const dateStr = isToday ? 'Today' : formatDateWithLocale(eventDate);
-    
     taskEl.innerHTML = `
       <div class="font-medium dark:text-white">${event.title}</div>
       <div class="text-gray-500 dark:text-gray-400">${dateStr}</div>
     `;
-    
     tasksContainer.appendChild(taskEl);
   });
 }
@@ -137,6 +158,14 @@ export function initializeSidebar(t) {
   // Listen for refresh events
   document.addEventListener('refreshSidebar', () => {
     loadPlantCategories(t);
+    loadUpcomingTasks(t);
+  });
+
+  // NEU: Aufgabenliste auch bei Kalenderwechsel aktualisieren
+  document.addEventListener('selectedCalendarChanged', () => {
+    loadUpcomingTasks(t);
+  });
+  document.addEventListener('localCalendarSwitched', () => {
     loadUpcomingTasks(t);
   });
 }

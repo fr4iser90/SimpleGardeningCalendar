@@ -14,6 +14,7 @@ export const de = {
     'ui.weather_info': 'Lokale Wetterinformationen werden hier angezeigt',
     'ui.built_with': 'Erstellt mit',
     'ui.language': 'Sprache:',
+    'ui.show_all_calendars': 'Alle Kalender anzeigen',
     
     // Buttons
     'btn.add_event': 'Termin hinzufügen',
