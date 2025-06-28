@@ -92,7 +92,7 @@ export async function showPlantLibraryModal() {
                  data-key="${key}"
                  data-tags="${(plant.tags || []).join(',')}">
               <div class="flex justify-between items-start mb-2">
-                <h3 class="font-semibold dark:text-white">${plant.name}</h3>
+                <h3 class="font-semibold dark:text-white">${t(plant.name)}</h3>
                 <div class="flex flex-col items-end space-y-1">
                   <span class="text-xs px-2 py-1 bg-gray-100 dark:bg-gray-700 text-gray-800 dark:text-gray-200 rounded">${t(plant.category)}</span>
                   ${(plant.tags || []).map(tag => `
@@ -163,7 +163,7 @@ export function showPlantDetailsModal(plant, plantKey) {
   modal.innerHTML = `
     <div class="bg-white dark:bg-gray-800 rounded-lg p-6 max-w-2xl w-full max-h-[90vh] overflow-y-auto">
       <div class="flex justify-between items-center mb-4">
-        <h2 class="text-xl font-semibold dark:text-white">${plant.name}</h2>
+        <h2 class="text-xl font-semibold dark:text-white">${t(plant.name)}</h2>
         <button class="text-gray-500 hover:text-gray-700 dark:text-gray-400 dark:hover:text-gray-200" onclick="this.closest('.fixed').remove()">✕</button>
       </div>
       

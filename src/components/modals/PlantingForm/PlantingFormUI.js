@@ -114,7 +114,7 @@ export async function createPlantingForm(date, preselectedPlant = null) {
       <div id="phaseInputs" class="grid grid-cols-1 md:grid-cols-2 gap-3">
         <!-- Phase duration inputs will be populated here -->
       </div>
-      <p class="text-xs text-gray-500 dark:text-gray-400 mt-2">${t('modal.phase_duration.tip')}</p>
+      <!-- <p class="text-xs text-gray-500 dark:text-gray-400 mt-2">${t('modal.phase_duration.tip')}</p> -->
     </div>
     
     <div id="phaseCareSection" class="mt-4" style="display:none;">

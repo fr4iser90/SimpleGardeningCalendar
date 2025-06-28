@@ -69,7 +69,7 @@ export const de = {
     'modal.phase_duration.help': 'Passen Sie die Phasendauern an, wenn Ihre Sorte von der Standardzeit abweicht',
     'modal.phase_duration.days': 'Tage',
     'modal.phase_duration.default': 'Standard:',
-    'modal.phase_duration.tip': '💡 Tipp: Cannabis-Blüte kann je nach Sorte 6-12 Wochen variieren',
+    'modal.phase_duration_cannabis.tip': '💡 Tipp: Cannabis-Blüte kann je nach Sorte 6-12 Wochen variieren',
     'modal.reminders.title': '🗓️ Automatische Erinnerungen',
     'modal.reminders.watering': '💧 Gießerinnerungen',
     'modal.reminders.watering_interval': 'Intervall:',

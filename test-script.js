@@ -107,9 +107,9 @@ class GardeningCalendarTester {
         this.results.plantTests[key] = testResult;
         
         if (testResult.errors.length === 0) {
-          this.logSuccess(`Plant '${plant.name}': ✅ All checks passed`);
+          this.logSuccess(`Plant '${t(plant.name)}': ✅ All checks passed`);
         } else {
-          this.logWarning(`Plant '${plant.name}': ⚠️ ${testResult.errors.join(', ')}`);
+          this.logWarning(`Plant '${t(plant.name)}': ⚠️ ${testResult.errors.join(', ')}`);
         }
       }
 
@@ -155,7 +155,7 @@ class GardeningCalendarTester {
             envTestCount++;
             
             if (!envData.phases || Object.keys(envData.phases).length === 0) {
-              this.logWarning(`${plant.name} (${env}): No phases defined`);
+              this.logWarning(`${t(plant.name)} (${env}): No phases defined`);
             }
           }
         }

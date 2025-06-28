@@ -106,26 +106,37 @@ export function getAvailableLanguages() {
   }));
 }
 
-// Deep merge utility for merging original and translated plant data
-function deepMerge(original, translation) {
-  if (!translation) return original;
-  if (typeof original !== 'object' || typeof translation !== 'object' || original === null || translation === null) {
-    return translation ?? original;
-  }
-  const result = Array.isArray(original) ? [...original] : { ...original };
-  for (const key in translation) {
-    if (
-      translation[key] &&
-      typeof translation[key] === 'object' &&
-      !Array.isArray(translation[key]) &&
-      original[key] &&
-      key !== 'commonProblems' // Special handling for commonProblems - replace completely
-    ) {
-      result[key] = deepMerge(original[key], translation[key]);
-    } else {
-      result[key] = translation[key];
+/**
+ * Resolve translation keys in plant data
+ * @param {Object} plantData - Plant data object
+ * @param {Object} translations - Translation data object
+ * @returns {Object} Plant data with resolved translations
+ */
+function resolvePlantTranslations(plantData, translations) {
+  if (!translations) return plantData;
+  
+  const result = JSON.parse(JSON.stringify(plantData)); // Deep clone
+  
+  // Recursive function to resolve translation keys
+  function resolveTranslations(obj, path = '') {
+    for (const key in obj) {
+      const currentPath = path ? `${path}.${key}` : key;
+      const value = obj[key];
+      
+      if (typeof value === 'string' && value.includes('.')) {
+        // Check if this looks like a translation key
+        const translationKey = value;
+        if (translations[translationKey]) {
+          obj[key] = translations[translationKey];
+        }
+      } else if (typeof value === 'object' && value !== null && !Array.isArray(value)) {
+        // Recursively resolve nested objects
+        resolveTranslations(value, currentPath);
+      }
     }
   }
+  
+  resolveTranslations(result);
   return result;
 }
 
@@ -182,16 +193,16 @@ export async function getTranslatedPlantData(plantKey) {
       category: translatedData.category 
     });
     
-    // Merge translation into original
-    const merged = deepMerge(originalData, translatedData);
+    // Resolve translation keys in the original data
+    const resolved = translatedData ? resolvePlantTranslations(originalData, translatedData) : originalData;
     
-    console.log(`🔍 [getTranslatedPlantData] Merged data:`, { 
-      name: merged.name, 
-      category: merged.category 
+    console.log(`🔍 [getTranslatedPlantData] Resolved data:`, { 
+      name: resolved.name, 
+      category: resolved.category 
     });
     
-    plantTranslationCache.set(cacheKey, merged);
-    return merged;
+    plantTranslationCache.set(cacheKey, resolved);
+    return resolved;
   } catch (error) {
     console.warn(`Failed to load translated plant data for ${plantKey} in ${currentLanguage}:`, error);
     plantTranslationCache.set(cacheKey, originalData);
@@ -284,9 +295,9 @@ export async function getAllTranslatedPlantData() {
       }
       const translationModule = await import(`./translations/${currentLanguage}/plants/${plantCategory}/${plantKey}.js`);
       const translatedData = translationModule.default;
-      const merged = translatedData ? deepMerge(originalData, translatedData) : originalData;
-      translatedPlants.set(plantKey, merged);
-      plantTranslationCache.set(cacheKey, merged);
+      const resolved = translatedData ? resolvePlantTranslations(originalData, translatedData) : originalData;
+      translatedPlants.set(plantKey, resolved);
+      plantTranslationCache.set(cacheKey, resolved);
     } catch (error) {
       translatedPlants.set(plantKey, originalData);
       plantTranslationCache.set(cacheKey, originalData);
@@ -299,6 +310,9 @@ export async function getAllTranslatedPlantData() {
 
 // Initialize on module load
 initI18n();
+
+// Clear plant translation cache to ensure new resolution logic takes effect
+clearPlantTranslationCache();
 
 // Export UI functions
 export { updateUITranslations };

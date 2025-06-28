@@ -62,7 +62,7 @@ export async function createPlantOptions(environment = getDefaultEnvironment()) 
     .filter(([key, plant]) => plant.environments && plant.environments[envKey])
     .map(([key, plant]) => {
       const legalNote = plant.legalNote ? ' ⚠️' : '';
-      return `<option value="${key}" data-category="${plant.category}">${plant.name}${legalNote}</option>`;
+      return `<option value="${key}" data-category="${plant.category}">${t(plant.name)}${legalNote}</option>`;
     })
     .join('');
 }
@@ -110,7 +110,7 @@ export async function updatePlantOptions(category, environment = getDefaultEnvir
     const option = document.createElement('option');
     option.value = key;
     option.dataset.category = plant.category;
-    option.textContent = plant.name + (plant.legalNote ? ' ⚠️' : '');
+    option.textContent = t(plant.name) + (plant.legalNote ? ' ⚠️' : '');
     plantTypeSelect.appendChild(option);
   });
 }
@@ -170,7 +170,7 @@ export function updatePlantInfo() {
   }
   plantInfo.style.display = '';
   plantInfo.innerHTML = `
-    <h4 class="font-medium mb-2">${plantData.name}</h4>
+    <h4 class="font-medium mb-2">${t(plantData.name)}</h4>
     <p class="text-sm mb-2"><strong>${t('plant.info.category')}</strong> ${t(plantData.category)}</p>
     <p class="text-sm mb-2"><strong>${t('plant.info.environment')}</strong> ${t('environment.' + envKey)}</p>
     <p class="text-sm mb-2"><strong>${t('plant.info.total_duration')}</strong> ${totalDuration}</p>
@@ -328,7 +328,7 @@ export async function updateCustomNamePlaceholder() {
   }
   
   if (plantData) {
-    customNameField.placeholder = `e.g., "My ${plantData.name}"`;
+    customNameField.placeholder = `e.g., "My ${t(plantData.name)}"`;
   } else {
     customNameField.placeholder = '';
   }
@@ -584,7 +584,7 @@ export async function createPlantTypeOptions() {
     options.push(`<optgroup label="${categoryName}">`);
     
     for (const plant of plants) {
-      const plantName = plant.data.name;
+      const plantName = t(plant.data.name);
       options.push(`<option value="${plant.key}">${plantName}</option>`);
     }
     

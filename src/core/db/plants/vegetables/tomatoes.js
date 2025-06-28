@@ -3,6 +3,8 @@
  * Indoor/Outdoor growing information for Tomatoes
  */
 
+import { PLANT_TAGS } from '../categories.js';
+
 // Helper function for temperature formatting
 function formatTemperature(fahrenheitRange) {
   if (!fahrenheitRange || typeof fahrenheitRange !== 'string')
@@ -19,208 +21,226 @@ function formatTemperature(fahrenheitRange) {
 }
 
 export const tomatoes = {
-  name: 'Tomatoes',
+  name: 'tomatoes.name',
   category: 'category.vegetables',
-  tags: ['tag.photoperiod', 'tag.annual'],
+  tags: [PLANT_TAGS.PHOTOPERIOD, PLANT_TAGS.ANNUAL],
   emoji: '🍅',
   environments: {
     indoor: {
       phases: {
         germination: {
           days: 7,
-          description: 'Seeds sprouting',
-          care: 'Keep soil warm (70-80°F/21-27°C) and moist',
+          description: 'tomatoes.phases.germination.description',
+          care: 'tomatoes.phases.germination.care',
           editable: true,
           soil: {
             watering: {
               interval: 1,
-              description: 'Keep soil consistently moist but not waterlogged',
+              description: 'tomatoes.phases.germination.soil.watering.description',
             },
             fertilizing: {
               interval: 0,
-              description: 'No fertilizer needed during germination',
+              description: 'tomatoes.phases.germination.soil.fertilizing.description',
             },
           },
           hydro: {
             watering: {
               interval: 0,
-              description: 'Continuous moisture in rockwool',
+              description: 'tomatoes.phases.germination.hydro.watering.description',
             },
             fertilizing: {
               interval: 0,
-              description: 'No nutrients during germination',
+              description: 'tomatoes.phases.germination.hydro.fertilizing.description',
             },
           },
           coco: {
             watering: {
               interval: 1,
-              description: 'Keep coco moist during germination',
+              description: 'tomatoes.phases.germination.coco.watering.description',
             },
             fertilizing: {
               interval: 0,
-              description: 'No fertilizing during germination',
+              description: 'tomatoes.phases.germination.coco.fertilizing.description',
             },
           },
         },
         seedling: {
           days: 21,
-          description: 'Young plant development',
-          care: 'Provide strong light, maintain moisture',
+          description: 'tomatoes.phases.seedling.description',
+          care: 'tomatoes.phases.seedling.care',
           editable: true,
           soil: {
             watering: {
               interval: 2,
-              description: 'Water when top inch of soil feels dry',
+              description: 'tomatoes.phases.seedling.soil.watering.description',
             },
             fertilizing: {
               interval: 7,
-              description:
-                'Light feeding with balanced fertilizer (1/4 strength)',
+              description: 'tomatoes.phases.seedling.soil.fertilizing.description',
             },
           },
           hydro: {
-            watering: { interval: 0, description: 'Continuous flow, low EC' },
+            watering: { 
+              interval: 0, 
+              description: 'tomatoes.phases.seedling.hydro.watering.description' 
+            },
             fertilizing: {
               interval: 7,
-              description: 'Light nutrients, EC 0.8-1.0',
+              description: 'tomatoes.phases.seedling.hydro.fertilizing.description',
             },
           },
           coco: {
-            watering: { interval: 1, description: 'Daily watering in coco' },
+            watering: { 
+              interval: 1, 
+              description: 'tomatoes.phases.seedling.coco.watering.description' 
+            },
             fertilizing: {
               interval: 7,
-              description: 'Light feeding, EC 0.8-1.0',
+              description: 'tomatoes.phases.seedling.coco.fertilizing.description',
             },
           },
         },
         vegetative: {
           days: 28,
-          description: 'Strong leaf and stem growth',
-          care: 'Regular watering, fertilizing, remove suckers',
+          description: 'tomatoes.phases.vegetative.description',
+          care: 'tomatoes.phases.vegetative.care',
           editable: true,
           soil: {
             watering: {
               interval: 2,
-              description: 'Deep watering when top inch of soil feels dry',
+              description: 'tomatoes.phases.vegetative.soil.watering.description',
             },
             fertilizing: {
               interval: 14,
-              description: 'Balanced fertilizer, avoid high nitrogen',
+              description: 'tomatoes.phases.vegetative.soil.fertilizing.description',
             },
           },
           hydro: {
             watering: {
               interval: 0,
-              description: 'Continuous flow, moderate EC',
+              description: 'tomatoes.phases.vegetative.hydro.watering.description',
             },
             fertilizing: {
               interval: 14,
-              description: 'Balanced nutrients, EC 1.0-1.2',
+              description: 'tomatoes.phases.vegetative.hydro.fertilizing.description',
             },
           },
           coco: {
-            watering: { interval: 1, description: 'Daily watering in coco' },
+            watering: { 
+              interval: 1, 
+              description: 'tomatoes.phases.vegetative.coco.watering.description' 
+            },
             fertilizing: {
               interval: 14,
-              description: 'Balanced feeding, EC 1.0-1.2',
+              description: 'tomatoes.phases.vegetative.coco.fertilizing.description',
             },
           },
         },
         transplant: {
           days: 14,
-          description: 'Hardening off period',
-          care: 'Gradually introduce to outdoor conditions',
+          description: 'tomatoes.phases.transplant.description',
+          care: 'tomatoes.phases.transplant.care',
           editable: true,
           soil: {
             watering: {
               interval: 2,
-              description: 'Maintain consistent moisture during transition',
+              description: 'tomatoes.phases.transplant.soil.watering.description',
             },
             fertilizing: {
               interval: 0,
-              description: 'No fertilizing during hardening off',
+              description: 'tomatoes.phases.transplant.soil.fertilizing.description',
             },
           },
           hydro: {
             watering: {
               interval: 0,
-              description: 'Continuous flow, moderate EC',
+              description: 'tomatoes.phases.transplant.hydro.watering.description',
             },
             fertilizing: {
               interval: 0,
-              description: 'No fertilizing during hardening off',
+              description: 'tomatoes.phases.transplant.hydro.fertilizing.description',
             },
           },
           coco: {
-            watering: { interval: 1, description: 'Daily watering in coco' },
+            watering: { 
+              interval: 1, 
+              description: 'tomatoes.phases.transplant.coco.watering.description' 
+            },
             fertilizing: {
               interval: 0,
-              description: 'No fertilizing during hardening off',
+              description: 'tomatoes.phases.transplant.coco.fertilizing.description',
             },
           },
         },
         flowering: {
           days: 20,
-          description: 'Flower development',
-          care: 'Maintain consistent watering, shake plants gently',
+          description: 'tomatoes.phases.flowering.description',
+          care: 'tomatoes.phases.flowering.care',
           editable: true,
           soil: {
             watering: {
               interval: 2,
-              description:
-                'Deep watering 2-3 times per week, avoid wetting leaves',
+              description: 'tomatoes.phases.flowering.soil.watering.description',
             },
             fertilizing: {
               interval: 14,
-              description: 'High phosphorus fertilizer for flower development',
+              description: 'tomatoes.phases.flowering.soil.fertilizing.description',
             },
           },
           hydro: {
             watering: {
               interval: 0,
-              description: 'Continuous flow, higher EC',
+              description: 'tomatoes.phases.flowering.hydro.watering.description',
             },
             fertilizing: {
               interval: 14,
-              description: 'High phosphorus nutrients, EC 1.2-1.5',
+              description: 'tomatoes.phases.flowering.hydro.fertilizing.description',
             },
           },
           coco: {
-            watering: { interval: 1, description: 'Daily watering in coco' },
+            watering: { 
+              interval: 1, 
+              description: 'tomatoes.phases.flowering.coco.watering.description' 
+            },
             fertilizing: {
               interval: 14,
-              description: 'High phosphorus feeding, EC 1.2-1.5',
+              description: 'tomatoes.phases.flowering.coco.fertilizing.description',
             },
           },
         },
         fruiting: {
           days: 45,
-          description: 'Fruit development to harvest',
-          care: 'Regular feeding, watch for pests and disease',
+          description: 'tomatoes.phases.fruiting.description',
+          care: 'tomatoes.phases.fruiting.care',
           editable: true,
           soil: {
             watering: {
               interval: 2,
-              description: 'Consistent deep watering, avoid drought stress',
+              description: 'tomatoes.phases.fruiting.soil.watering.description',
             },
             fertilizing: {
-              interval: 21,
-              description:
-                'Balanced fertilizer with higher potassium for fruit development',
+              interval: 14,
+              description: 'tomatoes.phases.fruiting.soil.fertilizing.description',
             },
           },
           hydro: {
-            watering: { interval: 0, description: 'Continuous flow, high EC' },
+            watering: {
+              interval: 0,
+              description: 'tomatoes.phases.fruiting.hydro.watering.description',
+            },
             fertilizing: {
-              interval: 21,
-              description: 'High potassium nutrients, EC 1.5-2.0',
+              interval: 14,
+              description: 'tomatoes.phases.fruiting.hydro.fertilizing.description',
             },
           },
           coco: {
-            watering: { interval: 1, description: 'Daily watering in coco' },
+            watering: { 
+              interval: 1, 
+              description: 'tomatoes.phases.fruiting.coco.watering.description' 
+            },
             fertilizing: {
-              interval: 21,
-              description: 'High potassium feeding, EC 1.5-2.0',
+              interval: 14,
+              description: 'tomatoes.phases.fruiting.coco.fertilizing.description',
             },
           },
         },
@@ -230,199 +250,217 @@ export const tomatoes = {
       phases: {
         germination: {
           days: 7,
-          description: 'Indoor seed starting',
-          care: 'Start indoors 6-8 weeks before last frost',
-          editable: false,
+          description: 'tomatoes.phases.germination.description',
+          care: 'tomatoes.phases.germination.care',
+          editable: true,
           soil: {
             watering: {
               interval: 1,
-              description: 'Keep soil consistently moist but not waterlogged',
+              description: 'tomatoes.phases.germination.soil.watering.description',
             },
             fertilizing: {
               interval: 0,
-              description: 'No fertilizer needed during germination',
+              description: 'tomatoes.phases.germination.soil.fertilizing.description',
             },
           },
           hydro: {
             watering: {
               interval: 0,
-              description: 'Continuous moisture in rockwool',
+              description: 'tomatoes.phases.germination.hydro.watering.description',
             },
             fertilizing: {
               interval: 0,
-              description: 'No nutrients during germination',
+              description: 'tomatoes.phases.germination.hydro.fertilizing.description',
             },
           },
           coco: {
             watering: {
               interval: 1,
-              description: 'Keep coco moist during germination',
+              description: 'tomatoes.phases.germination.coco.watering.description',
             },
             fertilizing: {
               interval: 0,
-              description: 'No fertilizing during germination',
+              description: 'tomatoes.phases.germination.coco.fertilizing.description',
             },
           },
         },
         seedling: {
-          days: 35,
-          description: 'Indoor growing',
-          care: 'Grow indoors until outdoor conditions suitable',
-          editable: false,
+          days: 21,
+          description: 'tomatoes.phases.seedling.description',
+          care: 'tomatoes.phases.seedling.care',
+          editable: true,
           soil: {
             watering: {
               interval: 2,
-              description: 'Water when top inch of soil feels dry',
+              description: 'tomatoes.phases.seedling.soil.watering.description',
             },
             fertilizing: {
               interval: 7,
-              description:
-                'Light feeding with balanced fertilizer (1/4 strength)',
+              description: 'tomatoes.phases.seedling.soil.fertilizing.description',
             },
           },
           hydro: {
-            watering: { interval: 0, description: 'Continuous flow, low EC' },
+            watering: { 
+              interval: 0, 
+              description: 'tomatoes.phases.seedling.hydro.watering.description' 
+            },
             fertilizing: {
               interval: 7,
-              description: 'Light nutrients, EC 0.8-1.0',
+              description: 'tomatoes.phases.seedling.hydro.fertilizing.description',
             },
           },
           coco: {
-            watering: { interval: 1, description: 'Daily watering in coco' },
+            watering: { 
+              interval: 1, 
+              description: 'tomatoes.phases.seedling.coco.watering.description' 
+            },
             fertilizing: {
               interval: 7,
-              description: 'Light feeding, EC 0.8-1.0',
+              description: 'tomatoes.phases.seedling.coco.fertilizing.description',
             },
           },
         },
         vegetative: {
-          days: 30,
-          description: 'Outdoor vegetative growth',
-          care: 'Regular watering, fertilizing, remove suckers',
-          editable: false,
+          days: 28,
+          description: 'tomatoes.phases.vegetative.description',
+          care: 'tomatoes.phases.vegetative.care',
+          editable: true,
           soil: {
             watering: {
-              interval: 3,
-              description: 'Deep watering 2-3 times per week',
+              interval: 2,
+              description: 'tomatoes.phases.vegetative.soil.watering.description',
             },
             fertilizing: {
               interval: 14,
-              description: 'Balanced fertilizer, avoid high nitrogen',
+              description: 'tomatoes.phases.vegetative.soil.fertilizing.description',
             },
           },
           hydro: {
             watering: {
               interval: 0,
-              description: 'Continuous flow, moderate EC',
+              description: 'tomatoes.phases.vegetative.hydro.watering.description',
             },
             fertilizing: {
               interval: 14,
-              description: 'Balanced nutrients, EC 1.0-1.2',
+              description: 'tomatoes.phases.vegetative.hydro.fertilizing.description',
             },
           },
           coco: {
-            watering: { interval: 1, description: 'Daily watering in coco' },
+            watering: { 
+              interval: 1, 
+              description: 'tomatoes.phases.vegetative.coco.watering.description' 
+            },
             fertilizing: {
               interval: 14,
-              description: 'Balanced feeding, EC 1.0-1.2',
+              description: 'tomatoes.phases.vegetative.coco.fertilizing.description',
             },
           },
         },
         transplant: {
           days: 14,
-          description: 'Outdoor transplanting',
-          care: 'Transplant after soil warms to 60°F/15°C',
-          editable: false,
+          description: 'tomatoes.phases.transplant.description',
+          care: 'tomatoes.phases.transplant.care',
+          editable: true,
           soil: {
             watering: {
               interval: 2,
-              description: 'Maintain consistent moisture during transition',
+              description: 'tomatoes.phases.transplant.soil.watering.description',
             },
             fertilizing: {
               interval: 0,
-              description: 'No fertilizing during transplant shock',
+              description: 'tomatoes.phases.transplant.soil.fertilizing.description',
             },
           },
           hydro: {
             watering: {
               interval: 0,
-              description: 'Continuous flow, moderate EC',
+              description: 'tomatoes.phases.transplant.hydro.watering.description',
             },
             fertilizing: {
               interval: 0,
-              description: 'No fertilizing during transplant shock',
+              description: 'tomatoes.phases.transplant.hydro.fertilizing.description',
             },
           },
           coco: {
-            watering: { interval: 1, description: 'Daily watering in coco' },
+            watering: { 
+              interval: 1, 
+              description: 'tomatoes.phases.transplant.coco.watering.description' 
+            },
             fertilizing: {
               interval: 0,
-              description: 'No fertilizing during transplant shock',
+              description: 'tomatoes.phases.transplant.coco.fertilizing.description',
             },
           },
         },
         flowering: {
-          days: 25,
-          description: 'Outdoor flowering',
-          care: 'Natural pollination, consistent watering',
+          days: 20,
+          description: 'tomatoes.phases.flowering.description',
+          care: 'tomatoes.phases.flowering.care',
           editable: true,
           soil: {
             watering: {
-              interval: 3,
-              description:
-                'Deep watering 2-3 times per week, avoid wetting leaves',
+              interval: 2,
+              description: 'tomatoes.phases.flowering.soil.watering.description',
             },
             fertilizing: {
               interval: 14,
-              description: 'High phosphorus fertilizer for flower development',
+              description: 'tomatoes.phases.flowering.soil.fertilizing.description',
             },
           },
           hydro: {
             watering: {
               interval: 0,
-              description: 'Continuous flow, higher EC',
+              description: 'tomatoes.phases.flowering.hydro.watering.description',
             },
             fertilizing: {
               interval: 14,
-              description: 'High phosphorus nutrients, EC 1.2-1.5',
+              description: 'tomatoes.phases.flowering.hydro.fertilizing.description',
             },
           },
           coco: {
-            watering: { interval: 1, description: 'Daily watering in coco' },
+            watering: { 
+              interval: 1, 
+              description: 'tomatoes.phases.flowering.coco.watering.description' 
+            },
             fertilizing: {
               interval: 14,
-              description: 'High phosphorus feeding, EC 1.2-1.5',
+              description: 'tomatoes.phases.flowering.coco.fertilizing.description',
             },
           },
         },
         fruiting: {
-          days: 60,
-          description: 'Outdoor fruit production',
-          care: 'Weather protection, extended harvest',
+          days: 45,
+          description: 'tomatoes.phases.fruiting.description',
+          care: 'tomatoes.phases.fruiting.care',
           editable: true,
           soil: {
             watering: {
-              interval: 3,
-              description: 'Consistent deep watering, avoid drought stress',
+              interval: 2,
+              description: 'tomatoes.phases.fruiting.soil.watering.description',
             },
             fertilizing: {
-              interval: 21,
-              description:
-                'Balanced fertilizer with higher potassium for fruit development',
+              interval: 14,
+              description: 'tomatoes.phases.fruiting.soil.fertilizing.description',
             },
           },
           hydro: {
-            watering: { interval: 0, description: 'Continuous flow, high EC' },
+            watering: {
+              interval: 0,
+              description: 'tomatoes.phases.fruiting.hydro.watering.description',
+            },
             fertilizing: {
-              interval: 21,
-              description: 'High potassium nutrients, EC 1.5-2.0',
+              interval: 14,
+              description: 'tomatoes.phases.fruiting.hydro.fertilizing.description',
             },
           },
           coco: {
-            watering: { interval: 1, description: 'Daily watering in coco' },
+            watering: { 
+              interval: 1, 
+              description: 'tomatoes.phases.fruiting.coco.watering.description' 
+            },
             fertilizing: {
-              interval: 21,
-              description: 'High potassium feeding, EC 1.5-2.0',
+              interval: 14,
+              description: 'tomatoes.phases.fruiting.coco.fertilizing.description',
             },
           },
         },
@@ -430,45 +468,265 @@ export const tomatoes = {
       seasonalTiming: {
         temperate_north: {
           plantingWindow: {
-            start: '05-15',
+            start: '04-15',
             end: '06-15',
-            description: 'After last frost, soil warm',
+            description: 'tomatoes.seasonalTiming.temperate_north.plantingWindow.description',
           },
           harvestWindow: {
             start: '07-15',
-            end: '10-01',
-            description: 'Until first frost',
+            end: '10-15',
+            description: 'tomatoes.seasonalTiming.temperate_north.harvestWindow.description',
           },
         },
         mediterranean: {
           plantingWindow: {
-            start: '03-15',
+            start: '03-01',
             end: '05-01',
-            description: 'Extended growing season',
+            description: 'tomatoes.seasonalTiming.mediterranean.plantingWindow.description',
           },
           harvestWindow: {
             start: '06-01',
-            end: '11-15',
-            description: 'Long harvest period',
+            end: '11-30',
+            description: 'tomatoes.seasonalTiming.mediterranean.harvestWindow.description',
+          },
+        },
+      },
+    },
+    greenhouse: {
+      phases: {
+        germination: {
+          days: 7,
+          description: 'tomatoes.phases.germination.description',
+          care: 'tomatoes.phases.germination.care',
+          editable: true,
+          soil: {
+            watering: {
+              interval: 1,
+              description: 'tomatoes.phases.germination.soil.watering.description',
+            },
+            fertilizing: {
+              interval: 0,
+              description: 'tomatoes.phases.germination.soil.fertilizing.description',
+            },
+          },
+          hydro: {
+            watering: {
+              interval: 0,
+              description: 'tomatoes.phases.germination.hydro.watering.description',
+            },
+            fertilizing: {
+              interval: 0,
+              description: 'tomatoes.phases.germination.hydro.fertilizing.description',
+            },
+          },
+          coco: {
+            watering: {
+              interval: 1,
+              description: 'tomatoes.phases.germination.coco.watering.description',
+            },
+            fertilizing: {
+              interval: 0,
+              description: 'tomatoes.phases.germination.coco.fertilizing.description',
+            },
+          },
+        },
+        seedling: {
+          days: 21,
+          description: 'tomatoes.phases.seedling.description',
+          care: 'tomatoes.phases.seedling.care',
+          editable: true,
+          soil: {
+            watering: {
+              interval: 2,
+              description: 'tomatoes.phases.seedling.soil.watering.description',
+            },
+            fertilizing: {
+              interval: 7,
+              description: 'tomatoes.phases.seedling.soil.fertilizing.description',
+            },
+          },
+          hydro: {
+            watering: { 
+              interval: 0, 
+              description: 'tomatoes.phases.seedling.hydro.watering.description' 
+            },
+            fertilizing: {
+              interval: 7,
+              description: 'tomatoes.phases.seedling.hydro.fertilizing.description',
+            },
+          },
+          coco: {
+            watering: { 
+              interval: 1, 
+              description: 'tomatoes.phases.seedling.coco.watering.description' 
+            },
+            fertilizing: {
+              interval: 7,
+              description: 'tomatoes.phases.seedling.coco.fertilizing.description',
+            },
+          },
+        },
+        vegetative: {
+          days: 28,
+          description: 'tomatoes.phases.vegetative.description',
+          care: 'tomatoes.phases.vegetative.care',
+          editable: true,
+          soil: {
+            watering: {
+              interval: 2,
+              description: 'tomatoes.phases.vegetative.soil.watering.description',
+            },
+            fertilizing: {
+              interval: 14,
+              description: 'tomatoes.phases.vegetative.soil.fertilizing.description',
+            },
+          },
+          hydro: {
+            watering: {
+              interval: 0,
+              description: 'tomatoes.phases.vegetative.hydro.watering.description',
+            },
+            fertilizing: {
+              interval: 14,
+              description: 'tomatoes.phases.vegetative.hydro.fertilizing.description',
+            },
+          },
+          coco: {
+            watering: { 
+              interval: 1, 
+              description: 'tomatoes.phases.vegetative.coco.watering.description' 
+            },
+            fertilizing: {
+              interval: 14,
+              description: 'tomatoes.phases.vegetative.coco.fertilizing.description',
+            },
+          },
+        },
+        transplant: {
+          days: 14,
+          description: 'tomatoes.phases.transplant.description',
+          care: 'tomatoes.phases.transplant.care',
+          editable: true,
+          soil: {
+            watering: {
+              interval: 2,
+              description: 'tomatoes.phases.transplant.soil.watering.description',
+            },
+            fertilizing: {
+              interval: 0,
+              description: 'tomatoes.phases.transplant.soil.fertilizing.description',
+            },
+          },
+          hydro: {
+            watering: {
+              interval: 0,
+              description: 'tomatoes.phases.transplant.hydro.watering.description',
+            },
+            fertilizing: {
+              interval: 0,
+              description: 'tomatoes.phases.transplant.hydro.fertilizing.description',
+            },
+          },
+          coco: {
+            watering: { 
+              interval: 1, 
+              description: 'tomatoes.phases.transplant.coco.watering.description' 
+            },
+            fertilizing: {
+              interval: 0,
+              description: 'tomatoes.phases.transplant.coco.fertilizing.description',
+            },
+          },
+        },
+        flowering: {
+          days: 20,
+          description: 'tomatoes.phases.flowering.description',
+          care: 'tomatoes.phases.flowering.care',
+          editable: true,
+          soil: {
+            watering: {
+              interval: 2,
+              description: 'tomatoes.phases.flowering.soil.watering.description',
+            },
+            fertilizing: {
+              interval: 14,
+              description: 'tomatoes.phases.flowering.soil.fertilizing.description',
+            },
+          },
+          hydro: {
+            watering: {
+              interval: 0,
+              description: 'tomatoes.phases.flowering.hydro.watering.description',
+            },
+            fertilizing: {
+              interval: 14,
+              description: 'tomatoes.phases.flowering.hydro.fertilizing.description',
+            },
+          },
+          coco: {
+            watering: { 
+              interval: 1, 
+              description: 'tomatoes.phases.flowering.coco.watering.description' 
+            },
+            fertilizing: {
+              interval: 14,
+              description: 'tomatoes.phases.flowering.coco.fertilizing.description',
+            },
+          },
+        },
+        fruiting: {
+          days: 45,
+          description: 'tomatoes.phases.fruiting.description',
+          care: 'tomatoes.phases.fruiting.care',
+          editable: true,
+          soil: {
+            watering: {
+              interval: 2,
+              description: 'tomatoes.phases.fruiting.soil.watering.description',
+            },
+            fertilizing: {
+              interval: 14,
+              description: 'tomatoes.phases.fruiting.soil.fertilizing.description',
+            },
+          },
+          hydro: {
+            watering: {
+              interval: 0,
+              description: 'tomatoes.phases.fruiting.hydro.watering.description',
+            },
+            fertilizing: {
+              interval: 14,
+              description: 'tomatoes.phases.fruiting.hydro.fertilizing.description',
+            },
+          },
+          coco: {
+            watering: { 
+              interval: 1, 
+              description: 'tomatoes.phases.fruiting.coco.watering.description' 
+            },
+            fertilizing: {
+              interval: 14,
+              description: 'tomatoes.phases.fruiting.coco.fertilizing.description',
+            },
           },
         },
       },
     },
   },
   careTips: {
-    watering: 'Keep soil consistently moist, water deeply 2-3 times per week',
-    fertilizing: 'Feed every 4 weeks with balanced fertilizer',
-    sunlight: 'Full sun (6-8 hours daily)',
-    spacing: '18-24 inches apart',
-    support: 'Cage or stake plants when 12 inches tall',
-    soilPH: '6.0-6.8',
-    temperature: formatTemperature('65-85°F optimal growing range'),
+    watering: 'tomatoes.careTips.watering',
+    fertilizing: 'tomatoes.careTips.fertilizing',
+    sunlight: 'tomatoes.careTips.sunlight',
+    spacing: 'tomatoes.careTips.spacing',
+    temperature: 'tomatoes.careTips.temperature',
+    soilPH: 'tomatoes.careTips.soilPH',
+    pruning: 'tomatoes.careTips.pruning',
   },
   commonProblems: {
-    'Blossom End Rot': 'Calcium deficiency - maintain consistent watering',
-    'Leaf Yellowing': 'Could be nutrient deficiency or overwatering',
-    'Cracked Fruits': 'Irregular watering - keep soil moisture consistent',
-    Hornworms: 'Large green caterpillars - hand pick or use BT spray',
+    'Blossom End Rot': 'tomatoes.commonProblems.blossomEndRot',
+    'Early Blight': 'tomatoes.commonProblems.earlyBlight',
+    'Late Blight': 'tomatoes.commonProblems.lateBlight',
+    'Aphids': 'tomatoes.commonProblems.aphids',
   },
 };
 

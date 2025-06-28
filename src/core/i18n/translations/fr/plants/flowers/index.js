@@ -4,18 +4,18 @@
  */
 
 // Import flower plants
-import { lavender } from './lavender.js';
-import { roses } from './roses.js';
-import { sunflowers } from './sunflowers.js';
+import lavender from './lavender.js';
+import roses from './roses.js';
+import sunflowers from './sunflowers.js';
 
 // Export all flower plants
-export const flowers = {
-  lavender,
-  roses,
-  sunflowers,
+export const fr = {
+  ...lavender,
+  ...roses,
+  ...sunflowers,
 };
 
 // Export individual plants for direct access
 export { lavender, roses, sunflowers };
 
-export default flowers;
+export default fr;

@@ -6,7 +6,7 @@
 import { PLANT_TAGS } from '../categories.js';
 
 export const lavender = {
-  name: 'Lavender',
+  name: 'lavender.name',
   category: 'category.flowers',
   tags: [PLANT_TAGS.PERENNIAL, PLANT_TAGS.PHOTOPERIOD],
   emoji: '🪻',
@@ -15,146 +15,145 @@ export const lavender = {
       phases: {
         establishment: {
           days: 60,
-          description: 'Root establishment',
-          care: 'Remove flowers first year, focus on root development',
+          description: 'lavender.phases.establishment.description',
+          care: 'lavender.phases.establishment.care',
           editable: true,
           soil: {
             watering: {
               interval: 3,
-              description: 'Keep soil consistently moist during establishment',
+              description: 'lavender.phases.establishment.soil.watering.description',
             },
             fertilizing: {
               interval: 0,
-              description: 'No fertilizing during establishment, remove flowers',
+              description: 'lavender.phases.establishment.soil.fertilizing.description',
             },
           },
           hydro: {
             watering: {
               interval: 0,
-              description: 'Continuous flow, low EC',
+              description: 'lavender.phases.establishment.hydro.watering.description',
             },
             fertilizing: {
               interval: 0,
-              description: 'No nutrients during establishment',
+              description: 'lavender.phases.establishment.hydro.fertilizing.description',
             },
           },
           coco: {
             watering: {
               interval: 1,
-              description: 'Daily watering in coco',
+              description: 'lavender.phases.establishment.coco.watering.description',
             },
             fertilizing: {
               interval: 0,
-              description: 'No fertilizing during establishment',
+              description: 'lavender.phases.establishment.coco.fertilizing.description',
             },
           },
         },
         vegetative: {
           days: 90,
-          description: 'Bush growth and development',
-          care: 'Shape pruning, remove weak growth',
+          description: 'lavender.phases.vegetative.description',
+          care: 'lavender.phases.vegetative.care',
           editable: true,
           soil: {
             watering: {
               interval: 5,
-              description: 'Allow soil to dry between waterings',
+              description: 'lavender.phases.vegetative.soil.watering.description',
             },
             fertilizing: {
               interval: 30,
-              description: 'Light feeding with low nitrogen fertilizer',
+              description: 'lavender.phases.vegetative.soil.fertilizing.description',
             },
           },
           hydro: {
             watering: {
               interval: 0,
-              description: 'Continuous flow, moderate EC',
+              description: 'lavender.phases.vegetative.hydro.watering.description',
             },
             fertilizing: {
               interval: 30,
-              description: 'Light nutrients, EC 0.8-1.0',
+              description: 'lavender.phases.vegetative.hydro.fertilizing.description',
             },
           },
           coco: {
             watering: {
               interval: 2,
-              description: 'Allow coco to dry between waterings',
+              description: 'lavender.phases.vegetative.coco.watering.description',
             },
             fertilizing: {
               interval: 30,
-              description: 'Light feeding, EC 0.8-1.0',
+              description: 'lavender.phases.vegetative.coco.fertilizing.description',
             },
           },
         },
         flowering: {
           days: 30,
-          description: 'Flower spike development',
-          care: 'Harvest flowers for drying, deadhead spent blooms',
+          description: 'lavender.phases.flowering.description',
+          care: 'lavender.phases.flowering.care',
           editable: true,
           soil: {
             watering: {
               interval: 4,
-              description: 'Maintain consistent moisture during flowering',
+              description: 'lavender.phases.flowering.soil.watering.description',
             },
             fertilizing: {
               interval: 0,
-              description: 'No fertilizing during flowering to preserve fragrance',
+              description: 'lavender.phases.flowering.soil.fertilizing.description',
             },
           },
           hydro: {
             watering: {
               interval: 0,
-              description: 'Continuous flow, moderate EC',
+              description: 'lavender.phases.flowering.hydro.watering.description',
             },
             fertilizing: {
               interval: 0,
-              description: 'No nutrients during flowering',
+              description: 'lavender.phases.flowering.hydro.fertilizing.description',
             },
           },
           coco: {
             watering: {
               interval: 2,
-              description: 'Daily watering in coco',
+              description: 'lavender.phases.flowering.coco.watering.description',
             },
             fertilizing: {
               interval: 0,
-              description: 'No fertilizing during flowering',
+              description: 'lavender.phases.flowering.coco.fertilizing.description',
             },
           },
         },
         dormancy: {
           days: 120,
-          description: 'Winter rest period',
-          care: 'Prune old wood, mulch for winter protection',
+          description: 'lavender.phases.dormancy.description',
+          care: 'lavender.phases.dormancy.care',
           editable: true,
           soil: {
             watering: {
               interval: 10,
-              description:
-                'Reduce watering during dormancy, just keep from drying out',
+              description: 'lavender.phases.dormancy.soil.watering.description',
             },
             fertilizing: {
               interval: 0,
-              description: 'No fertilizing during dormancy',
+              description: 'lavender.phases.dormancy.soil.fertilizing.description',
             },
           },
           hydro: {
             watering: {
               interval: 0,
-              description: 'Minimal flow during dormancy',
+              description: 'lavender.phases.dormancy.hydro.watering.description',
             },
             fertilizing: {
               interval: 0,
-              description: 'No nutrients during dormancy',
+              description: 'lavender.phases.dormancy.hydro.fertilizing.description',
             },
           },
           coco: {
             watering: {
               interval: 10,
-              description: 'Minimal watering during dormancy',
+              description: 'lavender.phases.dormancy.coco.watering.description',
             },
             fertilizing: {
               interval: 0,
-              description: 'No fertilizing during dormancy',
+              description: 'lavender.phases.dormancy.coco.fertilizing.description',
             },
           },
         },
@@ -165,147 +164,146 @@ export const lavender = {
         establishment: {
           start: '03-15',
           end: '05-15',
-          description: 'Root establishment',
-          care: 'Remove flowers first year, focus on root development',
+          description: 'lavender.phases.establishment.description',
+          care: 'lavender.phases.establishment.care',
           editable: false,
           soil: {
             watering: {
               interval: 3,
-              description: 'Keep soil consistently moist during establishment',
+              description: 'lavender.phases.establishment.soil.watering.description',
             },
             fertilizing: {
               interval: 0,
-              description: 'No fertilizing during establishment, remove flowers',
+              description: 'lavender.phases.establishment.soil.fertilizing.description',
             },
           },
           hydro: {
             watering: {
               interval: 0,
-              description: 'Continuous flow, low EC',
+              description: 'lavender.phases.establishment.hydro.watering.description',
             },
             fertilizing: {
               interval: 0,
-              description: 'No nutrients during establishment',
+              description: 'lavender.phases.establishment.hydro.fertilizing.description',
             },
           },
           coco: {
             watering: {
               interval: 1,
-              description: 'Daily watering in coco',
+              description: 'lavender.phases.establishment.coco.watering.description',
             },
             fertilizing: {
               interval: 0,
-              description: 'No fertilizing during establishment',
+              description: 'lavender.phases.establishment.coco.fertilizing.description',
             },
           },
         },
         vegetative: {
-          description: 'Bush growth and development',
-          care: 'Shape pruning, remove weak growth',
+          description: 'lavender.phases.vegetative.description',
+          care: 'lavender.phases.vegetative.care',
           editable: false,
           soil: {
             watering: {
               interval: 5,
-              description: 'Allow soil to dry between waterings',
+              description: 'lavender.phases.vegetative.soil.watering.description',
             },
             fertilizing: {
               interval: 30,
-              description: 'Light feeding with low nitrogen fertilizer',
+              description: 'lavender.phases.vegetative.soil.fertilizing.description',
             },
           },
           hydro: {
             watering: {
               interval: 0,
-              description: 'Continuous flow, moderate EC',
+              description: 'lavender.phases.vegetative.hydro.watering.description',
             },
             fertilizing: {
               interval: 30,
-              description: 'Light nutrients, EC 0.8-1.0',
+              description: 'lavender.phases.vegetative.hydro.fertilizing.description',
             },
           },
           coco: {
             watering: {
               interval: 2,
-              description: 'Allow coco to dry between waterings',
+              description: 'lavender.phases.vegetative.coco.watering.description',
             },
             fertilizing: {
               interval: 30,
-              description: 'Light feeding, EC 0.8-1.0',
+              description: 'lavender.phases.vegetative.coco.fertilizing.description',
             },
           },
         },
         flowering: {
           start: '06-15',
           end: '08-01',
-          description: 'Flower spike development',
-          care: 'Harvest flowers for drying, deadhead spent blooms',
+          description: 'lavender.phases.flowering.description',
+          care: 'lavender.phases.flowering.care',
           editable: true,
           soil: {
             watering: {
               interval: 4,
-              description: 'Maintain consistent moisture during flowering',
+              description: 'lavender.phases.flowering.soil.watering.description',
             },
             fertilizing: {
               interval: 0,
-              description: 'No fertilizing during flowering to preserve fragrance',
+              description: 'lavender.phases.flowering.soil.fertilizing.description',
             },
           },
           hydro: {
             watering: {
               interval: 0,
-              description: 'Continuous flow, moderate EC',
+              description: 'lavender.phases.flowering.hydro.watering.description',
             },
             fertilizing: {
               interval: 0,
-              description: 'No nutrients during flowering',
+              description: 'lavender.phases.flowering.hydro.fertilizing.description',
             },
           },
           coco: {
             watering: {
               interval: 2,
-              description: 'Daily watering in coco',
+              description: 'lavender.phases.flowering.coco.watering.description',
             },
             fertilizing: {
               interval: 0,
-              description: 'No fertilizing during flowering',
+              description: 'lavender.phases.flowering.coco.fertilizing.description',
             },
           },
         },
         dormancy: {
           start: '10-01',
           end: '03-14',
-          description: 'Winter rest period',
-          care: 'Prune old wood, mulch for winter protection',
+          description: 'lavender.phases.dormancy.description',
+          care: 'lavender.phases.dormancy.care',
           editable: false,
           soil: {
             watering: {
               interval: 10,
-              description:
-                'Reduce watering during dormancy, just keep from drying out',
+              description: 'lavender.phases.dormancy.soil.watering.description',
             },
             fertilizing: {
               interval: 0,
-              description: 'No fertilizing during dormancy',
+              description: 'lavender.phases.dormancy.soil.fertilizing.description',
             },
           },
           hydro: {
             watering: {
               interval: 0,
-              description: 'Minimal flow during dormancy',
+              description: 'lavender.phases.dormancy.hydro.watering.description',
             },
             fertilizing: {
               interval: 0,
-              description: 'No nutrients during dormancy',
+              description: 'lavender.phases.dormancy.hydro.fertilizing.description',
             },
           },
           coco: {
             watering: {
               interval: 10,
-              description: 'Minimal watering during dormancy',
+              description: 'lavender.phases.dormancy.coco.watering.description',
             },
             fertilizing: {
               interval: 0,
-              description: 'No fertilizing during dormancy',
+              description: 'lavender.phases.dormancy.coco.fertilizing.description',
             },
           },
         },
@@ -315,24 +313,24 @@ export const lavender = {
           plantingWindow: {
             start: '04-01',
             end: '06-01',
-            description: 'Spring to early summer planting',
+            description: 'lavender.seasonalTiming.temperate_north.plantingWindow.description',
           },
           harvestWindow: {
             start: '06-15',
             end: '09-15',
-            description: 'Harvest in summer',
+            description: 'lavender.seasonalTiming.temperate_north.harvestWindow.description',
           },
         },
         mediterranean: {
           plantingWindow: {
             start: '02-15',
             end: '05-01',
-            description: 'Very early spring to late spring',
+            description: 'lavender.seasonalTiming.mediterranean.plantingWindow.description',
           },
           harvestWindow: {
             start: '05-15',
             end: '09-30',
-            description: 'Harvest in summer',
+            description: 'lavender.seasonalTiming.mediterranean.harvestWindow.description',
           },
         },
       },
@@ -341,146 +339,145 @@ export const lavender = {
       phases: {
         establishment: {
           days: 60,
-          description: 'Root establishment',
-          care: 'Remove flowers first year, focus on root development',
+          description: 'lavender.phases.establishment.description',
+          care: 'lavender.phases.establishment.care',
           editable: true,
           soil: {
             watering: {
               interval: 3,
-              description: 'Keep soil consistently moist during establishment',
+              description: 'lavender.phases.establishment.soil.watering.description',
             },
             fertilizing: {
               interval: 0,
-              description: 'No fertilizing during establishment, remove flowers',
+              description: 'lavender.phases.establishment.soil.fertilizing.description',
             },
           },
           hydro: {
             watering: {
               interval: 0,
-              description: 'Continuous flow, low EC',
+              description: 'lavender.phases.establishment.hydro.watering.description',
             },
             fertilizing: {
               interval: 0,
-              description: 'No nutrients during establishment',
+              description: 'lavender.phases.establishment.hydro.fertilizing.description',
             },
           },
           coco: {
             watering: {
               interval: 1,
-              description: 'Daily watering in coco',
+              description: 'lavender.phases.establishment.coco.watering.description',
             },
             fertilizing: {
               interval: 0,
-              description: 'No fertilizing during establishment',
+              description: 'lavender.phases.establishment.coco.fertilizing.description',
             },
           },
         },
         vegetative: {
           days: 90,
-          description: 'Bush growth and development',
-          care: 'Shape pruning, remove weak growth',
+          description: 'lavender.phases.vegetative.description',
+          care: 'lavender.phases.vegetative.care',
           editable: true,
           soil: {
             watering: {
               interval: 5,
-              description: 'Allow soil to dry between waterings',
+              description: 'lavender.phases.vegetative.soil.watering.description',
             },
             fertilizing: {
               interval: 30,
-              description: 'Light feeding with low nitrogen fertilizer',
+              description: 'lavender.phases.vegetative.soil.fertilizing.description',
             },
           },
           hydro: {
             watering: {
               interval: 0,
-              description: 'Continuous flow, moderate EC',
+              description: 'lavender.phases.vegetative.hydro.watering.description',
             },
             fertilizing: {
               interval: 30,
-              description: 'Light nutrients, EC 0.8-1.0',
+              description: 'lavender.phases.vegetative.hydro.fertilizing.description',
             },
           },
           coco: {
             watering: {
               interval: 2,
-              description: 'Allow coco to dry between waterings',
+              description: 'lavender.phases.vegetative.coco.watering.description',
             },
             fertilizing: {
               interval: 30,
-              description: 'Light feeding, EC 0.8-1.0',
+              description: 'lavender.phases.vegetative.coco.fertilizing.description',
             },
           },
         },
         flowering: {
           days: 30,
-          description: 'Flower spike development',
-          care: 'Harvest flowers for drying, deadhead spent blooms',
+          description: 'lavender.phases.flowering.description',
+          care: 'lavender.phases.flowering.care',
           editable: true,
           soil: {
             watering: {
               interval: 4,
-              description: 'Maintain consistent moisture during flowering',
+              description: 'lavender.phases.flowering.soil.watering.description',
             },
             fertilizing: {
               interval: 0,
-              description: 'No fertilizing during flowering to preserve fragrance',
+              description: 'lavender.phases.flowering.soil.fertilizing.description',
             },
           },
           hydro: {
             watering: {
               interval: 0,
-              description: 'Continuous flow, moderate EC',
+              description: 'lavender.phases.flowering.hydro.watering.description',
             },
             fertilizing: {
               interval: 0,
-              description: 'No nutrients during flowering',
+              description: 'lavender.phases.flowering.hydro.fertilizing.description',
             },
           },
           coco: {
             watering: {
               interval: 2,
-              description: 'Daily watering in coco',
+              description: 'lavender.phases.flowering.coco.watering.description',
             },
             fertilizing: {
               interval: 0,
-              description: 'No fertilizing during flowering',
+              description: 'lavender.phases.flowering.coco.fertilizing.description',
             },
           },
         },
         dormancy: {
           days: 120,
-          description: 'Winter rest period',
-          care: 'Prune old wood, mulch for winter protection',
+          description: 'lavender.phases.dormancy.description',
+          care: 'lavender.phases.dormancy.care',
           editable: true,
           soil: {
             watering: {
               interval: 10,
-              description:
-                'Reduce watering during dormancy, just keep from drying out',
+              description: 'lavender.phases.dormancy.soil.watering.description',
             },
             fertilizing: {
               interval: 0,
-              description: 'No fertilizing during dormancy',
+              description: 'lavender.phases.dormancy.soil.fertilizing.description',
             },
           },
           hydro: {
             watering: {
               interval: 0,
-              description: 'Minimal flow during dormancy',
+              description: 'lavender.phases.dormancy.hydro.watering.description',
             },
             fertilizing: {
               interval: 0,
-              description: 'No nutrients during dormancy',
+              description: 'lavender.phases.dormancy.hydro.fertilizing.description',
             },
           },
           coco: {
             watering: {
               interval: 10,
-              description: 'Minimal watering during dormancy',
+              description: 'lavender.phases.dormancy.coco.watering.description',
             },
             fertilizing: {
               interval: 0,
-              description: 'No fertilizing during dormancy',
+              description: 'lavender.phases.dormancy.coco.fertilizing.description',
             },
           },
         },
@@ -488,18 +485,18 @@ export const lavender = {
     },
   },
   careTips: {
-    watering: 'Allow soil to dry between waterings, avoid overwatering',
-    fertilizing: 'Light feeding with low nitrogen fertilizer',
-    sunlight: 'Full sun (6+ hours daily)',
-    spacing: '2-3 feet apart',
-    temperature: 'Moderate temperatures, protect from extreme heat',
-    soilPH: '6.5-7.5 (alkaline soil preferred)',
-    pruning: 'Annual pruning in late winter or early spring',
+    watering: 'lavender.careTips.watering',
+    fertilizing: 'lavender.careTips.fertilizing',
+    sunlight: 'lavender.careTips.sunlight',
+    spacing: 'lavender.careTips.spacing',
+    temperature: 'lavender.careTips.temperature',
+    soilPH: 'lavender.careTips.soilPH',
+    pruning: 'lavender.careTips.pruning',
   },
   commonProblems: {
-    'Root Rot': 'Fungal disease - improve drainage, avoid overwatering',
-    'Powdery Mildew': 'White powder on leaves - improve airflow, reduce humidity',
-    'Leggy Growth': 'Weak stems - provide more light, prune regularly',
+    'Root Rot': 'lavender.commonProblems.rootRot',
+    'Powdery Mildew': 'lavender.commonProblems.powderyMildew',
+    'Leggy Growth': 'lavender.commonProblems.leggyGrowth',
   },
 };
 

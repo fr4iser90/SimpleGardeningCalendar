@@ -6,7 +6,7 @@
 import { PLANT_TAGS } from '../categories.js';
 
 export const roses = {
-  name: 'Roses',
+  name: 'roses.name',
   category: 'category.flowers',
   tags: [PLANT_TAGS.PERENNIAL, PLANT_TAGS.PHOTOPERIOD],
   emoji: '🌹',
@@ -15,146 +15,145 @@ export const roses = {
       phases: {
         establishment: {
           days: 60,
-          description: 'Root establishment',
-          care: 'Remove flowers first year, focus on root development',
+          description: 'roses.phases.establishment.description',
+          care: 'roses.phases.establishment.care',
           editable: true,
           soil: {
             watering: {
               interval: 3,
-              description: 'Keep soil consistently moist during establishment',
+              description: 'roses.phases.establishment.soil.watering.description',
             },
             fertilizing: {
               interval: 0,
-              description: 'No fertilizing during establishment, remove flowers',
+              description: 'roses.phases.establishment.soil.fertilizing.description',
             },
           },
           hydro: {
             watering: {
               interval: 0,
-              description: 'Continuous flow, low EC',
+              description: 'roses.phases.establishment.hydro.watering.description',
             },
             fertilizing: {
               interval: 0,
-              description: 'No nutrients during establishment',
+              description: 'roses.phases.establishment.hydro.fertilizing.description',
             },
           },
           coco: {
             watering: {
               interval: 1,
-              description: 'Daily watering in coco',
+              description: 'roses.phases.establishment.coco.watering.description',
             },
             fertilizing: {
               interval: 0,
-              description: 'No fertilizing during establishment',
+              description: 'roses.phases.establishment.coco.fertilizing.description',
             },
           },
         },
         vegetative: {
           days: 90,
-          description: 'Bush growth and development',
-          care: 'Shape pruning, remove weak growth',
+          description: 'roses.phases.vegetative.description',
+          care: 'roses.phases.vegetative.care',
           editable: true,
           soil: {
             watering: {
               interval: 3,
-              description: 'Keep soil consistently moist during vegetative growth',
+              description: 'roses.phases.vegetative.soil.watering.description',
             },
             fertilizing: {
               interval: 21,
-              description: 'Balanced fertilizer in spring, avoid high nitrogen',
+              description: 'roses.phases.vegetative.soil.fertilizing.description',
             },
           },
           hydro: {
             watering: {
               interval: 0,
-              description: 'Continuous flow, moderate EC',
+              description: 'roses.phases.vegetative.hydro.watering.description',
             },
             fertilizing: {
               interval: 21,
-              description: 'Balanced nutrients, EC 1.0-1.2',
+              description: 'roses.phases.vegetative.hydro.fertilizing.description',
             },
           },
           coco: {
             watering: {
               interval: 1,
-              description: 'Daily watering in coco',
+              description: 'roses.phases.vegetative.coco.watering.description',
             },
             fertilizing: {
               interval: 21,
-              description: 'Balanced feeding, EC 1.0-1.2',
+              description: 'roses.phases.vegetative.coco.fertilizing.description',
             },
           },
         },
         flowering: {
           days: 30,
-          description: 'Flower development',
-          care: 'Deadhead spent blooms, protect from pests',
+          description: 'roses.phases.flowering.description',
+          care: 'roses.phases.flowering.care',
           editable: true,
           soil: {
             watering: {
               interval: 2,
-              description: 'Maintain consistent moisture during flowering',
+              description: 'roses.phases.flowering.soil.watering.description',
             },
             fertilizing: {
               interval: 14,
-              description: 'Light feeding with balanced fertilizer during flowering',
+              description: 'roses.phases.flowering.soil.fertilizing.description',
             },
           },
           hydro: {
             watering: {
               interval: 0,
-              description: 'Continuous flow, moderate EC',
+              description: 'roses.phases.flowering.hydro.watering.description',
             },
             fertilizing: {
               interval: 14,
-              description: 'Balanced nutrients, EC 1.0-1.2',
+              description: 'roses.phases.flowering.hydro.fertilizing.description',
             },
           },
           coco: {
             watering: {
               interval: 1,
-              description: 'Daily watering in coco',
+              description: 'roses.phases.flowering.coco.watering.description',
             },
             fertilizing: {
               interval: 14,
-              description: 'Balanced feeding, EC 1.0-1.2',
+              description: 'roses.phases.flowering.coco.fertilizing.description',
             },
           },
         },
         dormancy: {
           days: 120,
-          description: 'Winter rest period',
-          care: 'Prune old wood, mulch for winter protection',
+          description: 'roses.phases.dormancy.description',
+          care: 'roses.phases.dormancy.care',
           editable: true,
           soil: {
             watering: {
               interval: 7,
-              description:
-                'Reduce watering during dormancy, just keep from drying out',
+              description: 'roses.phases.dormancy.soil.watering.description',
             },
             fertilizing: {
               interval: 0,
-              description: 'No fertilizing during dormancy',
+              description: 'roses.phases.dormancy.soil.fertilizing.description',
             },
           },
           hydro: {
             watering: {
               interval: 0,
-              description: 'Minimal flow during dormancy',
+              description: 'roses.phases.dormancy.hydro.watering.description',
             },
             fertilizing: {
               interval: 0,
-              description: 'No nutrients during dormancy',
+              description: 'roses.phases.dormancy.hydro.fertilizing.description',
             },
           },
           coco: {
             watering: {
               interval: 7,
-              description: 'Minimal watering during dormancy',
+              description: 'roses.phases.dormancy.coco.watering.description',
             },
             fertilizing: {
               interval: 0,
-              description: 'No fertilizing during dormancy',
+              description: 'roses.phases.dormancy.coco.fertilizing.description',
             },
           },
         },
@@ -165,149 +164,148 @@ export const roses = {
         establishment: {
           start: '03-15',
           end: '05-15',
-          description: 'Root establishment',
-          care: 'Remove flowers first year, focus on root development',
+          description: 'roses.phases.establishment.description',
+          care: 'roses.phases.establishment.care',
           editable: false,
           soil: {
             watering: {
               interval: 3,
-              description: 'Keep soil consistently moist during establishment',
+              description: 'roses.phases.establishment.soil.watering.description',
             },
             fertilizing: {
               interval: 0,
-              description: 'No fertilizing during establishment, remove flowers',
+              description: 'roses.phases.establishment.soil.fertilizing.description',
             },
           },
           hydro: {
             watering: {
               interval: 0,
-              description: 'Continuous flow, low EC',
+              description: 'roses.phases.establishment.hydro.watering.description',
             },
             fertilizing: {
               interval: 0,
-              description: 'No nutrients during establishment',
+              description: 'roses.phases.establishment.hydro.fertilizing.description',
             },
           },
           coco: {
             watering: {
               interval: 1,
-              description: 'Daily watering in coco',
+              description: 'roses.phases.establishment.coco.watering.description',
             },
             fertilizing: {
               interval: 0,
-              description: 'No fertilizing during establishment',
+              description: 'roses.phases.establishment.coco.fertilizing.description',
             },
           },
         },
         vegetative: {
           start: '05-16',
           end: '06-14',
-          description: 'Bush growth and development',
-          care: 'Shape pruning, remove weak growth',
+          description: 'roses.phases.vegetative.description',
+          care: 'roses.phases.vegetative.care',
           editable: false,
           soil: {
             watering: {
               interval: 3,
-              description: 'Keep soil consistently moist during vegetative growth',
+              description: 'roses.phases.vegetative.soil.watering.description',
             },
             fertilizing: {
               interval: 21,
-              description: 'Balanced fertilizer in spring, avoid high nitrogen',
+              description: 'roses.phases.vegetative.soil.fertilizing.description',
             },
           },
           hydro: {
             watering: {
               interval: 0,
-              description: 'Continuous flow, moderate EC',
+              description: 'roses.phases.vegetative.hydro.watering.description',
             },
             fertilizing: {
               interval: 21,
-              description: 'Balanced nutrients, EC 1.0-1.2',
+              description: 'roses.phases.vegetative.hydro.fertilizing.description',
             },
           },
           coco: {
             watering: {
               interval: 1,
-              description: 'Daily watering in coco',
+              description: 'roses.phases.vegetative.coco.watering.description',
             },
             fertilizing: {
               interval: 21,
-              description: 'Balanced feeding, EC 1.0-1.2',
+              description: 'roses.phases.vegetative.coco.fertilizing.description',
             },
           },
         },
         flowering: {
           start: '06-15',
           end: '09-30',
-          description: 'Flower development',
-          care: 'Deadhead spent blooms, protect from pests',
+          description: 'roses.phases.flowering.description',
+          care: 'roses.phases.flowering.care',
           editable: true,
           soil: {
             watering: {
               interval: 2,
-              description: 'Maintain consistent moisture during flowering',
+              description: 'roses.phases.flowering.soil.watering.description',
             },
             fertilizing: {
               interval: 14,
-              description: 'Light feeding with balanced fertilizer during flowering',
+              description: 'roses.phases.flowering.soil.fertilizing.description',
             },
           },
           hydro: {
             watering: {
               interval: 0,
-              description: 'Continuous flow, moderate EC',
+              description: 'roses.phases.flowering.hydro.watering.description',
             },
             fertilizing: {
               interval: 14,
-              description: 'Balanced nutrients, EC 1.0-1.2',
+              description: 'roses.phases.flowering.hydro.fertilizing.description',
             },
           },
           coco: {
             watering: {
               interval: 1,
-              description: 'Daily watering in coco',
+              description: 'roses.phases.flowering.coco.watering.description',
             },
             fertilizing: {
               interval: 14,
-              description: 'Balanced feeding, EC 1.0-1.2',
+              description: 'roses.phases.flowering.coco.fertilizing.description',
             },
           },
         },
         dormancy: {
           start: '10-01',
           end: '03-14',
-          description: 'Winter rest period',
-          care: 'Prune old wood, mulch for winter protection',
+          description: 'roses.phases.dormancy.description',
+          care: 'roses.phases.dormancy.care',
           editable: false,
           soil: {
             watering: {
               interval: 7,
-              description:
-                'Reduce watering during dormancy, just keep from drying out',
+              description: 'roses.phases.dormancy.soil.watering.description',
             },
             fertilizing: {
               interval: 0,
-              description: 'No fertilizing during dormancy',
+              description: 'roses.phases.dormancy.soil.fertilizing.description',
             },
           },
           hydro: {
             watering: {
               interval: 0,
-              description: 'Minimal flow during dormancy',
+              description: 'roses.phases.dormancy.hydro.watering.description',
             },
             fertilizing: {
               interval: 0,
-              description: 'No nutrients during dormancy',
+              description: 'roses.phases.dormancy.hydro.fertilizing.description',
             },
           },
           coco: {
             watering: {
               interval: 7,
-              description: 'Minimal watering during dormancy',
+              description: 'roses.phases.dormancy.coco.watering.description',
             },
             fertilizing: {
               interval: 0,
-              description: 'No fertilizing during dormancy',
+              description: 'roses.phases.dormancy.coco.fertilizing.description',
             },
           },
         },
@@ -317,146 +315,145 @@ export const roses = {
       phases: {
         establishment: {
           days: 60,
-          description: 'Root establishment',
-          care: 'Remove flowers first year, focus on root development',
+          description: 'roses.phases.establishment.description',
+          care: 'roses.phases.establishment.care',
           editable: true,
           soil: {
             watering: {
               interval: 3,
-              description: 'Keep soil consistently moist during establishment',
+              description: 'roses.phases.establishment.soil.watering.description',
             },
             fertilizing: {
               interval: 0,
-              description: 'No fertilizing during establishment, remove flowers',
+              description: 'roses.phases.establishment.soil.fertilizing.description',
             },
           },
           hydro: {
             watering: {
               interval: 0,
-              description: 'Continuous flow, low EC',
+              description: 'roses.phases.establishment.hydro.watering.description',
             },
             fertilizing: {
               interval: 0,
-              description: 'No nutrients during establishment',
+              description: 'roses.phases.establishment.hydro.fertilizing.description',
             },
           },
           coco: {
             watering: {
               interval: 1,
-              description: 'Daily watering in coco',
+              description: 'roses.phases.establishment.coco.watering.description',
             },
             fertilizing: {
               interval: 0,
-              description: 'No fertilizing during establishment',
+              description: 'roses.phases.establishment.coco.fertilizing.description',
             },
           },
         },
         vegetative: {
           days: 90,
-          description: 'Bush growth and development',
-          care: 'Shape pruning, remove weak growth',
+          description: 'roses.phases.vegetative.description',
+          care: 'roses.phases.vegetative.care',
           editable: true,
           soil: {
             watering: {
               interval: 3,
-              description: 'Keep soil consistently moist during vegetative growth',
+              description: 'roses.phases.vegetative.soil.watering.description',
             },
             fertilizing: {
               interval: 21,
-              description: 'Balanced fertilizer in spring, avoid high nitrogen',
+              description: 'roses.phases.vegetative.soil.fertilizing.description',
             },
           },
           hydro: {
             watering: {
               interval: 0,
-              description: 'Continuous flow, moderate EC',
+              description: 'roses.phases.vegetative.hydro.watering.description',
             },
             fertilizing: {
               interval: 21,
-              description: 'Balanced nutrients, EC 1.0-1.2',
+              description: 'roses.phases.vegetative.hydro.fertilizing.description',
             },
           },
           coco: {
             watering: {
               interval: 1,
-              description: 'Daily watering in coco',
+              description: 'roses.phases.vegetative.coco.watering.description',
             },
             fertilizing: {
               interval: 21,
-              description: 'Balanced feeding, EC 1.0-1.2',
+              description: 'roses.phases.vegetative.coco.fertilizing.description',
             },
           },
         },
         flowering: {
           days: 30,
-          description: 'Flower development',
-          care: 'Deadhead spent blooms, protect from pests',
+          description: 'roses.phases.flowering.description',
+          care: 'roses.phases.flowering.care',
           editable: true,
           soil: {
             watering: {
               interval: 2,
-              description: 'Maintain consistent moisture during flowering',
+              description: 'roses.phases.flowering.soil.watering.description',
             },
             fertilizing: {
               interval: 14,
-              description: 'Light feeding with balanced fertilizer during flowering',
+              description: 'roses.phases.flowering.soil.fertilizing.description',
             },
           },
           hydro: {
             watering: {
               interval: 0,
-              description: 'Continuous flow, moderate EC',
+              description: 'roses.phases.flowering.hydro.watering.description',
             },
             fertilizing: {
               interval: 14,
-              description: 'Balanced nutrients, EC 1.0-1.2',
+              description: 'roses.phases.flowering.hydro.fertilizing.description',
             },
           },
           coco: {
             watering: {
               interval: 1,
-              description: 'Daily watering in coco',
+              description: 'roses.phases.flowering.coco.watering.description',
             },
             fertilizing: {
               interval: 14,
-              description: 'Balanced feeding, EC 1.0-1.2',
+              description: 'roses.phases.flowering.coco.fertilizing.description',
             },
           },
         },
         dormancy: {
           days: 120,
-          description: 'Winter rest period',
-          care: 'Prune old wood, mulch for winter protection',
+          description: 'roses.phases.dormancy.description',
+          care: 'roses.phases.dormancy.care',
           editable: true,
           soil: {
             watering: {
               interval: 7,
-              description:
-                'Reduce watering during dormancy, just keep from drying out',
+              description: 'roses.phases.dormancy.soil.watering.description',
             },
             fertilizing: {
               interval: 0,
-              description: 'No fertilizing during dormancy',
+              description: 'roses.phases.dormancy.soil.fertilizing.description',
             },
           },
           hydro: {
             watering: {
               interval: 0,
-              description: 'Minimal flow during dormancy',
+              description: 'roses.phases.dormancy.hydro.watering.description',
             },
             fertilizing: {
               interval: 0,
-              description: 'No nutrients during dormancy',
+              description: 'roses.phases.dormancy.hydro.fertilizing.description',
             },
           },
           coco: {
             watering: {
               interval: 7,
-              description: 'Minimal watering during dormancy',
+              description: 'roses.phases.dormancy.coco.watering.description',
             },
             fertilizing: {
               interval: 0,
-              description: 'No fertilizing during dormancy',
+              description: 'roses.phases.dormancy.coco.fertilizing.description',
             },
           },
         },
@@ -464,18 +461,18 @@ export const roses = {
     },
   },
   careTips: {
-    watering: 'Keep soil consistently moist, avoid overhead watering',
-    fertilizing: 'Balanced fertilizer in spring, avoid high nitrogen',
-    sunlight: 'Full sun (6+ hours daily)',
-    spacing: '3-5 feet apart',
-    temperature: 'Moderate temperatures, protect from extreme heat',
-    soilPH: '6.0-7.0',
-    pruning: 'Annual pruning in late winter or early spring',
+    watering: 'roses.careTips.watering',
+    fertilizing: 'roses.careTips.fertilizing',
+    sunlight: 'roses.careTips.sunlight',
+    spacing: 'roses.careTips.spacing',
+    temperature: 'roses.careTips.temperature',
+    soilPH: 'roses.careTips.soilPH',
+    pruning: 'roses.careTips.pruning',
   },
   commonProblems: {
-    'Black Spot': 'Fungal disease - improve air circulation, avoid overhead watering',
-    'Aphids': 'Small insects on new growth - spray with water or insecticidal soap',
-    'Powdery Mildew': 'White powder on leaves - improve airflow, reduce humidity',
+    'Black Spot': 'roses.commonProblems.blackSpot',
+    'Aphids': 'roses.commonProblems.aphids',
+    'Powdery Mildew': 'roses.commonProblems.powderyMildew',
   },
 };
 
