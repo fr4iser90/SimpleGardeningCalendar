@@ -16,145 +16,145 @@ export const spinach = {
       phases: {
         germination: {
           days: 7,
-          description: 'spinach.phases.germination.description',
-          care: 'spinach.phases.germination.care',
+          description: 'spinach.environments.indoor.phases.germination.description',
+          care: 'spinach.environments.indoor.phases.germination.care',
           editable: true,
           soil: {
             watering: {
               interval: 1,
-              description: 'spinach.phases.germination.soil.watering.description',
+              description: 'spinach.environments.indoor.phases.germination.soil.watering.description',
             },
             fertilizing: {
               interval: 0,
-              description: 'spinach.phases.germination.soil.fertilizing.description',
+              description: 'spinach.environments.indoor.phases.germination.soil.fertilizing.description',
             },
           },
           hydro: {
             watering: {
               interval: 0,
-              description: 'spinach.phases.germination.hydro.watering.description',
+              description: 'spinach.environments.indoor.phases.germination.hydro.watering.description',
             },
             fertilizing: {
               interval: 0,
-              description: 'spinach.phases.germination.hydro.fertilizing.description',
+              description: 'spinach.environments.indoor.phases.germination.hydro.fertilizing.description',
             },
           },
           coco: {
             watering: {
               interval: 1,
-              description: 'spinach.phases.germination.coco.watering.description',
+              description: 'spinach.environments.indoor.phases.germination.coco.watering.description',
             },
             fertilizing: {
               interval: 0,
-              description: 'spinach.phases.germination.coco.fertilizing.description',
+              description: 'spinach.environments.indoor.phases.germination.coco.fertilizing.description',
             },
           },
         },
         leafing: {
           days: 21,
-          description: 'spinach.phases.leafing.description',
-          care: 'spinach.phases.leafing.care',
+          description: 'spinach.environments.indoor.phases.leafing.description',
+          care: 'spinach.environments.indoor.phases.leafing.care',
           editable: true,
           soil: {
             watering: {
               interval: 2,
-              description: 'spinach.phases.leafing.soil.watering.description',
+              description: 'spinach.environments.indoor.phases.leafing.soil.watering.description',
             },
             fertilizing: {
               interval: 14,
-              description: 'spinach.phases.leafing.soil.fertilizing.description',
+              description: 'spinach.environments.indoor.phases.leafing.soil.fertilizing.description',
             },
           },
           hydro: {
             watering: {
               interval: 0,
-              description: 'spinach.phases.leafing.hydro.watering.description',
+              description: 'spinach.environments.indoor.phases.leafing.hydro.watering.description',
             },
             fertilizing: {
               interval: 14,
-              description: 'spinach.phases.leafing.hydro.fertilizing.description',
+              description: 'spinach.environments.indoor.phases.leafing.hydro.fertilizing.description',
             },
           },
           coco: {
             watering: {
               interval: 1,
-              description: 'spinach.phases.leafing.coco.watering.description',
+              description: 'spinach.environments.indoor.phases.leafing.coco.watering.description',
             },
             fertilizing: {
               interval: 14,
-              description: 'spinach.phases.leafing.coco.fertilizing.description',
+              description: 'spinach.environments.indoor.phases.leafing.coco.fertilizing.description',
             },
           },
         },
         harvest: {
           days: 14,
-          description: 'spinach.phases.harvest.description',
-          care: 'spinach.phases.harvest.care',
+          description: 'spinach.environments.indoor.phases.harvest.description',
+          care: 'spinach.environments.indoor.phases.harvest.care',
           editable: true,
           soil: {
             watering: {
               interval: 3,
-              description: 'spinach.phases.harvest.soil.watering.description',
+              description: 'spinach.environments.indoor.phases.harvest.soil.watering.description',
             },
             fertilizing: {
               interval: 14,
-              description: 'spinach.phases.harvest.soil.fertilizing.description',
+              description: 'spinach.environments.indoor.phases.harvest.soil.fertilizing.description',
             },
           },
           hydro: {
             watering: {
               interval: 0,
-              description: 'spinach.phases.harvest.hydro.watering.description',
+              description: 'spinach.environments.indoor.phases.harvest.hydro.watering.description',
             },
             fertilizing: {
               interval: 14,
-              description: 'spinach.phases.harvest.hydro.fertilizing.description',
+              description: 'spinach.environments.indoor.phases.harvest.hydro.fertilizing.description',
             },
           },
           coco: {
             watering: {
               interval: 1,
-              description: 'spinach.phases.harvest.coco.watering.description',
+              description: 'spinach.environments.indoor.phases.harvest.coco.watering.description',
             },
             fertilizing: {
               interval: 14,
-              description: 'spinach.phases.harvest.coco.fertilizing.description',
+              description: 'spinach.environments.indoor.phases.harvest.coco.fertilizing.description',
             },
           },
         },
         bolting: {
           days: 7,
-          description: 'spinach.phases.bolting.description',
-          care: 'spinach.phases.bolting.care',
+          description: 'spinach.environments.indoor.phases.bolting.description',
+          care: 'spinach.environments.indoor.phases.bolting.care',
           editable: true,
           soil: {
             watering: {
               interval: 0,
-              description: 'spinach.phases.bolting.soil.watering.description',
+              description: 'spinach.environments.indoor.phases.bolting.soil.watering.description',
             },
             fertilizing: {
               interval: 0,
-              description: 'spinach.phases.bolting.soil.fertilizing.description',
+              description: 'spinach.environments.indoor.phases.bolting.soil.fertilizing.description',
             },
           },
           hydro: {
             watering: {
               interval: 0,
-              description: 'spinach.phases.bolting.hydro.watering.description',
+              description: 'spinach.environments.indoor.phases.bolting.hydro.watering.description',
             },
             fertilizing: {
               interval: 0,
-              description: 'spinach.phases.bolting.hydro.fertilizing.description',
+              description: 'spinach.environments.indoor.phases.bolting.hydro.fertilizing.description',
             },
           },
           coco: {
             watering: {
               interval: 0,
-              description: 'spinach.phases.bolting.coco.watering.description',
+              description: 'spinach.environments.indoor.phases.bolting.coco.watering.description',
             },
             fertilizing: {
               interval: 0,
-              description: 'spinach.phases.bolting.coco.fertilizing.description',
+              description: 'spinach.environments.indoor.phases.bolting.coco.fertilizing.description',
             },
           },
         },
@@ -165,25 +165,25 @@ export const spinach = {
         germination: {
           start: '03-15',
           end: '05-01',
-          description: 'spinach.phases.germination.description',
-          care: 'spinach.phases.germination.care',
+          description: 'spinach.environments.outdoor.phases.germination.description',
+          care: 'spinach.environments.outdoor.phases.germination.care',
           editable: false,
         },
         leafing: {
-          description: 'spinach.phases.leafing.description',
-          care: 'spinach.phases.leafing.care',
+          description: 'spinach.environments.outdoor.phases.leafing.description',
+          care: 'spinach.environments.outdoor.phases.leafing.care',
           editable: false,
         },
         harvest: {
           start: '04-15',
           end: '06-30',
-          description: 'spinach.phases.harvest.description',
-          care: 'spinach.phases.harvest.care',
+          description: 'spinach.environments.outdoor.phases.harvest.description',
+          care: 'spinach.environments.outdoor.phases.harvest.care',
           editable: true,
         },
         bolting: {
-          description: 'spinach.phases.bolting.description',
-          care: 'spinach.phases.bolting.care',
+          description: 'spinach.environments.outdoor.phases.bolting.description',
+          care: 'spinach.environments.outdoor.phases.bolting.care',
           editable: false,
         },
       },
@@ -218,26 +218,26 @@ export const spinach = {
       phases: {
         germination: {
           days: 7,
-          description: 'spinach.phases.germination.description',
-          care: 'spinach.phases.germination.care',
+          description: 'spinach.environments.greenhouse.phases.germination.description',
+          care: 'spinach.environments.greenhouse.phases.germination.care',
           editable: true,
         },
         leafing: {
           days: 21,
-          description: 'spinach.phases.leafing.description',
-          care: 'spinach.phases.leafing.care',
+          description: 'spinach.environments.greenhouse.phases.leafing.description',
+          care: 'spinach.environments.greenhouse.phases.leafing.care',
           editable: true,
         },
         harvest: {
           days: 14,
-          description: 'spinach.phases.harvest.description',
-          care: 'spinach.phases.harvest.care',
+          description: 'spinach.environments.greenhouse.phases.harvest.description',
+          care: 'spinach.environments.greenhouse.phases.harvest.care',
           editable: true,
         },
         bolting: {
           days: 7,
-          description: 'spinach.phases.bolting.description',
-          care: 'spinach.phases.bolting.care',
+          description: 'spinach.environments.greenhouse.phases.bolting.description',
+          care: 'spinach.environments.greenhouse.phases.bolting.care',
           editable: true,
         },
       },

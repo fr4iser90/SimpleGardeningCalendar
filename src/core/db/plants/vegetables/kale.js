@@ -16,181 +16,181 @@ export const kale = {
       phases: {
         germination: {
           days: 7,
-          description: 'kale.phases.germination.description',
-          care: 'kale.phases.germination.care',
+          description: 'kale.environments.indoor.phases.germination.description',
+          care: 'kale.environments.indoor.phases.germination.care',
           editable: true,
           soil: {
             watering: {
               interval: 1,
-              description: 'kale.phases.germination.soil.watering.description',
+              description: 'kale.environments.indoor.phases.germination.soil.watering.description',
             },
             fertilizing: {
               interval: 0,
-              description: 'kale.phases.germination.soil.fertilizing.description',
+              description: 'kale.environments.indoor.phases.germination.soil.fertilizing.description',
             },
           },
           hydro: {
             watering: {
               interval: 0,
-              description: 'kale.phases.germination.hydro.watering.description',
+              description: 'kale.environments.indoor.phases.germination.hydro.watering.description',
             },
             fertilizing: {
               interval: 0,
-              description: 'kale.phases.germination.hydro.fertilizing.description',
+              description: 'kale.environments.indoor.phases.germination.hydro.fertilizing.description',
             },
           },
           coco: {
             watering: {
               interval: 1,
-              description: 'kale.phases.germination.coco.watering.description',
+              description: 'kale.environments.indoor.phases.germination.coco.watering.description',
             },
             fertilizing: {
               interval: 0,
-              description: 'kale.phases.germination.coco.fertilizing.description',
+              description: 'kale.environments.indoor.phases.germination.coco.fertilizing.description',
             },
           },
         },
         seedling: {
           days: 14,
-          description: 'kale.phases.seedling.description',
-          care: 'kale.phases.seedling.care',
+          description: 'kale.environments.indoor.phases.seedling.description',
+          care: 'kale.environments.indoor.phases.seedling.care',
           editable: true,
           soil: {
             watering: {
               interval: 2,
-              description: 'kale.phases.seedling.soil.watering.description',
+              description: 'kale.environments.indoor.phases.seedling.soil.watering.description',
             },
             fertilizing: {
               interval: 0,
-              description: 'kale.phases.seedling.soil.fertilizing.description',
+              description: 'kale.environments.indoor.phases.seedling.soil.fertilizing.description',
             },
           },
           hydro: {
             watering: {
               interval: 0,
-              description: 'kale.phases.seedling.hydro.watering.description',
+              description: 'kale.environments.indoor.phases.seedling.hydro.watering.description',
             },
             fertilizing: {
               interval: 7,
-              description: 'kale.phases.seedling.hydro.fertilizing.description',
+              description: 'kale.environments.indoor.phases.seedling.hydro.fertilizing.description',
             },
           },
           coco: {
             watering: {
               interval: 1,
-              description: 'kale.phases.seedling.coco.watering.description',
+              description: 'kale.environments.indoor.phases.seedling.coco.watering.description',
             },
             fertilizing: {
               interval: 7,
-              description: 'kale.phases.seedling.coco.fertilizing.description',
+              description: 'kale.environments.indoor.phases.seedling.coco.fertilizing.description',
             },
           },
         },
         vegetative: {
           days: 21,
-          description: 'kale.phases.vegetative.description',
-          care: 'kale.phases.vegetative.care',
+          description: 'kale.environments.indoor.phases.vegetative.description',
+          care: 'kale.environments.indoor.phases.vegetative.care',
           editable: true,
           soil: {
             watering: {
               interval: 3,
-              description: 'kale.phases.vegetative.soil.watering.description',
+              description: 'kale.environments.indoor.phases.vegetative.soil.watering.description',
             },
             fertilizing: {
               interval: 14,
-              description: 'kale.phases.vegetative.soil.fertilizing.description',
+              description: 'kale.environments.indoor.phases.vegetative.soil.fertilizing.description',
             },
           },
           hydro: {
             watering: {
               interval: 0,
-              description: 'kale.phases.vegetative.hydro.watering.description',
+              description: 'kale.environments.indoor.phases.vegetative.hydro.watering.description',
             },
             fertilizing: {
               interval: 14,
-              description: 'kale.phases.vegetative.hydro.fertilizing.description',
+              description: 'kale.environments.indoor.phases.vegetative.hydro.fertilizing.description',
             },
           },
           coco: {
             watering: {
               interval: 1,
-              description: 'kale.phases.vegetative.coco.watering.description',
+              description: 'kale.environments.indoor.phases.vegetative.coco.watering.description',
             },
             fertilizing: {
               interval: 14,
-              description: 'kale.phases.vegetative.coco.fertilizing.description',
+              description: 'kale.environments.indoor.phases.vegetative.coco.fertilizing.description',
             },
           },
         },
         leaf_development: {
           days: 14,
-          description: 'kale.phases.leaf_development.description',
-          care: 'kale.phases.leaf_development.care',
+          description: 'kale.environments.indoor.phases.leaf_development.description',
+          care: 'kale.environments.indoor.phases.leaf_development.care',
           editable: true,
           soil: {
             watering: {
               interval: 3,
-              description: 'kale.phases.leaf_development.soil.watering.description',
+              description: 'kale.environments.indoor.phases.leaf_development.soil.watering.description',
             },
             fertilizing: {
               interval: 14,
-              description: 'kale.phases.leaf_development.soil.fertilizing.description',
+              description: 'kale.environments.indoor.phases.leaf_development.soil.fertilizing.description',
             },
           },
           hydro: {
             watering: {
               interval: 0,
-              description: 'kale.phases.leaf_development.hydro.watering.description',
+              description: 'kale.environments.indoor.phases.leaf_development.hydro.watering.description',
             },
             fertilizing: {
               interval: 14,
-              description: 'kale.phases.leaf_development.hydro.fertilizing.description',
+              description: 'kale.environments.indoor.phases.leaf_development.hydro.fertilizing.description',
             },
           },
           coco: {
             watering: {
               interval: 1,
-              description: 'kale.phases.leaf_development.coco.watering.description',
+              description: 'kale.environments.indoor.phases.leaf_development.coco.watering.description',
             },
             fertilizing: {
               interval: 14,
-              description: 'kale.phases.leaf_development.coco.fertilizing.description',
+              description: 'kale.environments.indoor.phases.leaf_development.coco.fertilizing.description',
             },
           },
         },
         harvest: {
           days: 30,
-          description: 'kale.phases.harvest.description',
-          care: 'kale.phases.harvest.care',
+          description: 'kale.environments.indoor.phases.harvest.description',
+          care: 'kale.environments.indoor.phases.harvest.care',
           editable: true,
           soil: {
             watering: {
               interval: 7,
-              description: 'kale.phases.harvest.soil.watering.description',
+              description: 'kale.environments.indoor.phases.harvest.soil.watering.description',
             },
             fertilizing: {
               interval: 21,
-              description: 'kale.phases.harvest.soil.fertilizing.description',
+              description: 'kale.environments.indoor.phases.harvest.soil.fertilizing.description',
             },
           },
           hydro: {
             watering: {
               interval: 0,
-              description: 'kale.phases.harvest.hydro.watering.description',
+              description: 'kale.environments.indoor.phases.harvest.hydro.watering.description',
             },
             fertilizing: {
               interval: 21,
-              description: 'kale.phases.harvest.hydro.fertilizing.description',
+              description: 'kale.environments.indoor.phases.harvest.hydro.fertilizing.description',
             },
           },
           coco: {
             watering: {
               interval: 1,
-              description: 'kale.phases.harvest.coco.watering.description',
+              description: 'kale.environments.indoor.phases.harvest.coco.watering.description',
             },
             fertilizing: {
               interval: 21,
-              description: 'kale.phases.harvest.coco.fertilizing.description',
+              description: 'kale.environments.indoor.phases.harvest.coco.fertilizing.description',
             },
           },
         },
@@ -201,30 +201,30 @@ export const kale = {
         germination: {
           start: '03-15',
           end: '05-15',
-          description: 'kale.phases.germination.description',
-          care: 'kale.phases.germination.care',
+          description: 'kale.environments.outdoor.phases.germination.description',
+          care: 'kale.environments.outdoor.phases.germination.care',
           editable: false,
         },
         seedling: {
-          description: 'kale.phases.seedling.description',
-          care: 'kale.phases.seedling.care',
+          description: 'kale.environments.outdoor.phases.seedling.description',
+          care: 'kale.environments.outdoor.phases.seedling.care',
           editable: false,
         },
         vegetative: {
-          description: 'kale.phases.vegetative.description',
-          care: 'kale.phases.vegetative.care',
+          description: 'kale.environments.outdoor.phases.vegetative.description',
+          care: 'kale.environments.outdoor.phases.vegetative.care',
           editable: false,
         },
         leaf_development: {
-          description: 'kale.phases.leaf_development.description',
-          care: 'kale.phases.leaf_development.care',
+          description: 'kale.environments.outdoor.phases.leaf_development.description',
+          care: 'kale.environments.outdoor.phases.leaf_development.care',
           editable: false,
         },
         harvest: {
           start: '06-01',
           end: '11-30',
-          description: 'kale.phases.harvest.description',
-          care: 'kale.phases.harvest.care',
+          description: 'kale.environments.outdoor.phases.harvest.description',
+          care: 'kale.environments.outdoor.phases.harvest.care',
           editable: true,
         },
       },
@@ -259,32 +259,32 @@ export const kale = {
       phases: {
         germination: {
           days: 7,
-          description: 'kale.phases.germination.description',
-          care: 'kale.phases.germination.care',
+          description: 'kale.environments.greenhouse.phases.germination.description',
+          care: 'kale.environments.greenhouse.phases.germination.care',
           editable: true,
         },
         seedling: {
           days: 14,
-          description: 'kale.phases.seedling.description',
-          care: 'kale.phases.seedling.care',
+          description: 'kale.environments.greenhouse.phases.seedling.description',
+          care: 'kale.environments.greenhouse.phases.seedling.care',
           editable: true,
         },
         vegetative: {
           days: 21,
-          description: 'kale.phases.vegetative.description',
-          care: 'kale.phases.vegetative.care',
+          description: 'kale.environments.greenhouse.phases.vegetative.description',
+          care: 'kale.environments.greenhouse.phases.vegetative.care',
           editable: true,
         },
         leaf_development: {
           days: 14,
-          description: 'kale.phases.leaf_development.description',
-          care: 'kale.phases.leaf_development.care',
+          description: 'kale.environments.greenhouse.phases.leaf_development.description',
+          care: 'kale.environments.greenhouse.phases.leaf_development.care',
           editable: true,
         },
         harvest: {
           days: 30,
-          description: 'kale.phases.harvest.description',
-          care: 'kale.phases.harvest.care',
+          description: 'kale.environments.greenhouse.phases.harvest.description',
+          care: 'kale.environments.greenhouse.phases.harvest.care',
           editable: true,
         },
       },

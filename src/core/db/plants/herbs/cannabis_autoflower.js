@@ -436,7 +436,6 @@ export const cannabis_autoflower = {
           },
         },
       },
-      naturalTiming: 'cannabis_autoflower.naturalTiming',
     },
     greenhouse: {
       phases: {
@@ -639,33 +638,6 @@ export const cannabis_autoflower = {
           },
         },
       },
-      seasonalTiming: {
-        temperate_north: {
-          plantingWindow: {
-            start: '03-01',
-            end: '08-01',
-            description: 'cannabis_autoflower.seasonalTiming.temperate_north.plantingWindow.description',
-          },
-          harvestWindow: {
-            start: '05-15',
-            end: '11-15',
-            description: 'cannabis_autoflower.seasonalTiming.temperate_north.harvestWindow.description',
-          },
-        },
-        mediterranean: {
-          plantingWindow: {
-            start: '02-15',
-            end: '09-01',
-            description: 'cannabis_autoflower.seasonalTiming.mediterranean.plantingWindow.description',
-          },
-          harvestWindow: {
-            start: '05-01',
-            end: '12-01',
-            description: 'cannabis_autoflower.seasonalTiming.mediterranean.harvestWindow.description',
-          },
-        },
-      },
-      naturalTiming: 'cannabis_autoflower.naturalTiming',
     },
   },
   careTips: {

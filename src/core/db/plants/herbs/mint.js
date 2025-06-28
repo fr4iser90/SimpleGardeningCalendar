@@ -16,121 +16,121 @@ export const mint = {
       phases: {
         germination: {
           days: 10,
-          description: 'mint.indoor.germination.description',
-          care: 'mint.indoor.germination.care',
+          description: 'mint.environments.indoor.phases.germination.description',
+          care: 'mint.environments.indoor.phases.germination.care',
           editable: true,
           soil: {
             watering: {
               interval: 1,
-              description: 'mint.indoor.germination.soil.watering.description',
+              description: 'mint.environments.indoor.phases.germination.soil.watering',
             },
             fertilizing: {
               interval: 0,
-              description: 'mint.indoor.germination.soil.fertilizing.description',
+              description: 'mint.environments.indoor.phases.germination.soil.fertilizing',
             },
           },
           hydro: {
             watering: {
               interval: 0,
-              description: 'mint.indoor.germination.hydro.watering.description',
+              description: 'mint.environments.indoor.phases.germination.hydro.watering',
             },
             fertilizing: {
               interval: 0,
-              description: 'mint.indoor.germination.hydro.fertilizing.description',
+              description: 'mint.environments.indoor.phases.germination.hydro.fertilizing',
             },
           },
           coco: {
             watering: {
               interval: 1,
-              description: 'mint.indoor.germination.coco.watering.description',
+              description: 'mint.environments.indoor.phases.germination.coco.watering',
             },
             fertilizing: {
               interval: 0,
-              description: 'mint.indoor.germination.coco.fertilizing.description',
+              description: 'mint.environments.indoor.phases.germination.coco.fertilizing',
             },
           },
         },
         seedling: {
           days: 21,
-          description: 'mint.indoor.seedling.description',
-          care: 'mint.indoor.seedling.care',
+          description: 'mint.environments.indoor.phases.seedling.description',
+          care: 'mint.environments.indoor.phases.seedling.care',
           editable: true,
           soil: {
             watering: {
               interval: 2,
-              description: 'mint.indoor.seedling.soil.watering.description',
+              description: 'mint.environments.indoor.phases.seedling.soil.watering',
             },
             fertilizing: {
               interval: 0,
-              description: 'mint.indoor.seedling.soil.fertilizing.description',
+              description: 'mint.environments.indoor.phases.seedling.soil.fertilizing',
             },
           },
           hydro: {
-            watering: { interval: 0, description: 'mint.seedling.hydro.watering' },
+            watering: { interval: 0, description: 'mint.environments.indoor.phases.seedling.hydro.watering' },
             fertilizing: {
               interval: 7,
-              description: 'mint.seedling.hydro.fertilizing',
+              description: 'mint.environments.indoor.phases.seedling.hydro.fertilizing',
             },
           },
           coco: {
-            watering: { interval: 1, description: 'mint.seedling.coco.watering' },
-            fertilizing: { interval: 7, description: 'mint.seedling.coco.fertilizing' },
+            watering: { interval: 1, description: 'mint.environments.indoor.phases.seedling.coco.watering' },
+            fertilizing: { interval: 7, description: 'mint.environments.indoor.phases.seedling.coco.fertilizing' },
           },
         },
         vegetative: {
           days: 30,
-          description: 'mint.vegetative.description',
-          care: 'mint.vegetative.care',
+          description: 'mint.environments.indoor.phases.vegetative.description',
+          care: 'mint.environments.indoor.phases.vegetative.care',
           editable: true,
           soil: {
             watering: {
               interval: 2,
-              description: 'mint.vegetative.soil.watering',
+              description: 'mint.environments.indoor.phases.vegetative.soil.watering',
             },
             fertilizing: {
               interval: 14,
-              description: 'mint.vegetative.soil.fertilizing',
+              description: 'mint.environments.indoor.phases.vegetative.soil.fertilizing',
             },
           },
           hydro: {
-            watering: { interval: 0, description: 'mint.vegetative.hydro.watering' },
+            watering: { interval: 0, description: 'mint.environments.indoor.phases.vegetative.hydro.watering' },
             fertilizing: {
               interval: 14,
-              description: 'mint.vegetative.hydro.fertilizing',
+              description: 'mint.environments.indoor.phases.vegetative.hydro.fertilizing',
             },
           },
           coco: {
-            watering: { interval: 1, description: 'mint.vegetative.coco.watering' },
+            watering: { interval: 1, description: 'mint.environments.indoor.phases.vegetative.coco.watering' },
             fertilizing: {
               interval: 14,
-              description: 'mint.vegetative.coco.fertilizing',
+              description: 'mint.environments.indoor.phases.vegetative.coco.fertilizing',
             },
           },
         },
         harvest: {
           days: 60,
-          description: 'mint.harvest.description',
-          care: 'mint.harvest.care',
+          description: 'mint.environments.indoor.phases.harvest.description',
+          care: 'mint.environments.indoor.phases.harvest.care',
           editable: true,
           soil: {
-            watering: { interval: 2, description: 'mint.harvest.soil.watering' },
+            watering: { interval: 2, description: 'mint.environments.indoor.phases.harvest.soil.watering' },
             fertilizing: {
               interval: 14,
-              description: 'mint.harvest.soil.fertilizing',
+              description: 'mint.environments.indoor.phases.harvest.soil.fertilizing',
             },
           },
           hydro: {
-            watering: { interval: 0, description: 'mint.harvest.hydro.watering' },
+            watering: { interval: 0, description: 'mint.environments.indoor.phases.harvest.hydro.watering' },
             fertilizing: {
               interval: 14,
-              description: 'mint.harvest.hydro.fertilizing',
+              description: 'mint.environments.indoor.phases.harvest.hydro.fertilizing',
             },
           },
           coco: {
-            watering: { interval: 1, description: 'mint.harvest.coco.watering' },
+            watering: { interval: 1, description: 'mint.environments.indoor.phases.harvest.coco.watering' },
             fertilizing: {
               interval: 14,
-              description: 'mint.harvest.coco.fertilizing',
+              description: 'mint.environments.indoor.phases.harvest.coco.fertilizing',
             },
           },
         },
@@ -140,121 +140,121 @@ export const mint = {
       phases: {
         germination: {
           days: 10,
-          description: 'mint.outdoor.germination.description',
-          care: 'mint.outdoor.germination.care',
+          description: 'mint.environments.outdoor.phases.germination.description',
+          care: 'mint.environments.outdoor.phases.germination.care',
           editable: false,
           soil: {
             watering: {
               interval: 1,
-              description: 'mint.outdoor.germination.soil.watering',
+              description: 'mint.environments.outdoor.phases.germination.soil.watering',
             },
             fertilizing: {
               interval: 0,
-              description: 'mint.outdoor.germination.soil.fertilizing',
+              description: 'mint.environments.outdoor.phases.germination.soil.fertilizing',
             },
           },
           hydro: {
             watering: {
               interval: 0,
-              description: 'mint.outdoor.germination.hydro.watering',
+              description: 'mint.environments.outdoor.phases.germination.hydro.watering',
             },
             fertilizing: {
               interval: 0,
-              description: 'mint.outdoor.germination.hydro.fertilizing',
+              description: 'mint.environments.outdoor.phases.germination.hydro.fertilizing',
             },
           },
           coco: {
             watering: {
               interval: 1,
-              description: 'mint.outdoor.germination.coco.watering',
+              description: 'mint.environments.outdoor.phases.germination.coco.watering',
             },
             fertilizing: {
               interval: 0,
-              description: 'mint.outdoor.germination.coco.fertilizing',
+              description: 'mint.environments.outdoor.phases.germination.coco.fertilizing',
             },
           },
         },
         seedling: {
           days: 21,
-          description: 'mint.outdoor.seedling.description',
-          care: 'mint.outdoor.seedling.care',
+          description: 'mint.environments.outdoor.phases.seedling.description',
+          care: 'mint.environments.outdoor.phases.seedling.care',
           editable: false,
           soil: {
             watering: {
               interval: 2,
-              description: 'mint.outdoor.seedling.soil.watering',
+              description: 'mint.environments.outdoor.phases.seedling.soil.watering',
             },
             fertilizing: {
               interval: 0,
-              description: 'mint.outdoor.seedling.soil.fertilizing',
+              description: 'mint.environments.outdoor.phases.seedling.soil.fertilizing',
             },
           },
           hydro: {
-            watering: { interval: 0, description: 'mint.outdoor.seedling.hydro.watering' },
+            watering: { interval: 0, description: 'mint.environments.outdoor.phases.seedling.hydro.watering' },
             fertilizing: {
               interval: 7,
-              description: 'mint.outdoor.seedling.hydro.fertilizing',
+              description: 'mint.environments.outdoor.phases.seedling.hydro.fertilizing',
             },
           },
           coco: {
-            watering: { interval: 1, description: 'mint.outdoor.seedling.coco.watering' },
-            fertilizing: { interval: 7, description: 'mint.outdoor.seedling.coco.fertilizing' },
+            watering: { interval: 1, description: 'mint.environments.outdoor.phases.seedling.coco.watering' },
+            fertilizing: { interval: 7, description: 'mint.environments.outdoor.phases.seedling.coco.fertilizing' },
           },
         },
         vegetative: {
           days: 30,
-          description: 'mint.outdoor.vegetative.description',
-          care: 'mint.outdoor.vegetative.care',
+          description: 'mint.environments.outdoor.phases.vegetative.description',
+          care: 'mint.environments.outdoor.phases.vegetative.care',
           editable: false,
           soil: {
             watering: {
               interval: 2,
-              description: 'mint.outdoor.vegetative.soil.watering',
+              description: 'mint.environments.outdoor.phases.vegetative.soil.watering',
             },
             fertilizing: {
               interval: 14,
-              description: 'mint.outdoor.vegetative.soil.fertilizing',
+              description: 'mint.environments.outdoor.phases.vegetative.soil.fertilizing',
             },
           },
           hydro: {
-            watering: { interval: 0, description: 'mint.outdoor.vegetative.hydro.watering' },
+            watering: { interval: 0, description: 'mint.environments.outdoor.phases.vegetative.hydro.watering' },
             fertilizing: {
               interval: 14,
-              description: 'mint.outdoor.vegetative.hydro.fertilizing',
+              description: 'mint.environments.outdoor.phases.vegetative.hydro.fertilizing',
             },
           },
           coco: {
-            watering: { interval: 1, description: 'mint.outdoor.vegetative.coco.watering' },
+            watering: { interval: 1, description: 'mint.environments.outdoor.phases.vegetative.coco.watering' },
             fertilizing: {
               interval: 14,
-              description: 'mint.outdoor.vegetative.coco.fertilizing',
+              description: 'mint.environments.outdoor.phases.vegetative.coco.fertilizing',
             },
           },
         },
         harvest: {
           days: 60,
-          description: 'mint.outdoor.harvest.description',
-          care: 'mint.outdoor.harvest.care',
+          description: 'mint.environments.outdoor.phases.harvest.description',
+          care: 'mint.environments.outdoor.phases.harvest.care',
           editable: true,
           soil: {
-            watering: { interval: 2, description: 'mint.outdoor.harvest.soil.watering' },
+            watering: { interval: 2, description: 'mint.environments.outdoor.phases.harvest.soil.watering' },
             fertilizing: {
               interval: 14,
-              description: 'mint.outdoor.harvest.soil.fertilizing',
+              description: 'mint.environments.outdoor.phases.harvest.soil.fertilizing',
             },
           },
           hydro: {
-            watering: { interval: 0, description: 'mint.outdoor.harvest.hydro.watering' },
+            watering: { interval: 0, description: 'mint.environments.outdoor.phases.harvest.hydro.watering' },
             fertilizing: {
               interval: 14,
-              description: 'mint.outdoor.harvest.hydro.fertilizing',
+              description: 'mint.environments.outdoor.phases.harvest.hydro.fertilizing',
             },
           },
           coco: {
-            watering: { interval: 1, description: 'mint.outdoor.harvest.coco.watering' },
+            watering: { interval: 1, description: 'mint.environments.outdoor.phases.harvest.coco.watering' },
             fertilizing: {
               interval: 14,
-              description: 'mint.outdoor.harvest.coco.fertilizing',
+              description: 'mint.environments.outdoor.phases.harvest.coco.fertilizing',
             },
           },
         },
@@ -264,147 +264,148 @@ export const mint = {
           plantingWindow: {
             start: '04-01',
             end: '06-15',
-            description: 'mint.outdoor.seasonalTiming.temperate_north.plantingWindow.description',
+            description: 'mint.environments.outdoor.seasonalTiming.temperate_north.plantingWindow.description',
           },
           harvestWindow: {
             start: '06-01',
             end: '10-31',
-            description: 'mint.outdoor.seasonalTiming.temperate_north.harvestWindow.description',
+            description: 'mint.environments.outdoor.seasonalTiming.temperate_north.harvestWindow.description',
           },
         },
         mediterranean: {
           plantingWindow: {
             start: '03-01',
             end: '07-01',
-            description: 'mint.outdoor.seasonalTiming.mediterranean.plantingWindow.description',
+            description: 'mint.environments.outdoor.seasonalTiming.mediterranean.plantingWindow.description',
           },
           harvestWindow: {
             start: '05-01',
             end: '11-30',
-            description: 'mint.outdoor.seasonalTiming.mediterranean.harvestWindow.description',
+            description: 'mint.environments.outdoor.seasonalTiming.mediterranean.harvestWindow.description',
           },
         },
       },
+      naturalTiming: 'mint.environments.outdoor.naturalTiming',
     },
     greenhouse: {
       phases: {
         germination: {
           days: 10,
-          description: 'mint.greenhouse.germination.description',
-          care: 'mint.greenhouse.germination.care',
+          description: 'mint.environments.greenhouse.phases.germination.description',
+          care: 'mint.environments.greenhouse.phases.germination.care',
           editable: true,
           soil: {
             watering: {
               interval: 1,
-              description: 'mint.greenhouse.germination.soil.watering',
+              description: 'mint.environments.greenhouse.phases.germination.soil.watering',
             },
             fertilizing: {
               interval: 0,
-              description: 'mint.greenhouse.germination.soil.fertilizing',
+              description: 'mint.environments.greenhouse.phases.germination.soil.fertilizing',
             },
           },
           hydro: {
             watering: {
               interval: 0,
-              description: 'mint.greenhouse.germination.hydro.watering',
+              description: 'mint.environments.greenhouse.phases.germination.hydro.watering',
             },
             fertilizing: {
               interval: 0,
-              description: 'mint.greenhouse.germination.hydro.fertilizing',
+              description: 'mint.environments.greenhouse.phases.germination.hydro.fertilizing',
             },
           },
           coco: {
             watering: {
               interval: 1,
-              description: 'mint.greenhouse.germination.coco.watering',
+              description: 'mint.environments.greenhouse.phases.germination.coco.watering',
             },
             fertilizing: {
               interval: 0,
-              description: 'mint.greenhouse.germination.coco.fertilizing',
+              description: 'mint.environments.greenhouse.phases.germination.coco.fertilizing',
             },
           },
         },
         seedling: {
           days: 21,
-          description: 'mint.greenhouse.seedling.description',
-          care: 'mint.greenhouse.seedling.care',
+          description: 'mint.environments.greenhouse.phases.seedling.description',
+          care: 'mint.environments.greenhouse.phases.seedling.care',
           editable: true,
           soil: {
             watering: {
               interval: 2,
-              description: 'mint.greenhouse.seedling.soil.watering',
+              description: 'mint.environments.greenhouse.phases.seedling.soil.watering',
             },
             fertilizing: {
               interval: 0,
-              description: 'mint.greenhouse.seedling.soil.fertilizing',
+              description: 'mint.environments.greenhouse.phases.seedling.soil.fertilizing',
             },
           },
           hydro: {
-            watering: { interval: 0, description: 'mint.greenhouse.seedling.hydro.watering' },
+            watering: { interval: 0, description: 'mint.environments.greenhouse.phases.seedling.hydro.watering' },
             fertilizing: {
               interval: 7,
-              description: 'mint.greenhouse.seedling.hydro.fertilizing',
+              description: 'mint.environments.greenhouse.phases.seedling.hydro.fertilizing',
             },
           },
           coco: {
-            watering: { interval: 1, description: 'mint.greenhouse.seedling.coco.watering' },
-            fertilizing: { interval: 7, description: 'mint.greenhouse.seedling.coco.fertilizing' },
+            watering: { interval: 1, description: 'mint.environments.greenhouse.phases.seedling.coco.watering' },
+            fertilizing: { interval: 7, description: 'mint.environments.greenhouse.phases.seedling.coco.fertilizing' },
           },
         },
         vegetative: {
           days: 30,
-          description: 'mint.greenhouse.vegetative.description',
-          care: 'mint.greenhouse.vegetative.care',
+          description: 'mint.environments.greenhouse.phases.vegetative.description',
+          care: 'mint.environments.greenhouse.phases.vegetative.care',
           editable: true,
           soil: {
             watering: {
               interval: 2,
-              description: 'mint.greenhouse.vegetative.soil.watering',
+              description: 'mint.environments.greenhouse.phases.vegetative.soil.watering',
             },
             fertilizing: {
               interval: 14,
-              description: 'mint.greenhouse.vegetative.soil.fertilizing',
+              description: 'mint.environments.greenhouse.phases.vegetative.soil.fertilizing',
             },
           },
           hydro: {
-            watering: { interval: 0, description: 'mint.greenhouse.vegetative.hydro.watering' },
+            watering: { interval: 0, description: 'mint.environments.greenhouse.phases.vegetative.hydro.watering' },
             fertilizing: {
               interval: 14,
-              description: 'mint.greenhouse.vegetative.hydro.fertilizing',
+              description: 'mint.environments.greenhouse.phases.vegetative.hydro.fertilizing',
             },
           },
           coco: {
-            watering: { interval: 1, description: 'mint.greenhouse.vegetative.coco.watering' },
+            watering: { interval: 1, description: 'mint.environments.greenhouse.phases.vegetative.coco.watering' },
             fertilizing: {
               interval: 14,
-              description: 'mint.greenhouse.vegetative.coco.fertilizing',
+              description: 'mint.environments.greenhouse.phases.vegetative.coco.fertilizing',
             },
           },
         },
         harvest: {
           days: 60,
-          description: 'mint.greenhouse.harvest.description',
-          care: 'mint.greenhouse.harvest.care',
+          description: 'mint.environments.greenhouse.phases.harvest.description',
+          care: 'mint.environments.greenhouse.phases.harvest.care',
           editable: true,
           soil: {
-            watering: { interval: 2, description: 'mint.greenhouse.harvest.soil.watering' },
+            watering: { interval: 2, description: 'mint.environments.greenhouse.phases.harvest.soil.watering' },
             fertilizing: {
               interval: 14,
-              description: 'mint.greenhouse.harvest.soil.fertilizing',
+              description: 'mint.environments.greenhouse.phases.harvest.soil.fertilizing',
             },
           },
           hydro: {
-            watering: { interval: 0, description: 'mint.greenhouse.harvest.hydro.watering' },
+            watering: { interval: 0, description: 'mint.environments.greenhouse.phases.harvest.hydro.watering' },
             fertilizing: {
               interval: 14,
-              description: 'mint.greenhouse.harvest.hydro.fertilizing',
+              description: 'mint.environments.greenhouse.phases.harvest.hydro.fertilizing',
             },
           },
           coco: {
-            watering: { interval: 1, description: 'mint.greenhouse.harvest.coco.watering' },
+            watering: { interval: 1, description: 'mint.environments.greenhouse.phases.harvest.coco.watering' },
             fertilizing: {
               interval: 14,
-              description: 'mint.greenhouse.harvest.coco.fertilizing',
+              description: 'mint.environments.greenhouse.phases.harvest.coco.fertilizing',
             },
           },
         },

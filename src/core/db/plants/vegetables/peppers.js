@@ -16,181 +16,181 @@ export const peppers = {
       phases: {
         germination: {
           days: 10,
-          description: 'peppers.phases.germination.description',
-          care: 'peppers.phases.germination.care',
+          description: 'peppers.environments.indoor.phases.germination.description',
+          care: 'peppers.environments.indoor.phases.germination.care',
           editable: true,
           soil: {
             watering: {
               interval: 1,
-              description: 'peppers.phases.germination.soil.watering.description',
+              description: 'peppers.environments.indoor.phases.germination.soil.watering.description',
             },
             fertilizing: {
               interval: 0,
-              description: 'peppers.phases.germination.soil.fertilizing.description',
+              description: 'peppers.environments.indoor.phases.germination.soil.fertilizing.description',
             },
           },
           hydro: {
             watering: {
               interval: 0,
-              description: 'peppers.phases.germination.hydro.watering.description',
+              description: 'peppers.environments.indoor.phases.germination.hydro.watering.description',
             },
             fertilizing: {
               interval: 0,
-              description: 'peppers.phases.germination.hydro.fertilizing.description',
+              description: 'peppers.environments.indoor.phases.germination.hydro.fertilizing.description',
             },
           },
           coco: {
             watering: {
               interval: 1,
-              description: 'peppers.phases.germination.coco.watering.description',
+              description: 'peppers.environments.indoor.phases.germination.coco.watering.description',
             },
             fertilizing: {
               interval: 0,
-              description: 'peppers.phases.germination.coco.fertilizing.description',
+              description: 'peppers.environments.indoor.phases.germination.coco.fertilizing.description',
             },
           },
         },
         seedling: {
           days: 21,
-          description: 'peppers.phases.seedling.description',
-          care: 'peppers.phases.seedling.care',
+          description: 'peppers.environments.indoor.phases.seedling.description',
+          care: 'peppers.environments.indoor.phases.seedling.care',
           editable: true,
           soil: {
             watering: {
               interval: 2,
-              description: 'peppers.phases.seedling.soil.watering.description',
+              description: 'peppers.environments.indoor.phases.seedling.soil.watering.description',
             },
             fertilizing: {
               interval: 0,
-              description: 'peppers.phases.seedling.soil.fertilizing.description',
+              description: 'peppers.environments.indoor.phases.seedling.soil.fertilizing.description',
             },
           },
           hydro: {
             watering: {
               interval: 0,
-              description: 'peppers.phases.seedling.hydro.watering.description',
+              description: 'peppers.environments.indoor.phases.seedling.hydro.watering.description',
             },
             fertilizing: {
               interval: 7,
-              description: 'peppers.phases.seedling.hydro.fertilizing.description',
+              description: 'peppers.environments.indoor.phases.seedling.hydro.fertilizing.description',
             },
           },
           coco: {
             watering: {
               interval: 1,
-              description: 'peppers.phases.seedling.coco.watering.description',
+              description: 'peppers.environments.indoor.phases.seedling.coco.watering.description',
             },
             fertilizing: {
               interval: 7,
-              description: 'peppers.phases.seedling.coco.fertilizing.description',
+              description: 'peppers.environments.indoor.phases.seedling.coco.fertilizing.description',
             },
           },
         },
         vegetative: {
           days: 35,
-          description: 'peppers.phases.vegetative.description',
-          care: 'peppers.phases.vegetative.care',
+          description: 'peppers.environments.indoor.phases.vegetative.description',
+          care: 'peppers.environments.indoor.phases.vegetative.care',
           editable: true,
           soil: {
             watering: {
               interval: 3,
-              description: 'peppers.phases.vegetative.soil.watering.description',
+              description: 'peppers.environments.indoor.phases.vegetative.soil.watering.description',
             },
             fertilizing: {
               interval: 14,
-              description: 'peppers.phases.vegetative.soil.fertilizing.description',
+              description: 'peppers.environments.indoor.phases.vegetative.soil.fertilizing.description',
             },
           },
           hydro: {
             watering: {
               interval: 0,
-              description: 'peppers.phases.vegetative.hydro.watering.description',
+              description: 'peppers.environments.indoor.phases.vegetative.hydro.watering.description',
             },
             fertilizing: {
               interval: 14,
-              description: 'peppers.phases.vegetative.hydro.fertilizing.description',
+              description: 'peppers.environments.indoor.phases.vegetative.hydro.fertilizing.description',
             },
           },
           coco: {
             watering: {
               interval: 1,
-              description: 'peppers.phases.vegetative.coco.watering.description',
+              description: 'peppers.environments.indoor.phases.vegetative.coco.watering.description',
             },
             fertilizing: {
               interval: 14,
-              description: 'peppers.phases.vegetative.coco.fertilizing.description',
+              description: 'peppers.environments.indoor.phases.vegetative.coco.fertilizing.description',
             },
           },
         },
         flowering: {
           days: 21,
-          description: 'peppers.phases.flowering.description',
-          care: 'peppers.phases.flowering.care',
+          description: 'peppers.environments.indoor.phases.flowering.description',
+          care: 'peppers.environments.indoor.phases.flowering.care',
           editable: true,
           soil: {
             watering: {
               interval: 3,
-              description: 'peppers.phases.flowering.soil.watering.description',
+              description: 'peppers.environments.indoor.phases.flowering.soil.watering.description',
             },
             fertilizing: {
               interval: 14,
-              description: 'peppers.phases.flowering.soil.fertilizing.description',
+              description: 'peppers.environments.indoor.phases.flowering.soil.fertilizing.description',
             },
           },
           hydro: {
             watering: {
               interval: 0,
-              description: 'peppers.phases.flowering.hydro.watering.description',
+              description: 'peppers.environments.indoor.phases.flowering.hydro.watering.description',
             },
             fertilizing: {
               interval: 14,
-              description: 'peppers.phases.flowering.hydro.fertilizing.description',
+              description: 'peppers.environments.indoor.phases.flowering.hydro.fertilizing.description',
             },
           },
           coco: {
             watering: {
               interval: 1,
-              description: 'peppers.phases.flowering.coco.watering.description',
+              description: 'peppers.environments.indoor.phases.flowering.coco.watering.description',
             },
             fertilizing: {
               interval: 14,
-              description: 'peppers.phases.flowering.coco.fertilizing.description',
+              description: 'peppers.environments.indoor.phases.flowering.coco.fertilizing.description',
             },
           },
         },
         fruiting: {
           days: 60,
-          description: 'peppers.phases.fruiting.description',
-          care: 'peppers.phases.fruiting.care',
+          description: 'peppers.environments.indoor.phases.fruiting.description',
+          care: 'peppers.environments.indoor.phases.fruiting.care',
           editable: true,
           soil: {
             watering: {
               interval: 3,
-              description: 'peppers.phases.fruiting.soil.watering.description',
+              description: 'peppers.environments.indoor.phases.fruiting.soil.watering.description',
             },
             fertilizing: {
               interval: 21,
-              description: 'peppers.phases.fruiting.soil.fertilizing.description',
+              description: 'peppers.environments.indoor.phases.fruiting.soil.fertilizing.description',
             },
           },
           hydro: {
             watering: {
               interval: 0,
-              description: 'peppers.phases.fruiting.hydro.watering.description',
+              description: 'peppers.environments.indoor.phases.fruiting.hydro.watering.description',
             },
             fertilizing: {
               interval: 21,
-              description: 'peppers.phases.fruiting.hydro.fertilizing.description',
+              description: 'peppers.environments.indoor.phases.fruiting.hydro.fertilizing.description',
             },
           },
           coco: {
             watering: {
               interval: 1,
-              description: 'peppers.phases.fruiting.coco.watering.description',
+              description: 'peppers.environments.indoor.phases.fruiting.coco.watering.description',
             },
             fertilizing: {
               interval: 21,
-              description: 'peppers.phases.fruiting.coco.fertilizing.description',
+              description: 'peppers.environments.indoor.phases.fruiting.coco.fertilizing.description',
             },
           },
         },
@@ -201,30 +201,30 @@ export const peppers = {
         germination: {
           start: '03-15',
           end: '04-15',
-          description: 'peppers.phases.germination.description',
-          care: 'peppers.phases.germination.care',
+          description: 'peppers.environments.outdoor.phases.germination.description',
+          care: 'peppers.environments.outdoor.phases.germination.care',
           editable: false,
         },
         seedling: {
-          description: 'peppers.phases.seedling.description',
-          care: 'peppers.phases.seedling.care',
+          description: 'peppers.environments.outdoor.phases.seedling.description',
+          care: 'peppers.environments.outdoor.phases.seedling.care',
           editable: false,
         },
         vegetative: {
-          description: 'peppers.phases.vegetative.description',
-          care: 'peppers.phases.vegetative.care',
+          description: 'peppers.environments.outdoor.phases.vegetative.description',
+          care: 'peppers.environments.outdoor.phases.vegetative.care',
           editable: false,
         },
         flowering: {
-          description: 'peppers.phases.flowering.description',
-          care: 'peppers.phases.flowering.care',
+          description: 'peppers.environments.outdoor.phases.flowering.description',
+          care: 'peppers.environments.outdoor.phases.flowering.care',
           editable: true,
         },
         fruiting: {
           start: '07-15',
           end: '10-15',
-          description: 'peppers.phases.fruiting.description',
-          care: 'peppers.phases.fruiting.care',
+          description: 'peppers.environments.outdoor.phases.fruiting.description',
+          care: 'peppers.environments.outdoor.phases.fruiting.care',
           editable: true,
         },
       },
@@ -259,32 +259,32 @@ export const peppers = {
       phases: {
         germination: {
           days: 10,
-          description: 'peppers.phases.germination.description',
-          care: 'peppers.phases.germination.care',
+          description: 'peppers.environments.greenhouse.phases.germination.description',
+          care: 'peppers.environments.greenhouse.phases.germination.care',
           editable: true,
         },
         seedling: {
           days: 21,
-          description: 'peppers.phases.seedling.description',
-          care: 'peppers.phases.seedling.care',
+          description: 'peppers.environments.greenhouse.phases.seedling.description',
+          care: 'peppers.environments.greenhouse.phases.seedling.care',
           editable: true,
         },
         vegetative: {
           days: 35,
-          description: 'peppers.phases.vegetative.description',
-          care: 'peppers.phases.vegetative.care',
+          description: 'peppers.environments.greenhouse.phases.vegetative.description',
+          care: 'peppers.environments.greenhouse.phases.vegetative.care',
           editable: true,
         },
         flowering: {
           days: 21,
-          description: 'peppers.phases.flowering.description',
-          care: 'peppers.phases.flowering.care',
+          description: 'peppers.environments.greenhouse.phases.flowering.description',
+          care: 'peppers.environments.greenhouse.phases.flowering.care',
           editable: true,
         },
         fruiting: {
           days: 60,
-          description: 'peppers.phases.fruiting.description',
-          care: 'peppers.phases.fruiting.care',
+          description: 'peppers.environments.greenhouse.phases.fruiting.description',
+          care: 'peppers.environments.greenhouse.phases.fruiting.care',
           editable: true,
         },
       },

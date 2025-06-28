@@ -16,145 +16,145 @@ export const thyme = {
       phases: {
         germination: {
           days: 14,
-          description: 'thyme.phases.germination.description',
-          care: 'thyme.phases.germination.care',
+          description: 'thyme.environments.indoor.phases.germination.description',
+          care: 'thyme.environments.indoor.phases.germination.care',
           editable: true,
           soil: {
             watering: {
               interval: 1,
-              description: 'thyme.phases.germination.soil.watering.description',
+              description: 'thyme.environments.indoor.phases.germination.soil.watering.description',
             },
             fertilizing: {
               interval: 0,
-              description: 'thyme.phases.germination.soil.fertilizing.description',
+              description: 'thyme.environments.indoor.phases.germination.soil.fertilizing.description',
             },
           },
           hydro: {
             watering: {
               interval: 0,
-              description: 'thyme.phases.germination.hydro.watering.description',
+              description: 'thyme.environments.indoor.phases.germination.hydro.watering.description',
             },
             fertilizing: {
               interval: 0,
-              description: 'thyme.phases.germination.hydro.fertilizing.description',
+              description: 'thyme.environments.indoor.phases.germination.hydro.fertilizing.description',
             },
           },
           coco: {
             watering: {
               interval: 1,
-              description: 'thyme.phases.germination.coco.watering.description',
+              description: 'thyme.environments.indoor.phases.germination.coco.watering.description',
             },
             fertilizing: {
               interval: 0,
-              description: 'thyme.phases.germination.coco.fertilizing.description',
+              description: 'thyme.environments.indoor.phases.germination.coco.fertilizing.description',
             },
           },
         },
         seedling: {
           days: 21,
-          description: 'thyme.phases.seedling.description',
-          care: 'thyme.phases.seedling.care',
+          description: 'thyme.environments.indoor.phases.seedling.description',
+          care: 'thyme.environments.indoor.phases.seedling.care',
           editable: true,
           soil: {
             watering: {
               interval: 3,
-              description: 'thyme.phases.seedling.soil.watering.description',
+              description: 'thyme.environments.indoor.phases.seedling.soil.watering.description',
             },
             fertilizing: {
               interval: 0,
-              description: 'thyme.phases.seedling.soil.fertilizing.description',
+              description: 'thyme.environments.indoor.phases.seedling.soil.fertilizing.description',
             },
           },
           hydro: {
             watering: { 
               interval: 0, 
-              description: 'thyme.phases.seedling.hydro.watering.description' 
+              description: 'thyme.environments.indoor.phases.seedling.hydro.watering.description' 
             },
             fertilizing: {
               interval: 7,
-              description: 'thyme.phases.seedling.hydro.fertilizing.description',
+              description: 'thyme.environments.indoor.phases.seedling.hydro.fertilizing.description',
             },
           },
           coco: {
             watering: { 
               interval: 1, 
-              description: 'thyme.phases.seedling.coco.watering.description' 
+              description: 'thyme.environments.indoor.phases.seedling.coco.watering.description' 
             },
             fertilizing: { 
               interval: 7, 
-              description: 'thyme.phases.seedling.coco.fertilizing.description' 
+              description: 'thyme.environments.indoor.phases.seedling.coco.fertilizing.description' 
             },
           },
         },
         vegetative: {
           days: 35,
-          description: 'thyme.phases.vegetative.description',
-          care: 'thyme.phases.vegetative.care',
+          description: 'thyme.environments.indoor.phases.vegetative.description',
+          care: 'thyme.environments.indoor.phases.vegetative.care',
           editable: true,
           soil: {
             watering: {
               interval: 4,
-              description: 'thyme.phases.vegetative.soil.watering.description',
+              description: 'thyme.environments.indoor.phases.vegetative.soil.watering.description',
             },
             fertilizing: {
               interval: 21,
-              description: 'thyme.phases.vegetative.soil.fertilizing.description',
+              description: 'thyme.environments.indoor.phases.vegetative.soil.fertilizing.description',
             },
           },
           hydro: {
             watering: { 
               interval: 0, 
-              description: 'thyme.phases.vegetative.hydro.watering.description' 
+              description: 'thyme.environments.indoor.phases.vegetative.hydro.watering.description' 
             },
             fertilizing: {
               interval: 21,
-              description: 'thyme.phases.vegetative.hydro.fertilizing.description',
+              description: 'thyme.environments.indoor.phases.vegetative.hydro.fertilizing.description',
             },
           },
           coco: {
             watering: { 
               interval: 2, 
-              description: 'thyme.phases.vegetative.coco.watering.description' 
+              description: 'thyme.environments.indoor.phases.vegetative.coco.watering.description' 
             },
             fertilizing: {
               interval: 21,
-              description: 'thyme.phases.vegetative.coco.fertilizing.description',
+              description: 'thyme.environments.indoor.phases.vegetative.coco.fertilizing.description',
             },
           },
         },
         harvest: {
           days: 75,
-          description: 'thyme.phases.harvest.description',
-          care: 'thyme.phases.harvest.care',
+          description: 'thyme.environments.indoor.phases.harvest.description',
+          care: 'thyme.environments.indoor.phases.harvest.care',
           editable: true,
           soil: {
             watering: { 
               interval: 4, 
-              description: 'thyme.phases.harvest.soil.watering.description' 
+              description: 'thyme.environments.indoor.phases.harvest.soil.watering.description' 
             },
             fertilizing: {
               interval: 21,
-              description: 'thyme.phases.harvest.soil.fertilizing.description',
+              description: 'thyme.environments.indoor.phases.harvest.soil.fertilizing.description',
             },
           },
           hydro: {
             watering: { 
               interval: 0, 
-              description: 'thyme.phases.harvest.hydro.watering.description' 
+              description: 'thyme.environments.indoor.phases.harvest.hydro.watering.description' 
             },
             fertilizing: {
               interval: 21,
-              description: 'thyme.phases.harvest.hydro.fertilizing.description',
+              description: 'thyme.environments.indoor.phases.harvest.hydro.fertilizing.description',
             },
           },
           coco: {
             watering: { 
               interval: 2, 
-              description: 'thyme.phases.harvest.coco.watering.description' 
+              description: 'thyme.environments.indoor.phases.harvest.coco.watering.description' 
             },
             fertilizing: {
               interval: 21,
-              description: 'thyme.phases.harvest.coco.fertilizing.description',
+              description: 'thyme.environments.indoor.phases.harvest.coco.fertilizing.description',
             },
           },
         },
@@ -164,145 +164,145 @@ export const thyme = {
       phases: {
         germination: {
           days: 14,
-          description: 'thyme.phases.germination.description',
-          care: 'thyme.phases.germination.care',
+          description: 'thyme.environments.outdoor.phases.germination.description',
+          care: 'thyme.environments.outdoor.phases.germination.care',
           editable: false,
           soil: {
             watering: {
               interval: 1,
-              description: 'thyme.phases.germination.soil.watering.description',
+              description: 'thyme.environments.outdoor.phases.germination.soil.watering.description',
             },
             fertilizing: {
               interval: 0,
-              description: 'thyme.phases.germination.soil.fertilizing.description',
+              description: 'thyme.environments.outdoor.phases.germination.soil.fertilizing.description',
             },
           },
           hydro: {
             watering: {
               interval: 0,
-              description: 'thyme.phases.germination.hydro.watering.description',
+              description: 'thyme.environments.outdoor.phases.germination.hydro.watering.description',
             },
             fertilizing: {
               interval: 0,
-              description: 'thyme.phases.germination.hydro.fertilizing.description',
+              description: 'thyme.environments.outdoor.phases.germination.hydro.fertilizing.description',
             },
           },
           coco: {
             watering: {
               interval: 1,
-              description: 'thyme.phases.germination.coco.watering.description',
+              description: 'thyme.environments.outdoor.phases.germination.coco.watering.description',
             },
             fertilizing: {
               interval: 0,
-              description: 'thyme.phases.germination.coco.fertilizing.description',
+              description: 'thyme.environments.outdoor.phases.germination.coco.fertilizing.description',
             },
           },
         },
         seedling: {
           days: 21,
-          description: 'thyme.phases.seedling.description',
-          care: 'thyme.phases.seedling.care',
+          description: 'thyme.environments.outdoor.phases.seedling.description',
+          care: 'thyme.environments.outdoor.phases.seedling.care',
           editable: false,
           soil: {
             watering: {
               interval: 3,
-              description: 'thyme.phases.seedling.soil.watering.description',
+              description: 'thyme.environments.outdoor.phases.seedling.soil.watering.description',
             },
             fertilizing: {
               interval: 0,
-              description: 'thyme.phases.seedling.soil.fertilizing.description',
+              description: 'thyme.environments.outdoor.phases.seedling.soil.fertilizing.description',
             },
           },
           hydro: {
             watering: { 
               interval: 0, 
-              description: 'thyme.phases.seedling.hydro.watering.description' 
+              description: 'thyme.environments.outdoor.phases.seedling.hydro.watering.description' 
             },
             fertilizing: {
               interval: 7,
-              description: 'thyme.phases.seedling.hydro.fertilizing.description',
+              description: 'thyme.environments.outdoor.phases.seedling.hydro.fertilizing.description',
             },
           },
           coco: {
             watering: { 
               interval: 1, 
-              description: 'thyme.phases.seedling.coco.watering.description' 
+              description: 'thyme.environments.outdoor.phases.seedling.coco.watering.description' 
             },
             fertilizing: { 
               interval: 7, 
-              description: 'thyme.phases.seedling.coco.fertilizing.description' 
+              description: 'thyme.environments.outdoor.phases.seedling.coco.fertilizing.description' 
             },
           },
         },
         vegetative: {
           days: 35,
-          description: 'thyme.phases.vegetative.description',
-          care: 'thyme.phases.vegetative.care',
+          description: 'thyme.environments.outdoor.phases.vegetative.description',
+          care: 'thyme.environments.outdoor.phases.vegetative.care',
           editable: false,
           soil: {
             watering: {
               interval: 4,
-              description: 'thyme.phases.vegetative.soil.watering.description',
+              description: 'thyme.environments.outdoor.phases.vegetative.soil.watering.description',
             },
             fertilizing: {
               interval: 21,
-              description: 'thyme.phases.vegetative.soil.fertilizing.description',
+              description: 'thyme.environments.outdoor.phases.vegetative.soil.fertilizing.description',
             },
           },
           hydro: {
             watering: { 
               interval: 0, 
-              description: 'thyme.phases.vegetative.hydro.watering.description' 
+              description: 'thyme.environments.outdoor.phases.vegetative.hydro.watering.description' 
             },
             fertilizing: {
               interval: 21,
-              description: 'thyme.phases.vegetative.hydro.fertilizing.description',
+              description: 'thyme.environments.outdoor.phases.vegetative.hydro.fertilizing.description',
             },
           },
           coco: {
             watering: { 
               interval: 2, 
-              description: 'thyme.phases.vegetative.coco.watering.description' 
+              description: 'thyme.environments.outdoor.phases.vegetative.coco.watering.description' 
             },
             fertilizing: {
               interval: 21,
-              description: 'thyme.phases.vegetative.coco.fertilizing.description',
+              description: 'thyme.environments.outdoor.phases.vegetative.coco.fertilizing.description',
             },
           },
         },
         harvest: {
           days: 75,
-          description: 'thyme.phases.harvest.description',
-          care: 'thyme.phases.harvest.care',
+          description: 'thyme.environments.outdoor.phases.harvest.description',
+          care: 'thyme.environments.outdoor.phases.harvest.care',
           editable: true,
           soil: {
             watering: { 
               interval: 4, 
-              description: 'thyme.phases.harvest.soil.watering.description' 
+              description: 'thyme.environments.outdoor.phases.harvest.soil.watering.description' 
             },
             fertilizing: {
               interval: 21,
-              description: 'thyme.phases.harvest.soil.fertilizing.description',
+              description: 'thyme.environments.outdoor.phases.harvest.soil.fertilizing.description',
             },
           },
           hydro: {
             watering: { 
               interval: 0, 
-              description: 'thyme.phases.harvest.hydro.watering.description' 
+              description: 'thyme.environments.outdoor.phases.harvest.hydro.watering.description' 
             },
             fertilizing: {
               interval: 21,
-              description: 'thyme.phases.harvest.hydro.fertilizing.description',
+              description: 'thyme.environments.outdoor.phases.harvest.hydro.fertilizing.description',
             },
           },
           coco: {
             watering: { 
               interval: 2, 
-              description: 'thyme.phases.harvest.coco.watering.description' 
+              description: 'thyme.environments.outdoor.phases.harvest.coco.watering.description' 
             },
             fertilizing: {
               interval: 21,
-              description: 'thyme.phases.harvest.coco.fertilizing.description',
+              description: 'thyme.environments.outdoor.phases.harvest.coco.fertilizing.description',
             },
           },
         },
@@ -338,145 +338,145 @@ export const thyme = {
       phases: {
         germination: {
           days: 14,
-          description: 'thyme.phases.germination.description',
-          care: 'thyme.phases.germination.care',
+          description: 'thyme.environments.greenhouse.phases.germination.description',
+          care: 'thyme.environments.greenhouse.phases.germination.care',
           editable: true,
           soil: {
             watering: {
               interval: 1,
-              description: 'thyme.phases.germination.soil.watering.description',
+              description: 'thyme.environments.greenhouse.phases.germination.soil.watering.description',
             },
             fertilizing: {
               interval: 0,
-              description: 'thyme.phases.germination.soil.fertilizing.description',
+              description: 'thyme.environments.greenhouse.phases.germination.soil.fertilizing.description',
             },
           },
           hydro: {
             watering: {
               interval: 0,
-              description: 'thyme.phases.germination.hydro.watering.description',
+              description: 'thyme.environments.greenhouse.phases.germination.hydro.watering.description',
             },
             fertilizing: {
               interval: 0,
-              description: 'thyme.phases.germination.hydro.fertilizing.description',
+              description: 'thyme.environments.greenhouse.phases.germination.hydro.fertilizing.description',
             },
           },
           coco: {
             watering: {
               interval: 1,
-              description: 'thyme.phases.germination.coco.watering.description',
+              description: 'thyme.environments.greenhouse.phases.germination.coco.watering.description',
             },
             fertilizing: {
               interval: 0,
-              description: 'thyme.phases.germination.coco.fertilizing.description',
+              description: 'thyme.environments.greenhouse.phases.germination.coco.fertilizing.description',
             },
           },
         },
         seedling: {
           days: 21,
-          description: 'thyme.phases.seedling.description',
-          care: 'thyme.phases.seedling.care',
+          description: 'thyme.environments.greenhouse.phases.seedling.description',
+          care: 'thyme.environments.greenhouse.phases.seedling.care',
           editable: true,
           soil: {
             watering: {
               interval: 3,
-              description: 'thyme.phases.seedling.soil.watering.description',
+              description: 'thyme.environments.greenhouse.phases.seedling.soil.watering.description',
             },
             fertilizing: {
               interval: 0,
-              description: 'thyme.phases.seedling.soil.fertilizing.description',
+              description: 'thyme.environments.greenhouse.phases.seedling.soil.fertilizing.description',
             },
           },
           hydro: {
             watering: { 
               interval: 0, 
-              description: 'thyme.phases.seedling.hydro.watering.description' 
+              description: 'thyme.environments.greenhouse.phases.seedling.hydro.watering.description' 
             },
             fertilizing: {
               interval: 7,
-              description: 'thyme.phases.seedling.hydro.fertilizing.description',
+              description: 'thyme.environments.greenhouse.phases.seedling.hydro.fertilizing.description',
             },
           },
           coco: {
             watering: { 
               interval: 1, 
-              description: 'thyme.phases.seedling.coco.watering.description' 
+              description: 'thyme.environments.greenhouse.phases.seedling.coco.watering.description' 
             },
             fertilizing: { 
               interval: 7, 
-              description: 'thyme.phases.seedling.coco.fertilizing.description' 
+              description: 'thyme.environments.greenhouse.phases.seedling.coco.fertilizing.description' 
             },
           },
         },
         vegetative: {
           days: 35,
-          description: 'thyme.phases.vegetative.description',
-          care: 'thyme.phases.vegetative.care',
+          description: 'thyme.environments.greenhouse.phases.vegetative.description',
+          care: 'thyme.environments.greenhouse.phases.vegetative.care',
           editable: true,
           soil: {
             watering: {
               interval: 4,
-              description: 'thyme.phases.vegetative.soil.watering.description',
+              description: 'thyme.environments.greenhouse.phases.vegetative.soil.watering.description',
             },
             fertilizing: {
               interval: 21,
-              description: 'thyme.phases.vegetative.soil.fertilizing.description',
+              description: 'thyme.environments.greenhouse.phases.vegetative.soil.fertilizing.description',
             },
           },
           hydro: {
             watering: { 
               interval: 0, 
-              description: 'thyme.phases.vegetative.hydro.watering.description' 
+              description: 'thyme.environments.greenhouse.phases.vegetative.hydro.watering.description' 
             },
             fertilizing: {
               interval: 21,
-              description: 'thyme.phases.vegetative.hydro.fertilizing.description',
+              description: 'thyme.environments.greenhouse.phases.vegetative.hydro.fertilizing.description',
             },
           },
           coco: {
             watering: { 
               interval: 2, 
-              description: 'thyme.phases.vegetative.coco.watering.description' 
+              description: 'thyme.environments.greenhouse.phases.vegetative.coco.watering.description' 
             },
             fertilizing: {
               interval: 21,
-              description: 'thyme.phases.vegetative.coco.fertilizing.description',
+              description: 'thyme.environments.greenhouse.phases.vegetative.coco.fertilizing.description',
             },
           },
         },
         harvest: {
           days: 75,
-          description: 'thyme.phases.harvest.description',
-          care: 'thyme.phases.harvest.care',
+          description: 'thyme.environments.greenhouse.phases.harvest.description',
+          care: 'thyme.environments.greenhouse.phases.harvest.care',
           editable: true,
           soil: {
             watering: { 
               interval: 4, 
-              description: 'thyme.phases.harvest.soil.watering.description' 
+              description: 'thyme.environments.greenhouse.phases.harvest.soil.watering.description' 
             },
             fertilizing: {
               interval: 21,
-              description: 'thyme.phases.harvest.soil.fertilizing.description',
+              description: 'thyme.environments.greenhouse.phases.harvest.soil.fertilizing.description',
             },
           },
           hydro: {
             watering: { 
               interval: 0, 
-              description: 'thyme.phases.harvest.hydro.watering.description' 
+              description: 'thyme.environments.greenhouse.phases.harvest.hydro.watering.description' 
             },
             fertilizing: {
               interval: 21,
-              description: 'thyme.phases.harvest.hydro.fertilizing.description',
+              description: 'thyme.environments.greenhouse.phases.harvest.hydro.fertilizing.description',
             },
           },
           coco: {
             watering: { 
               interval: 2, 
-              description: 'thyme.phases.harvest.coco.watering.description' 
+              description: 'thyme.environments.greenhouse.phases.harvest.coco.watering.description' 
             },
             fertilizing: {
               interval: 21,
-              description: 'thyme.phases.harvest.coco.fertilizing.description',
+              description: 'thyme.environments.greenhouse.phases.harvest.coco.fertilizing.description',
             },
           },
         },
@@ -495,4 +495,4 @@ export const thyme = {
   commonProblems: createProblemRefs(['rootRot', 'leggyGrowth', 'winterDamage'], 'herbs'),
 };
 
-export default thyme; 
+export default thyme;

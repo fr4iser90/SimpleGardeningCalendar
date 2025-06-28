@@ -16,145 +16,145 @@ export const lettuce = {
       phases: {
         germination: {
           days: 5,
-          description: 'lettuce.phases.germination.description',
-          care: 'lettuce.phases.germination.care',
+          description: 'lettuce.environments.indoor.phases.germination.description',
+          care: 'lettuce.environments.indoor.phases.germination.care',
           editable: true,
           soil: {
             watering: {
               interval: 1,
-              description: 'lettuce.phases.germination.soil.watering.description',
+              description: 'lettuce.environments.indoor.phases.germination.soil.watering.description',
             },
             fertilizing: {
               interval: 0,
-              description: 'lettuce.phases.germination.soil.fertilizing.description',
+              description: 'lettuce.environments.indoor.phases.germination.soil.fertilizing.description',
             },
           },
           hydro: {
             watering: {
               interval: 0,
-              description: 'lettuce.phases.germination.hydro.watering.description',
+              description: 'lettuce.environments.indoor.phases.germination.hydro.watering.description',
             },
             fertilizing: {
               interval: 0,
-              description: 'lettuce.phases.germination.hydro.fertilizing.description',
+              description: 'lettuce.environments.indoor.phases.germination.hydro.fertilizing.description',
             },
           },
           coco: {
             watering: {
               interval: 1,
-              description: 'lettuce.phases.germination.coco.watering.description',
+              description: 'lettuce.environments.indoor.phases.germination.coco.watering.description',
             },
             fertilizing: {
               interval: 0,
-              description: 'lettuce.phases.germination.coco.fertilizing.description',
+              description: 'lettuce.environments.indoor.phases.germination.coco.fertilizing.description',
             },
           },
         },
         leafing: {
           days: 20,
-          description: 'lettuce.phases.leafing.description',
-          care: 'lettuce.phases.leafing.care',
+          description: 'lettuce.environments.indoor.phases.leafing.description',
+          care: 'lettuce.environments.indoor.phases.leafing.care',
           editable: true,
           soil: {
             watering: {
               interval: 2,
-              description: 'lettuce.phases.leafing.soil.watering.description',
+              description: 'lettuce.environments.indoor.phases.leafing.soil.watering.description',
             },
             fertilizing: {
               interval: 0,
-              description: 'lettuce.phases.leafing.soil.fertilizing.description',
+              description: 'lettuce.environments.indoor.phases.leafing.soil.fertilizing.description',
             },
           },
           hydro: {
             watering: {
               interval: 0,
-              description: 'lettuce.phases.leafing.hydro.watering.description',
+              description: 'lettuce.environments.indoor.phases.leafing.hydro.watering.description',
             },
             fertilizing: {
               interval: 7,
-              description: 'lettuce.phases.leafing.hydro.fertilizing.description',
+              description: 'lettuce.environments.indoor.phases.leafing.hydro.fertilizing.description',
             },
           },
           coco: {
             watering: {
               interval: 1,
-              description: 'lettuce.phases.leafing.coco.watering.description',
+              description: 'lettuce.environments.indoor.phases.leafing.coco.watering.description',
             },
             fertilizing: {
               interval: 7,
-              description: 'lettuce.phases.leafing.coco.fertilizing.description',
+              description: 'lettuce.environments.indoor.phases.leafing.coco.fertilizing.description',
             },
           },
         },
         heading: {
           days: 25,
-          description: 'lettuce.phases.heading.description',
-          care: 'lettuce.phases.heading.care',
+          description: 'lettuce.environments.indoor.phases.heading.description',
+          care: 'lettuce.environments.indoor.phases.heading.care',
           editable: true,
           soil: {
             watering: {
               interval: 2,
-              description: 'lettuce.phases.heading.soil.watering.description',
+              description: 'lettuce.environments.indoor.phases.heading.soil.watering.description',
             },
             fertilizing: {
               interval: 14,
-              description: 'lettuce.phases.heading.soil.fertilizing.description',
+              description: 'lettuce.environments.indoor.phases.heading.soil.fertilizing.description',
             },
           },
           hydro: {
             watering: {
               interval: 0,
-              description: 'lettuce.phases.heading.hydro.watering.description',
+              description: 'lettuce.environments.indoor.phases.heading.hydro.watering.description',
             },
             fertilizing: {
               interval: 14,
-              description: 'lettuce.phases.heading.hydro.fertilizing.description',
+              description: 'lettuce.environments.indoor.phases.heading.hydro.fertilizing.description',
             },
           },
           coco: {
             watering: {
               interval: 1,
-              description: 'lettuce.phases.heading.coco.watering.description',
+              description: 'lettuce.environments.indoor.phases.heading.coco.watering.description',
             },
             fertilizing: {
               interval: 14,
-              description: 'lettuce.phases.heading.coco.fertilizing.description',
+              description: 'lettuce.environments.indoor.phases.heading.coco.fertilizing.description',
             },
           },
         },
         harvest: {
           days: 10,
-          description: 'lettuce.phases.harvest.description',
-          care: 'lettuce.phases.harvest.care',
+          description: 'lettuce.environments.indoor.phases.harvest.description',
+          care: 'lettuce.environments.indoor.phases.harvest.care',
           editable: true,
           soil: {
             watering: {
               interval: 2,
-              description: 'lettuce.phases.harvest.soil.watering.description',
+              description: 'lettuce.environments.indoor.phases.harvest.soil.watering.description',
             },
             fertilizing: {
               interval: 0,
-              description: 'lettuce.phases.harvest.soil.fertilizing.description',
+              description: 'lettuce.environments.indoor.phases.harvest.soil.fertilizing.description',
             },
           },
           hydro: {
             watering: {
               interval: 0,
-              description: 'lettuce.phases.harvest.hydro.watering.description',
+              description: 'lettuce.environments.indoor.phases.harvest.hydro.watering.description',
             },
             fertilizing: {
               interval: 0,
-              description: 'lettuce.phases.harvest.hydro.fertilizing.description',
+              description: 'lettuce.environments.indoor.phases.harvest.hydro.fertilizing.description',
             },
           },
           coco: {
             watering: {
               interval: 1,
-              description: 'lettuce.phases.harvest.coco.watering.description',
+              description: 'lettuce.environments.indoor.phases.harvest.coco.watering.description',
             },
             fertilizing: {
               interval: 0,
-              description: 'lettuce.phases.harvest.coco.fertilizing.description',
+              description: 'lettuce.environments.indoor.phases.harvest.coco.fertilizing.description',
             },
           },
         },
@@ -165,25 +165,25 @@ export const lettuce = {
         germination: {
           start: '03-15',
           end: '05-15',
-          description: 'lettuce.phases.germination.description',
-          care: 'lettuce.phases.germination.care',
+          description: 'lettuce.environments.outdoor.phases.germination.description',
+          care: 'lettuce.environments.outdoor.phases.germination.care',
           editable: false,
         },
         leafing: {
-          description: 'lettuce.phases.leafing.description',
-          care: 'lettuce.phases.leafing.care',
+          description: 'lettuce.environments.outdoor.phases.leafing.description',
+          care: 'lettuce.environments.outdoor.phases.leafing.care',
           editable: false,
         },
         heading: {
-          description: 'lettuce.phases.heading.description',
-          care: 'lettuce.phases.heading.care',
+          description: 'lettuce.environments.outdoor.phases.heading.description',
+          care: 'lettuce.environments.outdoor.phases.heading.care',
           editable: false,
         },
         harvest: {
           start: '05-01',
           end: '07-15',
-          description: 'lettuce.phases.harvest.description',
-          care: 'lettuce.phases.harvest.care',
+          description: 'lettuce.environments.outdoor.phases.harvest.description',
+          care: 'lettuce.environments.outdoor.phases.harvest.care',
           editable: true,
         },
       },
@@ -218,26 +218,26 @@ export const lettuce = {
       phases: {
         germination: {
           days: 5,
-          description: 'lettuce.phases.germination.description',
-          care: 'lettuce.phases.germination.care',
+          description: 'lettuce.environments.greenhouse.phases.germination.description',
+          care: 'lettuce.environments.greenhouse.phases.germination.care',
           editable: true,
         },
         leafing: {
           days: 20,
-          description: 'lettuce.phases.leafing.description',
-          care: 'lettuce.phases.leafing.care',
+          description: 'lettuce.environments.greenhouse.phases.leafing.description',
+          care: 'lettuce.environments.greenhouse.phases.leafing.care',
           editable: true,
         },
         heading: {
           days: 25,
-          description: 'lettuce.phases.heading.description',
-          care: 'lettuce.phases.heading.care',
+          description: 'lettuce.environments.greenhouse.phases.heading.description',
+          care: 'lettuce.environments.greenhouse.phases.heading.care',
           editable: true,
         },
         harvest: {
           days: 10,
-          description: 'lettuce.phases.harvest.description',
-          care: 'lettuce.phases.harvest.care',
+          description: 'lettuce.environments.greenhouse.phases.harvest.description',
+          care: 'lettuce.environments.greenhouse.phases.harvest.care',
           editable: true,
         },
       },

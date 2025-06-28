@@ -16,121 +16,121 @@ export const oregano = {
       phases: {
         germination: {
           days: 10,
-          description: 'oregano.indoor.germination.description',
-          care: 'oregano.indoor.germination.care',
+          description: 'oregano.environments.indoor.phases.germination.description',
+          care: 'oregano.environments.indoor.phases.germination.care',
           editable: true,
           soil: {
             watering: {
               interval: 1,
-              description: 'oregano.indoor.germination.soil.watering',
+              description: 'oregano.environments.indoor.phases.germination.soil.watering',
             },
             fertilizing: {
               interval: 0,
-              description: 'oregano.indoor.germination.soil.fertilizing',
+              description: 'oregano.environments.indoor.phases.germination.soil.fertilizing',
             },
           },
           hydro: {
             watering: {
               interval: 0,
-              description: 'oregano.indoor.germination.hydro.watering',
+              description: 'oregano.environments.indoor.phases.germination.hydro.watering',
             },
             fertilizing: {
               interval: 0,
-              description: 'oregano.indoor.germination.hydro.fertilizing',
+              description: 'oregano.environments.indoor.phases.germination.hydro.fertilizing',
             },
           },
           coco: {
             watering: {
               interval: 1,
-              description: 'oregano.indoor.germination.coco.watering',
+              description: 'oregano.environments.indoor.phases.germination.coco.watering',
             },
             fertilizing: {
               interval: 0,
-              description: 'oregano.indoor.germination.coco.fertilizing',
+              description: 'oregano.environments.indoor.phases.germination.coco.fertilizing',
             },
           },
         },
         seedling: {
           days: 21,
-          description: 'oregano.indoor.seedling.description',
-          care: 'oregano.indoor.seedling.care',
+          description: 'oregano.environments.indoor.phases.seedling.description',
+          care: 'oregano.environments.indoor.phases.seedling.care',
           editable: true,
           soil: {
             watering: {
               interval: 2,
-              description: 'oregano.indoor.seedling.soil.watering',
+              description: 'oregano.environments.indoor.phases.seedling.soil.watering',
             },
             fertilizing: {
               interval: 0,
-              description: 'oregano.indoor.seedling.soil.fertilizing',
+              description: 'oregano.environments.indoor.phases.seedling.soil.fertilizing',
             },
           },
           hydro: {
-            watering: { interval: 0, description: 'oregano.indoor.seedling.hydro.watering' },
+            watering: { interval: 0, description: 'oregano.environments.indoor.phases.seedling.hydro.watering' },
             fertilizing: {
               interval: 7,
-              description: 'oregano.indoor.seedling.hydro.fertilizing',
+              description: 'oregano.environments.indoor.phases.seedling.hydro.fertilizing',
             },
           },
           coco: {
-            watering: { interval: 1, description: 'oregano.indoor.seedling.coco.watering' },
-            fertilizing: { interval: 7, description: 'oregano.indoor.seedling.coco.fertilizing' },
+            watering: { interval: 1, description: 'oregano.environments.indoor.phases.seedling.coco.watering' },
+            fertilizing: { interval: 7, description: 'oregano.environments.indoor.phases.seedling.coco.fertilizing' },
           },
         },
         vegetative: {
           days: 30,
-          description: 'oregano.indoor.vegetative.description',
-          care: 'oregano.indoor.vegetative.care',
+          description: 'oregano.environments.indoor.phases.vegetative.description',
+          care: 'oregano.environments.indoor.phases.vegetative.care',
           editable: true,
           soil: {
             watering: {
               interval: 3,
-              description: 'oregano.indoor.vegetative.soil.watering',
+              description: 'oregano.environments.indoor.phases.vegetative.soil.watering',
             },
             fertilizing: {
               interval: 14,
-              description: 'oregano.indoor.vegetative.soil.fertilizing',
+              description: 'oregano.environments.indoor.phases.vegetative.soil.fertilizing',
             },
           },
           hydro: {
-            watering: { interval: 0, description: 'oregano.indoor.vegetative.hydro.watering' },
+            watering: { interval: 0, description: 'oregano.environments.indoor.phases.vegetative.hydro.watering' },
             fertilizing: {
               interval: 14,
-              description: 'oregano.indoor.vegetative.hydro.fertilizing',
+              description: 'oregano.environments.indoor.phases.vegetative.hydro.fertilizing',
             },
           },
           coco: {
-            watering: { interval: 1, description: 'oregano.indoor.vegetative.coco.watering' },
+            watering: { interval: 1, description: 'oregano.environments.indoor.phases.vegetative.coco.watering' },
             fertilizing: {
               interval: 14,
-              description: 'oregano.indoor.vegetative.coco.fertilizing',
+              description: 'oregano.environments.indoor.phases.vegetative.coco.fertilizing',
             },
           },
         },
         harvest: {
           days: 60,
-          description: 'oregano.indoor.harvest.description',
-          care: 'oregano.indoor.harvest.care',
+          description: 'oregano.environments.indoor.phases.harvest.description',
+          care: 'oregano.environments.indoor.phases.harvest.care',
           editable: true,
           soil: {
-            watering: { interval: 3, description: 'oregano.indoor.harvest.soil.watering' },
+            watering: { interval: 3, description: 'oregano.environments.indoor.phases.harvest.soil.watering' },
             fertilizing: {
               interval: 14,
-              description: 'oregano.indoor.harvest.soil.fertilizing',
+              description: 'oregano.environments.indoor.phases.harvest.soil.fertilizing',
             },
           },
           hydro: {
-            watering: { interval: 0, description: 'oregano.indoor.harvest.hydro.watering' },
+            watering: { interval: 0, description: 'oregano.environments.indoor.phases.harvest.hydro.watering' },
             fertilizing: {
               interval: 14,
-              description: 'oregano.indoor.harvest.hydro.fertilizing',
+              description: 'oregano.environments.indoor.phases.harvest.hydro.fertilizing',
             },
           },
           coco: {
-            watering: { interval: 1, description: 'oregano.indoor.harvest.coco.watering' },
+            watering: { interval: 1, description: 'oregano.environments.indoor.phases.harvest.coco.watering' },
             fertilizing: {
               interval: 14,
-              description: 'oregano.indoor.harvest.coco.fertilizing',
+              description: 'oregano.environments.indoor.phases.harvest.coco.fertilizing',
             },
           },
         },
@@ -140,121 +140,121 @@ export const oregano = {
       phases: {
         germination: {
           days: 10,
-          description: 'oregano.outdoor.germination.description',
-          care: 'oregano.outdoor.germination.care',
+          description: 'oregano.environments.outdoor.phases.germination.description',
+          care: 'oregano.environments.outdoor.phases.germination.care',
           editable: false,
           soil: {
             watering: {
               interval: 1,
-              description: 'oregano.outdoor.germination.soil.watering',
+              description: 'oregano.environments.outdoor.phases.germination.soil.watering',
             },
             fertilizing: {
               interval: 0,
-              description: 'oregano.outdoor.germination.soil.fertilizing',
+              description: 'oregano.environments.outdoor.phases.germination.soil.fertilizing',
             },
           },
           hydro: {
             watering: {
               interval: 0,
-              description: 'oregano.outdoor.germination.hydro.watering',
+              description: 'oregano.environments.outdoor.phases.germination.hydro.watering',
             },
             fertilizing: {
               interval: 0,
-              description: 'oregano.outdoor.germination.hydro.fertilizing',
+              description: 'oregano.environments.outdoor.phases.germination.hydro.fertilizing',
             },
           },
           coco: {
             watering: {
               interval: 1,
-              description: 'oregano.outdoor.germination.coco.watering',
+              description: 'oregano.environments.outdoor.phases.germination.coco.watering',
             },
             fertilizing: {
               interval: 0,
-              description: 'oregano.outdoor.germination.coco.fertilizing',
+              description: 'oregano.environments.outdoor.phases.germination.coco.fertilizing',
             },
           },
         },
         seedling: {
           days: 21,
-          description: 'oregano.outdoor.seedling.description',
-          care: 'oregano.outdoor.seedling.care',
+          description: 'oregano.environments.outdoor.phases.seedling.description',
+          care: 'oregano.environments.outdoor.phases.seedling.care',
           editable: false,
           soil: {
             watering: {
               interval: 2,
-              description: 'oregano.outdoor.seedling.soil.watering',
+              description: 'oregano.environments.outdoor.phases.seedling.soil.watering',
             },
             fertilizing: {
               interval: 0,
-              description: 'oregano.outdoor.seedling.soil.fertilizing',
+              description: 'oregano.environments.outdoor.phases.seedling.soil.fertilizing',
             },
           },
           hydro: {
-            watering: { interval: 0, description: 'oregano.outdoor.seedling.hydro.watering' },
+            watering: { interval: 0, description: 'oregano.environments.outdoor.phases.seedling.hydro.watering' },
             fertilizing: {
               interval: 7,
-              description: 'oregano.outdoor.seedling.hydro.fertilizing',
+              description: 'oregano.environments.outdoor.phases.seedling.hydro.fertilizing',
             },
           },
           coco: {
-            watering: { interval: 1, description: 'oregano.outdoor.seedling.coco.watering' },
-            fertilizing: { interval: 7, description: 'oregano.outdoor.seedling.coco.fertilizing' },
+            watering: { interval: 1, description: 'oregano.environments.outdoor.phases.seedling.coco.watering' },
+            fertilizing: { interval: 7, description: 'oregano.environments.outdoor.phases.seedling.coco.fertilizing' },
           },
         },
         vegetative: {
           days: 30,
-          description: 'oregano.outdoor.vegetative.description',
-          care: 'oregano.outdoor.vegetative.care',
+          description: 'oregano.environments.outdoor.phases.vegetative.description',
+          care: 'oregano.environments.outdoor.phases.vegetative.care',
           editable: false,
           soil: {
             watering: {
               interval: 3,
-              description: 'oregano.outdoor.vegetative.soil.watering',
+              description: 'oregano.environments.outdoor.phases.vegetative.soil.watering',
             },
             fertilizing: {
               interval: 14,
-              description: 'oregano.outdoor.vegetative.soil.fertilizing',
+              description: 'oregano.environments.outdoor.phases.vegetative.soil.fertilizing',
             },
           },
           hydro: {
-            watering: { interval: 0, description: 'oregano.outdoor.vegetative.hydro.watering' },
+            watering: { interval: 0, description: 'oregano.environments.outdoor.phases.vegetative.hydro.watering' },
             fertilizing: {
               interval: 14,
-              description: 'oregano.outdoor.vegetative.hydro.fertilizing',
+              description: 'oregano.environments.outdoor.phases.vegetative.hydro.fertilizing',
             },
           },
           coco: {
-            watering: { interval: 1, description: 'oregano.outdoor.vegetative.coco.watering' },
+            watering: { interval: 1, description: 'oregano.environments.outdoor.phases.vegetative.coco.watering' },
             fertilizing: {
               interval: 14,
-              description: 'oregano.outdoor.vegetative.coco.fertilizing',
+              description: 'oregano.environments.outdoor.phases.vegetative.coco.fertilizing',
             },
           },
         },
         harvest: {
           days: 60,
-          description: 'oregano.outdoor.harvest.description',
-          care: 'oregano.outdoor.harvest.care',
+          description: 'oregano.environments.outdoor.phases.harvest.description',
+          care: 'oregano.environments.outdoor.phases.harvest.care',
           editable: true,
           soil: {
-            watering: { interval: 3, description: 'oregano.outdoor.harvest.soil.watering' },
+            watering: { interval: 3, description: 'oregano.environments.outdoor.phases.harvest.soil.watering' },
             fertilizing: {
               interval: 14,
-              description: 'oregano.outdoor.harvest.soil.fertilizing',
+              description: 'oregano.environments.outdoor.phases.harvest.soil.fertilizing',
             },
           },
           hydro: {
-            watering: { interval: 0, description: 'oregano.outdoor.harvest.hydro.watering' },
+            watering: { interval: 0, description: 'oregano.environments.outdoor.phases.harvest.hydro.watering' },
             fertilizing: {
               interval: 14,
-              description: 'oregano.outdoor.harvest.hydro.fertilizing',
+              description: 'oregano.environments.outdoor.phases.harvest.hydro.fertilizing',
             },
           },
           coco: {
-            watering: { interval: 1, description: 'oregano.outdoor.harvest.coco.watering' },
+            watering: { interval: 1, description: 'oregano.environments.outdoor.phases.harvest.coco.watering' },
             fertilizing: {
               interval: 14,
-              description: 'oregano.outdoor.harvest.coco.fertilizing',
+              description: 'oregano.environments.outdoor.phases.harvest.coco.fertilizing',
             },
           },
         },
@@ -264,24 +264,24 @@ export const oregano = {
           plantingWindow: {
             start: '04-01',
             end: '06-15',
-            description: 'oregano.outdoor.seasonalTiming.temperate_north.plantingWindow.description',
+            description: 'oregano.environments.outdoor.seasonalTiming.temperate_north.plantingWindow.description',
           },
           harvestWindow: {
             start: '06-01',
             end: '10-31',
-            description: 'oregano.outdoor.seasonalTiming.temperate_north.harvestWindow.description',
+            description: 'oregano.environments.outdoor.seasonalTiming.temperate_north.harvestWindow.description',
           },
         },
         mediterranean: {
           plantingWindow: {
             start: '03-01',
             end: '07-01',
-            description: 'oregano.outdoor.seasonalTiming.mediterranean.plantingWindow.description',
+            description: 'oregano.environments.outdoor.seasonalTiming.mediterranean.plantingWindow.description',
           },
           harvestWindow: {
             start: '05-01',
             end: '11-30',
-            description: 'oregano.outdoor.seasonalTiming.mediterranean.harvestWindow.description',
+            description: 'oregano.environments.outdoor.seasonalTiming.mediterranean.harvestWindow.description',
           },
         },
       },
@@ -290,121 +290,121 @@ export const oregano = {
       phases: {
         germination: {
           days: 10,
-          description: 'oregano.greenhouse.germination.description',
-          care: 'oregano.greenhouse.germination.care',
+          description: 'oregano.environments.greenhouse.phases.germination.description',
+          care: 'oregano.environments.greenhouse.phases.germination.care',
           editable: true,
           soil: {
             watering: {
               interval: 1,
-              description: 'oregano.greenhouse.germination.soil.watering',
+              description: 'oregano.environments.greenhouse.phases.germination.soil.watering',
             },
             fertilizing: {
               interval: 0,
-              description: 'oregano.greenhouse.germination.soil.fertilizing',
+              description: 'oregano.environments.greenhouse.phases.germination.soil.fertilizing',
             },
           },
           hydro: {
             watering: {
               interval: 0,
-              description: 'oregano.greenhouse.germination.hydro.watering',
+              description: 'oregano.environments.greenhouse.phases.germination.hydro.watering',
             },
             fertilizing: {
               interval: 0,
-              description: 'oregano.greenhouse.germination.hydro.fertilizing',
+              description: 'oregano.environments.greenhouse.phases.germination.hydro.fertilizing',
             },
           },
           coco: {
             watering: {
               interval: 1,
-              description: 'oregano.greenhouse.germination.coco.watering',
+              description: 'oregano.environments.greenhouse.phases.germination.coco.watering',
             },
             fertilizing: {
               interval: 0,
-              description: 'oregano.greenhouse.germination.coco.fertilizing',
+              description: 'oregano.environments.greenhouse.phases.germination.coco.fertilizing',
             },
           },
         },
         seedling: {
           days: 21,
-          description: 'oregano.greenhouse.seedling.description',
-          care: 'oregano.greenhouse.seedling.care',
+          description: 'oregano.environments.greenhouse.phases.seedling.description',
+          care: 'oregano.environments.greenhouse.phases.seedling.care',
           editable: true,
           soil: {
             watering: {
               interval: 2,
-              description: 'oregano.greenhouse.seedling.soil.watering',
+              description: 'oregano.environments.greenhouse.phases.seedling.soil.watering',
             },
             fertilizing: {
               interval: 0,
-              description: 'oregano.greenhouse.seedling.soil.fertilizing',
+              description: 'oregano.environments.greenhouse.phases.seedling.soil.fertilizing',
             },
           },
           hydro: {
-            watering: { interval: 0, description: 'oregano.greenhouse.seedling.hydro.watering' },
+            watering: { interval: 0, description: 'oregano.environments.greenhouse.phases.seedling.hydro.watering' },
             fertilizing: {
               interval: 7,
-              description: 'oregano.greenhouse.seedling.hydro.fertilizing',
+              description: 'oregano.environments.greenhouse.phases.seedling.hydro.fertilizing',
             },
           },
           coco: {
-            watering: { interval: 1, description: 'oregano.greenhouse.seedling.coco.watering' },
-            fertilizing: { interval: 7, description: 'oregano.greenhouse.seedling.coco.fertilizing' },
+            watering: { interval: 1, description: 'oregano.environments.greenhouse.phases.seedling.coco.watering' },
+            fertilizing: { interval: 7, description: 'oregano.environments.greenhouse.phases.seedling.coco.fertilizing' },
           },
         },
         vegetative: {
           days: 30,
-          description: 'oregano.greenhouse.vegetative.description',
-          care: 'oregano.greenhouse.vegetative.care',
+          description: 'oregano.environments.greenhouse.phases.vegetative.description',
+          care: 'oregano.environments.greenhouse.phases.vegetative.care',
           editable: true,
           soil: {
             watering: {
               interval: 3,
-              description: 'oregano.greenhouse.vegetative.soil.watering',
+              description: 'oregano.environments.greenhouse.phases.vegetative.soil.watering',
             },
             fertilizing: {
               interval: 14,
-              description: 'oregano.greenhouse.vegetative.soil.fertilizing',
+              description: 'oregano.environments.greenhouse.phases.vegetative.soil.fertilizing',
             },
           },
           hydro: {
-            watering: { interval: 0, description: 'oregano.greenhouse.vegetative.hydro.watering' },
+            watering: { interval: 0, description: 'oregano.environments.greenhouse.phases.vegetative.hydro.watering' },
             fertilizing: {
               interval: 14,
-              description: 'oregano.greenhouse.vegetative.hydro.fertilizing',
+              description: 'oregano.environments.greenhouse.phases.vegetative.hydro.fertilizing',
             },
           },
           coco: {
-            watering: { interval: 1, description: 'oregano.greenhouse.vegetative.coco.watering' },
+            watering: { interval: 1, description: 'oregano.environments.greenhouse.phases.vegetative.coco.watering' },
             fertilizing: {
               interval: 14,
-              description: 'oregano.greenhouse.vegetative.coco.fertilizing',
+              description: 'oregano.environments.greenhouse.phases.vegetative.coco.fertilizing',
             },
           },
         },
         harvest: {
           days: 60,
-          description: 'oregano.greenhouse.harvest.description',
-          care: 'oregano.greenhouse.harvest.care',
+          description: 'oregano.environments.greenhouse.phases.harvest.description',
+          care: 'oregano.environments.greenhouse.phases.harvest.care',
           editable: true,
           soil: {
-            watering: { interval: 3, description: 'oregano.greenhouse.harvest.soil.watering' },
+            watering: { interval: 3, description: 'oregano.environments.greenhouse.phases.harvest.soil.watering' },
             fertilizing: {
               interval: 14,
-              description: 'oregano.greenhouse.harvest.soil.fertilizing',
+              description: 'oregano.environments.greenhouse.phases.harvest.soil.fertilizing',
             },
           },
           hydro: {
-            watering: { interval: 0, description: 'oregano.greenhouse.harvest.hydro.watering' },
+            watering: { interval: 0, description: 'oregano.environments.greenhouse.phases.harvest.hydro.watering' },
             fertilizing: {
               interval: 14,
-              description: 'oregano.greenhouse.harvest.hydro.fertilizing',
+              description: 'oregano.environments.greenhouse.phases.harvest.hydro.fertilizing',
             },
           },
           coco: {
-            watering: { interval: 1, description: 'oregano.greenhouse.harvest.coco.watering' },
+            watering: { interval: 1, description: 'oregano.environments.greenhouse.phases.harvest.coco.watering' },
             fertilizing: {
               interval: 14,
-              description: 'oregano.greenhouse.harvest.coco.fertilizing',
+              description: 'oregano.environments.greenhouse.phases.harvest.coco.fertilizing',
             },
           },
         },
