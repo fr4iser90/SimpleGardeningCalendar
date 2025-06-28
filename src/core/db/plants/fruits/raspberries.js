@@ -199,7 +199,8 @@ export const raspberries = {
     outdoor: {
       phases: {
         establishment: {
-          days: 60,
+          start: '03-15',
+          end: '05-15',
           description: 'Root establishment',
           care: 'Remove flowers first year, focus on root development',
           editable: false,
@@ -235,7 +236,8 @@ export const raspberries = {
           },
         },
         vegetative: {
-          days: 90,
+          start: '05-16',
+          end: '06-14',
           description: 'Cane growth and development',
           care: 'Train canes to trellis, remove weak growth',
           editable: false,
@@ -271,7 +273,8 @@ export const raspberries = {
           },
         },
         flowering: {
-          days: 21,
+          start: '06-15',
+          end: '07-05',
           description: 'Flower development',
           care: 'Protect flowers from late frost',
           editable: true,
@@ -307,7 +310,8 @@ export const raspberries = {
           },
         },
         fruiting: {
-          days: 35,
+          start: '07-06',
+          end: '08-10',
           description: 'Berry development',
           care: 'Regular harvest, protect from birds',
           editable: true,
@@ -343,7 +347,8 @@ export const raspberries = {
           },
         },
         dormancy: {
-          days: 120,
+          start: '10-01',
+          end: '03-14',
           description: 'Winter rest period',
           care: 'Prune old canes, mulch for winter protection',
           editable: false,

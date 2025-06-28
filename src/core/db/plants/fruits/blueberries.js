@@ -199,7 +199,8 @@ export const blueberries = {
     outdoor: {
       phases: {
         establishment: {
-          days: 90,
+          start: '03-15',
+          end: '06-15',
           description: 'Root establishment',
           care: 'Remove flowers first year, focus on root development',
           editable: false,
@@ -235,7 +236,8 @@ export const blueberries = {
           },
         },
         vegetative: {
-          days: 120,
+          start: '06-16',
+          end: '07-14',
           description: 'Bush growth and development',
           care: 'Shape pruning, remove weak growth',
           editable: false,
@@ -271,7 +273,8 @@ export const blueberries = {
           },
         },
         flowering: {
-          days: 21,
+          start: '07-15',
+          end: '08-05',
           description: 'Flower development',
           care: 'Protect flowers from late frost',
           editable: true,
@@ -307,7 +310,8 @@ export const blueberries = {
           },
         },
         fruiting: {
-          days: 45,
+          start: '08-06',
+          end: '09-20',
           description: 'Berry production',
           care: 'Regular watering and feeding during fruiting',
           editable: true,
@@ -343,7 +347,8 @@ export const blueberries = {
           },
         },
         dormancy: {
-          days: 120,
+          start: '10-01',
+          end: '03-14',
           description: 'Winter rest period',
           care: 'Prune old wood, mulch for winter protection',
           editable: false,

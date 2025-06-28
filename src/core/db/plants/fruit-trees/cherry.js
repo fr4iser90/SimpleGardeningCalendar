@@ -13,7 +13,8 @@ export const cherry_tree = {
     outdoor: {
       phases: {
         establishment: {
-          days: 365,
+          start: '03-01',
+          end: '02-28',
           description: 'First year establishment',
           care: 'Regular watering, protection from birds',
           editable: false,
@@ -49,7 +50,8 @@ export const cherry_tree = {
           },
         },
         juvenile: {
-          days: 1095,
+          start: '03-01',
+          end: '02-28',
           description: 'Years 2-4 development',
           care: 'Training pruning, disease prevention',
           editable: false,
@@ -85,7 +87,8 @@ export const cherry_tree = {
           },
         },
         productive: {
-          days: 5475,
+          start: '03-01',
+          end: '02-28',
           description: 'Productive years 5-20',
           care: 'Harvest timing, bird protection, disease management',
           editable: false,
@@ -121,7 +124,8 @@ export const cherry_tree = {
           },
         },
         dormancy: {
-          days: 120,
+          start: '11-01',
+          end: '02-28',
           description: 'Winter dormancy',
           care: 'Dormant pruning, trunk protection',
           editable: false,

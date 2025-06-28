@@ -163,7 +163,8 @@ export const lavender = {
     outdoor: {
       phases: {
         establishment: {
-          days: 60,
+          start: '03-15',
+          end: '05-15',
           description: 'Root establishment',
           care: 'Remove flowers first year, focus on root development',
           editable: false,
@@ -199,7 +200,6 @@ export const lavender = {
           },
         },
         vegetative: {
-          days: 90,
           description: 'Bush growth and development',
           care: 'Shape pruning, remove weak growth',
           editable: false,
@@ -235,7 +235,8 @@ export const lavender = {
           },
         },
         flowering: {
-          days: 30,
+          start: '06-15',
+          end: '08-01',
           description: 'Flower spike development',
           care: 'Harvest flowers for drying, deadhead spent blooms',
           editable: true,
@@ -271,7 +272,8 @@ export const lavender = {
           },
         },
         dormancy: {
-          days: 120,
+          start: '10-01',
+          end: '03-14',
           description: 'Winter rest period',
           care: 'Prune old wood, mulch for winter protection',
           editable: false,

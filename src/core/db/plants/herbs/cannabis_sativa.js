@@ -227,7 +227,8 @@ export const cannabis_sativa = {
     outdoor: {
       phases: {
         germination: {
-          days: 3,
+          start: '04-15',
+          end: '04-18',
           description: 'Seed sprouting',
           care: 'Keep seeds warm and moist, protect from direct sun',
           editable: false,
@@ -263,7 +264,8 @@ export const cannabis_sativa = {
           },
         },
         seedling: {
-          days: 21,
+          start: '04-19',
+          end: '05-10',
           description: 'Establishing outdoors',
           care: 'Gradual sun exposure, protect from wind and pests',
           editable: false,
@@ -293,7 +295,8 @@ export const cannabis_sativa = {
           },
         },
         vegetative: {
-          days: 120,
+          start: '05-11',
+          end: '08-31',
           description: 'Extended natural light vegetative growth',
           care: 'Natural sunlight, train for size management, heavy feeding',
           editable: false,
@@ -326,7 +329,8 @@ export const cannabis_sativa = {
           },
         },
         preflower: {
-          days: 14,
+          start: '09-01',
+          end: '09-14',
           description: 'Natural photoperiod trigger',
           care: 'Occurs naturally as days shorten, identify males',
           editable: false,
@@ -356,7 +360,8 @@ export const cannabis_sativa = {
           },
         },
         flowering: {
-          days: 84,
+          start: '09-15',
+          end: '12-08',
           description:
             'Extended outdoor flowering (8-16 weeks depending on strain)',
           care: 'Natural light cycle, weather protection, pest monitoring',
@@ -390,7 +395,8 @@ export const cannabis_sativa = {
           },
         },
         harvest: {
-          days: 14,
+          start: '12-09',
+          end: '12-23',
           description: 'Outdoor harvest timing',
           care: 'Weather dependent, check trichomes, quick dry if rain',
           editable: false,

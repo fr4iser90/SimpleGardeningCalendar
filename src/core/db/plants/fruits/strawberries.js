@@ -199,7 +199,8 @@ export const strawberries = {
     outdoor: {
       phases: {
         establishment: {
-          days: 30,
+          start: '03-15',
+          end: '04-15',
           description: 'Root establishment',
           care: 'Keep soil moist, remove flowers first year',
           editable: false,
@@ -235,7 +236,8 @@ export const strawberries = {
           },
         },
         vegetative: {
-          days: 60,
+          start: '04-16',
+          end: '06-15',
           description: 'Runner and leaf production',
           care: 'Allow runners to establish new plants',
           editable: false,
@@ -271,7 +273,8 @@ export const strawberries = {
           },
         },
         flowering: {
-          days: 21,
+          start: '06-16',
+          end: '07-07',
           description: 'Flower development',
           care: 'Protect flowers from late frost',
           editable: true,
@@ -307,7 +310,8 @@ export const strawberries = {
           },
         },
         fruiting: {
-          days: 30,
+          start: '07-08',
+          end: '08-07',
           description: 'Berry production',
           care: 'Regular watering and feeding during fruiting',
           editable: true,
@@ -343,7 +347,8 @@ export const strawberries = {
           },
         },
         dormancy: {
-          days: 120,
+          start: '10-01',
+          end: '03-14',
           description: 'Winter rest period',
           care: 'Mulch for winter protection',
           editable: false,

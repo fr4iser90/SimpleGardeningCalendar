@@ -13,7 +13,8 @@ export const apple_tree = {
     outdoor: {
       phases: {
         establishment: {
-          days: 365,
+          start: '03-01',
+          end: '02-28',
           description: 'First year root establishment',
           care: 'Regular watering, weed control, light pruning',
           editable: false,
@@ -51,7 +52,8 @@ export const apple_tree = {
           },
         },
         juvenile: {
-          days: 730,
+          start: '03-01',
+          end: '02-28',
           description: 'Years 2-3 growth',
           care: 'Shape pruning, continued care, no fruit expected',
           editable: false,
@@ -88,7 +90,8 @@ export const apple_tree = {
           },
         },
         productive: {
-          days: 7300,
+          start: '03-01',
+          end: '02-28',
           description: 'Productive years 4-20+',
           care: 'Annual pruning, pest management, harvest timing',
           editable: false,
@@ -126,7 +129,8 @@ export const apple_tree = {
           },
         },
         dormancy: {
-          days: 120,
+          start: '11-01',
+          end: '02-28',
           description: 'Winter dormancy period',
           care: 'Dormant season pruning, pest oil application',
           editable: false,

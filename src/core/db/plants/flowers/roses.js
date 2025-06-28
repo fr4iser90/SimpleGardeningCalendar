@@ -163,7 +163,8 @@ export const roses = {
     outdoor: {
       phases: {
         establishment: {
-          days: 60,
+          start: '03-15',
+          end: '05-15',
           description: 'Root establishment',
           care: 'Remove flowers first year, focus on root development',
           editable: false,
@@ -199,7 +200,8 @@ export const roses = {
           },
         },
         vegetative: {
-          days: 90,
+          start: '05-16',
+          end: '06-14',
           description: 'Bush growth and development',
           care: 'Shape pruning, remove weak growth',
           editable: false,
@@ -235,7 +237,8 @@ export const roses = {
           },
         },
         flowering: {
-          days: 21,
+          start: '06-15',
+          end: '09-30',
           description: 'Flower development',
           care: 'Deadhead spent blooms, protect from pests',
           editable: true,
@@ -271,7 +274,8 @@ export const roses = {
           },
         },
         dormancy: {
-          days: 120,
+          start: '10-01',
+          end: '03-14',
           description: 'Winter rest period',
           care: 'Prune old wood, mulch for winter protection',
           editable: false,

@@ -165,7 +165,8 @@ export const sunflowers = {
     outdoor: {
       phases: {
         germination: {
-          days: 7,
+          start: '04-15',
+          end: '04-22',
           description: 'Seed sprouting',
           care: 'Keep warm and moist',
           editable: false,
@@ -201,7 +202,8 @@ export const sunflowers = {
           },
         },
         seedling: {
-          days: 14,
+          start: '04-23',
+          end: '05-07',
           description: 'First true leaves',
           care: 'Provide adequate light',
           editable: false,
@@ -228,7 +230,8 @@ export const sunflowers = {
           },
         },
         vegetative: {
-          days: 30,
+          start: '05-08',
+          end: '06-07',
           description: 'Rapid growth phase',
           care: 'Support tall stems, provide adequate light',
           editable: false,
@@ -258,7 +261,8 @@ export const sunflowers = {
           },
         },
         flowering: {
-          days: 21,
+          start: '06-08',
+          end: '06-29',
           description: 'Flower head development',
           care: 'Support heavy flower heads, protect from pests',
           editable: true,
@@ -285,7 +289,8 @@ export const sunflowers = {
           },
         },
         seed_development: {
-          days: 30,
+          start: '06-30',
+          end: '07-30',
           description: 'Seed maturation',
           care: 'Protect from birds, allow seeds to mature',
           editable: true,
