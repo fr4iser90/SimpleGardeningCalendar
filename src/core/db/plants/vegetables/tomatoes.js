@@ -16,217 +16,217 @@ export const tomatoes = {
       phases: {
         germination: {
           days: 7,
-          description: 'tomatoes.phases.germination.description',
-          care: 'tomatoes.phases.germination.care',
+          description: 'tomatoes.environments.indoor.phases.germination.description',
+          care: 'tomatoes.environments.indoor.phases.germination.care',
           editable: true,
           soil: {
             watering: {
               interval: 1,
-              description: 'tomatoes.phases.germination.soil.watering.description',
+              description: 'tomatoes.environments.indoor.phases.germination.soil.watering.description',
             },
             fertilizing: {
               interval: 0,
-              description: 'tomatoes.phases.germination.soil.fertilizing.description',
+              description: 'tomatoes.environments.indoor.phases.germination.soil.fertilizing.description',
             },
           },
           hydro: {
             watering: {
               interval: 0,
-              description: 'tomatoes.phases.germination.hydro.watering.description',
+              description: 'tomatoes.environments.indoor.phases.germination.hydro.watering.description',
             },
             fertilizing: {
               interval: 0,
-              description: 'tomatoes.phases.germination.hydro.fertilizing.description',
+              description: 'tomatoes.environments.indoor.phases.germination.hydro.fertilizing.description',
             },
           },
           coco: {
             watering: {
               interval: 1,
-              description: 'tomatoes.phases.germination.coco.watering.description',
+              description: 'tomatoes.environments.indoor.phases.germination.coco.watering.description',
             },
             fertilizing: {
               interval: 0,
-              description: 'tomatoes.phases.germination.coco.fertilizing.description',
+              description: 'tomatoes.environments.indoor.phases.germination.coco.fertilizing.description',
             },
           },
         },
         seedling: {
           days: 21,
-          description: 'tomatoes.phases.seedling.description',
-          care: 'tomatoes.phases.seedling.care',
+          description: 'tomatoes.environments.indoor.phases.seedling.description',
+          care: 'tomatoes.environments.indoor.phases.seedling.care',
           editable: true,
           soil: {
             watering: {
               interval: 2,
-              description: 'tomatoes.phases.seedling.soil.watering.description',
+              description: 'tomatoes.environments.indoor.phases.seedling.soil.watering.description',
             },
             fertilizing: {
               interval: 7,
-              description: 'tomatoes.phases.seedling.soil.fertilizing.description',
+              description: 'tomatoes.environments.indoor.phases.seedling.soil.fertilizing.description',
             },
           },
           hydro: {
             watering: { 
               interval: 0, 
-              description: 'tomatoes.phases.seedling.hydro.watering.description' 
+              description: 'tomatoes.environments.indoor.phases.seedling.hydro.watering.description' 
             },
             fertilizing: {
               interval: 7,
-              description: 'tomatoes.phases.seedling.hydro.fertilizing.description',
+              description: 'tomatoes.environments.indoor.phases.seedling.hydro.fertilizing.description',
             },
           },
           coco: {
             watering: { 
               interval: 1, 
-              description: 'tomatoes.phases.seedling.coco.watering.description' 
+              description: 'tomatoes.environments.indoor.phases.seedling.coco.watering.description' 
             },
             fertilizing: {
               interval: 7,
-              description: 'tomatoes.phases.seedling.coco.fertilizing.description',
+              description: 'tomatoes.environments.indoor.phases.seedling.coco.fertilizing.description',
             },
           },
         },
         vegetative: {
           days: 28,
-          description: 'tomatoes.phases.vegetative.description',
-          care: 'tomatoes.phases.vegetative.care',
+          description: 'tomatoes.environments.indoor.phases.vegetative.description',
+          care: 'tomatoes.environments.indoor.phases.vegetative.care',
           editable: true,
           soil: {
             watering: {
               interval: 2,
-              description: 'tomatoes.phases.vegetative.soil.watering.description',
+              description: 'tomatoes.environments.indoor.phases.vegetative.soil.watering.description',
             },
             fertilizing: {
               interval: 14,
-              description: 'tomatoes.phases.vegetative.soil.fertilizing.description',
+              description: 'tomatoes.environments.indoor.phases.vegetative.soil.fertilizing.description',
             },
           },
           hydro: {
             watering: {
               interval: 0,
-              description: 'tomatoes.phases.vegetative.hydro.watering.description',
+              description: 'tomatoes.environments.indoor.phases.vegetative.hydro.watering.description',
             },
             fertilizing: {
               interval: 14,
-              description: 'tomatoes.phases.vegetative.hydro.fertilizing.description',
+              description: 'tomatoes.environments.indoor.phases.vegetative.hydro.fertilizing.description',
             },
           },
           coco: {
             watering: { 
               interval: 1, 
-              description: 'tomatoes.phases.vegetative.coco.watering.description' 
+              description: 'tomatoes.environments.indoor.phases.vegetative.coco.watering.description' 
             },
             fertilizing: {
               interval: 14,
-              description: 'tomatoes.phases.vegetative.coco.fertilizing.description',
+              description: 'tomatoes.environments.indoor.phases.vegetative.coco.fertilizing.description',
             },
           },
         },
         transplant: {
           days: 14,
-          description: 'tomatoes.phases.transplant.description',
-          care: 'tomatoes.phases.transplant.care',
+          description: 'tomatoes.environments.indoor.phases.transplant.description',
+          care: 'tomatoes.environments.indoor.phases.transplant.care',
           editable: true,
           soil: {
             watering: {
               interval: 2,
-              description: 'tomatoes.phases.transplant.soil.watering.description',
+              description: 'tomatoes.environments.indoor.phases.transplant.soil.watering.description',
             },
             fertilizing: {
               interval: 0,
-              description: 'tomatoes.phases.transplant.soil.fertilizing.description',
+              description: 'tomatoes.environments.indoor.phases.transplant.soil.fertilizing.description',
             },
           },
           hydro: {
             watering: {
               interval: 0,
-              description: 'tomatoes.phases.transplant.hydro.watering.description',
+              description: 'tomatoes.environments.indoor.phases.transplant.hydro.watering.description',
             },
             fertilizing: {
               interval: 0,
-              description: 'tomatoes.phases.transplant.hydro.fertilizing.description',
+              description: 'tomatoes.environments.indoor.phases.transplant.hydro.fertilizing.description',
             },
           },
           coco: {
             watering: { 
               interval: 1, 
-              description: 'tomatoes.phases.transplant.coco.watering.description' 
+              description: 'tomatoes.environments.indoor.phases.transplant.coco.watering.description' 
             },
             fertilizing: {
               interval: 0,
-              description: 'tomatoes.phases.transplant.coco.fertilizing.description',
+              description: 'tomatoes.environments.indoor.phases.transplant.coco.fertilizing.description',
             },
           },
         },
         flowering: {
           days: 20,
-          description: 'tomatoes.phases.flowering.description',
-          care: 'tomatoes.phases.flowering.care',
+          description: 'tomatoes.environments.indoor.phases.flowering.description',
+          care: 'tomatoes.environments.indoor.phases.flowering.care',
           editable: true,
           soil: {
             watering: {
               interval: 2,
-              description: 'tomatoes.phases.flowering.soil.watering.description',
+              description: 'tomatoes.environments.indoor.phases.flowering.soil.watering.description',
             },
             fertilizing: {
               interval: 14,
-              description: 'tomatoes.phases.flowering.soil.fertilizing.description',
+              description: 'tomatoes.environments.indoor.phases.flowering.soil.fertilizing.description',
             },
           },
           hydro: {
             watering: {
               interval: 0,
-              description: 'tomatoes.phases.flowering.hydro.watering.description',
+              description: 'tomatoes.environments.indoor.phases.flowering.hydro.watering.description',
             },
             fertilizing: {
               interval: 14,
-              description: 'tomatoes.phases.flowering.hydro.fertilizing.description',
+              description: 'tomatoes.environments.indoor.phases.flowering.hydro.fertilizing.description',
             },
           },
           coco: {
             watering: { 
               interval: 1, 
-              description: 'tomatoes.phases.flowering.coco.watering.description' 
+              description: 'tomatoes.environments.indoor.phases.flowering.coco.watering.description' 
             },
             fertilizing: {
               interval: 14,
-              description: 'tomatoes.phases.flowering.coco.fertilizing.description',
+              description: 'tomatoes.environments.indoor.phases.flowering.coco.fertilizing.description',
             },
           },
         },
         fruiting: {
           days: 45,
-          description: 'tomatoes.phases.fruiting.description',
-          care: 'tomatoes.phases.fruiting.care',
+          description: 'tomatoes.environments.indoor.phases.fruiting.description',
+          care: 'tomatoes.environments.indoor.phases.fruiting.care',
           editable: true,
           soil: {
             watering: {
               interval: 2,
-              description: 'tomatoes.phases.fruiting.soil.watering.description',
+              description: 'tomatoes.environments.indoor.phases.fruiting.soil.watering.description',
             },
             fertilizing: {
               interval: 14,
-              description: 'tomatoes.phases.fruiting.soil.fertilizing.description',
+              description: 'tomatoes.environments.indoor.phases.fruiting.soil.fertilizing.description',
             },
           },
           hydro: {
             watering: {
               interval: 0,
-              description: 'tomatoes.phases.fruiting.hydro.watering.description',
+              description: 'tomatoes.environments.indoor.phases.fruiting.hydro.watering.description',
             },
             fertilizing: {
               interval: 14,
-              description: 'tomatoes.phases.fruiting.hydro.fertilizing.description',
+              description: 'tomatoes.environments.indoor.phases.fruiting.hydro.fertilizing.description',
             },
           },
           coco: {
             watering: { 
               interval: 1, 
-              description: 'tomatoes.phases.fruiting.coco.watering.description' 
+              description: 'tomatoes.environments.indoor.phases.fruiting.coco.watering.description' 
             },
             fertilizing: {
               interval: 14,
-              description: 'tomatoes.phases.fruiting.coco.fertilizing.description',
+              description: 'tomatoes.environments.indoor.phases.fruiting.coco.fertilizing.description',
             },
           },
         },
@@ -236,217 +236,217 @@ export const tomatoes = {
       phases: {
         germination: {
           days: 7,
-          description: 'tomatoes.phases.germination.description',
-          care: 'tomatoes.phases.germination.care',
+          description: 'tomatoes.environments.outdoor.phases.germination.description',
+          care: 'tomatoes.environments.outdoor.phases.germination.care',
           editable: true,
           soil: {
             watering: {
               interval: 1,
-              description: 'tomatoes.phases.germination.soil.watering.description',
+              description: 'tomatoes.environments.outdoor.phases.germination.soil.watering.description',
             },
             fertilizing: {
               interval: 0,
-              description: 'tomatoes.phases.germination.soil.fertilizing.description',
+              description: 'tomatoes.environments.outdoor.phases.germination.soil.fertilizing.description',
             },
           },
           hydro: {
             watering: {
               interval: 0,
-              description: 'tomatoes.phases.germination.hydro.watering.description',
+              description: 'tomatoes.environments.outdoor.phases.germination.hydro.watering.description',
             },
             fertilizing: {
               interval: 0,
-              description: 'tomatoes.phases.germination.hydro.fertilizing.description',
+              description: 'tomatoes.environments.outdoor.phases.germination.hydro.fertilizing.description',
             },
           },
           coco: {
             watering: {
               interval: 1,
-              description: 'tomatoes.phases.germination.coco.watering.description',
+              description: 'tomatoes.environments.outdoor.phases.germination.coco.watering.description',
             },
             fertilizing: {
               interval: 0,
-              description: 'tomatoes.phases.germination.coco.fertilizing.description',
+              description: 'tomatoes.environments.outdoor.phases.germination.coco.fertilizing.description',
             },
           },
         },
         seedling: {
           days: 21,
-          description: 'tomatoes.phases.seedling.description',
-          care: 'tomatoes.phases.seedling.care',
+          description: 'tomatoes.environments.outdoor.phases.seedling.description',
+          care: 'tomatoes.environments.outdoor.phases.seedling.care',
           editable: true,
           soil: {
             watering: {
               interval: 2,
-              description: 'tomatoes.phases.seedling.soil.watering.description',
+              description: 'tomatoes.environments.outdoor.phases.seedling.soil.watering.description',
             },
             fertilizing: {
               interval: 7,
-              description: 'tomatoes.phases.seedling.soil.fertilizing.description',
+              description: 'tomatoes.environments.outdoor.phases.seedling.soil.fertilizing.description',
             },
           },
           hydro: {
             watering: { 
               interval: 0, 
-              description: 'tomatoes.phases.seedling.hydro.watering.description' 
+              description: 'tomatoes.environments.outdoor.phases.seedling.hydro.watering.description' 
             },
             fertilizing: {
               interval: 7,
-              description: 'tomatoes.phases.seedling.hydro.fertilizing.description',
+              description: 'tomatoes.environments.outdoor.phases.seedling.hydro.fertilizing.description',
             },
           },
           coco: {
             watering: { 
               interval: 1, 
-              description: 'tomatoes.phases.seedling.coco.watering.description' 
+              description: 'tomatoes.environments.outdoor.phases.seedling.coco.watering.description' 
             },
             fertilizing: {
               interval: 7,
-              description: 'tomatoes.phases.seedling.coco.fertilizing.description',
+              description: 'tomatoes.environments.outdoor.phases.seedling.coco.fertilizing.description',
             },
           },
         },
         vegetative: {
           days: 28,
-          description: 'tomatoes.phases.vegetative.description',
-          care: 'tomatoes.phases.vegetative.care',
+          description: 'tomatoes.environments.outdoor.phases.vegetative.description',
+          care: 'tomatoes.environments.outdoor.phases.vegetative.care',
           editable: true,
           soil: {
             watering: {
               interval: 2,
-              description: 'tomatoes.phases.vegetative.soil.watering.description',
+              description: 'tomatoes.environments.outdoor.phases.vegetative.soil.watering.description',
             },
             fertilizing: {
               interval: 14,
-              description: 'tomatoes.phases.vegetative.soil.fertilizing.description',
+              description: 'tomatoes.environments.outdoor.phases.vegetative.soil.fertilizing.description',
             },
           },
           hydro: {
             watering: {
               interval: 0,
-              description: 'tomatoes.phases.vegetative.hydro.watering.description',
+              description: 'tomatoes.environments.outdoor.phases.vegetative.hydro.watering.description',
             },
             fertilizing: {
               interval: 14,
-              description: 'tomatoes.phases.vegetative.hydro.fertilizing.description',
+              description: 'tomatoes.environments.outdoor.phases.vegetative.hydro.fertilizing.description',
             },
           },
           coco: {
             watering: { 
               interval: 1, 
-              description: 'tomatoes.phases.vegetative.coco.watering.description' 
+              description: 'tomatoes.environments.outdoor.phases.vegetative.coco.watering.description' 
             },
             fertilizing: {
               interval: 14,
-              description: 'tomatoes.phases.vegetative.coco.fertilizing.description',
+              description: 'tomatoes.environments.outdoor.phases.vegetative.coco.fertilizing.description',
             },
           },
         },
         transplant: {
           days: 14,
-          description: 'tomatoes.phases.transplant.description',
-          care: 'tomatoes.phases.transplant.care',
+          description: 'tomatoes.environments.outdoor.phases.transplant.description',
+          care: 'tomatoes.environments.outdoor.phases.transplant.care',
           editable: true,
           soil: {
             watering: {
               interval: 2,
-              description: 'tomatoes.phases.transplant.soil.watering.description',
+              description: 'tomatoes.environments.outdoor.phases.transplant.soil.watering.description',
             },
             fertilizing: {
               interval: 0,
-              description: 'tomatoes.phases.transplant.soil.fertilizing.description',
+              description: 'tomatoes.environments.outdoor.phases.transplant.soil.fertilizing.description',
             },
           },
           hydro: {
             watering: {
               interval: 0,
-              description: 'tomatoes.phases.transplant.hydro.watering.description',
+              description: 'tomatoes.environments.outdoor.phases.transplant.hydro.watering.description',
             },
             fertilizing: {
               interval: 0,
-              description: 'tomatoes.phases.transplant.hydro.fertilizing.description',
+              description: 'tomatoes.environments.outdoor.phases.transplant.hydro.fertilizing.description',
             },
           },
           coco: {
-            watering: { 
+            watering: {
               interval: 1, 
-              description: 'tomatoes.phases.transplant.coco.watering.description' 
+              description: 'tomatoes.environments.outdoor.phases.transplant.coco.watering.description' 
             },
             fertilizing: {
               interval: 0,
-              description: 'tomatoes.phases.transplant.coco.fertilizing.description',
+              description: 'tomatoes.environments.outdoor.phases.transplant.coco.fertilizing.description',
             },
           },
         },
         flowering: {
           days: 20,
-          description: 'tomatoes.phases.flowering.description',
-          care: 'tomatoes.phases.flowering.care',
+          description: 'tomatoes.environments.outdoor.phases.flowering.description',
+          care: 'tomatoes.environments.outdoor.phases.flowering.care',
           editable: true,
           soil: {
             watering: {
               interval: 2,
-              description: 'tomatoes.phases.flowering.soil.watering.description',
+              description: 'tomatoes.environments.outdoor.phases.flowering.soil.watering.description',
             },
             fertilizing: {
               interval: 14,
-              description: 'tomatoes.phases.flowering.soil.fertilizing.description',
+              description: 'tomatoes.environments.outdoor.phases.flowering.soil.fertilizing.description',
             },
           },
           hydro: {
             watering: {
               interval: 0,
-              description: 'tomatoes.phases.flowering.hydro.watering.description',
+              description: 'tomatoes.environments.outdoor.phases.flowering.hydro.watering.description',
             },
             fertilizing: {
               interval: 14,
-              description: 'tomatoes.phases.flowering.hydro.fertilizing.description',
+              description: 'tomatoes.environments.outdoor.phases.flowering.hydro.fertilizing.description',
             },
           },
           coco: {
             watering: { 
               interval: 1, 
-              description: 'tomatoes.phases.flowering.coco.watering.description' 
+              description: 'tomatoes.environments.outdoor.phases.flowering.coco.watering.description' 
             },
             fertilizing: {
               interval: 14,
-              description: 'tomatoes.phases.flowering.coco.fertilizing.description',
+              description: 'tomatoes.environments.outdoor.phases.flowering.coco.fertilizing.description',
             },
           },
         },
         fruiting: {
           days: 45,
-          description: 'tomatoes.phases.fruiting.description',
-          care: 'tomatoes.phases.fruiting.care',
+          description: 'tomatoes.environments.outdoor.phases.fruiting.description',
+          care: 'tomatoes.environments.outdoor.phases.fruiting.care',
           editable: true,
           soil: {
             watering: {
               interval: 2,
-              description: 'tomatoes.phases.fruiting.soil.watering.description',
+              description: 'tomatoes.environments.outdoor.phases.fruiting.soil.watering.description',
             },
             fertilizing: {
               interval: 14,
-              description: 'tomatoes.phases.fruiting.soil.fertilizing.description',
+              description: 'tomatoes.environments.outdoor.phases.fruiting.soil.fertilizing.description',
             },
           },
           hydro: {
             watering: {
               interval: 0,
-              description: 'tomatoes.phases.fruiting.hydro.watering.description',
+              description: 'tomatoes.environments.outdoor.phases.fruiting.hydro.watering.description',
             },
             fertilizing: {
               interval: 14,
-              description: 'tomatoes.phases.fruiting.hydro.fertilizing.description',
+              description: 'tomatoes.environments.outdoor.phases.fruiting.hydro.fertilizing.description',
             },
           },
           coco: {
             watering: { 
               interval: 1, 
-              description: 'tomatoes.phases.fruiting.coco.watering.description' 
+              description: 'tomatoes.environments.outdoor.phases.fruiting.coco.watering.description' 
             },
             fertilizing: {
               interval: 14,
-              description: 'tomatoes.phases.fruiting.coco.fertilizing.description',
+              description: 'tomatoes.environments.outdoor.phases.fruiting.coco.fertilizing.description',
             },
           },
         },
@@ -482,217 +482,217 @@ export const tomatoes = {
       phases: {
         germination: {
           days: 7,
-          description: 'tomatoes.phases.germination.description',
-          care: 'tomatoes.phases.germination.care',
+          description: 'tomatoes.environments.greenhouse.phases.germination.description',
+          care: 'tomatoes.environments.greenhouse.phases.germination.care',
           editable: true,
           soil: {
             watering: {
               interval: 1,
-              description: 'tomatoes.phases.germination.soil.watering.description',
+              description: 'tomatoes.environments.greenhouse.phases.germination.soil.watering.description',
             },
             fertilizing: {
               interval: 0,
-              description: 'tomatoes.phases.germination.soil.fertilizing.description',
+              description: 'tomatoes.environments.greenhouse.phases.germination.soil.fertilizing.description',
             },
           },
           hydro: {
             watering: {
               interval: 0,
-              description: 'tomatoes.phases.germination.hydro.watering.description',
+              description: 'tomatoes.environments.greenhouse.phases.germination.hydro.watering.description',
             },
             fertilizing: {
               interval: 0,
-              description: 'tomatoes.phases.germination.hydro.fertilizing.description',
+              description: 'tomatoes.environments.greenhouse.phases.germination.hydro.fertilizing.description',
             },
           },
           coco: {
             watering: {
               interval: 1,
-              description: 'tomatoes.phases.germination.coco.watering.description',
+              description: 'tomatoes.environments.greenhouse.phases.germination.coco.watering.description',
             },
             fertilizing: {
               interval: 0,
-              description: 'tomatoes.phases.germination.coco.fertilizing.description',
+              description: 'tomatoes.environments.greenhouse.phases.germination.coco.fertilizing.description',
             },
           },
         },
         seedling: {
           days: 21,
-          description: 'tomatoes.phases.seedling.description',
-          care: 'tomatoes.phases.seedling.care',
+          description: 'tomatoes.environments.greenhouse.phases.seedling.description',
+          care: 'tomatoes.environments.greenhouse.phases.seedling.care',
           editable: true,
           soil: {
             watering: {
               interval: 2,
-              description: 'tomatoes.phases.seedling.soil.watering.description',
+              description: 'tomatoes.environments.greenhouse.phases.seedling.soil.watering.description',
             },
             fertilizing: {
               interval: 7,
-              description: 'tomatoes.phases.seedling.soil.fertilizing.description',
+              description: 'tomatoes.environments.greenhouse.phases.seedling.soil.fertilizing.description',
             },
           },
           hydro: {
             watering: { 
               interval: 0, 
-              description: 'tomatoes.phases.seedling.hydro.watering.description' 
+              description: 'tomatoes.environments.greenhouse.phases.seedling.hydro.watering.description' 
             },
             fertilizing: {
               interval: 7,
-              description: 'tomatoes.phases.seedling.hydro.fertilizing.description',
+              description: 'tomatoes.environments.greenhouse.phases.seedling.hydro.fertilizing.description',
             },
           },
           coco: {
             watering: { 
               interval: 1, 
-              description: 'tomatoes.phases.seedling.coco.watering.description' 
+              description: 'tomatoes.environments.greenhouse.phases.seedling.coco.watering.description' 
             },
             fertilizing: {
               interval: 7,
-              description: 'tomatoes.phases.seedling.coco.fertilizing.description',
+              description: 'tomatoes.environments.greenhouse.phases.seedling.coco.fertilizing.description',
             },
           },
         },
         vegetative: {
           days: 28,
-          description: 'tomatoes.phases.vegetative.description',
-          care: 'tomatoes.phases.vegetative.care',
+          description: 'tomatoes.environments.greenhouse.phases.vegetative.description',
+          care: 'tomatoes.environments.greenhouse.phases.vegetative.care',
           editable: true,
           soil: {
             watering: {
               interval: 2,
-              description: 'tomatoes.phases.vegetative.soil.watering.description',
+              description: 'tomatoes.environments.greenhouse.phases.vegetative.soil.watering.description',
             },
             fertilizing: {
               interval: 14,
-              description: 'tomatoes.phases.vegetative.soil.fertilizing.description',
+              description: 'tomatoes.environments.greenhouse.phases.vegetative.soil.fertilizing.description',
             },
           },
           hydro: {
             watering: {
               interval: 0,
-              description: 'tomatoes.phases.vegetative.hydro.watering.description',
+              description: 'tomatoes.environments.greenhouse.phases.vegetative.hydro.watering.description',
             },
             fertilizing: {
               interval: 14,
-              description: 'tomatoes.phases.vegetative.hydro.fertilizing.description',
+              description: 'tomatoes.environments.greenhouse.phases.vegetative.hydro.fertilizing.description',
             },
           },
           coco: {
             watering: { 
               interval: 1, 
-              description: 'tomatoes.phases.vegetative.coco.watering.description' 
+              description: 'tomatoes.environments.greenhouse.phases.vegetative.coco.watering.description' 
             },
             fertilizing: {
               interval: 14,
-              description: 'tomatoes.phases.vegetative.coco.fertilizing.description',
+              description: 'tomatoes.environments.greenhouse.phases.vegetative.coco.fertilizing.description',
             },
           },
         },
         transplant: {
           days: 14,
-          description: 'tomatoes.phases.transplant.description',
-          care: 'tomatoes.phases.transplant.care',
+          description: 'tomatoes.environments.greenhouse.phases.transplant.description',
+          care: 'tomatoes.environments.greenhouse.phases.transplant.care',
           editable: true,
           soil: {
             watering: {
               interval: 2,
-              description: 'tomatoes.phases.transplant.soil.watering.description',
+              description: 'tomatoes.environments.greenhouse.phases.transplant.soil.watering.description',
             },
             fertilizing: {
               interval: 0,
-              description: 'tomatoes.phases.transplant.soil.fertilizing.description',
+              description: 'tomatoes.environments.greenhouse.phases.transplant.soil.fertilizing.description',
             },
           },
           hydro: {
             watering: {
               interval: 0,
-              description: 'tomatoes.phases.transplant.hydro.watering.description',
+              description: 'tomatoes.environments.greenhouse.phases.transplant.hydro.watering.description',
             },
             fertilizing: {
               interval: 0,
-              description: 'tomatoes.phases.transplant.hydro.fertilizing.description',
+              description: 'tomatoes.environments.greenhouse.phases.transplant.hydro.fertilizing.description',
             },
           },
           coco: {
             watering: { 
               interval: 1, 
-              description: 'tomatoes.phases.transplant.coco.watering.description' 
+              description: 'tomatoes.environments.greenhouse.phases.transplant.coco.watering.description' 
             },
             fertilizing: {
               interval: 0,
-              description: 'tomatoes.phases.transplant.coco.fertilizing.description',
+              description: 'tomatoes.environments.greenhouse.phases.transplant.coco.fertilizing.description',
             },
           },
         },
         flowering: {
           days: 20,
-          description: 'tomatoes.phases.flowering.description',
-          care: 'tomatoes.phases.flowering.care',
+          description: 'tomatoes.environments.greenhouse.phases.flowering.description',
+          care: 'tomatoes.environments.greenhouse.phases.flowering.care',
           editable: true,
           soil: {
             watering: {
               interval: 2,
-              description: 'tomatoes.phases.flowering.soil.watering.description',
+              description: 'tomatoes.environments.greenhouse.phases.flowering.soil.watering.description',
             },
             fertilizing: {
               interval: 14,
-              description: 'tomatoes.phases.flowering.soil.fertilizing.description',
+              description: 'tomatoes.environments.greenhouse.phases.flowering.soil.fertilizing.description',
             },
           },
           hydro: {
             watering: {
               interval: 0,
-              description: 'tomatoes.phases.flowering.hydro.watering.description',
+              description: 'tomatoes.environments.greenhouse.phases.flowering.hydro.watering.description',
             },
             fertilizing: {
               interval: 14,
-              description: 'tomatoes.phases.flowering.hydro.fertilizing.description',
+              description: 'tomatoes.environments.greenhouse.phases.flowering.hydro.fertilizing.description',
             },
           },
           coco: {
             watering: { 
               interval: 1, 
-              description: 'tomatoes.phases.flowering.coco.watering.description' 
+              description: 'tomatoes.environments.greenhouse.phases.flowering.coco.watering.description' 
             },
             fertilizing: {
               interval: 14,
-              description: 'tomatoes.phases.flowering.coco.fertilizing.description',
+              description: 'tomatoes.environments.greenhouse.phases.flowering.coco.fertilizing.description',
             },
           },
         },
         fruiting: {
           days: 45,
-          description: 'tomatoes.phases.fruiting.description',
-          care: 'tomatoes.phases.fruiting.care',
+          description: 'tomatoes.environments.greenhouse.phases.fruiting.description',
+          care: 'tomatoes.environments.greenhouse.phases.fruiting.care',
           editable: true,
           soil: {
             watering: {
               interval: 2,
-              description: 'tomatoes.phases.fruiting.soil.watering.description',
+              description: 'tomatoes.environments.greenhouse.phases.fruiting.soil.watering.description',
             },
             fertilizing: {
               interval: 14,
-              description: 'tomatoes.phases.fruiting.soil.fertilizing.description',
+              description: 'tomatoes.environments.greenhouse.phases.fruiting.soil.fertilizing.description',
             },
           },
           hydro: {
             watering: {
               interval: 0,
-              description: 'tomatoes.phases.fruiting.hydro.watering.description',
+              description: 'tomatoes.environments.greenhouse.phases.fruiting.hydro.watering.description',
             },
             fertilizing: {
               interval: 14,
-              description: 'tomatoes.phases.fruiting.hydro.fertilizing.description',
+              description: 'tomatoes.environments.greenhouse.phases.fruiting.hydro.fertilizing.description',
             },
           },
           coco: {
             watering: { 
               interval: 1, 
-              description: 'tomatoes.phases.fruiting.coco.watering.description' 
+              description: 'tomatoes.environments.greenhouse.phases.fruiting.coco.watering.description' 
             },
             fertilizing: {
               interval: 14,
-              description: 'tomatoes.phases.fruiting.coco.fertilizing.description',
+              description: 'tomatoes.environments.greenhouse.phases.fruiting.coco.fertilizing.description',
             },
           },
         },

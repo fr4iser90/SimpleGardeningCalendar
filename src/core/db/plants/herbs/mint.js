@@ -16,53 +16,53 @@ export const mint = {
       phases: {
         germination: {
           days: 10,
-          description: 'mint.germination.description',
-          care: 'mint.germination.care',
+          description: 'mint.indoor.germination.description',
+          care: 'mint.indoor.germination.care',
           editable: true,
           soil: {
             watering: {
               interval: 1,
-              description: 'mint.germination.soil.watering',
+              description: 'mint.indoor.germination.soil.watering.description',
             },
             fertilizing: {
               interval: 0,
-              description: 'mint.germination.soil.fertilizing',
+              description: 'mint.indoor.germination.soil.fertilizing.description',
             },
           },
           hydro: {
             watering: {
               interval: 0,
-              description: 'mint.germination.hydro.watering',
+              description: 'mint.indoor.germination.hydro.watering.description',
             },
             fertilizing: {
               interval: 0,
-              description: 'mint.germination.hydro.fertilizing',
+              description: 'mint.indoor.germination.hydro.fertilizing.description',
             },
           },
           coco: {
             watering: {
               interval: 1,
-              description: 'mint.germination.coco.watering',
+              description: 'mint.indoor.germination.coco.watering.description',
             },
             fertilizing: {
               interval: 0,
-              description: 'mint.germination.coco.fertilizing',
+              description: 'mint.indoor.germination.coco.fertilizing.description',
             },
           },
         },
         seedling: {
           days: 21,
-          description: 'mint.seedling.description',
-          care: 'mint.seedling.care',
+          description: 'mint.indoor.seedling.description',
+          care: 'mint.indoor.seedling.care',
           editable: true,
           soil: {
             watering: {
               interval: 2,
-              description: 'mint.seedling.soil.watering',
+              description: 'mint.indoor.seedling.soil.watering.description',
             },
             fertilizing: {
               interval: 0,
-              description: 'mint.seedling.soil.fertilizing',
+              description: 'mint.indoor.seedling.soil.fertilizing.description',
             },
           },
           hydro: {
@@ -423,4 +423,4 @@ export const mint = {
   commonProblems: createProblemRefs(['rustDisease', 'rootRot', 'invasiveGrowth'], 'herbs'),
 };
 
-export default mint; 
+export default mint;

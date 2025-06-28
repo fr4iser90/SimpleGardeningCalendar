@@ -16,145 +16,145 @@ export const roses = {
       phases: {
         establishment: {
           days: 60,
-          description: 'roses.phases.establishment.description',
-          care: 'roses.phases.establishment.care',
+          description: 'roses.environments.indoor.phases.establishment.description',
+          care: 'roses.environments.indoor.phases.establishment.care',
           editable: true,
           soil: {
             watering: {
               interval: 3,
-              description: 'roses.phases.establishment.soil.watering.description',
+              description: 'roses.environments.indoor.phases.establishment.soil.watering.description',
             },
             fertilizing: {
               interval: 0,
-              description: 'roses.phases.establishment.soil.fertilizing.description',
+              description: 'roses.environments.indoor.phases.establishment.soil.fertilizing.description',
             },
           },
           hydro: {
             watering: {
               interval: 0,
-              description: 'roses.phases.establishment.hydro.watering.description',
+              description: 'roses.environments.indoor.phases.establishment.hydro.watering.description',
             },
             fertilizing: {
               interval: 0,
-              description: 'roses.phases.establishment.hydro.fertilizing.description',
+              description: 'roses.environments.indoor.phases.establishment.hydro.fertilizing.description',
             },
           },
           coco: {
             watering: {
               interval: 1,
-              description: 'roses.phases.establishment.coco.watering.description',
+              description: 'roses.environments.indoor.phases.establishment.coco.watering.description',
             },
             fertilizing: {
               interval: 0,
-              description: 'roses.phases.establishment.coco.fertilizing.description',
+              description: 'roses.environments.indoor.phases.establishment.coco.fertilizing.description',
             },
           },
         },
         vegetative: {
           days: 90,
-          description: 'roses.phases.vegetative.description',
-          care: 'roses.phases.vegetative.care',
+          description: 'roses.environments.indoor.phases.vegetative.description',
+          care: 'roses.environments.indoor.phases.vegetative.care',
           editable: true,
           soil: {
             watering: {
               interval: 3,
-              description: 'roses.phases.vegetative.soil.watering.description',
+              description: 'roses.environments.indoor.phases.vegetative.soil.watering.description',
             },
             fertilizing: {
               interval: 21,
-              description: 'roses.phases.vegetative.soil.fertilizing.description',
+              description: 'roses.environments.indoor.phases.vegetative.soil.fertilizing.description',
             },
           },
           hydro: {
             watering: {
               interval: 0,
-              description: 'roses.phases.vegetative.hydro.watering.description',
+              description: 'roses.environments.indoor.phases.vegetative.hydro.watering.description',
             },
             fertilizing: {
               interval: 21,
-              description: 'roses.phases.vegetative.hydro.fertilizing.description',
+              description: 'roses.environments.indoor.phases.vegetative.hydro.fertilizing.description',
             },
           },
           coco: {
             watering: {
               interval: 1,
-              description: 'roses.phases.vegetative.coco.watering.description',
+              description: 'roses.environments.indoor.phases.vegetative.coco.watering.description',
             },
             fertilizing: {
               interval: 21,
-              description: 'roses.phases.vegetative.coco.fertilizing.description',
+              description: 'roses.environments.indoor.phases.vegetative.coco.fertilizing.description',
             },
           },
         },
         flowering: {
           days: 30,
-          description: 'roses.phases.flowering.description',
-          care: 'roses.phases.flowering.care',
+          description: 'roses.environments.indoor.phases.flowering.description',
+          care: 'roses.environments.indoor.phases.flowering.care',
           editable: true,
           soil: {
             watering: {
               interval: 2,
-              description: 'roses.phases.flowering.soil.watering.description',
+              description: 'roses.environments.indoor.phases.flowering.soil.watering.description',
             },
             fertilizing: {
               interval: 14,
-              description: 'roses.phases.flowering.soil.fertilizing.description',
+              description: 'roses.environments.indoor.phases.flowering.soil.fertilizing.description',
             },
           },
           hydro: {
             watering: {
               interval: 0,
-              description: 'roses.phases.flowering.hydro.watering.description',
+              description: 'roses.environments.indoor.phases.flowering.hydro.watering.description',
             },
             fertilizing: {
               interval: 14,
-              description: 'roses.phases.flowering.hydro.fertilizing.description',
+              description: 'roses.environments.indoor.phases.flowering.hydro.fertilizing.description',
             },
           },
           coco: {
             watering: {
               interval: 1,
-              description: 'roses.phases.flowering.coco.watering.description',
+              description: 'roses.environments.indoor.phases.flowering.coco.watering.description',
             },
             fertilizing: {
               interval: 14,
-              description: 'roses.phases.flowering.coco.fertilizing.description',
+              description: 'roses.environments.indoor.phases.flowering.coco.fertilizing.description',
             },
           },
         },
         dormancy: {
           days: 120,
-          description: 'roses.phases.dormancy.description',
-          care: 'roses.phases.dormancy.care',
+          description: 'roses.environments.indoor.phases.dormancy.description',
+          care: 'roses.environments.indoor.phases.dormancy.care',
           editable: true,
           soil: {
             watering: {
               interval: 7,
-              description: 'roses.phases.dormancy.soil.watering.description',
+              description: 'roses.environments.indoor.phases.dormancy.soil.watering.description',
             },
             fertilizing: {
               interval: 0,
-              description: 'roses.phases.dormancy.soil.fertilizing.description',
+              description: 'roses.environments.indoor.phases.dormancy.soil.fertilizing.description',
             },
           },
           hydro: {
             watering: {
               interval: 0,
-              description: 'roses.phases.dormancy.hydro.watering.description',
+              description: 'roses.environments.indoor.phases.dormancy.hydro.watering.description',
             },
             fertilizing: {
               interval: 0,
-              description: 'roses.phases.dormancy.hydro.fertilizing.description',
+              description: 'roses.environments.indoor.phases.dormancy.hydro.fertilizing.description',
             },
           },
           coco: {
             watering: {
               interval: 7,
-              description: 'roses.phases.dormancy.coco.watering.description',
+              description: 'roses.environments.indoor.phases.dormancy.coco.watering.description',
             },
             fertilizing: {
               interval: 0,
-              description: 'roses.phases.dormancy.coco.fertilizing.description',
+              description: 'roses.environments.indoor.phases.dormancy.coco.fertilizing.description',
             },
           },
         },
@@ -165,148 +165,146 @@ export const roses = {
         establishment: {
           start: '03-15',
           end: '05-15',
-          description: 'roses.phases.establishment.description',
-          care: 'roses.phases.establishment.care',
+          description: 'roses.environments.outdoor.phases.establishment.description',
+          care: 'roses.environments.outdoor.phases.establishment.care',
           editable: false,
           soil: {
             watering: {
               interval: 3,
-              description: 'roses.phases.establishment.soil.watering.description',
+              description: 'roses.environments.outdoor.phases.establishment.soil.watering.description',
             },
             fertilizing: {
               interval: 0,
-              description: 'roses.phases.establishment.soil.fertilizing.description',
+              description: 'roses.environments.outdoor.phases.establishment.soil.fertilizing.description',
             },
           },
           hydro: {
             watering: {
               interval: 0,
-              description: 'roses.phases.establishment.hydro.watering.description',
+              description: 'roses.environments.outdoor.phases.establishment.hydro.watering.description',
             },
             fertilizing: {
               interval: 0,
-              description: 'roses.phases.establishment.hydro.fertilizing.description',
+              description: 'roses.environments.outdoor.phases.establishment.hydro.fertilizing.description',
             },
           },
           coco: {
             watering: {
               interval: 1,
-              description: 'roses.phases.establishment.coco.watering.description',
+              description: 'roses.environments.outdoor.phases.establishment.coco.watering.description',
             },
             fertilizing: {
               interval: 0,
-              description: 'roses.phases.establishment.coco.fertilizing.description',
+              description: 'roses.environments.outdoor.phases.establishment.coco.fertilizing.description',
             },
           },
         },
         vegetative: {
-          start: '05-16',
-          end: '06-14',
-          description: 'roses.phases.vegetative.description',
-          care: 'roses.phases.vegetative.care',
+          description: 'roses.environments.outdoor.phases.vegetative.description',
+          care: 'roses.environments.outdoor.phases.vegetative.care',
           editable: false,
           soil: {
             watering: {
               interval: 3,
-              description: 'roses.phases.vegetative.soil.watering.description',
+              description: 'roses.environments.outdoor.phases.vegetative.soil.watering.description',
             },
             fertilizing: {
               interval: 21,
-              description: 'roses.phases.vegetative.soil.fertilizing.description',
+              description: 'roses.environments.outdoor.phases.vegetative.soil.fertilizing.description',
             },
           },
           hydro: {
             watering: {
               interval: 0,
-              description: 'roses.phases.vegetative.hydro.watering.description',
+              description: 'roses.environments.outdoor.phases.vegetative.hydro.watering.description',
             },
             fertilizing: {
               interval: 21,
-              description: 'roses.phases.vegetative.hydro.fertilizing.description',
+              description: 'roses.environments.outdoor.phases.vegetative.hydro.fertilizing.description',
             },
           },
           coco: {
             watering: {
               interval: 1,
-              description: 'roses.phases.vegetative.coco.watering.description',
+              description: 'roses.environments.outdoor.phases.vegetative.coco.watering.description',
             },
             fertilizing: {
               interval: 21,
-              description: 'roses.phases.vegetative.coco.fertilizing.description',
+              description: 'roses.environments.outdoor.phases.vegetative.coco.fertilizing.description',
             },
           },
         },
         flowering: {
-          start: '06-15',
+          start: '06-01',
           end: '09-30',
-          description: 'roses.phases.flowering.description',
-          care: 'roses.phases.flowering.care',
+          description: 'roses.environments.outdoor.phases.flowering.description',
+          care: 'roses.environments.outdoor.phases.flowering.care',
           editable: true,
           soil: {
             watering: {
               interval: 2,
-              description: 'roses.phases.flowering.soil.watering.description',
+              description: 'roses.environments.outdoor.phases.flowering.soil.watering.description',
             },
             fertilizing: {
               interval: 14,
-              description: 'roses.phases.flowering.soil.fertilizing.description',
+              description: 'roses.environments.outdoor.phases.flowering.soil.fertilizing.description',
             },
           },
           hydro: {
             watering: {
               interval: 0,
-              description: 'roses.phases.flowering.hydro.watering.description',
+              description: 'roses.environments.outdoor.phases.flowering.hydro.watering.description',
             },
             fertilizing: {
               interval: 14,
-              description: 'roses.phases.flowering.hydro.fertilizing.description',
+              description: 'roses.environments.outdoor.phases.flowering.hydro.fertilizing.description',
             },
           },
           coco: {
             watering: {
               interval: 1,
-              description: 'roses.phases.flowering.coco.watering.description',
+              description: 'roses.environments.outdoor.phases.flowering.coco.watering.description',
             },
             fertilizing: {
               interval: 14,
-              description: 'roses.phases.flowering.coco.fertilizing.description',
+              description: 'roses.environments.outdoor.phases.flowering.coco.fertilizing.description',
             },
           },
         },
         dormancy: {
           start: '10-01',
           end: '03-14',
-          description: 'roses.phases.dormancy.description',
-          care: 'roses.phases.dormancy.care',
+          description: 'roses.environments.outdoor.phases.dormancy.description',
+          care: 'roses.environments.outdoor.phases.dormancy.care',
           editable: false,
           soil: {
             watering: {
               interval: 7,
-              description: 'roses.phases.dormancy.soil.watering.description',
+              description: 'roses.environments.outdoor.phases.dormancy.soil.watering.description',
             },
             fertilizing: {
               interval: 0,
-              description: 'roses.phases.dormancy.soil.fertilizing.description',
+              description: 'roses.environments.outdoor.phases.dormancy.soil.fertilizing.description',
             },
           },
           hydro: {
             watering: {
               interval: 0,
-              description: 'roses.phases.dormancy.hydro.watering.description',
+              description: 'roses.environments.outdoor.phases.dormancy.hydro.watering.description',
             },
             fertilizing: {
               interval: 0,
-              description: 'roses.phases.dormancy.hydro.fertilizing.description',
+              description: 'roses.environments.outdoor.phases.dormancy.hydro.fertilizing.description',
             },
           },
           coco: {
             watering: {
               interval: 7,
-              description: 'roses.phases.dormancy.coco.watering.description',
+              description: 'roses.environments.outdoor.phases.dormancy.coco.watering.description',
             },
             fertilizing: {
               interval: 0,
-              description: 'roses.phases.dormancy.coco.fertilizing.description',
+              description: 'roses.environments.outdoor.phases.dormancy.coco.fertilizing.description',
             },
           },
         },
@@ -316,145 +314,145 @@ export const roses = {
       phases: {
         establishment: {
           days: 60,
-          description: 'roses.phases.establishment.description',
-          care: 'roses.phases.establishment.care',
+          description: 'roses.environments.greenhouse.phases.establishment.description',
+          care: 'roses.environments.greenhouse.phases.establishment.care',
           editable: true,
           soil: {
             watering: {
               interval: 3,
-              description: 'roses.phases.establishment.soil.watering.description',
+              description: 'roses.environments.greenhouse.phases.establishment.soil.watering.description',
             },
             fertilizing: {
               interval: 0,
-              description: 'roses.phases.establishment.soil.fertilizing.description',
+              description: 'roses.environments.greenhouse.phases.establishment.soil.fertilizing.description',
             },
           },
           hydro: {
             watering: {
               interval: 0,
-              description: 'roses.phases.establishment.hydro.watering.description',
+              description: 'roses.environments.greenhouse.phases.establishment.hydro.watering.description',
             },
             fertilizing: {
               interval: 0,
-              description: 'roses.phases.establishment.hydro.fertilizing.description',
+              description: 'roses.environments.greenhouse.phases.establishment.hydro.fertilizing.description',
             },
           },
           coco: {
             watering: {
               interval: 1,
-              description: 'roses.phases.establishment.coco.watering.description',
+              description: 'roses.environments.greenhouse.phases.establishment.coco.watering.description',
             },
             fertilizing: {
               interval: 0,
-              description: 'roses.phases.establishment.coco.fertilizing.description',
+              description: 'roses.environments.greenhouse.phases.establishment.coco.fertilizing.description',
             },
           },
         },
         vegetative: {
           days: 90,
-          description: 'roses.phases.vegetative.description',
-          care: 'roses.phases.vegetative.care',
+          description: 'roses.environments.greenhouse.phases.vegetative.description',
+          care: 'roses.environments.greenhouse.phases.vegetative.care',
           editable: true,
           soil: {
             watering: {
               interval: 3,
-              description: 'roses.phases.vegetative.soil.watering.description',
+              description: 'roses.environments.greenhouse.phases.vegetative.soil.watering.description',
             },
             fertilizing: {
               interval: 21,
-              description: 'roses.phases.vegetative.soil.fertilizing.description',
+              description: 'roses.environments.greenhouse.phases.vegetative.soil.fertilizing.description',
             },
           },
           hydro: {
             watering: {
               interval: 0,
-              description: 'roses.phases.vegetative.hydro.watering.description',
+              description: 'roses.environments.greenhouse.phases.vegetative.hydro.watering.description',
             },
             fertilizing: {
               interval: 21,
-              description: 'roses.phases.vegetative.hydro.fertilizing.description',
+              description: 'roses.environments.greenhouse.phases.vegetative.hydro.fertilizing.description',
             },
           },
           coco: {
             watering: {
               interval: 1,
-              description: 'roses.phases.vegetative.coco.watering.description',
+              description: 'roses.environments.greenhouse.phases.vegetative.coco.watering.description',
             },
             fertilizing: {
               interval: 21,
-              description: 'roses.phases.vegetative.coco.fertilizing.description',
+              description: 'roses.environments.greenhouse.phases.vegetative.coco.fertilizing.description',
             },
           },
         },
         flowering: {
           days: 30,
-          description: 'roses.phases.flowering.description',
-          care: 'roses.phases.flowering.care',
+          description: 'roses.environments.greenhouse.phases.flowering.description',
+          care: 'roses.environments.greenhouse.phases.flowering.care',
           editable: true,
           soil: {
             watering: {
               interval: 2,
-              description: 'roses.phases.flowering.soil.watering.description',
+              description: 'roses.environments.greenhouse.phases.flowering.soil.watering.description',
             },
             fertilizing: {
               interval: 14,
-              description: 'roses.phases.flowering.soil.fertilizing.description',
+              description: 'roses.environments.greenhouse.phases.flowering.soil.fertilizing.description',
             },
           },
           hydro: {
             watering: {
               interval: 0,
-              description: 'roses.phases.flowering.hydro.watering.description',
+              description: 'roses.environments.greenhouse.phases.flowering.hydro.watering.description',
             },
             fertilizing: {
               interval: 14,
-              description: 'roses.phases.flowering.hydro.fertilizing.description',
+              description: 'roses.environments.greenhouse.phases.flowering.hydro.fertilizing.description',
             },
           },
           coco: {
             watering: {
               interval: 1,
-              description: 'roses.phases.flowering.coco.watering.description',
+              description: 'roses.environments.greenhouse.phases.flowering.coco.watering.description',
             },
             fertilizing: {
               interval: 14,
-              description: 'roses.phases.flowering.coco.fertilizing.description',
+              description: 'roses.environments.greenhouse.phases.flowering.coco.fertilizing.description',
             },
           },
         },
         dormancy: {
           days: 120,
-          description: 'roses.phases.dormancy.description',
-          care: 'roses.phases.dormancy.care',
+          description: 'roses.environments.greenhouse.phases.dormancy.description',
+          care: 'roses.environments.greenhouse.phases.dormancy.care',
           editable: true,
           soil: {
             watering: {
               interval: 7,
-              description: 'roses.phases.dormancy.soil.watering.description',
+              description: 'roses.environments.greenhouse.phases.dormancy.soil.watering.description',
             },
             fertilizing: {
               interval: 0,
-              description: 'roses.phases.dormancy.soil.fertilizing.description',
+              description: 'roses.environments.greenhouse.phases.dormancy.soil.fertilizing.description',
             },
           },
           hydro: {
             watering: {
               interval: 0,
-              description: 'roses.phases.dormancy.hydro.watering.description',
+              description: 'roses.environments.greenhouse.phases.dormancy.hydro.watering.description',
             },
             fertilizing: {
               interval: 0,
-              description: 'roses.phases.dormancy.hydro.fertilizing.description',
+              description: 'roses.environments.greenhouse.phases.dormancy.hydro.fertilizing.description',
             },
           },
           coco: {
             watering: {
               interval: 7,
-              description: 'roses.phases.dormancy.coco.watering.description',
+              description: 'roses.environments.greenhouse.phases.dormancy.coco.watering.description',
             },
             fertilizing: {
               interval: 0,
-              description: 'roses.phases.dormancy.coco.fertilizing.description',
+              description: 'roses.environments.greenhouse.phases.dormancy.coco.fertilizing.description',
             },
           },
         },

@@ -17,148 +17,148 @@ export const cherry_tree = {
         establishment: {
           start: '03-01',
           end: '02-28',
-          description: 'cherry_tree.phases.establishment.description',
-          care: 'cherry_tree.phases.establishment.care',
+          description: 'cherry_tree.environments.outdoor.phases.establishment.description',
+          care: 'cherry_tree.environments.outdoor.phases.establishment.care',
           editable: false,
           soil: {
             watering: {
               interval: 7,
-              description: 'cherry_tree.phases.establishment.soil.watering.description',
+              description: 'cherry_tree.environments.outdoor.phases.establishment.soil.watering.description',
             },
             fertilizing: {
               interval: 90,
-              description: 'cherry_tree.phases.establishment.soil.fertilizing.description',
+              description: 'cherry_tree.environments.outdoor.phases.establishment.soil.fertilizing.description',
             },
           },
           hydro: {
             watering: {
               interval: 0,
-              description: 'cherry_tree.phases.establishment.hydro.watering.description',
+              description: 'cherry_tree.environments.outdoor.phases.establishment.hydro.watering.description',
             },
             fertilizing: {
               interval: 90,
-              description: 'cherry_tree.phases.establishment.hydro.fertilizing.description',
+              description: 'cherry_tree.environments.outdoor.phases.establishment.hydro.fertilizing.description',
             },
           },
           coco: {
             watering: {
               interval: 7,
-              description: 'cherry_tree.phases.establishment.coco.watering.description',
+              description: 'cherry_tree.environments.outdoor.phases.establishment.coco.watering.description',
             },
             fertilizing: {
               interval: 90,
-              description: 'cherry_tree.phases.establishment.coco.fertilizing.description',
+              description: 'cherry_tree.environments.outdoor.phases.establishment.coco.fertilizing.description',
             },
           },
         },
         juvenile: {
           start: '03-01',
           end: '02-28',
-          description: 'cherry_tree.phases.juvenile.description',
-          care: 'cherry_tree.phases.juvenile.care',
+          description: 'cherry_tree.environments.outdoor.phases.juvenile.description',
+          care: 'cherry_tree.environments.outdoor.phases.juvenile.care',
           editable: false,
           soil: {
             watering: {
               interval: 7,
-              description: 'cherry_tree.phases.juvenile.soil.watering.description',
+              description: 'cherry_tree.environments.outdoor.phases.juvenile.soil.watering.description',
             },
             fertilizing: {
               interval: 90,
-              description: 'cherry_tree.phases.juvenile.soil.fertilizing.description',
+              description: 'cherry_tree.environments.outdoor.phases.juvenile.soil.fertilizing.description',
             },
           },
           hydro: {
             watering: {
               interval: 0,
-              description: 'cherry_tree.phases.juvenile.hydro.watering.description',
+              description: 'cherry_tree.environments.outdoor.phases.juvenile.hydro.watering.description',
             },
             fertilizing: {
               interval: 90,
-              description: 'cherry_tree.phases.juvenile.hydro.fertilizing.description',
+              description: 'cherry_tree.environments.outdoor.phases.juvenile.hydro.fertilizing.description',
             },
           },
           coco: {
             watering: {
               interval: 7,
-              description: 'cherry_tree.phases.juvenile.coco.watering.description',
+              description: 'cherry_tree.environments.outdoor.phases.juvenile.coco.watering.description',
             },
             fertilizing: {
               interval: 90,
-              description: 'cherry_tree.phases.juvenile.coco.fertilizing.description',
+              description: 'cherry_tree.environments.outdoor.phases.juvenile.coco.fertilizing.description',
             },
           },
         },
         productive: {
           start: '03-01',
           end: '02-28',
-          description: 'cherry_tree.phases.productive.description',
-          care: 'cherry_tree.phases.productive.care',
+          description: 'cherry_tree.environments.outdoor.phases.productive.description',
+          care: 'cherry_tree.environments.outdoor.phases.productive.care',
           editable: false,
           soil: {
             watering: {
               interval: 7,
-              description: 'cherry_tree.phases.productive.soil.watering.description',
+              description: 'cherry_tree.environments.outdoor.phases.productive.soil.watering.description',
             },
             fertilizing: {
               interval: 90,
-              description: 'cherry_tree.phases.productive.soil.fertilizing.description',
+              description: 'cherry_tree.environments.outdoor.phases.productive.soil.fertilizing.description',
             },
           },
           hydro: {
             watering: {
               interval: 0,
-              description: 'cherry_tree.phases.productive.hydro.watering.description',
+              description: 'cherry_tree.environments.outdoor.phases.productive.hydro.watering.description',
             },
             fertilizing: {
               interval: 90,
-              description: 'cherry_tree.phases.productive.hydro.fertilizing.description',
+              description: 'cherry_tree.environments.outdoor.phases.productive.hydro.fertilizing.description',
             },
           },
           coco: {
             watering: {
               interval: 7,
-              description: 'cherry_tree.phases.productive.coco.watering.description',
+              description: 'cherry_tree.environments.outdoor.phases.productive.coco.watering.description',
             },
             fertilizing: {
               interval: 90,
-              description: 'cherry_tree.phases.productive.coco.fertilizing.description',
+              description: 'cherry_tree.environments.outdoor.phases.productive.coco.fertilizing.description',
             },
           },
         },
         dormancy: {
           start: '11-01',
           end: '02-28',
-          description: 'cherry_tree.phases.dormancy.description',
-          care: 'cherry_tree.phases.dormancy.care',
+          description: 'cherry_tree.environments.outdoor.phases.dormancy.description',
+          care: 'cherry_tree.environments.outdoor.phases.dormancy.care',
           editable: false,
           soil: {
             watering: {
               interval: 14,
-              description: 'cherry_tree.phases.dormancy.soil.watering.description',
+              description: 'cherry_tree.environments.outdoor.phases.dormancy.soil.watering.description',
             },
             fertilizing: {
               interval: 0,
-              description: 'cherry_tree.phases.dormancy.soil.fertilizing.description',
+              description: 'cherry_tree.environments.outdoor.phases.dormancy.soil.fertilizing.description',
             },
           },
           hydro: {
             watering: {
               interval: 0,
-              description: 'cherry_tree.phases.dormancy.hydro.watering.description',
+              description: 'cherry_tree.environments.outdoor.phases.dormancy.hydro.watering.description',
             },
             fertilizing: {
               interval: 0,
-              description: 'cherry_tree.phases.dormancy.hydro.fertilizing.description',
+              description: 'cherry_tree.environments.outdoor.phases.dormancy.hydro.fertilizing.description',
             },
           },
           coco: {
             watering: {
               interval: 14,
-              description: 'cherry_tree.phases.dormancy.coco.watering.description',
+              description: 'cherry_tree.environments.outdoor.phases.dormancy.coco.watering.description',
             },
             fertilizing: {
               interval: 0,
-              description: 'cherry_tree.phases.dormancy.coco.fertilizing.description',
+              description: 'cherry_tree.environments.outdoor.phases.dormancy.coco.fertilizing.description',
             },
           },
         },
@@ -167,29 +167,29 @@ export const cherry_tree = {
         temperate_north: {
           plantingWindow: {
             start: '03-01',
-            end: '04-15',
+            end: '05-01',
             description: 'cherry_tree.seasonalTiming.temperate_north.plantingWindow.description',
           },
           harvestWindow: {
             start: '06-01',
-            end: '08-15',
+            end: '07-31',
             description: 'cherry_tree.seasonalTiming.temperate_north.harvestWindow.description',
           },
           pruningWindow: {
-            start: '02-01',
+            start: '01-15',
             end: '03-15',
             description: 'cherry_tree.seasonalTiming.temperate_north.pruningWindow.description',
           },
         },
         mediterranean: {
           plantingWindow: {
-            start: '01-15',
-            end: '03-15',
+            start: '02-01',
+            end: '04-01',
             description: 'cherry_tree.seasonalTiming.mediterranean.plantingWindow.description',
           },
           harvestWindow: {
             start: '05-01',
-            end: '07-31',
+            end: '06-30',
             description: 'cherry_tree.seasonalTiming.mediterranean.harvestWindow.description',
           },
         },

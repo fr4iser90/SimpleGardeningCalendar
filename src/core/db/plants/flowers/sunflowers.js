@@ -16,148 +16,148 @@ export const sunflowers = {
       phases: {
         germination: {
           days: 7,
-          description: 'sunflowers.phases.germination.description',
-          care: 'sunflowers.phases.germination.care',
+          description: 'sunflowers.environments.indoor.phases.germination.description',
+          care: 'sunflowers.environments.indoor.phases.germination.care',
           editable: true,
           soil: {
             watering: {
               interval: 1,
-              description: 'sunflowers.phases.germination.soil.watering.description',
+              description: 'sunflowers.environments.indoor.phases.germination.soil.watering.description',
             },
             fertilizing: {
               interval: 0,
-              description: 'sunflowers.phases.germination.soil.fertilizing.description',
+              description: 'sunflowers.environments.indoor.phases.germination.soil.fertilizing.description',
             },
           },
           hydro: {
             watering: {
               interval: 0,
-              description: 'sunflowers.phases.germination.hydro.watering.description',
+              description: 'sunflowers.environments.indoor.phases.germination.hydro.watering.description',
             },
             fertilizing: {
               interval: 0,
-              description: 'sunflowers.phases.germination.hydro.fertilizing.description',
+              description: 'sunflowers.environments.indoor.phases.germination.hydro.fertilizing.description',
             },
           },
           coco: {
             watering: {
               interval: 1,
-              description: 'sunflowers.phases.germination.coco.watering.description',
+              description: 'sunflowers.environments.indoor.phases.germination.coco.watering.description',
             },
             fertilizing: {
               interval: 0,
-              description: 'sunflowers.phases.germination.coco.fertilizing.description',
+              description: 'sunflowers.environments.indoor.phases.germination.coco.fertilizing.description',
             },
           },
         },
         seedling: {
           days: 14,
-          description: 'sunflowers.phases.seedling.description',
-          care: 'sunflowers.phases.seedling.care',
+          description: 'sunflowers.environments.indoor.phases.seedling.description',
+          care: 'sunflowers.environments.indoor.phases.seedling.care',
           editable: true,
           soil: {
             watering: {
               interval: 2,
-              description: 'sunflowers.phases.seedling.soil.watering.description',
+              description: 'sunflowers.environments.indoor.phases.seedling.soil.watering.description',
             },
             fertilizing: {
               interval: 0,
-              description: 'sunflowers.phases.seedling.soil.fertilizing.description',
+              description: 'sunflowers.environments.indoor.phases.seedling.soil.fertilizing.description',
             },
           },
           hydro: {
-            watering: { interval: 0, description: 'sunflowers.phases.seedling.hydro.watering.description' },
+            watering: { interval: 0, description: 'sunflowers.environments.indoor.phases.seedling.hydro.watering.description' },
             fertilizing: {
               interval: 7,
-              description: 'sunflowers.phases.seedling.hydro.fertilizing.description',
+              description: 'sunflowers.environments.indoor.phases.seedling.hydro.fertilizing.description',
             },
           },
           coco: {
-            watering: { interval: 1, description: 'sunflowers.phases.seedling.coco.watering.description' },
-            fertilizing: { interval: 7, description: 'sunflowers.phases.seedling.coco.fertilizing.description' },
+            watering: { interval: 1, description: 'sunflowers.environments.indoor.phases.seedling.coco.watering.description' },
+            fertilizing: { interval: 7, description: 'sunflowers.environments.indoor.phases.seedling.coco.fertilizing.description' },
           },
         },
         vegetative: {
           days: 30,
-          description: 'sunflowers.phases.vegetative.description',
-          care: 'sunflowers.phases.vegetative.care',
+          description: 'sunflowers.environments.indoor.phases.vegetative.description',
+          care: 'sunflowers.environments.indoor.phases.vegetative.care',
           editable: true,
           soil: {
             watering: {
               interval: 3,
-              description: 'sunflowers.phases.vegetative.soil.watering.description',
+              description: 'sunflowers.environments.indoor.phases.vegetative.soil.watering.description',
             },
             fertilizing: {
               interval: 14,
-              description: 'sunflowers.phases.vegetative.soil.fertilizing.description',
+              description: 'sunflowers.environments.indoor.phases.vegetative.soil.fertilizing.description',
             },
           },
           hydro: {
-            watering: { interval: 0, description: 'sunflowers.phases.vegetative.hydro.watering.description' },
+            watering: { interval: 0, description: 'sunflowers.environments.indoor.phases.vegetative.hydro.watering.description' },
             fertilizing: {
               interval: 14,
-              description: 'sunflowers.phases.vegetative.hydro.fertilizing.description',
+              description: 'sunflowers.environments.indoor.phases.vegetative.hydro.fertilizing.description',
             },
           },
           coco: {
-            watering: { interval: 1, description: 'sunflowers.phases.vegetative.coco.watering.description' },
+            watering: { interval: 1, description: 'sunflowers.environments.indoor.phases.vegetative.coco.watering.description' },
             fertilizing: {
               interval: 14,
-              description: 'sunflowers.phases.vegetative.coco.fertilizing.description',
+              description: 'sunflowers.environments.indoor.phases.vegetative.coco.fertilizing.description',
             },
           },
         },
         flowering: {
           days: 21,
-          description: 'sunflowers.phases.flowering.description',
-          care: 'sunflowers.phases.flowering.care',
+          description: 'sunflowers.environments.indoor.phases.flowering.description',
+          care: 'sunflowers.environments.indoor.phases.flowering.care',
           editable: true,
           soil: {
-            watering: { interval: 3, description: 'sunflowers.phases.flowering.soil.watering.description' },
+            watering: { interval: 3, description: 'sunflowers.environments.indoor.phases.flowering.soil.watering.description' },
             fertilizing: {
               interval: 21,
-              description: 'sunflowers.phases.flowering.soil.fertilizing.description',
+              description: 'sunflowers.environments.indoor.phases.flowering.soil.fertilizing.description',
             },
           },
           hydro: {
-            watering: { interval: 0, description: 'sunflowers.phases.flowering.hydro.watering.description' },
+            watering: { interval: 0, description: 'sunflowers.environments.indoor.phases.flowering.hydro.watering.description' },
             fertilizing: {
               interval: 21,
-              description: 'sunflowers.phases.flowering.hydro.fertilizing.description',
+              description: 'sunflowers.environments.indoor.phases.flowering.hydro.fertilizing.description',
             },
           },
           coco: {
-            watering: { interval: 1, description: 'sunflowers.phases.flowering.coco.watering.description' },
+            watering: { interval: 1, description: 'sunflowers.environments.indoor.phases.flowering.coco.watering.description' },
             fertilizing: {
               interval: 21,
-              description: 'sunflowers.phases.flowering.coco.fertilizing.description',
+              description: 'sunflowers.environments.indoor.phases.flowering.coco.fertilizing.description',
             },
           },
         },
         seed_development: {
           days: 30,
-          description: 'sunflowers.phases.seed_development.description',
-          care: 'sunflowers.phases.seed_development.care',
+          description: 'sunflowers.environments.indoor.phases.seed_development.description',
+          care: 'sunflowers.environments.indoor.phases.seed_development.care',
           editable: true,
           soil: {
-            watering: { interval: 3, description: 'sunflowers.phases.seed_development.soil.watering.description' },
+            watering: { interval: 3, description: 'sunflowers.environments.indoor.phases.seed_development.soil.watering.description' },
             fertilizing: {
               interval: 0,
-              description: 'sunflowers.phases.seed_development.soil.fertilizing.description',
+              description: 'sunflowers.environments.indoor.phases.seed_development.soil.fertilizing.description',
             },
           },
           hydro: {
-            watering: { interval: 0, description: 'sunflowers.phases.seed_development.hydro.watering.description' },
+            watering: { interval: 0, description: 'sunflowers.environments.indoor.phases.seed_development.hydro.watering.description' },
             fertilizing: {
               interval: 0,
-              description: 'sunflowers.phases.seed_development.hydro.fertilizing.description',
+              description: 'sunflowers.environments.indoor.phases.seed_development.hydro.fertilizing.description',
             },
           },
           coco: {
-            watering: { interval: 1, description: 'sunflowers.phases.seed_development.coco.watering.description' },
+            watering: { interval: 1, description: 'sunflowers.environments.indoor.phases.seed_development.coco.watering.description' },
             fertilizing: {
               interval: 0,
-              description: 'sunflowers.phases.seed_development.coco.fertilizing.description',
+              description: 'sunflowers.environments.indoor.phases.seed_development.coco.fertilizing.description',
             },
           },
         },
@@ -168,152 +168,152 @@ export const sunflowers = {
         germination: {
           start: '04-15',
           end: '04-22',
-          description: 'sunflowers.phases.germination.description',
-          care: 'sunflowers.phases.germination.care',
+          description: 'sunflowers.environments.outdoor.phases.germination.description',
+          care: 'sunflowers.environments.outdoor.phases.germination.care',
           editable: false,
           soil: {
             watering: {
               interval: 1,
-              description: 'sunflowers.phases.germination.soil.watering.description',
+              description: 'sunflowers.environments.outdoor.phases.germination.soil.watering.description',
             },
             fertilizing: {
               interval: 0,
-              description: 'sunflowers.phases.germination.soil.fertilizing.description',
+              description: 'sunflowers.environments.outdoor.phases.germination.soil.fertilizing.description',
             },
           },
           hydro: {
             watering: {
               interval: 0,
-              description: 'sunflowers.phases.germination.hydro.watering.description',
+              description: 'sunflowers.environments.outdoor.phases.germination.hydro.watering.description',
             },
             fertilizing: {
               interval: 0,
-              description: 'sunflowers.phases.germination.hydro.fertilizing.description',
+              description: 'sunflowers.environments.outdoor.phases.germination.hydro.fertilizing.description',
             },
           },
           coco: {
             watering: {
               interval: 1,
-              description: 'sunflowers.phases.germination.coco.watering.description',
+              description: 'sunflowers.environments.outdoor.phases.germination.coco.watering.description',
             },
             fertilizing: {
               interval: 0,
-              description: 'sunflowers.phases.germination.coco.fertilizing.description',
+              description: 'sunflowers.environments.outdoor.phases.germination.coco.fertilizing.description',
             },
           },
         },
         seedling: {
           start: '04-23',
           end: '05-07',
-          description: 'sunflowers.phases.seedling.description',
-          care: 'sunflowers.phases.seedling.care',
+          description: 'sunflowers.environments.outdoor.phases.seedling.description',
+          care: 'sunflowers.environments.outdoor.phases.seedling.care',
           editable: false,
           soil: {
             watering: {
               interval: 2,
-              description: 'sunflowers.phases.seedling.soil.watering.description',
+              description: 'sunflowers.environments.outdoor.phases.seedling.soil.watering.description',
             },
             fertilizing: {
               interval: 0,
-              description: 'sunflowers.phases.seedling.soil.fertilizing.description',
+              description: 'sunflowers.environments.outdoor.phases.seedling.soil.fertilizing.description',
             },
           },
           hydro: {
-            watering: { interval: 0, description: 'sunflowers.phases.seedling.hydro.watering.description' },
+            watering: { interval: 0, description: 'sunflowers.environments.outdoor.phases.seedling.hydro.watering.description' },
             fertilizing: {
               interval: 7,
-              description: 'sunflowers.phases.seedling.hydro.fertilizing.description',
+              description: 'sunflowers.environments.outdoor.phases.seedling.hydro.fertilizing.description',
             },
           },
           coco: {
-            watering: { interval: 1, description: 'sunflowers.phases.seedling.coco.watering.description' },
-            fertilizing: { interval: 7, description: 'sunflowers.phases.seedling.coco.fertilizing.description' },
+            watering: { interval: 1, description: 'sunflowers.environments.outdoor.phases.seedling.coco.watering.description' },
+            fertilizing: { interval: 7, description: 'sunflowers.environments.outdoor.phases.seedling.coco.fertilizing.description' },
           },
         },
         vegetative: {
           start: '05-08',
           end: '06-07',
-          description: 'sunflowers.phases.vegetative.description',
-          care: 'sunflowers.phases.vegetative.care',
+          description: 'sunflowers.environments.outdoor.phases.vegetative.description',
+          care: 'sunflowers.environments.outdoor.phases.vegetative.care',
           editable: false,
           soil: {
             watering: {
               interval: 3,
-              description: 'sunflowers.phases.vegetative.soil.watering.description',
+              description: 'sunflowers.environments.outdoor.phases.vegetative.soil.watering.description',
             },
             fertilizing: {
               interval: 14,
-              description: 'sunflowers.phases.vegetative.soil.fertilizing.description',
+              description: 'sunflowers.environments.outdoor.phases.vegetative.soil.fertilizing.description',
             },
           },
           hydro: {
-            watering: { interval: 0, description: 'sunflowers.phases.vegetative.hydro.watering.description' },
+            watering: { interval: 0, description: 'sunflowers.environments.outdoor.phases.vegetative.hydro.watering.description' },
             fertilizing: {
               interval: 14,
-              description: 'sunflowers.phases.vegetative.hydro.fertilizing.description',
+              description: 'sunflowers.environments.outdoor.phases.vegetative.hydro.fertilizing.description',
             },
           },
           coco: {
-            watering: { interval: 1, description: 'sunflowers.phases.vegetative.coco.watering.description' },
+            watering: { interval: 1, description: 'sunflowers.environments.outdoor.phases.vegetative.coco.watering.description' },
             fertilizing: {
               interval: 14,
-              description: 'sunflowers.phases.vegetative.coco.fertilizing.description',
+              description: 'sunflowers.environments.outdoor.phases.vegetative.coco.fertilizing.description',
             },
           },
         },
         flowering: {
           start: '06-08',
           end: '06-29',
-          description: 'sunflowers.phases.flowering.description',
-          care: 'sunflowers.phases.flowering.care',
+          description: 'sunflowers.environments.outdoor.phases.flowering.description',
+          care: 'sunflowers.environments.outdoor.phases.flowering.care',
           editable: true,
           soil: {
-            watering: { interval: 3, description: 'sunflowers.phases.flowering.soil.watering.description' },
+            watering: { interval: 3, description: 'sunflowers.environments.outdoor.phases.flowering.soil.watering.description' },
             fertilizing: {
               interval: 21,
-              description: 'sunflowers.phases.flowering.soil.fertilizing.description',
+              description: 'sunflowers.environments.outdoor.phases.flowering.soil.fertilizing.description',
             },
           },
           hydro: {
-            watering: { interval: 0, description: 'sunflowers.phases.flowering.hydro.watering.description' },
+            watering: { interval: 0, description: 'sunflowers.environments.outdoor.phases.flowering.hydro.watering.description' },
             fertilizing: {
               interval: 21,
-              description: 'sunflowers.phases.flowering.hydro.fertilizing.description',
+              description: 'sunflowers.environments.outdoor.phases.flowering.hydro.fertilizing.description',
             },
           },
           coco: {
-            watering: { interval: 1, description: 'sunflowers.phases.flowering.coco.watering.description' },
+            watering: { interval: 1, description: 'sunflowers.environments.outdoor.phases.flowering.coco.watering.description' },
             fertilizing: {
               interval: 21,
-              description: 'sunflowers.phases.flowering.coco.fertilizing.description',
+              description: 'sunflowers.environments.outdoor.phases.flowering.coco.fertilizing.description',
             },
           },
         },
         seed_development: {
           start: '06-30',
           end: '07-30',
-          description: 'sunflowers.phases.seed_development.description',
-          care: 'sunflowers.phases.seed_development.care',
+          description: 'sunflowers.environments.outdoor.phases.seed_development.description',
+          care: 'sunflowers.environments.outdoor.phases.seed_development.care',
           editable: true,
           soil: {
-            watering: { interval: 3, description: 'sunflowers.phases.seed_development.soil.watering.description' },
+            watering: { interval: 3, description: 'sunflowers.environments.outdoor.phases.seed_development.soil.watering.description' },
             fertilizing: {
               interval: 0,
-              description: 'sunflowers.phases.seed_development.soil.fertilizing.description',
+              description: 'sunflowers.environments.outdoor.phases.seed_development.soil.fertilizing.description',
             },
           },
           hydro: {
-            watering: { interval: 0, description: 'sunflowers.phases.seed_development.hydro.watering.description' },
+            watering: { interval: 0, description: 'sunflowers.environments.outdoor.phases.seed_development.hydro.watering.description' },
             fertilizing: {
               interval: 0,
-              description: 'sunflowers.phases.seed_development.hydro.fertilizing.description',
+              description: 'sunflowers.environments.outdoor.phases.seed_development.hydro.fertilizing.description',
             },
           },
           coco: {
-            watering: { interval: 1, description: 'sunflowers.phases.seed_development.coco.watering.description' },
+            watering: { interval: 1, description: 'sunflowers.environments.outdoor.phases.seed_development.coco.watering.description' },
             fertilizing: {
               interval: 0,
-              description: 'sunflowers.phases.seed_development.coco.fertilizing.description',
+              description: 'sunflowers.environments.outdoor.phases.seed_development.coco.fertilizing.description',
             },
           },
         },
@@ -349,148 +349,148 @@ export const sunflowers = {
       phases: {
         germination: {
           days: 7,
-          description: 'sunflowers.phases.germination.description',
-          care: 'sunflowers.phases.germination.care',
+          description: 'sunflowers.environments.greenhouse.phases.germination.description',
+          care: 'sunflowers.environments.greenhouse.phases.germination.care',
           editable: true,
           soil: {
             watering: {
               interval: 1,
-              description: 'sunflowers.phases.germination.soil.watering.description',
+              description: 'sunflowers.environments.greenhouse.phases.germination.soil.watering.description',
             },
             fertilizing: {
               interval: 0,
-              description: 'sunflowers.phases.germination.soil.fertilizing.description',
+              description: 'sunflowers.environments.greenhouse.phases.germination.soil.fertilizing.description',
             },
           },
           hydro: {
             watering: {
               interval: 0,
-              description: 'sunflowers.phases.germination.hydro.watering.description',
+              description: 'sunflowers.environments.greenhouse.phases.germination.hydro.watering.description',
             },
             fertilizing: {
               interval: 0,
-              description: 'sunflowers.phases.germination.hydro.fertilizing.description',
+              description: 'sunflowers.environments.greenhouse.phases.germination.hydro.fertilizing.description',
             },
           },
           coco: {
             watering: {
               interval: 1,
-              description: 'sunflowers.phases.germination.coco.watering.description',
+              description: 'sunflowers.environments.greenhouse.phases.germination.coco.watering.description',
             },
             fertilizing: {
               interval: 0,
-              description: 'sunflowers.phases.germination.coco.fertilizing.description',
+              description: 'sunflowers.environments.greenhouse.phases.germination.coco.fertilizing.description',
             },
           },
         },
         seedling: {
           days: 14,
-          description: 'sunflowers.phases.seedling.description',
-          care: 'sunflowers.phases.seedling.care',
+          description: 'sunflowers.environments.greenhouse.phases.seedling.description',
+          care: 'sunflowers.environments.greenhouse.phases.seedling.care',
           editable: true,
           soil: {
             watering: {
               interval: 2,
-              description: 'sunflowers.phases.seedling.soil.watering.description',
+              description: 'sunflowers.environments.greenhouse.phases.seedling.soil.watering.description',
             },
             fertilizing: {
               interval: 0,
-              description: 'sunflowers.phases.seedling.soil.fertilizing.description',
+              description: 'sunflowers.environments.greenhouse.phases.seedling.soil.fertilizing.description',
             },
           },
           hydro: {
-            watering: { interval: 0, description: 'sunflowers.phases.seedling.hydro.watering.description' },
+            watering: { interval: 0, description: 'sunflowers.environments.greenhouse.phases.seedling.hydro.watering.description' },
             fertilizing: {
               interval: 7,
-              description: 'sunflowers.phases.seedling.hydro.fertilizing.description',
+              description: 'sunflowers.environments.greenhouse.phases.seedling.hydro.fertilizing.description',
             },
           },
           coco: {
-            watering: { interval: 1, description: 'sunflowers.phases.seedling.coco.watering.description' },
-            fertilizing: { interval: 7, description: 'sunflowers.phases.seedling.coco.fertilizing.description' },
+            watering: { interval: 1, description: 'sunflowers.environments.greenhouse.phases.seedling.coco.watering.description' },
+            fertilizing: { interval: 7, description: 'sunflowers.environments.greenhouse.phases.seedling.coco.fertilizing.description' },
           },
         },
         vegetative: {
           days: 30,
-          description: 'sunflowers.phases.vegetative.description',
-          care: 'sunflowers.phases.vegetative.care',
+          description: 'sunflowers.environments.greenhouse.phases.vegetative.description',
+          care: 'sunflowers.environments.greenhouse.phases.vegetative.care',
           editable: true,
           soil: {
             watering: {
               interval: 3,
-              description: 'sunflowers.phases.vegetative.soil.watering.description',
+              description: 'sunflowers.environments.greenhouse.phases.vegetative.soil.watering.description',
             },
             fertilizing: {
               interval: 14,
-              description: 'sunflowers.phases.vegetative.soil.fertilizing.description',
+              description: 'sunflowers.environments.greenhouse.phases.vegetative.soil.fertilizing.description',
             },
           },
           hydro: {
-            watering: { interval: 0, description: 'sunflowers.phases.vegetative.hydro.watering.description' },
+            watering: { interval: 0, description: 'sunflowers.environments.greenhouse.phases.vegetative.hydro.watering.description' },
             fertilizing: {
               interval: 14,
-              description: 'sunflowers.phases.vegetative.hydro.fertilizing.description',
+              description: 'sunflowers.environments.greenhouse.phases.vegetative.hydro.fertilizing.description',
             },
           },
           coco: {
-            watering: { interval: 1, description: 'sunflowers.phases.vegetative.coco.watering.description' },
+            watering: { interval: 1, description: 'sunflowers.environments.greenhouse.phases.vegetative.coco.watering.description' },
             fertilizing: {
               interval: 14,
-              description: 'sunflowers.phases.vegetative.coco.fertilizing.description',
+              description: 'sunflowers.environments.greenhouse.phases.vegetative.coco.fertilizing.description',
             },
           },
         },
         flowering: {
           days: 21,
-          description: 'sunflowers.phases.flowering.description',
-          care: 'sunflowers.phases.flowering.care',
+          description: 'sunflowers.environments.greenhouse.phases.flowering.description',
+          care: 'sunflowers.environments.greenhouse.phases.flowering.care',
           editable: true,
           soil: {
-            watering: { interval: 3, description: 'sunflowers.phases.flowering.soil.watering.description' },
+            watering: { interval: 3, description: 'sunflowers.environments.greenhouse.phases.flowering.soil.watering.description' },
             fertilizing: {
               interval: 21,
-              description: 'sunflowers.phases.flowering.soil.fertilizing.description',
+              description: 'sunflowers.environments.greenhouse.phases.flowering.soil.fertilizing.description',
             },
           },
           hydro: {
-            watering: { interval: 0, description: 'sunflowers.phases.flowering.hydro.watering.description' },
+            watering: { interval: 0, description: 'sunflowers.environments.greenhouse.phases.flowering.hydro.watering.description' },
             fertilizing: {
               interval: 21,
-              description: 'sunflowers.phases.flowering.hydro.fertilizing.description',
+              description: 'sunflowers.environments.greenhouse.phases.flowering.hydro.fertilizing.description',
             },
           },
           coco: {
-            watering: { interval: 1, description: 'sunflowers.phases.flowering.coco.watering.description' },
+            watering: { interval: 1, description: 'sunflowers.environments.greenhouse.phases.flowering.coco.watering.description' },
             fertilizing: {
               interval: 21,
-              description: 'sunflowers.phases.flowering.coco.fertilizing.description',
+              description: 'sunflowers.environments.greenhouse.phases.flowering.coco.fertilizing.description',
             },
           },
         },
         seed_development: {
           days: 30,
-          description: 'sunflowers.phases.seed_development.description',
-          care: 'sunflowers.phases.seed_development.care',
+          description: 'sunflowers.environments.greenhouse.phases.seed_development.description',
+          care: 'sunflowers.environments.greenhouse.phases.seed_development.care',
           editable: true,
           soil: {
-            watering: { interval: 3, description: 'sunflowers.phases.seed_development.soil.watering.description' },
+            watering: { interval: 3, description: 'sunflowers.environments.greenhouse.phases.seed_development.soil.watering.description' },
             fertilizing: {
               interval: 0,
-              description: 'sunflowers.phases.seed_development.soil.fertilizing.description',
+              description: 'sunflowers.environments.greenhouse.phases.seed_development.soil.fertilizing.description',
             },
           },
           hydro: {
-            watering: { interval: 0, description: 'sunflowers.phases.seed_development.hydro.watering.description' },
+            watering: { interval: 0, description: 'sunflowers.environments.greenhouse.phases.seed_development.hydro.watering.description' },
             fertilizing: {
               interval: 0,
-              description: 'sunflowers.phases.seed_development.hydro.fertilizing.description',
+              description: 'sunflowers.environments.greenhouse.phases.seed_development.hydro.fertilizing.description',
             },
           },
           coco: {
-            watering: { interval: 1, description: 'sunflowers.phases.seed_development.coco.watering.description' },
+            watering: { interval: 1, description: 'sunflowers.environments.greenhouse.phases.seed_development.coco.watering.description' },
             fertilizing: {
               interval: 0,
-              description: 'sunflowers.phases.seed_development.coco.fertilizing.description',
+              description: 'sunflowers.environments.greenhouse.phases.seed_development.coco.fertilizing.description',
             },
           },
         },

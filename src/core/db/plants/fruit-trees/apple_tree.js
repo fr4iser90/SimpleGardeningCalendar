@@ -17,148 +17,148 @@ export const apple_tree = {
         establishment: {
           start: '03-01',
           end: '02-28',
-          description: 'apple_tree.phases.establishment.description',
-          care: 'apple_tree.phases.establishment.care',
+          description: 'apple_tree.environments.outdoor.phases.establishment.description',
+          care: 'apple_tree.environments.outdoor.phases.establishment.care',
           editable: false,
           soil: {
             watering: {
               interval: 7,
-              description: 'apple_tree.phases.establishment.soil.watering.description',
+              description: 'apple_tree.environments.outdoor.phases.establishment.soil.watering.description',
             },
             fertilizing: {
               interval: 90,
-              description: 'apple_tree.phases.establishment.soil.fertilizing.description',
+              description: 'apple_tree.environments.outdoor.phases.establishment.soil.fertilizing.description',
             },
           },
           hydro: {
             watering: {
               interval: 0,
-              description: 'apple_tree.phases.establishment.hydro.watering.description',
+              description: 'apple_tree.environments.outdoor.phases.establishment.hydro.watering.description',
             },
             fertilizing: {
               interval: 90,
-              description: 'apple_tree.phases.establishment.hydro.fertilizing.description',
+              description: 'apple_tree.environments.outdoor.phases.establishment.hydro.fertilizing.description',
             },
           },
           coco: {
             watering: {
               interval: 7,
-              description: 'apple_tree.phases.establishment.coco.watering.description',
+              description: 'apple_tree.environments.outdoor.phases.establishment.coco.watering.description',
             },
             fertilizing: {
               interval: 90,
-              description: 'apple_tree.phases.establishment.coco.fertilizing.description',
+              description: 'apple_tree.environments.outdoor.phases.establishment.coco.fertilizing.description',
             },
           },
         },
         juvenile: {
           start: '03-01',
           end: '02-28',
-          description: 'apple_tree.phases.juvenile.description',
-          care: 'apple_tree.phases.juvenile.care',
+          description: 'apple_tree.environments.outdoor.phases.juvenile.description',
+          care: 'apple_tree.environments.outdoor.phases.juvenile.care',
           editable: false,
           soil: {
             watering: {
               interval: 7,
-              description: 'apple_tree.phases.juvenile.soil.watering.description',
+              description: 'apple_tree.environments.outdoor.phases.juvenile.soil.watering.description',
             },
             fertilizing: {
               interval: 90,
-              description: 'apple_tree.phases.juvenile.soil.fertilizing.description',
+              description: 'apple_tree.environments.outdoor.phases.juvenile.soil.fertilizing.description',
             },
           },
           hydro: {
             watering: {
               interval: 0,
-              description: 'apple_tree.phases.juvenile.hydro.watering.description',
+              description: 'apple_tree.environments.outdoor.phases.juvenile.hydro.watering.description',
             },
             fertilizing: {
               interval: 90,
-              description: 'apple_tree.phases.juvenile.hydro.fertilizing.description',
+              description: 'apple_tree.environments.outdoor.phases.juvenile.hydro.fertilizing.description',
             },
           },
           coco: {
             watering: {
               interval: 7,
-              description: 'apple_tree.phases.juvenile.coco.watering.description',
+              description: 'apple_tree.environments.outdoor.phases.juvenile.coco.watering.description',
             },
             fertilizing: {
               interval: 90,
-              description: 'apple_tree.phases.juvenile.coco.fertilizing.description',
+              description: 'apple_tree.environments.outdoor.phases.juvenile.coco.fertilizing.description',
             },
           },
         },
         productive: {
           start: '03-01',
           end: '02-28',
-          description: 'apple_tree.phases.productive.description',
-          care: 'apple_tree.phases.productive.care',
+          description: 'apple_tree.environments.outdoor.phases.productive.description',
+          care: 'apple_tree.environments.outdoor.phases.productive.care',
           editable: false,
           soil: {
             watering: {
               interval: 7,
-              description: 'apple_tree.phases.productive.soil.watering.description',
+              description: 'apple_tree.environments.outdoor.phases.productive.soil.watering.description',
             },
             fertilizing: {
               interval: 90,
-              description: 'apple_tree.phases.productive.soil.fertilizing.description',
+              description: 'apple_tree.environments.outdoor.phases.productive.soil.fertilizing.description',
             },
           },
           hydro: {
             watering: {
               interval: 0,
-              description: 'apple_tree.phases.productive.hydro.watering.description',
+              description: 'apple_tree.environments.outdoor.phases.productive.hydro.watering.description',
             },
             fertilizing: {
               interval: 90,
-              description: 'apple_tree.phases.productive.hydro.fertilizing.description',
+              description: 'apple_tree.environments.outdoor.phases.productive.hydro.fertilizing.description',
             },
           },
           coco: {
             watering: {
               interval: 7,
-              description: 'apple_tree.phases.productive.coco.watering.description',
+              description: 'apple_tree.environments.outdoor.phases.productive.coco.watering.description',
             },
             fertilizing: {
               interval: 90,
-              description: 'apple_tree.phases.productive.coco.fertilizing.description',
+              description: 'apple_tree.environments.outdoor.phases.productive.coco.fertilizing.description',
             },
           },
         },
         dormancy: {
           start: '11-01',
           end: '02-28',
-          description: 'apple_tree.phases.dormancy.description',
-          care: 'apple_tree.phases.dormancy.care',
+          description: 'apple_tree.environments.outdoor.phases.dormancy.description',
+          care: 'apple_tree.environments.outdoor.phases.dormancy.care',
           editable: false,
           soil: {
             watering: {
               interval: 14,
-              description: 'apple_tree.phases.dormancy.soil.watering.description',
+              description: 'apple_tree.environments.outdoor.phases.dormancy.soil.watering.description',
             },
             fertilizing: {
               interval: 0,
-              description: 'apple_tree.phases.dormancy.soil.fertilizing.description',
+              description: 'apple_tree.environments.outdoor.phases.dormancy.soil.fertilizing.description',
             },
           },
           hydro: {
             watering: {
               interval: 0,
-              description: 'apple_tree.phases.dormancy.hydro.watering.description',
+              description: 'apple_tree.environments.outdoor.phases.dormancy.hydro.watering.description',
             },
             fertilizing: {
               interval: 0,
-              description: 'apple_tree.phases.dormancy.hydro.fertilizing.description',
+              description: 'apple_tree.environments.outdoor.phases.dormancy.hydro.fertilizing.description',
             },
           },
           coco: {
             watering: {
               interval: 14,
-              description: 'apple_tree.phases.dormancy.coco.watering.description',
+              description: 'apple_tree.environments.outdoor.phases.dormancy.coco.watering.description',
             },
             fertilizing: {
               interval: 0,
-              description: 'apple_tree.phases.dormancy.coco.fertilizing.description',
+              description: 'apple_tree.environments.outdoor.phases.dormancy.coco.fertilizing.description',
             },
           },
         },
