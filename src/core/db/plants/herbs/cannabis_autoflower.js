@@ -6,219 +6,205 @@
 
 import { PLANT_TAGS } from '../categories.js';
 
-// Helper function for temperature formatting
-function formatTemperature(fahrenheitRange) {
-  if (!fahrenheitRange || typeof fahrenheitRange !== 'string')
-    return fahrenheitRange;
 
-  const fahrenheitMatch = fahrenheitRange.match(/(\d+)-(\d+)°F/);
-  if (!fahrenheitMatch) return fahrenheitRange;
-
-  const [, minF, maxF] = fahrenheitMatch;
-  const minC = Math.round(((parseInt(minF) - 32) * 5) / 9);
-  const maxC = Math.round(((parseInt(maxF) - 32) * 5) / 9);
-
-  return `${minF}-${maxF}°F (${minC}-${maxC}°C)`;
-}
 
 export const cannabis_autoflower = {
-  name: 'Cannabis Autoflower',
-  category: 'category.herbs', // Updated category
-  tags: [PLANT_TAGS.CANNABIS, PLANT_TAGS.ANNUAL], // Autoflowers are NOT photoperiod-dependent
-  legalNote:
-    'Check local laws before cultivation. This information is for educational purposes only.',
+  name: 'cannabis_autoflower.name',
+  category: 'category.herbs',
+  tags: [PLANT_TAGS.CANNABIS, PLANT_TAGS.ANNUAL],
+  legalNote: 'cannabis_autoflower.legalNote',
   environments: {
     indoor: {
       phases: {
         germination: {
           days: 3,
-          description: 'Seed sprouting',
-          care: 'Keep seeds warm (70-85°F/21-29°C) and moist in dark environment',
+          description: 'cannabis_autoflower.phases.germination.description',
+          care: 'cannabis_autoflower.phases.germination.care',
           editable: true,
           soil: {
             watering: {
               interval: 1,
-              description: 'Keep soil moist during germination',
+              description: 'cannabis_autoflower.phases.germination.soil.watering.description',
             },
             fertilizing: {
               interval: 0,
-              description: 'No fertilizing during germination',
+              description: 'cannabis_autoflower.phases.germination.soil.fertilizing.description',
             },
           },
           hydro: {
             watering: {
               interval: 0,
-              description: 'Continuous moisture in rockwool',
+              description: 'cannabis_autoflower.phases.germination.hydro.watering.description',
             },
             fertilizing: {
               interval: 0,
-              description: 'No nutrients during germination',
+              description: 'cannabis_autoflower.phases.germination.hydro.fertilizing.description',
             },
           },
           coco: {
             watering: {
               interval: 1,
-              description: 'Keep coco moist during germination',
+              description: 'cannabis_autoflower.phases.germination.coco.watering.description',
             },
             fertilizing: {
               interval: 0,
-              description: 'No fertilizing during germination',
+              description: 'cannabis_autoflower.phases.germination.coco.fertilizing.description',
             },
           },
         },
         seedling: {
           days: 10,
-          description: 'First true leaves development',
-          care: 'Provide 18-24 hours of light, gentle care - no transplanting',
+          description: 'cannabis_autoflower.phases.seedling.description',
+          care: 'cannabis_autoflower.phases.seedling.care',
           editable: true,
           soil: {
             watering: {
               interval: 2,
-              description: 'Water every 2 days during seedling stage',
+              description: 'cannabis_autoflower.phases.seedling.soil.watering.description',
             },
             fertilizing: {
               interval: 0,
-              description: 'No fertilizing during seedling stage',
+              description: 'cannabis_autoflower.phases.seedling.soil.fertilizing.description',
             },
           },
           hydro: {
-            watering: { interval: 0, description: 'Continuous flow, low EC' },
+            watering: { interval: 0, description: 'cannabis_autoflower.phases.seedling.hydro.watering.description' },
             fertilizing: {
               interval: 7,
-              description: 'Light nutrients, EC 0.5-0.8',
+              description: 'cannabis_autoflower.phases.seedling.hydro.fertilizing.description',
             },
           },
           coco: {
-            watering: { interval: 1, description: 'Daily watering in coco' },
+            watering: { interval: 1, description: 'cannabis_autoflower.phases.seedling.coco.watering.description' },
             fertilizing: {
               interval: 7,
-              description: 'Light feeding, EC 0.5-0.8',
+              description: 'cannabis_autoflower.phases.seedling.coco.fertilizing.description',
             },
           },
         },
         vegetative: {
           days: 21,
-          description: 'Rapid early growth',
-          care: '18-24 hours light, light feeding, minimal stress',
+          description: 'cannabis_autoflower.phases.vegetative.description',
+          care: 'cannabis_autoflower.phases.vegetative.care',
           editable: true,
           soil: {
             watering: {
               interval: 2,
-              description: 'Water every 2 days during vegetative growth',
+              description: 'cannabis_autoflower.phases.vegetative.soil.watering.description',
             },
             fertilizing: {
               interval: 7,
-              description: 'Weekly feeding with high nitrogen',
+              description: 'cannabis_autoflower.phases.vegetative.soil.fertilizing.description',
             },
           },
           hydro: {
             watering: {
               interval: 0,
-              description: 'Continuous flow, moderate EC',
+              description: 'cannabis_autoflower.phases.vegetative.hydro.watering.description',
             },
             fertilizing: {
               interval: 7,
-              description: 'Weekly nutrient change, EC 1.0-1.2',
+              description: 'cannabis_autoflower.phases.vegetative.hydro.fertilizing.description',
             },
           },
           coco: {
-            watering: { interval: 1, description: 'Daily watering in coco' },
+            watering: { interval: 1, description: 'cannabis_autoflower.phases.vegetative.coco.watering.description' },
             fertilizing: {
               interval: 7,
-              description: 'Weekly feeding, EC 1.0-1.2',
+              description: 'cannabis_autoflower.phases.vegetative.coco.fertilizing.description',
             },
           },
         },
         preflower: {
           days: 7,
-          description: 'Automatic transition',
-          care: 'Continue same light schedule, begin flower nutrients',
+          description: 'cannabis_autoflower.phases.preflower.description',
+          care: 'cannabis_autoflower.phases.preflower.care',
           editable: true,
           soil: {
             watering: {
               interval: 2,
-              description: 'Continue regular watering schedule',
+              description: 'cannabis_autoflower.phases.preflower.soil.watering.description',
             },
             fertilizing: {
               interval: 7,
-              description: 'Transition to flowering nutrients',
+              description: 'cannabis_autoflower.phases.preflower.soil.fertilizing.description',
             },
           },
           hydro: {
             watering: {
               interval: 0,
-              description: 'Continuous flow, moderate EC',
+              description: 'cannabis_autoflower.phases.preflower.hydro.watering.description',
             },
             fertilizing: {
               interval: 7,
-              description: 'Transition to flowering nutrients',
+              description: 'cannabis_autoflower.phases.preflower.hydro.fertilizing.description',
             },
           },
           coco: {
-            watering: { interval: 1, description: 'Daily watering in coco' },
+            watering: { interval: 1, description: 'cannabis_autoflower.phases.preflower.coco.watering.description' },
             fertilizing: {
               interval: 7,
-              description: 'Transition to flowering nutrients',
+              description: 'cannabis_autoflower.phases.preflower.coco.fertilizing.description',
             },
           },
         },
         flowering: {
           days: 35,
-          description: 'Fast flowering',
-          care: 'Continue 18-24 hour light, phosphorus/potassium feeding',
+          description: 'cannabis_autoflower.phases.flowering.description',
+          care: 'cannabis_autoflower.phases.flowering.care',
           editable: true,
           soil: {
             watering: {
               interval: 2,
-              description: 'Water every 2 days during flowering',
+              description: 'cannabis_autoflower.phases.flowering.soil.watering.description',
             },
             fertilizing: {
               interval: 7,
-              description: 'Weekly feeding with bloom nutrients',
+              description: 'cannabis_autoflower.phases.flowering.soil.fertilizing.description',
             },
           },
           hydro: {
             watering: {
               interval: 0,
-              description: 'Continuous flow, higher EC',
+              description: 'cannabis_autoflower.phases.flowering.hydro.watering.description',
             },
             fertilizing: {
               interval: 7,
-              description: 'Weekly nutrient change, EC 1.2-1.5',
+              description: 'cannabis_autoflower.phases.flowering.hydro.fertilizing.description',
             },
           },
           coco: {
-            watering: { interval: 1, description: 'Daily watering in coco' },
+            watering: { interval: 1, description: 'cannabis_autoflower.phases.flowering.coco.watering.description' },
             fertilizing: {
               interval: 7,
-              description: 'Weekly feeding, EC 1.2-1.5',
+              description: 'cannabis_autoflower.phases.flowering.coco.fertilizing.description',
             },
           },
         },
         harvest: {
           days: 7,
-          description: 'Quick harvest cycle',
-          care: 'Flush nutrients 1 week before harvest',
+          description: 'cannabis_autoflower.phases.harvest.description',
+          care: 'cannabis_autoflower.phases.harvest.care',
           editable: true,
           soil: {
-            watering: { interval: 1, description: 'Flush with plain water' },
+            watering: { interval: 1, description: 'cannabis_autoflower.phases.harvest.soil.watering.description' },
             fertilizing: {
               interval: 0,
-              description: 'No fertilizing during flush',
+              description: 'cannabis_autoflower.phases.harvest.soil.fertilizing.description',
             },
           },
           hydro: {
-            watering: { interval: 0, description: 'Flush with plain water' },
+            watering: { interval: 0, description: 'cannabis_autoflower.phases.harvest.hydro.watering.description' },
             fertilizing: {
               interval: 0,
-              description: 'No nutrients during flush',
+              description: 'cannabis_autoflower.phases.harvest.hydro.fertilizing.description',
             },
           },
           coco: {
-            watering: { interval: 1, description: 'Flush with plain water' },
+            watering: { interval: 1, description: 'cannabis_autoflower.phases.harvest.coco.watering.description' },
             fertilizing: {
               interval: 0,
-              description: 'No fertilizing during flush',
+              description: 'cannabis_autoflower.phases.harvest.coco.fertilizing.description',
             },
           },
         },
@@ -228,200 +214,199 @@ export const cannabis_autoflower = {
       phases: {
         germination: {
           days: 3,
-          description: 'Seed sprouting',
-          care: 'Keep seeds warm and moist, protect from direct sun',
+          description: 'cannabis_autoflower.phases.germination.description',
+          care: 'cannabis_autoflower.phases.germination.care',
           editable: false,
           soil: {
             watering: {
               interval: 1,
-              description: 'Keep soil moist during germination',
+              description: 'cannabis_autoflower.phases.germination.soil.watering.description',
             },
             fertilizing: {
               interval: 0,
-              description: 'No fertilizing during germination',
+              description: 'cannabis_autoflower.phases.germination.soil.fertilizing.description',
             },
           },
           hydro: {
             watering: {
               interval: 0,
-              description: 'Continuous moisture in rockwool',
+              description: 'cannabis_autoflower.phases.germination.hydro.watering.description',
             },
             fertilizing: {
               interval: 0,
-              description: 'No nutrients during germination',
+              description: 'cannabis_autoflower.phases.germination.hydro.fertilizing.description',
             },
           },
           coco: {
             watering: {
               interval: 1,
-              description: 'Keep coco moist during germination',
+              description: 'cannabis_autoflower.phases.germination.coco.watering.description',
             },
             fertilizing: {
               interval: 0,
-              description: 'No fertilizing during germination',
+              description: 'cannabis_autoflower.phases.germination.coco.fertilizing.description',
             },
           },
         },
         seedling: {
           days: 21,
-          description: 'Establishing outdoors',
-          care: 'Gradual sun exposure, protect from wind and pests',
+          description: 'cannabis_autoflower.phases.seedling.description',
+          care: 'cannabis_autoflower.phases.seedling.care',
           editable: false,
           soil: {
             watering: {
               interval: 2,
-              description: 'Water every 2 days during seedling stage',
+              description: 'cannabis_autoflower.phases.seedling.soil.watering.description',
             },
             fertilizing: {
               interval: 0,
-              description: 'No fertilizing during seedling establishment',
+              description: 'cannabis_autoflower.phases.seedling.soil.fertilizing.description',
             },
           },
           hydro: {
-            watering: { interval: 0, description: 'Continuous flow, low EC' },
+            watering: { interval: 0, description: 'cannabis_autoflower.phases.seedling.hydro.watering.description' },
             fertilizing: {
               interval: 7,
-              description: 'Light nutrients, EC 0.5-0.8',
+              description: 'cannabis_autoflower.phases.seedling.hydro.fertilizing.description',
             },
           },
           coco: {
-            watering: { interval: 1, description: 'Daily watering in coco' },
+            watering: { interval: 1, description: 'cannabis_autoflower.phases.seedling.coco.watering.description' },
             fertilizing: {
               interval: 7,
-              description: 'Light feeding, EC 0.5-0.8',
+              description: 'cannabis_autoflower.phases.seedling.coco.fertilizing.description',
             },
           },
         },
         vegetative: {
           days: 35,
-          description: 'Autoflower vegetative growth',
-          care: 'Natural sunlight, LST training, heavy feeding',
+          description: 'cannabis_autoflower.phases.vegetative.description',
+          care: 'cannabis_autoflower.phases.vegetative.care',
           editable: false,
           soil: {
             watering: {
               interval: 2,
-              description: 'Water every 2 days during vegetative growth',
+              description: 'cannabis_autoflower.phases.vegetative.soil.watering.description',
             },
             fertilizing: {
               interval: 14,
-              description: 'High nitrogen feeding for vegetative growth',
+              description: 'cannabis_autoflower.phases.vegetative.soil.fertilizing.description',
             },
           },
           hydro: {
             watering: {
               interval: 0,
-              description: 'Continuous flow, moderate EC',
+              description: 'cannabis_autoflower.phases.vegetative.hydro.watering.description',
             },
             fertilizing: {
               interval: 14,
-              description: 'High nitrogen feeding for vegetative growth',
+              description: 'cannabis_autoflower.phases.vegetative.hydro.fertilizing.description',
             },
           },
           coco: {
-            watering: { interval: 1, description: 'Daily watering in coco' },
+            watering: { interval: 1, description: 'cannabis_autoflower.phases.vegetative.coco.watering.description' },
             fertilizing: {
               interval: 14,
-              description: 'High nitrogen feeding for vegetative growth',
+              description: 'cannabis_autoflower.phases.vegetative.coco.fertilizing.description',
             },
           },
         },
         preflower: {
           days: 7,
-          description: 'Autoflower transition',
-          care: 'Autoflowering occurs regardless of light cycle',
+          description: 'cannabis_autoflower.phases.preflower.description',
+          care: 'cannabis_autoflower.phases.preflower.care',
           editable: false,
           soil: {
             watering: {
               interval: 2,
-              description: 'Continue regular watering schedule',
+              description: 'cannabis_autoflower.phases.preflower.soil.watering.description',
             },
             fertilizing: {
               interval: 14,
-              description: 'Transition to flowering nutrients',
+              description: 'cannabis_autoflower.phases.preflower.soil.fertilizing.description',
             },
           },
           hydro: {
-            watering: { interval: 0, description: 'Continuous flow, moderate EC' },
+            watering: { interval: 0, description: 'cannabis_autoflower.phases.preflower.hydro.watering.description' },
             fertilizing: {
               interval: 14,
-              description: 'Transition to flowering nutrients',
+              description: 'cannabis_autoflower.phases.preflower.hydro.fertilizing.description',
             },
           },
           coco: {
-            watering: { interval: 1, description: 'Daily watering in coco' },
+            watering: { interval: 1, description: 'cannabis_autoflower.phases.preflower.coco.watering.description' },
             fertilizing: {
               interval: 14,
-              description: 'Transition to flowering nutrients',
+              description: 'cannabis_autoflower.phases.preflower.coco.fertilizing.description',
             },
           },
         },
         flowering: {
           days: 49,
-          description:
-            'Autoflower outdoor flowering (6-10 weeks depending on strain)',
-          care: 'Natural light cycle, weather protection, pest monitoring',
+          description: 'cannabis_autoflower.phases.flowering.description',
+          care: 'cannabis_autoflower.phases.flowering.care',
           editable: true,
           soil: {
             watering: {
               interval: 2,
-              description: 'Water every 2 days during flowering',
+              description: 'cannabis_autoflower.phases.flowering.soil.watering.description',
             },
             fertilizing: {
               interval: 14,
-              description: 'High phosphorus/potassium feeding for flowering',
+              description: 'cannabis_autoflower.phases.flowering.soil.fertilizing.description',
             },
           },
           hydro: {
             watering: {
               interval: 0,
-              description: 'Continuous flow, higher EC',
+              description: 'cannabis_autoflower.phases.flowering.hydro.watering.description',
             },
             fertilizing: {
               interval: 14,
-              description: 'High phosphorus/potassium feeding for flowering',
+              description: 'cannabis_autoflower.phases.flowering.hydro.fertilizing.description',
             },
           },
           coco: {
-            watering: { interval: 1, description: 'Daily watering in coco' },
+            watering: { interval: 1, description: 'cannabis_autoflower.phases.flowering.coco.watering.description' },
             fertilizing: {
               interval: 14,
-              description: 'High phosphorus/potassium feeding for flowering',
+              description: 'cannabis_autoflower.phases.flowering.coco.fertilizing.description',
             },
           },
         },
         harvest: {
           days: 7,
-          description: 'Autoflower harvest timing',
-          care: 'Weather dependent, check trichomes, quick dry if rain',
+          description: 'cannabis_autoflower.phases.harvest.description',
+          care: 'cannabis_autoflower.phases.harvest.care',
           editable: false,
           soil: {
             watering: {
               interval: 2,
-              description: 'Flush with plain water 1 week before harvest',
+              description: 'cannabis_autoflower.phases.harvest.soil.watering.description',
             },
             fertilizing: {
               interval: 0,
-              description: 'No fertilizing during flush and harvest',
+              description: 'cannabis_autoflower.phases.harvest.soil.fertilizing.description',
             },
           },
           hydro: {
             watering: {
               interval: 0,
-              description: 'Flush with plain water 1 week before harvest',
+              description: 'cannabis_autoflower.phases.harvest.hydro.watering.description',
             },
             fertilizing: {
               interval: 0,
-              description: 'No fertilizing during flush and harvest',
+              description: 'cannabis_autoflower.phases.harvest.hydro.fertilizing.description',
             },
           },
           coco: {
             watering: {
               interval: 1,
-              description: 'Flush with plain water 1 week before harvest',
+              description: 'cannabis_autoflower.phases.harvest.coco.watering.description',
             },
             fertilizing: {
               interval: 0,
-              description: 'No fertilizing during flush and harvest',
+              description: 'cannabis_autoflower.phases.harvest.coco.fertilizing.description',
             },
           },
         },
@@ -431,228 +416,226 @@ export const cannabis_autoflower = {
           plantingWindow: {
             start: '04-15',
             end: '07-01',
-            description: 'Multiple harvests possible with autoflowers',
+            description: 'cannabis_autoflower.seasonalTiming.temperate_north.plantingWindow.description',
           },
           harvestWindow: {
             start: '07-01',
             end: '10-15',
-            description: 'Multiple harvests throughout season',
+            description: 'cannabis_autoflower.seasonalTiming.temperate_north.harvestWindow.description',
           },
         },
         mediterranean: {
           plantingWindow: {
             start: '03-15',
             end: '08-01',
-            description: 'Extended season with multiple harvests',
+            description: 'cannabis_autoflower.seasonalTiming.mediterranean.plantingWindow.description',
           },
           harvestWindow: {
             start: '06-01',
             end: '11-01',
-            description: 'Multiple harvests throughout season',
+            description: 'cannabis_autoflower.seasonalTiming.mediterranean.harvestWindow.description',
           },
         },
       },
-      naturalTiming:
-        'Autoflowers flower automatically regardless of light cycle. Total cycle is 70-90 days from seed to harvest.',
+      naturalTiming: 'cannabis_autoflower.naturalTiming',
     },
     greenhouse: {
       phases: {
         germination: {
           days: 3,
-          description: 'Seed sprouting',
-          care: 'Keep seeds warm and moist in controlled environment',
+          description: 'cannabis_autoflower.phases.germination.description',
+          care: 'cannabis_autoflower.phases.germination.care',
           editable: true,
           soil: {
             watering: {
               interval: 1,
-              description: 'Keep soil moist during germination',
+              description: 'cannabis_autoflower.phases.germination.soil.watering.description',
             },
             fertilizing: {
               interval: 0,
-              description: 'No fertilizing during germination',
+              description: 'cannabis_autoflower.phases.germination.soil.fertilizing.description',
             },
           },
           hydro: {
             watering: {
               interval: 0,
-              description: 'Continuous moisture in rockwool',
+              description: 'cannabis_autoflower.phases.germination.hydro.watering.description',
             },
             fertilizing: {
               interval: 0,
-              description: 'No nutrients during germination',
+              description: 'cannabis_autoflower.phases.germination.hydro.fertilizing.description',
             },
           },
           coco: {
             watering: {
               interval: 1,
-              description: 'Keep coco moist during germination',
+              description: 'cannabis_autoflower.phases.germination.coco.watering.description',
             },
             fertilizing: {
               interval: 0,
-              description: 'No fertilizing during germination',
+              description: 'cannabis_autoflower.phases.germination.coco.fertilizing.description',
             },
           },
         },
         seedling: {
           days: 21,
-          description: 'Establishing in greenhouse',
-          care: 'Controlled environment, protect from temperature extremes',
+          description: 'cannabis_autoflower.phases.seedling.description',
+          care: 'cannabis_autoflower.phases.seedling.care',
           editable: true,
           soil: {
             watering: {
               interval: 2,
-              description: 'Water every 2 days during seedling stage',
+              description: 'cannabis_autoflower.phases.seedling.soil.watering.description',
             },
             fertilizing: {
               interval: 0,
-              description: 'No fertilizing during seedling establishment',
+              description: 'cannabis_autoflower.phases.seedling.soil.fertilizing.description',
             },
           },
           hydro: {
-            watering: { interval: 0, description: 'Continuous flow, low EC' },
+            watering: { interval: 0, description: 'cannabis_autoflower.phases.seedling.hydro.watering.description' },
             fertilizing: {
               interval: 7,
-              description: 'Light nutrients, EC 0.5-0.8',
+              description: 'cannabis_autoflower.phases.seedling.hydro.fertilizing.description',
             },
           },
           coco: {
-            watering: { interval: 1, description: 'Daily watering in coco' },
+            watering: { interval: 1, description: 'cannabis_autoflower.phases.seedling.coco.watering.description' },
             fertilizing: {
               interval: 7,
-              description: 'Light feeding, EC 0.5-0.8',
+              description: 'cannabis_autoflower.phases.seedling.coco.fertilizing.description',
             },
           },
         },
         vegetative: {
           days: 35,
-          description: 'Autoflower greenhouse vegetative growth',
-          care: 'Natural light with temperature control, LST training',
+          description: 'cannabis_autoflower.phases.vegetative.description',
+          care: 'cannabis_autoflower.phases.vegetative.care',
           editable: true,
           soil: {
             watering: {
               interval: 2,
-              description: 'Water every 2 days during vegetative growth',
+              description: 'cannabis_autoflower.phases.vegetative.soil.watering.description',
             },
             fertilizing: {
               interval: 14,
-              description: 'High nitrogen feeding for vegetative growth',
+              description: 'cannabis_autoflower.phases.vegetative.soil.fertilizing.description',
             },
           },
           hydro: {
             watering: {
               interval: 0,
-              description: 'Continuous flow, moderate EC',
+              description: 'cannabis_autoflower.phases.vegetative.hydro.watering.description',
             },
             fertilizing: {
               interval: 14,
-              description: 'High nitrogen feeding for vegetative growth',
+              description: 'cannabis_autoflower.phases.vegetative.hydro.fertilizing.description',
             },
           },
           coco: {
-            watering: { interval: 1, description: 'Daily watering in coco' },
+            watering: { interval: 1, description: 'cannabis_autoflower.phases.vegetative.coco.watering.description' },
             fertilizing: {
               interval: 14,
-              description: 'High nitrogen feeding for vegetative growth',
+              description: 'cannabis_autoflower.phases.vegetative.coco.fertilizing.description',
             },
           },
         },
         preflower: {
           days: 7,
-          description: 'Autoflower transition',
-          care: 'Autoflowering occurs regardless of light cycle',
+          description: 'cannabis_autoflower.phases.preflower.description',
+          care: 'cannabis_autoflower.phases.preflower.care',
           editable: true,
           soil: {
             watering: {
               interval: 2,
-              description: 'Continue regular watering schedule',
+              description: 'cannabis_autoflower.phases.preflower.soil.watering.description',
             },
             fertilizing: {
               interval: 14,
-              description: 'Transition to flowering nutrients',
+              description: 'cannabis_autoflower.phases.preflower.soil.fertilizing.description',
             },
           },
           hydro: {
-            watering: { interval: 0, description: 'Continuous flow, moderate EC' },
+            watering: { interval: 0, description: 'cannabis_autoflower.phases.preflower.hydro.watering.description' },
             fertilizing: {
               interval: 14,
-              description: 'Transition to flowering nutrients',
+              description: 'cannabis_autoflower.phases.preflower.hydro.fertilizing.description',
             },
           },
           coco: {
-            watering: { interval: 1, description: 'Daily watering in coco' },
+            watering: { interval: 1, description: 'cannabis_autoflower.phases.preflower.coco.watering.description' },
             fertilizing: {
               interval: 14,
-              description: 'Transition to flowering nutrients',
+              description: 'cannabis_autoflower.phases.preflower.coco.fertilizing.description',
             },
           },
         },
         flowering: {
           days: 49,
-          description:
-            'Autoflower greenhouse flowering (6-10 weeks depending on strain)',
-          care: 'Controlled environment, weather protection, pest monitoring',
+          description: 'cannabis_autoflower.phases.flowering.description',
+          care: 'cannabis_autoflower.phases.flowering.care',
           editable: true,
           soil: {
             watering: {
               interval: 2,
-              description: 'Water every 2 days during flowering',
+              description: 'cannabis_autoflower.phases.flowering.soil.watering.description',
             },
             fertilizing: {
               interval: 14,
-              description: 'High phosphorus/potassium feeding for flowering',
+              description: 'cannabis_autoflower.phases.flowering.soil.fertilizing.description',
             },
           },
           hydro: {
             watering: {
               interval: 0,
-              description: 'Continuous flow, higher EC',
+              description: 'cannabis_autoflower.phases.flowering.hydro.watering.description',
             },
             fertilizing: {
               interval: 14,
-              description: 'High phosphorus/potassium feeding for flowering',
+              description: 'cannabis_autoflower.phases.flowering.hydro.fertilizing.description',
             },
           },
           coco: {
-            watering: { interval: 1, description: 'Daily watering in coco' },
+            watering: { interval: 1, description: 'cannabis_autoflower.phases.flowering.coco.watering.description' },
             fertilizing: {
               interval: 14,
-              description: 'High phosphorus/potassium feeding for flowering',
+              description: 'cannabis_autoflower.phases.flowering.coco.fertilizing.description',
             },
           },
         },
         harvest: {
           days: 7,
-          description: 'Autoflower greenhouse harvest timing',
-          care: 'Controlled drying environment, check trichomes',
+          description: 'cannabis_autoflower.phases.harvest.description',
+          care: 'cannabis_autoflower.phases.harvest.care',
           editable: true,
           soil: {
             watering: {
               interval: 2,
-              description: 'Flush with plain water 1 week before harvest',
+              description: 'cannabis_autoflower.phases.harvest.soil.watering.description',
             },
             fertilizing: {
               interval: 0,
-              description: 'No fertilizing during flush and harvest',
+              description: 'cannabis_autoflower.phases.harvest.soil.fertilizing.description',
             },
           },
           hydro: {
             watering: {
               interval: 0,
-              description: 'Flush with plain water 1 week before harvest',
+              description: 'cannabis_autoflower.phases.harvest.hydro.watering.description',
             },
             fertilizing: {
               interval: 0,
-              description: 'No fertilizing during flush and harvest',
+              description: 'cannabis_autoflower.phases.harvest.hydro.fertilizing.description',
             },
           },
           coco: {
             watering: {
               interval: 1,
-              description: 'Flush with plain water 1 week before harvest',
+              description: 'cannabis_autoflower.phases.harvest.coco.watering.description',
             },
             fertilizing: {
               interval: 0,
-              description: 'No fertilizing during flush and harvest',
+              description: 'cannabis_autoflower.phases.harvest.coco.fertilizing.description',
             },
           },
         },
@@ -662,45 +645,43 @@ export const cannabis_autoflower = {
           plantingWindow: {
             start: '03-01',
             end: '08-01',
-            description: 'Extended season with greenhouse protection',
+            description: 'cannabis_autoflower.seasonalTiming.temperate_north.plantingWindow.description',
           },
           harvestWindow: {
             start: '05-15',
             end: '11-15',
-            description: 'Multiple harvests with climate control',
+            description: 'cannabis_autoflower.seasonalTiming.temperate_north.harvestWindow.description',
           },
         },
         mediterranean: {
           plantingWindow: {
             start: '02-15',
             end: '09-01',
-            description: 'Very extended season possible',
+            description: 'cannabis_autoflower.seasonalTiming.mediterranean.plantingWindow.description',
           },
           harvestWindow: {
             start: '05-01',
             end: '12-01',
-            description: 'Multiple harvests with climate control',
+            description: 'cannabis_autoflower.seasonalTiming.mediterranean.harvestWindow.description',
           },
         },
       },
-      naturalTiming:
-        'Autoflowers flower automatically regardless of light cycle. Greenhouse extends growing season for multiple harvests.',
+      naturalTiming: 'cannabis_autoflower.naturalTiming',
     },
   },
   careTips: {
-    watering: 'Light watering, autoflowers prefer less water than photoperiods',
-    fertilizing: 'Light feeding schedule, 1/4 to 1/2 strength nutrients',
-    sunlight: '18-24 hours throughout entire cycle',
-    spacing: '1-2 feet apart, smaller plants',
-    support: 'Minimal training, LST only if needed',
-    humidity: '60-65% throughout cycle',
-    temperature: formatTemperature('70-80°F consistent'),
+    watering: 'cannabis_autoflower.careTips.watering',
+    fertilizing: 'cannabis_autoflower.careTips.fertilizing',
+    sunlight: 'cannabis_autoflower.careTips.sunlight',
+    spacing: 'cannabis_autoflower.careTips.spacing',
+    support: 'cannabis_autoflower.careTips.support',
+    humidity: 'cannabis_autoflower.careTips.humidity',
+    temperature: 'cannabis_autoflower.careTips.temperature',
   },
   commonProblems: {
-    'Stunted Growth':
-      'Stress sensitive - avoid transplanting and heavy training',
-    'Nutrient Burn': 'Very sensitive to nutrients - use light feeding',
-    'Short Cycle': 'Fast growth - be ready for quick transitions',
+    'Stunted Growth': 'cannabis_autoflower.commonProblems.stuntedGrowth',
+    'Nutrient Burn': 'cannabis_autoflower.commonProblems.nutrientBurn',
+    'Short Cycle': 'cannabis_autoflower.commonProblems.shortCycle',
   },
 };
 

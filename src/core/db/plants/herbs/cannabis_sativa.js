@@ -6,21 +6,6 @@
 
 import { PLANT_TAGS } from '../categories.js';
 
-// Helper function for temperature formatting
-function formatTemperature(fahrenheitRange) {
-  if (!fahrenheitRange || typeof fahrenheitRange !== 'string')
-    return fahrenheitRange;
-
-  const fahrenheitMatch = fahrenheitRange.match(/(\d+)-(\d+)°F/);
-  if (!fahrenheitMatch) return fahrenheitRange;
-
-  const [, minF, maxF] = fahrenheitMatch;
-  const minC = Math.round(((parseInt(minF) - 32) * 5) / 9);
-  const maxC = Math.round(((parseInt(maxF) - 32) * 5) / 9);
-
-  return `${minF}-${maxF}°F (${minC}-${maxC}°C)`;
-}
-
 export const cannabis_sativa = {
   name: 'Cannabis Sativa',
   category: 'category.herbs', // Updated category
