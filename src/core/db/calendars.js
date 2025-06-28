@@ -298,12 +298,12 @@ export async function migrateEventsToNewOrganization(organizationType) {
       break;
       
     case 'areas':
-      // Map events to area-specific calendars
+      // Map events to area-specific calendars using translated names
       const areaCalendars = {
-        vegetables: calendars.find(cal => cal.name.includes('Vegetable') || cal.name.includes('Gemüse')),
-        herbs: calendars.find(cal => cal.name.includes('Herb') || cal.name.includes('Kräuter')),
-        ornamental: calendars.find(cal => cal.name.includes('Ornamental') || cal.name.includes('Zier')),
-        fruits: calendars.find(cal => cal.name.includes('Fruit') || cal.name.includes('Obst'))
+        vegetables: calendars.find(cal => cal.name === t('calendar.vegetables')),
+        herbs: calendars.find(cal => cal.name === t('calendar.herbs')),
+        flowers: calendars.find(cal => cal.name === t('calendar.flowers')),
+        fruits: calendars.find(cal => cal.name === t('calendar.fruits'))
       };
       
       targetCalendars = {};
@@ -347,15 +347,19 @@ export async function migrateEventsToNewOrganization(organizationType) {
       // Find the planting for this event to get its category
       const planting = plantings.find(p => p.id === event.plantingId);
       if (planting) {
-        const category = planting.category?.toLowerCase();
-        
-        if (category?.includes('vegetable') && targetCalendars.vegetables) {
+        let category = planting.category;
+        if (Array.isArray(category)) {
+          category = category.join(',').toLowerCase();
+        } else {
+          category = (category || '').toLowerCase();
+        }
+        if (category.includes('vegetable') && targetCalendars.vegetables) {
           targetCalendarId = targetCalendars.vegetables;
-        } else if (category?.includes('herb') && targetCalendars.herbs) {
+        } else if (category.includes('herb') && targetCalendars.herbs) {
           targetCalendarId = targetCalendars.herbs;
-        } else if (category?.includes('ornamental') || category?.includes('flower') && targetCalendars.ornamental) {
-          targetCalendarId = targetCalendars.ornamental;
-        } else if (category?.includes('fruit') && targetCalendars.fruits) {
+        } else if (category.includes('flower') && targetCalendars.flowers) {
+          targetCalendarId = targetCalendars.flowers;
+        } else if (category.includes('fruit') && targetCalendars.fruits) {
           targetCalendarId = targetCalendars.fruits;
         }
       }
@@ -374,15 +378,19 @@ export async function migrateEventsToNewOrganization(organizationType) {
     let targetCalendarId = targetCalendars.default;
     
     if (organizationType === 'areas') {
-      const category = planting.category?.toLowerCase();
-      
-      if (category?.includes('vegetable') && targetCalendars.vegetables) {
+      let category = planting.category;
+      if (Array.isArray(category)) {
+        category = category.join(',').toLowerCase();
+      } else {
+        category = (category || '').toLowerCase();
+      }
+      if (category.includes('vegetable') && targetCalendars.vegetables) {
         targetCalendarId = targetCalendars.vegetables;
-      } else if (category?.includes('herb') && targetCalendars.herbs) {
+      } else if (category.includes('herb') && targetCalendars.herbs) {
         targetCalendarId = targetCalendars.herbs;
-      } else if (category?.includes('ornamental') || category?.includes('flower') && targetCalendars.ornamental) {
-        targetCalendarId = targetCalendars.ornamental;
-      } else if (category?.includes('fruit') && targetCalendars.fruits) {
+      } else if (category.includes('flower') && targetCalendars.flowers) {
+        targetCalendarId = targetCalendars.flowers;
+      } else if (category.includes('fruit') && targetCalendars.fruits) {
         targetCalendarId = targetCalendars.fruits;
       }
     }

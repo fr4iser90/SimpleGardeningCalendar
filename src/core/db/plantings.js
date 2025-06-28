@@ -9,7 +9,9 @@ import { validatePlantingDate as validatePlantingDateUtil } from '../../utils/va
 import { createIntelligentPlantingEvents } from './IntelligentEventSystem.js';
 import { deleteAllPlantingEvents } from './events.js';
 import { deleteAllPlantNotes } from './notes.js';
-import { getTranslatedPlantData } from '../i18n/index.js';
+import { t, getTranslatedPlantData } from '../i18n/index.js';
+import { getAllLocalCalendars } from './calendars.js';
+
 
 /**
  * Add a new planting with all associated events
@@ -20,7 +22,7 @@ import { getTranslatedPlantData } from '../i18n/index.js';
  * @param {Object} reminderOptions - Reminder options for the planting
  * @param {Object} customPhaseDurations - Custom phase durations for the planting
  * @param {string} calendarId - Calendar ID for the planting
- * @returns {Promise<number>} Planting ID
+ * @returns {Promise<{plantingId: number, calendarId: string}>} Planting ID and used calendar ID
  */
 export async function addPlanting(plantType, startDate, location = 'Default Garden', customName = null, reminderOptions = {}, customPhaseDurations = {}, calendarId = null) {
   // Use translated, merged plant data for the current language
@@ -29,6 +31,34 @@ export async function addPlanting(plantType, startDate, location = 'Default Gard
   if (!plantData) {
     throw new Error(`Plant type ${plantType} not found in database`);
   }
+  
+  // --- NEU: Intelligente Kalenderzuordnung bei Option 2 (areas) ---
+  const localCalendarsSetting = JSON.parse(localStorage.getItem('localCalendars') || '{}');
+  if (localCalendarsSetting.type === 'areas') {
+    // Hole alle lokalen Kalender
+    const calendars = await getAllLocalCalendars();
+    let category = plantData.category;
+    if (Array.isArray(category)) {
+      category = category.join(',').toLowerCase();
+    } else {
+      category = (category || '').toLowerCase();
+    }
+    // Mapping wie in migrateEventsToNewOrganization
+    let matchedCal = null;
+    if (category.includes('vegetable')) {
+      matchedCal = calendars.find(cal => cal.name === t('calendar.vegetables'));
+    } else if (category.includes('herb')) {
+      matchedCal = calendars.find(cal => cal.name === t('calendar.herbs'));
+    } else if (category.includes('flower')) {
+      matchedCal = calendars.find(cal => cal.name === t('calendar.ornamental'));
+    } else if (category.includes('fruit')) {
+      matchedCal = calendars.find(cal => cal.name === t('calendar.fruits'));
+    }
+    if (matchedCal) {
+      calendarId = matchedCal.id;
+    }
+  }
+  // --- ENDE NEU ---
   
   // Calculate all phase dates with custom durations if provided
   let currentDate = new Date(startDate);
@@ -106,7 +136,8 @@ export async function addPlanting(plantType, startDate, location = 'Default Gard
   // Create all associated events with reminder options
   await createIntelligentPlantingEvents(planting, plantData, phases, completionDate.toISOString(), reminderOptions);
   
-  return plantingId;
+  // Rückgabe: Planting-ID und verwendete Kalender-ID
+  return { plantingId, calendarId };
 }
 
 /**

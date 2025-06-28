@@ -40,19 +40,19 @@ export function renderLocalCalendarWizardHTML() {
                 <div id="areaCalendarsCheckboxes" class="mt-2 hidden">
                   <label class="flex items-center gap-2">
                     <input type="checkbox" class="area-checkbox" value="vegetables" checked>
-                    ${t('plant.category.vegetables')}
+                    ${t('calendar.vegetables')}
                   </label>
                   <label class="flex items-center gap-2">
                     <input type="checkbox" class="area-checkbox" value="herbs" checked>
-                    ${t('plant.category.herbs')}
+                    ${t('calendar.herbs')}
                   </label>
                   <label class="flex items-center gap-2">
                     <input type="checkbox" class="area-checkbox" value="flowers" checked>
-                    ${t('plant.category.flowers')}
+                    ${t('calendar.ornamental')}
                   </label>
                   <label class="flex items-center gap-2">
                     <input type="checkbox" class="area-checkbox" value="fruits" checked>
-                    ${t('plant.category.fruits')}
+                    ${t('calendar.fruits')}
                   </label>
                 </div>
               </div>
@@ -326,10 +326,10 @@ async function handleLocalCalendarSetup(organizationType, customCalendars = []) 
     // Nur ausgewählte Bereiche als Kalender anlegen
     const checkedAreas = Array.from(document.querySelectorAll('.area-checkbox:checked')).map(cb => cb.value);
     const areaTemplates = [
-      { key: 'vegetables', name: t('plant.category.vegetables'), icon: '🥕' },
-      { key: 'herbs', name: t('plant.category.herbs'), icon: '🌿' },
-      { key: 'flowers', name: t('plant.category.flowers'), icon: '🌸' },
-      { key: 'fruits', name: t('plant.category.fruits'), icon: '🍓' }
+      { key: 'vegetables', name: t('calendar.vegetables'), icon: '🥕' },
+      { key: 'herbs', name: t('calendar.herbs'), icon: '🌿' },
+      { key: 'flowers', name: t('calendar.ornamental'), icon: '🌸' },
+      { key: 'fruits', name: t('calendar.fruits'), icon: '🍓' }
     ];
     const selectedTemplates = areaTemplates.filter(tpl => checkedAreas.includes(tpl.key));
     const areaCalendarIds = [];

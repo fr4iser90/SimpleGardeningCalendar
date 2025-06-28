@@ -135,7 +135,7 @@ async function handlePlantingSubmission() {
   if (!plantingForm) throw new Error('Planting form not found');
   const plantingData = getPlantingFormData(plantingForm);
   const selectedCalendarId = localStorage.getItem('selectedLocalCalendarId');
-  await addPlanting(
+  const { plantingId, calendarId } = await addPlanting(
     plantingData.plantType,
     plantingData.startDate,
     plantingData.location,
@@ -144,6 +144,9 @@ async function handlePlantingSubmission() {
     plantingData.customPhaseDurations,
     selectedCalendarId
   );
+  if (calendarId && calendarId !== selectedCalendarId) {
+    localStorage.setItem('selectedLocalCalendarId', calendarId.toString());
+  }
   showNotification(t('notification.planting_added'), 'success');
   document.dispatchEvent(new CustomEvent('refreshCalendar'));
 }
