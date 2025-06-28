@@ -4,6 +4,7 @@ import { formatDate } from '../../utils/dateUtils.js';
 import { isGardeningEvent, convertToGoogleEvent, convertFromGoogleEvent } from '../../utils/eventUtils.js';
 import { validateEventData } from '../../utils/validators.js';
 import { isGardenCalendar, groupSimilarCalendars, findDuplicateGroups } from '../../utils/calendarUtils.js';
+import { getGoogleCalendarIdForEvent } from './GoogleCalendarWizard.js';
 
 /**
  * Google Calendar API Calls
@@ -50,7 +51,7 @@ async function initializeClient() {
   console.log('🔧 Initializing Google Token Client for the first time...');
   tokenClient = google.accounts.oauth2.initTokenClient({
     client_id: settings.clientId,
-    scope: 'https://www.googleapis.com/auth/calendar https://www.googleapis.com/auth/calendar.events https://www.googleapis.com/auth/userinfo.email',
+    scope: 'https://www.googleapis.com/auth/calendar https://www.googleapis.com/auth/calendar.events https://www.googleapis.com/auth/calendar.settings.readonly https://www.googleapis.com/auth/userinfo.email',
     callback: tokenCallback,
   });
 }
@@ -140,6 +141,8 @@ export async function createCalendar(calendarData) {
     timeZone: Intl.DateTimeFormat().resolvedOptions().timeZone
   };
   
+  console.log(`🔄 Creating calendar with payload:`, calendarPayload);
+  
   const response = await fetch('https://www.googleapis.com/calendar/v3/calendars', {
     method: 'POST',
     headers: {
@@ -150,11 +153,26 @@ export async function createCalendar(calendarData) {
   });
   
   if (!response.ok) {
-    const error = await response.text();
-    throw new Error(`Failed to create calendar: ${error}`);
+    const errorText = await response.text();
+    console.error(`❌ Calendar creation failed:`, {
+      status: response.status,
+      statusText: response.statusText,
+      errorText: errorText
+    });
+    
+    // Enhanced error handling
+    if (response.status === 403) {
+      throw new Error(`403 Forbidden: Cannot create calendar. Please check your Google Calendar permissions. Details: ${errorText}`);
+    } else if (response.status === 401) {
+      throw new Error(`401 Unauthorized: Authentication failed. Please reconnect to Google Calendar.`);
+    } else {
+      throw new Error(`HTTP ${response.status}: ${response.statusText} - ${errorText}`);
+    }
   }
   
-  return await response.json();
+  const result = await response.json();
+  console.log(`✅ Calendar created successfully:`, result);
+  return result;
 }
 
 // Update an existing calendar in Google Calendar
@@ -185,10 +203,15 @@ export async function createEvent(eventData) {
   if (!isSignedIn) throw new Error('Not signed in to Google Calendar');
   
   const googleEvent = convertToGoogleEvent(eventData);
-  const settings = googleCalendarSettings.load();
-  const calendarId = settings.selectedCalendarId;
+  
+  // KRITISCHER FIX: Verwende getGoogleCalendarIdForEvent anstatt settings.selectedCalendarId
+  // um sicherzustellen, dass Events in den richtigen Kalender gehen
+  const calendarId = getGoogleCalendarIdForEvent(eventData);
 
-  if (!calendarId) throw new Error(t('google.error.no_calendar_selected'));
+  // KRITISCHER SICHERHEITSCHECK: Verhindere Primary Calendar Verwendung
+  if (!calendarId) {
+    throw new Error('🚨 BLOCKED: No valid garden calendar found! Cannot create event in primary calendar.');
+  }
   
   const response = await fetch(`https://www.googleapis.com/calendar/v3/calendars/${calendarId}/events`, {
     method: 'POST',

@@ -39,6 +39,34 @@ export function updateGoogleCalendarStatus() {
 
   if (isCurrentlySignedIn && hasSavedCredentials) {
     if (!hasSelectedCalendar) {
+      // Check if there's a quota error by looking at recent console logs or error state
+      const hasQuotaError = settings.lastError && (
+        settings.lastError.includes('quotaExceeded') || 
+        settings.lastError.includes('usageLimits')
+      );
+      
+      if (hasQuotaError) {
+        statusDisplay.innerHTML = `
+          <span class="font-bold mr-2 flex items-center"><span class="text-lg mr-1">📅</span>${t('google.calendar.name')}:</span>
+          <span class="text-red-600 dark:text-red-400 flex items-center">
+            <i class="fas fa-exclamation-triangle mr-1"></i>Quota Limit erreicht
+          </span>
+          <span class="mx-2">|</span>
+          <span class="text-sm text-gray-600 dark:text-gray-400">
+            Bitte manuell Garten-Kalender in Google Calendar erstellen
+          </span>
+          <span class="mx-2">|</span>
+          <button 
+            class="text-xs text-blue-600 dark:text-blue-400 hover:underline"
+            onclick="showGoogleCalendarSetup()"
+            title="Google Calendar Setup"
+          >
+            <i class="fas fa-cog mr-1"></i>Setup
+          </button>
+        `;
+        return;
+      }
+      
       statusDisplay.innerHTML = `
         <span class="font-bold mr-2 flex items-center"><span class="text-lg mr-1">📅</span>${t('google.calendar.name')}:</span>
         <span class="text-yellow-600 dark:text-yellow-400 flex items-center">

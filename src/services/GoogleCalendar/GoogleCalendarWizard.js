@@ -178,11 +178,15 @@ export async function autoDetectAndMatchCalendars() {
       } else {
         // Create new complete garden calendar
         try {
+          console.log(`🔄 Creating new garden calendar: "${completeGardenInfo.emoji} ${completeGardenInfo.name}"`);
+          
           const newCalendar = await createCalendar({
             summary: `${completeGardenInfo.emoji} ${completeGardenInfo.name}`,
             description: completeGardenInfo.description,
             timeZone: Intl.DateTimeFormat().resolvedOptions().timeZone
           });
+          
+          console.log(`✅ Successfully created calendar:`, newCalendar);
           
           results.created[CALENDAR_CATEGORIES.COMPLETE_GARDEN] = {
             id: newCalendar.id,
@@ -193,7 +197,28 @@ export async function autoDetectAndMatchCalendars() {
           
           showNotification(`Created new calendar: "${completeGardenInfo.emoji} ${completeGardenInfo.name}"`, 'success');
         } catch (error) {
+          console.error(`❌ Failed to create garden calendar:`, error);
+          console.error(`❌ Error details:`, {
+            message: error.message,
+            status: error.status,
+            statusText: error.statusText,
+            response: error.response
+          });
+          
           results.errors.push(`Failed to create calendar: ${error.message}`);
+          
+          // Show specific error message for quota exceeded
+          if (error.message.includes('quotaExceeded') || error.message.includes('usageLimits')) {
+            showNotification(`❌ Google Calendar quota exceeded! You have reached the limit for creating calendars. Please manually create a garden calendar in Google Calendar or wait for daily quota reset.`, 'error');
+            
+            // Save quota error to settings for status bar display
+            settings.lastError = error.message;
+            googleCalendarSettings.save(settings);
+          } else if (error.message.includes('403')) {
+            showNotification(`❌ Permission denied: Cannot create Google Calendar. Please check your Google Calendar permissions.`, 'error');
+          } else {
+            showNotification(`❌ Failed to create garden calendar: ${error.message}`, 'error');
+          }
         }
       }
     }
@@ -269,6 +294,13 @@ export async function autoDetectAndMatchCalendars() {
     // --- DEBUG: Log matched results ---
     console.log('[DEBUG] results.matched:', results.matched);
     // ----------------------------------
+    
+    // KRITISCHER SICHERHEITSCHECK: Verhindere Primary Calendar Verwendung
+    if (settings.selectedCalendarId === 'primary' || settings.selectedCalendarId === settings.userEmail) {
+      console.error('🚨 BLOCKED: Attempted to use primary calendar! Setting selectedCalendarId to null');
+      settings.selectedCalendarId = null;
+    }
+    
     // Save updated settings
     settings.calendarMappings = results.matched;
     settings.organizationType = localCalendarsSetting.type;
@@ -357,9 +389,23 @@ export function getGoogleCalendarIdForEvent(eventData) {
   const settings = googleCalendarSettings.load();
   const localCalendarsSetting = JSON.parse(localStorage.getItem('localCalendarsSetting') || '{"type": "single"}');
   
+  // KRITISCHER SICHERHEITSCHECK: Verhindere Primary Calendar Verwendung
+  function validateCalendarId(calendarId) {
+    if (!calendarId || calendarId === 'primary' || calendarId === settings.userEmail) {
+      console.error('🚨 BLOCKED: Attempted to use primary calendar!', { calendarId, userEmail: settings.userEmail });
+      return null;
+    }
+    return calendarId;
+  }
+  
   // For single calendar organization, use the main calendar
   if (localCalendarsSetting.type === 'single') {
-    return settings.selectedCalendarId;
+    const calendarId = validateCalendarId(settings.selectedCalendarId);
+    if (!calendarId) {
+      console.error('🚨 No valid garden calendar found for single organization!');
+      return null;
+    }
+    return calendarId;
   }
   
   // For area-based organization, determine category from event/planting
@@ -396,13 +442,21 @@ export function getGoogleCalendarIdForEvent(eventData) {
       
       const mappedCategory = categoryMapping[category];
       if (mappedCategory && settings.calendarMappings?.[mappedCategory]) {
-        return settings.calendarMappings[mappedCategory];
+        const calendarId = validateCalendarId(settings.calendarMappings[mappedCategory]);
+        if (calendarId) {
+          return calendarId;
+        }
       }
     }
   }
   
-  // Fallback to selected calendar
-  return settings.selectedCalendarId;
+  // Fallback to selected calendar (with validation)
+  const fallbackId = validateCalendarId(settings.selectedCalendarId);
+  if (!fallbackId) {
+    console.error('🚨 No valid garden calendar found! Cannot create event.');
+    return null;
+  }
+  return fallbackId;
 }
 
 /**
