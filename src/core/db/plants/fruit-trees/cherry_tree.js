@@ -179,6 +179,18 @@ export const cherry_tree = {
             description: 'Late winter pruning',
           },
         },
+        mediterranean: {
+          plantingWindow: {
+            start: '01-15',
+            end: '03-15',
+            description: 'Very early spring planting',
+          },
+          harvestWindow: {
+            start: '05-01',
+            end: '07-31',
+            description: 'Harvest before summer heat',
+          },
+        },
       },
     },
   },

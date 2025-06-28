@@ -185,6 +185,18 @@ export const apple_tree = {
             description: 'Dormant season pruning',
           },
         },
+        mediterranean: {
+          plantingWindow: {
+            start: '02-01',
+            end: '04-01',
+            description: 'Very early spring planting',
+          },
+          harvestWindow: {
+            start: '06-01',
+            end: '09-30',
+            description: 'Harvest before autumn rains',
+          },
+        },
       },
     },
   },

@@ -317,6 +317,32 @@ export const sunflowers = {
           },
         },
       },
+      seasonalTiming: {
+        temperate_north: {
+          plantingWindow: {
+            start: '04-15',
+            end: '06-15',
+            description: 'After last frost, soil warm',
+          },
+          harvestWindow: {
+            start: '08-01',
+            end: '09-30',
+            description: 'Harvest before frost',
+          },
+        },
+        mediterranean: {
+          plantingWindow: {
+            start: '03-01',
+            end: '05-15',
+            description: 'Early spring to late spring',
+          },
+          harvestWindow: {
+            start: '07-01',
+            end: '10-31',
+            description: 'Long harvest period',
+          },
+        },
+      },
     },
     greenhouse: {
       phases: {

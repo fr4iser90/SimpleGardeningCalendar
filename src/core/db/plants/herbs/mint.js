@@ -257,6 +257,32 @@ export const mint = {
           },
         },
       },
+      seasonalTiming: {
+        temperate_north: {
+          plantingWindow: {
+            start: '04-01',
+            end: '06-15',
+            description: 'Spring to early summer planting',
+          },
+          harvestWindow: {
+            start: '06-01',
+            end: '10-31',
+            description: 'Continuous harvest throughout growing season',
+          },
+        },
+        mediterranean: {
+          plantingWindow: {
+            start: '03-01',
+            end: '07-01',
+            description: 'Early spring to early summer planting',
+          },
+          harvestWindow: {
+            start: '05-01',
+            end: '11-30',
+            description: 'Extended harvest season',
+          },
+        },
+      },
     },
     greenhouse: {
       phases: {

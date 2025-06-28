@@ -321,6 +321,32 @@ export const spinach = {
           },
         },
       },
+      seasonalTiming: {
+        temperate_north: {
+          plantingWindow: {
+            start: '03-15',
+            end: '05-01',
+            description: 'Early spring planting',
+          },
+          harvestWindow: {
+            start: '04-15',
+            end: '06-30',
+            description: 'Harvest before hot weather',
+          },
+        },
+        mediterranean: {
+          plantingWindow: {
+            start: '02-15',
+            end: '04-01',
+            description: 'Very early spring planting',
+          },
+          harvestWindow: {
+            start: '03-15',
+            end: '05-31',
+            description: 'Harvest before heat',
+          },
+        },
+      },
     },
     greenhouse: {
       phases: {

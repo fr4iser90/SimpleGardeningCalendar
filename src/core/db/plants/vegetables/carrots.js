@@ -344,6 +344,32 @@ export const carrots = {
           },
         },
       },
+      seasonalTiming: {
+        temperate_north: {
+          plantingWindow: {
+            start: '04-01',
+            end: '06-15',
+            description: 'Spring to early summer planting',
+          },
+          harvestWindow: {
+            start: '07-01',
+            end: '10-15',
+            description: 'Harvest throughout summer and fall',
+          },
+        },
+        mediterranean: {
+          plantingWindow: {
+            start: '02-15',
+            end: '05-01',
+            description: 'Early spring to late spring',
+          },
+          harvestWindow: {
+            start: '05-15',
+            end: '11-01',
+            description: 'Harvest before winter',
+          },
+        },
+      },
     },
     greenhouse: {
       phases: {

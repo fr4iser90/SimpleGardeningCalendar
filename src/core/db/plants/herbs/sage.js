@@ -257,6 +257,32 @@ export const sage = {
           },
         },
       },
+      seasonalTiming: {
+        temperate_north: {
+          plantingWindow: {
+            start: '04-15',
+            end: '06-01',
+            description: 'Spring planting after last frost',
+          },
+          harvestWindow: {
+            start: '06-15',
+            end: '10-31',
+            description: 'Harvest leaves throughout growing season',
+          },
+        },
+        mediterranean: {
+          plantingWindow: {
+            start: '03-15',
+            end: '05-15',
+            description: 'Early spring planting',
+          },
+          harvestWindow: {
+            start: '05-15',
+            end: '11-30',
+            description: 'Extended harvest season',
+          },
+        },
+      },
     },
     greenhouse: {
       phases: {

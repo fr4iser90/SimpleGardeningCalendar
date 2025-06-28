@@ -311,6 +311,32 @@ export const basil = {
           },
         },
       },
+      seasonalTiming: {
+        temperate_north: {
+          plantingWindow: {
+            start: '05-15',
+            end: '07-01',
+            description: 'Late spring to early summer planting',
+          },
+          harvestWindow: {
+            start: '07-01',
+            end: '10-15',
+            description: 'Harvest leaves before first frost',
+          },
+        },
+        mediterranean: {
+          plantingWindow: {
+            start: '04-01',
+            end: '07-15',
+            description: 'Spring to mid-summer planting',
+          },
+          harvestWindow: {
+            start: '06-01',
+            end: '11-15',
+            description: 'Extended harvest season',
+          },
+        },
+      },
     },
     greenhouse: {
       phases: {

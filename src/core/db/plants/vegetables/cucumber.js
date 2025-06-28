@@ -390,6 +390,32 @@ export const cucumber = {
           },
         },
       },
+      seasonalTiming: {
+        temperate_north: {
+          plantingWindow: {
+            start: '05-01',
+            end: '06-15',
+            description: 'After last frost, soil warm',
+          },
+          harvestWindow: {
+            start: '07-01',
+            end: '09-30',
+            description: 'Harvest until first frost',
+          },
+        },
+        mediterranean: {
+          plantingWindow: {
+            start: '03-15',
+            end: '05-15',
+            description: 'Early spring to late spring',
+          },
+          harvestWindow: {
+            start: '06-01',
+            end: '10-31',
+            description: 'Long harvest period',
+          },
+        },
+      },
     },
     greenhouse: {
       phases: {

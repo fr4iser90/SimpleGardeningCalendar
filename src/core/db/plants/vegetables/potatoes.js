@@ -413,7 +413,33 @@ export const potatoes = {
             watering: { interval: 1, description: 'Daily watering in coco before harvest' },
             fertilizing: { interval: 0, description: 'No fertilizing before harvest' },
           },
-        }
+        },
+      },
+      seasonalTiming: {
+        temperate_north: {
+          plantingWindow: {
+            start: '03-15',
+            end: '05-15',
+            description: 'Early to mid spring planting',
+          },
+          harvestWindow: {
+            start: '07-01',
+            end: '09-30',
+            description: 'Harvest throughout summer',
+          },
+        },
+        mediterranean: {
+          plantingWindow: {
+            start: '02-01',
+            end: '04-15',
+            description: 'Very early spring planting',
+          },
+          harvestWindow: {
+            start: '05-01',
+            end: '08-31',
+            description: 'Harvest before autumn rains',
+          },
+        },
       },
     },
     greenhouse: {
