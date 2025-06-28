@@ -400,4 +400,47 @@ export function testMultiLanguageDetection() {
 if (typeof window !== 'undefined') {
   window.testMultiLanguageDetection = testMultiLanguageDetection;
   window.debugCalendarKeywords = debugKeywords;
+}
+
+export function getCalendarInfoForCategory(category) {
+  const CALENDAR_CATEGORIES = {
+    VEGETABLE_GARDEN: 'VEGETABLE_GARDEN',
+    HERB_GARDEN: 'HERB_GARDEN',
+    ORNAMENTAL: 'ORNAMENTAL',
+    FRUIT_GARDEN: 'FRUIT_GARDEN',
+    COMPLETE_GARDEN: 'COMPLETE_GARDEN'
+  };
+  const currentLang = getCurrentLanguage ? getCurrentLanguage() : 'de';
+  const calendarInfo = {
+    [CALENDAR_CATEGORIES.VEGETABLE_GARDEN]: {
+      name: t('calendar.vegetables'),
+      emoji: '🥕',
+      description: t('calendar.vegetables_description')
+    },
+    [CALENDAR_CATEGORIES.HERB_GARDEN]: {
+      name: t('calendar.herbs'),
+      emoji: '🌱',
+      description: t('calendar.herbs_description')
+    },
+    [CALENDAR_CATEGORIES.ORNAMENTAL]: {
+      name: t('calendar.ornamental'),
+      emoji: '🌸',
+      description: t('calendar.ornamental_description')
+    },
+    [CALENDAR_CATEGORIES.FRUIT_GARDEN]: {
+      name: t('calendar.fruits'),
+      emoji: '🍎',
+      description: t('calendar.fruits_description')
+    },
+    [CALENDAR_CATEGORIES.COMPLETE_GARDEN]: {
+      name: t('calendar.garden'),
+      emoji: '🌱',
+      description: t('calendar.garden_description')
+    }
+  };
+  return calendarInfo[category] || {
+    name: t('calendar.garden'),
+    emoji: '🌱',
+    description: t('calendar.garden_description')
+  };
 } 

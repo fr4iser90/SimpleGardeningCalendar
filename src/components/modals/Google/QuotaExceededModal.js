@@ -1,6 +1,7 @@
 import { t } from '../../../core/i18n/index.js';
 import { showNotification } from '../../../utils/notifications.js';
 import { googleCalendarSettings } from '../../../services/GoogleCalendar/GoogleCalendarSettings.js';
+import { getCalendarInfoForCategory } from '../../../utils/calendarUtils.js';
 
 /**
  * Quota Exceeded Modal
@@ -34,13 +35,13 @@ export function showQuotaExceededModal(errorType = 'calendar_creation') {
   
   let calendarExamples = [];
   if (localCalendarsSetting.type === 'single') {
-    calendarExamples = [t('calendar.garden')];
+    calendarExamples = [getCalendarInfoForCategory('COMPLETE_GARDEN')];
   } else if (localCalendarsSetting.type === 'areas') {
     calendarExamples = [
-      t('calendar.vegetables'),
-      t('calendar.herbs'), 
-      t('calendar.ornamental'),
-      t('calendar.fruits')
+      getCalendarInfoForCategory('VEGETABLE_GARDEN'),
+      getCalendarInfoForCategory('HERB_GARDEN'),
+      getCalendarInfoForCategory('ORNAMENTAL'),
+      getCalendarInfoForCategory('FRUIT_GARDEN')
     ];
   }
   
@@ -128,9 +129,9 @@ export function showQuotaExceededModal(errorType = 'calendar_creation') {
                 ${t('google.quota.modal.calendar_creation.examples_title')}
               </h4>
               <div class="grid grid-cols-1 md:grid-cols-2 gap-2 text-sm">
-                ${calendarExamples.map(name => `
+                ${calendarExamples.map(info => `
                   <div class="bg-white dark:bg-gray-700 p-2 rounded border">
-                    <span class="font-mono">${name}</span>
+                    <span class="font-mono">${info.emoji} ${info.name}</span>
                   </div>
                 `).join('')}
               </div>
