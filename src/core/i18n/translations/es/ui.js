@@ -684,6 +684,7 @@ export const es = {
     'google.quota.modal.calendar_creation.step2': 'Crea un nuevo calendario manualmente',
     'google.quota.modal.calendar_creation.step3': 'Usa uno de los nombres de los ejemplos de abajo',
     'google.quota.modal.calendar_creation.examples_title': 'Nombres de Calendarios Recomendados:',
+    'google.quota.modal.calendar_creation.wait_hours_info': 'Si la creación manual tampoco funciona, espere varias horas y vuelva a intentarlo. Google levantará el límite automáticamente después de un tiempo.',
     
     'google.quota.modal.event_sync.title': 'Límite de Sincronización de Eventos Alcanzado',
     'google.quota.modal.event_sync.message': 'Has alcanzado el límite diario para crear eventos de Google Calendar.',

@@ -681,6 +681,7 @@ export const fr = {
     'google.quota.modal.open_google_calendar': 'Ouvrir Google Calendar',
     'google.quota.modal.opened_google_calendar': 'Google Calendar ouvert',
     'google.quota.modal.setup_calendars': 'Configurer les Calendriers',
+    'google.quota.modal.calendar_creation.wait_hours_info': 'Si la création manuelle échoue également, veuillez attendre plusieurs heures puis réessayer. Google lèvera automatiquement la limite après un certain temps.',
 
 };
   

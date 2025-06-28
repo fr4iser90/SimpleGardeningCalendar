@@ -526,6 +526,7 @@ export const de = {
     'google.quota.modal.calendar_creation.step2': 'Erstellen Sie manuell einen neuen Kalender',
     'google.quota.modal.calendar_creation.step3': 'Verwenden Sie einen der Namen aus den Beispielen unten',
     'google.quota.modal.calendar_creation.examples_title': 'Empfohlene Kalendernamen:',
+    'google.quota.modal.calendar_creation.wait_hours_info': 'Falls das manuelle Anlegen auch nicht funktioniert, bitte mehrere Stunden warten und dann erneut versuchen. Google hebt das Limit nach einiger Zeit automatisch wieder auf.',
     
     'google.quota.modal.event_sync.title': 'Event-Sync Limit erreicht',
     'google.quota.modal.event_sync.message': 'Sie haben das tägliche Limit für das Erstellen von Google Calendar Events erreicht.',

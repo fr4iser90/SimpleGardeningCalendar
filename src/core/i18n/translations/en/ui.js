@@ -730,6 +730,7 @@ export const en = {
     'google.quota.modal.open_google_calendar': 'Open Google Calendar',
     'google.quota.modal.opened_google_calendar': 'Google Calendar opened',
     'google.quota.modal.setup_calendars': 'Setup Calendars',
+    'google.quota.modal.calendar_creation.wait_hours_info': 'If manual creation also fails, please wait several hours and try again. Google will automatically lift the limit after some time.',
 
 };
   
