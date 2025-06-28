@@ -389,7 +389,7 @@ class GardeningCalendarTester {
     
     try {
       const gcModule = await import('./src/services/index.js');
-      const modalModule = await import('./src/components/modals/GoogleCalendarSetupModal.js');
+      const modalModule = await import('./src/components/modals/Google/GoogleCalendarSetupModal.js');
       
       this.logSuccess('Google Calendar modules loaded successfully');
       

@@ -33,7 +33,7 @@ export async function addPlanting(plantType, startDate, location = 'Default Gard
   }
   
   // --- NEU: Intelligente Kalenderzuordnung bei Option 2 (areas) ---
-  const localCalendarsSetting = JSON.parse(localStorage.getItem('localCalendars') || '{}');
+  const localCalendarsSetting = JSON.parse(localStorage.getItem('localCalendarsSetting') || '{}');
   if (localCalendarsSetting.type === 'areas') {
     // Hole alle lokalen Kalender
     const calendars = await getAllLocalCalendars();

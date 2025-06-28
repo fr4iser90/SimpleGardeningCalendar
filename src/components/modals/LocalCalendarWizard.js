@@ -317,6 +317,12 @@ async function handleLocalCalendarSetup(organizationType, customCalendars = []) 
       throw new Error('Standardkalender konnte nicht angelegt werden!');
     }
     
+    // Save organization type to localStorage
+    localStorage.setItem('localCalendarsSetting', JSON.stringify({
+      type: 'single',
+      calendarIds: [defaultCalendar.id]
+    }));
+    
     // Migrate existing events to new organization
     await migrateEventsToNewOrganization('single');
     return;
@@ -340,7 +346,7 @@ async function handleLocalCalendarSetup(organizationType, customCalendars = []) 
     if (areaCalendarIds.length > 0) {
       localStorage.setItem('selectedLocalCalendarId', areaCalendarIds[0].toString());
     }
-    localStorage.setItem('localCalendars', JSON.stringify({
+    localStorage.setItem('localCalendarsSetting', JSON.stringify({
       type: 'areas',
       calendarIds: areaCalendarIds
     }));
@@ -362,7 +368,7 @@ async function handleLocalCalendarSetup(organizationType, customCalendars = []) 
       localStorage.setItem('selectedLocalCalendarId', customCalendarIds[0].toString());
     }
     // Speichere alle Kalender
-    localStorage.setItem('localCalendars', JSON.stringify({
+    localStorage.setItem('localCalendarsSetting', JSON.stringify({
       type: 'custom',
       calendarIds: customCalendarIds
     }));

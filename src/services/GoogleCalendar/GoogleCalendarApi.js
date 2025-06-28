@@ -157,6 +157,29 @@ export async function createCalendar(calendarData) {
   return await response.json();
 }
 
+// Update an existing calendar in Google Calendar
+export async function updateCalendar(calendarId, updateData) {
+  if (!isSignedIn) {
+    throw new Error('Not signed in to Google Calendar');
+  }
+  
+  const response = await fetch(`https://www.googleapis.com/calendar/v3/calendars/${encodeURIComponent(calendarId)}`, {
+    method: 'PATCH',
+    headers: {
+      'Authorization': `Bearer ${accessToken}`,
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify(updateData)
+  });
+  
+  if (!response.ok) {
+    const error = await response.text();
+    throw new Error(`Failed to update calendar: ${error}`);
+  }
+  
+  return await response.json();
+}
+
 // Create an event in Google Calendar
 export async function createEvent(eventData) {
   if (!isSignedIn) throw new Error('Not signed in to Google Calendar');

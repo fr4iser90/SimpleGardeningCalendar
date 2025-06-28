@@ -7,6 +7,7 @@ import { isGardeningEvent } from '../../utils/eventUtils.js';
 import { formatDate } from '../../utils/dateUtils.js';
 import { validateEventData } from '../../utils/validators.js';
 import { convertToGoogleEvent, convertFromGoogleEvent } from '../../utils/eventUtils.js';
+import { getGoogleCalendarIdForEvent, autoDetectAndMatchCalendars } from './GoogleCalendarWizard.js';
 
 /**
  * Google Calendar Sync Logic
@@ -24,7 +25,15 @@ export async function performBidirectionalSync() {
   const errors = [];
   
   try {
-    // Step 1: Export local events to Google
+    // Step 1: Auto-detect and match calendars if needed
+    console.log('🔍 Checking calendar setup...');
+    const settings = googleCalendarSettings.load();
+    if (!settings.calendarMappings) {
+      console.log('No calendar mappings found, running auto-detection...');
+      await autoDetectAndMatchCalendars();
+    }
+    
+    // Step 2: Export local events to Google
     console.log('🔄 Exporting local events to Google...');
     const exportResult = await exportLocalEventsToGoogle();
     exported = exportResult.synced;
@@ -37,7 +46,7 @@ export async function performBidirectionalSync() {
   }
   
   try {
-    // Step 2: Import events from Google
+    // Step 3: Import events from Google
     console.log('🔄 Importing events from Google...');
     const importResult = await importGoogleEvents();
     imported = importResult.imported;
@@ -61,16 +70,17 @@ export async function createEvents(eventsData) {
   const { isSignedIn, accessToken } = getAuthState();
   if (!isSignedIn) throw new Error('Not signed in to Google Calendar');
   
-  const settings = googleCalendarSettings.load();
-  const calendarId = settings.selectedCalendarId;
-
-  if (!calendarId) throw new Error(t('google.error.no_calendar_selected'));
-  
   const results = [];
   const errors = [];
   
   for (const eventData of eventsData) {
     try {
+      // Get the appropriate Google calendar ID for this event
+      const calendarId = getGoogleCalendarIdForEvent(eventData);
+      if (!calendarId) {
+        throw new Error('No appropriate Google calendar found for this event');
+      }
+      
       const googleEvent = convertToGoogleEvent(eventData);
       const response = await fetch(`https://www.googleapis.com/calendar/v3/calendars/${calendarId}/events`, {
         method: 'POST',
@@ -103,31 +113,53 @@ export async function importEvents(timeMin = null, timeMax = null) {
   if (!isSignedIn) throw new Error('Not signed in to Google Calendar');
   
   const settings = googleCalendarSettings.load();
-  const calendarId = settings.selectedCalendarId;
-
-  if (!calendarId) throw new Error(t('google.error.no_calendar_selected'));
   
-  let url = `https://www.googleapis.com/calendar/v3/calendars/${calendarId}/events?singleEvents=true&orderBy=startTime`;
-  
-  if (timeMin) {
-    url += `&timeMin=${encodeURIComponent(timeMin)}`;
-  }
-  if (timeMax) {
-    url += `&timeMax=${encodeURIComponent(timeMax)}`;
+  // If no calendar mappings, run auto-detection first
+  if (!settings.calendarMappings) {
+    await autoDetectAndMatchCalendars();
   }
   
-  const response = await fetch(url, {
-    headers: {
-      'Authorization': `Bearer ${accessToken}`
+  const allEvents = [];
+  
+  // Import from all mapped calendars
+  for (const [category, calendarId] of Object.entries(settings.calendarMappings || {})) {
+    try {
+      let url = `https://www.googleapis.com/calendar/v3/calendars/${calendarId}/events?singleEvents=true&orderBy=startTime`;
+      
+      if (timeMin) {
+        url += `&timeMin=${encodeURIComponent(timeMin)}`;
+      }
+      if (timeMax) {
+        url += `&timeMax=${encodeURIComponent(timeMax)}`;
+      }
+      
+      const response = await fetch(url, {
+        headers: {
+          'Authorization': `Bearer ${accessToken}`
+        }
+      });
+      
+      if (!response.ok) {
+        console.error(`Failed to fetch events from calendar ${category}: ${response.statusText}`);
+        continue;
+      }
+      
+      const data = await response.json();
+      const events = data.items || [];
+      
+      // Add category information to events
+      events.forEach(event => {
+        event.sourceCategory = category;
+        event.sourceCalendarId = calendarId;
+      });
+      
+      allEvents.push(...events);
+    } catch (error) {
+      console.error(`Failed to import from calendar ${category}:`, error);
     }
-  });
-  
-  if (!response.ok) {
-    throw new Error('Failed to fetch events from Google Calendar');
   }
   
-  const data = await response.json();
-  return data.items || [];
+  return allEvents;
 }
 
 // Export local events to Google (internal implementation)
@@ -140,37 +172,14 @@ export async function exportLocalEventsToGoogle() {
   const events = await db.getAll('events');
   const settings = googleCalendarSettings.load();
   
-  // Check if no calendar is selected, search for existing gardening calendars
-  if (!settings.selectedCalendarId) {
-    console.log('[DEBUG] No calendar selected - searching for existing gardening calendars...');
+  // Auto-detect and match calendars if no setup exists
+  if (!settings.calendarMappings) {
+    console.log('[DEBUG] No calendar mappings found - running auto-detection...');
     try {
-      const { fetchCalendarList } = await import('./GoogleCalendarApi.js');
-      const calendars = await fetchCalendarList();
-      
-      // Search for gardening-related calendars by summary name
-      const gardeningKeywords = ['garden', 'gardening', 'plant', '🌱', '🌿', '🌾', '💧', '🔧'];
-      const gardeningCalendars = calendars.filter(cal => 
-        gardeningKeywords.some(keyword => 
-          cal.summary.toLowerCase().includes(keyword.toLowerCase())
-        )
-      );
-      
-      if (gardeningCalendars.length > 0) {
-        // Auto-select the first gardening calendar found
-        const selectedCalendar = gardeningCalendars[0];
-        settings.selectedCalendarId = selectedCalendar.id;
-        settings.calendarList = calendars.reduce((acc, cal) => {
-          acc[cal.id] = cal.summary;
-          return acc;
-        }, {});
-        googleCalendarSettings.save(settings);
-        console.log(`[DEBUG] Auto-selected gardening calendar: ${selectedCalendar.summary} (${selectedCalendar.id})`);
-      } else {
-        throw new Error('No gardening calendar found. Please select a calendar from your available calendars.');
-      }
+      await autoDetectAndMatchCalendars();
     } catch (error) {
-      console.error('[DEBUG] Failed to search for calendars:', error);
-      throw new Error('No calendar selected for sync. Please complete the Google Calendar setup wizard to choose a calendar.');
+      console.error('[DEBUG] Auto-detection failed:', error);
+      throw new Error('Failed to set up Google Calendar sync. Please try again.');
     }
   }
   
@@ -199,15 +208,22 @@ export async function exportLocalEventsToGoogle() {
     const googleEvent = results[i];
     
     if (googleEvent && googleEvent.id) {
-      await db.put('events', {
-        ...localEvent,
-        googleEventId: googleEvent.id,
-        lastModified: new Date().toISOString()
-      });
+      localEvent.googleEventId = googleEvent.id;
+      localEvent.googleCalendarId = getGoogleCalendarIdForEvent(localEvent);
+      await db.put('events', localEvent);
     }
   }
   
-  return { synced: results.length, failed: errors.length };
+  const synced = results.filter(r => r !== null).length;
+  const failed = results.filter(r => r === null).length;
+  
+  console.log(`✅ Export complete: ${synced} synced, ${failed} failed`);
+  
+  if (failed > 0) {
+    console.error('❌ Export errors:', errors);
+  }
+  
+  return { synced, failed };
 }
 
 // Import Google events (internal implementation)

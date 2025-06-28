@@ -1,10 +1,10 @@
 import { attemptSignIn, signOut, getUserInfo, getAuthState } from '../../../services/GoogleCalendar/GoogleCalendarApi.js';
 import { performBidirectionalSync, exportLocalEventsToGoogle, importGoogleEvents } from '../../../services/GoogleCalendar/GoogleCalendarSync.js';
 import { googleCalendarSettings } from '../../../services/GoogleCalendar/GoogleCalendarSettings.js';
+import { autoDetectAndMatchCalendars, updateCalendarNamesForLanguage } from '../../../services/GoogleCalendar/GoogleCalendarWizard.js';
 import { getEventTypeIcon } from '../../../utils/eventUtils.js';
 import { showNotification } from '../../../utils/notifications.js';
 import { showButtonSpinner, hideButtonSpinner, showLoadingSpinner, hideLoadingSpinner } from '../../ui/LoadingSpinner.js';
-import { renderCalendarWizardHTML, setupCalendarWizardEventListeners } from './GoogleCalendarWizard.js';
 import { showDetailedHelp } from './GoogleDetailedHelp.js';
 import { t } from '../../../core/i18n/index.js';
 
@@ -56,13 +56,13 @@ async function performSyncOperation(operation, button, originalText) {
   }
 }
 
-export async function updateConnectionStatus(showWizard = false) {
+export async function updateConnectionStatus() {
   const statusDiv = document.getElementById('connectionStatus');
   const userInfoDiv = document.getElementById('userInfo');
   const syncOptionsDiv = document.getElementById('syncOptions');
-  const calendarWizard = document.getElementById('calendarWizard');
+  const calendarSetupSection = document.getElementById('calendarSetupSection');
   
-  if (!statusDiv || !userInfoDiv || !syncOptionsDiv || !calendarWizard) return;
+  if (!statusDiv || !userInfoDiv || !syncOptionsDiv || !calendarSetupSection) return;
   
   try {
     const { isSignedIn } = getAuthState();
@@ -82,58 +82,23 @@ export async function updateConnectionStatus(showWizard = false) {
         userInfoDiv.textContent = 'Connected (user info unavailable)';
       }
       
-      // SMART AUTO-DETECTION: If no setup exists, check for existing garden calendars
-      let hasCalendarSetup = settings.organizationType || settings.selectedCalendarId;
+      // Show calendar setup section after login
+      calendarSetupSection.style.display = 'block';
       
-      if (!hasCalendarSetup && !showWizard) {
-        console.log('🔍 No setup found - checking for existing garden calendars...');
+      // Auto-detect and match calendars if no setup exists
+      if (!settings.calendarMappings) {
+        console.log('🔍 No calendar mappings found - running auto-detection...');
         try {
-          const { detectGardenCalendars } = await import('../../../services/GoogleCalendar/GoogleCalendarApi.js');
-          const { gardenCalendars, hasExistingGardenCalendars } = await detectGardenCalendars();
-          
-          if (hasExistingGardenCalendars && gardenCalendars.length > 0) {
-            // Auto-select the first garden calendar found
-            const firstCalendar = gardenCalendars[0];
-            settings.selectedCalendarId = firstCalendar.id;
-            settings.organizationType = 'existing';
-            settings.createdCalendars = gardenCalendars.map(cal => ({
-              id: cal.id,
-              name: cal.summary
-            }));
-            googleCalendarSettings.save(settings);
-            hasCalendarSetup = true;
-            
-            console.log('✅ Auto-detected and configured existing garden calendars:', {
-              selectedCalendar: firstCalendar.summary,
-              totalCalendars: gardenCalendars.length
-            });
-            
-            showNotification(`Auto-detected ${gardenCalendars.length} garden calendar(s). Using "${firstCalendar.summary}" as primary.`, 'success');
-          }
+          const detectionResult = await autoDetectAndMatchCalendars();
+          showNotification(`Calendar setup complete: ${Object.keys(detectionResult.matched).length} calendars configured`, 'success');
         } catch (error) {
           console.error('Failed to auto-detect calendars:', error);
+          showNotification('Calendar setup failed. Please try again.', 'error');
         }
       }
       
-      const shouldShowWizard = showWizard || !hasCalendarSetup;
-      
-      console.log('📋 Calendar Setup Status:', {
-        organizationType: settings.organizationType,
-        selectedCalendarId: settings.selectedCalendarId,
-        hasCalendarSetup,
-        showWizard,
-        shouldShowWizard
-      });
-      
-      if (shouldShowWizard) {
-        console.log('🔧 Showing calendar wizard');
-        calendarWizard.style.display = 'block';
-        syncOptionsDiv.style.display = 'none';
-      } else {
-        console.log('⚙️ Showing sync options');
-        calendarWizard.style.display = 'none';
-        syncOptionsDiv.style.display = 'block';
-      }
+      // Show sync options
+      syncOptionsDiv.style.display = 'block';
       
     } else {
       statusDiv.className = 'p-3 rounded-lg bg-gray-50 dark:bg-gray-700 border border-gray-200 dark:border-gray-600';
@@ -145,7 +110,7 @@ export async function updateConnectionStatus(showWizard = false) {
       `;
       userInfoDiv.textContent = 'Enter your Client ID below to connect';
       syncOptionsDiv.style.display = 'none';
-      calendarWizard.style.display = 'none';
+      calendarSetupSection.style.display = 'none';
     }
   } catch (error) {
     console.error('Failed to update connection status:', error);
@@ -161,6 +126,7 @@ function initializeGoogleCalendarEventListeners() {
   const bidirectionalSyncBtn = document.getElementById('bidirectionalSyncBtn');
   const saveSyncSettingsBtn = document.getElementById('saveSyncSettingsBtn');
   const signOutBtn = document.getElementById('signOutBtn');
+  const setupCalendarsBtn = document.getElementById('setupCalendarsBtn');
 
   // Connect button
   connectBtn?.addEventListener('click', async () => {
@@ -193,6 +159,23 @@ function initializeGoogleCalendarEventListeners() {
     settings.clientId = clientIdInput.value;
     googleCalendarSettings.save(settings);
     showNotification('Settings saved successfully!', 'success');
+  });
+  
+  // Setup calendars button
+  setupCalendarsBtn?.addEventListener('click', async () => {
+    const originalText = setupCalendarsBtn.textContent;
+    const spinnerId = showButtonSpinner(setupCalendarsBtn, originalText, 'Setting up calendars...');
+    
+    try {
+      const result = await autoDetectAndMatchCalendars();
+      const calendarCount = Object.keys(result.matched).length;
+      showNotification(`Calendar setup complete: ${calendarCount} calendars configured`, 'success');
+      updateConnectionStatus();
+    } catch (error) {
+      showNotification(`Calendar setup failed: ${error.message}`, 'error');
+    } finally {
+      hideButtonSpinner(setupCalendarsBtn, spinnerId);
+    }
   });
   
   // Sync buttons
@@ -235,24 +218,26 @@ function initializeGoogleCalendarEventListeners() {
     }
   });
 
-  // Change calendar setup
-  const changeSetupBtn = document.getElementById('changeSetupBtn');
-  changeSetupBtn?.addEventListener('click', () => {
-    if (confirm('Are you sure you want to change your calendar setup? This will reset your current organization.')) {
-      const settings = googleCalendarSettings.load();
-      delete settings.organizationType;
-      delete settings.createdCalendars;
-      delete settings.selectedCalendarId;
-      googleCalendarSettings.save(settings);
-      updateConnectionStatus(true); // Pass showWizard=true to explicitly show the wizard
-      showNotification('Setup has been reset. Please configure your calendars again.', 'info');
-    }
-  });
-
   // Listener for status changes from the API module
   document.addEventListener('googleCalendarStatusChanged', (e) => {
       console.log('Event "googleCalendarStatusChanged" received in UI, updating status.');
       updateConnectionStatus();
+  });
+
+  // Listener for language changes to update Google calendar names
+  document.addEventListener('languageChanged', async (e) => {
+      console.log('Language changed to:', e.detail.language);
+      const { isSignedIn } = getAuthState();
+      if (isSignedIn) {
+          try {
+              const result = await updateCalendarNamesForLanguage();
+              if (Object.keys(result.updated).length > 0) {
+                  showNotification(`Updated ${Object.keys(result.updated).length} calendar names for new language`, 'success');
+              }
+          } catch (error) {
+              console.error('Failed to update calendar names for language change:', error);
+          }
+      }
   });
 }
 
@@ -336,15 +321,22 @@ export function renderGoogleCalendarSetupModal() {
           </div>
         </form>
         
-        ${renderCalendarWizardHTML(settings)}
+        <!-- Calendar Setup Section (only shown after login) -->
+        <div id="calendarSetupSection" style="display: none;" class="bg-yellow-50 dark:bg-yellow-900/20 border border-yellow-200 dark:border-yellow-800 rounded-lg p-4">
+          <h3 class="font-semibold text-yellow-800 dark:text-yellow-200 mb-2">🔧 Automatic Calendar Setup</h3>
+          <p class="text-sm text-yellow-700 dark:text-yellow-300 mb-3">
+            The app will automatically detect, match, and create Google calendars based on your local calendar organization. 
+            No manual setup required!
+          </p>
+          <button id="setupCalendarsBtn" class="px-4 py-2 bg-yellow-600 text-white rounded hover:bg-yellow-700">
+            🔧 Setup Calendars Now
+          </button>
+        </div>
         
         <!-- Enhanced Sync Options -->
         <div id="syncOptions" style="display: none;" class="border-t pt-4">
           <div class="flex justify-between items-center mb-4">
             <h3 class="font-semibold dark:text-white">⚙️ ${t('google.setup.sync_settings')}</h3>
-            <button id="changeSetupBtn" class="text-sm text-blue-600 dark:text-blue-400 hover:underline">
-              ${t('google.setup.change_setup')}
-            </button>
           </div>
           
           <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
@@ -441,6 +433,4 @@ export function renderGoogleCalendarSetupModal() {
   
   initializeGoogleCalendarEventListeners();
   updateConnectionStatus();
-
-  setupCalendarWizardEventListeners();
 } 
