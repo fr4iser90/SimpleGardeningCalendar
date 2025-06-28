@@ -8,7 +8,7 @@ import { PLANT_TAGS } from '../categories.js';
 export const carrots = {
   name: 'Carrots',
   category: 'category.vegetables',
-  tags: [PLANT_TAGS.ROOT, PLANT_TAGS.ANNUAL],
+  tags: ['tag.root', 'tag.biennial', 'tag.photoperiod'],
   emoji: '🥕',
   environments: {
     indoor: {

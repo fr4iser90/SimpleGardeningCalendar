@@ -8,7 +8,8 @@ import { PLANT_TAGS } from '../categories.js';
 export const parsley = {
   name: 'Parsley',
   category: 'category.herbs',
-  tags: [PLANT_TAGS.BIENNIAL],
+  tags: [PLANT_TAGS.BIENNIAL, PLANT_TAGS.PHOTOPERIOD],
+  emoji: '🌿',
   environments: {
     indoor: {
       phases: {

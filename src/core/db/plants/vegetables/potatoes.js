@@ -8,8 +8,8 @@ import { PLANT_TAGS } from '../categories.js';
 export const potatoes = {
   name: 'Potatoes',
   category: 'category.vegetables',
+  tags: ['tag.root', 'tag.annual', 'tag.photoperiod'],
   emoji: '🥔',
-  tags: [PLANT_TAGS.ROOT, PLANT_TAGS.ANNUAL],
   environments: {
     indoor: {
       phases: {

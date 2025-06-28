@@ -8,7 +8,8 @@ import { PLANT_TAGS } from '../categories.js';
 export const basil = {
   name: 'Basil',
   category: 'category.herbs',
-  tags: [PLANT_TAGS.ANNUAL],
+  tags: [PLANT_TAGS.ANNUAL, PLANT_TAGS.PHOTOPERIOD],
+  emoji: '🌿',
   environments: {
     indoor: {
       phases: {

@@ -8,7 +8,8 @@ import { PLANT_TAGS } from '../categories.js';
 export const cherry_tree = {
   name: 'Cherry Tree',
   category: 'category.fruit_trees',
-  tags: [PLANT_TAGS.PERENNIAL],
+  tags: [PLANT_TAGS.PERENNIAL, PLANT_TAGS.PHOTOPERIOD],
+  emoji: '🍒',
   environments: {
     outdoor: {
       phases: {

@@ -23,6 +23,7 @@ export const PLANT_TAGS = {
   ANNUAL: 'tag.annual',
   BIENNIAL: 'tag.biennial',
   CANNABIS: 'tag.cannabis', // Optional, country-dependent
+  PHOTOPERIOD: 'tag.photoperiod', // Photoperiod-dependent plants
 };
 
 export const CATEGORY_METADATA = {

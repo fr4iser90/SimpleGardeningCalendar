@@ -21,6 +21,7 @@ function formatTemperature(fahrenheitRange) {
 export const cucumber = {
   name: 'Cucumber',
   category: 'category.vegetables',
+  tags: ['tag.photoperiod', 'tag.annual'],
   emoji: '🥒',
   environments: {
     indoor: {

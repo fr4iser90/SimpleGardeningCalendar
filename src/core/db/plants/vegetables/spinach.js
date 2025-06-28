@@ -24,7 +24,7 @@ export const spinach = {
   name: 'Spinach',
   category: 'category.vegetables',
   emoji: '🥬',
-  tags: [PLANT_TAGS.LEAFY, PLANT_TAGS.ANNUAL],
+  tags: [PLANT_TAGS.LEAFY, PLANT_TAGS.ANNUAL, PLANT_TAGS.PHOTOPERIOD],
   environments: {
     indoor: {
       phases: {

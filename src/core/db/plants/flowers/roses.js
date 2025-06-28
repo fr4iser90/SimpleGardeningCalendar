@@ -8,7 +8,7 @@ import { PLANT_TAGS } from '../categories.js';
 export const roses = {
   name: 'Roses',
   category: 'category.flowers',
-  tags: [PLANT_TAGS.PERENNIAL],
+  tags: [PLANT_TAGS.PERENNIAL, PLANT_TAGS.PHOTOPERIOD],
   emoji: '🌹',
   environments: {
     indoor: {

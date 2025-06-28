@@ -24,7 +24,7 @@ function formatTemperature(fahrenheitRange) {
 export const cannabis_indica = {
   name: 'Cannabis Indica',
   category: 'category.herbs', // Updated category
-  tags: [PLANT_TAGS.CANNABIS, PLANT_TAGS.ANNUAL], // New tag structure
+  tags: [PLANT_TAGS.CANNABIS, PLANT_TAGS.ANNUAL, PLANT_TAGS.PHOTOPERIOD], // New tag structure
   legalNote:
     'Check local laws before cultivation. This information is for educational purposes only.',
   environments: {

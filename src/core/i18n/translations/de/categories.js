@@ -104,7 +104,7 @@ export const de = {
   'cannabis.fully_legal': 'Vollständig legalisiert',
 
   // Cannabis country-specific info
-  'cannabis.de.info': 'Medizinisches Cannabis legal, Freizeit-Cannabis illegal',
+  'cannabis.de.info': 'Medizinisches Cannabis legal, Bis zu 3 Blühende Pflanzen pro Person',
   'cannabis.at.info': 'Medizinisches Cannabis legal, Freizeit-Cannabis illegal',
   'cannabis.ch.info': 'Medizinisches Cannabis legal, Freizeit-Cannabis entkriminalisiert',
   'cannabis.nl.info': 'Medizinisches Cannabis legal, Freizeit-Cannabis toleriert',

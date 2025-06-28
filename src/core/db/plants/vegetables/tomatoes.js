@@ -21,6 +21,7 @@ function formatTemperature(fahrenheitRange) {
 export const tomatoes = {
   name: 'Tomatoes',
   category: 'category.vegetables',
+  tags: ['tag.photoperiod', 'tag.annual'],
   emoji: '🍅',
   environments: {
     indoor: {

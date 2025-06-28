@@ -8,7 +8,8 @@ import { PLANT_TAGS } from '../categories.js';
 export const oregano = {
   name: 'Oregano',
   category: 'category.herbs',
-  tags: [PLANT_TAGS.PERENNIAL],
+  tags: [PLANT_TAGS.PERENNIAL, PLANT_TAGS.PHOTOPERIOD],
+  emoji: '🌿',
   environments: {
     indoor: {
       phases: {

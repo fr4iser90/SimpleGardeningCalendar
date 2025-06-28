@@ -248,19 +248,41 @@ export async function createIntelligentPlantingEvents(planting, plantData, phase
     if (phaseStartDate < plantingDateObj) {
       console.log(`🎯 [createIntelligentPlantingEvents] Phase ${phase.name} starts before planting date, adjusting to planting date`);
       
-      // Berechne die ursprüngliche Phasendauer
-      const originalPhaseDays = Math.round((phaseEndDate - phaseStartDate) / (1000*60*60*24));
+      // --- NEU: Intelligente Photoperioden-Anpassung für alle Photoperioden-Pflanzen im Freien ---
+      const isOutdoor = planting.environment === 'outdoor' || planting.environment === 'environment.outdoor';
+      const isPhotoperiodPlant = plantData.tags?.includes('tag.photoperiod');
+      const isPhotoperiodPhase = ['preflower', 'flowering', 'fruiting', 'bloom'].includes(phase.name);
       
-      // Setze Start auf Pflanzdatum und Ende entsprechend verschieben
-      phaseStartDate = new Date(plantingDateObj);
-      phaseEndDate = new Date(plantingDateObj);
-      phaseEndDate.setDate(phaseEndDate.getDate() + originalPhaseDays);
-      
-      // Aktualisiere die phase.startDate für Event-Erstellung
-      phase.startDate = phaseStartDate.toISOString().split('T')[0];
-      phase.endDate = phaseEndDate.toISOString().split('T')[0];
-      
-      console.log(`🎯 [createIntelligentPlantingEvents] Adjusted phase ${phase.name}: ${phase.startDate} - ${phase.endDate}`);
+      if (isOutdoor && isPhotoperiodPlant && isPhotoperiodPhase) {
+        // Bei allen Photoperioden-Pflanzen im Freien: Photoperioden-Trigger respektieren
+        console.log(`🎯 [createIntelligentPlantingEvents] Outdoor photoperiod plant detected - respecting natural triggers for ${phase.name}`);
+        
+        // Prüfe, ob die Phase nach dem Pflanzdatum beginnt
+        if (phaseStartDate >= plantingDateObj) {
+          // Phase beginnt nach Pflanzdatum: normal verarbeiten
+          console.log(`🎯 [createIntelligentPlantingEvents] Phase ${phase.name} starts after planting date, processing normally`);
+        } else {
+          // Phase beginnt vor Pflanzdatum: überspringen (Photoperioden-Trigger nicht erreichbar)
+          console.log(`🎯 [createIntelligentPlantingEvents] Phase ${phase.name} starts before planting date and is photoperiod-dependent, skipping`);
+          continue;
+        }
+      } else {
+        // Für alle anderen Pflanzen/Phasen: normale Anpassung
+        // Berechne die ursprüngliche Phasendauer
+        const originalPhaseDays = Math.round((phaseEndDate - phaseStartDate) / (1000*60*60*24));
+        
+        // Setze Start auf Pflanzdatum und Ende entsprechend verschieben
+        phaseStartDate = new Date(plantingDateObj);
+        phaseEndDate = new Date(plantingDateObj);
+        phaseEndDate.setDate(phaseEndDate.getDate() + originalPhaseDays);
+        
+        // Aktualisiere die phase.startDate für Event-Erstellung
+        phase.startDate = phaseStartDate.toISOString().split('T')[0];
+        phase.endDate = phaseEndDate.toISOString().split('T')[0];
+        
+        console.log(`🎯 [createIntelligentPlantingEvents] Adjusted phase ${phase.name}: ${phase.startDate} - ${phase.endDate}`);
+      }
+      // --- ENDE NEU ---
     }
     // --- ENDE NEU ---
 

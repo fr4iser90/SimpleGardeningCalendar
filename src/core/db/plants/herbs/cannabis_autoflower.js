@@ -24,7 +24,7 @@ function formatTemperature(fahrenheitRange) {
 export const cannabis_autoflower = {
   name: 'Cannabis Autoflower',
   category: 'category.herbs', // Updated category
-  tags: [PLANT_TAGS.CANNABIS, PLANT_TAGS.ANNUAL], // New tag structure
+  tags: [PLANT_TAGS.CANNABIS, PLANT_TAGS.ANNUAL], // Autoflowers are NOT photoperiod-dependent
   legalNote:
     'Check local laws before cultivation. This information is for educational purposes only.',
   environments: {
