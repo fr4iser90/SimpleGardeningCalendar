@@ -224,6 +224,12 @@ export async function exportLocalEventsToGoogle() {
       localEvent.googleEventId = googleEvent.id;
       localEvent.googleCalendarId = getGoogleCalendarIdForEvent(localEvent);
       await db.put('events', localEvent);
+    } else if (errors[i] && errors[i].message && errors[i].message.includes('403')) {
+      // Automatische Bereinigung bei 403: Kalender-ID und Event-ID zurücksetzen
+      console.warn(`[SYNC-CLEANUP] 403 Forbidden für Event '${localEvent.title}' (calendarId: ${localEvent.googleCalendarId}). Setze IDs auf null für Re-Export.`);
+      localEvent.googleEventId = null;
+      localEvent.googleCalendarId = null;
+      await db.put('events', localEvent);
     }
   }
   

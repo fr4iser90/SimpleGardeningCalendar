@@ -60,8 +60,7 @@ export function convertToGoogleEvent(eventData) {
     maintenance: '🔧'
   };
   
-  const emoji = categoryEmojis[eventData.type] || '📅';
-  const title = `${emoji} ${eventData.title}`;
+  const title = eventData.title;
   
   // Add metadata
   const metadata = {

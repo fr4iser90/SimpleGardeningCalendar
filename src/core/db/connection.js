@@ -45,8 +45,10 @@ export const SEASONAL_WINDOWS = {
  * Creates all necessary object stores and indexes
  */
 export async function initializeDB() {
+  console.log('INITIALIZING DB...');
   const db = await openDB(DB_NAME, DB_VERSION, {
     upgrade(db, oldVersion, newVersion, transaction) {
+      console.log('UPGRADING DB...', oldVersion, newVersion);
       // Version 1: Initial schema
       if (oldVersion < 1) {
         const plantStore = db.createObjectStore('plants', { keyPath: 'id', autoIncrement: true });
@@ -142,7 +144,7 @@ export async function initializeDB() {
       }
     }
   });
-
+  console.log('DB INITIALIZED!');
   return db;
 }
 

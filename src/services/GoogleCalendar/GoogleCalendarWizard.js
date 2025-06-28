@@ -124,19 +124,20 @@ export async function autoDetectAndMatchCalendars() {
       );
       
       if (matchedCalendar) {
-        // Check if name needs updating for current language
-        if (matchedCalendar.summary !== completeGardenInfo.name) {
+        // Check if full summary (emoji + name) needs updating for current language
+        const desiredSummary = `${completeGardenInfo.emoji} ${completeGardenInfo.name}`;
+        if (matchedCalendar.summary !== desiredSummary) {
           try {
             await updateCalendar(matchedCalendar.id, {
-              summary: `${completeGardenInfo.emoji} ${completeGardenInfo.name}`,
+              summary: desiredSummary,
               description: completeGardenInfo.description
             });
             results.renamed[CALENDAR_CATEGORIES.COMPLETE_GARDEN] = {
               id: matchedCalendar.id,
               oldName: matchedCalendar.summary,
-              newName: `${completeGardenInfo.emoji} ${completeGardenInfo.name}`
+              newName: desiredSummary
             };
-            showNotification(`Renamed calendar to "${completeGardenInfo.emoji} ${completeGardenInfo.name}"`, 'success');
+            showNotification(`Renamed calendar to "${desiredSummary}"`, 'success');
           } catch (error) {
             results.errors.push(`Failed to rename calendar: ${error.message}`);
           }
@@ -186,19 +187,20 @@ export async function autoDetectAndMatchCalendars() {
         );
         
         if (matchedCalendar) {
-          // Check if name needs updating for current language
-          if (matchedCalendar.summary !== calendarInfo.name) {
+          // Check if full summary (emoji + name) needs updating for current language
+          const desiredSummary = `${calendarInfo.emoji} ${calendarInfo.name}`;
+          if (matchedCalendar.summary !== desiredSummary) {
             try {
               await updateCalendar(matchedCalendar.id, {
-                summary: `${calendarInfo.emoji} ${calendarInfo.name}`,
+                summary: desiredSummary,
                 description: calendarInfo.description
               });
               results.renamed[category] = {
                 id: matchedCalendar.id,
                 oldName: matchedCalendar.summary,
-                newName: `${calendarInfo.emoji} ${calendarInfo.name}`
+                newName: desiredSummary
               };
-              showNotification(`Renamed calendar to "${calendarInfo.emoji} ${calendarInfo.name}"`, 'success');
+              showNotification(`Renamed calendar to "${desiredSummary}"`, 'success');
             } catch (error) {
               results.errors.push(`Failed to rename calendar: ${error.message}`);
             }
@@ -285,19 +287,20 @@ export async function updateCalendarNamesForLanguage() {
         const calendars = await fetchCalendarList();
         const currentCalendar = calendars.find(cal => cal.id === calendarId);
         
-        if (currentCalendar && currentCalendar.summary !== calendarInfo.name) {
+        const desiredSummary = `${calendarInfo.emoji} ${calendarInfo.name}`;
+        if (currentCalendar && currentCalendar.summary !== desiredSummary) {
           await updateCalendar(calendarId, {
-            summary: `${calendarInfo.emoji} ${calendarInfo.name}`,
+            summary: desiredSummary,
             description: calendarInfo.description
           });
           
           results.updated[category] = {
             id: calendarId,
             oldName: currentCalendar.summary,
-            newName: calendarInfo.name
+            newName: desiredSummary
           };
           
-          showNotification(`Updated calendar name to "${calendarInfo.name}"`, 'success');
+          showNotification(`Updated calendar name to "${desiredSummary}"`, 'success');
         }
       } catch (error) {
         results.errors.push(`Failed to update ${category}: ${error.message}`);
