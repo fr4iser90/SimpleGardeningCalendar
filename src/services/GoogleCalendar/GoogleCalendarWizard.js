@@ -128,15 +128,15 @@ export async function autoDetectAndMatchCalendars() {
         if (matchedCalendar.summary !== completeGardenInfo.name) {
           try {
             await updateCalendar(matchedCalendar.id, {
-              summary: completeGardenInfo.name,
+              summary: `${completeGardenInfo.emoji} ${completeGardenInfo.name}`,
               description: completeGardenInfo.description
             });
             results.renamed[CALENDAR_CATEGORIES.COMPLETE_GARDEN] = {
               id: matchedCalendar.id,
               oldName: matchedCalendar.summary,
-              newName: completeGardenInfo.name
+              newName: `${completeGardenInfo.emoji} ${completeGardenInfo.name}`
             };
-            showNotification(`Renamed calendar to "${completeGardenInfo.name}"`, 'success');
+            showNotification(`Renamed calendar to "${completeGardenInfo.emoji} ${completeGardenInfo.name}"`, 'success');
           } catch (error) {
             results.errors.push(`Failed to rename calendar: ${error.message}`);
           }
@@ -149,19 +149,19 @@ export async function autoDetectAndMatchCalendars() {
         // Create new complete garden calendar
         try {
           const newCalendar = await createCalendar({
-            summary: completeGardenInfo.name,
+            summary: `${completeGardenInfo.emoji} ${completeGardenInfo.name}`,
             description: completeGardenInfo.description,
             timeZone: Intl.DateTimeFormat().resolvedOptions().timeZone
           });
           
           results.created[CALENDAR_CATEGORIES.COMPLETE_GARDEN] = {
             id: newCalendar.id,
-            name: completeGardenInfo.name
+            name: `${completeGardenInfo.emoji} ${completeGardenInfo.name}`
           };
           results.matched[CALENDAR_CATEGORIES.COMPLETE_GARDEN] = newCalendar.id;
           settings.selectedCalendarId = newCalendar.id;
           
-          showNotification(`Created new calendar: "${completeGardenInfo.name}"`, 'success');
+          showNotification(`Created new calendar: "${completeGardenInfo.emoji} ${completeGardenInfo.name}"`, 'success');
         } catch (error) {
           results.errors.push(`Failed to create calendar: ${error.message}`);
         }
@@ -190,15 +190,15 @@ export async function autoDetectAndMatchCalendars() {
           if (matchedCalendar.summary !== calendarInfo.name) {
             try {
               await updateCalendar(matchedCalendar.id, {
-                summary: calendarInfo.name,
+                summary: `${calendarInfo.emoji} ${calendarInfo.name}`,
                 description: calendarInfo.description
               });
               results.renamed[category] = {
                 id: matchedCalendar.id,
                 oldName: matchedCalendar.summary,
-                newName: calendarInfo.name
+                newName: `${calendarInfo.emoji} ${calendarInfo.name}`
               };
-              showNotification(`Renamed calendar to "${calendarInfo.name}"`, 'success');
+              showNotification(`Renamed calendar to "${calendarInfo.emoji} ${calendarInfo.name}"`, 'success');
             } catch (error) {
               results.errors.push(`Failed to rename calendar: ${error.message}`);
             }
@@ -210,18 +210,18 @@ export async function autoDetectAndMatchCalendars() {
           // Create new calendar for this category
           try {
             const newCalendar = await createCalendar({
-              summary: calendarInfo.name,
+              summary: `${calendarInfo.emoji} ${calendarInfo.name}`,
               description: calendarInfo.description,
               timeZone: Intl.DateTimeFormat().resolvedOptions().timeZone
             });
             
             results.created[category] = {
               id: newCalendar.id,
-              name: calendarInfo.name
+              name: `${calendarInfo.emoji} ${calendarInfo.name}`
             };
             results.matched[category] = newCalendar.id;
             
-            showNotification(`Created new calendar: "${calendarInfo.name}"`, 'success');
+            showNotification(`Created new calendar: "${calendarInfo.emoji} ${calendarInfo.name}"`, 'success');
           } catch (error) {
             results.errors.push(`Failed to create calendar: ${error.message}`);
           }
@@ -287,7 +287,7 @@ export async function updateCalendarNamesForLanguage() {
         
         if (currentCalendar && currentCalendar.summary !== calendarInfo.name) {
           await updateCalendar(calendarId, {
-            summary: calendarInfo.name,
+            summary: `${calendarInfo.emoji} ${calendarInfo.name}`,
             description: calendarInfo.description
           });
           

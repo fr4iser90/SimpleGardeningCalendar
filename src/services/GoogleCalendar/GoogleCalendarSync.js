@@ -25,14 +25,27 @@ export async function performBidirectionalSync() {
   const errors = [];
   
   try {
-    // Step 1: Auto-detect and match calendars if needed
+    // Step 1: Auto-detect and match calendars ALWAYS before export
     console.log('🔍 Checking calendar setup...');
+    const calendarResults = await autoDetectAndMatchCalendars();
+
+    // NEU: Nach Kalender-Matching alle Events, deren googleCalendarId nicht mehr passt, zum Re-Export markieren
+    const db = await openDB(DB_NAME, DB_VERSION);
+    const allEvents = await db.getAll('events');
     const settings = googleCalendarSettings.load();
-    if (!settings.calendarMappings) {
-      console.log('No calendar mappings found, running auto-detection...');
-      await autoDetectAndMatchCalendars();
+    const validCalendarIds = Object.values(settings.calendarMappings || {});
+    let reexportCount = 0;
+    for (const event of allEvents) {
+      if (event.googleEventId && (!event.googleCalendarId || !validCalendarIds.includes(event.googleCalendarId))) {
+        event.googleEventId = null;
+        event.googleCalendarId = null;
+        await db.put('events', event);
+        reexportCount++;
+      }
     }
-    
+    if (reexportCount > 0) {
+      console.log(`🔄 Marked ${reexportCount} events for re-export after calendar change.`);
+    }
     // Step 2: Export local events to Google
     console.log('🔄 Exporting local events to Google...');
     const exportResult = await exportLocalEventsToGoogle();

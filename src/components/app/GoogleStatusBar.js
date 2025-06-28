@@ -48,24 +48,6 @@ export function updateGoogleCalendarStatus() {
       return;
     }
 
-    const selectedCalendarId = settings.selectedCalendarId;
-    // Try to get calendar name from createdCalendars first, then fallback to calendarList
-    let calendarName = selectedCalendarId;
-    
-    if (settings.createdCalendars && settings.createdCalendars.length > 0) {
-      const foundCalendar = settings.createdCalendars.find(cal => cal.id === selectedCalendarId);
-      if (foundCalendar) {
-        calendarName = foundCalendar.name;
-      }
-    } else if (settings.calendarList && settings.calendarList[selectedCalendarId]) {
-      calendarName = settings.calendarList[selectedCalendarId];
-    }
-    
-    // If still showing ID, try to load calendar name
-    if (calendarName === selectedCalendarId && calendarName.includes('@group.calendar.google.com')) {
-      calendarName = t('google.calendar.fallback_name'); // Fallback friendly name
-    }
-    
     const autoSync = settings.autoSync || false;
 
     statusDisplay.innerHTML = `
@@ -73,23 +55,6 @@ export function updateGoogleCalendarStatus() {
       <span class="text-green-600 dark:text-green-400 flex items-center" title="${settings.userEmail}">
         <i class="fas fa-check-circle mr-1"></i>${t('google.connected')}
       </span>
-      <span class="mx-2">|</span>
-      <div class="flex items-center space-x-2">
-        <span>📅</span>
-        ${settings.createdCalendars && settings.createdCalendars.length > 1 ? `
-          <select 
-            id="calendarSwitcher" 
-            class="text-xs px-2 py-1 border rounded dark:bg-gray-700 dark:border-gray-600 dark:text-white"
-            onchange="switchCalendar(this.value)"
-          >
-            ${settings.createdCalendars.map(cal => `
-              <option value="${cal.id}" ${cal.id === selectedCalendarId ? 'selected' : ''}>
-                ${cal.name}
-              </option>
-            `).join('')}
-          </select>
-        ` : `<span>${calendarName}</span>`}
-      </div>
       <span class="mx-2">|</span>
       <span>${t('google.sync')}:</span>
       <button 
@@ -110,9 +75,10 @@ export function updateGoogleCalendarStatus() {
         onclick="showGoogleCalendarSetup()"
         title="${t('google.status.manage_integration')}"
       >
-        <i class="fas fa-cog mr-1"></i>${t('google.status.manage_integration')}
+        <i class="fas fa-cog mr-1"></i>
       </button>
     `;
+    return;
   } else if (hasSavedCredentials && !isCurrentlySignedIn) {
     console.log('📊 Google Status Bar: Showing RECONNECT NEEDED');
     statusDisplay.innerHTML = `
@@ -225,9 +191,28 @@ export function initializeGoogleStatusBar() {
   window.updateGoogleCalendarStatus = updateGoogleCalendarStatus;
   
   // Listen for Google Calendar status changes
-  document.addEventListener('googleCalendarStatusChanged', () => {
+  document.addEventListener('googleCalendarStatusChanged', async (e) => {
     console.log('📊 Google Status Bar: Received googleCalendarStatusChanged event');
     updateGoogleCalendarStatus();
+
+    // NEU: Nach erfolgreichem Reconnect/Login sofort AutoSync, falls aktiviert
+    const settingsJSON = localStorage.getItem('googleCalendarSettings');
+    const settings = settingsJSON ? JSON.parse(settingsJSON) : {};
+    if (e.detail?.isSignedIn && settings.autoSync) {
+      try {
+        const report = await performBidirectionalSync();
+        const message = `${t('google.sync_report_title')}: ${t('google.sync_report_details', {
+          exported: report.exported || 0,
+          imported: report.imported || 0,
+          updated: report.updated || 0,
+        })}`;
+        showNotification(message, 'success');
+        if (window.calendar) window.calendar.refetchEvents();
+      } catch (error) {
+        console.error('AutoSync after reconnect failed:', error);
+        showNotification(`${t('error.title')}: ${error.message || 'Sync failed'}`, 'error');
+      }
+    }
   });
 
   // Make Google Calendar functions available on the window object for onclick handlers
@@ -243,6 +228,24 @@ export function initializeGoogleStatusBar() {
       localStorage.setItem('googleCalendarSettings', JSON.stringify(settings));
       showNotification(t(settings.autoSync ? 'google.autosync_on_notif' : 'google.autosync_off_notif'), 'info');
       updateGoogleCalendarStatus();
+      // NEU: Wenn AutoSync aktiviert wurde, sofort synchronisieren
+      if (settings.autoSync) {
+        try {
+          const report = await performBidirectionalSync();
+          const message = `${t('google.sync_report_title')}: ${t('google.sync_report_details', {
+            exported: report.exported || 0,
+            imported: report.imported || 0,
+            updated: report.updated || 0,
+          })}`;
+          showNotification(message, 'success');
+          if (window.calendar) window.calendar.refetchEvents();
+        } catch (error) {
+          console.error('AutoSync initial sync failed:', error);
+          showNotification(`${t('error.title')}: ${error.message || 'Sync failed'}`, 'error');
+        } finally {
+          updateGoogleCalendarStatus();
+        }
+      }
     } catch (error) {
       console.error('Failed to toggle auto-sync:', error);
       showNotification('Error changing sync setting', 'error');
