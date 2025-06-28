@@ -45,13 +45,14 @@ export function initializePlantingFormHandlers(formContainer) {
   }
 
   // Add event listeners
-  environmentSelect?.addEventListener('change', function() {
+  environmentSelect?.addEventListener('change', async function() {
     const environment = this.value;
     updateEnvironmentFields(environment);
     // Update plant options when environment changes
     const category = plantCategorySelect?.value || '';
     updatePlantOptions(category, environment);
     updatePlantInfo();
+    await checkSeasonalTiming();
   });
 
   plantCategorySelect?.addEventListener('change', function() {
@@ -60,11 +61,11 @@ export function initializePlantingFormHandlers(formContainer) {
     updatePlantOptions(category, environment);
   });
 
-  plantTypeSelect?.addEventListener('change', function() {
+  plantTypeSelect?.addEventListener('change', async function() {
     updatePlantInfo();
     updatePhaseInputs();
     updateCustomNamePlaceholder();
-    checkSeasonalTiming();
+    await checkSeasonalTiming();
   });
 
   // Initialize form state

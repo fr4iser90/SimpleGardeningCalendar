@@ -161,7 +161,8 @@ export const it = {
     'timing.no_seasonal_restrictions_found': 'Nessuna restrizione stagionale trovata',
     'timing.no_planting_window_specified': 'Nessuna finestra di piantagione specificata',
     'timing.consider_planting_between': 'Considerare la piantagione tra {start} e {end}. {description}',
-    'timing.good_timing': 'Buon momento! {description}',
+    'timing.recommended_window': 'Finestra di piantagione raccomandata',
+    'timing.good_timing': 'Buon tempismo! {description}',
     'timing.current_season': 'Stagione attuale',
     
     // Location Placeholders

@@ -165,6 +165,7 @@ export const en = {
     'timing.no_seasonal_restrictions_found': 'No seasonal restrictions found',
     'timing.no_planting_window_specified': 'No planting window specified',
     'timing.consider_planting_between': 'Consider planting between {start} and {end}. {description}',
+    'timing.recommended_window': 'Recommended planting window',
     'timing.good_timing': 'Good timing! {description}',
     'timing.current_season': 'Current season',
     

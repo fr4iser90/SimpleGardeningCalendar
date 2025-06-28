@@ -291,7 +291,7 @@ export async function updateCustomNamePlaceholder() {
   }
 }
 
-export function checkSeasonalTiming() {
+export async function checkSeasonalTiming() {
   const plantTypeSelect = document.getElementById('plantTypeSelect');
   const environmentSelect = document.getElementById('environmentSelect');
   const regionSelect = document.getElementById('regionSelect');
@@ -316,7 +316,7 @@ export function checkSeasonalTiming() {
     return;
   }
 
-  const validation = validatePlantingDate(plantTypeSelect.value, envKey, dateInput.value);
+  const validation = await validatePlantingDate(plantTypeSelect.value, envKey, dateInput.value);
   const region = regionSelect?.value || 'temperate_north';
   
   if (!validation.isValid) {

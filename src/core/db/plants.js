@@ -58,23 +58,23 @@ export async function getPlantDataForEnvironment(plantKey, environment = 'indoor
  * @param {string} environment - Growing environment
  * @param {string} plantingDate - Planting date (YYYY-MM-DD)
  * @param {string} region - Seasonal region
- * @returns {Object} Validation result with isValid and message
+ * @returns {Promise<Object>} Validation result with isValid and message
  */
-export function validatePlantingDate(plantKey, environment, plantingDate, region = 'temperate_north') {
+export async function validatePlantingDate(plantKey, environment, plantingDate, region = 'temperate_north') {
   if (environment !== 'outdoor') {
     return { isValid: true, message: t('timing.indoor_growing_date_flexible') };
   }
   
-  const plantData = getPlantDataForEnvironment(plantKey, environment);
+  const plantData = await getPlantDataForEnvironment(plantKey, environment);
   if (!plantData || !plantData.seasonalTiming || !plantData.seasonalTiming[region]) {
-    return { isValid: true, message: t('timing.no_seasonal_restrictions_found') };
+    return { isValid: false, message: t('timing.no_seasonal_restrictions_found') };
   }
   
   const seasonal = plantData.seasonalTiming[region];
   const plantingWindow = seasonal.plantingWindow;
   
   if (!plantingWindow) {
-    return { isValid: true, message: t('timing.no_planting_window_specified') };
+    return { isValid: false, message: t('timing.no_planting_window_specified') };
   }
   
   const plantDate = new Date(plantingDate);
@@ -87,7 +87,8 @@ export function validatePlantingDate(plantKey, environment, plantingDate, region
   if (plantDate >= startDate && plantDate <= endDate) {
     return { 
       isValid: true, 
-      message: t('timing.good_timing', { description: t(plantingWindow.description) })
+      message: t('timing.good_timing', { description: t(plantingWindow.description) }),
+      recommendedPeriod: t(plantingWindow.description)
     };
   } else {
     return { 
@@ -96,7 +97,9 @@ export function validatePlantingDate(plantKey, environment, plantingDate, region
         start: plantingWindow.start, 
         end: plantingWindow.end, 
         description: t(plantingWindow.description) 
-      })
+      }),
+      recommendedPeriod: t(plantingWindow.description),
+      details: `${t('timing.recommended_window')}: ${plantingWindow.start} - ${plantingWindow.end}`
     };
   }
 }

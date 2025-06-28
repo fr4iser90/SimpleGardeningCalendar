@@ -160,7 +160,8 @@ export const fr = {
     'timing.no_seasonal_restrictions_found': 'Aucune restriction saisonnière trouvée',
     'timing.no_planting_window_specified': 'Aucune fenêtre de plantation spécifiée',
     'timing.consider_planting_between': 'Envisagez de planter entre {start} et {end}. {description}',
-    'timing.good_timing': 'Bon timing! {description}',
+    'timing.recommended_window': 'Fenêtre de plantation recommandée',
+    'timing.good_timing': 'Bon timing ! {description}',
     'timing.current_season': 'Saison actuelle',
     
     // Location Placeholders
