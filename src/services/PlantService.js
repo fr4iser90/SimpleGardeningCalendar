@@ -184,7 +184,7 @@ export async function addPlanting(plantType, startDate, location = 'Default Gard
   await createIntelligentPlantingEvents(planting, plantData, phases, completionDate.toISOString());
   
   console.log('🌱 [addPlanting] Planting creation completed successfully!');
-  return plantingId;
+  return { plantingId, calendarId };
 }
 
 // Update planting status

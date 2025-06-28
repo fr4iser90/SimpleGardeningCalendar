@@ -145,10 +145,32 @@ async function handlePlantingSubmission() {
     selectedCalendarId,
     plantingData.environment
   );
+  
   if (calendarId && calendarId !== selectedCalendarId) {
+    console.log('🌱 [AddEventModal] Switching to calendar:', calendarId, 'from:', selectedCalendarId);
+    
+    // Update localStorage
     localStorage.setItem('selectedLocalCalendarId', calendarId.toString());
+    
+    // Get calendar name for notification
+    const { getCalendar } = await import('../../core/db/calendars.js');
+    const calendar = await getCalendar(calendarId);
+    if (calendar) {
+      showNotification(t('local.status.switched', { name: calendar.name }), 'success');
+    }
+    
+    // Dispatch events to update UI
     document.dispatchEvent(new CustomEvent('selectedCalendarChanged'));
+    document.dispatchEvent(new CustomEvent('localCalendarSwitched', { 
+      detail: { calendarId: parseInt(calendarId) } 
+    }));
+    
+    // Refresh calendar events
+    if (window.calendar) {
+      window.calendar.refetchEvents();
+    }
   }
+  
   showNotification(t('notification.planting_added'), 'success');
   document.dispatchEvent(new CustomEvent('refreshCalendar'));
 }
