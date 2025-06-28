@@ -46,6 +46,26 @@ export async function performBidirectionalSync() {
     if (reexportCount > 0) {
       console.log(`🔄 Marked ${reexportCount} events for re-export after calendar change.`);
     }
+
+    // --- NEU: Kurzer Delay, damit Google Kalender wirklich gelöscht/angelegt hat ---
+    await new Promise(resolve => setTimeout(resolve, 2000));
+    // ---
+
+    // Double-check: Set all events with invalid googleCalendarId to null (extra robust)
+    const allEventsCheck = await db.getAll('events');
+    let extraReset = 0;
+    for (const event of allEventsCheck) {
+      if (event.googleCalendarId && !validCalendarIds.includes(event.googleCalendarId)) {
+        event.googleEventId = null;
+        event.googleCalendarId = null;
+        await db.put('events', event);
+        extraReset++;
+      }
+    }
+    if (extraReset > 0) {
+      console.log(`🔄 Extra reset for ${extraReset} events with invalid googleCalendarId before export.`);
+    }
+
     // Step 2: Export local events to Google
     console.log('🔄 Exporting local events to Google...');
     const exportResult = await exportLocalEventsToGoogle();

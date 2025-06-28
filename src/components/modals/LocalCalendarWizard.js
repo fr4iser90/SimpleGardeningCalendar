@@ -279,6 +279,49 @@ export async function setupLocalCalendarWizardEventListeners() {
       // Refresh the calendar to show migrated events
       document.dispatchEvent(new CustomEvent('refreshCalendar'));
       
+      // NEU: Alle Google-IDs zurücksetzen, damit Events in neue Kalender exportiert werden
+      try {
+        const { openDB } = await import('idb');
+        const { DB_NAME, DB_VERSION } = await import('../../core/db/connection.js');
+        const db = await openDB(DB_NAME, DB_VERSION);
+        const allEvents = await db.getAll('events');
+        
+        let resetCount = 0;
+        for (const event of allEvents) {
+          if (event.googleEventId || event.googleCalendarId) {
+            event.googleEventId = null;
+            event.googleCalendarId = null;
+            await db.put('events', event);
+            resetCount++;
+          }
+        }
+        
+        if (resetCount > 0) {
+          console.log(`🔄 Reset Google IDs for ${resetCount} events after organization change`);
+          showNotification(`🔄 ${resetCount} Events werden für neuen Google-Export vorbereitet...`, 'info');
+        }
+      } catch (error) {
+        console.error('Failed to reset Google IDs:', error);
+      }
+      
+      // NEU: Automatischer Google-Sync nach Kalender-Setup
+      try {
+        const { performBidirectionalSync } = await import('../../services/GoogleCalendar/GoogleCalendarSync.js');
+        const { getAuthState } = await import('../../services/GoogleCalendar/GoogleCalendarApi.js');
+        const { isSignedIn } = getAuthState();
+        
+        if (isSignedIn) {
+          showNotification('🔄 Google-Kalender werden automatisch angepasst...', 'info');
+          await performBidirectionalSync();
+          showNotification('✅ Google-Sync nach Kalender-Setup erfolgreich!', 'success');
+        } else {
+          console.log('Google nicht verbunden - überspringe automatischen Sync');
+        }
+      } catch (error) {
+        console.error('Google-Sync nach Kalender-Setup fehlgeschlagen:', error);
+        showNotification('⚠️ Google-Sync nach Kalender-Setup fehlgeschlagen: ' + error.message, 'warning');
+      }
+      
       // Close the entire modal after organization is complete
       const modal = document.querySelector('.local-calendar-modal');
       if (modal) {

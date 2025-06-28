@@ -107,6 +107,35 @@ export async function autoDetectAndMatchCalendars() {
     console.log('[DEBUG] localCalendarsSetting:', localCalendarsSetting);
     // ---------------------------------------------------------------
     
+    // NEU: Bei Organisationswechsel ALLE alten Garten-Kalender löschen
+    const oldOrganizationType = settings.organizationType;
+    if (oldOrganizationType && oldOrganizationType !== localCalendarsSetting.type) {
+      console.log(`🔄 Organization changed from ${oldOrganizationType} to ${localCalendarsSetting.type} - deleting all old garden calendars`);
+      
+      // Alle Garten-Kalender löschen (auch die, die nicht in mappings stehen)
+      for (const cal of googleCalendars) {
+        if (isGardenCalendar(cal)) {
+          try {
+            await deleteCalendar(cal.id);
+            console.log(`🗑️ Deleted old garden calendar: ${cal.summary}`);
+            showNotification(`🗑️ Alten Kalender gelöscht: ${cal.summary}`, 'info');
+          } catch (error) {
+            console.error(`Failed to delete calendar ${cal.summary}:`, error);
+          }
+        }
+      }
+      
+      // Settings zurücksetzen
+      settings.calendarMappings = {};
+      settings.selectedCalendarId = '';
+      googleCalendarSettings.save(settings);
+      
+      // Kalender-Liste neu laden
+      const freshGoogleCalendars = await fetchCalendarList();
+      googleCalendars.length = 0;
+      googleCalendars.push(...freshGoogleCalendars);
+    }
+    
     const results = {
       matched: {},
       created: {},
