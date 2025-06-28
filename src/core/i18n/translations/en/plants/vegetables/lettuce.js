@@ -51,6 +51,32 @@ export default {
           care: "Harvest whole plant or individual leaves",
         },
       },
+      seasonalTiming: {
+        temperate_north: {
+          plantingWindow: {
+            start: '03-15',
+            end: '07-01',
+            description: 'Early spring to mid-summer, as soon as soil can be worked',
+          },
+          harvestWindow: {
+            start: '05-01',
+            end: '08-15',
+            description: 'Harvest before hot weather',
+          },
+        },
+        mediterranean: {
+          plantingWindow: {
+            start: '10-01',
+            end: '12-01',
+            description: 'Fall planting for winter/spring harvest',
+          },
+          harvestWindow: {
+            start: '01-15',
+            end: '04-15',
+            description: 'Harvest before heat causes bolting',
+          },
+        },
+      },
     },
     greenhouse: {
       phases: {

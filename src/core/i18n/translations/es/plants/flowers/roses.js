@@ -61,6 +61,32 @@ export default {
           care: "Cosechar flores cuando se abren, cortar para jarrones.",
         },
       },
+      seasonalTiming: {
+        temperate_north: {
+          plantingWindow: {
+            start: '03-01',
+            end: '05-15',
+            description: 'Plantación temprana en primavera, antes del brote',
+          },
+          harvestWindow: {
+            start: '06-01',
+            end: '10-31',
+            description: 'Cosecha durante toda la temporada de crecimiento',
+          },
+        },
+        mediterranean: {
+          plantingWindow: {
+            start: '02-01',
+            end: '04-15',
+            description: 'Muy temprano en primavera hasta mediados de primavera',
+          },
+          harvestWindow: {
+            start: '04-15',
+            end: '11-30',
+            description: 'Temporada de cosecha extendida',
+          },
+        },
+      },
     },
     greenhouse: {
       phases: {

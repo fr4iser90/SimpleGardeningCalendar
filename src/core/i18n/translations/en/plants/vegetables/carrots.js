@@ -61,6 +61,32 @@ export default {
           care: "Carefully pull out, don't damage",
         },
       },
+      seasonalTiming: {
+        temperate_north: {
+          plantingWindow: {
+            start: '04-01',
+            end: '07-01',
+            description: 'Early spring to mid-summer, after soil is workable',
+          },
+          harvestWindow: {
+            start: '07-01',
+            end: '11-01',
+            description: 'Harvest before ground freezes',
+          },
+        },
+        mediterranean: {
+          plantingWindow: {
+            start: '02-15',
+            end: '05-15',
+            description: 'Early planting possible, avoid hottest months',
+          },
+          harvestWindow: {
+            start: '05-15',
+            end: '09-30',
+            description: 'Harvest before hot, dry period',
+          },
+        },
+      },
     },
     greenhouse: {
       phases: {

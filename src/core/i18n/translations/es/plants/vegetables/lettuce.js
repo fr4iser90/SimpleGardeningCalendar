@@ -51,6 +51,32 @@ export default {
           care: "Cosechar planta completa o hojas individuales",
         },
       },
+      seasonalTiming: {
+        temperate_north: {
+          plantingWindow: {
+            start: '03-15',
+            end: '07-01',
+            description: 'Principios de primavera a mediados de verano, tan pronto como el suelo sea trabajable',
+          },
+          harvestWindow: {
+            start: '05-01',
+            end: '08-15',
+            description: 'Cosecha antes del clima cálido',
+          },
+        },
+        mediterranean: {
+          plantingWindow: {
+            start: '10-01',
+            end: '12-01',
+            description: 'Plantación de otoño para cosecha invierno/primavera',
+          },
+          harvestWindow: {
+            start: '01-15',
+            end: '04-15',
+            description: 'Cosecha antes de que el calor cause la floración',
+          },
+        },
+      },
     },
     greenhouse: {
       phases: {

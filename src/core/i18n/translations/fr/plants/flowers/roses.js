@@ -61,6 +61,32 @@ export default {
           care: "Récolter fleurs quand elles s'ouvrent, couper pour vases.",
         },
       },
+      seasonalTiming: {
+        temperate_north: {
+          plantingWindow: {
+            start: '03-01',
+            end: '05-15',
+            description: 'Plantation au début du printemps, avant le débourrement',
+          },
+          harvestWindow: {
+            start: '06-01',
+            end: '10-31',
+            description: 'Récolte tout au long de la saison de croissance',
+          },
+        },
+        mediterranean: {
+          plantingWindow: {
+            start: '02-01',
+            end: '04-15',
+            description: 'Très tôt au printemps jusqu\'au milieu du printemps',
+          },
+          harvestWindow: {
+            start: '04-15',
+            end: '11-30',
+            description: 'Saison de récolte prolongée',
+          },
+        },
+      },
     },
     greenhouse: {
       phases: {

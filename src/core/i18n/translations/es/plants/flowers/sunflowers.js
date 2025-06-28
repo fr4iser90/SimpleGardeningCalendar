@@ -61,6 +61,32 @@ export default {
           care: "Cosechar flores cuando se abren, dejar semillas secar.",
         },
       },
+      seasonalTiming: {
+        temperate_north: {
+          plantingWindow: {
+            start: '04-15',
+            end: '06-15',
+            description: 'Después de la última helada, suelo cálido',
+          },
+          harvestWindow: {
+            start: '08-01',
+            end: '09-30',
+            description: 'Cosecha antes de la helada',
+          },
+        },
+        mediterranean: {
+          plantingWindow: {
+            start: '03-01',
+            end: '05-15',
+            description: 'Principios de primavera hasta finales de primavera',
+          },
+          harvestWindow: {
+            start: '07-01',
+            end: '10-31',
+            description: 'Largo período de cosecha',
+          },
+        },
+      },
     },
     greenhouse: {
       phases: {

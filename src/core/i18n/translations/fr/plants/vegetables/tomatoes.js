@@ -41,9 +41,9 @@ export default {
           care: "Sol chaud et humide, 20-25°C",
         },
         seedling: {
-          name: "Semis",
+          name: "Plantule",
           description: "Développement des premières feuilles",
-          care: "Emplacement lumineux, maintenir humide",
+          care: "Emplacement lumineux, garder humide",
         },
         vegetative: {
           name: "Phase Végétative",
@@ -53,12 +53,38 @@ export default {
         flowering: {
           name: "Floraison",
           description: "Formation des fleurs et pollinisation",
-          care: "Favoriser la circulation d'air, secouer les fleurs",
+          care: "Favoriser circulation air, secouer fleurs",
         },
         fruiting: {
           name: "Fructification",
           description: "Développement et maturation des tomates",
           care: "Arrosage régulier, récolter fruits mûrs",
+        },
+      },
+      seasonalTiming: {
+        temperate_north: {
+          plantingWindow: {
+            start: '05-15',
+            end: '06-15',
+            description: 'Après la dernière gelée, sol chaud',
+          },
+          harvestWindow: {
+            start: '07-15',
+            end: '10-01',
+            description: 'Jusqu\'à la première gelée',
+          },
+        },
+        mediterranean: {
+          plantingWindow: {
+            start: '03-15',
+            end: '05-01',
+            description: 'Saison de croissance prolongée',
+          },
+          harvestWindow: {
+            start: '06-01',
+            end: '11-15',
+            description: 'Période de récolte prolongée',
+          },
         },
       },
     },

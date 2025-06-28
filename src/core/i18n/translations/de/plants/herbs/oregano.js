@@ -50,6 +50,32 @@ export default {
           care: "Blätter und Stängel nach Bedarf ernten. Rückschnitt verhindert Blüte und Ausbreitung.",
         },
       },
+      seasonalTiming: {
+        temperate_north: {
+          plantingWindow: {
+            start: '04-01',
+            end: '06-01',
+            description: 'Nach dem letzten Frost, mehrjährige Pflanze',
+          },
+          harvestWindow: {
+            start: '05-15',
+            end: '10-15',
+            description: 'Kontinuierliche Ernte während der Wachstumssaison',
+          },
+        },
+        mediterranean: {
+          plantingWindow: {
+            start: '03-01',
+            end: '05-01',
+            description: 'Früher Start für mehrjährige Pflanze',
+          },
+          harvestWindow: {
+            start: '04-15',
+            end: '11-15',
+            description: 'Verlängerte Erntesaison',
+          },
+        },
+      },
     },
     greenhouse: {
       phases: {

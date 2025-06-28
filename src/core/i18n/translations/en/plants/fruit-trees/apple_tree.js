@@ -27,6 +27,37 @@ export default {
           care: "Winter pruning, dormant oil for pests",
         },
       },
+      seasonalTiming: {
+        temperate_north: {
+          plantingWindow: {
+            start: '03-01',
+            end: '05-01',
+            description: 'Early spring before bud break',
+          },
+          harvestWindow: {
+            start: '08-01',
+            end: '10-31',
+            description: 'Variety dependent harvest',
+          },
+          pruningWindow: {
+            start: '01-15',
+            end: '03-15',
+            description: 'Dormant season pruning',
+          },
+        },
+        mediterranean: {
+          plantingWindow: {
+            start: '02-01',
+            end: '04-01',
+            description: 'Very early spring planting',
+          },
+          harvestWindow: {
+            start: '06-01',
+            end: '09-30',
+            description: 'Harvest before autumn rains',
+          },
+        },
+      },
     },
   },
   careTips: {

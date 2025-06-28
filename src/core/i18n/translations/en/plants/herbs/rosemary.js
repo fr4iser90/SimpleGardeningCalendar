@@ -47,7 +47,33 @@ export default {
         harvest: {
           name: "Harvest",
           description: "Continuous harvest of sprigs.",
-          care: "Harvest sprigs as needed. Cut back to prevent flowering and spreading.",
+          care: "Harvest sprigs as needed. Pruning prevents flowering and spreading.",
+        },
+      },
+      seasonalTiming: {
+        temperate_north: {
+          plantingWindow: {
+            start: '04-01',
+            end: '06-01',
+            description: 'After last frost, perennial plant',
+          },
+          harvestWindow: {
+            start: '05-15',
+            end: '10-15',
+            description: 'Continuous harvest during growing season',
+          },
+        },
+        mediterranean: {
+          plantingWindow: {
+            start: '03-01',
+            end: '05-01',
+            description: 'Early start for perennial plant',
+          },
+          harvestWindow: {
+            start: '04-15',
+            end: '11-15',
+            description: 'Extended harvest season',
+          },
         },
       },
     },

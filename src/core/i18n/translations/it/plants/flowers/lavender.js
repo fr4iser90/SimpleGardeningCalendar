@@ -61,6 +61,32 @@ export default {
           care: "Raccogliere fiori quando si aprono, appendere per asciugare.",
         },
       },
+      seasonalTiming: {
+        temperate_north: {
+          plantingWindow: {
+            start: '04-01',
+            end: '06-01',
+            description: 'Piantagione dalla primavera all\'inizio dell\'estate',
+          },
+          harvestWindow: {
+            start: '06-15',
+            end: '09-15',
+            description: 'Raccolta in estate',
+          },
+        },
+        mediterranean: {
+          plantingWindow: {
+            start: '02-15',
+            end: '05-01',
+            description: 'Prima primavera fino alla fine della primavera',
+          },
+          harvestWindow: {
+            start: '05-15',
+            end: '09-30',
+            description: 'Raccolta in estate',
+          },
+        },
+      },
     },
     greenhouse: {
       phases: {

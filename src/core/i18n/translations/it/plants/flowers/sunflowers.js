@@ -61,6 +61,32 @@ export default {
           care: "Raccogliere fiori quando si aprono, lasciare semi asciugare.",
         },
       },
+      seasonalTiming: {
+        temperate_north: {
+          plantingWindow: {
+            start: '04-15',
+            end: '06-15',
+            description: 'Dopo l\'ultima gelata, terreno caldo',
+          },
+          harvestWindow: {
+            start: '08-01',
+            end: '09-30',
+            description: 'Raccolta prima del gelo',
+          },
+        },
+        mediterranean: {
+          plantingWindow: {
+            start: '03-01',
+            end: '05-15',
+            description: 'Prima primavera fino alla fine della primavera',
+          },
+          harvestWindow: {
+            start: '07-01',
+            end: '10-31',
+            description: 'Lungo periodo di raccolta',
+          },
+        },
+      },
     },
     greenhouse: {
       phases: {

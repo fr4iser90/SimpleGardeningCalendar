@@ -71,6 +71,32 @@ export default {
           care: "Dependiente del clima, verificar tricomas, secar rápido si llueve.",
         },
       },
+      seasonalTiming: {
+        temperate_north: {
+          plantingWindow: {
+            start: '05-01',
+            end: '06-15',
+            description: 'Después de la última helada, suelo cálido (15°C+)',
+          },
+          harvestWindow: {
+            start: '08-01',
+            end: '09-30',
+            description: 'Cosecha antes de la primera helada',
+          },
+        },
+        mediterranean: {
+          plantingWindow: {
+            start: '04-01',
+            end: '05-15',
+            description: 'Posible siembra temprana, suelo cálido',
+          },
+          harvestWindow: {
+            start: '07-01',
+            end: '09-30',
+            description: 'Cosecha antes del calor extremo',
+          },
+        },
+      },
     },
     greenhouse: {
       phases: {

@@ -61,6 +61,32 @@ export default {
           care: "Cosechar hojas exteriores, dejar crecer interiores",
         },
       },
+      seasonalTiming: {
+        temperate_north: {
+          plantingWindow: {
+            start: '04-01',
+            end: '07-01',
+            description: 'Principios de primavera a mediados de verano, después de que el suelo sea trabajable',
+          },
+          harvestWindow: {
+            start: '06-15',
+            end: '11-15',
+            description: 'Cosecha hasta helada fuerte, más dulce después de helada ligera',
+          },
+        },
+        mediterranean: {
+          plantingWindow: {
+            start: '09-01',
+            end: '11-01',
+            description: 'Plantación de otoño para cosecha invierno/primavera',
+          },
+          harvestWindow: {
+            start: '12-01',
+            end: '04-15',
+            description: 'Cosecha antes de que el calor cause la floración',
+          },
+        },
+      },
     },
     greenhouse: {
       phases: {

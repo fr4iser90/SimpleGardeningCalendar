@@ -61,6 +61,32 @@ export default {
           care: "Altes Holz schneiden, mulchen zum Winterschutz",
         },
       },
+      seasonalTiming: {
+        temperate_north: {
+          plantingWindow: {
+            start: '03-15',
+            end: '05-15',
+            description: 'Früher bis mittlerer Frühling',
+          },
+          harvestWindow: {
+            start: '07-01',
+            end: '09-30',
+            description: 'Ernte während des Sommers',
+          },
+        },
+        mediterranean: {
+          plantingWindow: {
+            start: '02-01',
+            end: '04-15',
+            description: 'Sehr früher Frühling',
+          },
+          harvestWindow: {
+            start: '04-15',
+            end: '07-31',
+            description: 'Ernte vor der Sommerhitze',
+          },
+        },
+      },
     },
     greenhouse: {
       phases: {

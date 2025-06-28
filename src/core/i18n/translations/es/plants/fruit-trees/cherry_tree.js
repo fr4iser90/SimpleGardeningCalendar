@@ -27,6 +27,37 @@ export default {
           care: "Poda invernal, protección del tronco",
         },
       },
+      seasonalTiming: {
+        temperate_north: {
+          plantingWindow: {
+            start: '03-01',
+            end: '04-15',
+            description: 'Plantación temprana en primavera',
+          },
+          harvestWindow: {
+            start: '06-01',
+            end: '08-15',
+            description: 'Cosecha a principios del verano',
+          },
+          pruningWindow: {
+            start: '02-01',
+            end: '03-15',
+            description: 'Poda de finales de invierno',
+          },
+        },
+        mediterranean: {
+          plantingWindow: {
+            start: '01-15',
+            end: '03-15',
+            description: 'Plantación muy temprana en primavera',
+          },
+          harvestWindow: {
+            start: '05-01',
+            end: '07-31',
+            description: 'Cosecha antes del calor del verano',
+          },
+        },
+      },
     },
   },
   careTips: {

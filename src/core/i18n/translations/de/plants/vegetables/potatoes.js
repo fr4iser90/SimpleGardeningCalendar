@@ -71,6 +71,32 @@ export default {
           care: "Vorsichtig ausgraben, nicht beschädigen",
         },
       },
+      seasonalTiming: {
+        temperate_north: {
+          plantingWindow: {
+            start: '03-15',
+            end: '05-15',
+            description: 'Sobald Boden bearbeitbar, nach dem letzten Frost',
+          },
+          harvestWindow: {
+            start: '07-01',
+            end: '09-30',
+            description: 'Ernte vor starkem Frost',
+          },
+        },
+        mediterranean: {
+          plantingWindow: {
+            start: '02-15',
+            end: '04-15',
+            description: 'Frühe Pflanzung möglich, Sommerhitze vermeiden',
+          },
+          harvestWindow: {
+            start: '06-01',
+            end: '08-31',
+            description: 'Ernte vor heißer, trockener Periode',
+          },
+        },
+      },
     },
     greenhouse: {
       phases: {

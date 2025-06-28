@@ -61,6 +61,32 @@ export default {
           care: "Gleichmäßig gießen, junge Gurken ernten",
         },
       },
+      seasonalTiming: {
+        temperate_north: {
+          plantingWindow: {
+            start: '05-15',
+            end: '06-15',
+            description: 'Nach dem letzten Frost, Boden warm (18°C+)',
+          },
+          harvestWindow: {
+            start: '07-01',
+            end: '09-30',
+            description: 'Ernte vor dem ersten Frost',
+          },
+        },
+        mediterranean: {
+          plantingWindow: {
+            start: '04-01',
+            end: '05-15',
+            description: 'Früherer Start möglich, Boden warm',
+          },
+          harvestWindow: {
+            start: '06-01',
+            end: '09-30',
+            description: 'Längere Erntezeit',
+          },
+        },
+      },
     },
     greenhouse: {
       phases: {

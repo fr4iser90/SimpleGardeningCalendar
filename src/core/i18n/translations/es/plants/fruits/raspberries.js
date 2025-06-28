@@ -61,6 +61,32 @@ export default {
           care: "Podar cañas viejas, acolchar para protección invernal",
         },
       },
+      seasonalTiming: {
+        temperate_north: {
+          plantingWindow: {
+            start: '03-15',
+            end: '05-15',
+            description: 'Plantación de principios a mediados de primavera',
+          },
+          harvestWindow: {
+            start: '06-15',
+            end: '09-30',
+            description: 'Cosecha durante todo el verano',
+          },
+        },
+        mediterranean: {
+          plantingWindow: {
+            start: '02-01',
+            end: '04-15',
+            description: 'Plantación muy temprana en primavera',
+          },
+          harvestWindow: {
+            start: '04-15',
+            end: '07-31',
+            description: 'Cosecha antes del calor del verano',
+          },
+        },
+      },
     },
     greenhouse: {
       phases: {

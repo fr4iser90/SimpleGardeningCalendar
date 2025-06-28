@@ -71,6 +71,32 @@ export default {
           care: "Weather dependent, check trichomes, quick dry if rain.",
         },
       },
+      seasonalTiming: {
+        temperate_north: {
+          plantingWindow: {
+            start: '04-15',
+            end: '07-01',
+            description: 'Early start for quick harvest',
+          },
+          harvestWindow: {
+            start: '07-01',
+            end: '10-15',
+            description: 'Quick harvest after 70-90 days',
+          },
+        },
+        mediterranean: {
+          plantingWindow: {
+            start: '03-15',
+            end: '08-01',
+            description: 'Extended planting season possible',
+          },
+          harvestWindow: {
+            start: '06-01',
+            end: '11-01',
+            description: 'Quick harvest after 70-90 days',
+          },
+        },
+      },
     },
     greenhouse: {
       phases: {

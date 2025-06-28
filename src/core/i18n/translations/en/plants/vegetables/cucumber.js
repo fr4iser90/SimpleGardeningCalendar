@@ -61,6 +61,32 @@ export default {
           care: "Even watering, harvest young cucumbers",
         },
       },
+      seasonalTiming: {
+        temperate_north: {
+          plantingWindow: {
+            start: '05-15',
+            end: '06-15',
+            description: 'After last frost, soil warm (18°C+)',
+          },
+          harvestWindow: {
+            start: '07-01',
+            end: '09-30',
+            description: 'Harvest before first frost',
+          },
+        },
+        mediterranean: {
+          plantingWindow: {
+            start: '04-01',
+            end: '05-15',
+            description: 'Earlier start possible, soil warm',
+          },
+          harvestWindow: {
+            start: '06-01',
+            end: '09-30',
+            description: 'Longer harvest season',
+          },
+        },
+      },
     },
     greenhouse: {
       phases: {

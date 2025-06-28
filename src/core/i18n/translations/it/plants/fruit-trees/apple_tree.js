@@ -27,6 +27,37 @@ export default {
           care: "Potatura invernale, olio dormiente contro parassiti",
         },
       },
+      seasonalTiming: {
+        temperate_north: {
+          plantingWindow: {
+            start: '03-01',
+            end: '05-01',
+            description: 'Prima primavera prima del germogliamento',
+          },
+          harvestWindow: {
+            start: '08-01',
+            end: '10-31',
+            description: 'Raccolta dipendente dalla varietà',
+          },
+          pruningWindow: {
+            start: '01-15',
+            end: '03-15',
+            description: 'Potatura in periodo di dormienza',
+          },
+        },
+        mediterranean: {
+          plantingWindow: {
+            start: '02-01',
+            end: '04-01',
+            description: 'Piantagione molto precoce in primavera',
+          },
+          harvestWindow: {
+            start: '06-01',
+            end: '09-30',
+            description: 'Raccolta prima delle piogge autunnali',
+          },
+        },
+      },
     },
   },
   careTips: {

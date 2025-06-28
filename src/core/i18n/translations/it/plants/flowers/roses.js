@@ -61,6 +61,32 @@ export default {
           care: "Raccogliere fiori quando si aprono, tagliare per vasi.",
         },
       },
+      seasonalTiming: {
+        temperate_north: {
+          plantingWindow: {
+            start: '03-01',
+            end: '05-01',
+            description: 'Piantagione primaverile dopo l\'ultima gelata, pianta perenne',
+          },
+          harvestWindow: {
+            start: '06-01',
+            end: '10-01',
+            description: 'Periodo di fioritura durante la stagione di crescita',
+          },
+        },
+        mediterranean: {
+          plantingWindow: {
+            start: '02-15',
+            end: '04-15',
+            description: 'Inizio anticipato per pianta perenne in clima mite',
+          },
+          harvestWindow: {
+            start: '05-15',
+            end: '11-01',
+            description: 'Periodo di fioritura prolungato in clima più caldo',
+          },
+        },
+      },
     },
     greenhouse: {
       phases: {

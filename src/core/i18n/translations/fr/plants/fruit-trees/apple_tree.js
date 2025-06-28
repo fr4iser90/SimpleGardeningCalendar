@@ -27,6 +27,32 @@ export default {
           care: "Taille d'hiver, huile dormante contre les ravageurs",
         },
       },
+      seasonalTiming: {
+        temperate_north: {
+          plantingWindow: {
+            start: '11-01',
+            end: '03-15',
+            description: 'Plantation en automne ou début printemps, arbre pérenne',
+          },
+          harvestWindow: {
+            start: '08-15',
+            end: '10-15',
+            description: 'Récolte en automne selon la variété',
+          },
+        },
+        mediterranean: {
+          plantingWindow: {
+            start: '10-01',
+            end: '02-15',
+            description: 'Plantation en automne pour arbre pérenne',
+          },
+          harvestWindow: {
+            start: '08-01',
+            end: '10-01',
+            description: 'Récolte légèrement plus tôt',
+          },
+        },
+      },
     },
   },
   careTips: {

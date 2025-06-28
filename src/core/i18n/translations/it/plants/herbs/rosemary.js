@@ -50,6 +50,32 @@ export default {
           care: "Raccogliere i rametti secondo necessità. Potare per evitare la fioritura e la diffusione.",
         },
       },
+      seasonalTiming: {
+        temperate_north: {
+          plantingWindow: {
+            start: '04-01',
+            end: '06-01',
+            description: "Semina in primavera, dopo le gelate",
+          },
+          harvestWindow: {
+            start: "06-15",
+            end: "09-30",
+            description: "Raccolta durante l'estate",
+          },
+        },
+        mediterranean: {
+          plantingWindow: {
+            start: '02-15',
+            end: '05-01',
+            description: "Semina molto precoce fino a fine primavera",
+          },
+          harvestWindow: {
+            start: "05-15",
+            end: "09-30",
+            description: "Raccolta in estate",
+          },
+        },
+      },
     },
     greenhouse: {
       phases: {

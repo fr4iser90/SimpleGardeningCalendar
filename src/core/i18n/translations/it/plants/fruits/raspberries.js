@@ -61,6 +61,32 @@ export default {
           care: "Potare canne vecchie, pacciamare per protezione invernale",
         },
       },
+      seasonalTiming: {
+        temperate_north: {
+          plantingWindow: {
+            start: '03-15',
+            end: '05-15',
+            description: 'Piantagione dall\'inizio alla metà della primavera',
+          },
+          harvestWindow: {
+            start: '06-15',
+            end: '09-30',
+            description: 'Raccolta durante l\'estate',
+          },
+        },
+        mediterranean: {
+          plantingWindow: {
+            start: '02-01',
+            end: '04-15',
+            description: 'Piantagione molto precoce in primavera',
+          },
+          harvestWindow: {
+            start: '04-15',
+            end: '07-31',
+            description: 'Raccolta prima del caldo estivo',
+          },
+        },
+      },
     },
     greenhouse: {
       phases: {

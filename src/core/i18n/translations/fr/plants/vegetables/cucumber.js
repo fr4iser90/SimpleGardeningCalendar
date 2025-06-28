@@ -61,6 +61,32 @@ export default {
           care: "Arrosage régulier, récolter jeunes concombres",
         },
       },
+      seasonalTiming: {
+        temperate_north: {
+          plantingWindow: {
+            start: '05-15',
+            end: '06-15',
+            description: 'Après le dernier gel, sol chaud (18°C+)',
+          },
+          harvestWindow: {
+            start: '07-01',
+            end: '09-30',
+            description: 'Récolte avant le premier gel',
+          },
+        },
+        mediterranean: {
+          plantingWindow: {
+            start: '04-01',
+            end: '05-15',
+            description: 'Démarrage plus précoce possible, sol chaud',
+          },
+          harvestWindow: {
+            start: '06-01',
+            end: '09-30',
+            description: 'Saison de récolte plus longue',
+          },
+        },
+      },
     },
     greenhouse: {
       phases: {

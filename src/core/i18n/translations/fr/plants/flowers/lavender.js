@@ -61,6 +61,32 @@ export default {
           care: "Récolter fleurs quand elles s'ouvrent, suspendre pour sécher.",
         },
       },
+      seasonalTiming: {
+        temperate_north: {
+          plantingWindow: {
+            start: '04-01',
+            end: '06-01',
+            description: 'Plantation du printemps au début de l\'été',
+          },
+          harvestWindow: {
+            start: '06-15',
+            end: '09-15',
+            description: 'Récolte en été',
+          },
+        },
+        mediterranean: {
+          plantingWindow: {
+            start: '02-15',
+            end: '05-01',
+            description: 'Très tôt au printemps jusqu\'à la fin du printemps',
+          },
+          harvestWindow: {
+            start: '05-15',
+            end: '09-30',
+            description: 'Récolte en été',
+          },
+        },
+      },
     },
     greenhouse: {
       phases: {

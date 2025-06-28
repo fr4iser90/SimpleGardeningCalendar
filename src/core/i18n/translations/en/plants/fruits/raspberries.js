@@ -61,6 +61,32 @@ export default {
           care: "Prune old canes, mulch for winter protection",
         },
       },
+      seasonalTiming: {
+        temperate_north: {
+          plantingWindow: {
+            start: '03-15',
+            end: '05-15',
+            description: 'Early to mid spring planting',
+          },
+          harvestWindow: {
+            start: '06-15',
+            end: '09-30',
+            description: 'Harvest throughout summer',
+          },
+        },
+        mediterranean: {
+          plantingWindow: {
+            start: '02-01',
+            end: '04-15',
+            description: 'Very early spring planting',
+          },
+          harvestWindow: {
+            start: '04-15',
+            end: '07-31',
+            description: 'Harvest before summer heat',
+          },
+        },
+      },
     },
     greenhouse: {
       phases: {

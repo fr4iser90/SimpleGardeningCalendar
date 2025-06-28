@@ -71,6 +71,32 @@ export default {
           care: "Dépendant de la météo, vérifier les trichomes, sécher rapidement s'il pleut.",
         },
       },
+      seasonalTiming: {
+        temperate_north: {
+          plantingWindow: {
+            start: '05-01',
+            end: '06-15',
+            description: 'Après la dernière gelée, sol chaud (15°C+)',
+          },
+          harvestWindow: {
+            start: '09-15',
+            end: '10-31',
+            description: 'Récolte avant la première gelée',
+          },
+        },
+        mediterranean: {
+          plantingWindow: {
+            start: '04-01',
+            end: '05-15',
+            description: 'Semis précoce possible, sol chaud',
+          },
+          harvestWindow: {
+            start: '09-01',
+            end: '10-31',
+            description: 'Récolte plus longue',
+          },
+        },
+      },
     },
     greenhouse: {
       phases: {

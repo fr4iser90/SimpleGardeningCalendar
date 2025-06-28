@@ -27,6 +27,37 @@ export default {
           care: "Potatura invernale, protezione tronco",
         },
       },
+      seasonalTiming: {
+        temperate_north: {
+          plantingWindow: {
+            start: '03-01',
+            end: '04-15',
+            description: 'Piantagione precoce in primavera',
+          },
+          harvestWindow: {
+            start: '06-01',
+            end: '08-15',
+            description: 'Raccolta all\'inizio dell\'estate',
+          },
+          pruningWindow: {
+            start: '02-01',
+            end: '03-15',
+            description: 'Potatura di fine inverno',
+          },
+        },
+        mediterranean: {
+          plantingWindow: {
+            start: '01-15',
+            end: '03-15',
+            description: 'Piantagione molto precoce in primavera',
+          },
+          harvestWindow: {
+            start: '05-01',
+            end: '07-31',
+            description: 'Raccolta prima del caldo estivo',
+          },
+        },
+      },
     },
   },
   careTips: {

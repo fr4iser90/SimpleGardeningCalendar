@@ -61,6 +61,32 @@ export default {
           care: "Irrigazione regolare, raccogliere frutti maturi",
         },
       },
+      seasonalTiming: {
+        temperate_north: {
+          plantingWindow: {
+            start: '05-15',
+            end: '06-15',
+            description: 'Dopo l\'ultima gelata, terreno caldo (18°C+)',
+          },
+          harvestWindow: {
+            start: '08-01',
+            end: '10-01',
+            description: 'Raccolta prima della prima gelata',
+          },
+        },
+        mediterranean: {
+          plantingWindow: {
+            start: '04-01',
+            end: '05-15',
+            description: 'Avvio più precoce possibile, terreno caldo',
+          },
+          harvestWindow: {
+            start: '07-01',
+            end: '10-31',
+            description: 'Stagione di raccolta più lunga',
+          },
+        },
+      },
     },
     greenhouse: {
       phases: {

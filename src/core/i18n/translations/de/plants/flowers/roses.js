@@ -51,6 +51,32 @@ export default {
           care: "Weniger gießen, vor Frost schützen",
         },
       },
+      seasonalTiming: {
+        temperate_north: {
+          plantingWindow: {
+            start: '03-01',
+            end: '05-01',
+            description: 'Frühlingspflanzung nach dem letzten Frost, mehrjährige Pflanze',
+          },
+          harvestWindow: {
+            start: '06-01',
+            end: '10-01',
+            description: 'Blütenzeit während der Wachstumssaison',
+          },
+        },
+        mediterranean: {
+          plantingWindow: {
+            start: '02-15',
+            end: '04-15',
+            description: 'Früher Start für mehrjährige Pflanze in mildem Klima',
+          },
+          harvestWindow: {
+            start: '05-15',
+            end: '11-01',
+            description: 'Verlängerte Blütezeit in wärmerem Klima',
+          },
+        },
+      },
     },
     greenhouse: {
       phases: {

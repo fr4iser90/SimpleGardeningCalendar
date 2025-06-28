@@ -71,6 +71,32 @@ export default {
           care: "Dipendente dal meteo, controllare tricomi, asciugare rapidamente se piove.",
         },
       },
+      seasonalTiming: {
+        temperate_north: {
+          plantingWindow: {
+            start: '05-01',
+            end: '06-15',
+            description: "Dopo l'ultima gelata, terreno caldo (15°C+)",
+          },
+          harvestWindow: {
+            start: '09-15',
+            end: '10-31',
+            description: "Raccolta prima della prima gelata",
+          },
+        },
+        mediterranean: {
+          plantingWindow: {
+            start: '04-01',
+            end: '05-15',
+            description: "Possibile semina precoce, terreno caldo",
+          },
+          harvestWindow: {
+            start: '09-01',
+            end: '10-31',
+            description: "Raccolta più lunga",
+          },
+        },
+      },
     },
     greenhouse: {
       phases: {

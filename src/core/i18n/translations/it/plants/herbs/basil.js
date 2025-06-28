@@ -58,7 +58,33 @@ export default {
         harvest: {
           name: "Raccolta",
           description: "Raccolta continua fino al gelo.",
-          care: "Raccogliere regolarmente, congelare o essiccare per inverno.",
+          care: "Raccogliere regolarmente, congelare o essiccare per l'inverno.",
+        },
+      },
+      seasonalTiming: {
+        temperate_north: {
+          plantingWindow: {
+            start: '05-01',
+            end: '06-15',
+            description: 'Dopo l\'ultima gelata, terreno caldo',
+          },
+          harvestWindow: {
+            start: '07-01',
+            end: '10-15',
+            description: 'Raccolta continua fino alla prima gelata',
+          },
+        },
+        mediterranean: {
+          plantingWindow: {
+            start: '04-01',
+            end: '07-01',
+            description: 'Inizio precoce per stagione estesa',
+          },
+          harvestWindow: {
+            start: '06-01',
+            end: '11-01',
+            description: 'Stagione di raccolta estesa',
+          },
         },
       },
     },

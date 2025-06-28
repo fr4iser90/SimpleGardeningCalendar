@@ -57,8 +57,34 @@ export default {
         },
         harvest: {
           name: "Cosecha",
-          description: "Cosecha continua hasta las heladas.",
-          care: "Cosechar regularmente, congelar o secar para invierno.",
+          description: "Cosecha continua hasta la helada.",
+          care: "Cosechar regularmente, congelar o secar para el invierno.",
+        },
+      },
+      seasonalTiming: {
+        temperate_north: {
+          plantingWindow: {
+            start: '05-01',
+            end: '06-15',
+            description: 'Después de la última helada, suelo cálido',
+          },
+          harvestWindow: {
+            start: '07-01',
+            end: '10-15',
+            description: 'Cosecha continua hasta la primera helada',
+          },
+        },
+        mediterranean: {
+          plantingWindow: {
+            start: '04-01',
+            end: '07-01',
+            description: 'Comienzo temprano para temporada extendida',
+          },
+          harvestWindow: {
+            start: '06-01',
+            end: '11-01',
+            description: 'Temporada de cosecha extendida',
+          },
         },
       },
     },

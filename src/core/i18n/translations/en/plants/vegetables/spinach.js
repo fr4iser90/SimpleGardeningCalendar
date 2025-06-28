@@ -51,6 +51,32 @@ export default {
           care: "Harvest quickly before leaves become bitter",
         },
       },
+      seasonalTiming: {
+        temperate_north: {
+          plantingWindow: {
+            start: '03-15',
+            end: '05-15',
+            description: 'Early spring, as soon as soil can be worked',
+          },
+          harvestWindow: {
+            start: '05-01',
+            end: '07-01',
+            description: 'Harvest before hot weather',
+          },
+        },
+        mediterranean: {
+          plantingWindow: {
+            start: '10-01',
+            end: '12-01',
+            description: 'Fall planting for winter/spring harvest',
+          },
+          harvestWindow: {
+            start: '01-15',
+            end: '04-15',
+            description: 'Harvest before heat causes bolting',
+          },
+        },
+      },
     },
     greenhouse: {
       phases: {

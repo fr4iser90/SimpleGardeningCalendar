@@ -27,6 +27,37 @@ export default {
           care: "Winter pruning, trunk protection",
         },
       },
+      seasonalTiming: {
+        temperate_north: {
+          plantingWindow: {
+            start: '03-01',
+            end: '04-15',
+            description: 'Early spring planting',
+          },
+          harvestWindow: {
+            start: '06-01',
+            end: '08-15',
+            description: 'Early summer harvest',
+          },
+          pruningWindow: {
+            start: '02-01',
+            end: '03-15',
+            description: 'Late winter pruning',
+          },
+        },
+        mediterranean: {
+          plantingWindow: {
+            start: '01-15',
+            end: '03-15',
+            description: 'Very early spring planting',
+          },
+          harvestWindow: {
+            start: '05-01',
+            end: '07-31',
+            description: 'Harvest before summer heat',
+          },
+        },
+      },
     },
   },
   careTips: {

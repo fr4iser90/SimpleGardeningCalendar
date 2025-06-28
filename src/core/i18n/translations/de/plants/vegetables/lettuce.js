@@ -51,6 +51,32 @@ export default {
           care: "Ganze Pflanze oder einzelne Blätter ernten",
         },
       },
+      seasonalTiming: {
+        temperate_north: {
+          plantingWindow: {
+            start: '03-15',
+            end: '07-01',
+            description: 'Früher Frühling bis Hochsommer, sobald Boden bearbeitbar',
+          },
+          harvestWindow: {
+            start: '05-01',
+            end: '08-15',
+            description: 'Ernte vor heißem Wetter',
+          },
+        },
+        mediterranean: {
+          plantingWindow: {
+            start: '10-01',
+            end: '12-01',
+            description: 'Herbstpflanzung für Winter/Frühjahrsernte',
+          },
+          harvestWindow: {
+            start: '01-15',
+            end: '04-15',
+            description: 'Ernte bevor Hitze zum Schossen führt',
+          },
+        },
+      },
     },
     greenhouse: {
       phases: {

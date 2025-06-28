@@ -51,6 +51,32 @@ export default {
           care: "Schnell ernten, bevor Blätter bitter werden",
         },
       },
+      seasonalTiming: {
+        temperate_north: {
+          plantingWindow: {
+            start: '03-15',
+            end: '05-15',
+            description: 'Früher Frühling, sobald Boden bearbeitbar',
+          },
+          harvestWindow: {
+            start: '05-01',
+            end: '07-01',
+            description: 'Ernte vor heißem Wetter',
+          },
+        },
+        mediterranean: {
+          plantingWindow: {
+            start: '10-01',
+            end: '12-01',
+            description: 'Herbstpflanzung für Winter/Frühjahrsernte',
+          },
+          harvestWindow: {
+            start: '01-15',
+            end: '04-15',
+            description: 'Ernte bevor Hitze zum Schossen führt',
+          },
+        },
+      },
     },
     greenhouse: {
       phases: {

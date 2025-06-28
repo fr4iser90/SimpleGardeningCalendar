@@ -61,6 +61,32 @@ export default {
           care: "Tailler vieilles cannes, pailler pour protection hivernale",
         },
       },
+      seasonalTiming: {
+        temperate_north: {
+          plantingWindow: {
+            start: '03-15',
+            end: '05-15',
+            description: 'Plantation du début à la mi-printemps',
+          },
+          harvestWindow: {
+            start: '06-15',
+            end: '09-30',
+            description: 'Récolte tout au long de l\'été',
+          },
+        },
+        mediterranean: {
+          plantingWindow: {
+            start: '02-01',
+            end: '04-15',
+            description: 'Plantation très tôt au printemps',
+          },
+          harvestWindow: {
+            start: '04-15',
+            end: '07-31',
+            description: 'Récolte avant la chaleur estivale',
+          },
+        },
+      },
     },
     greenhouse: {
       phases: {

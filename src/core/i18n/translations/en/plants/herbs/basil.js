@@ -61,6 +61,32 @@ export default {
           care: "Harvest regularly, freeze or dry for winter.",
         },
       },
+      seasonalTiming: {
+        temperate_north: {
+          plantingWindow: {
+            start: '05-01',
+            end: '06-15',
+            description: 'After last frost, warm soil',
+          },
+          harvestWindow: {
+            start: '07-01',
+            end: '10-15',
+            description: 'Continuous harvest until first frost',
+          },
+        },
+        mediterranean: {
+          plantingWindow: {
+            start: '04-01',
+            end: '07-01',
+            description: 'Early start for extended season',
+          },
+          harvestWindow: {
+            start: '06-01',
+            end: '11-01',
+            description: 'Extended harvest season',
+          },
+        },
+      },
     },
     greenhouse: {
       phases: {

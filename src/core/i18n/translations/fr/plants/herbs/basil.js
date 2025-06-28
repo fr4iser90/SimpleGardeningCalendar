@@ -61,6 +61,32 @@ export default {
           care: "Récolter régulièrement, congeler ou sécher pour l'hiver.",
         },
       },
+      seasonalTiming: {
+        temperate_north: {
+          plantingWindow: {
+            start: '05-01',
+            end: '06-15',
+            description: 'Après la dernière gelée, sol chaud',
+          },
+          harvestWindow: {
+            start: '07-01',
+            end: '10-15',
+            description: 'Récolte continue jusqu\'à la première gelée',
+          },
+        },
+        mediterranean: {
+          plantingWindow: {
+            start: '04-01',
+            end: '07-01',
+            description: 'Début précoce pour saison prolongée',
+          },
+          harvestWindow: {
+            start: '06-01',
+            end: '11-01',
+            description: 'Saison de récolte prolongée',
+          },
+        },
+      },
     },
     greenhouse: {
       phases: {

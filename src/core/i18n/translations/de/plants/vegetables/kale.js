@@ -61,6 +61,32 @@ export default {
           care: "Äußere Blätter ernten, innere wachsen lassen",
         },
       },
+      seasonalTiming: {
+        temperate_north: {
+          plantingWindow: {
+            start: '04-01',
+            end: '07-01',
+            description: 'Früher Frühling bis Hochsommer, nachdem Boden bearbeitbar',
+          },
+          harvestWindow: {
+            start: '06-15',
+            end: '11-15',
+            description: 'Ernte bis zum starken Frost, süßer nach leichtem Frost',
+          },
+        },
+        mediterranean: {
+          plantingWindow: {
+            start: '09-01',
+            end: '11-01',
+            description: 'Herbstpflanzung für Winter/Frühjahrsernte',
+          },
+          harvestWindow: {
+            start: '12-01',
+            end: '04-15',
+            description: 'Ernte bevor Hitze zum Schossen führt',
+          },
+        },
+      },
     },
     greenhouse: {
       phases: {

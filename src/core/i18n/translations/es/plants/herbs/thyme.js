@@ -50,6 +50,32 @@ export default {
           care: "Cosechar ramitas según sea necesario. Podar para evitar floración y propagación.",
         },
       },
+      seasonalTiming: {
+        temperate_north: {
+          plantingWindow: {
+            start: '04-01',
+            end: '06-01',
+            description: 'Siembra en primavera, después de heladas',
+          },
+          harvestWindow: {
+            start: '06-15',
+            end: '09-30',
+            description: 'Cosecha durante el verano',
+          },
+        },
+        mediterranean: {
+          plantingWindow: {
+            start: '02-15',
+            end: '05-01',
+            description: 'Siembra muy temprana hasta finales de primavera',
+          },
+          harvestWindow: {
+            start: '05-15',
+            end: '09-30',
+            description: 'Cosecha en verano',
+          },
+        },
+      },
     },
     greenhouse: {
       phases: {

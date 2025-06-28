@@ -61,6 +61,32 @@ export default {
           care: "Raccogliere foglie esterne, lasciare crescere interne",
         },
       },
+      seasonalTiming: {
+        temperate_north: {
+          plantingWindow: {
+            start: '03-15',
+            end: '05-15',
+            description: 'Prima primavera, non appena il terreno è lavorabile',
+          },
+          harvestWindow: {
+            start: '05-01',
+            end: '07-01',
+            description: 'Raccolta prima del caldo',
+          },
+        },
+        mediterranean: {
+          plantingWindow: {
+            start: '10-01',
+            end: '12-01',
+            description: 'Piantagione autunnale per raccolta inverno/primavera',
+          },
+          harvestWindow: {
+            start: '01-15',
+            end: '04-15',
+            description: 'Raccolta prima che il caldo causi la montata a seme',
+          },
+        },
+      },
     },
     greenhouse: {
       phases: {

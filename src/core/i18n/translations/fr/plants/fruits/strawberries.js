@@ -38,17 +38,17 @@ export default {
         establishment: {
           name: "Établissement",
           description: "Développement racinaire (premiers 30 jours)",
-          care: "Garder sol humide, enlever fleurs première année",
+          care: "Maintenir sol humide, enlever fleurs première année",
         },
         vegetative: {
           name: "Phase Végétative",
           description: "Développement stolons et feuilles",
-          care: "Utiliser stolons pour multiplication",
+          care: "Utiliser stolons pour propagation",
         },
         flowering: {
           name: "Floraison",
           description: "Formation des fleurs",
-          care: "Protéger fleurs du gel tardif",
+          care: "Protéger fleurs des gelées tardives",
         },
         fruiting: {
           name: "Fructification",
@@ -59,6 +59,32 @@ export default {
           name: "Dormance",
           description: "Repos hivernal",
           care: "Couvrir avec paillis pour protection hivernale",
+        },
+      },
+      seasonalTiming: {
+        temperate_north: {
+          plantingWindow: {
+            start: '04-01',
+            end: '06-01',
+            description: 'Plantation après le dernier gel, plante pérenne',
+          },
+          harvestWindow: {
+            start: '05-15',
+            end: '10-15',
+            description: 'Récolte continue pendant la saison de croissance',
+          },
+        },
+        mediterranean: {
+          plantingWindow: {
+            start: '03-01',
+            end: '05-01',
+            description: 'Début précoce pour plante pérenne',
+          },
+          harvestWindow: {
+            start: '04-15',
+            end: '11-15',
+            description: 'Saison de récolte prolongée',
+          },
         },
       },
     },

@@ -38,27 +38,53 @@ export default {
         germination: {
           name: "Keimung",
           description: "Samenkeimung (10-21 Tage)",
-          care: "Feuchte Erde, gleichmäßige Temperatur",
+          care: "Feuchte, lockere Erde, 15-20°C",
         },
-        leafing: {
-          name: "Blattentwicklung",
+        seedling: {
+          name: "Sämling",
           description: "Entwicklung der ersten Blätter",
-          care: "Gleichmäßig feucht halten, ausdünnen",
+          care: "Ausdünnen auf 5-7 cm Abstand, feucht halten",
         },
-        rooting: {
-          name: "Wurzelentwicklung",
-          description: "Karottenwachstum unter der Erde",
-          care: "Gleichmäßig feucht halten, lockere Erde",
+        vegetative: {
+          name: "Vegetative Phase",
+          description: "Wachstum von Blättern und Wurzeln",
+          care: "Regelmäßig gießen, Unkraut entfernen",
         },
-        maturing: {
-          name: "Reifung",
-          description: "Wurzelvergrößerung und finales Wachstum",
-          care: "Gleichmäßige Feuchtigkeit, Risse vermeiden",
+        fruiting: {
+          name: "Wurzelbildung",
+          description: "Entwicklung der Karottenwurzel",
+          care: "Lockere Erde, gleichmäßig feucht halten",
         },
         harvest: {
           name: "Ernte",
-          description: "Karotten sind reif zur Ernte",
-          care: "Vorsichtig ausgraben, nicht beschädigen",
+          description: "Ernte der reifen Karotten",
+          care: "Vorsichtig ausziehen, lagern bei 0-4°C",
+        },
+      },
+      seasonalTiming: {
+        temperate_north: {
+          plantingWindow: {
+            start: '03-15',
+            end: '07-15',
+            description: 'Frühsorte im März, Hauptsaat bis Juli für Herbsternte',
+          },
+          harvestWindow: {
+            start: '06-01',
+            end: '11-01',
+            description: 'Ernte je nach Sorte und Aussaatzeit',
+          },
+        },
+        mediterranean: {
+          plantingWindow: {
+            start: '02-01',
+            end: '09-01',
+            description: 'Längere Saatsaison in mildem Klima',
+          },
+          harvestWindow: {
+            start: '05-01',
+            end: '12-15',
+            description: 'Verlängerte Erntezeit durch mildes Wetter',
+          },
         },
       },
     },

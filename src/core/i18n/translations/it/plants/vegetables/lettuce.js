@@ -61,6 +61,32 @@ export default {
           care: "Raccogliere pianta intera o foglie singole",
         },
       },
+      seasonalTiming: {
+        temperate_north: {
+          plantingWindow: {
+            start: '03-15',
+            end: '07-01',
+            description: 'Prima primavera a metà estate, non appena il terreno è lavorabile',
+          },
+          harvestWindow: {
+            start: '05-01',
+            end: '08-15',
+            description: 'Raccolta prima del caldo',
+          },
+        },
+        mediterranean: {
+          plantingWindow: {
+            start: '10-01',
+            end: '12-01',
+            description: 'Piantagione autunnale per raccolta inverno/primavera',
+          },
+          harvestWindow: {
+            start: '01-15',
+            end: '04-15',
+            description: 'Raccolta prima che il caldo causi la montata a seme',
+          },
+        },
+      },
     },
     greenhouse: {
       phases: {

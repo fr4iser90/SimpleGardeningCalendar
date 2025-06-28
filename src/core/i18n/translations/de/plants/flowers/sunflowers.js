@@ -61,6 +61,32 @@ export default {
           care: "Vor Vögeln schützen, Samen trocknen lassen",
         },
       },
+      seasonalTiming: {
+        temperate_north: {
+          plantingWindow: {
+            start: '04-15',
+            end: '06-15',
+            description: 'Nach dem letzten Frost, Boden warm',
+          },
+          harvestWindow: {
+            start: '08-01',
+            end: '09-30',
+            description: 'Ernte vor dem ersten Frost',
+          },
+        },
+        mediterranean: {
+          plantingWindow: {
+            start: '03-01',
+            end: '05-15',
+            description: 'Früher Frühling bis Spätfrühling',
+          },
+          harvestWindow: {
+            start: '07-01',
+            end: '10-31',
+            description: 'Lange Erntezeit',
+          },
+        },
+      },
     },
     greenhouse: {
       phases: {

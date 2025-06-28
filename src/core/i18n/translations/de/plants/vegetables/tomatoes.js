@@ -71,6 +71,32 @@ export default {
           care: "Gleichmäßig gießen, reife Früchte ernten",
         },
       },
+      seasonalTiming: {
+        temperate_north: {
+          plantingWindow: {
+            start: '05-01',
+            end: '06-15',
+            description: 'Nach dem letzten Frost, Boden warm (15°C+)',
+          },
+          harvestWindow: {
+            start: '07-15',
+            end: '10-01',
+            description: 'Ernte vor dem ersten Frost',
+          },
+        },
+        mediterranean: {
+          plantingWindow: {
+            start: '03-15',
+            end: '05-15',
+            description: 'Früherer Start möglich, Boden warm',
+          },
+          harvestWindow: {
+            start: '06-15',
+            end: '10-31',
+            description: 'Längere Erntezeit',
+          },
+        },
+      },
     },
     greenhouse: {
       phases: {

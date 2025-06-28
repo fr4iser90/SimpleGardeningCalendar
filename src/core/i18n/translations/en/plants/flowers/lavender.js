@@ -51,6 +51,32 @@ export default {
           care: "Reduce watering, protect from frost",
         },
       },
+      seasonalTiming: {
+        temperate_north: {
+          plantingWindow: {
+            start: '04-01',
+            end: '06-01',
+            description: 'Spring to early summer planting',
+          },
+          harvestWindow: {
+            start: '06-15',
+            end: '09-15',
+            description: 'Harvest in summer',
+          },
+        },
+        mediterranean: {
+          plantingWindow: {
+            start: '02-15',
+            end: '05-01',
+            description: 'Very early spring to late spring',
+          },
+          harvestWindow: {
+            start: '05-15',
+            end: '09-30',
+            description: 'Harvest in summer',
+          },
+        },
+      },
     },
     greenhouse: {
       phases: {

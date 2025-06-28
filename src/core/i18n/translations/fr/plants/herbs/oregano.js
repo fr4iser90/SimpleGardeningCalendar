@@ -47,7 +47,33 @@ export default {
         harvest: {
           name: "Récolte",
           description: "Récolte continue des feuilles.",
-          care: "Récolter feuilles et tiges selon les besoins. Tailler pour éviter la floraison et l'envahissement.",
+          care: "Récoltez les feuilles et tiges selon les besoins. La taille empêche la floraison et la propagation.",
+        },
+      },
+      seasonalTiming: {
+        temperate_north: {
+          plantingWindow: {
+            start: '04-01',
+            end: '06-01',
+            description: 'Après la dernière gelée, plante vivace',
+          },
+          harvestWindow: {
+            start: '05-15',
+            end: '10-15',
+            description: 'Récolte continue pendant la saison de croissance',
+          },
+        },
+        mediterranean: {
+          plantingWindow: {
+            start: '03-01',
+            end: '05-01',
+            description: 'Début précoce pour plante vivace',
+          },
+          harvestWindow: {
+            start: '04-15',
+            end: '11-15',
+            description: 'Saison de récolte prolongée',
+          },
         },
       },
     },

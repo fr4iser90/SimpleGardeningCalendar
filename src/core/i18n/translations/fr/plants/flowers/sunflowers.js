@@ -61,6 +61,32 @@ export default {
           care: "Récolter fleurs quand elles s'ouvrent, laisser graines sécher.",
         },
       },
+      seasonalTiming: {
+        temperate_north: {
+          plantingWindow: {
+            start: '04-15',
+            end: '06-15',
+            description: 'Après le dernier gel, sol chaud',
+          },
+          harvestWindow: {
+            start: '08-01',
+            end: '09-30',
+            description: 'Récolte avant le gel',
+          },
+        },
+        mediterranean: {
+          plantingWindow: {
+            start: '03-01',
+            end: '05-15',
+            description: 'Début du printemps à la fin du printemps',
+          },
+          harvestWindow: {
+            start: '07-01',
+            end: '10-31',
+            description: 'Longue période de récolte',
+          },
+        },
+      },
     },
     greenhouse: {
       phases: {

@@ -61,6 +61,32 @@ export default {
           care: "Riego regular, cosechar frutos maduros",
         },
       },
+      seasonalTiming: {
+        temperate_north: {
+          plantingWindow: {
+            start: '05-15',
+            end: '06-15',
+            description: 'Después de la última helada, suelo cálido',
+          },
+          harvestWindow: {
+            start: '07-15',
+            end: '10-01',
+            description: 'Hasta la primera helada',
+          },
+        },
+        mediterranean: {
+          plantingWindow: {
+            start: '03-15',
+            end: '05-01',
+            description: 'Temporada de crecimiento extendida',
+          },
+          harvestWindow: {
+            start: '06-01',
+            end: '11-15',
+            description: 'Período de cosecha prolongado',
+          },
+        },
+      },
     },
     greenhouse: {
       phases: {

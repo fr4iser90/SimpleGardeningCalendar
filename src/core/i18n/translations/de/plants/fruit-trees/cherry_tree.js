@@ -27,6 +27,37 @@ export default {
           care: "Winterschnitt, Stammschutz",
         },
       },
+      seasonalTiming: {
+        temperate_north: {
+          plantingWindow: {
+            start: '03-01',
+            end: '04-15',
+            description: 'Früher Frühling',
+          },
+          harvestWindow: {
+            start: '06-01',
+            end: '08-15',
+            description: 'Frühe Sommerernte',
+          },
+          pruningWindow: {
+            start: '02-01',
+            end: '03-15',
+            description: 'Spätwinter-Schnitt',
+          },
+        },
+        mediterranean: {
+          plantingWindow: {
+            start: '01-15',
+            end: '03-15',
+            description: 'Sehr früher Frühling',
+          },
+          harvestWindow: {
+            start: '05-01',
+            end: '07-31',
+            description: 'Ernte vor der Sommerhitze',
+          },
+        },
+      },
     },
   },
   careTips: {

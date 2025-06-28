@@ -61,6 +61,32 @@ export default {
           care: "Even watering, harvest ripe fruits",
         },
       },
+      seasonalTiming: {
+        temperate_north: {
+          plantingWindow: {
+            start: '05-15',
+            end: '06-15',
+            description: 'After last frost, soil warm (18°C+)',
+          },
+          harvestWindow: {
+            start: '08-01',
+            end: '10-01',
+            description: 'Harvest before first frost',
+          },
+        },
+        mediterranean: {
+          plantingWindow: {
+            start: '04-01',
+            end: '05-15',
+            description: 'Earlier start possible, soil warm',
+          },
+          harvestWindow: {
+            start: '07-01',
+            end: '10-31',
+            description: 'Longer harvest season',
+          },
+        },
+      },
     },
     greenhouse: {
       phases: {

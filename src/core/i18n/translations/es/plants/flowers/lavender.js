@@ -61,6 +61,32 @@ export default {
           care: "Cosechar flores cuando se abren, colgar para secar.",
         },
       },
+      seasonalTiming: {
+        temperate_north: {
+          plantingWindow: {
+            start: '04-01',
+            end: '06-01',
+            description: 'Plantación de primavera a principios de verano',
+          },
+          harvestWindow: {
+            start: '06-15',
+            end: '09-15',
+            description: 'Cosecha en verano',
+          },
+        },
+        mediterranean: {
+          plantingWindow: {
+            start: '02-15',
+            end: '05-01',
+            description: 'Muy temprano en primavera hasta finales de primavera',
+          },
+          harvestWindow: {
+            start: '05-15',
+            end: '09-30',
+            description: 'Cosecha en verano',
+          },
+        },
+      },
     },
     greenhouse: {
       phases: {

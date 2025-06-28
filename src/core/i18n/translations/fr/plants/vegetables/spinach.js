@@ -61,6 +61,32 @@ export default {
           care: "Récolter feuilles extérieures, laisser intérieures pousser",
         },
       },
+      seasonalTiming: {
+        temperate_north: {
+          plantingWindow: {
+            start: '03-15',
+            end: '05-15',
+            description: 'Début du printemps, dès que le sol est praticable',
+          },
+          harvestWindow: {
+            start: '05-01',
+            end: '07-01',
+            description: 'Récolte avant la chaleur',
+          },
+        },
+        mediterranean: {
+          plantingWindow: {
+            start: '10-01',
+            end: '12-01',
+            description: 'Plantation d\'automne pour récolte hiver/printemps',
+          },
+          harvestWindow: {
+            start: '01-15',
+            end: '04-15',
+            description: 'Récolte avant que la chaleur provoque la montée en graines',
+          },
+        },
+      },
     },
     greenhouse: {
       phases: {

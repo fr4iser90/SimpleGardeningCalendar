@@ -61,6 +61,32 @@ export default {
           care: "Cavar suavemente, no dañar",
         },
       },
+      seasonalTiming: {
+        temperate_north: {
+          plantingWindow: {
+            start: '03-15',
+            end: '07-15',
+            description: 'Siembra temprana en marzo, siembra principal hasta julio para cosecha de otoño',
+          },
+          harvestWindow: {
+            start: '06-01',
+            end: '11-01',
+            description: 'Cosecha según variedad y tiempo de siembra',
+          },
+        },
+        mediterranean: {
+          plantingWindow: {
+            start: '02-01',
+            end: '09-01',
+            description: 'Temporada de siembra más larga en clima suave',
+          },
+          harvestWindow: {
+            start: '05-01',
+            end: '12-15',
+            description: 'Tiempo de cosecha extendido por clima suave',
+          },
+        },
+      },
     },
     greenhouse: {
       phases: {

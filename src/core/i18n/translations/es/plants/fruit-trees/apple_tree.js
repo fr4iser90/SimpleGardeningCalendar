@@ -27,6 +27,37 @@ export default {
           care: "Poda invernal, aceite dormante contra plagas",
         },
       },
+      seasonalTiming: {
+        temperate_north: {
+          plantingWindow: {
+            start: '03-01',
+            end: '05-01',
+            description: 'Principios de primavera antes del brote',
+          },
+          harvestWindow: {
+            start: '08-01',
+            end: '10-31',
+            description: 'Cosecha dependiente de la variedad',
+          },
+          pruningWindow: {
+            start: '01-15',
+            end: '03-15',
+            description: 'Poda en temporada de dormancia',
+          },
+        },
+        mediterranean: {
+          plantingWindow: {
+            start: '02-01',
+            end: '04-01',
+            description: 'Plantación muy temprana en primavera',
+          },
+          harvestWindow: {
+            start: '06-01',
+            end: '09-30',
+            description: 'Cosecha antes de las lluvias de otoño',
+          },
+        },
+      },
     },
   },
   careTips: {

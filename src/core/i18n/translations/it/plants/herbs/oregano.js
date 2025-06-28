@@ -47,7 +47,33 @@ export default {
         harvest: {
           name: "Raccolta",
           description: "Raccolta continua delle foglie.",
-          care: "Raccogliere foglie e steli secondo necessità. Potare per evitare la fioritura e la diffusione.",
+          care: "Raccogliere foglie e steli secondo necessità. La potatura previene la fioritura e la diffusione.",
+        },
+      },
+      seasonalTiming: {
+        temperate_north: {
+          plantingWindow: {
+            start: '04-01',
+            end: '06-01',
+            description: 'Dopo l\'ultima gelata, pianta perenne',
+          },
+          harvestWindow: {
+            start: '05-15',
+            end: '10-15',
+            description: 'Raccolta continua durante la stagione di crescita',
+          },
+        },
+        mediterranean: {
+          plantingWindow: {
+            start: '03-01',
+            end: '05-01',
+            description: 'Inizio precoce per pianta perenne',
+          },
+          harvestWindow: {
+            start: '04-15',
+            end: '11-15',
+            description: 'Stagione di raccolta estesa',
+          },
         },
       },
     },

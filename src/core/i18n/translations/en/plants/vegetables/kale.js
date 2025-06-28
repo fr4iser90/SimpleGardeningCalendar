@@ -61,6 +61,32 @@ export default {
           care: "Harvest outer leaves, let inner ones grow",
         },
       },
+      seasonalTiming: {
+        temperate_north: {
+          plantingWindow: {
+            start: '04-01',
+            end: '07-01',
+            description: 'Early spring to mid-summer, after soil is workable',
+          },
+          harvestWindow: {
+            start: '06-15',
+            end: '11-15',
+            description: 'Harvest until hard frost, sweeter after light frost',
+          },
+        },
+        mediterranean: {
+          plantingWindow: {
+            start: '09-01',
+            end: '11-01',
+            description: 'Fall planting for winter/spring harvest',
+          },
+          harvestWindow: {
+            start: '12-01',
+            end: '04-15',
+            description: 'Harvest before heat causes bolting',
+          },
+        },
+      },
     },
     greenhouse: {
       phases: {

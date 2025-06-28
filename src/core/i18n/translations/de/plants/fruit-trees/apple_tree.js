@@ -27,6 +27,37 @@ export default {
           care: "Winterschnitt, Austrieböl gegen Schädlinge",
         },
       },
+      seasonalTiming: {
+        temperate_north: {
+          plantingWindow: {
+            start: '03-01',
+            end: '05-01',
+            description: 'Früher Frühling vor dem Knospenbruch',
+          },
+          harvestWindow: {
+            start: '08-01',
+            end: '10-31',
+            description: 'Sortenabhängige Ernte',
+          },
+          pruningWindow: {
+            start: '01-15',
+            end: '03-15',
+            description: 'Ruhezeit-Schnitt',
+          },
+        },
+        mediterranean: {
+          plantingWindow: {
+            start: '02-01',
+            end: '04-01',
+            description: 'Sehr früher Frühling',
+          },
+          harvestWindow: {
+            start: '06-01',
+            end: '09-30',
+            description: 'Ernte vor den Herbstregen',
+          },
+        },
+      },
     },
   },
   careTips: {

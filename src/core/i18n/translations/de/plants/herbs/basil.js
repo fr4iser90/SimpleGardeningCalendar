@@ -61,6 +61,32 @@ export default {
           care: "Regelmäßig ernten, für Winter einfrieren oder trocknen.",
         },
       },
+      seasonalTiming: {
+        temperate_north: {
+          plantingWindow: {
+            start: '05-01',
+            end: '06-15',
+            description: 'Nach dem letzten Frost, warme Erde',
+          },
+          harvestWindow: {
+            start: '07-01',
+            end: '10-15',
+            description: 'Kontinuierliche Ernte bis zum ersten Frost',
+          },
+        },
+        mediterranean: {
+          plantingWindow: {
+            start: '04-01',
+            end: '07-01',
+            description: 'Früher Start für verlängerte Saison',
+          },
+          harvestWindow: {
+            start: '06-01',
+            end: '11-01',
+            description: 'Verlängerte Erntesaison',
+          },
+        },
+      },
     },
     greenhouse: {
       phases: {

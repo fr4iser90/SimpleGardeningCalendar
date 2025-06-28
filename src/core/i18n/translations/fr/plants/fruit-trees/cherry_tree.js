@@ -27,6 +27,37 @@ export default {
           care: "Taille d'hiver, protection du tronc",
         },
       },
+      seasonalTiming: {
+        temperate_north: {
+          plantingWindow: {
+            start: '03-01',
+            end: '04-15',
+            description: 'Plantation au début du printemps',
+          },
+          harvestWindow: {
+            start: '06-01',
+            end: '08-15',
+            description: 'Récolte au début de l\'été',
+          },
+          pruningWindow: {
+            start: '02-01',
+            end: '03-15',
+            description: 'Taille de fin d\'hiver',
+          },
+        },
+        mediterranean: {
+          plantingWindow: {
+            start: '01-15',
+            end: '03-15',
+            description: 'Plantation très tôt au printemps',
+          },
+          harvestWindow: {
+            start: '05-01',
+            end: '07-31',
+            description: 'Récolte avant la chaleur estivale',
+          },
+        },
+      },
     },
   },
   careTips: {

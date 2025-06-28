@@ -71,6 +71,32 @@ export default {
           care: "Dig carefully, avoid damage",
         },
       },
+      seasonalTiming: {
+        temperate_north: {
+          plantingWindow: {
+            start: '03-15',
+            end: '05-15',
+            description: 'As soon as soil can be worked, after last frost',
+          },
+          harvestWindow: {
+            start: '07-01',
+            end: '09-30',
+            description: 'Harvest before heavy frost',
+          },
+        },
+        mediterranean: {
+          plantingWindow: {
+            start: '02-15',
+            end: '04-15',
+            description: 'Early planting possible, avoid summer heat',
+          },
+          harvestWindow: {
+            start: '06-01',
+            end: '08-31',
+            description: 'Harvest before hot, dry period',
+          },
+        },
+      },
     },
     greenhouse: {
       phases: {

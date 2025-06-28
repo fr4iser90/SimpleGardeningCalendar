@@ -71,6 +71,32 @@ export default {
           care: "Creuser avec précaution, éviter les dommages",
         },
       },
+      seasonalTiming: {
+        temperate_north: {
+          plantingWindow: {
+            start: '03-15',
+            end: '05-15',
+            description: 'Dès que le sol est praticable, après le dernier gel',
+          },
+          harvestWindow: {
+            start: '07-01',
+            end: '09-30',
+            description: 'Récolte avant le gel fort',
+          },
+        },
+        mediterranean: {
+          plantingWindow: {
+            start: '02-15',
+            end: '04-15',
+            description: 'Plantation précoce possible, éviter la chaleur estivale',
+          },
+          harvestWindow: {
+            start: '06-01',
+            end: '08-31',
+            description: 'Récolte avant la période chaude et sèche',
+          },
+        },
+      },
     },
     greenhouse: {
       phases: {

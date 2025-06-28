@@ -71,6 +71,32 @@ export default {
           care: "Scavare con attenzione, evitare danni",
         },
       },
+      seasonalTiming: {
+        temperate_north: {
+          plantingWindow: {
+            start: '03-15',
+            end: '05-15',
+            description: 'Non appena il terreno è lavorabile, dopo l\'ultima gelata',
+          },
+          harvestWindow: {
+            start: '07-01',
+            end: '09-30',
+            description: 'Raccolta prima del gelo forte',
+          },
+        },
+        mediterranean: {
+          plantingWindow: {
+            start: '02-15',
+            end: '04-15',
+            description: 'Piantagione precoce possibile, evitare il caldo estivo',
+          },
+          harvestWindow: {
+            start: '06-01',
+            end: '08-31',
+            description: 'Raccolta prima del periodo caldo e secco',
+          },
+        },
+      },
     },
     greenhouse: {
       phases: {

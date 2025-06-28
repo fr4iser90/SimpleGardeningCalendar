@@ -47,7 +47,33 @@ export default {
         harvest: {
           name: "Cosecha",
           description: "Cosecha continua de ramitas.",
-          care: "Cosechar ramitas según sea necesario. Podar para evitar floración y propagación.",
+          care: "Cosechar ramitas según sea necesario. La poda previene la floración y la propagación.",
+        },
+      },
+      seasonalTiming: {
+        temperate_north: {
+          plantingWindow: {
+            start: '04-01',
+            end: '06-01',
+            description: 'Después de la última helada, planta perenne',
+          },
+          harvestWindow: {
+            start: '05-15',
+            end: '10-15',
+            description: 'Cosecha continua durante la temporada de crecimiento',
+          },
+        },
+        mediterranean: {
+          plantingWindow: {
+            start: '03-01',
+            end: '05-01',
+            description: 'Comienzo temprano para planta perenne',
+          },
+          harvestWindow: {
+            start: '04-15',
+            end: '11-15',
+            description: 'Temporada de cosecha extendida',
+          },
         },
       },
     },
