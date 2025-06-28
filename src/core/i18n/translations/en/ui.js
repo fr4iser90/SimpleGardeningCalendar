@@ -168,6 +168,10 @@ export const en = {
     'timing.recommended_window': 'Recommended planting window',
     'timing.good_timing': 'Good timing! {description}',
     'timing.current_season': 'Current season',
+    'timing.alternatives': 'Alternatives',
+    'timing.alternative_indoor': 'Switch to indoor growing (flexible planting times)',
+    'timing.alternative_greenhouse': 'Switch to greenhouse (extended season)',
+    'timing.alternative_next_year': 'Plan for next year (optimal conditions)',
     
     // Location Placeholders
     'location.indoor.placeholder': 'e.g., Indoor Tent, Grow Room, Windowsill',

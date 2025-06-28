@@ -163,6 +163,10 @@ export const fr = {
     'timing.recommended_window': 'Fenêtre de plantation recommandée',
     'timing.good_timing': 'Bon timing ! {description}',
     'timing.current_season': 'Saison actuelle',
+    'timing.alternatives': 'Alternatives',
+    'timing.alternative_indoor': 'Passer à la culture intérieure (périodes de plantation flexibles)',
+    'timing.alternative_greenhouse': 'Passer à la serre (saison prolongée)',
+    'timing.alternative_next_year': 'Planifier pour l\'année prochaine (conditions optimales)',
     
     // Location Placeholders
     'location.indoor.placeholder': 'ex: Tente de Culture, Salle de Culture, Rebord de Fenêtre',

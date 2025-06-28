@@ -168,6 +168,10 @@ export const de = {
     'timing.recommended_window': 'Empfohlenes Pflanzfenster',
     'timing.good_timing': 'Gute Zeit! {description}',
     'timing.current_season': 'Aktuelle Jahreszeit',
+    'timing.alternatives': 'Alternativen',
+    'timing.alternative_indoor': 'Wechseln Sie zu Indoor-Anbau (flexible Pflanzzeiten)',
+    'timing.alternative_greenhouse': 'Wechseln Sie zu Gewächshaus (verlängerte Saison)',
+    'timing.alternative_next_year': 'Planen Sie für nächstes Jahr (optimale Bedingungen)',
     
     // Location Placeholders
     'location.indoor.placeholder': 'z.B. Growzelt, Growraum, Fensterbank',

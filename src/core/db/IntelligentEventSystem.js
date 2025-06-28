@@ -227,38 +227,43 @@ export async function createIntelligentPlantingEvents(planting, plantData, phase
     // --- NEU: Berechnung für startDate/endDate oder days ---
     let phaseStartDate, phaseEndDate, phaseDays;
     if (phase.startDate && phase.endDate) {
-      // Berechnete Phasen mit startDate/endDate verwenden
       phaseStartDate = new Date(phase.startDate);
       phaseEndDate = new Date(phase.endDate);
       phaseDays = Math.round((phaseEndDate - phaseStartDate) / (1000*60*60*24));
-      console.log('🎯 [createIntelligentPlantingEvents] Using calculated startDate/endDate:', {
-        startDate: phase.startDate,
-        endDate: phase.endDate,
-        calculatedDays: phaseDays
-      });
     } else if (phase.start && phase.end) {
-      // Fallback: Rohdaten aus Plant-File (sollte nicht mehr vorkommen)
       phaseStartDate = new Date(phase.start);
       phaseEndDate = new Date(phase.end);
       phaseDays = Math.round((phaseEndDate - phaseStartDate) / (1000*60*60*24));
-      console.log('🎯 [createIntelligentPlantingEvents] Using raw start/end dates:', {
-        start: phase.start,
-        end: phase.end,
-        calculatedDays: phaseDays
-      });
     } else {
-      // Days-basierte Phasen
       phaseStartDate = new Date(phase.startDate);
       phaseEndDate = new Date(phase.startDate);
       phaseEndDate.setDate(phaseEndDate.getDate() + (phase.days || 0));
       phaseDays = phase.days || 0;
-      console.log('🎯 [createIntelligentPlantingEvents] Using days calculation:', {
-        startDate: phase.startDate,
-        days: phase.days,
-        calculatedEndDate: phaseEndDate.toISOString().split('T')[0]
-      });
     }
     
+    // --- NEU: Events nur ab Pflanzdatum ---
+    const plantingDateObj = new Date(planting.startDate);
+    
+    // Wenn Phase vor Pflanzdatum beginnt: an Pflanzdatum anpassen
+    if (phaseStartDate < plantingDateObj) {
+      console.log(`🎯 [createIntelligentPlantingEvents] Phase ${phase.name} starts before planting date, adjusting to planting date`);
+      
+      // Berechne die ursprüngliche Phasendauer
+      const originalPhaseDays = Math.round((phaseEndDate - phaseStartDate) / (1000*60*60*24));
+      
+      // Setze Start auf Pflanzdatum und Ende entsprechend verschieben
+      phaseStartDate = new Date(plantingDateObj);
+      phaseEndDate = new Date(plantingDateObj);
+      phaseEndDate.setDate(phaseEndDate.getDate() + originalPhaseDays);
+      
+      // Aktualisiere die phase.startDate für Event-Erstellung
+      phase.startDate = phaseStartDate.toISOString().split('T')[0];
+      phase.endDate = phaseEndDate.toISOString().split('T')[0];
+      
+      console.log(`🎯 [createIntelligentPlantingEvents] Adjusted phase ${phase.name}: ${phase.startDate} - ${phase.endDate}`);
+    }
+    // --- ENDE NEU ---
+
     // Create intelligent event title and description
     const eventTitle = getIntelligentEventTitle(phase.name, plantData, i === phases.length - 1);
     const eventDescription = getIntelligentEventDescription(phase.name, plantData, phaseData);
@@ -282,19 +287,14 @@ export async function createIntelligentPlantingEvents(planting, plantData, phase
       for (let week = 1; week <= weeklyChecks; week++) {
         const checkDate = new Date(phaseStartDate);
         checkDate.setDate(checkDate.getDate() + (week * 7));
-        
-        if (checkDate < new Date(completionDate)) {
+        if (checkDate < new Date(completionDate) && checkDate >= plantingDateObj) {
+          // Nur Weekly Checks ab Pflanzdatum
           const weekCheckLabel = t('calendar.week_check', { week }) || `Week ${week} check`;
           const phaseLabel = t('phase.' + phase.name) || phase.name;
           const weekCheckDesc = t('calendar.weekly_check_during_phase', { phase: phaseLabel }) || `Weekly check during ${phaseLabel} phase`;
           const lookForSigns = t('calendar.look_for_signs') || 'Look for signs of:';
-          
-          // Get the phase checkpoints (now async)
           const phaseCheckpoints = await getPhaseCheckpoints(phase.name, plantData);
-          
           let description = `${weekCheckDesc}\n\n${phaseData.care}\n\n${lookForSigns}\n${phaseCheckpoints}`;
-          
-          // Use translated common problems from plantData (which should already be translated)
           if (plantData.commonProblems && Object.keys(plantData.commonProblems).length > 0) {
             description += `\n\n${t('plant_details.common_problems') || 'Common Problems to Watch For:'}\n`;
             Object.entries(plantData.commonProblems).forEach(([problem, solution]) => {
@@ -328,7 +328,8 @@ export async function createIntelligentPlantingEvents(planting, plantData, phase
         phase.name,
         reminderOptions.selectedMedium
       );
-      eventsToAdd.push(...wateringEvents);
+      // Nur Events ab Pflanzdatum hinzufügen
+      eventsToAdd.push(...wateringEvents.filter(e => new Date(e.date) >= plantingDateObj));
     }
     // Fertilizing
     if (careSettings.fertilizing) {
@@ -344,7 +345,8 @@ export async function createIntelligentPlantingEvents(planting, plantData, phase
         phase.name,
         reminderOptions.selectedMedium
       );
-      eventsToAdd.push(...fertilizingEvents);
+      // Nur Events ab Pflanzdatum hinzufügen
+      eventsToAdd.push(...fertilizingEvents.filter(e => new Date(e.date) >= plantingDateObj));
     }
     // --- END NEW ---
   }

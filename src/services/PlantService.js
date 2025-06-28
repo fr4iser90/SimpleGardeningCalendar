@@ -87,7 +87,7 @@ export async function addPlanting(plantType, startDate, location = 'Default Gard
     // Nutze das aktuelle Jahr oder das Jahr des Startdatums
     const year = new Date(startDate).getFullYear();
     console.log('🌱 [addPlanting] Using START/END logic for year:', year);
-    phases = calculatePhaseScheduleStartEnd(envPhases, year);
+    phases = calculatePhaseScheduleStartEnd(envPhases, year, startDate);
   } else {
     console.log('🌱 [addPlanting] Using DAYS logic with startDate:', startDate);
     phases = calculatePhaseScheduleDays(envPhases, startDate);

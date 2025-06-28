@@ -164,6 +164,10 @@ export const it = {
     'timing.recommended_window': 'Finestra di piantagione raccomandata',
     'timing.good_timing': 'Buon tempismo! {description}',
     'timing.current_season': 'Stagione attuale',
+    'timing.alternatives': 'Alternative',
+    'timing.alternative_indoor': 'Passare alla coltivazione indoor (tempi di piantagione flessibili)',
+    'timing.alternative_greenhouse': 'Passare alla serra (stagione prolungata)',
+    'timing.alternative_next_year': 'Pianificare per l\'anno prossimo (condizioni ottimali)',
     
     // Location Placeholders
     'location.indoor.placeholder': 'es: Tenda Indoor, Grow Room, Davanzale',

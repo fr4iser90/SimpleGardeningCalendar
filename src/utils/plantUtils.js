@@ -58,8 +58,24 @@ export function calculatePhaseScheduleDays(phases, startDate) {
 }
 
 // Calculate phase schedule for a plant (START/END-based)
-export function calculatePhaseScheduleStartEnd(phases, year = (new Date()).getFullYear()) {
-  console.log('📅 [calculatePhaseScheduleStartEnd] Called with:', { year, phaseCount: Object.keys(phases).length });
+export function calculatePhaseScheduleStartEnd(phases, year = (new Date()).getFullYear(), plantingDate = null) {
+  console.log('📅 [calculatePhaseScheduleStartEnd] Called with:', { year, phaseCount: Object.keys(phases).length, plantingDate });
+  
+  // If plantingDate is provided, use it to determine the appropriate year
+  let targetYear = year;
+  if (plantingDate) {
+    const plantingYear = new Date(plantingDate).getFullYear();
+    const plantingMonth = new Date(plantingDate).getMonth() + 1; // 0-based to 1-based
+    
+    // Check if we need to adjust the year based on planting date
+    // If planting in late season (July-December), use next year for phases that start early
+    if (plantingMonth >= 7) {
+      targetYear = plantingYear + 1;
+      console.log('📅 [calculatePhaseScheduleStartEnd] Late season planting detected, using next year:', targetYear);
+    } else {
+      targetYear = plantingYear;
+    }
+  }
   
   const result = Object.entries(phases).map(([phase, data]) => {
     let startDate, endDate;
@@ -71,17 +87,17 @@ export function calculatePhaseScheduleStartEnd(phases, year = (new Date()).getFu
       
       if (endMonth < startMonth) {
         // Phase crosses year boundary
-        startDate = `${year}-${data.start}`;
-        endDate = `${year + 1}-${data.end}`;
+        startDate = `${targetYear}-${data.start}`;
+        endDate = `${targetYear + 1}-${data.end}`;
       } else {
-        startDate = `${year}-${data.start}`;
-        endDate = `${year}-${data.end}`;
+        startDate = `${targetYear}-${data.start}`;
+        endDate = `${targetYear}-${data.end}`;
       }
     } else {
       // Fallback for phases without start/end
       console.warn('📅 [calculatePhaseScheduleStartEnd] Phase without start/end:', phase, data);
-      startDate = `${year}-01-01`;
-      endDate = `${year}-12-31`;
+      startDate = `${targetYear}-01-01`;
+      endDate = `${targetYear}-12-31`;
     }
     
     const phaseResult = {

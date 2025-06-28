@@ -119,6 +119,7 @@ export function updatePlantInfo() {
   const plantTypeSelect = document.getElementById('plantTypeSelect');
   const plantInfo = document.getElementById('plantInfo');
   const environmentSelect = document.getElementById('environmentSelect');
+  const dateInput = document.querySelector('input[name="date"]');
 
   if (!plantTypeSelect?.value || !plantInfo) {
     if (plantInfo) {
@@ -142,7 +143,8 @@ export function updatePlantInfo() {
   let phases;
   if (hasStartEnd) {
     const year = new Date().getFullYear();
-    phases = calculatePhaseScheduleStartEnd(phasesRaw, year);
+    const plantingDate = dateInput?.value || null;
+    phases = calculatePhaseScheduleStartEnd(phasesRaw, year, plantingDate);
   } else {
     const today = new Date();
     phases = calculatePhaseScheduleDays(phasesRaw, today.toISOString().split('T')[0]);
@@ -169,8 +171,8 @@ export function updatePlantInfo() {
   plantInfo.style.display = '';
   plantInfo.innerHTML = `
     <h4 class="font-medium mb-2">${plantData.name}</h4>
-    <p class="text-sm mb-2"><strong>${t('plant.info.category')}</strong> ${plantData.category}</p>
-    <p class="text-sm mb-2"><strong>${t('plant.info.environment')}</strong> ${envKey}</p>
+    <p class="text-sm mb-2"><strong>${t('plant.info.category')}</strong> ${t(plantData.category)}</p>
+    <p class="text-sm mb-2"><strong>${t('plant.info.environment')}</strong> ${t('environment.' + envKey)}</p>
     <p class="text-sm mb-2"><strong>${t('plant.info.total_duration')}</strong> ${totalDuration}</p>
     <div class="text-sm">
       <strong>${t('plant.info.phases')}</strong><br>
@@ -184,6 +186,8 @@ export function updatePhaseInputs() {
   const environmentSelect = document.getElementById('environmentSelect');
   const phaseDurationSection = document.getElementById('phaseDurationSection');
   const phaseInputs = document.getElementById('phaseInputs');
+  const dateInput = document.querySelector('input[name="date"]');
+  
   if (!plantTypeSelect?.value || !phaseDurationSection || !phaseInputs) {
     if (phaseDurationSection) {
       phaseDurationSection.style.display = 'none';
@@ -201,7 +205,8 @@ export function updatePhaseInputs() {
   let phases;
   if (hasStartEnd) {
     const year = new Date().getFullYear();
-    phases = calculatePhaseScheduleStartEnd(phasesRaw, year);
+    const plantingDate = dateInput?.value || null;
+    phases = calculatePhaseScheduleStartEnd(phasesRaw, year, plantingDate);
   } else {
     const today = new Date();
     phases = calculatePhaseScheduleDays(phasesRaw, today.toISOString().split('T')[0]);
@@ -382,6 +387,14 @@ export async function checkSeasonalTiming() {
         <div class="mt-2 text-sm text-yellow-700 dark:text-yellow-300">
           <p><strong>${t('plant.info.recommended_planting_time')}</strong> ${description}</p>
           <p class="mt-1"><strong>${t('timing.recommended_window')}:</strong> ${startDate} - ${endDate}</p>
+          <div class="mt-2 p-2 bg-blue-50 dark:bg-blue-900 rounded border border-blue-200 dark:border-blue-700">
+            <p class="text-xs font-medium text-blue-800 dark:text-blue-200 mb-1">💡 ${t('timing.alternatives')}:</p>
+            <ul class="text-xs text-blue-700 dark:text-blue-300 space-y-1">
+              <li>• ${t('timing.alternative_indoor')}</li>
+              <li>• ${t('timing.alternative_greenhouse')}</li>
+              <li>• ${t('timing.alternative_next_year')}</li>
+            </ul>
+          </div>
         </div>
       `;
     }

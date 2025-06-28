@@ -192,6 +192,10 @@ export const es = {
     'timing.recommended_window': 'Ventana de plantación recomendada',
     'timing.good_timing': '¡Buen momento! {description}',
     'timing.current_season': 'Temporada actual',
+    'timing.alternatives': 'Alternativas',
+    'timing.alternative_indoor': 'Cambiar a cultivo interior (tiempos de plantación flexibles)',
+    'timing.alternative_greenhouse': 'Cambiar a invernadero (temporada extendida)',
+    'timing.alternative_next_year': 'Planificar para el próximo año (condiciones óptimas)',
     
     // Planting Tips
     'planting.tips.vegetables': 'Siembra directa o cultivo previo posible',
