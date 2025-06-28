@@ -99,7 +99,9 @@ export async function validatePlantingDate(plantKey, environment, plantingDate, 
         description: t(plantingWindow.description) 
       }),
       recommendedPeriod: t(plantingWindow.description),
-      details: `${t('timing.recommended_window')}: ${plantingWindow.start} - ${plantingWindow.end}`
+      start: plantingWindow.start,
+      end: plantingWindow.end,
+      description: plantingWindow.description
     };
   }
 }

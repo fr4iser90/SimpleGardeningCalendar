@@ -14,6 +14,7 @@ import {
 } from './PlantingFormUtils.js';
 import { getAllTranslatedPlantData } from '../../../core/i18n/index.js';
 import { calculatePhaseScheduleDays, calculatePhaseScheduleStartEnd } from '../../../utils/plantUtils.js';
+import { formatDateForDisplay } from '../../../core/db/utils.js';
 
 /**
  * PlantingFormLogic - Contains all business logic for the planting form
@@ -323,12 +324,17 @@ export async function checkSeasonalTiming() {
     seasonalWarning.classList.remove('hidden');
     seasonalWarning.className = 'p-3 bg-yellow-50 dark:bg-yellow-900 border border-yellow-200 dark:border-yellow-700 rounded mb-3';
     
+    // Format dates and translate description
+    const startDate = await formatDateForDisplay(validation.start || '03-15');
+    const endDate = await formatDateForDisplay(validation.end || '05-15');
+    const description = t(validation.description || 'timing.early_to_mid_spring');
+    
     if (seasonalMessage) {
       seasonalMessage.innerHTML = `
         <div class="flex items-start">
           <span class="text-yellow-600 dark:text-yellow-400 mr-2">⚠️</span>
           <div>
-            <p class="font-medium text-yellow-800 dark:text-yellow-200">${validation.message}</p>
+            <p class="font-medium text-yellow-800 dark:text-yellow-200">${t('timing.consider_planting_between', { start: startDate, end: endDate, description })}</p>
           </div>
         </div>
       `;
@@ -337,8 +343,8 @@ export async function checkSeasonalTiming() {
     if (seasonalDetails) {
       seasonalDetails.innerHTML = `
         <div class="mt-2 text-sm text-yellow-700 dark:text-yellow-300">
-          <p><strong>${t('plant.info.recommended_planting_time')}</strong> ${validation.recommendedPeriod || t('plant.info.check_planting_times')}</p>
-          ${validation.details ? `<p class="mt-1">${validation.details}</p>` : ''}
+          <p><strong>${t('plant.info.recommended_planting_time')}</strong> ${description}</p>
+          <p class="mt-1"><strong>${t('timing.recommended_window')}:</strong> ${startDate} - ${endDate}</p>
         </div>
       `;
     }
