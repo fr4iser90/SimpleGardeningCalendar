@@ -2,11 +2,12 @@
 // Adaptadas a las prácticas de jardinería españolas y al clima
 
 export const GARDEN_TEMPLATE_CATEGORIES_ES = {
-  ORNAMENTAL: "Jardín ornamental",
-  VEGETABLE_FRUIT: "Huerto y frutales",
-  HERB_GARDEN: "Jardín de hierbas aromáticas",
-  BALCONY_TERRACE: "Balcón y terraza",
-  COMPLETE_GARDEN: "Jardín completo",
+  ORNAMENTAL: 'ORNAMENTAL',
+  HERB_GARDEN: 'HERB_GARDEN',
+  BALCONY_TERRACE: 'BALCONY_TERRACE',
+  COMPLETE_GARDEN: 'COMPLETE_GARDEN',
+  FRUIT_GARDEN: 'FRUIT_GARDEN',
+  VEGETABLE_GARDEN: 'VEGETABLE_GARDEN'
 };
 
 // Template for Ornamental Garden (Jardín ornamental)
@@ -234,11 +235,11 @@ export const ORNAMENTAL_GARDEN_TEMPLATE_ES = {
   ],
 };
 
-// Template for Vegetable and Fruit Garden (Huerto y frutales)
-export const VEGETABLE_FRUIT_GARDEN_TEMPLATE_ES = {
-  name: "Plan anual del huerto y frutales",
-  description: "Calendario completo para el huerto y los frutales",
-  category: GARDEN_TEMPLATE_CATEGORIES_ES.VEGETABLE_FRUIT,
+// Template for Fruit Garden (solo tareas de fruta)
+export const FRUIT_GARDEN_TEMPLATE_ES = {
+  name: "Plan anual del frutal",
+  description: "Calendario anual para árboles frutales, bayas y cuidados del huerto de frutas",
+  category: GARDEN_TEMPLATE_CATEGORIES_ES.FRUIT_GARDEN || 'Frutal',
   region: "mediterranean",
   tasks: [
     // Enero
@@ -250,141 +251,6 @@ export const VEGETABLE_FRUIT_GARDEN_TEMPLATE_ES = {
       description: "Podar árboles frutales de pepita en tiempo seco.",
       priority: "high",
     },
-    {
-      month: 1,
-      title: "Planificar cultivos",
-      date: "01-25",
-      type: "maintenance",
-      description: "Planificar la rotación de cultivos y encargar semillas.",
-      priority: "high",
-    },
-
-    // Febrero
-    {
-      month: 2,
-      title: "Preparar semilleros",
-      date: "02-01",
-      type: "maintenance",
-      description: "Preparar material de siembra y semilleros.",
-      priority: "medium",
-    },
-    {
-      month: 2,
-      title: "Siembra bajo protección",
-      date: "02-15",
-      type: "planting",
-      description: "Primeras siembras bajo protección: rábanos, lechugas.",
-      priority: "high",
-    },
-
-    // Marzo
-    {
-      month: 3,
-      title: "Siembra al aire libre",
-      date: "03-01",
-      type: "planting",
-      description: "Sembrar zanahorias, chirivías, guisantes.",
-      priority: "high",
-    },
-    {
-      month: 3,
-      title: "Plantar ajos y chalotes",
-      date: "03-15",
-      type: "planting",
-      description: "Plantar ajos rosados y chalotes.",
-      priority: "medium",
-    },
-
-    // Abril
-    {
-      month: 4,
-      title: "Plantar patatas",
-      date: "04-01",
-      type: "planting",
-      description: "Plantar patatas tempranas.",
-      priority: "high",
-    },
-    {
-      month: 4,
-      title: "Sembrar aromáticas",
-      date: "04-15",
-      type: "planting",
-      description: "Sembrar perejil, cebollino, perifollo.",
-      priority: "medium",
-    },
-
-    // Mayo
-    {
-      month: 5,
-      title: "Trasplantar plantones",
-      date: "05-01",
-      type: "planting",
-      description: "Trasplantar tomates, calabacines, berenjenas.",
-      priority: "high",
-    },
-    {
-      month: 5,
-      title: "Sembrar hortalizas de verano",
-      date: "05-15",
-      type: "planting",
-      description: "Sembrar judías, pepinos, calabazas.",
-      priority: "high",
-    },
-
-    // Junio
-    {
-      month: 6,
-      title: "Entutorar tomates",
-      date: "06-01",
-      type: "maintenance",
-      description: "Instalar tutores y atar plantas de tomate.",
-      priority: "high",
-    },
-    {
-      month: 6,
-      title: "Primera cosecha",
-      date: "06-15",
-      type: "harvesting",
-      description: "Primera cosecha de rábanos, lechugas, guisantes.",
-      priority: "medium",
-    },
-
-    // Julio
-    {
-      month: 7,
-      title: "Cosecha de verano",
-      date: "07-01",
-      type: "harvesting",
-      description: "Cosechar calabacines, tomates, judías verdes.",
-      priority: "high",
-    },
-    {
-      month: 7,
-      title: "Riego abundante",
-      date: "07-15",
-      type: "watering",
-      description: "Regar abundantemente el huerto, preferiblemente por la tarde.",
-      priority: "high",
-    },
-
-    // Agosto
-    {
-      month: 8,
-      title: "Gran cosecha",
-      date: "08-01",
-      type: "harvesting",
-      description: "Período de gran cosecha: tomates, berenjenas, pimientos.",
-      priority: "high",
-    },
-    {
-      month: 8,
-      title: "Sembrar hortalizas de otoño",
-      date: "08-15",
-      type: "planting",
-      description: "Sembrar coles, nabos, rábanos de invierno.",
-      priority: "medium",
-    },
-
     // Septiembre
     {
       month: 9,
@@ -394,6 +260,7 @@ export const VEGETABLE_FRUIT_GARDEN_TEMPLATE_ES = {
       description: "Cosecha de manzanas, peras, ciruelas.",
       priority: "high",
     },
+    // Septiembre
     {
       month: 9,
       title: "Plantar fresas",
@@ -402,7 +269,88 @@ export const VEGETABLE_FRUIT_GARDEN_TEMPLATE_ES = {
       description: "Plantar nuevas fresas.",
       priority: "medium",
     },
+    // Diciembre
+    {
+      month: 12,
+      title: "Cosechar cítricos",
+      date: "12-01",
+      type: "harvesting",
+      description: "Comenzar la cosecha de naranjas y mandarinas.",
+      priority: "high",
+    }
+  ]
+};
 
+// Template for Vegetable Garden (solo tareas de hortalizas)
+export const VEGETABLE_GARDEN_TEMPLATE_ES = {
+  name: "Plan anual del huerto",
+  description: "Calendario anual para hortalizas, ensaladas y patatas",
+  category: GARDEN_TEMPLATE_CATEGORIES_ES.VEGETABLE_GARDEN || 'Huerto',
+  region: "mediterranean",
+  tasks: [
+    // Febrero
+    {
+      month: 2,
+      title: "Siembra bajo protección",
+      date: "02-15",
+      type: "planting",
+      description: "Primeras siembras bajo protección: rábanos, lechugas.",
+      priority: "high",
+    },
+    // Marzo
+    {
+      month: 3,
+      title: "Siembra al aire libre",
+      date: "03-01",
+      type: "planting",
+      description: "Sembrar zanahorias, chirivías, guisantes.",
+      priority: "high",
+    },
+    // Abril
+    {
+      month: 4,
+      title: "Plantar patatas",
+      date: "04-01",
+      type: "planting",
+      description: "Plantar patatas tempranas.",
+      priority: "high",
+    },
+    // Mayo
+    {
+      month: 5,
+      title: "Trasplantar plantones",
+      date: "05-01",
+      type: "planting",
+      description: "Trasplantar tomates, calabacines, berenjenas.",
+      priority: "high",
+    },
+    // Junio
+    {
+      month: 6,
+      title: "Primera cosecha",
+      date: "06-15",
+      type: "harvesting",
+      description: "Primera cosecha de rábanos, lechugas, guisantes.",
+      priority: "medium",
+    },
+    // Julio
+    {
+      month: 7,
+      title: "Cosecha de verano",
+      date: "07-01",
+      type: "harvesting",
+      description: "Cosechar calabacines, tomates, judías verdes.",
+      priority: "high",
+    },
+    // Agosto
+    {
+      month: 8,
+      title: "Gran cosecha",
+      date: "08-01",
+      type: "harvesting",
+      description: "Período de gran cosecha: tomates, berenjenas, pimientos.",
+      priority: "high",
+    },
     // Octubre
     {
       month: 10,
@@ -412,24 +360,7 @@ export const VEGETABLE_FRUIT_GARDEN_TEMPLATE_ES = {
       description: "Cosechar zanahorias, remolachas, nabos.",
       priority: "high",
     },
-    {
-      month: 10,
-      title: "Plantar ajo de invierno",
-      date: "10-15",
-      type: "planting",
-      description: "Plantar ajo morado para cosecha estival.",
-      priority: "medium",
-    },
-
     // Noviembre
-    {
-      month: 11,
-      title: "Limpiar el huerto",
-      date: "11-01",
-      type: "maintenance",
-      description: "Limpiar parcelas libres y ponerlas en reposo.",
-      priority: "high",
-    },
     {
       month: 11,
       title: "Cosechar hortalizas de invierno",
@@ -437,26 +368,8 @@ export const VEGETABLE_FRUIT_GARDEN_TEMPLATE_ES = {
       type: "harvesting",
       description: "Cosechar puerros, coles, espinacas.",
       priority: "medium",
-    },
-
-    // Diciembre
-    {
-      month: 12,
-      title: "Cosechar cítricos",
-      date: "12-01",
-      type: "harvesting",
-      description: "Comenzar la cosecha de naranjas y mandarinas.",
-      priority: "high",
-    },
-    {
-      month: 12,
-      title: "Planificar próximo año",
-      date: "12-25",
-      type: "maintenance",
-      description: "Establecer el plan de cultivos para el año siguiente.",
-      priority: "low",
-    },
-  ],
+    }
+  ]
 };
 
 // Template for Herb Garden (Jardín de hierbas aromáticas)
@@ -850,7 +763,8 @@ export const COMPLETE_GARDEN_TEMPLATE_ES = {
 export function getAvailableTemplatesEs() {
   return [
     ORNAMENTAL_GARDEN_TEMPLATE_ES,
-    VEGETABLE_FRUIT_GARDEN_TEMPLATE_ES,
+    FRUIT_GARDEN_TEMPLATE_ES,
+    VEGETABLE_GARDEN_TEMPLATE_ES,
     HERB_GARDEN_TEMPLATE_ES,
     BALCONY_TERRACE_TEMPLATE_ES,
     COMPLETE_GARDEN_TEMPLATE_ES,

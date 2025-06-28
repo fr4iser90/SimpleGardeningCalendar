@@ -3,6 +3,7 @@ import { t } from '../../core/i18n/index.js';
 import { getAvailableTemplates, importGardenTemplate } from '../../services/TemplateService.js';
 import { showButtonSpinner, hideButtonSpinner } from '../ui/LoadingSpinner.js';
 import { DB_NAME, DB_VERSION } from '../../core/db/connection.js';
+import { getAllLocalCalendars } from '../../core/db/calendars.js';
 
 export function showTemplateImportModal() {
   const modal = document.createElement('div');
@@ -164,6 +165,18 @@ async function importSelectedTemplate() {
   try {
     // Import template events
     const events = await importGardenTemplate(selectedTemplate, year);
+
+    // Nach dem Import: Aktiven Kalender setzen (außer bei Complete Garden)
+    if (selectedTemplate.category !== 'COMPLETE_GARDEN') {
+      const allCalendars = await getAllLocalCalendars();
+      // Suche Kalender mit passender Kategorie (category oder name)
+      const targetCalendar = allCalendars.find(cal => cal.category === selectedTemplate.category || cal.name.toLowerCase().includes(selectedTemplate.name.toLowerCase()));
+      if (targetCalendar) {
+        localStorage.setItem('selectedLocalCalendarId', targetCalendar.id.toString());
+        if (window.updateLocalCalendarStatus) window.updateLocalCalendarStatus();
+        if (window.calendar) window.calendar.refetchEvents();
+      }
+    }
 
     // Refresh calendar
     if (window.calendar) {

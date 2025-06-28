@@ -71,68 +71,6 @@ export async function importGardenTemplate(templateData, startYear = new Date().
   return events;
 }
 
-// Function to get localized template categories
-export function getLocalizedTemplateCategories() {
-  const currentLang = getCurrentLanguage();
-  
-  switch (currentLang) {
-    case 'en':
-      return {
-        ORNAMENTAL: 'Ornamental Garden',
-        VEGETABLE_FRUIT: 'Vegetable & Fruit Garden',
-        HERB_GARDEN: 'Herb Garden',
-        FRUIT_GARDEN: 'Fruit Garden',
-        BALCONY_TERRACE: 'Balcony & Terrace',
-        COMPLETE_GARDEN: 'Complete Garden'
-      };
-    case 'fr':
-      return {
-        ORNAMENTAL: 'Jardin d\'Ornement',
-        VEGETABLE_FRUIT: 'Potager & Verger',
-        HERB_GARDEN: 'Jardin d\'Herbes Aromatiques',
-        FRUIT_GARDEN: 'Jardin de Fruits',
-        BALCONY_TERRACE: 'Balcon & Terrasse',
-        COMPLETE_GARDEN: 'Jardin Complet'
-      };
-    case 'es':
-      return {
-        ORNAMENTAL: 'Jardín Ornamental',
-        VEGETABLE_FRUIT: 'Huerto & Frutales',
-        HERB_GARDEN: 'Jardín de Hierbas',
-        FRUIT_GARDEN: 'Jardín de Frutas',
-        BALCONY_TERRACE: 'Balcón & Terraza',
-        COMPLETE_GARDEN: 'Jardín Completo'
-      };
-    case 'it':
-      return {
-        ORNAMENTAL: 'Giardino Ornamentale',
-        VEGETABLE_FRUIT: 'Orto & Frutteto',
-        HERB_GARDEN: 'Giardino delle Erbe',
-        FRUIT_GARDEN: 'Giardino delle Frutte',
-        BALCONY_TERRACE: 'Balcone & Terrazza',
-        COMPLETE_GARDEN: 'Giardino Completo'
-      };
-    case 'de':
-      return {
-        ORNAMENTAL: 'Ziergarten',
-        VEGETABLE_FRUIT: 'Obst- und Gemüsegarten',
-        HERB_GARDEN: 'Kräutergarten',
-        FRUIT_GARDEN: 'Obstgarten',
-        BALCONY_TERRACE: 'Balkon & Terrasse',
-        COMPLETE_GARDEN: 'Kompletter Garten'
-      };
-    default:
-      return {
-        ORNAMENTAL: 'Ornamental Garden',
-        VEGETABLE_FRUIT: 'Vegetable & Fruit Garden',
-        HERB_GARDEN: 'Herb Garden',
-        FRUIT_GARDEN: 'Fruit Garden',
-        BALCONY_TERRACE: 'Balcony & Terrace',
-        COMPLETE_GARDEN: 'Complete Garden'
-      }; // English as fallback
-  }
-}
-
 // Export template categories for backward compatibility
 export function getGardenTemplateCategories() {
   const currentLang = getCurrentLanguage();

@@ -1,10 +1,11 @@
 // German templates (original)
 export const GARDEN_TEMPLATE_CATEGORIES_DE = {
   ORNAMENTAL: 'ORNAMENTAL',
-  VEGETABLE_FRUIT: 'VEGETABLE_FRUIT',
   HERB_GARDEN: 'HERB_GARDEN',
   BALCONY_TERRACE: 'BALCONY_TERRACE',
-  COMPLETE_GARDEN: 'COMPLETE_GARDEN'
+  COMPLETE_GARDEN: 'COMPLETE_GARDEN',
+  FRUIT_GARDEN: 'FRUIT_GARDEN',
+  VEGETABLE_GARDEN: 'VEGETABLE_GARDEN'
 };
 
 // Template for Ornamental Garden (Ziergarten)
@@ -375,349 +376,6 @@ export const ORNAMENTAL_GARDEN_TEMPLATE_DE = {
       description:
         "Eingelagerte Blumenzwiebeln und Knollen auf Fäulnis kontrollieren.",
       priority: "medium",
-    },
-  ],
-};
-
-// Template for Vegetable and Fruit Garden (Obst- und Gemüsegarten)
-export const VEGETABLE_FRUIT_GARDEN_TEMPLATE_DE = {
-  name: "Obst- und Gemüsegarten Jahresplan",
-  description:
-    "Kompletter Jahreskalender für den Nutzgarten mit Obst und Gemüse",
-  category: GARDEN_TEMPLATE_CATEGORIES_DE.VEGETABLE_FRUIT,
-  region: "temperate_north",
-  tasks: [
-    // Januar
-    {
-      month: 1,
-      title: "Obstbäume schneiden",
-      date: "01-15",
-      type: "pruning",
-      description:
-        "Kernobst wie Äpfel, Quitten und Birnen bei Tauwetter schneiden.",
-      priority: "high",
-    },
-    {
-      month: 1,
-      title: "Steckholz schneiden",
-      date: "01-20",
-      type: "planting",
-      description: "Steckholz von Johannis- und Stachelbeeren schneiden.",
-      priority: "medium",
-    },
-    {
-      month: 1,
-      title: "Wintergemüse ernten",
-      date: "01-25",
-      type: "harvesting",
-      description:
-        "Grünkohl, Rosenkohl, Lauch und andere winterharte Gemüse ernten.",
-      priority: "medium",
-    },
-
-    // Februar
-    {
-      month: 2,
-      title: "Bodenproben nehmen",
-      date: "02-01",
-      type: "maintenance",
-      description: "Bodenproben im Gemüsegarten für Nährstoffanalyse nehmen.",
-      priority: "medium",
-    },
-    {
-      month: 2,
-      title: "Kartoffeln vorkeimen",
-      date: "02-15",
-      type: "planting",
-      description: "Frühkartoffeln in hellen, kühlen Räumen vorkeimen lassen.",
-      priority: "high",
-    },
-    {
-      month: 2,
-      title: "Beete vorbereiten",
-      date: "02-25",
-      type: "maintenance",
-      description: "Beete für die Aussaat vorbereiten, Kompost einarbeiten.",
-      priority: "high",
-    },
-
-    // März
-    {
-      month: 3,
-      title: "Salat auspflanzen",
-      date: "03-01",
-      type: "planting",
-      description: "Salat ins Frühbeet oder unter Vlies auspflanzen.",
-      priority: "high",
-    },
-    {
-      month: 3,
-      title: "Kräuter stutzen",
-      date: "03-15",
-      type: "pruning",
-      description:
-        "Mehrjährige Kräuter wie Thymian und Oregano zurückschneiden.",
-      priority: "medium",
-    },
-    {
-      month: 3,
-      title: "Obstbäume düngen",
-      date: "03-20",
-      type: "fertilizing",
-      description: "Obstbäume mit Kompost oder organischem Dünger versorgen.",
-      priority: "high",
-    },
-    {
-      month: 3,
-      title: "Tomaten vorziehen",
-      date: "03-25",
-      type: "planting",
-      description: "Tomaten auf der Fensterbank oder im Gewächshaus vorziehen.",
-      priority: "high",
-    },
-
-    // April
-    {
-      month: 4,
-      title: "Kartoffeln pflanzen",
-      date: "04-01",
-      type: "planting",
-      description: "Vorgekeimte Kartoffeln ins Beet pflanzen.",
-      priority: "high",
-    },
-    {
-      month: 4,
-      title: "Obstgehölze düngen",
-      date: "04-10",
-      type: "fertilizing",
-      description: "Beerensträucher und Obstbäume düngen.",
-      priority: "medium",
-    },
-    {
-      month: 4,
-      title: "Tomaten pikieren",
-      date: "04-15",
-      type: "maintenance",
-      description: "Tomatensämlinge in größere Töpfe umtopfen.",
-      priority: "high",
-    },
-    {
-      month: 4,
-      title: "Salat aussäen",
-      date: "04-20",
-      type: "planting",
-      description: "Salat für die Sommerernte direkt ins Beet säen.",
-      priority: "medium",
-    },
-
-    // Mai
-    {
-      month: 5,
-      title: "Tomaten auspflanzen",
-      date: "05-15",
-      type: "planting",
-      description:
-        "Nach den Eisheiligen Tomaten ins Freiland oder Gewächshaus pflanzen.",
-      priority: "high",
-    },
-    {
-      month: 5,
-      title: "Gurken aussäen",
-      date: "05-20",
-      type: "planting",
-      description: "Gurken direkt ins Beet oder Gewächshaus säen.",
-      priority: "high",
-    },
-    {
-      month: 5,
-      title: "Erdbeeren mulchen",
-      date: "05-25",
-      type: "maintenance",
-      description: "Erdbeeren mit Stroh mulchen zum Schutz der Früchte.",
-      priority: "medium",
-    },
-
-    // Juni
-    {
-      month: 6,
-      title: "Tomaten ausgeizen",
-      date: "06-01",
-      type: "maintenance",
-      description: "Geiztriebe bei Tomaten regelmäßig entfernen.",
-      priority: "high",
-    },
-    {
-      month: 6,
-      title: "Erdbeeren ernten",
-      date: "06-15",
-      type: "harvesting",
-      description: "Erste Erdbeeren ernten, täglich kontrollieren.",
-      priority: "high",
-    },
-    {
-      month: 6,
-      title: "Bohnen säen",
-      date: "06-20",
-      type: "planting",
-      description: "Busch- und Stangenbohnen direkt ins Beet säen.",
-      priority: "medium",
-    },
-
-    // Juli
-    {
-      month: 7,
-      title: "Sommerernte",
-      date: "07-01",
-      type: "harvesting",
-      description: "Erste Tomaten, Gurken, Zucchini und Salate ernten.",
-      priority: "high",
-    },
-    {
-      month: 7,
-      title: "Herbstgemüse säen",
-      date: "07-15",
-      type: "planting",
-      description: "Kohlarten, Radieschen und Spinat für die Herbsternte säen.",
-      priority: "medium",
-    },
-    {
-      month: 7,
-      title: "Beerensträucher schneiden",
-      date: "07-25",
-      type: "pruning",
-      description: "Johannisbeeren nach der Ernte auslichten.",
-      priority: "medium",
-    },
-
-    // August
-    {
-      month: 8,
-      title: "Haupterntezeit",
-      date: "08-01",
-      type: "harvesting",
-      description: "Haupternte von Tomaten, Gurken, Bohnen und Sommergemüse.",
-      priority: "high",
-    },
-    {
-      month: 8,
-      title: "Feldsalat säen",
-      date: "08-15",
-      type: "planting",
-      description: "Feldsalat für die Winterernte aussäen.",
-      priority: "medium",
-    },
-    {
-      month: 8,
-      title: "Erdbeeren pflanzen",
-      date: "08-25",
-      type: "planting",
-      description: "Neue Erdbeerpflanzen setzen für die nächste Saison.",
-      priority: "medium",
-    },
-
-    // September
-    {
-      month: 9,
-      title: "Apfelernte",
-      date: "09-01",
-      type: "harvesting",
-      description: "Äpfel und andere Herbstfrüchte ernten.",
-      priority: "high",
-    },
-    {
-      month: 9,
-      title: "Winterzwiebeln stecken",
-      date: "09-15",
-      type: "planting",
-      description:
-        "Winterzwiebeln für die frühe Ernte im nächsten Jahr stecken.",
-      priority: "medium",
-    },
-    {
-      month: 9,
-      title: "Obst einlagern",
-      date: "09-25",
-      type: "maintenance",
-      description: "Äpfel und Birnen fachgerecht einlagern.",
-      priority: "medium",
-    },
-
-    // Oktober
-    {
-      month: 10,
-      title: "Späte Ernte",
-      date: "10-01",
-      type: "harvesting",
-      description: "Kürbisse, späte Tomaten und Herbstgemüse ernten.",
-      priority: "high",
-    },
-    {
-      month: 10,
-      title: "Stachelbeeren pflanzen",
-      date: "10-15",
-      type: "planting",
-      description: "Neue Stachelbeersträucher pflanzen.",
-      priority: "medium",
-    },
-    {
-      month: 10,
-      title: "Herbst-Himbeeren schneiden",
-      date: "10-25",
-      type: "pruning",
-      description: "Herbst-Himbeeren bodennah zurückschneiden.",
-      priority: "medium",
-    },
-
-    // November
-    {
-      month: 11,
-      title: "Gemüsebeete abräumen",
-      date: "11-01",
-      type: "maintenance",
-      description: "Abgeerntete Beete räumen und für den Winter vorbereiten.",
-      priority: "high",
-    },
-    {
-      month: 11,
-      title: "Kompostpflege",
-      date: "11-15",
-      type: "maintenance",
-      description: "Kompost umsetzen und mit Gartenabfällen auffüllen.",
-      priority: "medium",
-    },
-    {
-      month: 11,
-      title: "Obstbäume kalken",
-      date: "11-25",
-      type: "maintenance",
-      description: "Obstbaumstämme weißen zum Schutz vor Frostrissen.",
-      priority: "medium",
-    },
-
-    // Dezember
-    {
-      month: 12,
-      title: "Boden umgraben",
-      date: "12-01",
-      type: "maintenance",
-      description: "Schwere Böden umgraben, das spart im Frühjahr Arbeit.",
-      priority: "medium",
-    },
-    {
-      month: 12,
-      title: "Wintergemüse ernten",
-      date: "12-15",
-      type: "harvesting",
-      description: "Grünkohl, Rosenkohl und anderen Wintergemüse ernten.",
-      priority: "medium",
-    },
-    {
-      month: 12,
-      title: "Gartenboden kalken",
-      date: "12-25",
-      type: "maintenance",
-      description: "Saure Böden kalken für besseres Wachstum im nächsten Jahr.",
-      priority: "low",
     },
   ],
 };
@@ -1459,11 +1117,350 @@ export const COMPLETE_GARDEN_TEMPLATE_DE = {
   ],
 };
 
+// Template für Obstgarten (nur Obst, Beeren, Obstbäume)
+export const FRUIT_GARDEN_TEMPLATE_DE = {
+  name: "Obstgarten Jahresplan",
+  description: "Jahreskalender für den Obstgarten mit allen wichtigen Arbeiten an Obstbäumen und Beerensträuchern",
+  category: GARDEN_TEMPLATE_CATEGORIES_DE.FRUIT_GARDEN,
+  region: "temperate_north",
+  tasks: [
+    // Januar
+    {
+      month: 1,
+      title: "Obstbäume schneiden",
+      date: "01-15",
+      type: "pruning",
+      description: "Kernobst wie Äpfel, Quitten und Birnen bei Tauwetter schneiden.",
+      priority: "high",
+    },
+    {
+      month: 1,
+      title: "Steckholz schneiden",
+      date: "01-20",
+      type: "planting",
+      description: "Steckholz von Johannis- und Stachelbeeren schneiden.",
+      priority: "medium",
+    },
+    // März
+    {
+      month: 3,
+      title: "Obstbäume düngen",
+      date: "03-20",
+      type: "fertilizing",
+      description: "Obstbäume mit Kompost oder organischem Dünger versorgen.",
+      priority: "high",
+    },
+    // April
+    {
+      month: 4,
+      title: "Obstgehölze düngen",
+      date: "04-10",
+      type: "fertilizing",
+      description: "Beerensträucher und Obstbäume düngen.",
+      priority: "medium",
+    },
+    // Mai
+    {
+      month: 5,
+      title: "Erdbeeren mulchen",
+      date: "05-25",
+      type: "maintenance",
+      description: "Erdbeeren mit Stroh mulchen zum Schutz der Früchte.",
+      priority: "medium",
+    },
+    // Juni
+    {
+      month: 6,
+      title: "Erdbeeren ernten",
+      date: "06-15",
+      type: "harvesting",
+      description: "Erste Erdbeeren ernten, täglich kontrollieren.",
+      priority: "high",
+    },
+    // Juli
+    {
+      month: 7,
+      title: "Beerensträucher schneiden",
+      date: "07-25",
+      type: "pruning",
+      description: "Johannisbeeren nach der Ernte auslichten.",
+      priority: "medium",
+    },
+    // August
+    {
+      month: 8,
+      title: "Erdbeeren pflanzen",
+      date: "08-25",
+      type: "planting",
+      description: "Neue Erdbeerpflanzen setzen für die nächste Saison.",
+      priority: "medium",
+    },
+    // September
+    {
+      month: 9,
+      title: "Apfelernte",
+      date: "09-01",
+      type: "harvesting",
+      description: "Äpfel und andere Herbstfrüchte ernten.",
+      priority: "high",
+    },
+    {
+      month: 9,
+      title: "Obst einlagern",
+      date: "09-25",
+      type: "maintenance",
+      description: "Äpfel und Birnen fachgerecht einlagern.",
+      priority: "medium",
+    },
+    // Oktober
+    {
+      month: 10,
+      title: "Stachelbeeren pflanzen",
+      date: "10-15",
+      type: "planting",
+      description: "Neue Stachelbeersträucher pflanzen.",
+      priority: "medium",
+    },
+    {
+      month: 10,
+      title: "Herbst-Himbeeren schneiden",
+      date: "10-25",
+      type: "pruning",
+      description: "Herbst-Himbeeren bodennah zurückschneiden.",
+      priority: "medium",
+    },
+    // November
+    {
+      month: 11,
+      title: "Obstbäume kalken",
+      date: "11-25",
+      type: "maintenance",
+      description: "Obstbaumstämme weißen zum Schutz vor Frostrissen.",
+      priority: "medium",
+    }
+  ]
+};
+
+// Template für Gemüsegarten (nur Gemüse, Salate, Kartoffeln)
+export const VEGETABLE_GARDEN_TEMPLATE_DE = {
+  name: "Gemüsegarten Jahresplan",
+  description: "Jahreskalender für den Gemüsegarten mit allen wichtigen Arbeiten an Gemüse, Salaten und Kartoffeln",
+  category: GARDEN_TEMPLATE_CATEGORIES_DE.VEGETABLE_GARDEN,
+  region: "temperate_north",
+  tasks: [
+    // Januar
+    {
+      month: 1,
+      title: "Wintergemüse ernten",
+      date: "01-25",
+      type: "harvesting",
+      description: "Grünkohl, Rosenkohl, Lauch und andere winterharte Gemüse ernten.",
+      priority: "medium",
+    },
+    // Februar
+    {
+      month: 2,
+      title: "Bodenproben nehmen",
+      date: "02-01",
+      type: "maintenance",
+      description: "Bodenproben im Gemüsegarten für Nährstoffanalyse nehmen.",
+      priority: "medium",
+    },
+    {
+      month: 2,
+      title: "Kartoffeln vorkeimen",
+      date: "02-15",
+      type: "planting",
+      description: "Frühkartoffeln in hellen, kühlen Räumen vorkeimen lassen.",
+      priority: "high",
+    },
+    {
+      month: 2,
+      title: "Beete vorbereiten",
+      date: "02-25",
+      type: "maintenance",
+      description: "Beete für die Aussaat vorbereiten, Kompost einarbeiten.",
+      priority: "high",
+    },
+    // März
+    {
+      month: 3,
+      title: "Salat auspflanzen",
+      date: "03-01",
+      type: "planting",
+      description: "Salat ins Frühbeet oder unter Vlies auspflanzen.",
+      priority: "high",
+    },
+    {
+      month: 3,
+      title: "Tomaten vorziehen",
+      date: "03-25",
+      type: "planting",
+      description: "Tomaten auf der Fensterbank oder im Gewächshaus vorziehen.",
+      priority: "high",
+    },
+    // April
+    {
+      month: 4,
+      title: "Kartoffeln pflanzen",
+      date: "04-01",
+      type: "planting",
+      description: "Vorgekeimte Kartoffeln ins Beet pflanzen.",
+      priority: "high",
+    },
+    {
+      month: 4,
+      title: "Tomaten pikieren",
+      date: "04-15",
+      type: "maintenance",
+      description: "Tomatensämlinge in größere Töpfe umtopfen.",
+      priority: "high",
+    },
+    {
+      month: 4,
+      title: "Salat aussäen",
+      date: "04-20",
+      type: "planting",
+      description: "Salat für die Sommerernte direkt ins Beet säen.",
+      priority: "medium",
+    },
+    // Mai
+    {
+      month: 5,
+      title: "Tomaten auspflanzen",
+      date: "05-15",
+      type: "planting",
+      description: "Nach den Eisheiligen Tomaten ins Freiland oder Gewächshaus pflanzen.",
+      priority: "high",
+    },
+    {
+      month: 5,
+      title: "Gurken aussäen",
+      date: "05-20",
+      type: "planting",
+      description: "Gurken direkt ins Beet oder Gewächshaus säen.",
+      priority: "high",
+    },
+    // Juni
+    {
+      month: 6,
+      title: "Tomaten ausgeizen",
+      date: "06-01",
+      type: "maintenance",
+      description: "Geiztriebe bei Tomaten regelmäßig entfernen.",
+      priority: "high",
+    },
+    {
+      month: 6,
+      title: "Bohnen säen",
+      date: "06-20",
+      type: "planting",
+      description: "Busch- und Stangenbohnen direkt ins Beet säen.",
+      priority: "medium",
+    },
+    // Juli
+    {
+      month: 7,
+      title: "Sommerernte",
+      date: "07-01",
+      type: "harvesting",
+      description: "Erste Tomaten, Gurken, Zucchini und Salate ernten.",
+      priority: "high",
+    },
+    {
+      month: 7,
+      title: "Herbstgemüse säen",
+      date: "07-15",
+      type: "planting",
+      description: "Kohlarten, Radieschen und Spinat für die Herbsternte säen.",
+      priority: "medium",
+    },
+    // August
+    {
+      month: 8,
+      title: "Haupterntezeit",
+      date: "08-01",
+      type: "harvesting",
+      description: "Haupternte von Tomaten, Gurken, Bohnen und Sommergemüse.",
+      priority: "high",
+    },
+    {
+      month: 8,
+      title: "Feldsalat säen",
+      date: "08-15",
+      type: "planting",
+      description: "Feldsalat für die Winterernte aussäen.",
+      priority: "medium",
+    },
+    // September
+    {
+      month: 9,
+      title: "Winterzwiebeln stecken",
+      date: "09-15",
+      type: "planting",
+      description: "Winterzwiebeln für die frühe Ernte im nächsten Jahr stecken.",
+      priority: "medium",
+    },
+    // Oktober
+    {
+      month: 10,
+      title: "Späte Ernte",
+      date: "10-01",
+      type: "harvesting",
+      description: "Kürbisse, späte Tomaten und Herbstgemüse ernten.",
+      priority: "high",
+    },
+    // November
+    {
+      month: 11,
+      title: "Gemüsebeete abräumen",
+      date: "11-01",
+      type: "maintenance",
+      description: "Abgeerntete Beete räumen und für den Winter vorbereiten.",
+      priority: "high",
+    },
+    {
+      month: 11,
+      title: "Kompostpflege",
+      date: "11-15",
+      type: "maintenance",
+      description: "Kompost umsetzen und mit Gartenabfällen auffüllen.",
+      priority: "medium",
+    },
+    // Dezember
+    {
+      month: 12,
+      title: "Boden umgraben",
+      date: "12-01",
+      type: "maintenance",
+      description: "Schwere Böden umgraben, das spart im Frühjahr Arbeit.",
+      priority: "medium",
+    },
+    {
+      month: 12,
+      title: "Wintergemüse ernten",
+      date: "12-15",
+      type: "harvesting",
+      description: "Grünkohl, Rosenkohl und anderen Wintergemüse ernten.",
+      priority: "medium",
+    },
+    {
+      month: 12,
+      title: "Gartenboden kalken",
+      date: "12-25",
+      type: "maintenance",
+      description: "Saure Böden kalken für besseres Wachstum im nächsten Jahr.",
+      priority: "low",
+    }
+  ]
+};
+
 // Function to export all German templates
 export function getAvailableTemplatesDe() {
   return [
     ORNAMENTAL_GARDEN_TEMPLATE_DE,
-    VEGETABLE_FRUIT_GARDEN_TEMPLATE_DE,
+    FRUIT_GARDEN_TEMPLATE_DE,
+    VEGETABLE_GARDEN_TEMPLATE_DE,
     HERB_GARDEN_TEMPLATE_DE,
     BALCONY_TERRACE_TEMPLATE_DE,
     COMPLETE_GARDEN_TEMPLATE_DE,

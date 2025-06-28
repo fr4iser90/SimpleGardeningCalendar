@@ -2,11 +2,12 @@
 // Adattati alle pratiche di giardinaggio italiane e al clima
 
 export const GARDEN_TEMPLATE_CATEGORIES_IT = {
-  ORNAMENTAL: "Giardino ornamentale",
-  VEGETABLE_FRUIT: "Orto e frutteto",
-  HERB_GARDEN: "Giardino delle erbe aromatiche",
-  BALCONY_TERRACE: "Balcone e terrazza",
-  COMPLETE_GARDEN: "Giardino completo",
+  ORNAMENTAL: 'ORNAMENTAL',
+  HERB_GARDEN: 'HERB_GARDEN',
+  FRUIT_GARDEN: 'FRUIT_GARDEN',
+  VEGETABLE_GARDEN: 'VEGETABLE_GARDEN',
+  BALCONY_TERRACE: 'BALCONY_TERRACE',
+  COMPLETE_GARDEN: 'COMPLETE_GARDEN',
 };
 
 // Template for Ornamental Garden (Giardino ornamentale)
@@ -229,231 +230,6 @@ export const ORNAMENTAL_GARDEN_TEMPLATE_IT = {
       date: "12-15",
       type: "planting",
       description: "Piantare bulbi in vaso per forzatura invernale.",
-      priority: "low",
-    },
-  ],
-};
-
-// Template for Vegetable and Fruit Garden (Orto e frutteto)
-export const VEGETABLE_FRUIT_GARDEN_TEMPLATE_IT = {
-  name: "Piano annuale dell'orto e frutteto",
-  description: "Calendario completo per l'orto e il frutteto",
-  category: GARDEN_TEMPLATE_CATEGORIES_IT.VEGETABLE_FRUIT,
-  region: "mediterranean",
-  tasks: [
-    // Gennaio
-    {
-      month: 1,
-      title: "Potatura fruttiferi",
-      date: "01-15",
-      type: "pruning",
-      description: "Potare alberi da frutto a granella in tempo asciutto.",
-      priority: "high",
-    },
-    {
-      month: 1,
-      title: "Pianificare colture",
-      date: "01-25",
-      type: "maintenance",
-      description: "Pianificare la rotazione delle colture e ordinare semi.",
-      priority: "high",
-    },
-
-    // Febbraio
-    {
-      month: 2,
-      title: "Preparare semenzai",
-      date: "02-01",
-      type: "maintenance",
-      description: "Preparare materiale per semina e semenzai.",
-      priority: "medium",
-    },
-    {
-      month: 2,
-      title: "Semina sotto protezione",
-      date: "02-15",
-      type: "planting",
-      description: "Prime semine sotto protezione: ravanelli, lattughe.",
-      priority: "high",
-    },
-
-    // Marzo
-    {
-      month: 3,
-      title: "Semina all'aperto",
-      date: "03-01",
-      type: "planting",
-      description: "Seminare carote, pastinache, piselli.",
-      priority: "high",
-    },
-    {
-      month: 3,
-      title: "Piantare aglio e scalogno",
-      date: "03-15",
-      type: "planting",
-      description: "Piantare aglio rosa e scalogni.",
-      priority: "medium",
-    },
-
-    // Aprile
-    {
-      month: 4,
-      title: "Piantare patate",
-      date: "04-01",
-      type: "planting",
-      description: "Piantare patate precoci.",
-      priority: "high",
-    },
-    {
-      month: 4,
-      title: "Seminare aromatiche",
-      date: "04-15",
-      type: "planting",
-      description: "Seminare prezzemolo, erba cipollina, cerfoglio.",
-      priority: "medium",
-    },
-
-    // Maggio
-    {
-      month: 5,
-      title: "Trapiantare piantine",
-      date: "05-01",
-      type: "planting",
-      description: "Trapiantare pomodori, zucchine, melanzane.",
-      priority: "high",
-    },
-    {
-      month: 5,
-      title: "Seminare ortaggi estivi",
-      date: "05-15",
-      type: "planting",
-      description: "Seminare fagiolini, cetrioli, zucche.",
-      priority: "high",
-    },
-
-    // Giugno
-    {
-      month: 6,
-      title: "Tutorare pomodori",
-      date: "06-01",
-      type: "maintenance",
-      description: "Installare tutori e legare piante di pomodoro.",
-      priority: "high",
-    },
-    {
-      month: 6,
-      title: "Primo raccolto",
-      date: "06-15",
-      type: "harvesting",
-      description: "Primo raccolto di ravanelli, lattughe, piselli.",
-      priority: "medium",
-    },
-
-    // Luglio
-    {
-      month: 7,
-      title: "Raccolto estivo",
-      date: "07-01",
-      type: "harvesting",
-      description: "Raccogliere zucchine, pomodori, fagiolini.",
-      priority: "high",
-    },
-    {
-      month: 7,
-      title: "Irrigazione abbondante",
-      date: "07-15",
-      type: "watering",
-      description: "Irrigare abbondantemente l'orto, preferibilmente la sera.",
-      priority: "high",
-    },
-
-    // Agosto
-    {
-      month: 8,
-      title: "Grande raccolto",
-      date: "08-01",
-      type: "harvesting",
-      description: "Periodo di grande raccolto: pomodori, melanzane, peperoni.",
-      priority: "high",
-    },
-    {
-      month: 8,
-      title: "Seminare ortaggi autunnali",
-      date: "08-15",
-      type: "planting",
-      description: "Seminare cavoli, rape, ravanelli invernali.",
-      priority: "medium",
-    },
-
-    // Settembre
-    {
-      month: 9,
-      title: "Raccogliere frutti",
-      date: "09-01",
-      type: "harvesting",
-      description: "Raccolta di mele, pere, prugne.",
-      priority: "high",
-    },
-    {
-      month: 9,
-      title: "Piantare fragole",
-      date: "09-15",
-      type: "planting",
-      description: "Piantare nuove fragole.",
-      priority: "medium",
-    },
-
-    // Ottobre
-    {
-      month: 10,
-      title: "Raccogliere ortaggi da radice",
-      date: "10-01",
-      type: "harvesting",
-      description: "Raccogliere carote, barbabietole, rape.",
-      priority: "high",
-    },
-    {
-      month: 10,
-      title: "Piantare aglio invernale",
-      date: "10-15",
-      type: "planting",
-      description: "Piantare aglio viola per raccolta estiva.",
-      priority: "medium",
-    },
-
-    // Novembre
-    {
-      month: 11,
-      title: "Pulire l'orto",
-      date: "11-01",
-      type: "maintenance",
-      description: "Pulire parcelle libere e metterle a riposo.",
-      priority: "high",
-    },
-    {
-      month: 11,
-      title: "Raccogliere ortaggi invernali",
-      date: "11-15",
-      type: "harvesting",
-      description: "Raccogliere porri, cavoli, spinaci.",
-      priority: "medium",
-    },
-
-    // Dicembre
-    {
-      month: 12,
-      title: "Raccogliere agrumi",
-      date: "12-01",
-      type: "harvesting",
-      description: "Iniziare la raccolta di arance e mandarini.",
-      priority: "high",
-    },
-    {
-      month: 12,
-      title: "Pianificare prossimo anno",
-      date: "12-25",
-      type: "maintenance",
-      description: "Stabilire il piano colturale per l'anno successivo.",
       priority: "low",
     },
   ],
@@ -846,11 +622,149 @@ export const COMPLETE_GARDEN_TEMPLATE_IT = {
   ],
 };
 
+// Modello per Frutteto (solo attività di frutta)
+export const FRUIT_GARDEN_TEMPLATE_IT = {
+  name: "Piano annuale del frutteto",
+  description: "Calendario annuale per alberi da frutto, bacche e cura del frutteto",
+  category: GARDEN_TEMPLATE_CATEGORIES_IT.FRUIT_GARDEN || 'Frutteto',
+  region: "mediterranean",
+  tasks: [
+    // Gennaio
+    {
+      month: 1,
+      title: "Potatura fruttiferi",
+      date: "01-15",
+      type: "pruning",
+      description: "Potare alberi da frutto a granella in tempo asciutto.",
+      priority: "high",
+    },
+    // Settembre
+    {
+      month: 9,
+      title: "Raccogliere frutti",
+      date: "09-01",
+      type: "harvesting",
+      description: "Raccolta di mele, pere, prugne.",
+      priority: "high",
+    },
+    // Settembre
+    {
+      month: 9,
+      title: "Piantare fragole",
+      date: "09-15",
+      type: "planting",
+      description: "Piantare nuove fragole.",
+      priority: "medium",
+    },
+    // Dicembre
+    {
+      month: 12,
+      title: "Raccogliere agrumi",
+      date: "12-01",
+      type: "harvesting",
+      description: "Iniziare la raccolta di arance e mandarini.",
+      priority: "high",
+    }
+  ]
+};
+
+// Modello per Orto (solo attività di ortaggi)
+export const VEGETABLE_GARDEN_TEMPLATE_IT = {
+  name: "Piano annuale dell'orto",
+  description: "Calendario annuale per ortaggi, insalate e patate",
+  category: GARDEN_TEMPLATE_CATEGORIES_IT.VEGETABLE_GARDEN || 'Orto',
+  region: "mediterranean",
+  tasks: [
+    // Febbraio
+    {
+      month: 2,
+      title: "Semina sotto protezione",
+      date: "02-15",
+      type: "planting",
+      description: "Prime semine sotto protezione: ravanelli, lattughe.",
+      priority: "high",
+    },
+    // Marzo
+    {
+      month: 3,
+      title: "Semina all'aperto",
+      date: "03-01",
+      type: "planting",
+      description: "Seminare carote, pastinache, piselli.",
+      priority: "high",
+    },
+    // Aprile
+    {
+      month: 4,
+      title: "Piantare patate",
+      date: "04-01",
+      type: "planting",
+      description: "Piantare patate precoci.",
+      priority: "high",
+    },
+    // Maggio
+    {
+      month: 5,
+      title: "Trapiantare piantine",
+      date: "05-01",
+      type: "planting",
+      description: "Trapiantare pomodori, zucchine, melanzane.",
+      priority: "high",
+    },
+    // Giugno
+    {
+      month: 6,
+      title: "Primo raccolto",
+      date: "06-15",
+      type: "harvesting",
+      description: "Primo raccolto di ravanelli, lattughe, piselli.",
+      priority: "medium",
+    },
+    // Luglio
+    {
+      month: 7,
+      title: "Raccolto estivo",
+      date: "07-01",
+      type: "harvesting",
+      description: "Raccogliere zucchine, pomodori, fagiolini.",
+      priority: "high",
+    },
+    // Agosto
+    {
+      month: 8,
+      title: "Grande raccolto",
+      date: "08-01",
+      type: "harvesting",
+      description: "Periodo di grande raccolto: pomodori, melanzane, peperoni.",
+      priority: "high",
+    },
+    // Ottobre
+    {
+      month: 10,
+      title: "Raccogliere ortaggi da radice",
+      date: "10-01",
+      type: "harvesting",
+      description: "Raccogliere carote, barbabietole, rape.",
+      priority: "high",
+    },
+    // Novembre
+    {
+      month: 11,
+      title: "Raccogliere ortaggi invernali",
+      date: "11-15",
+      type: "harvesting",
+      description: "Raccogliere porri, cavoli, spinaci.",
+      priority: "medium",
+    }
+  ]
+};
+
 // Function to export all Italian templates
 export function getAvailableTemplatesIt() {
   return [
     ORNAMENTAL_GARDEN_TEMPLATE_IT,
-    VEGETABLE_FRUIT_GARDEN_TEMPLATE_IT,
+    FRUIT_GARDEN_TEMPLATE_IT,
+    VEGETABLE_GARDEN_TEMPLATE_IT,
     HERB_GARDEN_TEMPLATE_IT,
     BALCONY_TERRACE_TEMPLATE_IT,
     COMPLETE_GARDEN_TEMPLATE_IT,

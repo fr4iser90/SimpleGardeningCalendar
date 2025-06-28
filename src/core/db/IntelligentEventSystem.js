@@ -379,7 +379,7 @@ async function createWateringEventsData(plantData, phase, plantingId, completion
   while (wateringDate < phaseEnd) {
     const wateringDescription = mediumData?.watering?.description || phase?.watering?.description || plantData.careTips?.watering || 'Check soil moisture and water as needed';
     events.push({
-      title: `💧 Water ${plantData.name}`,
+      title: `💧 ${t('task.watering')} ${plantData.name}`,
       date: wateringDate.toISOString().split('T')[0],
       type: 'watering',
       description: `${wateringDescription}\n\nPhase: ${phaseName}\nCare: ${phase?.care || 'Follow general watering guidelines'}`,
@@ -430,7 +430,7 @@ async function createFertilizingEventsData(plantData, phase, plantingId, fertili
     while (fertilizeDate < phaseEnd) {
       const fertilizingDescription = mediumData?.fertilizing?.description || phase?.fertilizing?.description || plantData.careTips?.fertilizing || 'Apply appropriate fertilizer';
       events.push({
-        title: `🌿 Fertilize ${plantData.name}`,
+        title: `🌿 ${t('task.fertilizing')} ${plantData.name}`,
         date: fertilizeDate.toISOString().split('T')[0],
         type: 'fertilizing',
         description: `${fertilizingDescription}\n\nPhase: ${phaseName}`,

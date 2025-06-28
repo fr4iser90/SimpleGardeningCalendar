@@ -2,11 +2,12 @@
 // Adaptés aux pratiques de jardinage françaises et au climat
 
 export const GARDEN_TEMPLATE_CATEGORIES_FR = {
-  ORNAMENTAL: "Jardin d'ornement",
-  VEGETABLE_FRUIT: "Potager et verger",
-  HERB_GARDEN: "Jardin d'herbes aromatiques",
-  BALCONY_TERRACE: "Balcon et terrasse",
-  COMPLETE_GARDEN: "Jardin complet",
+  ORNAMENTAL: 'ORNAMENTAL',
+  HERB_GARDEN: 'HERB_GARDEN',
+  BALCONY_TERRACE: 'BALCONY_TERRACE',
+  COMPLETE_GARDEN: 'COMPLETE_GARDEN',
+  FRUIT_GARDEN: 'FRUIT_GARDEN',
+  VEGETABLE_GARDEN: 'VEGETABLE_GARDEN'
 };
 
 // Template for Ornamental Garden (Jardin d'ornement)
@@ -330,11 +331,11 @@ export const ORNAMENTAL_GARDEN_TEMPLATE_FR = {
   ],
 };
 
-// Template for Vegetable and Fruit Garden (Potager et verger)
-export const VEGETABLE_FRUIT_GARDEN_TEMPLATE_FR = {
-  name: "Plan annuel du potager et verger",
-  description: "Calendrier complet pour le potager et le verger",
-  category: GARDEN_TEMPLATE_CATEGORIES_FR.VEGETABLE_FRUIT,
+// Template for Fruit Garden (Verger)
+export const FRUIT_GARDEN_TEMPLATE_FR = {
+  name: "Plan annuel du verger",
+  description: "Calendrier annuel pour arbres fruitiers, baies et entretien du verger",
+  category: GARDEN_TEMPLATE_CATEGORIES_FR.FRUIT_GARDEN || 'Verger',
   region: "temperate_north",
   tasks: [
     // Janvier
@@ -346,32 +347,26 @@ export const VEGETABLE_FRUIT_GARDEN_TEMPLATE_FR = {
       description: "Tailler les arbres fruitiers à pépins par temps sec.",
       priority: "high",
     },
+    // Septembre
     {
-      month: 1,
-      title: "Forcer les endives",
-      date: "01-20",
-      type: "planting",
-      description: "Forcer les racines d'endives en cave pour récolte hivernale.",
-      priority: "medium",
-    },
-    {
-      month: 1,
-      title: "Planifier les cultures",
-      date: "01-25",
-      type: "maintenance",
-      description: "Planifier l'assolement et commander les graines.",
+      month: 9,
+      title: "Récolte des fruits",
+      date: "09-15",
+      type: "harvesting",
+      description: "Récolter pommes, poires, prunes.",
       priority: "high",
-    },
+    }
+  ]
+};
 
+// Template for Vegetable Garden (Potager)
+export const VEGETABLE_GARDEN_TEMPLATE_FR = {
+  name: "Plan annuel du potager",
+  description: "Calendrier annuel pour légumes, salades et pommes de terre",
+  category: GARDEN_TEMPLATE_CATEGORIES_FR.VEGETABLE_GARDEN || 'Potager',
+  region: "temperate_north",
+  tasks: [
     // Février
-    {
-      month: 2,
-      title: "Préparer les semis",
-      date: "02-01",
-      type: "maintenance",
-      description: "Préparer le matériel de semis et les godets.",
-      priority: "medium",
-    },
     {
       month: 2,
       title: "Semer sous abri",
@@ -380,15 +375,6 @@ export const VEGETABLE_FRUIT_GARDEN_TEMPLATE_FR = {
       description: "Premiers semis sous abri : radis, laitue, épinards.",
       priority: "high",
     },
-    {
-      month: 2,
-      title: "Tailler les framboisiers",
-      date: "02-25",
-      type: "pruning",
-      description: "Tailler les framboisiers remontants et non-remontants.",
-      priority: "medium",
-    },
-
     // Mars
     {
       month: 3,
@@ -398,32 +384,7 @@ export const VEGETABLE_FRUIT_GARDEN_TEMPLATE_FR = {
       description: "Semer carottes, panais, petits pois sous tunnel.",
       priority: "high",
     },
-    {
-      month: 3,
-      title: "Planter l'ail et l'échalote",
-      date: "03-15",
-      type: "planting",
-      description: "Planter l'ail rose et les échalotes.",
-      priority: "medium",
-    },
-    {
-      month: 3,
-      title: "Préparer le sol",
-      date: "03-25",
-      type: "maintenance",
-      description: "Bêcher et enrichir le sol du potager.",
-      priority: "high",
-    },
-
     // Avril
-    {
-      month: 4,
-      title: "Semer en pleine terre",
-      date: "04-01",
-      type: "planting",
-      description: "Semer radis, épinards, laitue directement au potager.",
-      priority: "high",
-    },
     {
       month: 4,
       title: "Planter les pommes de terre",
@@ -432,15 +393,6 @@ export const VEGETABLE_FRUIT_GARDEN_TEMPLATE_FR = {
       description: "Planter les pommes de terre primeurs.",
       priority: "high",
     },
-    {
-      month: 4,
-      title: "Semer les aromatiques",
-      date: "04-25",
-      type: "planting",
-      description: "Semer persil, ciboulette, cerfeuil.",
-      priority: "medium",
-    },
-
     // Mai
     {
       month: 5,
@@ -450,49 +402,15 @@ export const VEGETABLE_FRUIT_GARDEN_TEMPLATE_FR = {
       description: "Repiquer les plants de tomates, courgettes, aubergines.",
       priority: "high",
     },
-    {
-      month: 5,
-      title: "Semer les légumes d'été",
-      date: "05-15",
-      type: "planting",
-      description: "Après les Saints de Glace, semer haricots, concombres.",
-      priority: "high",
-    },
-    {
-      month: 5,
-      title: "Pailler le potager",
-      date: "05-25",
-      type: "maintenance",
-      description: "Pailler autour des plants pour conserver l'humidité.",
-      priority: "medium",
-    },
-
     // Juin
     {
       month: 6,
-      title: "Tuteurer les tomates",
-      date: "06-01",
-      type: "maintenance",
-      description: "Installer les tuteurs et attacher les plants de tomates.",
-      priority: "high",
-    },
-    {
-      month: 6,
-      title: "Récolter les premiers légumes",
+      title: "Première récolte",
       date: "06-15",
       type: "harvesting",
       description: "Première récolte de radis, laitue, petits pois.",
       priority: "medium",
     },
-    {
-      month: 6,
-      title: "Éclaircir les semis",
-      date: "06-20",
-      type: "maintenance",
-      description: "Éclaircir les semis de carottes, betteraves, navets.",
-      priority: "medium",
-    },
-
     // Juillet
     {
       month: 7,
@@ -502,23 +420,6 @@ export const VEGETABLE_FRUIT_GARDEN_TEMPLATE_FR = {
       description: "Récolter courgettes, tomates, haricots verts.",
       priority: "high",
     },
-    {
-      month: 7,
-      title: "Arroser régulièrement",
-      date: "07-15",
-      type: "watering",
-      description: "Arroser copieusement le potager, de préférence le soir.",
-      priority: "high",
-    },
-    {
-      month: 7,
-      title: "Semer les légumes d'automne",
-      date: "07-25",
-      type: "planting",
-      description: "Semer choux, navets, radis d'hiver.",
-      priority: "medium",
-    },
-
     // Août
     {
       month: 8,
@@ -528,127 +429,25 @@ export const VEGETABLE_FRUIT_GARDEN_TEMPLATE_FR = {
       description: "Période de grande récolte : tomates, aubergines, poivrons.",
       priority: "high",
     },
-    {
-      month: 8,
-      title: "Semer la mâche",
-      date: "08-15",
-      type: "planting",
-      description: "Semer la mâche pour récolte automnale et hivernale.",
-      priority: "medium",
-    },
-    {
-      month: 8,
-      title: "Récolter et conserver",
-      date: "08-25",
-      type: "harvesting",
-      description: "Récolter et mettre en conserve les excédents.",
-      priority: "medium",
-    },
-
-    // Septembre
-    {
-      month: 9,
-      title: "Récolter les fruits",
-      date: "09-01",
-      type: "harvesting",
-      description: "Récolte des pommes, poires, prunes.",
-      priority: "high",
-    },
-    {
-      month: 9,
-      title: "Semer les épinards",
-      date: "09-15",
-      type: "planting",
-      description: "Semer les épinards d'hiver.",
-      priority: "medium",
-    },
-    {
-      month: 9,
-      title: "Planter les fraisiers",
-      date: "09-25",
-      type: "planting",
-      description: "Planter les nouveaux fraisiers.",
-      priority: "medium",
-    },
-
     // Octobre
     {
       month: 10,
-      title: "Récolter les légumes racines",
+      title: "Récolte des légumes racines",
       date: "10-01",
       type: "harvesting",
-      description: "Récolter carottes, betteraves, navets avant les gelées.",
+      description: "Récolter carottes, betteraves, navets.",
       priority: "high",
     },
-    {
-      month: 10,
-      title: "Planter l'ail d'hiver",
-      date: "10-15",
-      type: "planting",
-      description: "Planter l'ail violet pour récolte estivale.",
-      priority: "medium",
-    },
-    {
-      month: 10,
-      title: "Protéger les cultures",
-      date: "10-25",
-      type: "maintenance",
-      description: "Installer les protections hivernales sur les cultures sensibles.",
-      priority: "medium",
-    },
-
     // Novembre
     {
       month: 11,
-      title: "Nettoyer le potager",
-      date: "11-01",
-      type: "maintenance",
-      description: "Nettoyer les parcelles libres et les mettre au repos.",
-      priority: "high",
-    },
-    {
-      month: 11,
-      title: "Récolter les légumes d'hiver",
+      title: "Récolte des légumes d'hiver",
       date: "11-15",
       type: "harvesting",
       description: "Récolter poireaux, choux, épinards.",
       priority: "medium",
-    },
-    {
-      month: 11,
-      title: "Pailler les cultures",
-      date: "11-25",
-      type: "maintenance",
-      description: "Pailler les cultures d'hiver pour les protéger du froid.",
-      priority: "medium",
-    },
-
-    // Décembre
-    {
-      month: 12,
-      title: "Forcer la rhubarbe",
-      date: "12-01",
-      type: "maintenance",
-      description: "Couvrir la rhubarbe pour forcer les jeunes pousses.",
-      priority: "low",
-    },
-    {
-      month: 12,
-      title: "Récolter les légumes d'hiver",
-      date: "12-15",
-      type: "harvesting",
-      description: "Continuer la récolte des légumes d'hiver selon les besoins.",
-      priority: "medium",
-    },
-    {
-      month: 12,
-      title: "Planifier l'année suivante",
-      date: "12-25",
-      type: "maintenance",
-      description: "Établir le plan de culture pour l'année suivante.",
-      priority: "low",
-    },
-  ],
+    }
+  ]
 };
 
 // Template for Herb Garden (Jardin d'herbes aromatiques)
@@ -1204,7 +1003,8 @@ export const COMPLETE_GARDEN_TEMPLATE_FR = {
 export function getAvailableTemplatesFr() {
   return [
     ORNAMENTAL_GARDEN_TEMPLATE_FR,
-    VEGETABLE_FRUIT_GARDEN_TEMPLATE_FR,
+    FRUIT_GARDEN_TEMPLATE_FR,
+    VEGETABLE_GARDEN_TEMPLATE_FR,
     HERB_GARDEN_TEMPLATE_FR,
     BALCONY_TERRACE_TEMPLATE_FR,
     COMPLETE_GARDEN_TEMPLATE_FR,

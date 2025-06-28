@@ -2,11 +2,12 @@
 // Different timing and plants suitable for English-speaking regions
 
 export const GARDEN_TEMPLATE_CATEGORIES_EN = {
-  ORNAMENTAL: 'Ornamental Garden',
-  VEGETABLE_FRUIT: 'Vegetable & Fruit Garden',
-  HERB_GARDEN: 'Herb Garden',
-  BALCONY_TERRACE: 'Balcony & Terrace',
-  COMPLETE_GARDEN: 'Complete Garden'
+  ORNAMENTAL: 'ORNAMENTAL',
+  VEGETABLE_GARDEN: 'VEGETABLE_GARDEN',
+  HERB_GARDEN: 'HERB_GARDEN',
+  BALCONY_TERRACE: 'BALCONY_TERRACE',
+  COMPLETE_GARDEN: 'COMPLETE_GARDEN',
+  FRUIT_GARDEN: 'FRUIT_GARDEN'
 };
 
 // Template for Ornamental Garden
@@ -258,11 +259,66 @@ export const ORNAMENTAL_GARDEN_TEMPLATE_EN = {
   ]
 };
 
-// Template for Vegetable & Fruit Garden
-export const VEGETABLE_FRUIT_GARDEN_TEMPLATE_EN = {
-  name: 'Vegetable & Fruit Garden Year Plan',
-  description: 'Complete yearly calendar for kitchen garden with seasonal growing guide',
-  category: GARDEN_TEMPLATE_CATEGORIES_EN.VEGETABLE_FRUIT,
+// Template for Fruit Garden (only fruit tasks)
+export const FRUIT_GARDEN_TEMPLATE_EN = {
+  name: 'Fruit Garden Year Plan',
+  description: 'Yearly calendar for fruit trees, berries, and orchard care',
+  category: GARDEN_TEMPLATE_CATEGORIES_EN.FRUIT_GARDEN || 'Fruit Garden',
+  region: 'temperate_north',
+  tasks: [
+    // January
+    {
+      month: 1,
+      title: 'Prune fruit trees',
+      date: '01-20',
+      type: 'pruning',
+      description: 'Prune apple and pear trees on frost-free days.',
+      priority: 'high'
+    },
+    // June
+    {
+      month: 6,
+      title: 'Net soft fruit',
+      date: '06-20',
+      type: 'maintenance',
+      description: 'Protect strawberries and other soft fruit from birds.',
+      priority: 'medium'
+    },
+    // July
+    {
+      month: 7,
+      title: 'Summer pruning fruit',
+      date: '07-15',
+      type: 'pruning',
+      description: 'Summer prune trained fruit trees and soft fruit.',
+      priority: 'medium'
+    },
+    // August
+    {
+      month: 8,
+      title: 'Plant strawberry runners',
+      date: '08-25',
+      type: 'planting',
+      description: 'Plant new strawberry plants from runners.',
+      priority: 'medium'
+    },
+    // September
+    {
+      month: 9,
+      title: 'Harvest apples',
+      date: '09-15',
+      type: 'harvesting',
+      description: 'Harvest apples and other orchard fruit.',
+      priority: 'high'
+    }
+  ]
+};
+
+// Template for Vegetable Garden (only vegetable tasks)
+export const VEGETABLE_GARDEN_TEMPLATE_EN = {
+  name: 'Vegetable Garden Year Plan',
+  description: 'Yearly calendar for vegetables, salads, and potatoes',
+  category: GARDEN_TEMPLATE_CATEGORIES_EN.VEGETABLE_GARDEN || 'Vegetable Garden',
   region: 'temperate_north',
   tasks: [
     // January
@@ -274,15 +330,6 @@ export const VEGETABLE_FRUIT_GARDEN_TEMPLATE_EN = {
       description: 'Plan this year\'s crop rotation and order seeds.',
       priority: 'high'
     },
-    {
-      month: 1,
-      title: 'Prune fruit trees',
-      date: '01-20',
-      type: 'pruning',
-      description: 'Prune apple and pear trees on frost-free days.',
-      priority: 'high'
-    },
-
     // February
     {
       month: 2,
@@ -300,7 +347,6 @@ export const VEGETABLE_FRUIT_GARDEN_TEMPLATE_EN = {
       description: 'Prepare vegetable beds when soil conditions allow.',
       priority: 'medium'
     },
-
     // March
     {
       month: 3,
@@ -326,7 +372,6 @@ export const VEGETABLE_FRUIT_GARDEN_TEMPLATE_EN = {
       description: 'Sow tomato seeds indoors on windowsill or heated propagator.',
       priority: 'high'
     },
-
     // April
     {
       month: 4,
@@ -352,7 +397,6 @@ export const VEGETABLE_FRUIT_GARDEN_TEMPLATE_EN = {
       description: 'Plant one-year-old asparagus crowns in prepared beds.',
       priority: 'low'
     },
-
     // May
     {
       month: 5,
@@ -378,7 +422,6 @@ export const VEGETABLE_FRUIT_GARDEN_TEMPLATE_EN = {
       description: 'Earth up potato shoots to protect from frost.',
       priority: 'high'
     },
-
     // June
     {
       month: 6,
@@ -388,24 +431,7 @@ export const VEGETABLE_FRUIT_GARDEN_TEMPLATE_EN = {
       description: 'Harvest early potatoes, broad beans, and salads.',
       priority: 'high'
     },
-    {
-      month: 6,
-      title: 'Net soft fruit',
-      date: '06-20',
-      type: 'maintenance',
-      description: 'Protect strawberries and other soft fruit from birds.',
-      priority: 'medium'
-    },
-
     // July
-    {
-      month: 7,
-      title: 'Summer pruning fruit',
-      date: '07-15',
-      type: 'pruning',
-      description: 'Summer prune trained fruit trees and soft fruit.',
-      priority: 'medium'
-    },
     {
       month: 7,
       title: 'Harvest summer crops',
@@ -414,7 +440,6 @@ export const VEGETABLE_FRUIT_GARDEN_TEMPLATE_EN = {
       description: 'Regular harvesting of beans, courgettes, and tomatoes.',
       priority: 'high'
     },
-
     // August
     {
       month: 8,
@@ -424,22 +449,13 @@ export const VEGETABLE_FRUIT_GARDEN_TEMPLATE_EN = {
       description: 'Sow winter lettuce, corn salad, and oriental leaves.',
       priority: 'medium'
     },
-    {
-      month: 8,
-      title: 'Plant strawberry runners',
-      date: '08-25',
-      type: 'planting',
-      description: 'Plant new strawberry plants from runners.',
-      priority: 'medium'
-    },
-
     // September
     {
       month: 9,
       title: 'Harvest main crops',
       date: '09-15',
       type: 'harvesting',
-      description: 'Harvest maincrop potatoes, onions, and apples.',
+      description: 'Harvest maincrop potatoes, onions.',
       priority: 'high'
     },
     {
@@ -450,7 +466,6 @@ export const VEGETABLE_FRUIT_GARDEN_TEMPLATE_EN = {
       description: 'Sow green manures on empty beds for winter cover.',
       priority: 'medium'
     },
-
     // October
     {
       month: 10,
@@ -468,7 +483,6 @@ export const VEGETABLE_FRUIT_GARDEN_TEMPLATE_EN = {
       description: 'Plant garlic cloves for next year\'s harvest.',
       priority: 'medium'
     },
-
     // November
     {
       month: 11,
@@ -478,15 +492,6 @@ export const VEGETABLE_FRUIT_GARDEN_TEMPLATE_EN = {
       description: 'Lift and store carrots, parsnips, and beetroot.',
       priority: 'high'
     },
-    {
-      month: 11,
-      title: 'Protect tender crops',
-      date: '11-25',
-      type: 'maintenance',
-      description: 'Protect winter crops with fleece or cloches.',
-      priority: 'medium'
-    },
-
     // December
     {
       month: 12,
@@ -827,7 +832,8 @@ export const COMPLETE_GARDEN_TEMPLATE_EN = {
 export function getAvailableTemplatesEn() {
   return [
     ORNAMENTAL_GARDEN_TEMPLATE_EN,
-    VEGETABLE_FRUIT_GARDEN_TEMPLATE_EN,
+    FRUIT_GARDEN_TEMPLATE_EN,
+    VEGETABLE_GARDEN_TEMPLATE_EN,
     HERB_GARDEN_TEMPLATE_EN,
     BALCONY_TERRACE_TEMPLATE_EN,
     COMPLETE_GARDEN_TEMPLATE_EN
