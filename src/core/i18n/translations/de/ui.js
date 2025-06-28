@@ -114,6 +114,10 @@ export const de = {
     'plant.info.outdoor.title': 'Außenbereich - Natürliche Jahreszeiten',
     'plant.info.outdoor.description': 'Phasen werden durch natürliche Jahreszeiten bestimmt und können nicht angepasst werden.',
     'plant.info.outdoor.fixed': 'fest',
+    'plant.info.outdoor.seasonal.title': 'Außenbereich - Natürliche Jahreszeiten',
+    'plant.info.seasonal': 'jahreszeitlich',
+    'plant.info.seasonal_based': 'Jahreszeiten-basiert',
+    'plant.info.variable': 'variabel',
     'plant.info.recommended_planting_time': 'Empfohlene Pflanzzeit:',
     'plant.info.check_planting_times': 'Bitte prüfen Sie die Pflanzzeiten für Ihre Region',
     
@@ -693,6 +697,7 @@ export const de = {
     // Event Details
     'event.details.plant': 'Pflanze:',
     'event.details.category': 'Kategorie:',
+    'event.details.environment': 'Umgebung:',
     'event.details.location': 'Standort:',
     'event.details.current_phase': 'Aktuelle Phase:',
     'event.details.started': 'Gestartet:',

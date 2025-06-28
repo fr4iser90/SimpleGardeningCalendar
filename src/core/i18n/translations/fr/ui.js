@@ -617,6 +617,7 @@ export const fr = {
     // Event Details
     'event.details.plant': 'Plante :',
     'event.details.category': 'Catégorie :',
+    'event.details.environment': 'Environnement :',
     'event.details.location': 'Emplacement :',
     'event.details.current_phase': 'Phase actuelle :',
     'event.details.started': 'Commencé :',

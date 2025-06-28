@@ -38,7 +38,6 @@ import {
 
 // Planting operations
 import {
-  addPlanting,
   updatePlantingStatus,
   updatePlantingPhase,
   updatePlantingDisplayName,
@@ -111,7 +110,6 @@ export {
 };
 
 export {
-  addPlanting,
   updatePlantingStatus,
   updatePlantingPhase,
   updatePlantingDisplayName,
@@ -173,10 +171,6 @@ export default {
   getSeasonalRecommendations,
   
   // Plantings
-  addPlanting,
-  updatePlantingStatus,
-  updatePlantingPhase,
-  updatePlantingDisplayName,
   getPlantingsByCategory,
   getActivePlantings,
   getAllPlantings,

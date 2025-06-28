@@ -361,9 +361,9 @@ export const cannabis_sativa = {
         },
         flowering: {
           start: '09-15',
-          end: '12-08',
+          end: '11-15',
           description:
-            'Extended outdoor flowering (8-16 weeks depending on strain)',
+            'Extended outdoor flowering (8-10 weeks depending on strain)',
           care: 'Natural light cycle, weather protection, pest monitoring',
           editable: true,
           soil: {
@@ -395,8 +395,8 @@ export const cannabis_sativa = {
           },
         },
         harvest: {
-          start: '12-09',
-          end: '12-23',
+          start: '11-16',
+          end: '11-30',
           description: 'Outdoor harvest timing',
           care: 'Weather dependent, check trichomes, quick dry if rain',
           editable: false,

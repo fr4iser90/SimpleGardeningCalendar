@@ -13,6 +13,7 @@ import {
   getDefaultEnvironment 
 } from './PlantingFormUtils.js';
 import { getAllTranslatedPlantData } from '../../../core/i18n/index.js';
+import { calculatePhaseScheduleDays, calculatePhaseScheduleStartEnd } from '../../../utils/plantUtils.js';
 
 /**
  * PlantingFormLogic - Contains all business logic for the planting form
@@ -127,7 +128,6 @@ export function updatePlantInfo() {
   }
 
   const plantEnvData = getPlantDataForEnvironment(plantTypeSelect.value, environmentSelect?.value);
-  
   if (!plantEnvData) {
     plantInfo.style.display = '';
     plantInfo.innerHTML = '<p class="text-red-500">Plant data not found for this environment</p>';
@@ -135,23 +135,45 @@ export function updatePlantInfo() {
   }
 
   const { plantData, envData, envKey } = plantEnvData;
-  const phases = Object.entries(envData.phases).map(([phase, data]) => {
-    const emoji = getPhaseEmoji(phase);
-    const editable = data.editable ? ` (${t('phase.editable')})` : ` (${t('phase.fixed')})`;
-    return `${emoji} ${t('phase.' + phase)}: ${data.days} ${t('plant.info.days')}${editable}`;
+  const phasesRaw = envData.phases;
+  // Entscheide, welche Logik verwendet wird
+  const hasStartEnd = Object.values(phasesRaw).some(phase => phase.start && phase.end);
+  let phases;
+  if (hasStartEnd) {
+    const year = new Date().getFullYear();
+    phases = calculatePhaseScheduleStartEnd(phasesRaw, year);
+  } else {
+    const today = new Date();
+    phases = calculatePhaseScheduleDays(phasesRaw, today.toISOString().split('T')[0]);
+  }
+  // Anzeige
+  const phasesHtml = phases.map(phase => {
+    const emoji = getPhaseEmoji(phase.name);
+    if (phase.startDate && phase.endDate) {
+      return `${emoji} ${t('phase.' + phase.name)}: ${phase.startDate} - ${phase.endDate} (${t('plant.info.seasonal')})`;
+    } else if (phase.days) {
+      return `${emoji} ${t('phase.' + phase.name)}: ${phase.days} ${t('plant.info.days')}`;
+    } else {
+      return `${emoji} ${t('phase.' + phase.name)}: ${t('plant.info.variable')}`;
+    }
   }).join('<br>');
-
-  const totalDays = Object.values(envData.phases).reduce((sum, phase) => sum + phase.days, 0);
-
+  // Gesamtdauer
+  let totalDuration;
+  if (hasStartEnd) {
+    totalDuration = `${t('plant.info.seasonal_based')}`;
+  } else {
+    const totalDays = phases.reduce((sum, phase) => sum + (phase.days || 0), 0);
+    totalDuration = `${totalDays} ${t('plant.info.days')}`;
+  }
   plantInfo.style.display = '';
   plantInfo.innerHTML = `
     <h4 class="font-medium mb-2">${plantData.name}</h4>
     <p class="text-sm mb-2"><strong>${t('plant.info.category')}</strong> ${plantData.category}</p>
     <p class="text-sm mb-2"><strong>${t('plant.info.environment')}</strong> ${envKey}</p>
-    <p class="text-sm mb-2"><strong>${t('plant.info.total_duration')}</strong> ${totalDays} ${t('plant.info.days')}</p>
+    <p class="text-sm mb-2"><strong>${t('plant.info.total_duration')}</strong> ${totalDuration}</p>
     <div class="text-sm">
       <strong>${t('plant.info.phases')}</strong><br>
-      ${phases}
+      ${phasesHtml}
     </div>
   `;
 }
@@ -161,27 +183,30 @@ export function updatePhaseInputs() {
   const environmentSelect = document.getElementById('environmentSelect');
   const phaseDurationSection = document.getElementById('phaseDurationSection');
   const phaseInputs = document.getElementById('phaseInputs');
-  
   if (!plantTypeSelect?.value || !phaseDurationSection || !phaseInputs) {
     if (phaseDurationSection) {
       phaseDurationSection.style.display = 'none';
     }
     return;
   }
-  
   const plantEnvData = getPlantDataForEnvironment(plantTypeSelect.value, environmentSelect?.value);
-  
   if (!plantEnvData) {
     phaseDurationSection.style.display = 'none';
     return;
   }
-  
   const { plantData, envData, envKey } = plantEnvData;
-  const phases = envData.phases;
-  
-  // Check if this is an autoflower (no phase editing needed)
+  const phasesRaw = envData.phases;
+  const hasStartEnd = Object.values(phasesRaw).some(phase => phase.start && phase.end);
+  let phases;
+  if (hasStartEnd) {
+    const year = new Date().getFullYear();
+    phases = calculatePhaseScheduleStartEnd(phasesRaw, year);
+  } else {
+    const today = new Date();
+    phases = calculatePhaseScheduleDays(phasesRaw, today.toISOString().split('T')[0]);
+  }
+  // Autoflower: keine Bearbeitung
   if (isAutoflower(plantTypeSelect.value)) {
-    // Autoflowers don't need phase editing - they flower automatically
     phaseInputs.innerHTML = `
       <div class="col-span-full p-3 bg-blue-50 dark:bg-blue-900 border border-blue-200 dark:border-blue-700 rounded">
         <div class="flex items-start">
@@ -197,64 +222,42 @@ export function updatePhaseInputs() {
         </div>
       </div>
     `;
-  } else if (envKey === 'outdoor') {
-    // Outdoor: Only editable phases can be adjusted
-    const editablePhases = Object.entries(phases).filter(([phase, data]) => data.editable);
-    
-    if (editablePhases.length === 0) {
-      phaseInputs.innerHTML = `
-        <div class="col-span-full p-3 bg-yellow-50 dark:bg-yellow-900 border border-yellow-200 dark:border-yellow-700 rounded">
-          <div class="flex items-start">
-            <span class="text-yellow-600 dark:text-yellow-400 mr-2">🌱</span>
-            <div>
-              <p class="text-sm font-medium text-yellow-800 dark:text-yellow-200 mb-1">
-                ${t('plant.info.outdoor.title')}
-              </p>
-              <p class="text-xs text-yellow-700 dark:text-yellow-300">
-                ${t('plant.info.outdoor.description')}
-              </p>
-            </div>
-          </div>
-        </div>
-      `;
-    } else {
-      const nonEditablePhases = Object.entries(phases).filter(([phase, data]) => !data.editable);
-      const nonEditableInfo = nonEditablePhases.map(([phase, data]) => 
-        `${getPhaseEmoji(phase)} ${t('phase.' + phase)}: ${data.days} ${t('plant.info.days')} (${t('plant.info.outdoor.fixed')})`
-      ).join('<br>');
-      
-      phaseInputs.innerHTML = `
-        <div class="col-span-full p-3 bg-yellow-50 dark:bg-yellow-900 border border-yellow-200 dark:border-yellow-700 rounded mb-3">
-          <div class="flex items-start">
-            <span class="text-yellow-600 dark:text-yellow-400 mr-2">🌱</span>
-            <div>
-              <p class="text-sm font-medium text-yellow-800 dark:text-yellow-200 mb-1">
-                ${t('plant.info.outdoor.title')}
-              </p>
-              <p class="text-xs text-yellow-700 dark:text-yellow-300">
-                ${nonEditableInfo}
-              </p>
-            </div>
-          </div>
-        </div>
-        ${editablePhases.map(([phase, data]) => `
+  } else if (hasStartEnd) {
+    // Outdoor perennial/light-periodic: Zeige nur Info
+    const seasonalPhases = phases.map(phase => {
+      const emoji = getPhaseEmoji(phase.name);
+      if (phase.startDate && phase.endDate) {
+        return `${emoji} ${t('phase.' + phase.name)}: ${phase.startDate} - ${phase.endDate} (${t('plant.info.seasonal')})`;
+      } else if (phase.days) {
+        return `${emoji} ${t('phase.' + phase.name)}: ${phase.days} ${t('plant.info.days')}`;
+      } else {
+        return `${emoji} ${t('phase.' + phase.name)}: ${t('plant.info.variable')}`;
+      }
+    }).join('<br>');
+    phaseInputs.innerHTML = `
+      <div class="col-span-full p-3 bg-yellow-50 dark:bg-yellow-900 border border-yellow-200 dark:border-yellow-700 rounded">
+        <div class="flex items-start">
+          <span class="text-yellow-600 dark:text-yellow-400 mr-2">🌱</span>
           <div>
-            <label class="block text-sm font-medium mb-1">${getPhaseEmoji(phase)} ${t('phase.' + phase)}</label>
-            <input type="number" name="phase_${phase}" value="${data.days}" min="1" class="w-full p-2 border rounded dark:bg-gray-700 dark:border-gray-600 dark:text-white">
+            <p class="text-sm font-medium text-yellow-800 dark:text-yellow-200 mb-1">
+              ${t('plant.info.outdoor.seasonal.title') || 'Outdoor - Natural Seasons'}
+            </p>
+            <p class="text-xs text-yellow-700 dark:text-yellow-300">
+              ${seasonalPhases}
+            </p>
           </div>
-        `).join('')}
-      `;
-    }
+        </div>
+      </div>
+    `;
   } else {
-    // Indoor or greenhouse: All phases editable
-    phaseInputs.innerHTML = Object.entries(phases).map(([phase, data]) => `
+    // Indoor/Greenhouse/Annual: alle Phasen editierbar
+    phaseInputs.innerHTML = phases.map(phase => `
       <div>
-        <label class="block text-sm font-medium mb-1">${getPhaseEmoji(phase)} ${t('phase.' + phase)}</label>
-        <input type="number" name="phase_${phase}" value="${data.days}" min="1" class="w-full p-2 border rounded dark:bg-gray-700 dark:border-gray-600 dark:text-white">
+        <label class="block text-sm font-medium mb-1">${getPhaseEmoji(phase.name)} ${t('phase.' + phase.name)}</label>
+        <input type="number" name="phase_${phase.name}" value="${phase.days || ''}" min="1" class="w-full p-2 border rounded dark:bg-gray-700 dark:border-gray-600 dark:text-white">
       </div>
     `).join('');
   }
-  
   phaseDurationSection.style.display = 'block';
   updatePhaseCareInputs();
 }

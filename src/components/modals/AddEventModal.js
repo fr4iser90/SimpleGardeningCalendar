@@ -1,6 +1,6 @@
 import { openDB } from 'idb';
 import { t } from '../../core/i18n/index.js';
-import { addPlanting } from '../../core/db/index.js';
+import { addPlanting } from '../../services/PlantService.js';
 import { showButtonSpinner, hideButtonSpinner } from '../ui/LoadingSpinner.js';
 import { DB_NAME, DB_VERSION } from '../../core/db/connection.js';
 import { createPlantingForm, getPlantingFormData } from './PlantingForm';
@@ -142,7 +142,8 @@ async function handlePlantingSubmission() {
     plantingData.customName,
     plantingData.reminderOptions,
     plantingData.customPhaseDurations,
-    selectedCalendarId
+    selectedCalendarId,
+    plantingData.environment
   );
   if (calendarId && calendarId !== selectedCalendarId) {
     localStorage.setItem('selectedLocalCalendarId', calendarId.toString());

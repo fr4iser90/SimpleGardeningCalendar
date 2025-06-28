@@ -105,6 +105,7 @@ export const es = {
     // Event Details
     'event.details.plant': 'Planta:',
     'event.details.category': 'Categoría:',
+    'event.details.environment': 'Ambiente:',
     'event.details.location': 'Ubicación:',
     'event.details.current_phase': 'Fase Actual:',
     'event.details.started': 'Iniciado:',

@@ -46,35 +46,13 @@ function getIntelligentEventTitle(phaseName, plantData, isLastPhase = false) {
   const plantName = plantData.name;
   const phaseLabel = t('phase.' + phaseName) || phaseName;
   
-  // Special handling for different plant types
-  switch (phaseName) {
-    case 'harvest':
-      return `🌾 ${t('task.harvesting')} ${plantName}`;
-    case 'fruiting':
-    case 'productive':
-    case 'establishment':
-    case 'juvenile':
-    case 'dormancy':
-    case 'germination':
-    case 'seedling':
-    case 'vegetative':
-    case 'flowering':
-    case 'leafing':
-    case 'rooting':
-    case 'maturing':
-    case 'sprouting':
-    case 'tuberization':
-    case 'bulking':
-    case 'heading':
-    case 'bolting':
-    case 'seed_production':
-    case 'transplant':
-    case 'preflower':
-      return `${phaseEmoji} ${plantName}: ${phaseLabel}`;
-    default:
-      // For unknown phases, create a generic title
-      return `${phaseEmoji} ${plantName}: ${phaseLabel}`;
+  // Special handling for harvest phase only
+  if (phaseName === 'harvest') {
+    return `🌾 ${t('task.harvesting')} ${plantName}`;
   }
+  
+  // All other phases use the same pattern
+  return `${phaseEmoji} ${plantName}: ${phaseLabel}`;
 }
 
 /**
@@ -128,24 +106,13 @@ function isFinalPhase(phaseName, plantData) {
  * @returns {string} Event type
  */
 function getIntelligentEventType(phaseName, plantData) {
-  // Special handling for different phases
-  switch (phaseName) {
-    case 'harvest':
-      return 'harvesting';
-    case 'watering':
-      return 'watering';
-    case 'fertilizing':
-      return 'fertilizing';
-    case 'pruning':
-      return 'pruning';
-    case 'transplant':
-      return 'transplanting';
-    case 'pest_control':
-      return 'pest_control';
-    default:
-      // For most phases, use 'maintenance' as default
-      return 'maintenance';
+  // Special handling for harvest phase only
+  if (phaseName === 'harvest') {
+    return 'harvesting';
   }
+  
+  // All other phases use 'maintenance' as default
+  return 'maintenance';
 }
 
 /**
@@ -182,6 +149,12 @@ function getPhaseMediumData(plantData, phaseName, medium = 'soil') {
  * @returns {Promise<void>}
  */
 export async function createIntelligentPlantingEvents(planting, plantData, phases, completionDate, reminderOptions = {}) {
+  console.log('🎯 [createIntelligentPlantingEvents] Starting event creation for:', {
+    plantName: planting.plantName,
+    phaseCount: phases.length,
+    completionDate
+  });
+
   const plantingId = planting.id;
   
   // Load default settings from localStorage
@@ -202,6 +175,8 @@ export async function createIntelligentPlantingEvents(planting, plantData, phase
     weeklyChecks: reminderOptions.weeklyChecks ?? settings.defaultWeeklyChecks !== false,
     harvestReminder: reminderOptions.harvestReminder ?? settings.defaultHarvestReminders !== false
   };
+  
+  console.log('🎯 [createIntelligentPlantingEvents] Reminder options:', finalReminderOptions);
   
   // Get phases from plant data
   const plantPhases = getPlantPhases(plantData);
@@ -237,8 +212,51 @@ export async function createIntelligentPlantingEvents(planting, plantData, phase
     const phaseData = plantPhases[phase.name];
     
     if (!phaseData) {
-      console.warn(`Phase data not found for ${phase.name} in plant ${plantData.name}`);
+      console.warn(`🎯 [createIntelligentPlantingEvents] Phase data not found for ${phase.name} in plant ${plantData.name}`);
       continue;
+    }
+    
+    console.log('🎯 [createIntelligentPlantingEvents] Processing phase:', {
+      name: phase.name,
+      hasStartEnd: !!(phase.startDate && phase.endDate),
+      hasDays: !!(phase.days),
+      startDate: phase.startDate,
+      endDate: phase.endDate
+    });
+
+    // --- NEU: Berechnung für startDate/endDate oder days ---
+    let phaseStartDate, phaseEndDate, phaseDays;
+    if (phase.startDate && phase.endDate) {
+      // Berechnete Phasen mit startDate/endDate verwenden
+      phaseStartDate = new Date(phase.startDate);
+      phaseEndDate = new Date(phase.endDate);
+      phaseDays = Math.round((phaseEndDate - phaseStartDate) / (1000*60*60*24));
+      console.log('🎯 [createIntelligentPlantingEvents] Using calculated startDate/endDate:', {
+        startDate: phase.startDate,
+        endDate: phase.endDate,
+        calculatedDays: phaseDays
+      });
+    } else if (phase.start && phase.end) {
+      // Fallback: Rohdaten aus Plant-File (sollte nicht mehr vorkommen)
+      phaseStartDate = new Date(phase.start);
+      phaseEndDate = new Date(phase.end);
+      phaseDays = Math.round((phaseEndDate - phaseStartDate) / (1000*60*60*24));
+      console.log('🎯 [createIntelligentPlantingEvents] Using raw start/end dates:', {
+        start: phase.start,
+        end: phase.end,
+        calculatedDays: phaseDays
+      });
+    } else {
+      // Days-basierte Phasen
+      phaseStartDate = new Date(phase.startDate);
+      phaseEndDate = new Date(phase.startDate);
+      phaseEndDate.setDate(phaseEndDate.getDate() + (phase.days || 0));
+      phaseDays = phase.days || 0;
+      console.log('🎯 [createIntelligentPlantingEvents] Using days calculation:', {
+        startDate: phase.startDate,
+        days: phase.days,
+        calculatedEndDate: phaseEndDate.toISOString().split('T')[0]
+      });
     }
     
     // Create intelligent event title and description
@@ -259,10 +277,10 @@ export async function createIntelligentPlantingEvents(planting, plantData, phase
     }
 
     // Add weekly check-ins for longer phases (more than 14 days) if enabled
-    if (finalReminderOptions.weeklyChecks && phase.days > 14) {
-      const weeklyChecks = Math.floor(phase.days / 7);
+    if (finalReminderOptions.weeklyChecks && phaseDays > 14) {
+      const weeklyChecks = Math.floor(phaseDays / 7);
       for (let week = 1; week <= weeklyChecks; week++) {
-        const checkDate = new Date(phase.startDate);
+        const checkDate = new Date(phaseStartDate);
         checkDate.setDate(checkDate.getDate() + (week * 7));
         
         if (checkDate < new Date(completionDate)) {
@@ -374,7 +392,13 @@ async function createWateringEventsData(plantData, phase, plantingId, completion
   
   let wateringDate = new Date(phase.startDate);
   const phaseEnd = new Date(wateringDate);
-  phaseEnd.setDate(phaseEnd.getDate() + phase.days);
+  if (phase.endDate) {
+    // Verwende endDate wenn verfügbar (berechnete Phasen)
+    phaseEnd.setTime(new Date(phase.endDate).getTime());
+  } else {
+    // Fallback auf days-basierte Berechnung
+    phaseEnd.setDate(phaseEnd.getDate() + (phase.days || 0));
+  }
   
   while (wateringDate < phaseEnd) {
     const wateringDescription = mediumData?.watering?.description || phase?.watering?.description || plantData.careTips?.watering || 'Check soil moisture and water as needed';
@@ -420,12 +444,32 @@ async function createFertilizingEventsData(plantData, phase, plantingId, fertili
   }
   if (interval === 0) return events;
   
-  if (phase.days > 14 && (phaseName === 'vegetative' || phaseName === 'flowering' || phaseName === 'fruiting' || phaseName === 'productive' || phaseName === 'rooting' || phaseName === 'maturing')) {
+  // Berechne phaseDays für diese Funktion
+  let phaseDays;
+  if (phase.startDate && phase.endDate) {
+    const startDate = new Date(phase.startDate);
+    const endDate = new Date(phase.endDate);
+    phaseDays = Math.round((endDate - startDate) / (1000*60*60*24));
+  } else if (phase.start && phase.end) {
+    const startDate = new Date(phase.start);
+    const endDate = new Date(phase.end);
+    phaseDays = Math.round((endDate - startDate) / (1000*60*60*24));
+  } else {
+    phaseDays = phase.days || 0;
+  }
+  
+  if (phaseDays > 14) {
     const fertilizeDate = new Date(phase.startDate);
     const delay = fertilizingOptions?.delay || 7;
     fertilizeDate.setDate(fertilizeDate.getDate() + delay);
     const phaseEnd = new Date(phase.startDate);
-    phaseEnd.setDate(phaseEnd.getDate() + phase.days);
+    if (phase.endDate) {
+      // Verwende endDate wenn verfügbar (berechnete Phasen)
+      phaseEnd.setTime(new Date(phase.endDate).getTime());
+    } else {
+      // Fallback auf days-basierte Berechnung
+      phaseEnd.setDate(phaseEnd.getDate() + (phase.days || 0));
+    }
     
     while (fertilizeDate < phaseEnd) {
       const fertilizingDescription = mediumData?.fertilizing?.description || phase?.fertilizing?.description || plantData.careTips?.fertilizing || 'Apply appropriate fertilizer';

@@ -588,6 +588,7 @@ export const it = {
     // Event Details
     'event.details.plant': 'Pianta:',
     'event.details.category': 'Categoria:',
+    'event.details.environment': 'Ambiente:',
     'event.details.location': 'Posizione:',
     'event.details.current_phase': 'Fase attuale:',
     'event.details.started': 'Iniziato:',

@@ -51,6 +51,7 @@ export async function showEventDetails(event) {
         <div class="p-3 bg-blue-50 dark:bg-blue-900 border border-blue-200 dark:border-blue-700 rounded mt-2 text-sm">
           <strong>${t('event.details.plant')}</strong> ${displayName}${planting.customName ? ` (${planting.plantName})` : ''}<br>
           <strong>${t('event.details.category')}</strong> ${t(planting.category)}<br>
+          <strong>${t('event.details.environment')}</strong> ${t(planting.environment)}<br>
           ${planting.location ? `<strong>${t('event.details.location')}</strong> ${planting.location}<br>` : ''}
           <strong>${t('event.details.current_phase')}</strong> ${t('phase.' + planting.currentPhase)}<br>
           <strong>${t('event.details.started')}</strong> ${formatDateWithLocale(planting.startDate)}<br>

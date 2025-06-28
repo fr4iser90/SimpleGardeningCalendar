@@ -11,9 +11,9 @@ export const DB_VERSION = 6;
 
 // Growing Environment Constants
 export const GROWING_ENVIRONMENTS = {
-  INDOOR: 'indoor',
-  OUTDOOR: 'outdoor',
-  GREENHOUSE: 'greenhouse'
+  INDOOR: 'environment.indoor',
+  OUTDOOR: 'environment.outdoor',
+  GREENHOUSE: 'environment.greenhouse'
 };
 
 // Seasonal Region Constants

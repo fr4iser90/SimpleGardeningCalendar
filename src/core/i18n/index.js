@@ -135,9 +135,12 @@ function deepMerge(original, translation) {
  * @returns {Promise<Object|null>} Translated plant data or null if not found
  */
 export async function getTranslatedPlantData(plantKey) {
+  console.log(`🔍 [getTranslatedPlantData] Starting for: ${plantKey}, language: ${currentLanguage}`);
+  
   // Check cache first
   const cacheKey = `${currentLanguage}:${plantKey}`;
   if (plantTranslationCache.has(cacheKey)) {
+    console.log(`🔍 [getTranslatedPlantData] Found in cache: ${plantKey}`);
     return plantTranslationCache.get(cacheKey);
   }
 
@@ -148,6 +151,11 @@ export async function getTranslatedPlantData(plantKey) {
     console.warn(`Original plant data not found for: ${plantKey}`);
     return null;
   }
+  
+  console.log(`🔍 [getTranslatedPlantData] Original data found:`, { 
+    name: originalData.name, 
+    category: originalData.category 
+  });
 
   try {
     // Try to load from translation files based on current language
@@ -157,15 +165,31 @@ export async function getTranslatedPlantData(plantKey) {
       plantTranslationCache.set(cacheKey, originalData);
       return originalData;
     }
+    
+    console.log(`🔍 [getTranslatedPlantData] Plant category: ${plantCategory}`);
+    
     // Import the translated plant data
     const translationModule = await import(`./translations/${currentLanguage}/plants/${plantCategory}/${plantKey}.js`);
     const translatedData = translationModule.default;
     if (!translatedData) {
+      console.warn(`No translation data found for: ${plantKey}`);
       plantTranslationCache.set(cacheKey, originalData);
       return originalData;
     }
+    
+    console.log(`🔍 [getTranslatedPlantData] Translation data found:`, { 
+      name: translatedData.name, 
+      category: translatedData.category 
+    });
+    
     // Merge translation into original
     const merged = deepMerge(originalData, translatedData);
+    
+    console.log(`🔍 [getTranslatedPlantData] Merged data:`, { 
+      name: merged.name, 
+      category: merged.category 
+    });
+    
     plantTranslationCache.set(cacheKey, merged);
     return merged;
   } catch (error) {
