@@ -1,8 +1,8 @@
-import { googleCalendarSettings } from '../../services/GoogleCalendar/GoogleCalendarSettings.js';
-import { updateConnectionStatus } from './GoogleCalendarSetupModal.js';
-import { showNotification } from '../../utils/notifications.js';
-import { getCalendarTypeIcon, generateCleanupSuggestions, getLocalizedCalendarName } from '../../utils/calendarUtils.js';
-import { t } from '../../core/i18n/index.js';
+import { googleCalendarSettings } from '../../../services/GoogleCalendar/GoogleCalendarSettings.js';
+import { updateConnectionStatus } from '../GoogleCalendarSetupModal.js';
+import { showNotification } from '../../../utils/notifications.js';
+import { getCalendarTypeIcon, generateCleanupSuggestions, getLocalizedCalendarName } from '../../../utils/calendarUtils.js';
+import { t } from '../../../core/i18n/index.js';
 
 // Render the calendar wizard HTML section
 export function renderCalendarWizardHTML(settings) {
@@ -280,7 +280,7 @@ async function detectAndShowExistingCalendars() {
   isDetecting = true;
   
   try {
-    const { detectGardenCalendars } = await import('../../services/GoogleCalendar/GoogleCalendarApi.js');
+    const { detectGardenCalendars } = await import('../../../services/GoogleCalendar/GoogleCalendarApi.js');
     const { gardenCalendars, groupedCalendars, duplicateGroups, hasExistingGardenCalendars, hasDuplicates } = await detectGardenCalendars();
     
     const existingSection = document.getElementById('existingCalendarsSection');
@@ -431,7 +431,7 @@ function setupCalendarManagementListeners() {
 // Show calendar management modal
 async function showCalendarManagementModal() {
   try {
-    const { detectGardenCalendars } = await import('../../services/GoogleCalendar/GoogleCalendarApi.js');
+    const { detectGardenCalendars } = await import('../../../services/GoogleCalendar/GoogleCalendarApi.js');
     const { gardenCalendars } = await detectGardenCalendars();
     
     const managementList = document.getElementById('calendarManagementList');
@@ -491,7 +491,7 @@ window.deleteExistingCalendar = async function(calendarId, calendarName) {
   }
   
   try {
-    const { deleteCalendar } = await import('../../services/GoogleCalendar/GoogleCalendarApi.js');
+    const { deleteCalendar } = await import('../../../services/GoogleCalendar/GoogleCalendarApi.js');
     await deleteCalendar(calendarId);
     showNotification(`Calendar "${calendarName}" deleted successfully`, 'success');
     
@@ -510,7 +510,7 @@ window.deleteExistingCalendar = async function(calendarId, calendarName) {
 // Load user's own calendars for the wizard
 async function loadUserCalendarsForWizard() {
   const existingCalendarSelect = document.getElementById('existingCalendarSelect');
-  const { fetchCalendarList } = await import('../../services/GoogleCalendar/GoogleCalendarApi.js');
+  const { fetchCalendarList } = await import('../../../services/GoogleCalendar/GoogleCalendarApi.js');
   
   try {
     existingCalendarSelect.innerHTML = '<option value="">Loading calendars...</option>';
@@ -531,7 +531,7 @@ async function loadUserCalendarsForWizard() {
 
 // Handle calendar setup based on selected organization
 async function handleCalendarSetup(organizationType) {
-  const { createCalendar, detectGardenCalendars } = await import('../../services/GoogleCalendar/GoogleCalendarApi.js');
+  const { createCalendar, detectGardenCalendars } = await import('../../../services/GoogleCalendar/GoogleCalendarApi.js');
   const settings = googleCalendarSettings.load();
   
   // Get existing calendars to avoid duplicates
@@ -646,7 +646,7 @@ async function handleCalendarSetup(organizationType) {
     
     case 'by_plant':
       // Get plants from database dynamically instead of hardcoded list
-      const { getPlantRegistry } = await import('../../core/db/plants/index.js');
+      const { getPlantRegistry } = await import('../../../core/db/plants/index.js');
       const plantRegistry = getPlantRegistry();
       
       // Take first 3 plants as examples (in real app, user would select their plants)
@@ -693,7 +693,7 @@ async function handleCalendarSetup(organizationType) {
 // Show duplicate cleanup modal
 async function showDuplicateCleanupModal() {
   try {
-    const { detectGardenCalendars } = await import('../../services/GoogleCalendar/GoogleCalendarApi.js');
+    const { detectGardenCalendars } = await import('../../../services/GoogleCalendar/GoogleCalendarApi.js');
     const { duplicateGroups } = await detectGardenCalendars();
     const suggestions = generateCleanupSuggestions(duplicateGroups);
     
@@ -769,7 +769,7 @@ async function executeCalendarCleanup() {
   executeBtn.textContent = t('google.wizard.cleanup_cleaning');
   
   try {
-    const { detectGardenCalendars, deleteCalendar } = await import('../../services/GoogleCalendar/GoogleCalendarApi.js');
+    const { detectGardenCalendars, deleteCalendar } = await import('../../../services/GoogleCalendar/GoogleCalendarApi.js');
     const { duplicateGroups } = await detectGardenCalendars();
     const suggestions = generateCleanupSuggestions(duplicateGroups);
     

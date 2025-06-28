@@ -1,12 +1,12 @@
-import { attemptSignIn, signOut, getUserInfo, getAuthState } from '../../services/GoogleCalendar/GoogleCalendarApi.js';
-import { performBidirectionalSync, exportLocalEventsToGoogle, importGoogleEvents } from '../../services/GoogleCalendar/GoogleCalendarSync.js';
-import { googleCalendarSettings } from '../../services/GoogleCalendar/GoogleCalendarSettings.js';
-import { getEventTypeIcon } from '../../utils/eventUtils.js';
-import { showNotification } from '../../utils/notifications.js';
-import { showButtonSpinner, hideButtonSpinner, showLoadingSpinner, hideLoadingSpinner } from '../ui/LoadingSpinner.js';
-import { renderCalendarWizardHTML, setupCalendarWizardEventListeners } from './Google/GoogleCalendarWizard.js';
-import { showDetailedHelp } from './Google/GoogleDetailedHelp.js';
-import { t } from '../../core/i18n/index.js';
+import { attemptSignIn, signOut, getUserInfo, getAuthState } from '../../../services/GoogleCalendar/GoogleCalendarApi.js';
+import { performBidirectionalSync, exportLocalEventsToGoogle, importGoogleEvents } from '../../../services/GoogleCalendar/GoogleCalendarSync.js';
+import { googleCalendarSettings } from '../../../services/GoogleCalendar/GoogleCalendarSettings.js';
+import { getEventTypeIcon } from '../../../utils/eventUtils.js';
+import { showNotification } from '../../../utils/notifications.js';
+import { showButtonSpinner, hideButtonSpinner, showLoadingSpinner, hideLoadingSpinner } from '../../ui/LoadingSpinner.js';
+import { renderCalendarWizardHTML, setupCalendarWizardEventListeners } from './GoogleCalendarWizard.js';
+import { showDetailedHelp } from './GoogleDetailedHelp.js';
+import { t } from '../../../core/i18n/index.js';
 
 /**
  * Google Calendar Setup Modal
@@ -88,7 +88,7 @@ export async function updateConnectionStatus(showWizard = false) {
       if (!hasCalendarSetup && !showWizard) {
         console.log('🔍 No setup found - checking for existing garden calendars...');
         try {
-          const { detectGardenCalendars } = await import('../../services/GoogleCalendar/GoogleCalendarApi.js');
+          const { detectGardenCalendars } = await import('../../../services/GoogleCalendar/GoogleCalendarApi.js');
           const { gardenCalendars, hasExistingGardenCalendars } = await detectGardenCalendars();
           
           if (hasExistingGardenCalendars && gardenCalendars.length > 0) {

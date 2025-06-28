@@ -285,7 +285,7 @@ export function initializeGoogleStatusBar() {
     if (window.renderGoogleCalendarSetupModal) {
       window.renderGoogleCalendarSetupModal();
     } else {
-      import('../modals/GoogleCalendarSetupModal.js').then(mod => {
+      import('../modals/Google/GoogleCalendarSetupModal.js').then(mod => {
         mod.renderGoogleCalendarSetupModal();
       });
     }

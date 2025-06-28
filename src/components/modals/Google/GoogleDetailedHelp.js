@@ -1,4 +1,4 @@
-import { t } from '../../core/i18n/index.js';
+import { t } from '../../../core/i18n/index.js';
 
 export function showDetailedHelp() {
   const modal = document.createElement('div');
