@@ -6,7 +6,7 @@
 import { PLANT_TAGS } from '../categories.js';
 
 export const cherry_tree = {
-  name: 'Cherry Tree',
+  name: 'cherry_tree.name',
   category: 'category.fruit_trees',
   tags: [PLANT_TAGS.PERENNIAL, PLANT_TAGS.PHOTOPERIOD],
   emoji: '🍒',
@@ -16,148 +16,148 @@ export const cherry_tree = {
         establishment: {
           start: '03-01',
           end: '02-28',
-          description: 'First year establishment',
-          care: 'Regular watering, protection from birds',
+          description: 'cherry_tree.phases.establishment.description',
+          care: 'cherry_tree.phases.establishment.care',
           editable: false,
           soil: {
             watering: {
               interval: 7,
-              description: 'Weekly deep watering during establishment',
+              description: 'cherry_tree.phases.establishment.soil.watering.description',
             },
             fertilizing: {
               interval: 90,
-              description: 'Fertilize every 3 months during establishment',
+              description: 'cherry_tree.phases.establishment.soil.fertilizing.description',
             },
           },
           hydro: {
             watering: {
               interval: 0,
-              description: 'Continuous flow, low EC',
+              description: 'cherry_tree.phases.establishment.hydro.watering.description',
             },
             fertilizing: {
               interval: 90,
-              description: 'Light feeding, EC 0.5-0.8',
+              description: 'cherry_tree.phases.establishment.hydro.fertilizing.description',
             },
           },
           coco: {
             watering: {
               interval: 7,
-              description: 'Weekly watering in coco',
+              description: 'cherry_tree.phases.establishment.coco.watering.description',
             },
             fertilizing: {
               interval: 90,
-              description: 'Light feeding, EC 0.5-0.8',
+              description: 'cherry_tree.phases.establishment.coco.fertilizing.description',
             },
           },
         },
         juvenile: {
           start: '03-01',
           end: '02-28',
-          description: 'Years 2-4 development',
-          care: 'Training pruning, disease prevention',
+          description: 'cherry_tree.phases.juvenile.description',
+          care: 'cherry_tree.phases.juvenile.care',
           editable: false,
           soil: {
             watering: {
               interval: 7,
-              description: 'Weekly deep watering during juvenile phase',
+              description: 'cherry_tree.phases.juvenile.soil.watering.description',
             },
             fertilizing: {
               interval: 90,
-              description: 'Fertilize every 3 months during juvenile phase',
+              description: 'cherry_tree.phases.juvenile.soil.fertilizing.description',
             },
           },
           hydro: {
             watering: {
               interval: 0,
-              description: 'Continuous flow, moderate EC',
+              description: 'cherry_tree.phases.juvenile.hydro.watering.description',
             },
             fertilizing: {
               interval: 90,
-              description: 'Regular feeding, EC 1.0-1.2',
+              description: 'cherry_tree.phases.juvenile.hydro.fertilizing.description',
             },
           },
           coco: {
             watering: {
               interval: 7,
-              description: 'Weekly watering in coco',
+              description: 'cherry_tree.phases.juvenile.coco.watering.description',
             },
             fertilizing: {
               interval: 90,
-              description: 'Regular feeding, EC 1.0-1.2',
+              description: 'cherry_tree.phases.juvenile.coco.fertilizing.description',
             },
           },
         },
         productive: {
           start: '03-01',
           end: '02-28',
-          description: 'Productive years 5-20',
-          care: 'Harvest timing, bird protection, disease management',
+          description: 'cherry_tree.phases.productive.description',
+          care: 'cherry_tree.phases.productive.care',
           editable: false,
           soil: {
             watering: {
               interval: 7,
-              description: 'Weekly deep watering during productive years',
+              description: 'cherry_tree.phases.productive.soil.watering.description',
             },
             fertilizing: {
               interval: 90,
-              description: 'Fertilize every 3 months during productive years',
+              description: 'cherry_tree.phases.productive.soil.fertilizing.description',
             },
           },
           hydro: {
             watering: {
               interval: 0,
-              description: 'Continuous flow, moderate EC',
+              description: 'cherry_tree.phases.productive.hydro.watering.description',
             },
             fertilizing: {
               interval: 90,
-              description: 'Regular feeding, EC 1.0-1.2',
+              description: 'cherry_tree.phases.productive.hydro.fertilizing.description',
             },
           },
           coco: {
             watering: {
               interval: 7,
-              description: 'Weekly watering in coco',
+              description: 'cherry_tree.phases.productive.coco.watering.description',
             },
             fertilizing: {
               interval: 90,
-              description: 'Regular feeding, EC 1.0-1.2',
+              description: 'cherry_tree.phases.productive.coco.fertilizing.description',
             },
           },
         },
         dormancy: {
           start: '11-01',
           end: '02-28',
-          description: 'Winter dormancy',
-          care: 'Dormant pruning, trunk protection',
+          description: 'cherry_tree.phases.dormancy.description',
+          care: 'cherry_tree.phases.dormancy.care',
           editable: false,
           soil: {
             watering: {
               interval: 14,
-              description: 'Minimal watering during dormancy',
+              description: 'cherry_tree.phases.dormancy.soil.watering.description',
             },
             fertilizing: {
               interval: 0,
-              description: 'No fertilizing during dormancy',
+              description: 'cherry_tree.phases.dormancy.soil.fertilizing.description',
             },
           },
           hydro: {
             watering: {
               interval: 0,
-              description: 'Minimal flow during dormancy',
+              description: 'cherry_tree.phases.dormancy.hydro.watering.description',
             },
             fertilizing: {
               interval: 0,
-              description: 'No nutrients during dormancy',
+              description: 'cherry_tree.phases.dormancy.hydro.fertilizing.description',
             },
           },
           coco: {
             watering: {
               interval: 14,
-              description: 'Minimal watering during dormancy',
+              description: 'cherry_tree.phases.dormancy.coco.watering.description',
             },
             fertilizing: {
               interval: 0,
-              description: 'No fertilizing during dormancy',
+              description: 'cherry_tree.phases.dormancy.coco.fertilizing.description',
             },
           },
         },
@@ -167,51 +167,48 @@ export const cherry_tree = {
           plantingWindow: {
             start: '03-01',
             end: '04-15',
-            description: 'Early spring planting',
+            description: 'cherry_tree.seasonalTiming.temperate_north.plantingWindow.description',
           },
           harvestWindow: {
             start: '06-01',
             end: '08-15',
-            description: 'Early summer harvest',
+            description: 'cherry_tree.seasonalTiming.temperate_north.harvestWindow.description',
           },
           pruningWindow: {
             start: '02-01',
             end: '03-15',
-            description: 'Late winter pruning',
+            description: 'cherry_tree.seasonalTiming.temperate_north.pruningWindow.description',
           },
         },
         mediterranean: {
           plantingWindow: {
             start: '01-15',
             end: '03-15',
-            description: 'Very early spring planting',
+            description: 'cherry_tree.seasonalTiming.mediterranean.plantingWindow.description',
           },
           harvestWindow: {
             start: '05-01',
             end: '07-31',
-            description: 'Harvest before summer heat',
+            description: 'cherry_tree.seasonalTiming.mediterranean.harvestWindow.description',
           },
         },
       },
     },
   },
   careTips: {
-    watering:
-      'Regular watering but avoid overwatering, good drainage essential',
-    fertilizing: 'Light annual feeding, avoid excess nitrogen',
-    sunlight: 'Full sun exposure',
-    spacing: '20-25 feet apart for sweet cherries, 15-20 feet for sour',
-    pruning: 'Minimal pruning, prune in late winter',
-    pollination: 'Sweet cherries usually need cross-pollination',
-    birdProtection: 'Netting or other bird deterrents essential at harvest',
+    watering: 'cherry_tree.careTips.watering',
+    fertilizing: 'cherry_tree.careTips.fertilizing',
+    sunlight: 'cherry_tree.careTips.sunlight',
+    spacing: 'cherry_tree.careTips.spacing',
+    pruning: 'cherry_tree.careTips.pruning',
+    pollination: 'cherry_tree.careTips.pollination',
+    birdProtection: 'cherry_tree.careTips.birdProtection',
   },
   commonProblems: {
-    'Brown Rot':
-      'Fungal disease - remove infected fruit, improve air circulation',
-    'Cherry Fruit Fly': 'Maggots in fruit - yellow sticky traps, proper timing',
-    'Bacterial Canker':
-      'Trunk/branch disease - avoid winter injury, proper pruning',
-    Birds: 'Fruit theft - netting, scare devices, early harvest',
+    'Brown Rot': 'cherry_tree.commonProblems.brownRot',
+    'Cherry Fruit Fly': 'cherry_tree.commonProblems.cherryFruitFly',
+    'Bacterial Canker': 'cherry_tree.commonProblems.bacterialCanker',
+    Birds: 'cherry_tree.commonProblems.birds',
   },
 };
 

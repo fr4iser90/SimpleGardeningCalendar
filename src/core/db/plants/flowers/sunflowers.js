@@ -6,7 +6,7 @@
 import { PLANT_TAGS } from '../categories.js';
 
 export const sunflowers = {
-  name: 'Sunflowers',
+  name: 'sunflowers.name',
   category: 'category.flowers',
   tags: [PLANT_TAGS.ANNUAL, PLANT_TAGS.PHOTOPERIOD],
   emoji: '🌻',
@@ -15,148 +15,148 @@ export const sunflowers = {
       phases: {
         germination: {
           days: 7,
-          description: 'Seed sprouting',
-          care: 'Keep warm and moist',
+          description: 'sunflowers.phases.germination.description',
+          care: 'sunflowers.phases.germination.care',
           editable: true,
           soil: {
             watering: {
               interval: 1,
-              description: 'Keep soil moist during germination',
+              description: 'sunflowers.phases.germination.soil.watering.description',
             },
             fertilizing: {
               interval: 0,
-              description: 'No fertilizing during germination',
+              description: 'sunflowers.phases.germination.soil.fertilizing.description',
             },
           },
           hydro: {
             watering: {
               interval: 0,
-              description: 'Continuous moisture in rockwool',
+              description: 'sunflowers.phases.germination.hydro.watering.description',
             },
             fertilizing: {
               interval: 0,
-              description: 'No nutrients during germination',
+              description: 'sunflowers.phases.germination.hydro.fertilizing.description',
             },
           },
           coco: {
             watering: {
               interval: 1,
-              description: 'Keep coco moist during germination',
+              description: 'sunflowers.phases.germination.coco.watering.description',
             },
             fertilizing: {
               interval: 0,
-              description: 'No fertilizing during germination',
+              description: 'sunflowers.phases.germination.coco.fertilizing.description',
             },
           },
         },
         seedling: {
           days: 14,
-          description: 'First true leaves',
-          care: 'Provide adequate light',
+          description: 'sunflowers.phases.seedling.description',
+          care: 'sunflowers.phases.seedling.care',
           editable: true,
           soil: {
             watering: {
               interval: 2,
-              description: 'Water when top inch of soil feels dry',
+              description: 'sunflowers.phases.seedling.soil.watering.description',
             },
             fertilizing: {
               interval: 0,
-              description: 'No fertilizing during seedling stage',
+              description: 'sunflowers.phases.seedling.soil.fertilizing.description',
             },
           },
           hydro: {
-            watering: { interval: 0, description: 'Continuous flow, low EC' },
+            watering: { interval: 0, description: 'sunflowers.phases.seedling.hydro.watering.description' },
             fertilizing: {
               interval: 7,
-              description: 'Light nutrients, EC 0.5-0.8',
+              description: 'sunflowers.phases.seedling.hydro.fertilizing.description',
             },
           },
           coco: {
-            watering: { interval: 1, description: 'Daily watering in coco' },
-            fertilizing: { interval: 7, description: 'Light feeding, EC 0.5-0.8' },
+            watering: { interval: 1, description: 'sunflowers.phases.seedling.coco.watering.description' },
+            fertilizing: { interval: 7, description: 'sunflowers.phases.seedling.coco.fertilizing.description' },
           },
         },
         vegetative: {
           days: 30,
-          description: 'Rapid growth phase',
-          care: 'Support tall stems, provide adequate light',
+          description: 'sunflowers.phases.vegetative.description',
+          care: 'sunflowers.phases.vegetative.care',
           editable: true,
           soil: {
             watering: {
               interval: 3,
-              description: 'Keep soil moist but not waterlogged',
+              description: 'sunflowers.phases.vegetative.soil.watering.description',
             },
             fertilizing: {
               interval: 14,
-              description: 'Light feeding with balanced fertilizer',
+              description: 'sunflowers.phases.vegetative.soil.fertilizing.description',
             },
           },
           hydro: {
-            watering: { interval: 0, description: 'Continuous flow, moderate EC' },
+            watering: { interval: 0, description: 'sunflowers.phases.vegetative.hydro.watering.description' },
             fertilizing: {
               interval: 14,
-              description: 'Balanced nutrients, EC 1.0-1.2',
+              description: 'sunflowers.phases.vegetative.hydro.fertilizing.description',
             },
           },
           coco: {
-            watering: { interval: 1, description: 'Daily watering in coco' },
+            watering: { interval: 1, description: 'sunflowers.phases.vegetative.coco.watering.description' },
             fertilizing: {
               interval: 14,
-              description: 'Balanced feeding, EC 1.0-1.2',
+              description: 'sunflowers.phases.vegetative.coco.fertilizing.description',
             },
           },
         },
         flowering: {
           days: 21,
-          description: 'Flower head development',
-          care: 'Support heavy flower heads, protect from pests',
+          description: 'sunflowers.phases.flowering.description',
+          care: 'sunflowers.phases.flowering.care',
           editable: true,
           soil: {
-            watering: { interval: 3, description: 'Maintain consistent moisture' },
+            watering: { interval: 3, description: 'sunflowers.phases.flowering.soil.watering.description' },
             fertilizing: {
               interval: 21,
-              description: 'Light feeding to support flower development',
+              description: 'sunflowers.phases.flowering.soil.fertilizing.description',
             },
           },
           hydro: {
-            watering: { interval: 0, description: 'Continuous flow, moderate EC' },
+            watering: { interval: 0, description: 'sunflowers.phases.flowering.hydro.watering.description' },
             fertilizing: {
               interval: 21,
-              description: 'Light feeding, EC 1.0-1.2',
+              description: 'sunflowers.phases.flowering.hydro.fertilizing.description',
             },
           },
           coco: {
-            watering: { interval: 1, description: 'Daily watering in coco' },
+            watering: { interval: 1, description: 'sunflowers.phases.flowering.coco.watering.description' },
             fertilizing: {
               interval: 21,
-              description: 'Light feeding, EC 1.0-1.2',
+              description: 'sunflowers.phases.flowering.coco.fertilizing.description',
             },
           },
         },
         seed_development: {
           days: 30,
-          description: 'Seed maturation',
-          care: 'Protect from birds, allow seeds to mature',
+          description: 'sunflowers.phases.seed_development.description',
+          care: 'sunflowers.phases.seed_development.care',
           editable: true,
           soil: {
-            watering: { interval: 3, description: 'Keep soil consistently moist' },
+            watering: { interval: 3, description: 'sunflowers.phases.seed_development.soil.watering.description' },
             fertilizing: {
               interval: 0,
-              description: 'No fertilizing during seed development',
+              description: 'sunflowers.phases.seed_development.soil.fertilizing.description',
             },
           },
           hydro: {
-            watering: { interval: 0, description: 'Continuous flow, moderate EC' },
+            watering: { interval: 0, description: 'sunflowers.phases.seed_development.hydro.watering.description' },
             fertilizing: {
               interval: 0,
-              description: 'No nutrients during seed development',
+              description: 'sunflowers.phases.seed_development.hydro.fertilizing.description',
             },
           },
           coco: {
-            watering: { interval: 1, description: 'Daily watering in coco' },
+            watering: { interval: 1, description: 'sunflowers.phases.seed_development.coco.watering.description' },
             fertilizing: {
               interval: 0,
-              description: 'No fertilizing during seed development',
+              description: 'sunflowers.phases.seed_development.coco.fertilizing.description',
             },
           },
         },
@@ -167,152 +167,152 @@ export const sunflowers = {
         germination: {
           start: '04-15',
           end: '04-22',
-          description: 'Seed sprouting',
-          care: 'Keep warm and moist',
+          description: 'sunflowers.phases.germination.description',
+          care: 'sunflowers.phases.germination.care',
           editable: false,
           soil: {
             watering: {
               interval: 1,
-              description: 'Keep soil moist during germination',
+              description: 'sunflowers.phases.germination.soil.watering.description',
             },
             fertilizing: {
               interval: 0,
-              description: 'No fertilizing during germination',
+              description: 'sunflowers.phases.germination.soil.fertilizing.description',
             },
           },
           hydro: {
             watering: {
               interval: 0,
-              description: 'Continuous moisture in rockwool',
+              description: 'sunflowers.phases.germination.hydro.watering.description',
             },
             fertilizing: {
               interval: 0,
-              description: 'No nutrients during germination',
+              description: 'sunflowers.phases.germination.hydro.fertilizing.description',
             },
           },
           coco: {
             watering: {
               interval: 1,
-              description: 'Keep coco moist during germination',
+              description: 'sunflowers.phases.germination.coco.watering.description',
             },
             fertilizing: {
               interval: 0,
-              description: 'No fertilizing during germination',
+              description: 'sunflowers.phases.germination.coco.fertilizing.description',
             },
           },
         },
         seedling: {
           start: '04-23',
           end: '05-07',
-          description: 'First true leaves',
-          care: 'Provide adequate light',
+          description: 'sunflowers.phases.seedling.description',
+          care: 'sunflowers.phases.seedling.care',
           editable: false,
           soil: {
             watering: {
               interval: 2,
-              description: 'Water when top inch of soil feels dry',
+              description: 'sunflowers.phases.seedling.soil.watering.description',
             },
             fertilizing: {
               interval: 0,
-              description: 'No fertilizing during seedling stage',
+              description: 'sunflowers.phases.seedling.soil.fertilizing.description',
             },
           },
           hydro: {
-            watering: { interval: 0, description: 'Continuous flow, low EC' },
+            watering: { interval: 0, description: 'sunflowers.phases.seedling.hydro.watering.description' },
             fertilizing: {
               interval: 7,
-              description: 'Light nutrients, EC 0.5-0.8',
+              description: 'sunflowers.phases.seedling.hydro.fertilizing.description',
             },
           },
           coco: {
-            watering: { interval: 1, description: 'Daily watering in coco' },
-            fertilizing: { interval: 7, description: 'Light feeding, EC 0.5-0.8' },
+            watering: { interval: 1, description: 'sunflowers.phases.seedling.coco.watering.description' },
+            fertilizing: { interval: 7, description: 'sunflowers.phases.seedling.coco.fertilizing.description' },
           },
         },
         vegetative: {
           start: '05-08',
           end: '06-07',
-          description: 'Rapid growth phase',
-          care: 'Support tall stems, provide adequate light',
+          description: 'sunflowers.phases.vegetative.description',
+          care: 'sunflowers.phases.vegetative.care',
           editable: false,
           soil: {
             watering: {
               interval: 3,
-              description: 'Keep soil moist but not waterlogged',
+              description: 'sunflowers.phases.vegetative.soil.watering.description',
             },
             fertilizing: {
               interval: 14,
-              description: 'Light feeding with balanced fertilizer',
+              description: 'sunflowers.phases.vegetative.soil.fertilizing.description',
             },
           },
           hydro: {
-            watering: { interval: 0, description: 'Continuous flow, moderate EC' },
+            watering: { interval: 0, description: 'sunflowers.phases.vegetative.hydro.watering.description' },
             fertilizing: {
               interval: 14,
-              description: 'Balanced nutrients, EC 1.0-1.2',
+              description: 'sunflowers.phases.vegetative.hydro.fertilizing.description',
             },
           },
           coco: {
-            watering: { interval: 1, description: 'Daily watering in coco' },
+            watering: { interval: 1, description: 'sunflowers.phases.vegetative.coco.watering.description' },
             fertilizing: {
               interval: 14,
-              description: 'Balanced feeding, EC 1.0-1.2',
+              description: 'sunflowers.phases.vegetative.coco.fertilizing.description',
             },
           },
         },
         flowering: {
           start: '06-08',
           end: '06-29',
-          description: 'Flower head development',
-          care: 'Support heavy flower heads, protect from pests',
+          description: 'sunflowers.phases.flowering.description',
+          care: 'sunflowers.phases.flowering.care',
           editable: true,
           soil: {
-            watering: { interval: 3, description: 'Maintain consistent moisture' },
+            watering: { interval: 3, description: 'sunflowers.phases.flowering.soil.watering.description' },
             fertilizing: {
               interval: 21,
-              description: 'Light feeding to support flower development',
+              description: 'sunflowers.phases.flowering.soil.fertilizing.description',
             },
           },
           hydro: {
-            watering: { interval: 0, description: 'Continuous flow, moderate EC' },
+            watering: { interval: 0, description: 'sunflowers.phases.flowering.hydro.watering.description' },
             fertilizing: {
               interval: 21,
-              description: 'Light feeding, EC 1.0-1.2',
+              description: 'sunflowers.phases.flowering.hydro.fertilizing.description',
             },
           },
           coco: {
-            watering: { interval: 1, description: 'Daily watering in coco' },
+            watering: { interval: 1, description: 'sunflowers.phases.flowering.coco.watering.description' },
             fertilizing: {
               interval: 21,
-              description: 'Light feeding, EC 1.0-1.2',
+              description: 'sunflowers.phases.flowering.coco.fertilizing.description',
             },
           },
         },
         seed_development: {
           start: '06-30',
           end: '07-30',
-          description: 'Seed maturation',
-          care: 'Protect from birds, allow seeds to mature',
+          description: 'sunflowers.phases.seed_development.description',
+          care: 'sunflowers.phases.seed_development.care',
           editable: true,
           soil: {
-            watering: { interval: 3, description: 'Keep soil consistently moist' },
+            watering: { interval: 3, description: 'sunflowers.phases.seed_development.soil.watering.description' },
             fertilizing: {
               interval: 0,
-              description: 'No fertilizing during seed development',
+              description: 'sunflowers.phases.seed_development.soil.fertilizing.description',
             },
           },
           hydro: {
-            watering: { interval: 0, description: 'Continuous flow, moderate EC' },
+            watering: { interval: 0, description: 'sunflowers.phases.seed_development.hydro.watering.description' },
             fertilizing: {
               interval: 0,
-              description: 'No nutrients during seed development',
+              description: 'sunflowers.phases.seed_development.hydro.fertilizing.description',
             },
           },
           coco: {
-            watering: { interval: 1, description: 'Daily watering in coco' },
+            watering: { interval: 1, description: 'sunflowers.phases.seed_development.coco.watering.description' },
             fertilizing: {
               interval: 0,
-              description: 'No fertilizing during seed development',
+              description: 'sunflowers.phases.seed_development.coco.fertilizing.description',
             },
           },
         },
@@ -322,24 +322,24 @@ export const sunflowers = {
           plantingWindow: {
             start: '04-15',
             end: '06-15',
-            description: 'After last frost, soil warm',
+            description: 'sunflowers.seasonalTiming.temperate_north.plantingWindow.description',
           },
           harvestWindow: {
             start: '08-01',
             end: '09-30',
-            description: 'Harvest before frost',
+            description: 'sunflowers.seasonalTiming.temperate_north.harvestWindow.description',
           },
         },
         mediterranean: {
           plantingWindow: {
             start: '03-01',
             end: '05-15',
-            description: 'Early spring to late spring',
+            description: 'sunflowers.seasonalTiming.mediterranean.plantingWindow.description',
           },
           harvestWindow: {
             start: '07-01',
             end: '10-31',
-            description: 'Long harvest period',
+            description: 'sunflowers.seasonalTiming.mediterranean.harvestWindow.description',
           },
         },
       },
@@ -348,148 +348,148 @@ export const sunflowers = {
       phases: {
         germination: {
           days: 7,
-          description: 'Seed sprouting',
-          care: 'Keep warm and moist',
+          description: 'sunflowers.phases.germination.description',
+          care: 'sunflowers.phases.germination.care',
           editable: true,
           soil: {
             watering: {
               interval: 1,
-              description: 'Keep soil moist during germination',
+              description: 'sunflowers.phases.germination.soil.watering.description',
             },
             fertilizing: {
               interval: 0,
-              description: 'No fertilizing during germination',
+              description: 'sunflowers.phases.germination.soil.fertilizing.description',
             },
           },
           hydro: {
             watering: {
               interval: 0,
-              description: 'Continuous moisture in rockwool',
+              description: 'sunflowers.phases.germination.hydro.watering.description',
             },
             fertilizing: {
               interval: 0,
-              description: 'No nutrients during germination',
+              description: 'sunflowers.phases.germination.hydro.fertilizing.description',
             },
           },
           coco: {
             watering: {
               interval: 1,
-              description: 'Keep coco moist during germination',
+              description: 'sunflowers.phases.germination.coco.watering.description',
             },
             fertilizing: {
               interval: 0,
-              description: 'No fertilizing during germination',
+              description: 'sunflowers.phases.germination.coco.fertilizing.description',
             },
           },
         },
         seedling: {
           days: 14,
-          description: 'First true leaves',
-          care: 'Provide adequate light',
+          description: 'sunflowers.phases.seedling.description',
+          care: 'sunflowers.phases.seedling.care',
           editable: true,
           soil: {
             watering: {
               interval: 2,
-              description: 'Water when top inch of soil feels dry',
+              description: 'sunflowers.phases.seedling.soil.watering.description',
             },
             fertilizing: {
               interval: 0,
-              description: 'No fertilizing during seedling stage',
+              description: 'sunflowers.phases.seedling.soil.fertilizing.description',
             },
           },
           hydro: {
-            watering: { interval: 0, description: 'Continuous flow, low EC' },
+            watering: { interval: 0, description: 'sunflowers.phases.seedling.hydro.watering.description' },
             fertilizing: {
               interval: 7,
-              description: 'Light nutrients, EC 0.5-0.8',
+              description: 'sunflowers.phases.seedling.hydro.fertilizing.description',
             },
           },
           coco: {
-            watering: { interval: 1, description: 'Daily watering in coco' },
-            fertilizing: { interval: 7, description: 'Light feeding, EC 0.5-0.8' },
+            watering: { interval: 1, description: 'sunflowers.phases.seedling.coco.watering.description' },
+            fertilizing: { interval: 7, description: 'sunflowers.phases.seedling.coco.fertilizing.description' },
           },
         },
         vegetative: {
           days: 30,
-          description: 'Rapid growth phase',
-          care: 'Support tall stems, provide adequate light',
+          description: 'sunflowers.phases.vegetative.description',
+          care: 'sunflowers.phases.vegetative.care',
           editable: true,
           soil: {
             watering: {
               interval: 3,
-              description: 'Keep soil moist but not waterlogged',
+              description: 'sunflowers.phases.vegetative.soil.watering.description',
             },
             fertilizing: {
               interval: 14,
-              description: 'Light feeding with balanced fertilizer',
+              description: 'sunflowers.phases.vegetative.soil.fertilizing.description',
             },
           },
           hydro: {
-            watering: { interval: 0, description: 'Continuous flow, moderate EC' },
+            watering: { interval: 0, description: 'sunflowers.phases.vegetative.hydro.watering.description' },
             fertilizing: {
               interval: 14,
-              description: 'Balanced nutrients, EC 1.0-1.2',
+              description: 'sunflowers.phases.vegetative.hydro.fertilizing.description',
             },
           },
           coco: {
-            watering: { interval: 1, description: 'Daily watering in coco' },
+            watering: { interval: 1, description: 'sunflowers.phases.vegetative.coco.watering.description' },
             fertilizing: {
               interval: 14,
-              description: 'Balanced feeding, EC 1.0-1.2',
+              description: 'sunflowers.phases.vegetative.coco.fertilizing.description',
             },
           },
         },
         flowering: {
           days: 21,
-          description: 'Flower head development',
-          care: 'Support heavy flower heads, protect from pests',
+          description: 'sunflowers.phases.flowering.description',
+          care: 'sunflowers.phases.flowering.care',
           editable: true,
           soil: {
-            watering: { interval: 3, description: 'Maintain consistent moisture' },
+            watering: { interval: 3, description: 'sunflowers.phases.flowering.soil.watering.description' },
             fertilizing: {
               interval: 21,
-              description: 'Light feeding to support flower development',
+              description: 'sunflowers.phases.flowering.soil.fertilizing.description',
             },
           },
           hydro: {
-            watering: { interval: 0, description: 'Continuous flow, moderate EC' },
+            watering: { interval: 0, description: 'sunflowers.phases.flowering.hydro.watering.description' },
             fertilizing: {
               interval: 21,
-              description: 'Light feeding, EC 1.0-1.2',
+              description: 'sunflowers.phases.flowering.hydro.fertilizing.description',
             },
           },
           coco: {
-            watering: { interval: 1, description: 'Daily watering in coco' },
+            watering: { interval: 1, description: 'sunflowers.phases.flowering.coco.watering.description' },
             fertilizing: {
               interval: 21,
-              description: 'Light feeding, EC 1.0-1.2',
+              description: 'sunflowers.phases.flowering.coco.fertilizing.description',
             },
           },
         },
         seed_development: {
           days: 30,
-          description: 'Seed maturation',
-          care: 'Protect from birds, allow seeds to mature',
+          description: 'sunflowers.phases.seed_development.description',
+          care: 'sunflowers.phases.seed_development.care',
           editable: true,
           soil: {
-            watering: { interval: 3, description: 'Keep soil consistently moist' },
+            watering: { interval: 3, description: 'sunflowers.phases.seed_development.soil.watering.description' },
             fertilizing: {
               interval: 0,
-              description: 'No fertilizing during seed development',
+              description: 'sunflowers.phases.seed_development.soil.fertilizing.description',
             },
           },
           hydro: {
-            watering: { interval: 0, description: 'Continuous flow, moderate EC' },
+            watering: { interval: 0, description: 'sunflowers.phases.seed_development.hydro.watering.description' },
             fertilizing: {
               interval: 0,
-              description: 'No nutrients during seed development',
+              description: 'sunflowers.phases.seed_development.hydro.fertilizing.description',
             },
           },
           coco: {
-            watering: { interval: 1, description: 'Daily watering in coco' },
+            watering: { interval: 1, description: 'sunflowers.phases.seed_development.coco.watering.description' },
             fertilizing: {
               interval: 0,
-              description: 'No fertilizing during seed development',
+              description: 'sunflowers.phases.seed_development.coco.fertilizing.description',
             },
           },
         },
@@ -497,18 +497,18 @@ export const sunflowers = {
     },
   },
   careTips: {
-    watering: 'Keep soil moist but not waterlogged',
-    fertilizing: 'Light feeding every 2-3 weeks',
-    sunlight: 'Full sun (6+ hours daily)',
-    spacing: '1-2 feet apart',
-    temperature: 'Warm weather flower, protect from cold',
-    soilPH: '6.0-7.5',
-    support: 'Stake tall varieties to prevent wind damage',
+    watering: 'sunflowers.careTips.watering',
+    fertilizing: 'sunflowers.careTips.fertilizing',
+    sunlight: 'sunflowers.careTips.sunlight',
+    spacing: 'sunflowers.careTips.spacing',
+    temperature: 'sunflowers.careTips.temperature',
+    soilPH: 'sunflowers.careTips.soilPH',
+    support: 'sunflowers.careTips.support',
   },
   commonProblems: {
-    'Aphids': 'Small insects on new growth - spray with water',
-    'Birds': 'Eat seeds - cover flower heads with netting',
-    'Wind Damage': 'Tall stems break - provide support stakes',
+    'Aphids': 'sunflowers.commonProblems.aphids',
+    'Birds': 'sunflowers.commonProblems.birds',
+    'Wind Damage': 'sunflowers.commonProblems.windDamage',
   },
 };
 

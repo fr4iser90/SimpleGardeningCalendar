@@ -6,7 +6,7 @@
 import { PLANT_TAGS } from '../categories.js';
 
 export const raspberries = {
-  name: 'Raspberries',
+  name: 'raspberries.name',
   category: 'category.fruits',
   tags: [PLANT_TAGS.PERENNIAL, PLANT_TAGS.PHOTOPERIOD],
   emoji: '🫐',
@@ -15,49 +15,49 @@ export const raspberries = {
       phases: {
         establishment: {
           days: 60,
-          description: 'Root establishment',
-          care: 'Remove flowers first year, focus on root development',
+          description: 'raspberries.phases.establishment.description',
+          care: 'raspberries.phases.establishment.care',
           editable: true,
           soil: {
             watering: {
               interval: 3,
-              description: 'Keep soil consistently moist during establishment',
+              description: 'raspberries.phases.establishment.soil.watering.description',
             },
             fertilizing: {
               interval: 0,
-              description: 'No fertilizing during establishment, remove flowers',
+              description: 'raspberries.phases.establishment.soil.fertilizing.description',
             },
           },
           hydro: {
             watering: {
               interval: 0,
-              description: 'Continuous flow, low EC',
+              description: 'raspberries.phases.establishment.hydro.watering.description',
             },
             fertilizing: {
               interval: 0,
-              description: 'No nutrients during establishment',
+              description: 'raspberries.phases.establishment.hydro.fertilizing.description',
             },
           },
           coco: {
             watering: {
               interval: 1,
-              description: 'Daily watering in coco',
+              description: 'raspberries.phases.establishment.coco.watering.description',
             },
             fertilizing: {
               interval: 0,
-              description: 'No fertilizing during establishment',
+              description: 'raspberries.phases.establishment.coco.fertilizing.description',
             },
           },
         },
         vegetative: {
           days: 90,
-          description: 'Cane growth and development',
-          care: 'Train canes to trellis, remove weak growth',
+          description: 'raspberries.phases.vegetative.description',
+          care: 'raspberries.phases.vegetative.care',
           editable: true,
           soil: {
             watering: {
               interval: 3,
-              description: 'Keep soil consistently moist during vegetative growth',
+              description: 'raspberries.phases.vegetative.soil.watering.description',
             },
             fertilizing: {
               interval: 21,
@@ -67,7 +67,7 @@ export const raspberries = {
           hydro: {
             watering: {
               interval: 0,
-              description: 'Continuous flow, moderate EC',
+              description: 'raspberries.phases.vegetative.hydro.watering.description',
             },
             fertilizing: {
               interval: 21,
@@ -77,7 +77,7 @@ export const raspberries = {
           coco: {
             watering: {
               interval: 1,
-              description: 'Daily watering in coco',
+              description: 'raspberries.phases.vegetative.coco.watering.description',
             },
             fertilizing: {
               interval: 21,
@@ -87,110 +87,109 @@ export const raspberries = {
         },
         flowering: {
           days: 21,
-          description: 'Flower development',
-          care: 'Protect flowers from late frost',
+          description: 'raspberries.phases.flowering.description',
+          care: 'raspberries.phases.flowering.care',
           editable: true,
           soil: {
             watering: {
               interval: 2,
-              description: 'Maintain consistent moisture during flowering',
+              description: 'raspberries.phases.flowering.soil.watering.description',
             },
             fertilizing: {
               interval: 0,
-              description: 'No fertilizing during flowering to avoid blossom damage',
+              description: 'raspberries.phases.flowering.soil.fertilizing.description',
             },
           },
           hydro: {
             watering: {
               interval: 0,
-              description: 'Continuous flow, moderate EC',
+              description: 'raspberries.phases.flowering.hydro.watering.description',
             },
             fertilizing: {
               interval: 0,
-              description: 'No nutrients during flowering',
+              description: 'raspberries.phases.flowering.hydro.fertilizing.description',
             },
           },
           coco: {
             watering: {
               interval: 1,
-              description: 'Daily watering in coco',
+              description: 'raspberries.phases.flowering.coco.watering.description',
             },
             fertilizing: {
               interval: 0,
-              description: 'No fertilizing during flowering',
+              description: 'raspberries.phases.flowering.coco.fertilizing.description',
             },
           },
         },
         fruiting: {
           days: 30,
-          description: 'Berry production',
-          care: 'Regular watering and feeding during fruiting',
+          description: 'raspberries.phases.fruiting.description',
+          care: 'raspberries.phases.fruiting.care',
           editable: true,
           soil: {
             watering: {
               interval: 2,
-              description: 'Regular watering during fruiting, avoid wetting berries',
+              description: 'raspberries.phases.fruiting.soil.watering.description',
             },
             fertilizing: {
               interval: 14,
-              description: 'Light feeding with balanced fertilizer during fruiting',
+              description: 'raspberries.phases.fruiting.soil.fertilizing.description',
             },
           },
           hydro: {
             watering: {
               interval: 0,
-              description: 'Continuous flow, moderate EC',
+              description: 'raspberries.phases.fruiting.hydro.watering.description',
             },
             fertilizing: {
               interval: 14,
-              description: 'Balanced nutrients, EC 1.0-1.2',
+              description: 'raspberries.phases.fruiting.hydro.fertilizing.description',
             },
           },
           coco: {
             watering: {
               interval: 1,
-              description: 'Daily watering in coco',
+              description: 'raspberries.phases.fruiting.coco.watering.description',
             },
             fertilizing: {
               interval: 14,
-              description: 'Balanced feeding, EC 1.0-1.2',
+              description: 'raspberries.phases.fruiting.coco.fertilizing.description',
             },
           },
         },
         dormancy: {
           days: 120,
-          description: 'Winter rest period',
-          care: 'Prune old canes, mulch for winter protection',
+          description: 'raspberries.phases.dormancy.description',
+          care: 'raspberries.phases.dormancy.care',
           editable: true,
           soil: {
             watering: {
               interval: 7,
-              description:
-                'Reduce watering during dormancy, just keep from drying out',
+              description: 'raspberries.phases.dormancy.soil.watering.description',
             },
             fertilizing: {
               interval: 0,
-              description: 'No fertilizing during dormancy',
+              description: 'raspberries.phases.dormancy.soil.fertilizing.description',
             },
           },
           hydro: {
             watering: {
               interval: 0,
-              description: 'Minimal flow during dormancy',
+              description: 'raspberries.phases.dormancy.hydro.watering.description',
             },
             fertilizing: {
               interval: 0,
-              description: 'No nutrients during dormancy',
+              description: 'raspberries.phases.dormancy.hydro.fertilizing.description',
             },
           },
           coco: {
             watering: {
               interval: 7,
-              description: 'Minimal watering during dormancy',
+              description: 'raspberries.phases.dormancy.coco.watering.description',
             },
             fertilizing: {
               interval: 0,
-              description: 'No fertilizing during dormancy',
+              description: 'raspberries.phases.dormancy.coco.fertilizing.description',
             },
           },
         },
@@ -355,8 +354,7 @@ export const raspberries = {
           soil: {
             watering: {
               interval: 7,
-              description:
-                'Reduce watering during dormancy, just keep from drying out',
+              description: 'Reduce watering during dormancy, just keep from drying out',
             },
             fertilizing: {
               interval: 0,
@@ -390,24 +388,24 @@ export const raspberries = {
           plantingWindow: {
             start: '03-15',
             end: '05-15',
-            description: 'Early to mid spring planting',
+            description: 'raspberries.seasonalTiming.temperate_north.plantingWindow.description',
           },
           harvestWindow: {
             start: '06-15',
             end: '09-30',
-            description: 'Harvest throughout summer',
+            description: 'raspberries.seasonalTiming.temperate_north.harvestWindow.description',
           },
         },
         mediterranean: {
           plantingWindow: {
             start: '02-01',
             end: '04-15',
-            description: 'Very early spring planting',
+            description: 'raspberries.seasonalTiming.mediterranean.plantingWindow.description',
           },
           harvestWindow: {
             start: '04-15',
             end: '07-31',
-            description: 'Harvest before summer heat',
+            description: 'raspberries.seasonalTiming.mediterranean.harvestWindow.description',
           },
         },
       },
@@ -566,8 +564,7 @@ export const raspberries = {
           soil: {
             watering: {
               interval: 7,
-              description:
-                'Reduce watering during dormancy, just keep from drying out',
+              description: 'Reduce watering during dormancy, just keep from drying out',
             },
             fertilizing: {
               interval: 0,
@@ -599,18 +596,18 @@ export const raspberries = {
     },
   },
   careTips: {
-    watering: 'Keep soil consistently moist, avoid overhead watering',
-    fertilizing: 'Balanced fertilizer in spring, avoid high nitrogen',
-    sunlight: 'Full sun (6+ hours daily)',
-    spacing: '2-3 feet apart',
-    temperature: 'Cool season crop, protect from extreme heat',
-    soilPH: '5.5-6.5',
-    trellising: 'Support canes with trellis or wire system',
+    watering: 'raspberries.careTips.watering',
+    fertilizing: 'raspberries.careTips.fertilizing',
+    sunlight: 'raspberries.careTips.sunlight',
+    spacing: 'raspberries.careTips.spacing',
+    temperature: 'raspberries.careTips.temperature',
+    soilPH: 'raspberries.careTips.soilPH',
+    trellising: 'raspberries.careTips.trellising',
   },
   commonProblems: {
-    'Cane Borers': 'Insect damage to canes - remove and destroy affected canes',
-    'Gray Mold': 'Fungal disease on fruit - improve air circulation',
-    'Spider Mites': 'Tiny pests on leaves - increase humidity, use predatory mites',
+    'Cane Borers': 'raspberries.commonProblems.caneBorers',
+    'Gray Mold': 'raspberries.commonProblems.grayMold',
+    'Spider Mites': 'raspberries.commonProblems.spiderMites',
   },
 };
 

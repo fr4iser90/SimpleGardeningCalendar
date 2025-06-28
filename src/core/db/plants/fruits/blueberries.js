@@ -6,7 +6,7 @@
 import { PLANT_TAGS } from '../categories.js';
 
 export const blueberries = {
-  name: 'Blueberries',
+  name: 'blueberries.name',
   category: 'category.fruits',
   tags: [PLANT_TAGS.PERENNIAL, PLANT_TAGS.PHOTOPERIOD],
   emoji: '🫐',
@@ -15,49 +15,49 @@ export const blueberries = {
       phases: {
         establishment: {
           days: 90,
-          description: 'Root establishment',
-          care: 'Remove flowers first year, focus on root development',
+          description: 'blueberries.phases.establishment.description',
+          care: 'blueberries.phases.establishment.care',
           editable: true,
           soil: {
             watering: {
               interval: 3,
-              description: 'Keep soil consistently moist during establishment',
+              description: 'blueberries.phases.establishment.soil.watering.description',
             },
             fertilizing: {
               interval: 0,
-              description: 'No fertilizing during establishment, remove flowers',
+              description: 'blueberries.phases.establishment.soil.fertilizing.description',
             },
           },
           hydro: {
             watering: {
               interval: 0,
-              description: 'Continuous flow, low EC',
+              description: 'blueberries.phases.establishment.hydro.watering.description',
             },
             fertilizing: {
               interval: 0,
-              description: 'No nutrients during establishment',
+              description: 'blueberries.phases.establishment.hydro.fertilizing.description',
             },
           },
           coco: {
             watering: {
               interval: 1,
-              description: 'Daily watering in coco',
+              description: 'blueberries.phases.establishment.coco.watering.description',
             },
             fertilizing: {
               interval: 0,
-              description: 'No fertilizing during establishment',
+              description: 'blueberries.phases.establishment.coco.fertilizing.description',
             },
           },
         },
         vegetative: {
           days: 120,
-          description: 'Bush growth and development',
-          care: 'Shape pruning, remove weak growth',
+          description: 'blueberries.phases.vegetative.description',
+          care: 'blueberries.phases.vegetative.care',
           editable: true,
           soil: {
             watering: {
               interval: 3,
-              description: 'Keep soil consistently moist during vegetative growth',
+              description: 'blueberries.phases.vegetative.soil.watering.description',
             },
             fertilizing: {
               interval: 30,
@@ -67,7 +67,7 @@ export const blueberries = {
           hydro: {
             watering: {
               interval: 0,
-              description: 'Continuous flow, moderate EC',
+              description: 'blueberries.phases.vegetative.hydro.watering.description',
             },
             fertilizing: {
               interval: 30,
@@ -77,7 +77,7 @@ export const blueberries = {
           coco: {
             watering: {
               interval: 1,
-              description: 'Daily watering in coco',
+              description: 'blueberries.phases.vegetative.coco.watering.description',
             },
             fertilizing: {
               interval: 30,
@@ -87,110 +87,109 @@ export const blueberries = {
         },
         flowering: {
           days: 21,
-          description: 'Flower development',
-          care: 'Protect flowers from late frost',
+          description: 'blueberries.phases.flowering.description',
+          care: 'blueberries.phases.flowering.care',
           editable: true,
           soil: {
             watering: {
               interval: 2,
-              description: 'Maintain consistent moisture during flowering',
+              description: 'blueberries.phases.flowering.soil.watering.description',
             },
             fertilizing: {
               interval: 0,
-              description: 'No fertilizing during flowering to avoid blossom damage',
+              description: 'blueberries.phases.flowering.soil.fertilizing.description',
             },
           },
           hydro: {
             watering: {
               interval: 0,
-              description: 'Continuous flow, moderate EC',
+              description: 'blueberries.phases.flowering.hydro.watering.description',
             },
             fertilizing: {
               interval: 0,
-              description: 'No nutrients during flowering',
+              description: 'blueberries.phases.flowering.hydro.fertilizing.description',
             },
           },
           coco: {
             watering: {
               interval: 1,
-              description: 'Daily watering in coco',
+              description: 'blueberries.phases.flowering.coco.watering.description',
             },
             fertilizing: {
               interval: 0,
-              description: 'No fertilizing during flowering',
+              description: 'blueberries.phases.flowering.coco.fertilizing.description',
             },
           },
         },
         fruiting: {
           days: 45,
-          description: 'Berry production',
-          care: 'Regular watering and feeding during fruiting',
+          description: 'blueberries.phases.fruiting.description',
+          care: 'blueberries.phases.fruiting.care',
           editable: true,
           soil: {
             watering: {
               interval: 2,
-              description: 'Regular watering during fruiting, avoid wetting berries',
+              description: 'blueberries.phases.fruiting.soil.watering.description',
             },
             fertilizing: {
               interval: 21,
-              description: 'Light feeding with acid-loving fertilizer during fruiting',
+              description: 'blueberries.phases.fruiting.soil.fertilizing.description',
             },
           },
           hydro: {
             watering: {
               interval: 0,
-              description: 'Continuous flow, moderate EC',
+              description: 'blueberries.phases.fruiting.hydro.watering.description',
             },
             fertilizing: {
               interval: 21,
-              description: 'Acid-loving nutrients, EC 1.0-1.2',
+              description: 'blueberries.phases.fruiting.hydro.fertilizing.description',
             },
           },
           coco: {
             watering: {
               interval: 1,
-              description: 'Daily watering in coco',
+              description: 'blueberries.phases.fruiting.coco.watering.description',
             },
             fertilizing: {
               interval: 21,
-              description: 'Acid-loving feeding, EC 1.0-1.2',
+              description: 'blueberries.phases.fruiting.coco.fertilizing.description',
             },
           },
         },
         dormancy: {
           days: 120,
-          description: 'Winter rest period',
-          care: 'Prune old wood, mulch for winter protection',
+          description: 'blueberries.phases.dormancy.description',
+          care: 'blueberries.phases.dormancy.care',
           editable: true,
           soil: {
             watering: {
               interval: 7,
-              description:
-                'Reduce watering during dormancy, just keep from drying out',
+              description: 'blueberries.phases.dormancy.soil.watering.description',
             },
             fertilizing: {
               interval: 0,
-              description: 'No fertilizing during dormancy',
+              description: 'blueberries.phases.dormancy.soil.fertilizing.description',
             },
           },
           hydro: {
             watering: {
               interval: 0,
-              description: 'Minimal flow during dormancy',
+              description: 'blueberries.phases.dormancy.hydro.watering.description',
             },
             fertilizing: {
               interval: 0,
-              description: 'No nutrients during dormancy',
+              description: 'blueberries.phases.dormancy.hydro.fertilizing.description',
             },
           },
           coco: {
             watering: {
               interval: 7,
-              description: 'Minimal watering during dormancy',
+              description: 'blueberries.phases.dormancy.coco.watering.description',
             },
             fertilizing: {
               interval: 0,
-              description: 'No fertilizing during dormancy',
+              description: 'blueberries.phases.dormancy.coco.fertilizing.description',
             },
           },
         },
@@ -355,8 +354,7 @@ export const blueberries = {
           soil: {
             watering: {
               interval: 7,
-              description:
-                'Reduce watering during dormancy, just keep from drying out',
+              description: 'Reduce watering during dormancy, just keep from drying out',
             },
             fertilizing: {
               interval: 0,
@@ -390,24 +388,24 @@ export const blueberries = {
           plantingWindow: {
             start: '03-15',
             end: '05-15',
-            description: 'Early to mid spring planting',
+            description: 'blueberries.seasonalTiming.temperate_north.plantingWindow.description',
           },
           harvestWindow: {
             start: '07-01',
             end: '09-30',
-            description: 'Harvest throughout summer',
+            description: 'blueberries.seasonalTiming.temperate_north.harvestWindow.description',
           },
         },
         mediterranean: {
           plantingWindow: {
             start: '02-01',
             end: '04-15',
-            description: 'Very early spring planting',
+            description: 'blueberries.seasonalTiming.mediterranean.plantingWindow.description',
           },
           harvestWindow: {
             start: '04-15',
             end: '07-31',
-            description: 'Harvest before summer heat',
+            description: 'blueberries.seasonalTiming.mediterranean.harvestWindow.description',
           },
         },
       },
@@ -566,8 +564,7 @@ export const blueberries = {
           soil: {
             watering: {
               interval: 7,
-              description:
-                'Reduce watering during dormancy, just keep from drying out',
+              description: 'Reduce watering during dormancy, just keep from drying out',
             },
             fertilizing: {
               interval: 0,
@@ -599,18 +596,18 @@ export const blueberries = {
     },
   },
   careTips: {
-    watering: 'Keep soil consistently moist, avoid overhead watering',
-    fertilizing: 'Acid-loving fertilizer, pH 4.5-5.5',
-    sunlight: 'Full sun (6+ hours daily)',
-    spacing: '4-6 feet apart',
-    temperature: 'Cool season crop, protect from extreme heat',
-    soilPH: '4.5-5.5 (acidic soil required)',
-    mulching: 'Pine bark or sawdust mulch to maintain acidity',
+    watering: 'blueberries.careTips.watering',
+    fertilizing: 'blueberries.careTips.fertilizing',
+    sunlight: 'blueberries.careTips.sunlight',
+    spacing: 'blueberries.careTips.spacing',
+    temperature: 'blueberries.careTips.temperature',
+    soilPH: 'blueberries.careTips.soilPH',
+    mulching: 'blueberries.careTips.mulching',
   },
   commonProblems: {
-    'Iron Deficiency': 'Yellow leaves with green veins - check soil pH',
-    'Birds': 'Eat ripe berries - use netting protection',
-    'Root Rot': 'Fungal disease - improve drainage, avoid overwatering',
+    'Iron Deficiency': 'blueberries.commonProblems.ironDeficiency',
+    'Birds': 'blueberries.commonProblems.birds',
+    'Root Rot': 'blueberries.commonProblems.rootRot',
   },
 };
 

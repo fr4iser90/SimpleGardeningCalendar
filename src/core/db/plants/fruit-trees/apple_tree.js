@@ -6,7 +6,7 @@
 import { PLANT_TAGS } from '../categories.js';
 
 export const apple_tree = {
-  name: 'Apple Tree',
+  name: 'apple_tree.name',
   category: 'category.fruit_trees',
   tags: [PLANT_TAGS.PERENNIAL, PLANT_TAGS.PHOTOPERIOD],
   emoji: '🍎',
@@ -16,154 +16,148 @@ export const apple_tree = {
         establishment: {
           start: '03-01',
           end: '02-28',
-          description: 'First year root establishment',
-          care: 'Regular watering, weed control, light pruning',
+          description: 'apple_tree.phases.establishment.description',
+          care: 'apple_tree.phases.establishment.care',
           editable: false,
           soil: {
             watering: {
               interval: 7,
-              description:
-                'Deep weekly watering, 1-2 inches per week during growing season',
+              description: 'apple_tree.phases.establishment.soil.watering.description',
             },
             fertilizing: {
               interval: 90,
-              description:
-                'Light feeding in spring and fall, avoid high nitrogen',
+              description: 'apple_tree.phases.establishment.soil.fertilizing.description',
             },
           },
           hydro: {
             watering: {
               interval: 0,
-              description: 'Continuous flow, low EC',
+              description: 'apple_tree.phases.establishment.hydro.watering.description',
             },
             fertilizing: {
               interval: 90,
-              description: 'Light feeding, EC 0.5-0.8',
+              description: 'apple_tree.phases.establishment.hydro.fertilizing.description',
             },
           },
           coco: {
             watering: {
               interval: 7,
-              description: 'Weekly watering in coco',
+              description: 'apple_tree.phases.establishment.coco.watering.description',
             },
             fertilizing: {
               interval: 90,
-              description: 'Light feeding, EC 0.5-0.8',
+              description: 'apple_tree.phases.establishment.coco.fertilizing.description',
             },
           },
         },
         juvenile: {
           start: '03-01',
           end: '02-28',
-          description: 'Years 2-3 growth',
-          care: 'Shape pruning, continued care, no fruit expected',
+          description: 'apple_tree.phases.juvenile.description',
+          care: 'apple_tree.phases.juvenile.care',
           editable: false,
           soil: {
             watering: {
               interval: 7,
-              description: 'Deep weekly watering during growing season',
+              description: 'apple_tree.phases.juvenile.soil.watering.description',
             },
             fertilizing: {
               interval: 90,
-              description:
-                'Annual spring fertilizer application, avoid high nitrogen in fall',
+              description: 'apple_tree.phases.juvenile.soil.fertilizing.description',
             },
           },
           hydro: {
             watering: {
               interval: 0,
-              description: 'Continuous flow, moderate EC',
+              description: 'apple_tree.phases.juvenile.hydro.watering.description',
             },
             fertilizing: {
               interval: 90,
-              description: 'Annual feeding, EC 1.0-1.2',
+              description: 'apple_tree.phases.juvenile.hydro.fertilizing.description',
             },
           },
           coco: {
             watering: {
               interval: 7,
-              description: 'Weekly watering in coco',
+              description: 'apple_tree.phases.juvenile.coco.watering.description',
             },
             fertilizing: {
               interval: 90,
-              description: 'Annual feeding, EC 1.0-1.2',
+              description: 'apple_tree.phases.juvenile.coco.fertilizing.description',
             },
           },
         },
         productive: {
           start: '03-01',
           end: '02-28',
-          description: 'Productive years 4-20+',
-          care: 'Annual pruning, pest management, harvest timing',
+          description: 'apple_tree.phases.productive.description',
+          care: 'apple_tree.phases.productive.care',
           editable: false,
           soil: {
             watering: {
               interval: 7,
-              description:
-                'Deep weekly watering, 1-2 inches per week during growing season',
+              description: 'apple_tree.phases.productive.soil.watering.description',
             },
             fertilizing: {
               interval: 90,
-              description:
-                'Annual spring fertilizer application, avoid high nitrogen in fall',
+              description: 'apple_tree.phases.productive.soil.fertilizing.description',
             },
           },
           hydro: {
             watering: {
               interval: 0,
-              description: 'Continuous flow, moderate EC',
+              description: 'apple_tree.phases.productive.hydro.watering.description',
             },
             fertilizing: {
               interval: 90,
-              description: 'Annual feeding, EC 1.0-1.2',
+              description: 'apple_tree.phases.productive.hydro.fertilizing.description',
             },
           },
           coco: {
             watering: {
               interval: 7,
-              description: 'Weekly watering in coco',
+              description: 'apple_tree.phases.productive.coco.watering.description',
             },
             fertilizing: {
               interval: 90,
-              description: 'Annual feeding, EC 1.0-1.2',
+              description: 'apple_tree.phases.productive.coco.fertilizing.description',
             },
           },
         },
         dormancy: {
           start: '11-01',
           end: '02-28',
-          description: 'Winter dormancy period',
-          care: 'Dormant season pruning, pest oil application',
+          description: 'apple_tree.phases.dormancy.description',
+          care: 'apple_tree.phases.dormancy.care',
           editable: false,
           soil: {
             watering: {
               interval: 14,
-              description:
-                'Minimal watering during dormancy, just prevent complete drying',
+              description: 'apple_tree.phases.dormancy.soil.watering.description',
             },
             fertilizing: {
               interval: 0,
-              description: 'No fertilizing during dormancy',
+              description: 'apple_tree.phases.dormancy.soil.fertilizing.description',
             },
           },
           hydro: {
             watering: {
               interval: 0,
-              description: 'Minimal flow during dormancy',
+              description: 'apple_tree.phases.dormancy.hydro.watering.description',
             },
             fertilizing: {
               interval: 0,
-              description: 'No nutrients during dormancy',
+              description: 'apple_tree.phases.dormancy.hydro.fertilizing.description',
             },
           },
           coco: {
             watering: {
               interval: 14,
-              description: 'Minimal watering during dormancy',
+              description: 'apple_tree.phases.dormancy.coco.watering.description',
             },
             fertilizing: {
               interval: 0,
-              description: 'No fertilizing during dormancy',
+              description: 'apple_tree.phases.dormancy.coco.fertilizing.description',
             },
           },
         },
@@ -173,52 +167,48 @@ export const apple_tree = {
           plantingWindow: {
             start: '03-01',
             end: '05-01',
-            description: 'Early spring before bud break',
+            description: 'apple_tree.seasonalTiming.temperate_north.plantingWindow.description',
           },
           harvestWindow: {
             start: '08-01',
             end: '10-31',
-            description: 'Variety dependent harvest',
+            description: 'apple_tree.seasonalTiming.temperate_north.harvestWindow.description',
           },
           pruningWindow: {
             start: '01-15',
             end: '03-15',
-            description: 'Dormant season pruning',
+            description: 'apple_tree.seasonalTiming.temperate_north.pruningWindow.description',
           },
         },
         mediterranean: {
           plantingWindow: {
             start: '02-01',
             end: '04-01',
-            description: 'Very early spring planting',
+            description: 'apple_tree.seasonalTiming.mediterranean.plantingWindow.description',
           },
           harvestWindow: {
             start: '06-01',
             end: '09-30',
-            description: 'Harvest before autumn rains',
+            description: 'apple_tree.seasonalTiming.mediterranean.harvestWindow.description',
           },
         },
       },
     },
   },
   careTips: {
-    watering: 'Deep weekly watering, 1-2 inches per week during growing season',
-    fertilizing:
-      'Annual spring fertilizer application, avoid high nitrogen in fall',
-    sunlight: 'Full sun, 6+ hours daily',
-    spacing: '15-20 feet apart for standard trees, 8-12 feet for dwarf',
-    pruning: 'Annual dormant season pruning for shape and disease prevention',
-    pollination:
-      'Most varieties need cross-pollination with another apple variety',
-    soilPH: '6.0-7.0',
+    watering: 'apple_tree.careTips.watering',
+    fertilizing: 'apple_tree.careTips.fertilizing',
+    sunlight: 'apple_tree.careTips.sunlight',
+    spacing: 'apple_tree.careTips.spacing',
+    pruning: 'apple_tree.careTips.pruning',
+    pollination: 'apple_tree.careTips.pollination',
+    soilPH: 'apple_tree.careTips.soilPH',
   },
   commonProblems: {
-    'Apple Scab':
-      'Fungal disease - choose resistant varieties, improve air circulation',
-    'Codling Moth': 'Worm in apples - pheromone traps, proper timing of sprays',
-    'Fire Blight':
-      'Bacterial disease - prune infected branches, avoid high nitrogen',
-    'Biennial Bearing': 'Fruit every other year - thin fruit in heavy years',
+    'Apple Scab': 'apple_tree.commonProblems.appleScab',
+    'Codling Moth': 'apple_tree.commonProblems.codlingMoth',
+    'Fire Blight': 'apple_tree.commonProblems.fireBlight',
+    'Biennial Bearing': 'apple_tree.commonProblems.biennialBearing',
   },
 };
 

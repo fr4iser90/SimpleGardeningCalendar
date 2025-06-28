@@ -6,8 +6,8 @@
 import { PLANT_TAGS } from '../categories.js';
 
 export const strawberries = {
-  name: 'Strawberries',
-  category: 'Fruits',
+  name: 'strawberries.name',
+  category: 'category.fruits',
   tags: [PLANT_TAGS.PERENNIAL, PLANT_TAGS.PHOTOPERIOD],
   emoji: '🍓',
   environments: {
@@ -15,182 +15,181 @@ export const strawberries = {
       phases: {
         establishment: {
           days: 30,
-          description: 'Root establishment',
-          care: 'Keep soil moist, remove flowers first year',
+          description: 'strawberries.phases.establishment.description',
+          care: 'strawberries.phases.establishment.care',
           editable: true,
           soil: {
             watering: {
               interval: 2,
-              description: 'Keep soil consistently moist during establishment',
+              description: 'strawberries.phases.establishment.soil.watering.description',
             },
             fertilizing: {
               interval: 0,
-              description: 'No fertilizing during establishment, remove flowers',
+              description: 'strawberries.phases.establishment.soil.fertilizing.description',
             },
           },
           hydro: {
             watering: {
               interval: 0,
-              description: 'Continuous flow, low EC',
+              description: 'strawberries.phases.establishment.hydro.watering.description',
             },
             fertilizing: {
               interval: 0,
-              description: 'No nutrients during establishment',
+              description: 'strawberries.phases.establishment.hydro.fertilizing.description',
             },
           },
           coco: {
             watering: {
               interval: 1,
-              description: 'Daily watering in coco',
+              description: 'strawberries.phases.establishment.coco.watering.description',
             },
             fertilizing: {
               interval: 0,
-              description: 'No fertilizing during establishment',
+              description: 'strawberries.phases.establishment.coco.fertilizing.description',
             },
           },
         },
         vegetative: {
           days: 60,
-          description: 'Runner and leaf production',
-          care: 'Allow runners to establish new plants',
+          description: 'strawberries.phases.vegetative.description',
+          care: 'strawberries.phases.vegetative.care',
           editable: true,
           soil: {
             watering: {
               interval: 3,
-              description: 'Keep soil consistently moist, avoid overhead watering',
+              description: 'strawberries.phases.vegetative.soil.watering.description',
             },
             fertilizing: {
               interval: 21,
-              description: 'Balanced fertilizer in spring, avoid high nitrogen',
+              description: 'strawberries.phases.vegetative.soil.fertilizing.description',
             },
           },
           hydro: {
             watering: {
               interval: 0,
-              description: 'Continuous flow, moderate EC',
+              description: 'strawberries.phases.vegetative.hydro.watering.description',
             },
             fertilizing: {
               interval: 21,
-              description: 'Balanced nutrients, EC 1.0-1.2',
+              description: 'strawberries.phases.vegetative.hydro.fertilizing.description',
             },
           },
           coco: {
             watering: {
               interval: 1,
-              description: 'Daily watering in coco',
+              description: 'strawberries.phases.vegetative.coco.watering.description',
             },
             fertilizing: {
               interval: 21,
-              description: 'Balanced feeding, EC 1.0-1.2',
+              description: 'strawberries.phases.vegetative.coco.fertilizing.description',
             },
           },
         },
         flowering: {
           days: 21,
-          description: 'Flower development',
-          care: 'Protect flowers from late frost',
+          description: 'strawberries.phases.flowering.description',
+          care: 'strawberries.phases.flowering.care',
           editable: true,
           soil: {
             watering: {
               interval: 2,
-              description: 'Maintain consistent moisture during flowering',
+              description: 'strawberries.phases.flowering.soil.watering.description',
             },
             fertilizing: {
               interval: 0,
-              description: 'No fertilizing during flowering to avoid blossom damage',
+              description: 'strawberries.phases.flowering.soil.fertilizing.description',
             },
           },
           hydro: {
             watering: {
               interval: 0,
-              description: 'Continuous flow, moderate EC',
+              description: 'strawberries.phases.flowering.hydro.watering.description',
             },
             fertilizing: {
               interval: 0,
-              description: 'No nutrients during flowering',
+              description: 'strawberries.phases.flowering.hydro.fertilizing.description',
             },
           },
           coco: {
             watering: {
               interval: 1,
-              description: 'Daily watering in coco',
+              description: 'strawberries.phases.flowering.coco.watering.description',
             },
             fertilizing: {
               interval: 0,
-              description: 'No fertilizing during flowering',
+              description: 'strawberries.phases.flowering.coco.fertilizing.description',
             },
           },
         },
         fruiting: {
           days: 30,
-          description: 'Berry production',
-          care: 'Regular watering and feeding during fruiting',
+          description: 'strawberries.phases.fruiting.description',
+          care: 'strawberries.phases.fruiting.care',
           editable: true,
           soil: {
             watering: {
               interval: 2,
-              description: 'Regular watering during fruiting, avoid wetting berries',
+              description: 'strawberries.phases.fruiting.soil.watering.description',
             },
             fertilizing: {
               interval: 14,
-              description: 'Light feeding with balanced fertilizer during fruiting',
+              description: 'strawberries.phases.fruiting.soil.fertilizing.description',
             },
           },
           hydro: {
             watering: {
               interval: 0,
-              description: 'Continuous flow, moderate EC',
+              description: 'strawberries.phases.fruiting.hydro.watering.description',
             },
             fertilizing: {
               interval: 14,
-              description: 'Balanced nutrients, EC 1.0-1.2',
+              description: 'strawberries.phases.fruiting.hydro.fertilizing.description',
             },
           },
           coco: {
             watering: {
               interval: 1,
-              description: 'Daily watering in coco',
+              description: 'strawberries.phases.fruiting.coco.watering.description',
             },
             fertilizing: {
               interval: 14,
-              description: 'Balanced feeding, EC 1.0-1.2',
+              description: 'strawberries.phases.fruiting.coco.fertilizing.description',
             },
           },
         },
         dormancy: {
           days: 120,
-          description: 'Winter rest period',
-          care: 'Mulch for winter protection',
+          description: 'strawberries.phases.dormancy.description',
+          care: 'strawberries.phases.dormancy.care',
           editable: true,
           soil: {
             watering: {
               interval: 7,
-              description:
-                'Reduce watering during dormancy, just keep from drying out',
+              description: 'strawberries.phases.dormancy.soil.watering.description',
             },
             fertilizing: {
               interval: 0,
-              description: 'No fertilizing during dormancy',
+              description: 'strawberries.phases.dormancy.soil.fertilizing.description',
             },
           },
           hydro: {
             watering: {
               interval: 0,
-              description: 'Minimal flow during dormancy',
+              description: 'strawberries.phases.dormancy.hydro.watering.description',
             },
             fertilizing: {
               interval: 0,
-              description: 'No nutrients during dormancy',
+              description: 'strawberries.phases.dormancy.hydro.fertilizing.description',
             },
           },
           coco: {
             watering: {
               interval: 7,
-              description: 'Minimal watering during dormancy',
+              description: 'strawberries.phases.dormancy.coco.watering.description',
             },
             fertilizing: {
               interval: 0,
-              description: 'No fertilizing during dormancy',
+              description: 'strawberries.phases.dormancy.coco.fertilizing.description',
             },
           },
         },
@@ -201,186 +200,185 @@ export const strawberries = {
         establishment: {
           start: '03-15',
           end: '04-15',
-          description: 'Root establishment',
-          care: 'Keep soil moist, remove flowers first year',
+          description: 'strawberries.phases.establishment.description',
+          care: 'strawberries.phases.establishment.care',
           editable: false,
           soil: {
             watering: {
               interval: 2,
-              description: 'Keep soil consistently moist during establishment',
+              description: 'strawberries.phases.establishment.soil.watering.description',
             },
             fertilizing: {
               interval: 0,
-              description: 'No fertilizing during establishment, remove flowers',
+              description: 'strawberries.phases.establishment.soil.fertilizing.description',
             },
           },
           hydro: {
             watering: {
               interval: 0,
-              description: 'Continuous flow, low EC',
+              description: 'strawberries.phases.establishment.hydro.watering.description',
             },
             fertilizing: {
               interval: 0,
-              description: 'No nutrients during establishment',
+              description: 'strawberries.phases.establishment.hydro.fertilizing.description',
             },
           },
           coco: {
             watering: {
               interval: 1,
-              description: 'Daily watering in coco',
+              description: 'strawberries.phases.establishment.coco.watering.description',
             },
             fertilizing: {
               interval: 0,
-              description: 'No fertilizing during establishment',
+              description: 'strawberries.phases.establishment.coco.fertilizing.description',
             },
           },
         },
         vegetative: {
           start: '04-16',
           end: '06-15',
-          description: 'Runner and leaf production',
-          care: 'Allow runners to establish new plants',
+          description: 'strawberries.phases.vegetative.description',
+          care: 'strawberries.phases.vegetative.care',
           editable: false,
           soil: {
             watering: {
               interval: 3,
-              description: 'Keep soil consistently moist, avoid overhead watering',
+              description: 'strawberries.phases.vegetative.soil.watering.description',
             },
             fertilizing: {
               interval: 21,
-              description: 'Balanced fertilizer in spring, avoid high nitrogen',
+              description: 'strawberries.phases.vegetative.soil.fertilizing.description',
             },
           },
           hydro: {
             watering: {
               interval: 0,
-              description: 'Continuous flow, moderate EC',
+              description: 'strawberries.phases.vegetative.hydro.watering.description',
             },
             fertilizing: {
               interval: 21,
-              description: 'Balanced nutrients, EC 1.0-1.2',
+              description: 'strawberries.phases.vegetative.hydro.fertilizing.description',
             },
           },
           coco: {
             watering: {
               interval: 1,
-              description: 'Daily watering in coco',
+              description: 'strawberries.phases.vegetative.coco.watering.description',
             },
             fertilizing: {
               interval: 21,
-              description: 'Balanced feeding, EC 1.0-1.2',
+              description: 'strawberries.phases.vegetative.coco.fertilizing.description',
             },
           },
         },
         flowering: {
           start: '06-16',
           end: '07-07',
-          description: 'Flower development',
-          care: 'Protect flowers from late frost',
+          description: 'strawberries.phases.flowering.description',
+          care: 'strawberries.phases.flowering.care',
           editable: true,
           soil: {
             watering: {
               interval: 2,
-              description: 'Maintain consistent moisture during flowering',
+              description: 'strawberries.phases.flowering.soil.watering.description',
             },
             fertilizing: {
               interval: 0,
-              description: 'No fertilizing during flowering to avoid blossom damage',
+              description: 'strawberries.phases.flowering.soil.fertilizing.description',
             },
           },
           hydro: {
             watering: {
               interval: 0,
-              description: 'Continuous flow, moderate EC',
+              description: 'strawberries.phases.flowering.hydro.watering.description',
             },
             fertilizing: {
               interval: 0,
-              description: 'No nutrients during flowering',
+              description: 'strawberries.phases.flowering.hydro.fertilizing.description',
             },
           },
           coco: {
             watering: {
               interval: 1,
-              description: 'Daily watering in coco',
+              description: 'strawberries.phases.flowering.coco.watering.description',
             },
             fertilizing: {
               interval: 0,
-              description: 'No fertilizing during flowering',
+              description: 'strawberries.phases.flowering.coco.fertilizing.description',
             },
           },
         },
         fruiting: {
           start: '07-08',
           end: '08-07',
-          description: 'Berry production',
-          care: 'Regular watering and feeding during fruiting',
+          description: 'strawberries.phases.fruiting.description',
+          care: 'strawberries.phases.fruiting.care',
           editable: true,
           soil: {
             watering: {
               interval: 2,
-              description: 'Regular watering during fruiting, avoid wetting berries',
+              description: 'strawberries.phases.fruiting.soil.watering.description',
             },
             fertilizing: {
               interval: 14,
-              description: 'Light feeding with balanced fertilizer during fruiting',
+              description: 'strawberries.phases.fruiting.soil.fertilizing.description',
             },
           },
           hydro: {
             watering: {
               interval: 0,
-              description: 'Continuous flow, moderate EC',
+              description: 'strawberries.phases.fruiting.hydro.watering.description',
             },
             fertilizing: {
               interval: 14,
-              description: 'Balanced nutrients, EC 1.0-1.2',
+              description: 'strawberries.phases.fruiting.hydro.fertilizing.description',
             },
           },
           coco: {
             watering: {
               interval: 1,
-              description: 'Daily watering in coco',
+              description: 'strawberries.phases.fruiting.coco.watering.description',
             },
             fertilizing: {
               interval: 14,
-              description: 'Balanced feeding, EC 1.0-1.2',
+              description: 'strawberries.phases.fruiting.coco.fertilizing.description',
             },
           },
         },
         dormancy: {
           start: '10-01',
           end: '03-14',
-          description: 'Winter rest period',
-          care: 'Mulch for winter protection',
+          description: 'strawberries.phases.dormancy.description',
+          care: 'strawberries.phases.dormancy.care',
           editable: false,
           soil: {
             watering: {
               interval: 7,
-              description:
-                'Reduce watering during dormancy, just keep from drying out',
+              description: 'strawberries.phases.dormancy.soil.watering.description',
             },
             fertilizing: {
               interval: 0,
-              description: 'No fertilizing during dormancy',
+              description: 'strawberries.phases.dormancy.soil.fertilizing.description',
             },
           },
           hydro: {
             watering: {
               interval: 0,
-              description: 'Minimal flow during dormancy',
+              description: 'strawberries.phases.dormancy.hydro.watering.description',
             },
             fertilizing: {
               interval: 0,
-              description: 'No nutrients during dormancy',
+              description: 'strawberries.phases.dormancy.hydro.fertilizing.description',
             },
           },
           coco: {
             watering: {
               interval: 7,
-              description: 'Minimal watering during dormancy',
+              description: 'strawberries.phases.dormancy.coco.watering.description',
             },
             fertilizing: {
               interval: 0,
-              description: 'No fertilizing during dormancy',
+              description: 'strawberries.phases.dormancy.coco.fertilizing.description',
             },
           },
         },
@@ -390,24 +388,24 @@ export const strawberries = {
           plantingWindow: {
             start: '03-15',
             end: '05-15',
-            description: 'Early to mid spring planting',
+            description: 'strawberries.seasonalTiming.temperate_north.plantingWindow.description',
           },
           harvestWindow: {
             start: '06-01',
             end: '09-30',
-            description: 'Harvest throughout summer',
+            description: 'strawberries.seasonalTiming.temperate_north.harvestWindow.description',
           },
         },
         mediterranean: {
           plantingWindow: {
             start: '02-01',
             end: '04-15',
-            description: 'Very early spring planting',
+            description: 'strawberries.seasonalTiming.mediterranean.plantingWindow.description',
           },
           harvestWindow: {
             start: '04-15',
             end: '07-31',
-            description: 'Harvest before summer heat',
+            description: 'strawberries.seasonalTiming.mediterranean.harvestWindow.description',
           },
         },
       },
@@ -416,182 +414,181 @@ export const strawberries = {
       phases: {
         establishment: {
           days: 30,
-          description: 'Root establishment',
-          care: 'Keep soil moist, remove flowers first year',
+          description: 'strawberries.phases.establishment.description',
+          care: 'strawberries.phases.establishment.care',
           editable: true,
           soil: {
             watering: {
               interval: 2,
-              description: 'Keep soil consistently moist during establishment',
+              description: 'strawberries.phases.establishment.soil.watering.description',
             },
             fertilizing: {
               interval: 0,
-              description: 'No fertilizing during establishment, remove flowers',
+              description: 'strawberries.phases.establishment.soil.fertilizing.description',
             },
           },
           hydro: {
             watering: {
               interval: 0,
-              description: 'Continuous flow, low EC',
+              description: 'strawberries.phases.establishment.hydro.watering.description',
             },
             fertilizing: {
               interval: 0,
-              description: 'No nutrients during establishment',
+              description: 'strawberries.phases.establishment.hydro.fertilizing.description',
             },
           },
           coco: {
             watering: {
               interval: 1,
-              description: 'Daily watering in coco',
+              description: 'strawberries.phases.establishment.coco.watering.description',
             },
             fertilizing: {
               interval: 0,
-              description: 'No fertilizing during establishment',
+              description: 'strawberries.phases.establishment.coco.fertilizing.description',
             },
           },
         },
         vegetative: {
           days: 60,
-          description: 'Runner and leaf production',
-          care: 'Allow runners to establish new plants',
+          description: 'strawberries.phases.vegetative.description',
+          care: 'strawberries.phases.vegetative.care',
           editable: true,
           soil: {
             watering: {
               interval: 3,
-              description: 'Keep soil consistently moist, avoid overhead watering',
+              description: 'strawberries.phases.vegetative.soil.watering.description',
             },
             fertilizing: {
               interval: 21,
-              description: 'Balanced fertilizer in spring, avoid high nitrogen',
+              description: 'strawberries.phases.vegetative.soil.fertilizing.description',
             },
           },
           hydro: {
             watering: {
               interval: 0,
-              description: 'Continuous flow, moderate EC',
+              description: 'strawberries.phases.vegetative.hydro.watering.description',
             },
             fertilizing: {
               interval: 21,
-              description: 'Balanced nutrients, EC 1.0-1.2',
+              description: 'strawberries.phases.vegetative.hydro.fertilizing.description',
             },
           },
           coco: {
             watering: {
               interval: 1,
-              description: 'Daily watering in coco',
+              description: 'strawberries.phases.vegetative.coco.watering.description',
             },
             fertilizing: {
               interval: 21,
-              description: 'Balanced feeding, EC 1.0-1.2',
+              description: 'strawberries.phases.vegetative.coco.fertilizing.description',
             },
           },
         },
         flowering: {
           days: 21,
-          description: 'Flower development',
-          care: 'Protect flowers from late frost',
+          description: 'strawberries.phases.flowering.description',
+          care: 'strawberries.phases.flowering.care',
           editable: true,
           soil: {
             watering: {
               interval: 2,
-              description: 'Maintain consistent moisture during flowering',
+              description: 'strawberries.phases.flowering.soil.watering.description',
             },
             fertilizing: {
               interval: 0,
-              description: 'No fertilizing during flowering to avoid blossom damage',
+              description: 'strawberries.phases.flowering.soil.fertilizing.description',
             },
           },
           hydro: {
             watering: {
               interval: 0,
-              description: 'Continuous flow, moderate EC',
+              description: 'strawberries.phases.flowering.hydro.watering.description',
             },
             fertilizing: {
               interval: 0,
-              description: 'No nutrients during flowering',
+              description: 'strawberries.phases.flowering.hydro.fertilizing.description',
             },
           },
           coco: {
             watering: {
               interval: 1,
-              description: 'Daily watering in coco',
+              description: 'strawberries.phases.flowering.coco.watering.description',
             },
             fertilizing: {
               interval: 0,
-              description: 'No fertilizing during flowering',
+              description: 'strawberries.phases.flowering.coco.fertilizing.description',
             },
           },
         },
         fruiting: {
           days: 30,
-          description: 'Berry production',
-          care: 'Regular watering and feeding during fruiting',
+          description: 'strawberries.phases.fruiting.description',
+          care: 'strawberries.phases.fruiting.care',
           editable: true,
           soil: {
             watering: {
               interval: 2,
-              description: 'Regular watering during fruiting, avoid wetting berries',
+              description: 'strawberries.phases.fruiting.soil.watering.description',
             },
             fertilizing: {
               interval: 14,
-              description: 'Light feeding with balanced fertilizer during fruiting',
+              description: 'strawberries.phases.fruiting.soil.fertilizing.description',
             },
           },
           hydro: {
             watering: {
               interval: 0,
-              description: 'Continuous flow, moderate EC',
+              description: 'strawberries.phases.fruiting.hydro.watering.description',
             },
             fertilizing: {
               interval: 14,
-              description: 'Balanced nutrients, EC 1.0-1.2',
+              description: 'strawberries.phases.fruiting.hydro.fertilizing.description',
             },
           },
           coco: {
             watering: {
               interval: 1,
-              description: 'Daily watering in coco',
+              description: 'strawberries.phases.fruiting.coco.watering.description',
             },
             fertilizing: {
               interval: 14,
-              description: 'Balanced feeding, EC 1.0-1.2',
+              description: 'strawberries.phases.fruiting.coco.fertilizing.description',
             },
           },
         },
         dormancy: {
           days: 120,
-          description: 'Winter rest period',
-          care: 'Mulch for winter protection',
+          description: 'strawberries.phases.dormancy.description',
+          care: 'strawberries.phases.dormancy.care',
           editable: true,
           soil: {
             watering: {
               interval: 7,
-              description:
-                'Reduce watering during dormancy, just keep from drying out',
+              description: 'strawberries.phases.dormancy.soil.watering.description',
             },
             fertilizing: {
               interval: 0,
-              description: 'No fertilizing during dormancy',
+              description: 'strawberries.phases.dormancy.soil.fertilizing.description',
             },
           },
           hydro: {
             watering: {
               interval: 0,
-              description: 'Minimal flow during dormancy',
+              description: 'strawberries.phases.dormancy.hydro.watering.description',
             },
             fertilizing: {
               interval: 0,
-              description: 'No nutrients during dormancy',
+              description: 'strawberries.phases.dormancy.hydro.fertilizing.description',
             },
           },
           coco: {
             watering: {
               interval: 7,
-              description: 'Minimal watering during dormancy',
+              description: 'strawberries.phases.dormancy.coco.watering.description',
             },
             fertilizing: {
               interval: 0,
-              description: 'No fertilizing during dormancy',
+              description: 'strawberries.phases.dormancy.coco.fertilizing.description',
             },
           },
         },
@@ -599,18 +596,18 @@ export const strawberries = {
     },
   },
   careTips: {
-    watering: 'Keep soil consistently moist, avoid overhead watering',
-    fertilizing: 'Balanced fertilizer in spring, avoid high nitrogen',
-    sunlight: 'Full sun (6+ hours daily)',
-    spacing: '12-18 inches apart',
-    temperature: 'Cool season crop, protect from extreme heat',
-    soilPH: '5.5-6.5',
-    mulching: 'Straw mulch to keep berries clean and retain moisture',
+    watering: 'strawberries.careTips.watering',
+    fertilizing: 'strawberries.careTips.fertilizing',
+    sunlight: 'strawberries.careTips.sunlight',
+    spacing: 'strawberries.careTips.spacing',
+    temperature: 'strawberries.careTips.temperature',
+    soilPH: 'strawberries.careTips.soilPH',
+    mulching: 'strawberries.careTips.mulching',
   },
   commonProblems: {
-    'Gray Mold': 'Fungal disease on fruit - improve air circulation',
-    Slugs: 'Eat holes in berries - use beer traps or diatomaceous earth',
-    Birds: 'Eat ripe berries - use netting protection',
+    "Gray Mold": 'strawberries.commonProblems.grayMold',
+    "Slugs": 'strawberries.commonProblems.slugs',
+    "Birds": 'strawberries.commonProblems.birds',
   },
 };
 
