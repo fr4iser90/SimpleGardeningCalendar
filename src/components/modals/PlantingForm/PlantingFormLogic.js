@@ -250,8 +250,45 @@ export function updatePhaseInputs() {
         </div>
       </div>
     `;
+  } else if (envKey === 'outdoor') {
+    // Outdoor ohne saisonale Phasen: Nur editierbare Phasen anzeigen
+    const editablePhases = phases.filter(phase => {
+      const phaseData = phasesRaw[phase.name];
+      return phaseData && phaseData.editable === true;
+    });
+    
+    if (editablePhases.length === 0) {
+      // Keine editierbaren Phasen - zeige Info
+      const phaseInfo = phases.map(phase => {
+        const emoji = getPhaseEmoji(phase.name);
+        return `${emoji} ${t('phase.' + phase.name)}: ${phase.days || ''} ${t('plant.info.days')}`;
+      }).join('<br>');
+      phaseInputs.innerHTML = `
+        <div class="col-span-full p-3 bg-yellow-50 dark:bg-yellow-900 border border-yellow-200 dark:border-yellow-700 rounded">
+          <div class="flex items-start">
+            <span class="text-yellow-600 dark:text-yellow-400 mr-2">🌱</span>
+            <div>
+              <p class="text-sm font-medium text-yellow-800 dark:text-yellow-200 mb-1">
+                ${t('plant.info.outdoor.fixed.title') || 'Outdoor - Fixed Phases'}
+              </p>
+              <p class="text-xs text-yellow-700 dark:text-yellow-300">
+                ${phaseInfo}
+              </p>
+            </div>
+          </div>
+        </div>
+      `;
+    } else {
+      // Nur editierbare Phasen anzeigen
+      phaseInputs.innerHTML = editablePhases.map(phase => `
+        <div>
+          <label class="block text-sm font-medium mb-1">${getPhaseEmoji(phase.name)} ${t('phase.' + phase.name)}</label>
+          <input type="number" name="phase_${phase.name}" value="${phase.days || ''}" min="1" class="w-full p-2 border rounded dark:bg-gray-700 dark:border-gray-600 dark:text-white">
+        </div>
+      `).join('');
+    }
   } else {
-    // Indoor/Greenhouse/Annual: alle Phasen editierbar
+    // Indoor/Greenhouse: alle Phasen editierbar
     phaseInputs.innerHTML = phases.map(phase => `
       <div>
         <label class="block text-sm font-medium mb-1">${getPhaseEmoji(phase.name)} ${t('phase.' + phase.name)}</label>

@@ -52,6 +52,7 @@ export function initializePlantingFormHandlers(formContainer) {
     const category = plantCategorySelect?.value || '';
     updatePlantOptions(category, environment);
     updatePlantInfo();
+    updatePhaseInputs();
     await checkSeasonalTiming();
   });
 
