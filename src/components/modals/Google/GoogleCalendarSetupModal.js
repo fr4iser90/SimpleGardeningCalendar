@@ -14,29 +14,29 @@ import { t } from '../../../core/i18n/index.js';
  */
 
 async function performSyncOperation(operation, button, originalText) {
-  const spinnerId = showButtonSpinner(button, originalText, '⏳ Processing...');
+  const spinnerId = showButtonSpinner(button, originalText, t('google.setup.processing'));
   const syncStatusText = document.getElementById('syncStatusText');
-  syncStatusText.textContent = `Running ${operation} sync...`;
+  syncStatusText.textContent = t('google.setup.running_sync', { operation });
 
   try {
     const { isSignedIn } = getAuthState();
     if (!isSignedIn) {
-      throw new Error('Not signed in to Google Calendar');
+      throw new Error(t('google.setup.not_signed_in'));
     }
 
     let result;
     switch (operation) {
       case 'export':
         result = await exportLocalEventsToGoogle();
-        showNotification(`Export complete: ${result.synced} events exported.`, 'success');
+        showNotification(t('google.setup.export_complete', { count: result.synced }), 'success');
         break;
       case 'import':
         result = await importGoogleEvents();
-        showNotification(`Import complete: ${result.imported} new, ${result.updated} updated.`, 'success');
+        showNotification(t('google.setup.import_complete', { imported: result.imported, updated: result.updated }), 'success');
         break;
       case 'bidirectional':
         result = await performBidirectionalSync();
-        showNotification(`Bidirectional sync complete: ${result.exported} exported, ${result.imported} imported, ${result.updated} updated.`, 'success');
+        showNotification(t('google.setup.bidirectional_complete', { exported: result.exported, imported: result.imported, updated: result.updated }), 'success');
         break;
     }
     
@@ -44,13 +44,13 @@ async function performSyncOperation(operation, button, originalText) {
     const settings = googleCalendarSettings.load();
     settings.lastSyncTime = new Date().toISOString();
     googleCalendarSettings.save(settings);
-    document.getElementById('lastSyncInfo').textContent = `Last sync: ${new Date(settings.lastSyncTime).toLocaleString()}`;
-    syncStatusText.textContent = 'Sync successful!';
+    document.getElementById('lastSyncInfo').textContent = `${t('google.setup.last_sync')} ${new Date(settings.lastSyncTime).toLocaleString()}`;
+    syncStatusText.textContent = t('google.setup.sync_successful');
 
   } catch (error) {
     console.error(`Sync failed:`, error);
-    showNotification(`Sync failed: ${error.message}`, 'error');
-    syncStatusText.textContent = `Sync failed: ${error.message}`;
+    showNotification(t('google.setup.sync_failed', { error: error.message }), 'error');
+    syncStatusText.textContent = t('google.setup.sync_failed', { error: error.message });
   } finally {
     hideButtonSpinner(button, spinnerId);
   }
@@ -108,7 +108,7 @@ export async function updateConnectionStatus() {
         <span class="font-bold mr-1">Google Calendar:</span>
         <span class="font-medium dark:text-white">${t('google.setup.not_connected')}</span>
       `;
-      userInfoDiv.textContent = 'Enter your Client ID below to connect';
+      userInfoDiv.textContent = t('google.setup.enter_client_id');
       syncOptionsDiv.style.display = 'none';
       calendarSetupSection.style.display = 'none';
     }
@@ -323,13 +323,12 @@ export function renderGoogleCalendarSetupModal() {
         
         <!-- Calendar Setup Section (only shown after login) -->
         <div id="calendarSetupSection" style="display: none;" class="bg-yellow-50 dark:bg-yellow-900/20 border border-yellow-200 dark:border-yellow-800 rounded-lg p-4">
-          <h3 class="font-semibold text-yellow-800 dark:text-yellow-200 mb-2">🔧 Automatic Calendar Setup</h3>
+          <h3 class="font-semibold text-yellow-800 dark:text-yellow-200 mb-2">🔧 ${t('google.setup.calendar_setup.title')}</h3>
           <p class="text-sm text-yellow-700 dark:text-yellow-300 mb-3">
-            The app will automatically detect, match, and create Google calendars based on your local calendar organization. 
-            No manual setup required!
+            ${t('google.setup.calendar_setup.description')}
           </p>
           <button id="setupCalendarsBtn" class="px-4 py-2 bg-yellow-600 text-white rounded hover:bg-yellow-700">
-            🔧 Setup Calendars Now
+            🔧 ${t('google.setup.calendar_setup.button')}
           </button>
         </div>
         

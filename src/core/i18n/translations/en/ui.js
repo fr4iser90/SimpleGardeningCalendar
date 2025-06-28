@@ -432,7 +432,18 @@ export const en = {
     'google.setup.sync_status': 'Sync Status:',
     'google.setup.ready': 'Ready',
     'google.setup.sign_out': 'Sign Out & Revoke Permissions',
-  
+    // Google Setup Modal Additional
+    'google.setup.calendar_setup.title': 'Automatic Calendar Setup',
+    'google.setup.calendar_setup.description': 'The app will automatically detect, match, and create Google calendars based on your local calendar organization. No manual setup required!',
+    'google.setup.calendar_setup.button': 'Setup Calendars Now',
+    'google.setup.processing': '⏳ Processing...',
+    'google.setup.running_sync': 'Running {operation} sync...',
+    'google.setup.not_signed_in': 'Not signed in to Google Calendar',
+    'google.setup.export_complete': 'Export complete: {count} events exported.',
+    'google.setup.import_complete': 'Import complete: {imported} new, {updated} updated.',
+    'google.setup.bidirectional_complete': 'Bidirectional sync complete: {exported} exported, {imported} imported, {updated} updated.',
+    'google.setup.sync_successful': 'Sync successful!',
+    'google.setup.sync_failed': 'Sync failed: {error}',
     // Google Calendar Detailed Help
     'google.help.overview_title': 'Overview',
     'google.help.overview_text': 'This guide will walk you through setting up the Google Calendar API for your garden calendar. You only need a Client ID - no API keys or secrets required.',
@@ -663,5 +674,7 @@ export const en = {
     'care_tips.hilling': 'Hilling',
     'care_tips.pruning': 'Annual winter pruning for shape and health',
     'care_tips.pollination': 'Mostly cross-pollination needed with other apple varieties',
+
+
 };
   

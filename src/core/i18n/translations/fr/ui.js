@@ -424,7 +424,20 @@ export const fr = {
     'google.setup.sync_status': 'Statut de Synchronisation:',
     'google.setup.ready': 'Prêt',
     'google.setup.sign_out': 'Se Déconnecter et Révoquer les Permissions',
-  
+
+    // Google Setup Modal Additional
+    'google.setup.calendar_setup.title': 'Configuration Automatique du Calendrier',
+    'google.setup.calendar_setup.description': 'L\'application détectera, associera et créera automatiquement les calendriers Google en fonction de votre organisation de calendrier local. Aucune configuration manuelle requise !',
+    'google.setup.calendar_setup.button': 'Configurer les Calendriers Maintenant',
+    'google.setup.processing': '⏳ Traitement...',
+    'google.setup.running_sync': 'Exécution de la synchronisation {operation}...',
+    'google.setup.not_signed_in': 'Non connecté à Google Calendar',
+    'google.setup.export_complete': 'Exportation terminée : {count} événements exportés.',
+    'google.setup.import_complete': 'Importation terminée : {imported} nouveaux, {updated} mis à jour.',
+    'google.setup.bidirectional_complete': 'Synchronisation bidirectionnelle terminée : {exported} exportés, {imported} importés, {updated} mis à jour.',
+    'google.setup.sync_successful': 'Synchronisation réussie !',
+    'google.setup.sync_failed': 'Échec de la synchronisation : {error}',
+    
     // Google Calendar Detailed Help
     'google.help.overview_title': 'Aperçu',
     'google.help.overview_text': 'Ce guide vous guidera dans la configuration de l\'API Google Calendar pour votre calendrier de jardin. Vous n\'avez besoin que d\'un ID Client - aucune clé API ou secret requis.',
@@ -644,5 +657,7 @@ export const fr = {
     'care_tips.hilling': 'Buttage',
     'care_tips.pruning': 'Taille hivernale annuelle pour forme et santé',
     'care_tips.pollination': 'Pollinisation croisée nécessaire avec autres variétés de pommes',
+
+
 };
   

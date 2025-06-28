@@ -216,12 +216,41 @@ export async function exportLocalEventsToGoogle() {
     }
   }
   
-  // Filter events based on sync settings AND skip events that already have googleEventId
+  // KRITISCHER FIX: Robuste Duplikat-Prüfung vor Export
+  console.log('🔍 Checking for existing Google events to prevent duplicates...');
+  const existingGoogleEvents = await getAllGoogleEvents();
+  console.log(`[DEBUG] Found ${existingGoogleEvents.length} existing Google events`);
+  
+  // Filter events based on sync settings AND skip events that already have googleEventId OR exist on Google
   const eventsToSync = events.filter(event => {
     const syncTypeEnabled = settings.syncTypes[event.type];
     const notAlreadySynced = !event.googleEventId;
     
-    return syncTypeEnabled && notAlreadySynced;
+    // KRITISCHER CHECK: Prüfe ob Event bereits auf Google existiert
+    const alreadyExistsOnGoogle = existingGoogleEvents.some(googleEvent => {
+      // Prüfe auf exakte Übereinstimmung von Titel, Datum und Typ
+      const titleMatch = googleEvent.summary === event.title;
+      const dateMatch = googleEvent.start?.dateTime?.startsWith(event.date) || 
+                       googleEvent.start?.date?.startsWith(event.date);
+      const typeMatch = googleEvent.description?.includes(`"type":"${event.type}"`);
+      
+      return titleMatch && dateMatch && typeMatch;
+    });
+    
+    if (alreadyExistsOnGoogle && !event.googleEventId) {
+      // KRITISCHER FIX: Wenn Event auf Google existiert aber keine googleEventId hat, setze sie
+      console.log(`[DUPLICATE-PREVENTION] Event "${event.title}" already exists on Google - will update local googleEventId`);
+      event.googleEventId = existingGoogleEvents.find(ge => 
+        ge.summary === event.title && 
+        (ge.start?.dateTime?.startsWith(event.date) || ge.start?.date?.startsWith(event.date))
+      )?.id;
+      if (event.googleEventId) {
+        event.googleCalendarId = getGoogleCalendarIdForEvent(event);
+        db.put('events', event); // Update local database
+      }
+    }
+    
+    return syncTypeEnabled && notAlreadySynced && !alreadyExistsOnGoogle;
   });
   
   console.log(`[DEBUG] Events to sync: ${eventsToSync.length} out of ${events.length} total events`);
@@ -263,6 +292,41 @@ export async function exportLocalEventsToGoogle() {
   }
   
   return { synced, failed };
+}
+
+// NEUE FUNKTION: Hole alle Google Events für Duplikat-Prüfung
+async function getAllGoogleEvents() {
+  const { isSignedIn, accessToken } = getAuthState();
+  if (!isSignedIn) return [];
+  
+  const settings = googleCalendarSettings.load();
+  const allEvents = [];
+  
+  // Hole Events von allen gemappten Kalendern
+  for (const [category, calendarId] of Object.entries(settings.calendarMappings || {})) {
+    try {
+      const url = `https://www.googleapis.com/calendar/v3/calendars/${calendarId}/events?singleEvents=true&orderBy=startTime&maxResults=2500`;
+      
+      const response = await fetch(url, {
+        headers: {
+          'Authorization': `Bearer ${accessToken}`
+        }
+      });
+      
+      if (!response.ok) {
+        console.error(`Failed to fetch events from calendar ${category}: ${response.statusText}`);
+        continue;
+      }
+      
+      const data = await response.json();
+      const events = data.items || [];
+      allEvents.push(...events);
+    } catch (error) {
+      console.error(`Failed to fetch events from calendar ${category}:`, error);
+    }
+  }
+  
+  return allEvents;
 }
 
 // Import Google events (internal implementation)

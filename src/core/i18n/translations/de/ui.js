@@ -427,7 +427,7 @@ export const de = {
     'google.setup.step3': 'Aktivieren Sie die "Google Kalendar API"',
     'google.setup.step4': 'Erstellen Sie "OAuth 2.0 Client ID" Anmeldedaten',
     'google.setup.step5': 'Fügen Sie Ihre Domain zu "Autorisierte JavaScript-Ursprünge" hinzu',
-    'google.setup.detailed_guide': 'Detaillierte Anleitung anzeigen',
+    'google.setup.detailed_guide': 'Detaillierte Anleitung',
     'google.setup.not_connected': 'Nicht verbunden',
     'google.setup.connected': 'Mit Google Kalendar verbunden',
     'google.setup.connected_as': 'Verbunden als:',
@@ -457,7 +457,28 @@ export const de = {
     'google.setup.sync_status': 'Sync-Status:',
     'google.setup.ready': 'Bereit',
     'google.setup.sign_out': 'Abmelden & Berechtigungen widerrufen',
-    
+    'google.setup.cloud_console.title': 'Google Cloud Console Setup',
+    'google.setup.cloud_console.step1': 'Gehen Sie zur Google Cloud Console',
+    'google.setup.cloud_console.step2': 'Erstellen Sie ein neues Projekt oder wählen Sie ein bestehendes aus',
+    'google.setup.cloud_console.step2_desc': 'Klicken Sie auf das Projekt-Dropdown oben und erstellen Sie ein neues Projekt',
+    'google.setup.cloud_console.step3': 'Google Calendar API aktivieren',
+    'google.setup.cloud_console.step4': 'OAuth 2.0 Client ID erstellen',
+    'google.setup.cloud_console.step4_desc': 'Klicken Sie "Create Credentials" → "OAuth 2.0 Client IDs" → "Web application"',
+    'google.setup.cloud_console.step5': 'Fügen Sie Ihre Domain zu "Authorized JavaScript origins" hinzu',
+    'google.setup.cloud_console.step5_desc': 'Fügen Sie hinzu: http://localhost:5173 (für Entwicklung)',
+    'google.setup.cloud_console.step5_desc2': 'Fügen Sie Ihre Produktions-Domain beim Deployment hinzu',
+    'google.setup.client_id.title': 'Client ID erhalten',
+    'google.setup.client_id.description': 'Nach dem Erstellen der OAuth 2.0 Client ID erhalten Sie eine Client ID, die so aussieht:',
+    'google.setup.client_id.example': '123456789-abc123def456.apps.googleusercontent.com',
+    'google.setup.client_id.instruction': 'Kopieren Sie diese Client ID und fügen Sie sie in das Feld oben ein.',
+    'google.setup.troubleshooting.title': 'Fehlerbehebung',
+    'google.setup.troubleshooting.redirect_mismatch': 'Stellen Sie sicher, dass Sie die richtige Domain zu den autorisierten Ursprüngen hinzugefügt haben',
+    'google.setup.troubleshooting.access_denied': 'Überprüfen Sie, dass die Calendar API aktiviert ist',
+    'google.setup.troubleshooting.invalid_client': 'Überprüfen Sie, dass Ihre Client ID korrekt ist',
+    'google.setup.troubleshooting.calendar_not_showing': 'Stellen Sie sicher, dass Sie mit dem richtigen Google Account angemeldet sind',
+    'google.setup.security.title': 'Sicherheitshinweis',
+    'google.setup.security.description': 'Ihre Client ID wird lokal in Ihrem Browser gespeichert und ist sicher zu verwenden. Teilen Sie niemals Ihren Client Secret (falls vorhanden) - nur die Client ID wird benötigt.',
+
     // Google Kalendar Detailed Help
     'google.help.overview_title': 'Überblick',
     'google.help.overview_text': 'Diese Anleitung führt Sie durch die Einrichtung der Google Kalendar API für Ihren Gartenkalender. Sie benötigen nur eine Client-ID - keine API-Schlüssel oder Geheimnisse.',
@@ -482,7 +503,22 @@ export const de = {
     'google.help.troubleshooting_1': 'Stellen Sie sicher, dass die Google Kalendar API aktiviert ist',
     'google.help.troubleshooting_2': 'Überprüfen Sie, ob Ihre Domain korrekt zu den autorisierten Ursprüngen hinzugefügt wurde',
     'google.help.troubleshooting_3': 'Verwenden Sie nur die Client-ID, nicht den Client-Secret',
-    
+
+    // Google Calendar API Limits
+    'google.api_limits.title': '📊 Google Calendar API Limits',
+    'google.api_limits.calendar_creation.title': '🎯 Kalender-Erstellungslimits:',
+    'google.api_limits.calendar_creation.limit': '~50 Kalender pro Google Account (variiert je nach Account-Typ)',
+    'google.api_limits.calendar_creation.error': 'Fehler: "quotaExceeded" - Sie haben das Kalender-Erstellungslimit erreicht',
+    'google.api_limits.calendar_creation.solution': 'Lösung: Erstellen Sie manuell einen Garten-Kalender in Google Calendar, die App erkennt ihn automatisch',
+    'google.api_limits.event_creation.title': '📅 Event-Erstellungslimits:',
+    'google.api_limits.event_creation.limit': '~10.000.000 Events pro Tag (praktisch unbegrenzt für normale Nutzung)',
+    'google.api_limits.event_creation.no_problem': 'Kein Problem beim Hinzufügen tausender Garten-Events',
+    'google.api_limits.api_calls.title': '🔄 API-Aufruf-Limits:',
+    'google.api_limits.api_calls.limit': '~1.000.000 API-Aufrufe pro Tag',
+    'google.api_limits.api_calls.sufficient': 'Ausreichend für normale Garten-Kalender Nutzung',
+    'google.api_limits.pro_tip.title': '💡 Pro Tipp:',
+    'google.api_limits.pro_tip.text': 'Wenn Sie einen "quotaExceeded" Fehler beim Erstellen von Kalendern erhalten, erstellen Sie einfach manuell einen Garten-Kalender in Google Calendar mit einem Namen wie "🌱 Garten" oder "🌱 Garden". Die App erkennt ihn automatisch und verwendet ihn!',
+
     // Import Modal
     'import.modal.title': 'Kalender importieren',
     'import.drag_drop': 'Datei hier hinziehen oder klicken zum Auswählen',
@@ -678,6 +714,19 @@ export const de = {
 
     // New translations
     'care_tips.pruning': 'Jährlicher Winterschnitt für Form und Gesundheit',
-    'care_tips.pollination': 'Meist Fremdbestäubung durch andere Apfelsorten nötig'
+    'care_tips.pollination': 'Meist Fremdbestäubung durch andere Apfelsorten nötig',
+
+    // Google Setup Modal Additional
+    'google.setup.calendar_setup.title': 'Automatische Kalender-Einrichtung',
+    'google.setup.calendar_setup.description': 'Die App erkennt, ordnet zu und erstellt automatisch Google-Kalender basierend auf Ihrer lokalen Kalender-Organisation. Keine manuelle Einrichtung erforderlich!',
+    'google.setup.calendar_setup.button': 'Kalender jetzt einrichten',
+    'google.setup.processing': '⏳ Verarbeitung...',
+    'google.setup.running_sync': 'Führe {operation} Sync aus...',
+    'google.setup.not_signed_in': 'Nicht bei Google Calendar angemeldet',
+    'google.setup.export_complete': 'Export abgeschlossen: {count} Events exportiert.',
+    'google.setup.import_complete': 'Import abgeschlossen: {imported} neu, {updated} aktualisiert.',
+    'google.setup.bidirectional_complete': 'Bidirektionale Synchronisation abgeschlossen: {exported} exportiert, {imported} importiert, {updated} aktualisiert.',
+    'google.setup.sync_successful': 'Synchronisation erfolgreich!',
+    'google.setup.sync_failed': 'Synchronisation fehlgeschlagen: {error}'
   };
   

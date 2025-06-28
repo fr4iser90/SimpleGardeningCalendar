@@ -357,6 +357,17 @@ export const it = {
     'google.setup.sync_status': 'Stato di Sincronizzazione:',
     'google.setup.ready': 'Pronto',
     'google.setup.sign_out': 'Disconnetti e Revoca Permessi',
+    'google.setup.calendar_setup.title': 'Configurazione Automatica del Calendario',
+    'google.setup.calendar_setup.description': 'L\'app rileverà, abbinerà e creerà automaticamente i calendari Google in base all\'organizzazione locale del calendario. Nessuna configurazione manuale richiesta!',
+    'google.setup.calendar_setup.button': 'Configura Calendari Ora',
+    'google.setup.processing': '⏳ Elaborazione...',
+    'google.setup.running_sync': 'Esecuzione sincronizzazione {operation}...',
+    'google.setup.not_signed_in': 'Non connesso a Google Calendar',
+    'google.setup.export_complete': 'Esportazione completata: {count} eventi esportati.',
+    'google.setup.import_complete': 'Importazione completata: {imported} nuovi, {updated} aggiornati.',
+    'google.setup.bidirectional_complete': 'Sincronizzazione bidirezionale completata: {exported} esportati, {imported} importati, {updated} aggiornati.',
+    'google.setup.sync_successful': 'Sincronizzazione riuscita!',
+    'google.setup.sync_failed': 'Sincronizzazione fallita: {error}',
   
     // Google Calendar Detailed Help
     'google.help.overview_title': 'Panoramica',
