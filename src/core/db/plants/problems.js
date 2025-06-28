@@ -313,7 +313,7 @@ export const createProblemRefs = (problemKeys, category = 'common') => {
   
   problemKeys.forEach(key => {
     if (problems[key]) {
-      refs[problems[key].name] = problems[key].description;
+      refs[key] = problems[key];
     }
   });
   
