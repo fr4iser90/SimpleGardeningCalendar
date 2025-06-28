@@ -519,6 +519,27 @@ export const de = {
     'google.api_limits.pro_tip.title': '💡 Pro Tipp:',
     'google.api_limits.pro_tip.text': 'Wenn Sie einen "quotaExceeded" Fehler beim Erstellen von Kalendern erhalten, erstellen Sie einfach manuell einen Garten-Kalender in Google Calendar mit einem Namen wie "🌱 Garten" oder "🌱 Garden". Die App erkennt ihn automatisch und verwendet ihn!',
 
+    // Quota Exceeded Modal
+    'google.quota.modal.calendar_creation.title': 'Google Calendar Limit erreicht',
+    'google.quota.modal.calendar_creation.message': 'Sie haben das tägliche Limit für das Erstellen von Google Kalendern erreicht.',
+    'google.quota.modal.calendar_creation.step1': 'Gehen Sie zu Google Calendar (calendar.google.com)',
+    'google.quota.modal.calendar_creation.step2': 'Erstellen Sie manuell einen neuen Kalender',
+    'google.quota.modal.calendar_creation.step3': 'Verwenden Sie einen der Namen aus den Beispielen unten',
+    'google.quota.modal.calendar_creation.examples_title': 'Empfohlene Kalendernamen:',
+    
+    'google.quota.modal.event_sync.title': 'Event-Sync Limit erreicht',
+    'google.quota.modal.event_sync.message': 'Sie haben das tägliche Limit für das Erstellen von Google Calendar Events erreicht.',
+    'google.quota.modal.event_sync.step1': 'Warten Sie bis zum nächsten Tag (24 Stunden)',
+    'google.quota.modal.event_sync.step2': 'Versuchen Sie dann erneut zu synchronisieren',
+    
+    'google.quota.modal.daily_limit_info': 'Google setzt tägliche Limits für API-Aufrufe. Diese werden alle 24 Stunden zurückgesetzt.',
+    'google.quota.modal.what_to_do': 'Was können Sie tun?',
+    'google.quota.modal.retry_later': 'Später versuchen',
+    'google.quota.modal.retry_later_message': 'Versuchen Sie es in 24 Stunden erneut',
+    'google.quota.modal.open_google_calendar': 'Google Calendar öffnen',
+    'google.quota.modal.opened_google_calendar': 'Google Calendar wurde geöffnet',
+    'google.quota.modal.setup_calendars': 'Kalender einrichten',
+
     // Import Modal
     'import.modal.title': 'Kalender importieren',
     'import.drag_drop': 'Datei hier hinziehen oder klicken zum Auswählen',

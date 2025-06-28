@@ -6,6 +6,7 @@ import { googleCalendarSettings } from './GoogleCalendarSettings.js';
 import { fetchCalendarList, createCalendar, updateCalendar, deleteCalendar } from './GoogleCalendarApi.js';
 import { showNotification } from '../../utils/notifications.js';
 import { isGardenCalendar } from '../../utils/calendarUtils.js';
+import { showQuotaExceededModal } from '../../components/modals/Google/QuotaExceededModal.js';
 
 /**
  * Technical calendar categories that match local calendar organization
@@ -206,18 +207,20 @@ export async function autoDetectAndMatchCalendars() {
           });
           
           results.errors.push(`Failed to create calendar: ${error.message}`);
-          
-          // Show specific error message for quota exceeded
-          if (error.message.includes('quotaExceeded') || error.message.includes('usageLimits')) {
-            showNotification(`❌ Google Calendar quota exceeded! You have reached the limit for creating calendars. Please manually create a garden calendar in Google Calendar or wait for daily quota reset.`, 'error');
-            
-            // Save quota error to settings for status bar display
-            settings.lastError = error.message;
+          // NEU: Robustere Quota-Fehlererkennung
+          const errorStr = [error.message, error.errorText, error.body, error.response && error.response.errorText]
+            .filter(Boolean)
+            .join(' ');
+          console.log('🚨 Error string for quota check:', errorStr);
+          if (errorStr.includes('quotaExceeded') || errorStr.includes('usageLimits')) {
+            console.log('🚨 QUOTA EXCEEDED DETECTED! Showing modal...');
+            showQuotaExceededModal('calendar_creation');
+            settings.lastError = errorStr;
             googleCalendarSettings.save(settings);
-          } else if (error.message.includes('403')) {
-            showNotification(`❌ Permission denied: Cannot create Google Calendar. Please check your Google Calendar permissions.`, 'error');
+          } else if (errorStr.includes('403')) {
+            showNotification(t('google.error.permission_denied'), 'error');
           } else {
-            showNotification(`❌ Failed to create garden calendar: ${error.message}`, 'error');
+            showNotification(t('google.error.create_calendar_failed', { name: `${completeGardenInfo.emoji} ${completeGardenInfo.name}` }), 'error');
           }
         }
       }
@@ -279,7 +282,26 @@ export async function autoDetectAndMatchCalendars() {
             
             showNotification(`Created new calendar: "${calendarInfo.emoji} ${calendarInfo.name}"`, 'success');
           } catch (error) {
+            console.error(`❌ Failed to create calendar for ${category}:`, error);
             results.errors.push(`Failed to create calendar: ${error.message}`);
+            
+            // NEU: Robustere Quota-Fehlererkennung für Area-basierte Kalender
+            const errorStr = [error.message, error.errorText, error.body, error.response && error.response.errorText]
+              .filter(Boolean)
+              .join(' ');
+            console.log('🚨 Error string for quota check (area):', errorStr);
+            if (errorStr.includes('quotaExceeded') || errorStr.includes('usageLimits')) {
+              console.log('🚨 QUOTA EXCEEDED DETECTED in area calendar creation! Showing modal...');
+              showQuotaExceededModal('calendar_creation');
+              settings.lastError = errorStr;
+              googleCalendarSettings.save(settings);
+              // Break out of the loop since we've shown the modal
+              break;
+            } else if (errorStr.includes('403')) {
+              showNotification(t('google.error.permission_denied'), 'error');
+            } else {
+              showNotification(t('google.error.create_calendar_failed', { name: `${calendarInfo.emoji} ${calendarInfo.name}` }), 'error');
+            }
           }
         }
       }

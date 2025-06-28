@@ -706,5 +706,30 @@ export const en = {
     'google.quota.limit_reached': 'Quota limit reached',
     'google.quota.create_manually': 'Please manually create garden calendar in Google Calendar',
 
+    // Google API Limits
+    'google.api_limits.pro_tip.title': '💡 Pro Tip:',
+    'google.api_limits.pro_tip.text': 'If you get a "quotaExceeded" error when creating calendars, simply create a garden calendar manually in Google Calendar with a name like "🌱 Garden" or "🌱 Garten". The app will automatically detect and use it!',
+
+    // Quota Exceeded Modal
+    'google.quota.modal.calendar_creation.title': 'Google Calendar Limit Reached',
+    'google.quota.modal.calendar_creation.message': 'You have reached the daily limit for creating Google Calendars.',
+    'google.quota.modal.calendar_creation.step1': 'Go to Google Calendar (calendar.google.com)',
+    'google.quota.modal.calendar_creation.step2': 'Create a new calendar manually',
+    'google.quota.modal.calendar_creation.step3': 'Use one of the names from the examples below',
+    'google.quota.modal.calendar_creation.examples_title': 'Recommended Calendar Names:',
+    
+    'google.quota.modal.event_sync.title': 'Event Sync Limit Reached',
+    'google.quota.modal.event_sync.message': 'You have reached the daily limit for creating Google Calendar events.',
+    'google.quota.modal.event_sync.step1': 'Wait until tomorrow (24 hours)',
+    'google.quota.modal.event_sync.step2': 'Then try synchronizing again',
+    
+    'google.quota.modal.daily_limit_info': 'Google sets daily limits for API calls. These reset every 24 hours.',
+    'google.quota.modal.what_to_do': 'What can you do?',
+    'google.quota.modal.retry_later': 'Try Later',
+    'google.quota.modal.retry_later_message': 'Try again in 24 hours',
+    'google.quota.modal.open_google_calendar': 'Open Google Calendar',
+    'google.quota.modal.opened_google_calendar': 'Google Calendar opened',
+    'google.quota.modal.setup_calendars': 'Setup Calendars',
+
 };
   

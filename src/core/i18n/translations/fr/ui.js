@@ -658,6 +658,29 @@ export const fr = {
     'care_tips.pruning': 'Taille hivernale annuelle pour forme et santé',
     'care_tips.pollination': 'Pollinisation croisée nécessaire avec autres variétés de pommes',
 
+    'google.api_limits.pro_tip.title': '💡 Conseil Pro:',
+    'google.api_limits.pro_tip.text': 'Si vous obtenez une erreur "quotaExceeded" lors de la création de calendriers, créez simplement un calendrier de jardin manuellement dans Google Calendar avec un nom comme "🌱 Jardin" ou "🌱 Garden". L\'application le détectera automatiquement et l\'utilisera!',
+
+    // Quota Exceeded Modal
+    'google.quota.modal.calendar_creation.title': 'Limite Google Calendar Atteinte',
+    'google.quota.modal.calendar_creation.message': 'Vous avez atteint la limite quotidienne pour créer des calendriers Google.',
+    'google.quota.modal.calendar_creation.step1': 'Allez sur Google Calendar (calendar.google.com)',
+    'google.quota.modal.calendar_creation.step2': 'Créez un nouveau calendrier manuellement',
+    'google.quota.modal.calendar_creation.step3': 'Utilisez l\'un des noms des exemples ci-dessous',
+    'google.quota.modal.calendar_creation.examples_title': 'Noms de Calendriers Recommandés:',
+    
+    'google.quota.modal.event_sync.title': 'Limite de Synchronisation d\'Événements Atteinte',
+    'google.quota.modal.event_sync.message': 'Vous avez atteint la limite quotidienne pour créer des événements Google Calendar.',
+    'google.quota.modal.event_sync.step1': 'Attendez jusqu\'à demain (24 heures)',
+    'google.quota.modal.event_sync.step2': 'Puis essayez de synchroniser à nouveau',
+    
+    'google.quota.modal.daily_limit_info': 'Google fixe des limites quotidiennes pour les appels API. Celles-ci se réinitialisent toutes les 24 heures.',
+    'google.quota.modal.what_to_do': 'Que pouvez-vous faire?',
+    'google.quota.modal.retry_later': 'Réessayer Plus Tard',
+    'google.quota.modal.retry_later_message': 'Réessayez dans 24 heures',
+    'google.quota.modal.open_google_calendar': 'Ouvrir Google Calendar',
+    'google.quota.modal.opened_google_calendar': 'Google Calendar ouvert',
+    'google.quota.modal.setup_calendars': 'Configurer les Calendriers',
 
 };
   

@@ -8,6 +8,7 @@ import { formatDate } from '../../utils/dateUtils.js';
 import { validateEventData } from '../../utils/validators.js';
 import { convertToGoogleEvent, convertFromGoogleEvent } from '../../utils/eventUtils.js';
 import { getGoogleCalendarIdForEvent, autoDetectAndMatchCalendars } from './GoogleCalendarWizard.js';
+import { showQuotaExceededModal } from '../../components/modals/Google/QuotaExceededModal.js';
 
 /**
  * Google Calendar Sync Logic
@@ -143,6 +144,18 @@ export async function createEvents(eventsData) {
       results.push(result);
     } catch (error) {
       console.error(`Failed to create event "${eventData.title}":`, error);
+      
+      // NEU: Robustere Quota-Fehlererkennung
+      const errorStr = [error.message, error.errorText, error.body, error.response && error.response.errorText]
+        .filter(Boolean)
+        .join(' ');
+      if (errorStr.includes('quotaExceeded') || errorStr.includes('usageLimits')) {
+        showQuotaExceededModal('event_sync');
+        const settings = googleCalendarSettings.load();
+        settings.lastError = errorStr;
+        googleCalendarSettings.save(settings);
+      }
+      
       errors.push(error);
       results.push(null);
     }
