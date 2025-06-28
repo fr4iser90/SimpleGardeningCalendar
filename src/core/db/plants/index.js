@@ -11,6 +11,13 @@ import {
   cannabis_indica,
   cannabis_sativa,
   cannabis_autoflower,
+  basil,
+  mint,
+  rosemary,
+  thyme,
+  oregano,
+  sage,
+  parsley,
 } from './herbs/index.js';
 import {
   tomatoes,
@@ -22,10 +29,20 @@ import {
   kale,
   cucumber,
 } from './vegetables/index.js';
-import { basil } from './herbs/index.js';
-import { strawberries } from './fruits/index.js';
-import { apple_tree, cherry_tree } from './fruit-trees/index.js';
-import { lavender, roses, sunflowers } from './flowers/index.js';
+import { 
+  strawberries,
+  blueberries,
+  raspberries,
+} from './fruits/index.js';
+import { 
+  apple_tree,
+  cherry_tree,
+} from './fruit-trees/index.js';
+import { 
+  lavender, 
+  roses, 
+  sunflowers 
+} from './flowers/index.js';
 
 // Plant category registry with dynamic imports (for async loading)
 export const PLANT_REGISTRY = {
@@ -63,6 +80,15 @@ export function getPlantRegistry() {
     if (cannabis_autoflower)
       plantRegistryMap.set('cannabis_autoflower', cannabis_autoflower);
 
+    // Herbs
+    if (basil) plantRegistryMap.set('basil', basil);
+    if (mint) plantRegistryMap.set('mint', mint);
+    if (rosemary) plantRegistryMap.set('rosemary', rosemary);
+    if (thyme) plantRegistryMap.set('thyme', thyme);
+    if (oregano) plantRegistryMap.set('oregano', oregano);
+    if (sage) plantRegistryMap.set('sage', sage);
+    if (parsley) plantRegistryMap.set('parsley', parsley);
+
     // Vegetables
     if (tomatoes) plantRegistryMap.set('tomatoes', tomatoes);
     if (potatoes) plantRegistryMap.set('potatoes', potatoes);
@@ -73,11 +99,10 @@ export function getPlantRegistry() {
     if (kale) plantRegistryMap.set('kale', kale);
     if (cucumber) plantRegistryMap.set('cucumber', cucumber);
 
-    // Herbs
-    if (basil) plantRegistryMap.set('basil', basil);
-
     // Fruits
     if (strawberries) plantRegistryMap.set('strawberries', strawberries);
+    if (blueberries) plantRegistryMap.set('blueberries', blueberries);
+    if (raspberries) plantRegistryMap.set('raspberries', raspberries);
 
     // Fruit Trees
     if (apple_tree) plantRegistryMap.set('apple_tree', apple_tree);

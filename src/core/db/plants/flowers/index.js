@@ -9,7 +9,7 @@ import { roses } from './roses.js';
 import { sunflowers } from './sunflowers.js';
 
 // Export all flower plants
-export const flowers = {
+export const FLOWERS_PLANTS = {
   lavender,
   roses,
   sunflowers,
@@ -18,4 +18,4 @@ export const flowers = {
 // Export individual plants for direct access
 export { lavender, roses, sunflowers };
 
-export default flowers;
+export default FLOWERS_PLANTS;

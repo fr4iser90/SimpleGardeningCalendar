@@ -212,6 +212,12 @@ async function getPlantCategory(plantKey) {
     'cannabis_sativa': 'herbs',
     'cannabis_autoflower': 'herbs',
     'basil': 'herbs',
+    'mint': 'herbs',
+    'rosemary': 'herbs',
+    'thyme': 'herbs',
+    'oregano': 'herbs',
+    'sage': 'herbs',
+    'parsley': 'herbs',
     
     // Vegetables
     'tomatoes': 'vegetables',
@@ -248,7 +254,7 @@ async function getPlantCategory(plantKey) {
 export async function getAllTranslatedPlantData() {
   const plantKeys = [
     // Cannabis plants
-    'cannabis_indica', 'cannabis_sativa', 'cannabis_autoflower', 'basil',
+    'cannabis_indica', 'cannabis_sativa', 'cannabis_autoflower', 'basil', 'mint', 'rosemary', 'thyme', 'oregano', 'sage', 'parsley',
     // Vegetables
     'tomatoes', 'potatoes', 'carrots', 'lettuce', 'peppers', 'spinach', 'kale', 'cucumber',
     // Fruits

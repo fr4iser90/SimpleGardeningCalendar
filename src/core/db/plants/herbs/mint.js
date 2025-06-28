@@ -1,19 +1,19 @@
 /**
- * Basil Plant Data
- * Growing information for Basil
+ * Mint Plant Data
+ * Growing information for Mint
  */
 
 import { PLANT_TAGS } from '../categories.js';
 
-export const basil = {
-  name: 'Basil',
+export const mint = {
+  name: 'Mint',
   category: 'category.herbs',
-  tags: [PLANT_TAGS.ANNUAL],
+  tags: [PLANT_TAGS.PERENNIAL],
   environments: {
     indoor: {
       phases: {
         germination: {
-          days: 7,
+          days: 10,
           description: 'Seeds sprouting',
           care: 'Keep warm and moist',
           editable: true,
@@ -49,7 +49,7 @@ export const basil = {
           },
         },
         seedling: {
-          days: 14,
+          days: 21,
           description: 'First true leaves',
           care: 'Provide adequate light',
           editable: true,
@@ -76,13 +76,13 @@ export const basil = {
           },
         },
         vegetative: {
-          days: 21,
+          days: 30,
           description: 'Leaf growth',
           care: 'Pinch tips for bushiness',
           editable: true,
           soil: {
             watering: {
-              interval: 3,
+              interval: 2,
               description: 'Keep soil moist but not waterlogged',
             },
             fertilizing: {
@@ -105,40 +105,13 @@ export const basil = {
             },
           },
         },
-        flowering: {
-          days: 20,
-          description: 'Flower spike development',
-          care: 'Pinch flowers for continued leaf harvest',
-          editable: true,
-          soil: {
-            watering: { interval: 3, description: 'Maintain consistent moisture' },
-            fertilizing: {
-              interval: 21,
-              description: 'Continue light feeding to support leaf production',
-            },
-          },
-          hydro: {
-            watering: { interval: 0, description: 'Continuous flow, moderate EC' },
-            fertilizing: {
-              interval: 21,
-              description: 'Continue light feeding, EC 1.0-1.2',
-            },
-          },
-          coco: {
-            watering: { interval: 1, description: 'Daily watering in coco' },
-            fertilizing: {
-              interval: 21,
-              description: 'Continue light feeding, EC 1.0-1.2',
-            },
-          },
-        },
         harvest: {
-          days: 30,
+          days: 60,
           description: 'Continuous harvest',
           care: 'Harvest leaves regularly, prevent flowering',
           editable: true,
           soil: {
-            watering: { interval: 3, description: 'Keep soil consistently moist' },
+            watering: { interval: 2, description: 'Keep soil consistently moist' },
             fertilizing: {
               interval: 14,
               description: 'Regular feeding to support new growth',
@@ -164,7 +137,7 @@ export const basil = {
     outdoor: {
       phases: {
         germination: {
-          days: 7,
+          days: 10,
           description: 'Seeds sprouting',
           care: 'Keep warm and moist',
           editable: false,
@@ -200,7 +173,7 @@ export const basil = {
           },
         },
         seedling: {
-          days: 14,
+          days: 21,
           description: 'First true leaves',
           care: 'Provide adequate light',
           editable: false,
@@ -227,13 +200,13 @@ export const basil = {
           },
         },
         vegetative: {
-          days: 21,
+          days: 30,
           description: 'Leaf growth',
           care: 'Pinch tips for bushiness',
           editable: false,
           soil: {
             watering: {
-              interval: 3,
+              interval: 2,
               description: 'Keep soil moist but not waterlogged',
             },
             fertilizing: {
@@ -256,40 +229,13 @@ export const basil = {
             },
           },
         },
-        flowering: {
-          days: 20,
-          description: 'Flower spike development',
-          care: 'Pinch flowers for continued leaf harvest',
-          editable: false,
-          soil: {
-            watering: { interval: 3, description: 'Maintain consistent moisture' },
-            fertilizing: {
-              interval: 21,
-              description: 'Continue light feeding to support leaf production',
-            },
-          },
-          hydro: {
-            watering: { interval: 0, description: 'Continuous flow, moderate EC' },
-            fertilizing: {
-              interval: 21,
-              description: 'Continue light feeding, EC 1.0-1.2',
-            },
-          },
-          coco: {
-            watering: { interval: 1, description: 'Daily watering in coco' },
-            fertilizing: {
-              interval: 21,
-              description: 'Continue light feeding, EC 1.0-1.2',
-            },
-          },
-        },
         harvest: {
-          days: 30,
+          days: 60,
           description: 'Continuous harvest',
           care: 'Harvest leaves regularly, prevent flowering',
           editable: true,
           soil: {
-            watering: { interval: 3, description: 'Keep soil consistently moist' },
+            watering: { interval: 2, description: 'Keep soil consistently moist' },
             fertilizing: {
               interval: 14,
               description: 'Regular feeding to support new growth',
@@ -315,7 +261,7 @@ export const basil = {
     greenhouse: {
       phases: {
         germination: {
-          days: 7,
+          days: 10,
           description: 'Seeds sprouting',
           care: 'Keep warm and moist',
           editable: true,
@@ -351,7 +297,7 @@ export const basil = {
           },
         },
         seedling: {
-          days: 14,
+          days: 21,
           description: 'First true leaves',
           care: 'Provide adequate light',
           editable: true,
@@ -378,13 +324,13 @@ export const basil = {
           },
         },
         vegetative: {
-          days: 21,
+          days: 30,
           description: 'Leaf growth',
           care: 'Pinch tips for bushiness',
           editable: true,
           soil: {
             watering: {
-              interval: 3,
+              interval: 2,
               description: 'Keep soil moist but not waterlogged',
             },
             fertilizing: {
@@ -407,40 +353,13 @@ export const basil = {
             },
           },
         },
-        flowering: {
-          days: 20,
-          description: 'Flower spike development',
-          care: 'Pinch flowers for continued leaf harvest',
-          editable: true,
-          soil: {
-            watering: { interval: 3, description: 'Maintain consistent moisture' },
-            fertilizing: {
-              interval: 21,
-              description: 'Continue light feeding to support leaf production',
-            },
-          },
-          hydro: {
-            watering: { interval: 0, description: 'Continuous flow, moderate EC' },
-            fertilizing: {
-              interval: 21,
-              description: 'Continue light feeding, EC 1.0-1.2',
-            },
-          },
-          coco: {
-            watering: { interval: 1, description: 'Daily watering in coco' },
-            fertilizing: {
-              interval: 21,
-              description: 'Continue light feeding, EC 1.0-1.2',
-            },
-          },
-        },
         harvest: {
-          days: 30,
+          days: 60,
           description: 'Continuous harvest',
           care: 'Harvest leaves regularly, prevent flowering',
           editable: true,
           soil: {
-            watering: { interval: 3, description: 'Keep soil consistently moist' },
+            watering: { interval: 2, description: 'Keep soil consistently moist' },
             fertilizing: {
               interval: 14,
               description: 'Regular feeding to support new growth',
@@ -465,19 +384,19 @@ export const basil = {
     },
   },
   careTips: {
-    watering: 'Keep soil moist but not waterlogged',
+    watering: 'Keep soil consistently moist',
     fertilizing: 'Light feeding every 2-3 weeks',
-    sunlight: 'Full sun (6+ hours daily)',
-    spacing: '6-12 inches apart',
-    temperature: 'Warm weather herb, protect from cold',
+    sunlight: 'Partial shade to full sun',
+    spacing: '12-18 inches apart',
+    temperature: 'Cool to warm weather herb',
     soilPH: '6.0-7.0',
     harvesting: 'Pinch leaves regularly to encourage growth',
   },
   commonProblems: {
-    'Fusarium Wilt': 'Soil-borne disease - use disease-free soil and rotate crops',
-    'Aphids': 'Small insects on new growth - spray with water',
-    'Bolting': 'Going to seed too early - pinch flower buds regularly',
+    'Rust Disease': 'Orange spots on leaves - improve airflow and reduce humidity',
+    'Root Rot': 'Overwatering - ensure good drainage',
+    'Invasive Growth': 'Plant in containers to prevent spreading',
   },
 };
 
-export default basil;
+export default mint; 
