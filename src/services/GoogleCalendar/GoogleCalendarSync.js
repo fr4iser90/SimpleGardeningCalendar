@@ -14,6 +14,13 @@ import { getGoogleCalendarIdForEvent, autoDetectAndMatchCalendars } from './Goog
  * Handles bidirectional synchronization between local and Google Calendar
  */
 
+// Helper function to update status bar activity
+function updateActivityStatus(action) {
+  if (window.updateStatusBarActivity) {
+    window.updateStatusBarActivity(action, true);
+  }
+}
+
 // Bidirectional sync
 export async function performBidirectionalSync() {
   const { isSignedIn } = getAuthState();
@@ -26,10 +33,12 @@ export async function performBidirectionalSync() {
   
   try {
     // Step 1: Auto-detect and match calendars ALWAYS before export
+    updateActivityStatus(t('google.activity.checking_calendar_setup'));
     console.log('🔍 Checking calendar setup...');
     const calendarResults = await autoDetectAndMatchCalendars();
 
     // NEU: Nach Kalender-Matching alle Events, deren googleCalendarId nicht mehr passt, zum Re-Export markieren
+    updateActivityStatus(t('google.activity.updating_calendar_ids'));
     const db = await openDB(DB_NAME, DB_VERSION);
     const allEvents = await db.getAll('events');
     const settings = googleCalendarSettings.load();
@@ -67,6 +76,7 @@ export async function performBidirectionalSync() {
     }
 
     // Step 2: Export local events to Google
+    updateActivityStatus(t('google.activity.exporting_events'));
     console.log('🔄 Exporting local events to Google...');
     const exportResult = await exportLocalEventsToGoogle();
     exported = exportResult.synced;
@@ -80,6 +90,7 @@ export async function performBidirectionalSync() {
   
   try {
     // Step 3: Import events from Google
+    updateActivityStatus(t('google.activity.importing_events'));
     console.log('🔄 Importing events from Google...');
     const importResult = await importGoogleEvents();
     imported = importResult.imported;
@@ -207,6 +218,7 @@ export async function exportLocalEventsToGoogle() {
   
   // Auto-detect and match calendars if no setup exists
   if (!settings.calendarMappings) {
+    updateActivityStatus(t('google.activity.creating_calendar_mappings'));
     console.log('[DEBUG] No calendar mappings found - running auto-detection...');
     try {
       await autoDetectAndMatchCalendars();
@@ -217,6 +229,7 @@ export async function exportLocalEventsToGoogle() {
   }
   
   // KRITISCHER FIX: Robuste Duplikat-Prüfung vor Export
+  updateActivityStatus(t('google.activity.checking_for_existing_events'));
   console.log('🔍 Checking for existing Google events to prevent duplicates...');
   const existingGoogleEvents = await getAllGoogleEvents();
   console.log(`[DEBUG] Found ${existingGoogleEvents.length} existing Google events`);
@@ -260,11 +273,13 @@ export async function exportLocalEventsToGoogle() {
     return { synced: 0, failed: 0 };
   }
   
+  updateActivityStatus(t('google.activity.exporting_events'));
   console.log(`🔄 Exporting ${eventsToSync.length} NEW events to Google (skipping ${events.length - eventsToSync.length} already synced)`);
   
   const { results, errors } = await createEvents(eventsToSync);
   
   // Update local events with Google event IDs
+  updateActivityStatus(t('google.activity.updating_local_ids'));
   for (let i = 0; i < results.length; i++) {
     const localEvent = eventsToSync[i];
     const googleEvent = results[i];

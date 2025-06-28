@@ -727,6 +727,37 @@ export const de = {
     'google.setup.import_complete': 'Import abgeschlossen: {imported} neu, {updated} aktualisiert.',
     'google.setup.bidirectional_complete': 'Bidirektionale Synchronisation abgeschlossen: {exported} exportiert, {imported} importiert, {updated} aktualisiert.',
     'google.setup.sync_successful': 'Synchronisation erfolgreich!',
-    'google.setup.sync_failed': 'Synchronisation fehlgeschlagen: {error}'
-  };
+    'google.setup.sync_failed': 'Synchronisation fehlgeschlagen: {error}',
+
+    // Google Activity Status Messages
+    'google.activity.detecting_calendars': '🔍 Kalender werden erkannt...',
+    'google.activity.calendar_detected': '✅ Kalender erkannt: {name}',
+    'google.activity.no_calendars_found': '⚠️ Keine Garten-Kalender gefunden',
+    'google.activity.detection_failed': '❌ Kalender-Erkennung fehlgeschlagen: {error}',
+    'google.activity.autosync_after_reconnect': '🔄 AutoSync nach Reconnect...',
+    'google.activity.autosync_complete_after_reconnect': '✅ AutoSync nach Reconnect: {exported} exportiert, {imported} importiert',
+    'google.activity.autosync_failed_after_reconnect': '❌ AutoSync nach Reconnect fehlgeschlagen: {error}',
+    'google.activity.syncing': '🔄 Synchronisiere...',
+    'google.activity.sync_complete': '✅ Sync abgeschlossen: {exported} exportiert, {imported} importiert',
+    'google.activity.sync_failed': '❌ Sync fehlgeschlagen: {error}',
+    'google.activity.connecting': '🔗 Verbinde...',
+    'google.activity.connection_established': '✅ Verbindung hergestellt',
+    'google.activity.connection_failed': '❌ Verbindung fehlgeschlagen: {error}',
+    'google.activity.autosync_initializing': '🔄 AutoSync initialisiere...',
+    'google.activity.autosync_activated': '✅ AutoSync aktiviert: {exported} exportiert, {imported} importiert',
+    'google.activity.autosync_failed': '❌ AutoSync fehlgeschlagen: {error}',
+    'google.activity.autosync_deactivated': '⏸️ AutoSync deaktiviert',
+    'google.activity.setting_failed': '❌ Einstellung fehlgeschlagen: {error}',
+    'google.activity.checking_calendar_setup': '🔍 Kalender-Setup prüfen...',
+    'google.activity.updating_calendar_ids': '🔄 Kalender-IDs aktualisieren...',
+    'google.activity.exporting_events': '📤 Events zu Google exportieren...',
+    'google.activity.importing_events': '📥 Events von Google importieren...',
+    'google.activity.creating_calendar_mappings': '🔍 Kalender-Mappings erstellen...',
+    'google.activity.checking_for_existing_events': '🔍 Duplikate prüfen...',
+    'google.activity.updating_local_ids': '💾 Lokale IDs aktualisieren...',
+
+    // Google Quota Messages
+    'google.quota.limit_reached': 'Quota Limit erreicht',
+    'google.quota.create_manually': 'Bitte manuell Garten-Kalender in Google Calendar erstellen',
+};
   

@@ -675,6 +675,36 @@ export const en = {
     'care_tips.pruning': 'Annual winter pruning for shape and health',
     'care_tips.pollination': 'Mostly cross-pollination needed with other apple varieties',
 
+    // Google Activity Status Messages
+    'google.activity.detecting_calendars': '🔍 Detecting calendars...',
+    'google.activity.calendar_detected': '✅ Calendar detected: {name}',
+    'google.activity.no_calendars_found': '⚠️ No garden calendars found',
+    'google.activity.detection_failed': '❌ Calendar detection failed: {error}',
+    'google.activity.autosync_after_reconnect': '🔄 AutoSync after reconnect...',
+    'google.activity.autosync_complete_after_reconnect': '✅ AutoSync after reconnect: {exported} exported, {imported} imported',
+    'google.activity.autosync_failed_after_reconnect': '❌ AutoSync after reconnect failed: {error}',
+    'google.activity.syncing': '🔄 Syncing...',
+    'google.activity.sync_complete': '✅ Sync complete: {exported} exported, {imported} imported',
+    'google.activity.sync_failed': '❌ Sync failed: {error}',
+    'google.activity.connecting': '🔗 Connecting...',
+    'google.activity.connection_established': '✅ Connection established',
+    'google.activity.connection_failed': '❌ Connection failed: {error}',
+    'google.activity.autosync_initializing': '🔄 AutoSync initializing...',
+    'google.activity.autosync_activated': '✅ AutoSync activated: {exported} exported, {imported} imported',
+    'google.activity.autosync_failed': '❌ AutoSync failed: {error}',
+    'google.activity.autosync_deactivated': '⏸️ AutoSync deactivated',
+    'google.activity.setting_failed': '❌ Setting failed: {error}',
+    'google.activity.checking_calendar_setup': '🔍 Checking calendar setup...',
+    'google.activity.updating_calendar_ids': '🔄 Updating calendar IDs...',
+    'google.activity.exporting_events': '📤 Exporting events to Google...',
+    'google.activity.importing_events': '📥 Importing events from Google...',
+    'google.activity.creating_calendar_mappings': '🔍 Creating calendar mappings...',
+    'google.activity.checking_for_existing_events': '🔍 Checking for existing events...',
+    'google.activity.updating_local_ids': '💾 Updating local IDs...',
+
+    // Google Quota Messages
+    'google.quota.limit_reached': 'Quota limit reached',
+    'google.quota.create_manually': 'Please manually create garden calendar in Google Calendar',
 
 };
   

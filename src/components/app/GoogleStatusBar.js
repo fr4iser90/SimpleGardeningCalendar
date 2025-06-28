@@ -3,6 +3,42 @@ import { performBidirectionalSync } from '../../services/GoogleCalendar/GoogleCa
 import { showNotification } from '../../utils/notifications.js';
 import { t } from '../../core/i18n/index.js';
 
+// Global state for status bar activity
+let statusBarState = {
+  isActive: false,
+  currentAction: '',
+  lastAction: '',
+  lastActionTime: null,
+  spinnerId: null
+};
+
+// Function to update status bar activity
+export function updateStatusBarActivity(action, isActive = true) {
+  statusBarState.isActive = isActive;
+  statusBarState.currentAction = isActive ? action : '';
+  
+  if (!isActive && action) {
+    statusBarState.lastAction = action;
+    statusBarState.lastActionTime = new Date();
+  }
+  
+  updateGoogleCalendarStatus();
+}
+
+// Function to get time ago string
+function getTimeAgo(date) {
+  if (!date) return '';
+  
+  const now = new Date();
+  const diffMs = now - date;
+  const diffSecs = Math.floor(diffMs / 1000);
+  const diffMins = Math.floor(diffSecs / 60);
+  
+  if (diffSecs < 60) return `${diffSecs}s`;
+  if (diffMins < 60) return `${diffMins}m`;
+  return `${Math.floor(diffMins / 60)}h`;
+}
+
 // Function to update Google Calendar status display
 export function updateGoogleCalendarStatus() {
   const statusDisplay = document.getElementById('googleCalendarStatusDisplay');
@@ -37,6 +73,19 @@ export function updateGoogleCalendarStatus() {
     autoDetectAndSelectCalendar();
   }
 
+  // NEU: Loading Spinner und Activity Status
+  const activityStatus = statusBarState.isActive ? 
+    `<span class="text-blue-600 dark:text-blue-400 flex items-center">
+      <div class="animate-spin rounded-full h-3 w-3 border-b-2 border-blue-600 mr-1"></div>
+      ${statusBarState.currentAction}
+    </span>` : 
+    (statusBarState.lastAction ? 
+      `<span class="text-gray-500 dark:text-gray-400 text-xs">
+        ${statusBarState.lastAction} (${getTimeAgo(statusBarState.lastActionTime)})
+      </span>` : 
+      ''
+    );
+
   if (isCurrentlySignedIn && hasSavedCredentials) {
     if (!hasSelectedCalendar) {
       // Check if there's a quota error by looking at recent console logs or error state
@@ -49,20 +98,21 @@ export function updateGoogleCalendarStatus() {
         statusDisplay.innerHTML = `
           <span class="font-bold mr-2 flex items-center"><span class="text-lg mr-1">📅</span>${t('google.calendar.name')}:</span>
           <span class="text-red-600 dark:text-red-400 flex items-center">
-            <i class="fas fa-exclamation-triangle mr-1"></i>Quota Limit erreicht
+            <i class="fas fa-exclamation-triangle mr-1"></i>${t('google.quota.limit_reached')}
           </span>
           <span class="mx-2">|</span>
           <span class="text-sm text-gray-600 dark:text-gray-400">
-            Bitte manuell Garten-Kalender in Google Calendar erstellen
+            ${t('google.quota.create_manually')}
           </span>
           <span class="mx-2">|</span>
           <button 
             class="text-xs text-blue-600 dark:text-blue-400 hover:underline"
             onclick="showGoogleCalendarSetup()"
-            title="Google Calendar Setup"
+            title="${t('google.setup.title')}"
           >
-            <i class="fas fa-cog mr-1"></i>Setup
+            <i class="fas fa-cog mr-1"></i>${t('google.setup.title')}
           </button>
+          ${activityStatus ? `<span class="mx-2">|</span>${activityStatus}` : ''}
         `;
         return;
       }
@@ -72,6 +122,7 @@ export function updateGoogleCalendarStatus() {
         <span class="text-yellow-600 dark:text-yellow-400 flex items-center">
           <i class="fas fa-exclamation-triangle mr-1"></i>${t('google.status.no_calendar_selected')}
         </span>
+        ${activityStatus ? `<span class="mx-2">|</span>${activityStatus}` : ''}
       `;
       return;
     }
@@ -105,6 +156,7 @@ export function updateGoogleCalendarStatus() {
       >
         <i class="fas fa-cog mr-1"></i>
       </button>
+      ${activityStatus ? `<span class="mx-2">|</span>${activityStatus}` : ''}
     `;
     return;
   } else if (hasSavedCredentials && !isCurrentlySignedIn) {
@@ -125,6 +177,7 @@ export function updateGoogleCalendarStatus() {
       >
         <i class="fas fa-cog mr-1"></i>${t('google.status.manage_integration')}
       </button>
+      ${activityStatus ? `<span class="mx-2">|</span>${activityStatus}` : ''}
     `;
   } else {
     console.log('📊 Google Status Bar: Showing NOT CONNECTED');
@@ -147,6 +200,7 @@ export function updateGoogleCalendarStatus() {
       >
         <i class="fas fa-cog mr-1"></i>${t('google.status.manage_integration')}
       </button>
+      ${activityStatus ? `<span class="mx-2">|</span>${activityStatus}` : ''}
     `;
     // Button-Handler für Modal-Öffnung
     const connectBtn = document.getElementById('googleStatusConnectBtn');
@@ -160,6 +214,8 @@ export function updateGoogleCalendarStatus() {
 
 // Auto-detect and select garden calendars
 async function autoDetectAndSelectCalendar() {
+  updateStatusBarActivity(t('google.activity.detecting_calendars'), true);
+  
   try {
     const { detectGardenCalendars } = await import('../../services/GoogleCalendar/GoogleCalendarApi.js');
     const { gardenCalendars, hasExistingGardenCalendars } = await detectGardenCalendars();
@@ -207,9 +263,14 @@ async function autoDetectAndSelectCalendar() {
           calendarName: selectedCalendar.summary 
         } 
       }));
+      
+      updateStatusBarActivity(t('google.activity.calendar_detected', { name: selectedCalendar.summary }), false);
+    } else {
+      updateStatusBarActivity(t('google.activity.no_calendars_found'), false);
     }
   } catch (error) {
     console.error('❌ Auto-detection failed:', error);
+    updateStatusBarActivity(t('google.activity.detection_failed', { error: error.message }), false);
   }
 }
 
@@ -227,6 +288,7 @@ export function initializeGoogleStatusBar() {
     const settingsJSON = localStorage.getItem('googleCalendarSettings');
     const settings = settingsJSON ? JSON.parse(settingsJSON) : {};
     if (e.detail?.isSignedIn && settings.autoSync) {
+      updateStatusBarActivity(t('google.activity.autosync_after_reconnect'), true);
       try {
         const report = await performBidirectionalSync();
         const message = `${t('google.sync_report_title')}: ${t('google.sync_report_details', {
@@ -236,65 +298,29 @@ export function initializeGoogleStatusBar() {
         })}`;
         showNotification(message, 'success');
         if (window.calendar) window.calendar.refetchEvents();
+        updateStatusBarActivity(t('google.activity.autosync_complete_after_reconnect', { 
+          exported: report.exported || 0, 
+          imported: report.imported || 0 
+        }), false);
+        setTimeout(() => updateStatusBarActivity(t('google.setup.ready'), false), 2000);
       } catch (error) {
         console.error('AutoSync after reconnect failed:', error);
         showNotification(`${t('error.title')}: ${error.message || 'Sync failed'}`, 'error');
+        updateStatusBarActivity(t('google.activity.autosync_failed_after_reconnect', { error: error.message }), false);
       }
     }
   });
 
   // Make Google Calendar functions available on the window object for onclick handlers
-  window.toggleGoogleAutoSync = async function() {
-    try {
-      const settingsJSON = localStorage.getItem('googleCalendarSettings');
-      let settings = settingsJSON ? JSON.parse(settingsJSON) : {};
-      if (!settings.autoSync && !settings.selectedCalendarId) {
-        showNotification(t('google.error.no_calendar_selected'), 'error');
-        return;
-      }
-      settings.autoSync = !settings.autoSync;
-      localStorage.setItem('googleCalendarSettings', JSON.stringify(settings));
-      showNotification(t(settings.autoSync ? 'google.autosync_on_notif' : 'google.autosync_off_notif'), 'info');
-      updateGoogleCalendarStatus();
-      // NEU: Wenn AutoSync aktiviert wurde, sofort synchronisieren
-      if (settings.autoSync) {
-        try {
-          const report = await performBidirectionalSync();
-          const message = `${t('google.sync_report_title')}: ${t('google.sync_report_details', {
-            exported: report.exported || 0,
-            imported: report.imported || 0,
-            updated: report.updated || 0,
-          })}`;
-          showNotification(message, 'success');
-          if (window.calendar) window.calendar.refetchEvents();
-        } catch (error) {
-          console.error('AutoSync initial sync failed:', error);
-          showNotification(`${t('error.title')}: ${error.message || 'Sync failed'}`, 'error');
-        } finally {
-          updateGoogleCalendarStatus();
-        }
-      }
-    } catch (error) {
-      console.error('Failed to toggle auto-sync:', error);
-      showNotification('Error changing sync setting', 'error');
-    }
-  };
-
-  window.reconnectGoogleCalendar = async function() {
-    try {
-      await googleCalendar.attemptSignIn(true);
-    } catch (error) {
-      console.error('Google Calendar reconnect failed:', error);
-      showNotification(t('google.reconnect_failed'), 'error');
-    }
-  };
-
   window.triggerGoogleCalendarSync = async function() {
+    updateStatusBarActivity(t('google.activity.syncing'), true);
+    
     const syncBtn = document.querySelector('[onclick="triggerGoogleCalendarSync()"]');
     if (syncBtn) {
       syncBtn.disabled = true;
       syncBtn.textContent = t('common.loading');
     }
+    
     try {
       const report = await performBidirectionalSync();
       const message = `${t('google.sync_report_title')}: ${t('google.sync_report_details', {
@@ -304,11 +330,84 @@ export function initializeGoogleStatusBar() {
       })}`;
       showNotification(message, 'success');
       if (window.calendar) window.calendar.refetchEvents();
+      updateStatusBarActivity(t('google.activity.sync_complete', { 
+        exported: report.exported || 0, 
+        imported: report.imported || 0 
+      }), false);
+      setTimeout(() => updateStatusBarActivity(t('google.setup.ready'), false), 2000);
     } catch (error) {
       console.error('Sync failed:', error);
       showNotification(`${t('error.title')}: ${error.message || 'Sync failed'}`, 'error');
+      updateStatusBarActivity(t('google.activity.sync_failed', { error: error.message }), false);
     } finally {
+      if (syncBtn) {
+        syncBtn.disabled = false;
+        syncBtn.textContent = t('google.sync_now');
+      }
       updateGoogleCalendarStatus();
+    }
+  };
+
+  window.reconnectGoogleCalendar = async function() {
+    updateStatusBarActivity(t('google.activity.connecting'), true);
+    
+    try {
+      await googleCalendar.attemptSignIn(true);
+      updateStatusBarActivity(t('google.activity.connection_established'), false);
+    } catch (error) {
+      console.error('Google Calendar reconnect failed:', error);
+      showNotification(t('google.reconnect_failed'), 'error');
+      updateStatusBarActivity(t('google.activity.connection_failed', { error: error.message }), false);
+    }
+  };
+
+  window.toggleGoogleAutoSync = async function() {
+    try {
+      const settingsJSON = localStorage.getItem('googleCalendarSettings');
+      let settings = settingsJSON ? JSON.parse(settingsJSON) : {};
+      if (!settings.autoSync && !settings.selectedCalendarId) {
+        showNotification(t('google.error.no_calendar_selected'), 'error');
+        return;
+      }
+      
+      const newAutoSyncState = !settings.autoSync;
+      settings.autoSync = newAutoSyncState;
+      localStorage.setItem('googleCalendarSettings', JSON.stringify(settings));
+      
+      showNotification(t(newAutoSyncState ? 'google.autosync_on_notif' : 'google.autosync_off_notif'), 'info');
+      updateGoogleCalendarStatus();
+      
+      // NEU: Wenn AutoSync aktiviert wurde, sofort synchronisieren
+      if (newAutoSyncState) {
+        updateStatusBarActivity(t('google.activity.autosync_initializing'), true);
+        try {
+          const report = await performBidirectionalSync();
+          const message = `${t('google.sync_report_title')}: ${t('google.sync_report_details', {
+            exported: report.exported || 0,
+            imported: report.imported || 0,
+            updated: report.updated || 0,
+          })}`;
+          showNotification(message, 'success');
+          if (window.calendar) window.calendar.refetchEvents();
+          updateStatusBarActivity(t('google.activity.autosync_activated', { 
+            exported: report.exported || 0, 
+            imported: report.imported || 0 
+          }), false);
+          setTimeout(() => updateStatusBarActivity(t('google.setup.ready'), false), 2000);
+        } catch (error) {
+          console.error('AutoSync initial sync failed:', error);
+          showNotification(`${t('error.title')}: ${error.message || 'Sync failed'}`, 'error');
+          updateStatusBarActivity(t('google.activity.autosync_failed', { error: error.message }), false);
+        } finally {
+          updateGoogleCalendarStatus();
+        }
+      } else {
+        updateStatusBarActivity(t('google.activity.autosync_deactivated'), false);
+      }
+    } catch (error) {
+      console.error('Failed to toggle auto-sync:', error);
+      showNotification('Error changing sync setting', 'error');
+      updateStatusBarActivity(t('google.activity.setting_failed', { error: error.message }), false);
     }
   };
 
