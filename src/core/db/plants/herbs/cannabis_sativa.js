@@ -421,24 +421,24 @@ export const cannabis_sativa = {
           plantingWindow: {
             start: '04-01',
             end: '05-15',
-            description: 'cannabis_sativa.environments.outdoor.seasonalTiming.temperate_north.plantingWindow.description',
+            description: 'cannabis_sativa.seasonalTiming.temperate_north.plantingWindow.description',
           },
           harvestWindow: {
             start: '10-15',
             end: '11-30',
-            description: 'cannabis_sativa.environments.outdoor.seasonalTiming.temperate_north.harvestWindow.description',
+            description: 'cannabis_sativa.seasonalTiming.temperate_north.harvestWindow.description',
           },
         },
         mediterranean: {
           plantingWindow: {
             start: '03-01',
             end: '05-01',
-            description: 'cannabis_sativa.environments.outdoor.seasonalTiming.mediterranean.plantingWindow.description',
+            description: 'cannabis_sativa.seasonalTiming.mediterranean.plantingWindow.description',
           },
           harvestWindow: {
             start: '10-01',
             end: '12-15',
-            description: 'cannabis_sativa.environments.outdoor.seasonalTiming.mediterranean.harvestWindow.description',
+            description: 'cannabis_sativa.seasonalTiming.mediterranean.harvestWindow.description',
           },
         },
       },

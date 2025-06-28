@@ -421,24 +421,24 @@ export const cannabis_indica = {
           plantingWindow: {
             start: '04-15',
             end: '06-01',
-            description: 'cannabis_indica.environments.outdoor.seasonalTiming.temperate_north.plantingWindow.description',
+            description: 'cannabis_indica.seasonalTiming.temperate_north.plantingWindow.description',
           },
           harvestWindow: {
             start: '09-15',
             end: '10-31',
-            description: 'cannabis_indica.environments.outdoor.seasonalTiming.temperate_north.harvestWindow.description',
+            description: 'cannabis_indica.seasonalTiming.temperate_north.harvestWindow.description',
           },
         },
         mediterranean: {
           plantingWindow: {
             start: '03-15',
             end: '05-15',
-            description: 'cannabis_indica.environments.outdoor.seasonalTiming.mediterranean.plantingWindow.description',
+            description: 'cannabis_indica.seasonalTiming.mediterranean.plantingWindow.description',
           },
           harvestWindow: {
             start: '09-01',
             end: '11-15',
-            description: 'cannabis_indica.environments.outdoor.seasonalTiming.mediterranean.harvestWindow.description',
+            description: 'cannabis_indica.seasonalTiming.mediterranean.harvestWindow.description',
           },
         },
       },

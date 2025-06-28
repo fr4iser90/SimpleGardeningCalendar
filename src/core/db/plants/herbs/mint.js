@@ -264,24 +264,24 @@ export const mint = {
           plantingWindow: {
             start: '04-01',
             end: '06-15',
-            description: 'mint.environments.outdoor.seasonalTiming.temperate_north.plantingWindow.description',
+            description: 'mint.seasonalTiming.temperate_north.plantingWindow.description',
           },
           harvestWindow: {
             start: '06-01',
             end: '10-31',
-            description: 'mint.environments.outdoor.seasonalTiming.temperate_north.harvestWindow.description',
+            description: 'mint.seasonalTiming.temperate_north.harvestWindow.description',
           },
         },
         mediterranean: {
           plantingWindow: {
             start: '03-01',
             end: '07-01',
-            description: 'mint.environments.outdoor.seasonalTiming.mediterranean.plantingWindow.description',
+            description: 'mint.seasonalTiming.mediterranean.plantingWindow.description',
           },
           harvestWindow: {
             start: '05-01',
             end: '11-30',
-            description: 'mint.environments.outdoor.seasonalTiming.mediterranean.harvestWindow.description',
+            description: 'mint.seasonalTiming.mediterranean.harvestWindow.description',
           },
         },
       },

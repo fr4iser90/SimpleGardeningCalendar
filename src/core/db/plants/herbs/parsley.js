@@ -312,24 +312,24 @@ export const parsley = {
           plantingWindow: {
             start: '03-01',
             end: '07-01',
-            description: 'parsley.environments.outdoor.seasonalTiming.temperate_north.plantingWindow.description',
+            description: 'parsley.seasonalTiming.temperate_north.plantingWindow.description',
           },
           harvestWindow: {
             start: '05-01',
             end: '11-30',
-            description: 'parsley.environments.outdoor.seasonalTiming.temperate_north.harvestWindow.description',
+            description: 'parsley.seasonalTiming.temperate_north.harvestWindow.description',
           },
         },
         mediterranean: {
           plantingWindow: {
             start: '02-01',
             end: '08-01',
-            description: 'parsley.environments.outdoor.seasonalTiming.mediterranean.plantingWindow.description',
+            description: 'parsley.seasonalTiming.mediterranean.plantingWindow.description',
           },
           harvestWindow: {
             start: '04-01',
             end: '12-31',
-            description: 'parsley.environments.outdoor.seasonalTiming.mediterranean.harvestWindow.description',
+            description: 'parsley.seasonalTiming.mediterranean.harvestWindow.description',
           },
         },
       },

@@ -264,24 +264,24 @@ export const oregano = {
           plantingWindow: {
             start: '04-01',
             end: '06-15',
-            description: 'oregano.environments.outdoor.seasonalTiming.temperate_north.plantingWindow.description',
+            description: 'oregano.seasonalTiming.temperate_north.plantingWindow.description',
           },
           harvestWindow: {
             start: '06-01',
             end: '10-31',
-            description: 'oregano.environments.outdoor.seasonalTiming.temperate_north.harvestWindow.description',
+            description: 'oregano.seasonalTiming.temperate_north.harvestWindow.description',
           },
         },
         mediterranean: {
           plantingWindow: {
             start: '03-01',
             end: '07-01',
-            description: 'oregano.environments.outdoor.seasonalTiming.mediterranean.plantingWindow.description',
+            description: 'oregano.seasonalTiming.mediterranean.plantingWindow.description',
           },
           harvestWindow: {
             start: '05-01',
             end: '11-30',
-            description: 'oregano.environments.outdoor.seasonalTiming.mediterranean.harvestWindow.description',
+            description: 'oregano.seasonalTiming.mediterranean.harvestWindow.description',
           },
         },
       },
