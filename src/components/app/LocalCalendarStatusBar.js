@@ -158,6 +158,11 @@ export function initializeLocalCalendarStatusBar() {
     updateLocalCalendarStatus();
   });
 
+  // NEU: Listen for selectedCalendarChanged (z.B. nach intelligentem Planting)
+  document.addEventListener('selectedCalendarChanged', () => {
+    updateLocalCalendarStatus();
+  });
+
   // Listen for language changes
   document.addEventListener('languageChanged', () => {
     updateLocalCalendarStatus();

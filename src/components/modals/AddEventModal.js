@@ -146,6 +146,7 @@ async function handlePlantingSubmission() {
   );
   if (calendarId && calendarId !== selectedCalendarId) {
     localStorage.setItem('selectedLocalCalendarId', calendarId.toString());
+    document.dispatchEvent(new CustomEvent('selectedCalendarChanged'));
   }
   showNotification(t('notification.planting_added'), 'success');
   document.dispatchEvent(new CustomEvent('refreshCalendar'));
