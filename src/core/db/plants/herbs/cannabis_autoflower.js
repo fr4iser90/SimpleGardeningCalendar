@@ -5,8 +5,7 @@
  */
 
 import { PLANT_TAGS } from '../categories.js';
-
-
+import { createProblemRefs } from '../problems.js';
 
 export const cannabis_autoflower = {
   name: 'cannabis_autoflower.name',
@@ -678,11 +677,7 @@ export const cannabis_autoflower = {
     humidity: 'cannabis_autoflower.careTips.humidity',
     temperature: 'cannabis_autoflower.careTips.temperature',
   },
-  commonProblems: {
-    'Stunted Growth': 'cannabis_autoflower.commonProblems.stuntedGrowth',
-    'Nutrient Burn': 'cannabis_autoflower.commonProblems.nutrientBurn',
-    'Short Cycle': 'cannabis_autoflower.commonProblems.shortCycle',
-  },
+  commonProblems: createProblemRefs(['stuntedGrowth', 'nutrientBurn', 'shortCycle'], 'cannabis'),
 };
 
 export default cannabis_autoflower;

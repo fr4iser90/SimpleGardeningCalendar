@@ -4,6 +4,7 @@
  */
 
 import { PLANT_TAGS } from '../categories.js';
+import { createProblemRefs } from '../problems.js';
 
 export const basil = {
   name: 'basil.name',
@@ -500,11 +501,7 @@ export const basil = {
     soilPH: 'basil.careTips.soilPH',
     harvesting: 'basil.careTips.harvesting',
   },
-  commonProblems: {
-    'Fusarium Wilt': 'basil.commonProblems.fusariumWilt',
-    'Aphids': 'basil.commonProblems.aphids',
-    'Bolting': 'basil.commonProblems.bolting',
-  },
+  commonProblems: createProblemRefs(['fusariumWilt', 'aphids', 'bolting'], 'herbs'),
 };
 
 export default basil;

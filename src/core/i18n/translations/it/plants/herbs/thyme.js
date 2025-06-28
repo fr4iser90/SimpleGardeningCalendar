@@ -1,119 +1,49 @@
 export default {
-  name: "Timo",
-  category: "category.herbs",
-  tags: ["tag.perennial"],
-  environments: {
-    indoor: {
-      phases: {
-        germination: {
-          name: "Germinazione",
-          description: "I semi germinano e compaiono le radici.",
-          care: "Mantenere caldo e umido. Usare vassoi o piccoli vasi, coprire leggermente con terra.",
-        },
-        seedling: {
-          name: "Piantina",
-          description: "Prime vere foglie.",
-          care: "Fornire luce intensa, mantenere il terreno umido ma non inzuppato.",
-        },
-        vegetative: {
-          name: "Vegetativa",
-          description: "Crescita di foglie e steli.",
-          care: "Pizzicare le punte, annaffiare regolarmente, concimare leggermente ogni 3-4 settimane.",
-        },
-        harvest: {
-          name: "Raccolta",
-          description: "Raccolta continua dei rametti.",
-          care: "Raccogliere regolarmente per stimolare la crescita. Evitare la fioritura.",
-        },
-      },
-    },
-    outdoor: {
-      phases: {
-        germination: {
-          name: "Germinazione",
-          description: "I semi germinano e compaiono le radici.",
-          care: "Seminare dopo l'ultima gelata, mantenere il terreno umido fino alla comparsa delle piantine.",
-        },
-        seedling: {
-          name: "Piantina",
-          description: "Prime vere foglie.",
-          care: "Posizionare a mezz'ombra, proteggere dal sole forte e dal vento.",
-        },
-        vegetative: {
-          name: "Vegetativa",
-          description: "Crescita di foglie e steli.",
-          care: "Annaffiare regolarmente, concimare leggermente, pizzicare le punte per la ramificazione.",
-        },
-        harvest: {
-          name: "Raccolta",
-          description: "Raccolta continua dei rametti.",
-          care: "Raccogliere i rametti secondo necessità. Potare per evitare la fioritura e la diffusione.",
-        },
-      },
-      seasonalTiming: {
-        temperate_north: {
-          plantingWindow: {
-            start: "04-01",
-            end: "06-01",
-            description: "Semina in primavera, dopo le gelate",
-          },
-          harvestWindow: {
-            start: "06-15",
-            end: "09-30",
-            description: "Raccolta durante l'estate",
-          },
-        },
-        mediterranean: {
-          plantingWindow: {
-            start: "02-15",
-            end: "05-01",
-            description: "Semina molto precoce fino a fine primavera",
-          },
-          harvestWindow: {
-            start: "05-15",
-            end: "09-30",
-            description: "Raccolta in estate",
-          },
-        },
-      },
-    },
-    greenhouse: {
-      phases: {
-        germination: {
-          name: "Germinazione",
-          description: "I semi germinano e compaiono le radici.",
-          care: "Mantenere caldo e umido in ambiente protetto.",
-        },
-        seedling: {
-          name: "Piantina",
-          description: "Prime vere foglie.",
-          care: "Fornire luce intensa, mantenere il terreno umido.",
-        },
-        vegetative: {
-          name: "Vegetativa",
-          description: "Crescita di foglie e steli.",
-          care: "Pizzicare le punte, annaffiare regolarmente, concimare leggermente.",
-        },
-        harvest: {
-          name: "Raccolta",
-          description: "Raccolta continua dei rametti.",
-          care: "Raccogliere i rametti secondo necessità. Potare per evitare la fioritura e la diffusione.",
-        },
-      },
-    },
-  },
-  careTips: {
-    watering: "Lasciare asciugare il terreno tra un'annaffiatura e l'altra.",
-    fertilizing: "Concimare leggermente ogni 3-4 settimane.",
-    sunlight: "Pieno sole (6+ ore al giorno).",
-    spacing: "30-45 cm di distanza.",
-    temperature: "Ama il caldo, tollera la siccità.",
-    soilPH: "6,0-8,0",
-    harvesting: "Raccogliere regolarmente per stimolare la crescita.",
-  },
-  commonProblems: {
-    "Marciume radicale": "Eccesso d'acqua – garantire un buon drenaggio.",
-    "Crescita esile": "Poca luce – fornire più sole.",
-    "Danni da gelo": "Proteggere dal gelo nelle regioni fredde.",
-  },
-}; 
+  "thyme.name": "Timo",
+  "thyme.phases.germination.description": "I semi germinano e compaiono le radici.",
+  "thyme.phases.germination.care": "Mantenere caldo e umido. Usare vassoi o piccoli vasi, coprire leggermente con terra.",
+  "thyme.phases.germination.soil.watering.description": "Mantenere il terreno umido fino alla comparsa delle piantine.",
+  "thyme.phases.germination.soil.fertilizing.description": "Nessuna fertilizzazione durante la germinazione.",
+  "thyme.phases.germination.hydro.watering.description": "Flusso continuo in idroponica.",
+  "thyme.phases.germination.hydro.fertilizing.description": "Nessun nutriente durante la germinazione.",
+  "thyme.phases.germination.coco.watering.description": "Irrigazione giornaliera in cocco.",
+  "thyme.phases.germination.coco.fertilizing.description": "Nessuna fertilizzazione durante la germinazione.",
+  "thyme.phases.seedling.description": "Prime vere foglie.",
+  "thyme.phases.seedling.care": "Fornire luce intensa, mantenere il terreno umido ma non inzuppato.",
+  "thyme.phases.seedling.soil.watering.description": "Innaffiare quando il centimetro superiore del terreno è asciutto.",
+  "thyme.phases.seedling.soil.fertilizing.description": "Nessun fertilizzante necessario per giovani piantine.",
+  "thyme.phases.seedling.hydro.watering.description": "Flusso continuo, EC basso.",
+  "thyme.phases.seedling.hydro.fertilizing.description": "Nutrienti leggeri, EC 0,5-0,8.",
+  "thyme.phases.seedling.coco.watering.description": "Innaffiamento giornaliero in fibra di cocco.",
+  "thyme.phases.seedling.coco.fertilizing.description": "Alimentazione leggera, EC 0,5-0,8.",
+  "thyme.phases.vegetative.description": "Crescita di foglie e steli.",
+  "thyme.phases.vegetative.care": "Pizzicare le punte per favorire la ramificazione, annaffiare regolarmente, concimare leggermente ogni 3-4 settimane.",
+  "thyme.phases.vegetative.soil.watering.description": "Innaffiare quando i 5 cm superiori del terreno sono asciutti.",
+  "thyme.phases.vegetative.soil.fertilizing.description": "Applicare fertilizzante bilanciato ogni 3-4 settimane.",
+  "thyme.phases.vegetative.hydro.watering.description": "Flusso continuo, EC moderato.",
+  "thyme.phases.vegetative.hydro.fertilizing.description": "Cambio nutrienti settimanale, EC 0,8-1,0.",
+  "thyme.phases.vegetative.coco.watering.description": "Innaffiamento giornaliero in fibra di cocco.",
+  "thyme.phases.vegetative.coco.fertilizing.description": "Alimentazione settimanale, EC 0,8-1,0.",
+  "thyme.phases.harvest.description": "Raccolta continua dei rametti.",
+  "thyme.phases.harvest.care": "Raccogliere regolarmente per stimolare la crescita. Evitare la fioritura.",
+  "thyme.phases.harvest.soil.watering.description": "Innaffiare quando i 5 cm superiori del terreno sono asciutti.",
+  "thyme.phases.harvest.soil.fertilizing.description": "Applicare fertilizzante bilanciato ogni 3-4 settimane.",
+  "thyme.phases.harvest.hydro.watering.description": "Flusso continuo, EC moderato.",
+  "thyme.phases.harvest.hydro.fertilizing.description": "Cambio nutrienti settimanale, EC 0,8-1,0.",
+  "thyme.phases.harvest.coco.watering.description": "Innaffiamento giornaliero in fibra di cocco.",
+  "thyme.phases.harvest.coco.fertilizing.description": "Alimentazione settimanale, EC 0,8-1,0.",
+  "thyme.seasonalTiming.temperate_north.plantingWindow.description": "Semina in primavera, dopo le gelate.",
+  "thyme.seasonalTiming.temperate_north.harvestWindow.description": "Raccolta durante l'estate.",
+  "thyme.seasonalTiming.mediterranean.plantingWindow.description": "Semina molto precoce fino a fine primavera.",
+  "thyme.seasonalTiming.mediterranean.harvestWindow.description": "Raccolta in estate.",
+  "thyme.careTips.watering": "Lasciare asciugare il terreno tra un'annaffiatura e l'altra.",
+  "thyme.careTips.fertilizing": "Concimare leggermente ogni 3-4 settimane.",
+  "thyme.careTips.sunlight": "Pieno sole (6+ ore al giorno).",
+  "thyme.careTips.spacing": "30-45 cm di distanza.",
+  "thyme.careTips.temperature": "Ama il caldo, tollera la siccità.",
+  "thyme.careTips.soilPH": "6,0-8,0.",
+  "thyme.careTips.harvesting": "Raccogliere regolarmente per stimolare la crescita.",
+  "thyme.commonProblems.rootRot": "Marciume radicale: Eccesso d'acqua – garantire un buon drenaggio.",
+  "thyme.commonProblems.leggyGrowth": "Crescita esile: Poca luce – fornire più sole.",
+  "thyme.commonProblems.frostDamage": "Danni da gelo: Proteggere dal gelo nelle regioni fredde."
+};

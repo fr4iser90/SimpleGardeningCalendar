@@ -5,205 +5,205 @@
  */
 
 import { PLANT_TAGS } from '../categories.js';
+import { createProblemRefs } from '../problems.js';
 
 export const cannabis_indica = {
   name: 'Cannabis Indica',
   category: 'category.herbs', // Updated category
   tags: [PLANT_TAGS.CANNABIS, PLANT_TAGS.ANNUAL, PLANT_TAGS.PHOTOPERIOD], // New tag structure
-  legalNote:
-    'Check local laws before cultivation. This information is for educational purposes only.',
+  legalNote: 'plant.cannabis_indica.legal_note',
   environments: {
     indoor: {
       phases: {
         germination: {
           days: 3,
-          description: 'Seed sprouting',
-          care: 'Keep seeds warm (70-85°F/21-29°C) and moist in dark environment',
+          description: 'plant.cannabis_indica.indoor.germination.description',
+          care: 'plant.cannabis_indica.indoor.germination.care',
           editable: true,
           soil: {
             watering: {
               interval: 1,
-              description: 'Keep soil moist during germination',
+              description: 'plant.cannabis_indica.indoor.germination.soil.watering',
             },
             fertilizing: {
               interval: 0,
-              description: 'No fertilizing during germination',
+              description: 'plant.cannabis_indica.indoor.germination.soil.fertilizing',
             },
           },
           hydro: {
             watering: {
               interval: 0,
-              description: 'Continuous moisture in rockwool',
+              description: 'plant.cannabis_indica.indoor.germination.hydro.watering',
             },
             fertilizing: {
               interval: 0,
-              description: 'No nutrients during germination',
+              description: 'plant.cannabis_indica.indoor.germination.hydro.fertilizing',
             },
           },
           coco: {
             watering: {
               interval: 1,
-              description: 'Keep coco moist during germination',
+              description: 'plant.cannabis_indica.indoor.germination.coco.watering',
             },
             fertilizing: {
               interval: 0,
-              description: 'No fertilizing during germination',
+              description: 'plant.cannabis_indica.indoor.germination.coco.fertilizing',
             },
           },
         },
         seedling: {
           days: 14,
-          description: 'First true leaves development',
-          care: 'Provide 18-24 hours of light, maintain humidity 65-70%',
+          description: 'plant.cannabis_indica.indoor.seedling.description',
+          care: 'plant.cannabis_indica.indoor.seedling.care',
           editable: true,
           soil: {
             watering: {
               interval: 2,
-              description: 'Water every 2 days during seedling stage',
+              description: 'plant.cannabis_indica.indoor.seedling.soil.watering',
             },
             fertilizing: {
               interval: 0,
-              description: 'No fertilizing during seedling stage',
+              description: 'plant.cannabis_indica.indoor.seedling.soil.fertilizing',
             },
           },
           hydro: {
-            watering: { interval: 0, description: 'Continuous flow, low EC' },
+            watering: { interval: 0, description: 'plant.cannabis_indica.indoor.seedling.hydro.watering' },
             fertilizing: {
               interval: 7,
-              description: 'Light nutrients, EC 0.5-0.8',
+              description: 'plant.cannabis_indica.indoor.seedling.hydro.fertilizing',
             },
           },
           coco: {
-            watering: { interval: 1, description: 'Daily watering in coco' },
+            watering: { interval: 1, description: 'plant.cannabis_indica.indoor.seedling.coco.watering' },
             fertilizing: {
               interval: 7,
-              description: 'Light feeding, EC 0.5-0.8',
+              description: 'plant.cannabis_indica.indoor.seedling.coco.fertilizing',
             },
           },
         },
         vegetative: {
           days: 28,
-          description: 'Rapid growth phase',
-          care: '18/6 light cycle, high nitrogen feeding, training for bushiness',
+          description: 'plant.cannabis_indica.indoor.vegetative.description',
+          care: 'plant.cannabis_indica.indoor.vegetative.care',
           editable: true,
           soil: {
             watering: {
               interval: 2,
-              description: 'Water every 2 days during vegetative growth',
+              description: 'plant.cannabis_indica.indoor.vegetative.soil.watering',
             },
             fertilizing: {
               interval: 7,
-              description: 'Weekly feeding with high nitrogen',
+              description: 'plant.cannabis_indica.indoor.vegetative.soil.fertilizing',
             },
           },
           hydro: {
             watering: {
               interval: 0,
-              description: 'Continuous flow, moderate EC',
+              description: 'plant.cannabis_indica.indoor.vegetative.hydro.watering',
             },
             fertilizing: {
               interval: 7,
-              description: 'Weekly nutrient change, EC 1.0-1.2',
+              description: 'plant.cannabis_indica.indoor.vegetative.hydro.fertilizing',
             },
           },
           coco: {
-            watering: { interval: 1, description: 'Daily watering in coco' },
+            watering: { interval: 1, description: 'plant.cannabis_indica.indoor.vegetative.coco.watering' },
             fertilizing: {
               interval: 7,
-              description: 'Weekly feeding, EC 1.0-1.2',
+              description: 'plant.cannabis_indica.indoor.vegetative.coco.fertilizing',
             },
           },
         },
         preflower: {
           days: 7,
-          description: 'Sex determination',
-          care: 'Continue vegetative care, identify and remove males',
+          description: 'plant.cannabis_indica.indoor.preflower.description',
+          care: 'plant.cannabis_indica.indoor.preflower.care',
           editable: true,
           soil: {
             watering: {
               interval: 2,
-              description: 'Water every 2 days during vegetative growth',
+              description: 'plant.cannabis_indica.indoor.preflower.soil.watering',
             },
             fertilizing: {
               interval: 7,
-              description: 'Weekly feeding with high nitrogen',
+              description: 'plant.cannabis_indica.indoor.preflower.soil.fertilizing',
             },
           },
           hydro: {
             watering: {
               interval: 0,
-              description: 'Continuous flow, moderate EC',
+              description: 'plant.cannabis_indica.indoor.preflower.hydro.watering',
             },
             fertilizing: {
               interval: 7,
-              description: 'Weekly nutrient change, EC 1.0-1.2',
+              description: 'plant.cannabis_indica.indoor.preflower.hydro.fertilizing',
             },
           },
           coco: {
-            watering: { interval: 1, description: 'Daily watering in coco' },
+            watering: { interval: 1, description: 'plant.cannabis_indica.indoor.preflower.coco.watering' },
             fertilizing: {
               interval: 7,
-              description: 'Weekly feeding, EC 1.0-1.2',
+              description: 'plant.cannabis_indica.indoor.preflower.coco.fertilizing',
             },
           },
         },
         flowering: {
           days: 56,
-          description: 'Flower development and maturation',
-          care: '12/12 light cycle, high phosphorus/potassium, lower humidity 40-50%',
+          description: 'plant.cannabis_indica.indoor.flowering.description',
+          care: 'plant.cannabis_indica.indoor.flowering.care',
           editable: true,
           soil: {
             watering: {
               interval: 2,
-              description: 'Water every 2 days during flowering',
+              description: 'plant.cannabis_indica.indoor.flowering.soil.watering',
             },
             fertilizing: {
               interval: 7,
-              description: 'Weekly feeding with bloom nutrients',
+              description: 'plant.cannabis_indica.indoor.flowering.soil.fertilizing',
             },
           },
           hydro: {
             watering: {
               interval: 0,
-              description: 'Continuous flow, higher EC',
+              description: 'plant.cannabis_indica.indoor.flowering.hydro.watering',
             },
             fertilizing: {
               interval: 7,
-              description: 'Weekly nutrient change, EC 1.0-1.2',
+              description: 'plant.cannabis_indica.indoor.flowering.hydro.fertilizing',
             },
           },
           coco: {
-            watering: { interval: 1, description: 'Daily watering in coco' },
+            watering: { interval: 1, description: 'plant.cannabis_indica.indoor.flowering.coco.watering' },
             fertilizing: {
               interval: 7,
-              description: 'Weekly feeding, EC 1.0-1.2',
+              description: 'plant.cannabis_indica.indoor.flowering.coco.fertilizing',
             },
           },
         },
         harvest: {
           days: 7,
-          description: 'Harvest preparation and execution',
-          care: 'Flush with plain water, monitor trichomes, harvest at peak potency',
+          description: 'plant.cannabis_indica.indoor.harvest.description',
+          care: 'plant.cannabis_indica.indoor.harvest.care',
           editable: true,
           soil: {
-            watering: { interval: 1, description: 'Flush with plain water' },
+            watering: { interval: 1, description: 'plant.cannabis_indica.indoor.harvest.soil.watering' },
             fertilizing: {
               interval: 0,
-              description: 'No fertilizing during flush',
+              description: 'plant.cannabis_indica.indoor.harvest.soil.fertilizing',
             },
           },
           hydro: {
-            watering: { interval: 0, description: 'Flush with plain water' },
+            watering: { interval: 0, description: 'plant.cannabis_indica.indoor.harvest.hydro.watering' },
             fertilizing: {
               interval: 0,
-              description: 'No nutrients during flush',
+              description: 'plant.cannabis_indica.indoor.harvest.hydro.fertilizing',
             },
           },
           coco: {
-            watering: { interval: 1, description: 'Flush with plain water' },
+            watering: { interval: 1, description: 'plant.cannabis_indica.indoor.harvest.coco.watering' },
             fertilizing: {
               interval: 0,
-              description: 'No fertilizing during flush',
+              description: 'plant.cannabis_indica.indoor.harvest.coco.fertilizing',
             },
           },
         },
@@ -214,204 +214,204 @@ export const cannabis_indica = {
         germination: {
           start: '04-15',
           end: '04-18',
-          description: 'Seed sprouting',
-          care: 'Keep seeds warm and moist, protect from direct sun',
+          description: 'plant.cannabis_indica.outdoor.germination.description',
+          care: 'plant.cannabis_indica.outdoor.germination.care',
           editable: false,
           soil: {
             watering: {
               interval: 1,
-              description: 'Keep soil moist during germination',
+              description: 'plant.cannabis_indica.outdoor.germination.soil.watering',
             },
             fertilizing: {
               interval: 0,
-              description: 'No fertilizer needed during germination',
+              description: 'plant.cannabis_indica.outdoor.germination.soil.fertilizing',
             },
           },
           hydro: {
             watering: {
               interval: 0,
-              description: 'Continuous moisture in rockwool',
+              description: 'plant.cannabis_indica.outdoor.germination.hydro.watering',
             },
             fertilizing: {
               interval: 0,
-              description: 'No nutrients during germination',
+              description: 'plant.cannabis_indica.outdoor.germination.hydro.fertilizing',
             },
           },
           coco: {
             watering: {
               interval: 1,
-              description: 'Keep coco moist during germination',
+              description: 'plant.cannabis_indica.outdoor.germination.coco.watering',
             },
             fertilizing: {
               interval: 0,
-              description: 'No fertilizing during germination',
+              description: 'plant.cannabis_indica.outdoor.germination.coco.fertilizing',
             },
           },
         },
         seedling: {
           start: '04-19',
           end: '05-10',
-          description: 'Establishing outdoors',
-          care: 'Gradual sun exposure, protect from wind and pests',
+          description: 'plant.cannabis_indica.outdoor.seedling.description',
+          care: 'plant.cannabis_indica.outdoor.seedling.care',
           editable: false,
           soil: {
             watering: {
               interval: 2,
-              description: 'Water every 2 days during seedling establishment',
+              description: 'plant.cannabis_indica.outdoor.seedling.soil.watering',
             },
             fertilizing: {
               interval: 0,
-              description: 'No fertilizing during seedling establishment',
+              description: 'plant.cannabis_indica.outdoor.seedling.soil.fertilizing',
             },
           },
           hydro: {
-            watering: { interval: 0, description: 'Continuous flow, low EC' },
+            watering: { interval: 0, description: 'plant.cannabis_indica.outdoor.seedling.hydro.watering' },
             fertilizing: {
               interval: 7,
-              description: 'Light nutrients, EC 0.5-0.8',
+              description: 'plant.cannabis_indica.outdoor.seedling.hydro.fertilizing',
             },
           },
           coco: {
-            watering: { interval: 1, description: 'Daily watering in coco' },
+            watering: { interval: 1, description: 'plant.cannabis_indica.outdoor.seedling.coco.watering' },
             fertilizing: {
               interval: 7,
-              description: 'Light feeding, EC 0.5-0.8',
+              description: 'plant.cannabis_indica.outdoor.seedling.coco.fertilizing',
             },
           },
         },
         vegetative: {
           start: '05-11',
           end: '08-10',
-          description: 'Natural light vegetative growth',
-          care: 'Natural sunlight, train for size management, heavy feeding',
+          description: 'plant.cannabis_indica.outdoor.vegetative.description',
+          care: 'plant.cannabis_indica.outdoor.vegetative.care',
           editable: false,
           soil: {
             watering: {
               interval: 3,
-              description: 'Water every 3 days during vegetative growth',
+              description: 'plant.cannabis_indica.outdoor.vegetative.soil.watering',
             },
             fertilizing: {
               interval: 14,
-              description: 'High nitrogen feeding for vegetative growth',
+              description: 'plant.cannabis_indica.outdoor.vegetative.soil.fertilizing',
             },
           },
           hydro: {
             watering: {
               interval: 0,
-              description: 'Continuous flow, moderate EC',
+              description: 'plant.cannabis_indica.outdoor.vegetative.hydro.watering',
             },
             fertilizing: {
               interval: 14,
-              description: 'High nitrogen feeding for vegetative growth',
+              description: 'plant.cannabis_indica.outdoor.vegetative.hydro.fertilizing',
             },
           },
           coco: {
-            watering: { interval: 1, description: 'Daily watering in coco' },
+            watering: { interval: 1, description: 'plant.cannabis_indica.outdoor.vegetative.coco.watering' },
             fertilizing: {
               interval: 14,
-              description: 'High nitrogen feeding for vegetative growth',
+              description: 'plant.cannabis_indica.outdoor.vegetative.coco.fertilizing',
             },
           },
         },
         preflower: {
           start: '08-11',
           end: '08-24',
-          description: 'Natural photoperiod trigger',
-          care: 'Occurs naturally as days shorten, identify males',
+          description: 'plant.cannabis_indica.outdoor.preflower.description',
+          care: 'plant.cannabis_indica.outdoor.preflower.care',
           editable: false,
           soil: {
             watering: {
               interval: 3,
-              description: 'Water every 3 days during vegetative growth',
+              description: 'plant.cannabis_indica.outdoor.preflower.soil.watering',
             },
             fertilizing: {
               interval: 14,
-              description: 'Transition to flowering nutrients',
+              description: 'plant.cannabis_indica.outdoor.preflower.soil.fertilizing',
             },
           },
           hydro: {
-            watering: { interval: 0, description: 'Continuous flow, low EC' },
+            watering: { interval: 0, description: 'plant.cannabis_indica.outdoor.preflower.hydro.watering' },
             fertilizing: {
               interval: 14,
-              description: 'Transition to flowering nutrients',
+              description: 'plant.cannabis_indica.outdoor.preflower.hydro.fertilizing',
             },
           },
           coco: {
-            watering: { interval: 1, description: 'Daily watering in coco' },
+            watering: { interval: 1, description: 'plant.cannabis_indica.outdoor.preflower.coco.watering' },
             fertilizing: {
               interval: 14,
-              description: 'Transition to flowering nutrients',
+              description: 'plant.cannabis_indica.outdoor.preflower.coco.fertilizing',
             },
           },
         },
         flowering: {
           start: '08-25',
           end: '10-27',
-          description: 'Outdoor flowering (6-12 weeks depending on strain)',
-          care: 'Natural light cycle, weather protection, pest monitoring',
+          description: 'plant.cannabis_indica.outdoor.flowering.description',
+          care: 'plant.cannabis_indica.outdoor.flowering.care',
           editable: true,
           soil: {
             watering: {
               interval: 3,
-              description: 'Water every 3 days during flowering',
+              description: 'plant.cannabis_indica.outdoor.flowering.soil.watering',
             },
             fertilizing: {
               interval: 14,
-              description: 'High phosphorus/potassium feeding for flowering',
+              description: 'plant.cannabis_indica.outdoor.flowering.soil.fertilizing',
             },
           },
           hydro: {
             watering: {
               interval: 0,
-              description: 'Continuous flow, higher EC',
+              description: 'plant.cannabis_indica.outdoor.flowering.hydro.watering',
             },
             fertilizing: {
               interval: 14,
-              description: 'High phosphorus/potassium feeding for flowering',
+              description: 'plant.cannabis_indica.outdoor.flowering.hydro.fertilizing',
             },
           },
           coco: {
-            watering: { interval: 1, description: 'Daily watering in coco' },
+            watering: { interval: 1, description: 'plant.cannabis_indica.outdoor.flowering.coco.watering' },
             fertilizing: {
               interval: 14,
-              description: 'High phosphorus/potassium feeding for flowering',
+              description: 'plant.cannabis_indica.outdoor.flowering.coco.fertilizing',
             },
           },
         },
         harvest: {
           start: '10-28',
           end: '11-11',
-          description: 'Outdoor harvest timing',
-          care: 'Weather dependent, check trichomes, quick dry if rain',
+          description: 'plant.cannabis_indica.outdoor.harvest.description',
+          care: 'plant.cannabis_indica.outdoor.harvest.care',
           editable: false,
           soil: {
             watering: {
               interval: 3,
-              description: 'Flush with plain water 1-2 weeks before harvest',
+              description: 'plant.cannabis_indica.outdoor.harvest.soil.watering',
             },
             fertilizing: {
               interval: 0,
-              description: 'No fertilizing during flush and harvest',
+              description: 'plant.cannabis_indica.outdoor.harvest.soil.fertilizing',
             },
           },
           hydro: {
             watering: {
               interval: 0,
-              description: 'Flush with plain water 1-2 weeks before harvest',
+              description: 'plant.cannabis_indica.outdoor.harvest.hydro.watering',
             },
             fertilizing: {
               interval: 0,
-              description: 'No fertilizing during flush and harvest',
+              description: 'plant.cannabis_indica.outdoor.harvest.hydro.fertilizing',
             },
           },
           coco: {
             watering: {
               interval: 1,
-              description: 'Flush with plain water 1-2 weeks before harvest',
+              description: 'plant.cannabis_indica.outdoor.harvest.coco.watering',
             },
             fertilizing: {
               interval: 0,
-              description: 'No fertilizing during flush and harvest',
+              description: 'plant.cannabis_indica.outdoor.harvest.coco.fertilizing',
             },
           },
         },
@@ -421,227 +421,226 @@ export const cannabis_indica = {
           plantingWindow: {
             start: '04-15',
             end: '06-01',
-            description: 'After last frost, before summer solstice',
+            description: 'plant.cannabis_indica.outdoor.seasonalTiming.temperate_north.plantingWindow.description',
           },
           harvestWindow: {
             start: '09-15',
             end: '10-31',
-            description: 'Before first frost',
+            description: 'plant.cannabis_indica.outdoor.seasonalTiming.temperate_north.harvestWindow.description',
           },
         },
         mediterranean: {
           plantingWindow: {
             start: '03-15',
             end: '05-15',
-            description: 'Mild spring start',
+            description: 'plant.cannabis_indica.outdoor.seasonalTiming.mediterranean.plantingWindow.description',
           },
           harvestWindow: {
             start: '09-01',
             end: '11-15',
-            description: 'Extended harvest season',
+            description: 'plant.cannabis_indica.outdoor.seasonalTiming.mediterranean.harvestWindow.description',
           },
         },
       },
-      naturalTiming:
-        'Phases are determined by natural seasons and cannot be adjusted. Only flowering time varies by strain (6-12 weeks).',
+      naturalTiming: 'plant.cannabis_indica.outdoor.naturalTiming',
     },
     greenhouse: {
       phases: {
         germination: {
           days: 3,
-          description: 'Seed sprouting',
-          care: 'Keep seeds warm and moist in controlled environment',
+          description: 'plant.cannabis_indica.greenhouse.germination.description',
+          care: 'plant.cannabis_indica.greenhouse.germination.care',
           editable: true,
           soil: {
             watering: {
               interval: 1,
-              description: 'Keep soil moist during germination',
+              description: 'plant.cannabis_indica.greenhouse.germination.soil.watering',
             },
             fertilizing: {
               interval: 0,
-              description: 'No fertilizing during germination',
+              description: 'plant.cannabis_indica.greenhouse.germination.soil.fertilizing',
             },
           },
           hydro: {
             watering: {
               interval: 0,
-              description: 'Continuous moisture in rockwool',
+              description: 'plant.cannabis_indica.greenhouse.germination.hydro.watering',
             },
             fertilizing: {
               interval: 0,
-              description: 'No nutrients during germination',
+              description: 'plant.cannabis_indica.greenhouse.germination.hydro.fertilizing',
             },
           },
           coco: {
             watering: {
               interval: 1,
-              description: 'Keep coco moist during germination',
+              description: 'plant.cannabis_indica.greenhouse.germination.coco.watering',
             },
             fertilizing: {
               interval: 0,
-              description: 'No fertilizing during germination',
+              description: 'plant.cannabis_indica.greenhouse.germination.coco.fertilizing',
             },
           },
         },
         seedling: {
           days: 21,
-          description: 'Establishing in greenhouse',
-          care: 'Controlled environment, protect from temperature extremes',
+          description: 'plant.cannabis_indica.greenhouse.seedling.description',
+          care: 'plant.cannabis_indica.greenhouse.seedling.care',
           editable: true,
           soil: {
             watering: {
               interval: 2,
-              description: 'Water every 2 days during seedling establishment',
+              description: 'plant.cannabis_indica.greenhouse.seedling.soil.watering',
             },
             fertilizing: {
               interval: 0,
-              description: 'No fertilizing during seedling establishment',
+              description: 'plant.cannabis_indica.greenhouse.seedling.soil.fertilizing',
             },
           },
           hydro: {
-            watering: { interval: 0, description: 'Continuous flow, low EC' },
+            watering: { interval: 0, description: 'plant.cannabis_indica.greenhouse.seedling.hydro.watering' },
             fertilizing: {
               interval: 7,
-              description: 'Light nutrients, EC 0.5-0.8',
+              description: 'plant.cannabis_indica.greenhouse.seedling.hydro.fertilizing',
             },
           },
           coco: {
-            watering: { interval: 1, description: 'Daily watering in coco' },
+            watering: { interval: 1, description: 'plant.cannabis_indica.greenhouse.seedling.coco.watering' },
             fertilizing: {
               interval: 7,
-              description: 'Light feeding, EC 0.5-0.8',
+              description: 'plant.cannabis_indica.greenhouse.seedling.coco.fertilizing',
             },
           },
         },
         vegetative: {
           days: 60,
-          description: 'Greenhouse vegetative growth',
-          care: 'Natural light with temperature control, heavy feeding',
+          description: 'plant.cannabis_indica.greenhouse.vegetative.description',
+          care: 'plant.cannabis_indica.greenhouse.vegetative.care',
           editable: true,
           soil: {
             watering: {
               interval: 3,
-              description: 'Water every 3 days during vegetative growth',
+              description: 'plant.cannabis_indica.greenhouse.vegetative.soil.watering',
             },
             fertilizing: {
               interval: 14,
-              description: 'High nitrogen feeding for vegetative growth',
+              description: 'plant.cannabis_indica.greenhouse.vegetative.soil.fertilizing',
             },
           },
           hydro: {
             watering: {
               interval: 0,
-              description: 'Continuous flow, moderate EC',
+              description: 'plant.cannabis_indica.greenhouse.vegetative.hydro.watering',
             },
             fertilizing: {
               interval: 14,
-              description: 'High nitrogen feeding for vegetative growth',
+              description: 'plant.cannabis_indica.greenhouse.vegetative.hydro.fertilizing',
             },
           },
           coco: {
-            watering: { interval: 1, description: 'Daily watering in coco' },
+            watering: { interval: 1, description: 'plant.cannabis_indica.greenhouse.vegetative.coco.watering' },
             fertilizing: {
               interval: 14,
-              description: 'High nitrogen feeding for vegetative growth',
+              description: 'plant.cannabis_indica.greenhouse.vegetative.coco.fertilizing',
             },
           },
         },
         preflower: {
           days: 14,
-          description: 'Photoperiod management',
-          care: 'Control light hours to trigger flowering, identify males',
+          description: 'plant.cannabis_indica.greenhouse.preflower.description',
+          care: 'plant.cannabis_indica.greenhouse.preflower.care',
           editable: true,
           soil: {
             watering: {
               interval: 3,
-              description: 'Water every 3 days during vegetative growth',
+              description: 'plant.cannabis_indica.greenhouse.preflower.soil.watering',
             },
             fertilizing: {
               interval: 14,
-              description: 'Transition to flowering nutrients',
+              description: 'plant.cannabis_indica.greenhouse.preflower.soil.fertilizing',
             },
           },
           hydro: {
-            watering: { interval: 0, description: 'Continuous flow, low EC' },
+            watering: { interval: 0, description: 'plant.cannabis_indica.greenhouse.preflower.hydro.watering' },
             fertilizing: {
               interval: 14,
-              description: 'Transition to flowering nutrients',
+              description: 'plant.cannabis_indica.greenhouse.preflower.hydro.fertilizing',
             },
           },
           coco: {
-            watering: { interval: 1, description: 'Daily watering in coco' },
+            watering: { interval: 1, description: 'plant.cannabis_indica.greenhouse.preflower.coco.watering' },
             fertilizing: {
               interval: 14,
-              description: 'Transition to flowering nutrients',
+              description: 'plant.cannabis_indica.greenhouse.preflower.coco.fertilizing',
             },
           },
         },
         flowering: {
           days: 63,
-          description: 'Greenhouse flowering (6-12 weeks depending on strain)',
-          care: 'Controlled environment, weather protection, pest monitoring',
+          description: 'plant.cannabis_indica.greenhouse.flowering.description',
+          care: 'plant.cannabis_indica.greenhouse.flowering.care',
           editable: true,
           soil: {
             watering: {
               interval: 3,
-              description: 'Water every 3 days during flowering',
+              description: 'plant.cannabis_indica.greenhouse.flowering.soil.watering',
             },
             fertilizing: {
               interval: 14,
-              description: 'High phosphorus/potassium feeding for flowering',
+              description: 'plant.cannabis_indica.greenhouse.flowering.soil.fertilizing',
             },
           },
           hydro: {
             watering: {
               interval: 0,
-              description: 'Continuous flow, higher EC',
+              description: 'plant.cannabis_indica.greenhouse.flowering.hydro.watering',
             },
             fertilizing: {
               interval: 14,
-              description: 'High phosphorus/potassium feeding for flowering',
+              description: 'plant.cannabis_indica.greenhouse.flowering.hydro.fertilizing',
             },
           },
           coco: {
-            watering: { interval: 1, description: 'Daily watering in coco' },
+            watering: { interval: 1, description: 'plant.cannabis_indica.greenhouse.flowering.coco.watering' },
             fertilizing: {
               interval: 14,
-              description: 'High phosphorus/potassium feeding for flowering',
+              description: 'plant.cannabis_indica.greenhouse.flowering.coco.fertilizing',
             },
           },
         },
         harvest: {
           days: 14,
-          description: 'Greenhouse harvest timing',
-          care: 'Controlled drying environment, check trichomes',
+          description: 'plant.cannabis_indica.greenhouse.harvest.description',
+          care: 'plant.cannabis_indica.greenhouse.harvest.care',
           editable: true,
           soil: {
             watering: {
               interval: 3,
-              description: 'Flush with plain water 1-2 weeks before harvest',
+              description: 'plant.cannabis_indica.greenhouse.harvest.soil.watering',
             },
             fertilizing: {
               interval: 0,
-              description: 'No fertilizing during flush and harvest',
+              description: 'plant.cannabis_indica.greenhouse.harvest.soil.fertilizing',
             },
           },
           hydro: {
             watering: {
               interval: 0,
-              description: 'Flush with plain water 1-2 weeks before harvest',
+              description: 'plant.cannabis_indica.greenhouse.harvest.hydro.watering',
             },
             fertilizing: {
               interval: 0,
-              description: 'No fertilizing during flush and harvest',
+              description: 'plant.cannabis_indica.greenhouse.harvest.hydro.fertilizing',
             },
           },
           coco: {
             watering: {
               interval: 1,
-              description: 'Flush with plain water 1-2 weeks before harvest',
+              description: 'plant.cannabis_indica.greenhouse.harvest.coco.watering',
             },
             fertilizing: {
               interval: 0,
-              description: 'No fertilizing during flush and harvest',
+              description: 'plant.cannabis_indica.greenhouse.harvest.coco.fertilizing',
             },
           },
         },
@@ -651,53 +650,40 @@ export const cannabis_indica = {
           plantingWindow: {
             start: '03-01',
             end: '06-01',
-            description: 'Extended season with greenhouse protection',
+            description: 'plant.cannabis_indica.greenhouse.seasonalTiming.temperate_north.plantingWindow.description',
           },
           harvestWindow: {
             start: '09-01',
             end: '11-30',
-            description: 'Extended harvest with climate control',
+            description: 'plant.cannabis_indica.greenhouse.seasonalTiming.temperate_north.harvestWindow.description',
           },
         },
         mediterranean: {
           plantingWindow: {
             start: '02-15',
             end: '06-15',
-            description: 'Very early start possible',
+            description: 'plant.cannabis_indica.greenhouse.seasonalTiming.mediterranean.plantingWindow.description',
           },
           harvestWindow: {
             start: '08-15',
             end: '12-15',
-            description: 'Extended season with climate control',
+            description: 'plant.cannabis_indica.greenhouse.seasonalTiming.mediterranean.harvestWindow.description',
           },
         },
       },
-      naturalTiming:
-        'Greenhouse allows some control over timing, but flowering duration still varies by strain (6-12 weeks).',
+      naturalTiming: 'plant.cannabis_indica.greenhouse.naturalTiming',
     },
   },
   careTips: {
-    watering:
-      'Water when top inch of soil is dry, pH 6.0-7.0 in soil, 5.5-6.5 in hydro',
-    fertilizing:
-      'High nitrogen in veg (3-1-2), high phosphorus in flower (1-3-2)',
-    sunlight:
-      'Indoor: 18/6 hours in vegetative, 12/12 hours in flowering. Outdoor: Natural sunlight',
-    spacing: 'Indoor: 2-4 feet apart. Outdoor: 4-8 feet apart for full size',
-    support:
-      'Indoor: SCROG nets, LST. Outdoor: Strong stakes for wind resistance',
-    humidity: '65-70% seedling, 40-50% vegetative, 40-45% flowering',
-    temperature: formatTemperature('70-85°F day, 65-80°F night'),
+    watering: 'plant.cannabis_indica.careTips.watering',
+    fertilizing: 'plant.cannabis_indica.careTips.fertilizing',
+    sunlight: 'plant.cannabis_indica.careTips.sunlight',
+    spacing: 'plant.cannabis_indica.careTips.spacing',
+    support: 'plant.cannabis_indica.careTips.support',
+    humidity: 'plant.cannabis_indica.careTips.humidity',
+    temperature: 'plant.cannabis_indica.careTips.temperature',
   },
-  commonProblems: {
-    'Nutrient Burn': 'Yellow/brown leaf tips - reduce feeding concentration',
-    'Light Burn': 'Bleached tops - increase distance from lights',
-    'Bud Rot': 'Gray mold in buds - improve airflow and reduce humidity',
-    'Spider Mites':
-      'Tiny webs and spots - increase humidity, use predatory mites',
-    'Powdery Mildew':
-      'White powder on leaves - improve airflow, reduce humidity',
-  },
+  commonProblems: createProblemRefs(['rootRot', 'powderyMildew', 'leggyGrowth'], 'cannabis'),
 };
 
 export default cannabis_indica;

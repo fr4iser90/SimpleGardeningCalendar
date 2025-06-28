@@ -1,119 +1,49 @@
 export default {
-  name: "Origano",
-  category: "category.herbs",
-  tags: ["tag.perennial"],
-  environments: {
-    indoor: {
-      phases: {
-        germination: {
-          name: "Germinazione",
-          description: "I semi germinano e compaiono le radici.",
-          care: "Mantenere caldo e umido. Usare vassoi o piccoli vasi, coprire leggermente con terra.",
-        },
-        seedling: {
-          name: "Piantina",
-          description: "Prime vere foglie.",
-          care: "Fornire luce intensa, mantenere il terreno umido ma non inzuppato.",
-        },
-        vegetative: {
-          name: "Vegetativa",
-          description: "Crescita di foglie e steli.",
-          care: "Pizzicare le punte, annaffiare regolarmente, concimare leggermente ogni 3-4 settimane.",
-        },
-        harvest: {
-          name: "Raccolta",
-          description: "Raccolta continua delle foglie.",
-          care: "Raccogliere regolarmente per stimolare la crescita. Evitare la fioritura.",
-        },
-      },
-    },
-    outdoor: {
-      phases: {
-        germination: {
-          name: "Germinazione",
-          description: "I semi germinano e compaiono le radici.",
-          care: "Seminare dopo l'ultima gelata, mantenere il terreno umido fino alla comparsa delle piantine.",
-        },
-        seedling: {
-          name: "Piantina",
-          description: "Prime vere foglie.",
-          care: "Posizionare a mezz'ombra, proteggere dal sole forte e dal vento.",
-        },
-        vegetative: {
-          name: "Vegetativa",
-          description: "Crescita di foglie e steli.",
-          care: "Annaffiare regolarmente, concimare leggermente, pizzicare le punte per la ramificazione.",
-        },
-        harvest: {
-          name: "Raccolta",
-          description: "Raccolta continua delle foglie.",
-          care: "Raccogliere foglie e steli secondo necessità. La potatura previene la fioritura e la diffusione.",
-        },
-      },
-      seasonalTiming: {
-        temperate_north: {
-          plantingWindow: {
-            start: '04-01',
-            end: '06-01',
-            description: 'Dopo l\'ultima gelata, pianta perenne',
-          },
-          harvestWindow: {
-            start: '05-15',
-            end: '10-15',
-            description: 'Raccolta continua durante la stagione di crescita',
-          },
-        },
-        mediterranean: {
-          plantingWindow: {
-            start: '03-01',
-            end: '05-01',
-            description: 'Inizio precoce per pianta perenne',
-          },
-          harvestWindow: {
-            start: '04-15',
-            end: '11-15',
-            description: 'Stagione di raccolta estesa',
-          },
-        },
-      },
-    },
-    greenhouse: {
-      phases: {
-        germination: {
-          name: "Germinazione",
-          description: "I semi germinano e compaiono le radici.",
-          care: "Mantenere caldo e umido in ambiente protetto.",
-        },
-        seedling: {
-          name: "Piantina",
-          description: "Prime vere foglie.",
-          care: "Fornire luce intensa, mantenere il terreno umido.",
-        },
-        vegetative: {
-          name: "Vegetativa",
-          description: "Crescita di foglie e steli.",
-          care: "Pizzicare le punte, annaffiare regolarmente, concimare leggermente.",
-        },
-        harvest: {
-          name: "Raccolta",
-          description: "Raccolta continua delle foglie.",
-          care: "Raccogliere foglie e steli secondo necessità. Potare per evitare la fioritura e la diffusione.",
-        },
-      },
-    },
-  },
-  careTips: {
-    watering: "Lasciare asciugare il terreno tra un'annaffiatura e l'altra.",
-    fertilizing: "Concimare leggermente ogni 2-3 settimane.",
-    sunlight: "Pieno sole (6+ ore al giorno).",
-    spacing: "30-45 cm di distanza.",
-    temperature: "Ama il caldo, tollera la siccità.",
-    soilPH: "6,0-8,0",
-    harvesting: "Raccogliere regolarmente per stimolare la crescita.",
-  },
-  commonProblems: {
-    "Marciume radicale": "Eccesso d'acqua – garantire un buon drenaggio.",
-    "Crescita esile": "Poca luce – fornire più sole.",
-    "Danni da gelo": "Proteggere dal gelo nelle regioni fredde.",
-  },
-}; 
+  "oregano.name": "Origano",
+  "oregano.phases.germination.description": "I semi germinano e compaiono le radici.",
+  "oregano.phases.germination.care": "Mantenere caldo e umido. Usare vassoi o piccoli vasi, coprire leggermente con terra.",
+  "oregano.phases.germination.soil.watering.description": "Irrigazione giornaliera per mantenere il terreno umido.",
+  "oregano.phases.germination.soil.fertilizing.description": "Nessuna fertilizzazione durante la germinazione.",
+  "oregano.phases.germination.hydro.watering.description": "Flusso continuo in idroponica.",
+  "oregano.phases.germination.hydro.fertilizing.description": "Nessun nutriente durante la germinazione.",
+  "oregano.phases.germination.coco.watering.description": "Irrigazione giornaliera in cocco.",
+  "oregano.phases.germination.coco.fertilizing.description": "Nessuna fertilizzazione durante la germinazione.",
+  "oregano.phases.seedling.description": "Prime vere foglie.",
+  "oregano.phases.seedling.care": "Fornire luce intensa, mantenere il terreno umido ma non inzuppato.",
+  "oregano.phases.seedling.soil.watering.description": "Irrigazione ogni 2 giorni.",
+  "oregano.phases.seedling.soil.fertilizing.description": "Nessuna fertilizzazione durante questa fase.",
+  "oregano.phases.seedling.hydro.watering.description": "Flusso continuo in idroponica.",
+  "oregano.phases.seedling.hydro.fertilizing.description": "Nutrienti leggeri, EC basso, ogni 7 giorni.",
+  "oregano.phases.seedling.coco.watering.description": "Irrigazione giornaliera in cocco.",
+  "oregano.phases.seedling.coco.fertilizing.description": "Nutrienti leggeri, EC basso, ogni 7 giorni.",
+  "oregano.phases.vegetative.description": "Crescita di foglie e steli.",
+  "oregano.phases.vegetative.care": "Pizzicare le punte, annaffiare regolarmente, concimare leggermente ogni 3-4 settimane.",
+  "oregano.phases.vegetative.soil.watering.description": "Irrigazione ogni 3 giorni, lasciare asciugare il terreno.",
+  "oregano.phases.vegetative.soil.fertilizing.description": "Concimazione leggera ogni 14 giorni.",
+  "oregano.phases.vegetative.hydro.watering.description": "Flusso continuo in idroponica.",
+  "oregano.phases.vegetative.hydro.fertilizing.description": "Nutrienti moderati, EC 0,8-1,0, ogni 14 giorni.",
+  "oregano.phases.vegetative.coco.watering.description": "Irrigazione giornaliera in cocco.",
+  "oregano.phases.vegetative.coco.fertilizing.description": "Nutrienti moderati, EC 0,8-1,0, ogni 14 giorni.",
+  "oregano.phases.harvest.description": "Raccolta continua delle foglie.",
+  "oregano.phases.harvest.care": "Raccogliere regolarmente per stimolare la crescita. Evitare la fioritura.",
+  "oregano.phases.harvest.soil.watering.description": "Irrigazione ogni 3 giorni.",
+  "oregano.phases.harvest.soil.fertilizing.description": "Concimazione leggera ogni 14 giorni.",
+  "oregano.phases.harvest.hydro.watering.description": "Flusso continuo in idroponica.",
+  "oregano.phases.harvest.hydro.fertilizing.description": "Nutrienti moderati, EC 0,8-1,0, ogni 14 giorni.",
+  "oregano.phases.harvest.coco.watering.description": "Irrigazione giornaliera in cocco.",
+  "oregano.phases.harvest.coco.fertilizing.description": "Nutrienti moderati, EC 0,8-1,0, ogni 14 giorni.",
+  "oregano.seasonalTiming.temperate_north.plantingWindow.description": "Dopo l'ultima gelata, pianta perenne.",
+  "oregano.seasonalTiming.temperate_north.harvestWindow.description": "Raccolta continua durante la stagione di crescita.",
+  "oregano.seasonalTiming.mediterranean.plantingWindow.description": "Inizio precoce per pianta perenne.",
+  "oregano.seasonalTiming.mediterranean.harvestWindow.description": "Stagione di raccolta estesa.",
+  "oregano.careTips.watering": "Lasciare asciugare il terreno tra un'annaffiatura e l'altra.",
+  "oregano.careTips.fertilizing": "Concimare leggermente ogni 2-3 settimane.",
+  "oregano.careTips.sunlight": "Pieno sole (6+ ore al giorno).",
+  "oregano.careTips.spacing": "30-45 cm di distanza.",
+  "oregano.careTips.temperature": "Ama il caldo, tollera la siccità.",
+  "oregano.careTips.soilPH": "6,0-8,0.",
+  "oregano.careTips.harvesting": "Raccogliere regolarmente per stimolare la crescita.",
+  "oregano.commonProblems.rootRot": "Marciume radicale: Eccesso d'acqua – garantire un buon drenaggio.",
+  "oregano.commonProblems.leggyGrowth": "Crescita esile: Poca luce – fornire più sole.",
+  "oregano.commonProblems.winterDamage": "Danni da gelo: Proteggere dal gelo nelle regioni fredde."
+};

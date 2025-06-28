@@ -5,205 +5,205 @@
  */
 
 import { PLANT_TAGS } from '../categories.js';
+import { createProblemRefs } from '../problems.js';
 
 export const cannabis_sativa = {
   name: 'Cannabis Sativa',
   category: 'category.herbs', // Updated category
   tags: [PLANT_TAGS.CANNABIS, PLANT_TAGS.ANNUAL, PLANT_TAGS.PHOTOPERIOD], // New tag structure
-  legalNote:
-    'Check local laws before cultivation. This information is for educational purposes only.',
+  legalNote: 'plant.cannabis_sativa.legal_note',
   environments: {
     indoor: {
       phases: {
         germination: {
           days: 3,
-          description: 'Seed sprouting',
-          care: 'Keep seeds warm (70-85°F/21-29°C) and moist in dark environment',
+          description: 'plant.cannabis_sativa.indoor.germination.description',
+          care: 'plant.cannabis_sativa.indoor.germination.care',
           editable: true,
           soil: {
             watering: {
               interval: 1,
-              description: 'Keep soil moist during germination',
+              description: 'plant.cannabis_sativa.indoor.germination.soil.watering',
             },
             fertilizing: {
               interval: 0,
-              description: 'No fertilizing during germination',
+              description: 'plant.cannabis_sativa.indoor.germination.soil.fertilizing',
             },
           },
           hydro: {
             watering: {
               interval: 0,
-              description: 'Continuous moisture in rockwool',
+              description: 'plant.cannabis_sativa.indoor.germination.hydro.watering',
             },
             fertilizing: {
               interval: 0,
-              description: 'No nutrients during germination',
+              description: 'plant.cannabis_sativa.indoor.germination.hydro.fertilizing',
             },
           },
           coco: {
             watering: {
               interval: 1,
-              description: 'Keep coco moist during germination',
+              description: 'plant.cannabis_sativa.indoor.germination.coco.watering',
             },
             fertilizing: {
               interval: 0,
-              description: 'No fertilizing during germination',
+              description: 'plant.cannabis_sativa.indoor.germination.coco.fertilizing',
             },
           },
         },
         seedling: {
           days: 14,
-          description: 'First true leaves development',
-          care: 'Provide 18-24 hours of light, maintain humidity 65-70%',
+          description: 'plant.cannabis_sativa.indoor.seedling.description',
+          care: 'plant.cannabis_sativa.indoor.seedling.care',
           editable: true,
           soil: {
             watering: {
               interval: 2,
-              description: 'Water every 2 days during seedling stage',
+              description: 'plant.cannabis_sativa.indoor.seedling.soil.watering',
             },
             fertilizing: {
               interval: 0,
-              description: 'No fertilizing during seedling stage',
+              description: 'plant.cannabis_sativa.indoor.seedling.soil.fertilizing',
             },
           },
           hydro: {
-            watering: { interval: 0, description: 'Continuous flow, low EC' },
+            watering: { interval: 0, description: 'plant.cannabis_sativa.indoor.seedling.hydro.watering' },
             fertilizing: {
               interval: 7,
-              description: 'Light nutrients, EC 0.5-0.8',
+              description: 'plant.cannabis_sativa.indoor.seedling.hydro.fertilizing',
             },
           },
           coco: {
-            watering: { interval: 1, description: 'Daily watering in coco' },
+            watering: { interval: 1, description: 'plant.cannabis_sativa.indoor.seedling.coco.watering' },
             fertilizing: {
               interval: 7,
-              description: 'Light feeding, EC 0.5-0.8',
+              description: 'plant.cannabis_sativa.indoor.seedling.coco.fertilizing',
             },
           },
         },
         vegetative: {
           days: 42,
-          description: 'Extended growth phase',
-          care: '18/6 light cycle, high nitrogen feeding, training for height control',
+          description: 'plant.cannabis_sativa.indoor.vegetative.description',
+          care: 'plant.cannabis_sativa.indoor.vegetative.care',
           editable: true,
           soil: {
             watering: {
               interval: 2,
-              description: 'Water every 2 days during vegetative growth',
+              description: 'plant.cannabis_sativa.indoor.vegetative.soil.watering',
             },
             fertilizing: {
               interval: 7,
-              description: 'Weekly feeding with high nitrogen',
+              description: 'plant.cannabis_sativa.indoor.vegetative.soil.fertilizing',
             },
           },
           hydro: {
             watering: {
               interval: 0,
-              description: 'Continuous flow, moderate EC',
+              description: 'plant.cannabis_sativa.indoor.vegetative.hydro.watering',
             },
             fertilizing: {
               interval: 7,
-              description: 'Weekly nutrient change, EC 1.0-1.2',
+              description: 'plant.cannabis_sativa.indoor.vegetative.hydro.fertilizing',
             },
           },
           coco: {
-            watering: { interval: 1, description: 'Daily watering in coco' },
+            watering: { interval: 1, description: 'plant.cannabis_sativa.indoor.vegetative.coco.watering' },
             fertilizing: {
               interval: 7,
-              description: 'Weekly feeding, EC 1.0-1.2',
+              description: 'plant.cannabis_sativa.indoor.vegetative.coco.fertilizing',
             },
           },
         },
         preflower: {
           days: 7,
-          description: 'Sex determination',
-          care: 'Continue vegetative care, identify and remove males',
+          description: 'plant.cannabis_sativa.indoor.preflower.description',
+          care: 'plant.cannabis_sativa.indoor.preflower.care',
           editable: true,
           soil: {
             watering: {
               interval: 2,
-              description: 'Continue regular watering schedule',
+              description: 'plant.cannabis_sativa.indoor.preflower.soil.watering',
             },
             fertilizing: {
               interval: 7,
-              description: 'Weekly feeding with high nitrogen',
+              description: 'plant.cannabis_sativa.indoor.preflower.soil.fertilizing',
             },
           },
           hydro: {
             watering: {
               interval: 0,
-              description: 'Continuous flow, moderate EC',
+              description: 'plant.cannabis_sativa.indoor.preflower.hydro.watering',
             },
             fertilizing: {
               interval: 7,
-              description: 'Weekly nutrient change, EC 1.0-1.2',
+              description: 'plant.cannabis_sativa.indoor.preflower.hydro.fertilizing',
             },
           },
           coco: {
-            watering: { interval: 1, description: 'Daily watering in coco' },
+            watering: { interval: 1, description: 'plant.cannabis_sativa.indoor.preflower.coco.watering' },
             fertilizing: {
               interval: 7,
-              description: 'Weekly feeding, EC 1.0-1.2',
+              description: 'plant.cannabis_sativa.indoor.preflower.coco.fertilizing',
             },
           },
         },
         flowering: {
           days: 70,
-          description: 'Long flowering period',
-          care: '12/12 light cycle, phosphorus/potassium feeding, support tall branches',
+          description: 'plant.cannabis_sativa.indoor.flowering.description',
+          care: 'plant.cannabis_sativa.indoor.flowering.care',
           editable: true,
           soil: {
             watering: {
               interval: 2,
-              description: 'Water every 2 days during flowering',
+              description: 'plant.cannabis_sativa.indoor.flowering.soil.watering',
             },
             fertilizing: {
               interval: 7,
-              description: 'Weekly feeding with bloom nutrients',
+              description: 'plant.cannabis_sativa.indoor.flowering.soil.fertilizing',
             },
           },
           hydro: {
             watering: {
               interval: 0,
-              description: 'Continuous flow, higher EC',
+              description: 'plant.cannabis_sativa.indoor.flowering.hydro.watering',
             },
             fertilizing: {
               interval: 7,
-              description: 'Weekly nutrient change, EC 1.2-1.5',
+              description: 'plant.cannabis_sativa.indoor.flowering.hydro.fertilizing',
             },
           },
           coco: {
-            watering: { interval: 1, description: 'Daily watering in coco' },
+            watering: { interval: 1, description: 'plant.cannabis_sativa.indoor.flowering.coco.watering' },
             fertilizing: {
               interval: 7,
-              description: 'Weekly feeding, EC 1.2-1.5',
+              description: 'plant.cannabis_sativa.indoor.flowering.coco.fertilizing',
             },
           },
         },
         harvest: {
           days: 7,
-          description: 'Harvest and cure preparation',
-          care: 'Flush nutrients 1-2 weeks before harvest',
+          description: 'plant.cannabis_sativa.indoor.harvest.description',
+          care: 'plant.cannabis_sativa.indoor.harvest.care',
           editable: true,
           soil: {
-            watering: { interval: 1, description: 'Flush with plain water' },
+            watering: { interval: 1, description: 'plant.cannabis_sativa.indoor.harvest.soil.watering' },
             fertilizing: {
               interval: 0,
-              description: 'No fertilizing during flush',
+              description: 'plant.cannabis_sativa.indoor.harvest.soil.fertilizing',
             },
           },
           hydro: {
-            watering: { interval: 0, description: 'Flush with plain water' },
+            watering: { interval: 0, description: 'plant.cannabis_sativa.indoor.harvest.hydro.watering' },
             fertilizing: {
               interval: 0,
-              description: 'No nutrients during flush',
+              description: 'plant.cannabis_sativa.indoor.harvest.hydro.fertilizing',
             },
           },
           coco: {
-            watering: { interval: 1, description: 'Flush with plain water' },
+            watering: { interval: 1, description: 'plant.cannabis_sativa.indoor.harvest.coco.watering' },
             fertilizing: {
               interval: 0,
-              description: 'No fertilizing during flush',
+              description: 'plant.cannabis_sativa.indoor.harvest.coco.fertilizing',
             },
           },
         },
@@ -214,205 +214,204 @@ export const cannabis_sativa = {
         germination: {
           start: '04-15',
           end: '04-18',
-          description: 'Seed sprouting',
-          care: 'Keep seeds warm and moist, protect from direct sun',
+          description: 'plant.cannabis_sativa.outdoor.germination.description',
+          care: 'plant.cannabis_sativa.outdoor.germination.care',
           editable: false,
           soil: {
             watering: {
               interval: 1,
-              description: 'Keep soil moist during germination',
+              description: 'plant.cannabis_sativa.outdoor.germination.soil.watering',
             },
             fertilizing: {
               interval: 0,
-              description: 'No fertilizing during germination',
+              description: 'plant.cannabis_sativa.outdoor.germination.soil.fertilizing',
             },
           },
           hydro: {
             watering: {
               interval: 0,
-              description: 'Continuous moisture in rockwool',
+              description: 'plant.cannabis_sativa.outdoor.germination.hydro.watering',
             },
             fertilizing: {
               interval: 0,
-              description: 'No nutrients during germination',
+              description: 'plant.cannabis_sativa.outdoor.germination.hydro.fertilizing',
             },
           },
           coco: {
             watering: {
               interval: 1,
-              description: 'Keep coco moist during germination',
+              description: 'plant.cannabis_sativa.outdoor.germination.coco.watering',
             },
             fertilizing: {
               interval: 0,
-              description: 'No fertilizing during germination',
+              description: 'plant.cannabis_sativa.outdoor.germination.coco.fertilizing',
             },
           },
         },
         seedling: {
           start: '04-19',
           end: '05-10',
-          description: 'Establishing outdoors',
-          care: 'Gradual sun exposure, protect from wind and pests',
+          description: 'plant.cannabis_sativa.outdoor.seedling.description',
+          care: 'plant.cannabis_sativa.outdoor.seedling.care',
           editable: false,
           soil: {
             watering: {
               interval: 2,
-              description: 'Water every 2 days during seedling stage',
+              description: 'plant.cannabis_sativa.outdoor.seedling.soil.watering',
             },
             fertilizing: {
               interval: 0,
-              description: 'No fertilizing during seedling establishment',
+              description: 'plant.cannabis_sativa.outdoor.seedling.soil.fertilizing',
             },
           },
           hydro: {
-            watering: { interval: 0, description: 'Continuous flow, low EC' },
+            watering: { interval: 0, description: 'plant.cannabis_sativa.outdoor.seedling.hydro.watering' },
             fertilizing: {
               interval: 7,
-              description: 'Light nutrients, EC 0.5-0.8',
+              description: 'plant.cannabis_sativa.outdoor.seedling.hydro.fertilizing',
             },
           },
           coco: {
-            watering: { interval: 1, description: 'Daily watering in coco' },
+            watering: { interval: 1, description: 'plant.cannabis_sativa.outdoor.seedling.coco.watering' },
             fertilizing: {
               interval: 7,
-              description: 'Light feeding, EC 0.5-0.8',
+              description: 'plant.cannabis_sativa.outdoor.seedling.coco.fertilizing',
             },
           },
         },
         vegetative: {
           start: '05-11',
           end: '08-31',
-          description: 'Extended natural light vegetative growth',
-          care: 'Natural sunlight, train for size management, heavy feeding',
+          description: 'plant.cannabis_sativa.outdoor.vegetative.description',
+          care: 'plant.cannabis_sativa.outdoor.vegetative.care',
           editable: false,
           soil: {
             watering: {
               interval: 3,
-              description: 'Water every 3 days during vegetative growth',
+              description: 'plant.cannabis_sativa.outdoor.vegetative.soil.watering',
             },
             fertilizing: {
               interval: 14,
-              description: 'High nitrogen feeding for vegetative growth',
+              description: 'plant.cannabis_sativa.outdoor.vegetative.soil.fertilizing',
             },
           },
           hydro: {
             watering: {
               interval: 0,
-              description: 'Continuous flow, moderate EC',
+              description: 'plant.cannabis_sativa.outdoor.vegetative.hydro.watering',
             },
             fertilizing: {
               interval: 14,
-              description: 'High nitrogen feeding for vegetative growth',
+              description: 'plant.cannabis_sativa.outdoor.vegetative.hydro.fertilizing',
             },
           },
           coco: {
-            watering: { interval: 1, description: 'Daily watering in coco' },
+            watering: { interval: 1, description: 'plant.cannabis_sativa.outdoor.vegetative.coco.watering' },
             fertilizing: {
               interval: 14,
-              description: 'High nitrogen feeding for vegetative growth',
+              description: 'plant.cannabis_sativa.outdoor.vegetative.coco.fertilizing',
             },
           },
         },
         preflower: {
           start: '09-01',
           end: '09-14',
-          description: 'Natural photoperiod trigger',
-          care: 'Occurs naturally as days shorten, identify males',
+          description: 'plant.cannabis_sativa.outdoor.preflower.description',
+          care: 'plant.cannabis_sativa.outdoor.preflower.care',
           editable: false,
           soil: {
             watering: {
               interval: 3,
-              description: 'Continue regular watering schedule',
+              description: 'plant.cannabis_sativa.outdoor.preflower.soil.watering',
             },
             fertilizing: {
               interval: 14,
-              description: 'Transition to flowering nutrients',
+              description: 'plant.cannabis_sativa.outdoor.preflower.soil.fertilizing',
             },
           },
           hydro: {
-            watering: { interval: 0, description: 'Continuous flow, low EC' },
+            watering: { interval: 0, description: 'plant.cannabis_sativa.outdoor.preflower.hydro.watering' },
             fertilizing: {
               interval: 14,
-              description: 'Transition to flowering nutrients',
+              description: 'plant.cannabis_sativa.outdoor.preflower.hydro.fertilizing',
             },
           },
           coco: {
-            watering: { interval: 1, description: 'Daily watering in coco' },
+            watering: { interval: 1, description: 'plant.cannabis_sativa.outdoor.preflower.coco.watering' },
             fertilizing: {
               interval: 14,
-              description: 'Transition to flowering nutrients',
+              description: 'plant.cannabis_sativa.outdoor.preflower.coco.fertilizing',
             },
           },
         },
         flowering: {
           start: '09-15',
           end: '11-15',
-          description:
-            'Extended outdoor flowering (8-10 weeks depending on strain)',
-          care: 'Natural light cycle, weather protection, pest monitoring',
+          description: 'plant.cannabis_sativa.outdoor.flowering.description',
+          care: 'plant.cannabis_sativa.outdoor.flowering.care',
           editable: true,
           soil: {
             watering: {
               interval: 3,
-              description: 'Water every 3 days during flowering',
+              description: 'plant.cannabis_sativa.outdoor.flowering.soil.watering',
             },
             fertilizing: {
               interval: 14,
-              description: 'High phosphorus/potassium feeding for flowering',
+              description: 'plant.cannabis_sativa.outdoor.flowering.soil.fertilizing',
             },
           },
           hydro: {
             watering: {
               interval: 0,
-              description: 'Continuous flow, higher EC',
+              description: 'plant.cannabis_sativa.outdoor.flowering.hydro.watering',
             },
             fertilizing: {
               interval: 14,
-              description: 'High phosphorus/potassium feeding for flowering',
+              description: 'plant.cannabis_sativa.outdoor.flowering.hydro.fertilizing',
             },
           },
           coco: {
-            watering: { interval: 1, description: 'Daily watering in coco' },
+            watering: { interval: 1, description: 'plant.cannabis_sativa.outdoor.flowering.coco.watering' },
             fertilizing: {
               interval: 14,
-              description: 'High phosphorus/potassium feeding for flowering',
+              description: 'plant.cannabis_sativa.outdoor.flowering.coco.fertilizing',
             },
           },
         },
         harvest: {
           start: '11-16',
           end: '11-30',
-          description: 'Outdoor harvest timing',
-          care: 'Weather dependent, check trichomes, quick dry if rain',
+          description: 'plant.cannabis_sativa.outdoor.harvest.description',
+          care: 'plant.cannabis_sativa.outdoor.harvest.care',
           editable: false,
           soil: {
             watering: {
               interval: 3,
-              description: 'Flush with plain water 1-2 weeks before harvest',
+              description: 'plant.cannabis_sativa.outdoor.harvest.soil.watering',
             },
             fertilizing: {
               interval: 0,
-              description: 'No fertilizing during flush and harvest',
+              description: 'plant.cannabis_sativa.outdoor.harvest.soil.fertilizing',
             },
           },
           hydro: {
             watering: {
               interval: 0,
-              description: 'Flush with plain water 1-2 weeks before harvest',
+              description: 'plant.cannabis_sativa.outdoor.harvest.hydro.watering',
             },
             fertilizing: {
               interval: 0,
-              description: 'No fertilizing during flush and harvest',
+              description: 'plant.cannabis_sativa.outdoor.harvest.hydro.fertilizing',
             },
           },
           coco: {
             watering: {
               interval: 1,
-              description: 'Flush with plain water 1-2 weeks before harvest',
+              description: 'plant.cannabis_sativa.outdoor.harvest.coco.watering',
             },
             fertilizing: {
               interval: 0,
-              description: 'No fertilizing during flush and harvest',
+              description: 'plant.cannabis_sativa.outdoor.harvest.coco.fertilizing',
             },
           },
         },
@@ -422,227 +421,226 @@ export const cannabis_sativa = {
           plantingWindow: {
             start: '04-01',
             end: '05-15',
-            description: 'Early start needed for long flowering',
+            description: 'plant.cannabis_sativa.outdoor.seasonalTiming.temperate_north.plantingWindow.description',
           },
           harvestWindow: {
             start: '10-15',
             end: '11-30',
-            description: 'Late harvest due to long flowering',
+            description: 'plant.cannabis_sativa.outdoor.seasonalTiming.temperate_north.harvestWindow.description',
           },
         },
         mediterranean: {
           plantingWindow: {
             start: '03-01',
             end: '05-01',
-            description: 'Early start for extended season',
+            description: 'plant.cannabis_sativa.outdoor.seasonalTiming.mediterranean.plantingWindow.description',
           },
           harvestWindow: {
             start: '10-01',
             end: '12-15',
-            description: 'Extended harvest season',
+            description: 'plant.cannabis_sativa.outdoor.seasonalTiming.mediterranean.harvestWindow.description',
           },
         },
       },
-      naturalTiming:
-        'Phases are determined by natural seasons and cannot be adjusted. Only flowering time varies by strain (8-16 weeks).',
+      naturalTiming: 'plant.cannabis_sativa.outdoor.naturalTiming',
     },
     greenhouse: {
       phases: {
         germination: {
           days: 3,
-          description: 'Seed sprouting',
-          care: 'Keep seeds warm and moist in controlled environment',
+          description: 'plant.cannabis_sativa.greenhouse.germination.description',
+          care: 'plant.cannabis_sativa.greenhouse.germination.care',
           editable: true,
           soil: {
             watering: {
               interval: 1,
-              description: 'Keep soil moist during germination',
+              description: 'plant.cannabis_sativa.greenhouse.germination.soil.watering',
             },
             fertilizing: {
               interval: 0,
-              description: 'No fertilizing during germination',
+              description: 'plant.cannabis_sativa.greenhouse.germination.soil.fertilizing',
             },
           },
           hydro: {
             watering: {
               interval: 0,
-              description: 'Continuous moisture in rockwool',
+              description: 'plant.cannabis_sativa.greenhouse.germination.hydro.watering',
             },
             fertilizing: {
               interval: 0,
-              description: 'No nutrients during germination',
+              description: 'plant.cannabis_sativa.greenhouse.germination.hydro.fertilizing',
             },
           },
           coco: {
             watering: {
               interval: 1,
-              description: 'Keep coco moist during germination',
+              description: 'plant.cannabis_sativa.greenhouse.germination.coco.watering',
             },
             fertilizing: {
               interval: 0,
-              description: 'No fertilizing during germination',
+              description: 'plant.cannabis_sativa.greenhouse.germination.coco.fertilizing',
             },
           },
         },
         seedling: {
           days: 21,
-          description: 'Establishing in greenhouse',
-          care: 'Controlled environment, protect from temperature extremes',
+          description: 'plant.cannabis_sativa.greenhouse.seedling.description',
+          care: 'plant.cannabis_sativa.greenhouse.seedling.care',
           editable: true,
           soil: {
             watering: {
               interval: 2,
-              description: 'Water every 2 days during seedling stage',
+              description: 'plant.cannabis_sativa.greenhouse.seedling.soil.watering',
             },
             fertilizing: {
               interval: 0,
-              description: 'No fertilizing during seedling establishment',
+              description: 'plant.cannabis_sativa.greenhouse.seedling.soil.fertilizing',
             },
           },
           hydro: {
-            watering: { interval: 0, description: 'Continuous flow, low EC' },
+            watering: { interval: 0, description: 'plant.cannabis_sativa.greenhouse.seedling.hydro.watering' },
             fertilizing: {
               interval: 7,
-              description: 'Light nutrients, EC 0.5-0.8',
+              description: 'plant.cannabis_sativa.greenhouse.seedling.hydro.fertilizing',
             },
           },
           coco: {
-            watering: { interval: 1, description: 'Daily watering in coco' },
+            watering: { interval: 1, description: 'plant.cannabis_sativa.greenhouse.seedling.coco.watering' },
             fertilizing: {
               interval: 7,
-              description: 'Light feeding, EC 0.5-0.8',
+              description: 'plant.cannabis_sativa.greenhouse.seedling.coco.fertilizing',
             },
           },
         },
         vegetative: {
           days: 90,
-          description: 'Greenhouse vegetative growth',
-          care: 'Natural light with temperature control, heavy feeding',
+          description: 'plant.cannabis_sativa.greenhouse.vegetative.description',
+          care: 'plant.cannabis_sativa.greenhouse.vegetative.care',
           editable: true,
           soil: {
             watering: {
               interval: 3,
-              description: 'Water every 3 days during vegetative growth',
+              description: 'plant.cannabis_sativa.greenhouse.vegetative.soil.watering',
             },
             fertilizing: {
               interval: 14,
-              description: 'High nitrogen feeding for vegetative growth',
+              description: 'plant.cannabis_sativa.greenhouse.vegetative.soil.fertilizing',
             },
           },
           hydro: {
             watering: {
               interval: 0,
-              description: 'Continuous flow, moderate EC',
+              description: 'plant.cannabis_sativa.greenhouse.vegetative.hydro.watering',
             },
             fertilizing: {
               interval: 14,
-              description: 'High nitrogen feeding for vegetative growth',
+              description: 'plant.cannabis_sativa.greenhouse.vegetative.hydro.fertilizing',
             },
           },
           coco: {
-            watering: { interval: 1, description: 'Daily watering in coco' },
+            watering: { interval: 1, description: 'plant.cannabis_sativa.greenhouse.vegetative.coco.watering' },
             fertilizing: {
               interval: 14,
-              description: 'High nitrogen feeding for vegetative growth',
+              description: 'plant.cannabis_sativa.greenhouse.vegetative.coco.fertilizing',
             },
           },
         },
         preflower: {
           days: 14,
-          description: 'Photoperiod management',
-          care: 'Control light hours to trigger flowering, identify males',
+          description: 'plant.cannabis_sativa.greenhouse.preflower.description',
+          care: 'plant.cannabis_sativa.greenhouse.preflower.care',
           editable: true,
           soil: {
             watering: {
               interval: 3,
-              description: 'Continue regular watering schedule',
+              description: 'plant.cannabis_sativa.greenhouse.preflower.soil.watering',
             },
             fertilizing: {
               interval: 14,
-              description: 'Transition to flowering nutrients',
+              description: 'plant.cannabis_sativa.greenhouse.preflower.soil.fertilizing',
             },
           },
           hydro: {
-            watering: { interval: 0, description: 'Continuous flow, low EC' },
+            watering: { interval: 0, description: 'plant.cannabis_sativa.greenhouse.preflower.hydro.watering' },
             fertilizing: {
               interval: 14,
-              description: 'Transition to flowering nutrients',
+              description: 'plant.cannabis_sativa.greenhouse.preflower.hydro.fertilizing',
             },
           },
           coco: {
-            watering: { interval: 1, description: 'Daily watering in coco' },
+            watering: { interval: 1, description: 'plant.cannabis_sativa.greenhouse.preflower.coco.watering' },
             fertilizing: {
               interval: 14,
-              description: 'Transition to flowering nutrients',
+              description: 'plant.cannabis_sativa.greenhouse.preflower.coco.fertilizing',
             },
           },
         },
         flowering: {
           days: 84,
-          description: 'Greenhouse flowering (8-16 weeks depending on strain)',
-          care: 'Controlled environment, weather protection, pest monitoring',
+          description: 'plant.cannabis_sativa.greenhouse.flowering.description',
+          care: 'plant.cannabis_sativa.greenhouse.flowering.care',
           editable: true,
           soil: {
             watering: {
               interval: 3,
-              description: 'Water every 3 days during flowering',
+              description: 'plant.cannabis_sativa.greenhouse.flowering.soil.watering',
             },
             fertilizing: {
               interval: 14,
-              description: 'High phosphorus/potassium feeding for flowering',
+              description: 'plant.cannabis_sativa.greenhouse.flowering.soil.fertilizing',
             },
           },
           hydro: {
             watering: {
               interval: 0,
-              description: 'Continuous flow, higher EC',
+              description: 'plant.cannabis_sativa.greenhouse.flowering.hydro.watering',
             },
             fertilizing: {
               interval: 14,
-              description: 'High phosphorus/potassium feeding for flowering',
+              description: 'plant.cannabis_sativa.greenhouse.flowering.hydro.fertilizing',
             },
           },
           coco: {
-            watering: { interval: 1, description: 'Daily watering in coco' },
+            watering: { interval: 1, description: 'plant.cannabis_sativa.greenhouse.flowering.coco.watering' },
             fertilizing: {
               interval: 14,
-              description: 'High phosphorus/potassium feeding for flowering',
+              description: 'plant.cannabis_sativa.greenhouse.flowering.coco.fertilizing',
             },
           },
         },
         harvest: {
           days: 14,
-          description: 'Greenhouse harvest timing',
-          care: 'Controlled drying environment, check trichomes',
+          description: 'plant.cannabis_sativa.greenhouse.harvest.description',
+          care: 'plant.cannabis_sativa.greenhouse.harvest.care',
           editable: true,
           soil: {
             watering: {
               interval: 3,
-              description: 'Flush with plain water 1-2 weeks before harvest',
+              description: 'plant.cannabis_sativa.greenhouse.harvest.soil.watering',
             },
             fertilizing: {
               interval: 0,
-              description: 'No fertilizing during flush and harvest',
+              description: 'plant.cannabis_sativa.greenhouse.harvest.soil.fertilizing',
             },
           },
           hydro: {
             watering: {
               interval: 0,
-              description: 'Flush with plain water 1-2 weeks before harvest',
+              description: 'plant.cannabis_sativa.greenhouse.harvest.hydro.watering',
             },
             fertilizing: {
               interval: 0,
-              description: 'No fertilizing during flush and harvest',
+              description: 'plant.cannabis_sativa.greenhouse.harvest.hydro.fertilizing',
             },
           },
           coco: {
             watering: {
               interval: 1,
-              description: 'Flush with plain water 1-2 weeks before harvest',
+              description: 'plant.cannabis_sativa.greenhouse.harvest.coco.watering',
             },
             fertilizing: {
               interval: 0,
-              description: 'No fertilizing during flush and harvest',
+              description: 'plant.cannabis_sativa.greenhouse.harvest.coco.fertilizing',
             },
           },
         },
@@ -652,50 +650,40 @@ export const cannabis_sativa = {
           plantingWindow: {
             start: '02-15',
             end: '05-15',
-            description: 'Extended season with greenhouse protection',
+            description: 'plant.cannabis_sativa.greenhouse.seasonalTiming.temperate_north.plantingWindow.description',
           },
           harvestWindow: {
             start: '10-01',
             end: '12-31',
-            description: 'Extended harvest with climate control',
+            description: 'plant.cannabis_sativa.greenhouse.seasonalTiming.temperate_north.harvestWindow.description',
           },
         },
         mediterranean: {
           plantingWindow: {
             start: '02-01',
             end: '05-15',
-            description: 'Very early start possible',
+            description: 'plant.cannabis_sativa.greenhouse.seasonalTiming.mediterranean.plantingWindow.description',
           },
           harvestWindow: {
             start: '09-15',
             end: '12-31',
-            description: 'Extended season with climate control',
+            description: 'plant.cannabis_sativa.greenhouse.seasonalTiming.mediterranean.harvestWindow.description',
           },
         },
       },
-      naturalTiming:
-        'Greenhouse allows some control over timing, but flowering duration still varies by strain (8-16 weeks).',
+      naturalTiming: 'plant.cannabis_sativa.greenhouse.naturalTiming',
     },
   },
   careTips: {
-    watering:
-      'Water when top inch of soil is dry, pH 6.0-7.0 in soil, 5.5-6.5 in hydro',
-    fertilizing:
-      'High nitrogen in veg (3-1-2), high phosphorus in flower (1-3-2)',
-    sunlight: '18/6 hours in vegetative, 12/12 hours in flowering',
-    spacing: '3-6 feet apart, can grow very tall',
-    support: 'Strong stakes or SCROG for height management',
-    humidity: '65-70% seedling, 40-50% vegetative, 40-45% flowering',
-    temperature: formatTemperature('70-85°F day, 65-80°F night'),
+    watering: 'plant.cannabis_sativa.careTips.watering',
+    fertilizing: 'plant.cannabis_sativa.careTips.fertilizing',
+    sunlight: 'plant.cannabis_sativa.careTips.sunlight',
+    spacing: 'plant.cannabis_sativa.careTips.spacing',
+    support: 'plant.cannabis_sativa.careTips.support',
+    humidity: 'plant.cannabis_sativa.careTips.humidity',
+    temperature: 'plant.cannabis_sativa.careTips.temperature',
   },
-  commonProblems: {
-    'Height Management': 'Can grow very tall - use LST, topping, or SCROG',
-    'Long Flowering': 'Extended harvest time - be patient, monitor trichomes',
-    'Nutrient Deficiency':
-      'Large plants need more nutrients - increase feeding',
-    'Light Penetration':
-      'Dense canopy - defoliate and LST for light penetration',
-  },
+  commonProblems: createProblemRefs(['rootRot', 'powderyMildew', 'leggyGrowth'], 'cannabis'),
 };
 
 export default cannabis_sativa;

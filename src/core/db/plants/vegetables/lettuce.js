@@ -6,7 +6,7 @@
 import { PLANT_TAGS } from '../categories.js';
 
 export const lettuce = {
-  name: 'Lettuce',
+  name: 'lettuce.name',
   category: 'category.vegetables',
   emoji: '🥬',
   tags: [PLANT_TAGS.LEAFY, PLANT_TAGS.ANNUAL, PLANT_TAGS.PHOTOPERIOD],
@@ -15,145 +15,145 @@ export const lettuce = {
       phases: {
         germination: {
           days: 5,
-          description: 'Seeds sprouting',
-          care: 'Keep soil moist and cool',
+          description: 'lettuce.phases.germination.description',
+          care: 'lettuce.phases.germination.care',
           editable: true,
           soil: {
             watering: {
               interval: 1,
-              description: 'Keep soil consistently moist but not waterlogged',
+              description: 'lettuce.phases.germination.soil.watering.description',
             },
             fertilizing: {
               interval: 0,
-              description: 'No fertilizer needed during germination',
+              description: 'lettuce.phases.germination.soil.fertilizing.description',
             },
           },
           hydro: {
             watering: {
               interval: 0,
-              description: 'Continuous moisture in rockwool or hydroponic system',
+              description: 'lettuce.phases.germination.hydro.watering.description',
             },
             fertilizing: {
               interval: 0,
-              description: 'No nutrients during germination',
+              description: 'lettuce.phases.germination.hydro.fertilizing.description',
             },
           },
           coco: {
             watering: {
               interval: 1,
-              description: 'Keep coco consistently moist but not waterlogged',
+              description: 'lettuce.phases.germination.coco.watering.description',
             },
             fertilizing: {
               interval: 0,
-              description: 'No fertilizer needed during germination',
+              description: 'lettuce.phases.germination.coco.fertilizing.description',
             },
           },
         },
         leafing: {
           days: 20,
-          description: 'Leaf development',
-          care: 'Thin seedlings, maintain moisture',
+          description: 'lettuce.phases.leafing.description',
+          care: 'lettuce.phases.leafing.care',
           editable: true,
           soil: {
             watering: {
               interval: 2,
-              description: 'Regular light watering, keep soil consistently moist',
+              description: 'lettuce.phases.leafing.soil.watering.description',
             },
             fertilizing: {
               interval: 0,
-              description: 'No fertilizing during early leaf development',
+              description: 'lettuce.phases.leafing.soil.fertilizing.description',
             },
           },
           hydro: {
             watering: {
               interval: 0,
-              description: 'Continuous flow, low EC',
+              description: 'lettuce.phases.leafing.hydro.watering.description',
             },
             fertilizing: {
               interval: 7,
-              description: 'Light nutrients, EC 0.5-0.8',
+              description: 'lettuce.phases.leafing.hydro.fertilizing.description',
             },
           },
           coco: {
             watering: {
               interval: 1,
-              description: 'Daily watering in coco',
+              description: 'lettuce.phases.leafing.coco.watering.description',
             },
             fertilizing: {
               interval: 7,
-              description: 'Light feeding, EC 0.5-0.8',
+              description: 'lettuce.phases.leafing.coco.fertilizing.description',
             },
           },
         },
         heading: {
           days: 25,
-          description: 'Head formation',
-          care: 'Regular watering, watch for bolting',
+          description: 'lettuce.phases.heading.description',
+          care: 'lettuce.phases.heading.care',
           editable: true,
           soil: {
             watering: {
               interval: 2,
-              description: 'Regular light watering, keep soil consistently moist',
+              description: 'lettuce.phases.heading.soil.watering.description',
             },
             fertilizing: {
               interval: 14,
-              description: 'Light feeder - balanced fertilizer at planting',
+              description: 'lettuce.phases.heading.soil.fertilizing.description',
             },
           },
           hydro: {
             watering: {
               interval: 0,
-              description: 'Continuous flow, moderate EC',
+              description: 'lettuce.phases.heading.hydro.watering.description',
             },
             fertilizing: {
               interval: 14,
-              description: 'Balanced nutrients, EC 1.0-1.2',
+              description: 'lettuce.phases.heading.hydro.fertilizing.description',
             },
           },
           coco: {
             watering: {
               interval: 1,
-              description: 'Daily watering in coco',
+              description: 'lettuce.phases.heading.coco.watering.description',
             },
             fertilizing: {
               interval: 14,
-              description: 'Balanced feeding, EC 1.0-1.2',
+              description: 'lettuce.phases.heading.coco.fertilizing.description',
             },
           },
         },
         harvest: {
           days: 10,
-          description: 'Ready for harvest',
-          care: 'Harvest outer leaves or whole heads',
+          description: 'lettuce.phases.harvest.description',
+          care: 'lettuce.phases.harvest.care',
           editable: true,
           soil: {
             watering: {
               interval: 2,
-              description: 'Maintain moisture for crisp leaves',
+              description: 'lettuce.phases.harvest.soil.watering.description',
             },
             fertilizing: {
               interval: 0,
-              description: 'No fertilizing during harvest period',
+              description: 'lettuce.phases.harvest.soil.fertilizing.description',
             },
           },
           hydro: {
             watering: {
               interval: 0,
-              description: 'Continuous flow, moderate EC',
+              description: 'lettuce.phases.harvest.hydro.watering.description',
             },
             fertilizing: {
               interval: 0,
-              description: 'No nutrients during harvest',
+              description: 'lettuce.phases.harvest.hydro.fertilizing.description',
             },
           },
           coco: {
             watering: {
               interval: 1,
-              description: 'Daily watering in coco',
+              description: 'lettuce.phases.harvest.coco.watering.description',
             },
             fertilizing: {
               interval: 0,
-              description: 'No fertilizing during harvest period',
+              description: 'lettuce.phases.harvest.coco.fertilizing.description',
             },
           },
         },
@@ -162,147 +162,53 @@ export const lettuce = {
     outdoor: {
       phases: {
         germination: {
-          days: 5,
-          description: 'Seeds sprouting',
-          care: 'Keep soil moist and cool',
+          start: '03-15',
+          end: '05-15',
+          description: 'lettuce.phases.germination.description',
+          care: 'lettuce.phases.germination.care',
           editable: false,
-          soil: {
-            watering: {
-              interval: 1,
-              description: 'Keep soil consistently moist but not waterlogged',
-            },
-            fertilizing: {
-              interval: 0,
-              description: 'No fertilizer needed during germination',
-            },
-          },
-          hydro: {
-            watering: {
-              interval: 0,
-              description: 'Continuous moisture in rockwool or hydroponic system',
-            },
-            fertilizing: {
-              interval: 0,
-              description: 'No nutrients during germination',
-            },
-          },
-          coco: {
-            watering: {
-              interval: 1,
-              description: 'Keep coco consistently moist but not waterlogged',
-            },
-            fertilizing: {
-              interval: 0,
-              description: 'No fertilizer needed during germination',
-            },
-          },
         },
         leafing: {
-          days: 20,
-          description: 'Leaf development',
-          care: 'Thin seedlings, maintain moisture',
+          description: 'lettuce.phases.leafing.description',
+          care: 'lettuce.phases.leafing.care',
           editable: false,
-          soil: {
-            watering: {
-              interval: 2,
-              description: 'Regular light watering, keep soil consistently moist',
-            },
-            fertilizing: {
-              interval: 0,
-              description: 'No fertilizing during early leaf development',
-            },
-          },
-          hydro: {
-            watering: {
-              interval: 0,
-              description: 'Continuous flow, low EC',
-            },
-            fertilizing: {
-              interval: 7,
-              description: 'Light nutrients, EC 0.5-0.8',
-            },
-          },
-          coco: {
-            watering: {
-              interval: 1,
-              description: 'Daily watering in coco',
-            },
-            fertilizing: {
-              interval: 7,
-              description: 'Light feeding, EC 0.5-0.8',
-            },
-          },
         },
         heading: {
-          days: 25,
-          description: 'Head formation',
-          care: 'Regular watering, watch for bolting',
+          description: 'lettuce.phases.heading.description',
+          care: 'lettuce.phases.heading.care',
           editable: false,
-          soil: {
-            watering: {
-              interval: 2,
-              description: 'Regular light watering, keep soil consistently moist',
-            },
-            fertilizing: {
-              interval: 14,
-              description: 'Light feeder - balanced fertilizer at planting',
-            },
-          },
-          hydro: {
-            watering: {
-              interval: 0,
-              description: 'Continuous flow, moderate EC',
-            },
-            fertilizing: {
-              interval: 14,
-              description: 'Balanced nutrients, EC 1.0-1.2',
-            },
-          },
-          coco: {
-            watering: {
-              interval: 1,
-              description: 'Daily watering in coco',
-            },
-            fertilizing: {
-              interval: 14,
-              description: 'Balanced feeding, EC 1.0-1.2',
-            },
-          },
         },
         harvest: {
-          days: 21,
-          description: 'Leaf maturation',
-          care: 'Harvest outer leaves or whole head',
+          start: '05-01',
+          end: '07-15',
+          description: 'lettuce.phases.harvest.description',
+          care: 'lettuce.phases.harvest.care',
           editable: true,
-          soil: {
-            watering: {
-              interval: 2,
-              description: 'Maintain moisture for crisp leaves',
-            },
-            fertilizing: {
-              interval: 0,
-              description: 'No fertilizing during harvest period',
-            },
+        },
+      },
+      seasonalTiming: {
+        temperate_north: {
+          plantingWindow: {
+            start: '03-15',
+            end: '05-15',
+            description: 'lettuce.seasonalTiming.temperate_north.plantingWindow.description',
           },
-          hydro: {
-            watering: {
-              interval: 0,
-              description: 'Continuous flow, moderate EC',
-            },
-            fertilizing: {
-              interval: 0,
-              description: 'No nutrients during harvest',
-            },
+          harvestWindow: {
+            start: '05-01',
+            end: '07-15',
+            description: 'lettuce.seasonalTiming.temperate_north.harvestWindow.description',
           },
-          coco: {
-            watering: {
-              interval: 1,
-              description: 'Daily watering in coco',
-            },
-            fertilizing: {
-              interval: 0,
-              description: 'No fertilizing during harvest period',
-            },
+        },
+        mediterranean: {
+          plantingWindow: {
+            start: '09-01',
+            end: '11-01',
+            description: 'lettuce.seasonalTiming.mediterranean.plantingWindow.description',
+          },
+          harvestWindow: {
+            start: '11-01',
+            end: '04-30',
+            description: 'lettuce.seasonalTiming.mediterranean.harvestWindow.description',
           },
         },
       },
@@ -311,164 +217,44 @@ export const lettuce = {
       phases: {
         germination: {
           days: 5,
-          description: 'Seeds sprouting',
-          care: 'Keep soil moist and cool',
+          description: 'lettuce.phases.germination.description',
+          care: 'lettuce.phases.germination.care',
           editable: true,
-          soil: {
-            watering: {
-              interval: 1,
-              description: 'Keep soil consistently moist but not waterlogged',
-            },
-            fertilizing: {
-              interval: 0,
-              description: 'No fertilizer needed during germination',
-            },
-          },
-          hydro: {
-            watering: {
-              interval: 0,
-              description: 'Continuous moisture in rockwool or hydroponic system',
-            },
-            fertilizing: {
-              interval: 0,
-              description: 'No nutrients during germination',
-            },
-          },
-          coco: {
-            watering: {
-              interval: 1,
-              description: 'Keep coco consistently moist but not waterlogged',
-            },
-            fertilizing: {
-              interval: 0,
-              description: 'No fertilizer needed during germination',
-            },
-          },
         },
         leafing: {
           days: 20,
-          description: 'Leaf development',
-          care: 'Thin seedlings, maintain moisture',
+          description: 'lettuce.phases.leafing.description',
+          care: 'lettuce.phases.leafing.care',
           editable: true,
-          soil: {
-            watering: {
-              interval: 2,
-              description: 'Regular light watering, keep soil consistently moist',
-            },
-            fertilizing: {
-              interval: 0,
-              description: 'No fertilizing during early leaf development',
-            },
-          },
-          hydro: {
-            watering: {
-              interval: 0,
-              description: 'Continuous flow, low EC',
-            },
-            fertilizing: {
-              interval: 7,
-              description: 'Light nutrients, EC 0.5-0.8',
-            },
-          },
-          coco: {
-            watering: {
-              interval: 1,
-              description: 'Daily watering in coco',
-            },
-            fertilizing: {
-              interval: 7,
-              description: 'Light feeding, EC 0.5-0.8',
-            },
-          },
         },
         heading: {
           days: 25,
-          description: 'Head formation',
-          care: 'Regular watering, watch for bolting',
+          description: 'lettuce.phases.heading.description',
+          care: 'lettuce.phases.heading.care',
           editable: true,
-          soil: {
-            watering: {
-              interval: 2,
-              description: 'Regular light watering, keep soil consistently moist',
-            },
-            fertilizing: {
-              interval: 14,
-              description: 'Light feeder - balanced fertilizer at planting',
-            },
-          },
-          hydro: {
-            watering: {
-              interval: 0,
-              description: 'Continuous flow, moderate EC',
-            },
-            fertilizing: {
-              interval: 14,
-              description: 'Balanced nutrients, EC 1.0-1.2',
-            },
-          },
-          coco: {
-            watering: {
-              interval: 1,
-              description: 'Daily watering in coco',
-            },
-            fertilizing: {
-              interval: 14,
-              description: 'Balanced feeding, EC 1.0-1.2',
-            },
-          },
         },
         harvest: {
           days: 10,
-          description: 'Ready for harvest',
-          care: 'Harvest outer leaves or whole heads',
+          description: 'lettuce.phases.harvest.description',
+          care: 'lettuce.phases.harvest.care',
           editable: true,
-          soil: {
-            watering: {
-              interval: 2,
-              description: 'Maintain moisture for crisp leaves',
-            },
-            fertilizing: {
-              interval: 0,
-              description: 'No fertilizing during harvest period',
-            },
-          },
-          hydro: {
-            watering: {
-              interval: 0,
-              description: 'Continuous flow, moderate EC',
-            },
-            fertilizing: {
-              interval: 0,
-              description: 'No nutrients during harvest',
-            },
-          },
-          coco: {
-            watering: {
-              interval: 1,
-              description: 'Daily watering in coco',
-            },
-            fertilizing: {
-              interval: 0,
-              description: 'No fertilizing during harvest period',
-            },
-          },
         },
       },
     },
   },
   careTips: {
-    watering: 'Regular light watering, keep soil consistently moist',
-    fertilizing: 'Light feeder - balanced fertilizer at planting',
-    sunlight: 'Partial shade in warm weather, full sun in cool weather',
-    spacing: '6-8 inches apart for leaf, 10-12 inches for head lettuce',
-    temperature: 'Cool weather crop, protect from heat',
-    soilPH: '6.0-7.0',
+    watering: 'lettuce.careTips.watering',
+    fertilizing: 'lettuce.careTips.fertilizing',
+    sunlight: 'lettuce.careTips.sunlight',
+    spacing: 'lettuce.careTips.spacing',
+    temperature: 'lettuce.careTips.temperature',
+    soilPH: 'lettuce.careTips.soilPH',
   },
   commonProblems: {
-    Bolting: 'Heat stress - plant in cool season, provide shade',
-    'Tip Burn': 'Calcium deficiency or irregular watering',
-    'Bitter Leaves': 'Heat or water stress - maintain cool, moist conditions',
-    Aphids: 'Small green insects - spray with water or use insecticidal soap',
+    bolting: 'lettuce.commonProblems.bolting',
+    tipBurn: 'lettuce.commonProblems.tipBurn',
+    bitterLeaves: 'lettuce.commonProblems.bitterLeaves',
+    aphids: 'lettuce.commonProblems.aphids',
   },
 };
 

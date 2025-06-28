@@ -4,9 +4,10 @@
  */
 
 import { PLANT_TAGS } from '../categories.js';
+import { createProblemRefs } from '../problems.js';
 
 export const thyme = {
-  name: 'Thyme',
+  name: 'plants.herbs.thyme.name',
   category: 'category.herbs',
   tags: [PLANT_TAGS.PERENNIAL, PLANT_TAGS.PHOTOPERIOD],
   emoji: '🌿',
@@ -15,121 +16,145 @@ export const thyme = {
       phases: {
         germination: {
           days: 14,
-          description: 'Seeds sprouting',
-          care: 'Keep warm and moist',
+          description: 'plants.herbs.thyme.phases.germination.description',
+          care: 'plants.herbs.thyme.phases.germination.care',
           editable: true,
           soil: {
             watering: {
               interval: 1,
-              description: 'Keep soil moist during germination',
+              description: 'plants.herbs.thyme.phases.germination.soil.watering.description',
             },
             fertilizing: {
               interval: 0,
-              description: 'No fertilizing during germination',
+              description: 'plants.herbs.thyme.phases.germination.soil.fertilizing.description',
             },
           },
           hydro: {
             watering: {
               interval: 0,
-              description: 'Continuous moisture in rockwool',
+              description: 'plants.herbs.thyme.phases.germination.hydro.watering.description',
             },
             fertilizing: {
               interval: 0,
-              description: 'No nutrients during germination',
+              description: 'plants.herbs.thyme.phases.germination.hydro.fertilizing.description',
             },
           },
           coco: {
             watering: {
               interval: 1,
-              description: 'Keep coco moist during germination',
+              description: 'plants.herbs.thyme.phases.germination.coco.watering.description',
             },
             fertilizing: {
               interval: 0,
-              description: 'No fertilizing during germination',
+              description: 'plants.herbs.thyme.phases.germination.coco.fertilizing.description',
             },
           },
         },
         seedling: {
           days: 21,
-          description: 'First true leaves',
-          care: 'Provide adequate light',
+          description: 'plants.herbs.thyme.phases.seedling.description',
+          care: 'plants.herbs.thyme.phases.seedling.care',
           editable: true,
           soil: {
             watering: {
               interval: 3,
-              description: 'Water when top inch of soil feels dry',
+              description: 'plants.herbs.thyme.phases.seedling.soil.watering.description',
             },
             fertilizing: {
               interval: 0,
-              description: 'No fertilizing during seedling stage',
+              description: 'plants.herbs.thyme.phases.seedling.soil.fertilizing.description',
             },
           },
           hydro: {
-            watering: { interval: 0, description: 'Continuous flow, low EC' },
+            watering: { 
+              interval: 0, 
+              description: 'plants.herbs.thyme.phases.seedling.hydro.watering.description' 
+            },
             fertilizing: {
               interval: 7,
-              description: 'Light nutrients, EC 0.5-0.8',
+              description: 'plants.herbs.thyme.phases.seedling.hydro.fertilizing.description',
             },
           },
           coco: {
-            watering: { interval: 1, description: 'Daily watering in coco' },
-            fertilizing: { interval: 7, description: 'Light feeding, EC 0.5-0.8' },
+            watering: { 
+              interval: 1, 
+              description: 'plants.herbs.thyme.phases.seedling.coco.watering.description' 
+            },
+            fertilizing: { 
+              interval: 7, 
+              description: 'plants.herbs.thyme.phases.seedling.coco.fertilizing.description' 
+            },
           },
         },
         vegetative: {
           days: 35,
-          description: 'Leaf growth',
-          care: 'Pinch tips for bushiness',
+          description: 'plants.herbs.thyme.phases.vegetative.description',
+          care: 'plants.herbs.thyme.phases.vegetative.care',
           editable: true,
           soil: {
             watering: {
               interval: 4,
-              description: 'Allow soil to dry between watering',
+              description: 'plants.herbs.thyme.phases.vegetative.soil.watering.description',
             },
             fertilizing: {
               interval: 21,
-              description: 'Light feeding with balanced fertilizer',
+              description: 'plants.herbs.thyme.phases.vegetative.soil.fertilizing.description',
             },
           },
           hydro: {
-            watering: { interval: 0, description: 'Continuous flow, moderate EC' },
+            watering: { 
+              interval: 0, 
+              description: 'plants.herbs.thyme.phases.vegetative.hydro.watering.description' 
+            },
             fertilizing: {
               interval: 21,
-              description: 'Balanced nutrients, EC 1.0-1.2',
+              description: 'plants.herbs.thyme.phases.vegetative.hydro.fertilizing.description',
             },
           },
           coco: {
-            watering: { interval: 2, description: 'Water every 2 days in coco' },
+            watering: { 
+              interval: 2, 
+              description: 'plants.herbs.thyme.phases.vegetative.coco.watering.description' 
+            },
             fertilizing: {
               interval: 21,
-              description: 'Balanced feeding, EC 1.0-1.2',
+              description: 'plants.herbs.thyme.phases.vegetative.coco.fertilizing.description',
             },
           },
         },
         harvest: {
           days: 75,
-          description: 'Continuous harvest',
-          care: 'Harvest sprigs regularly',
+          description: 'plants.herbs.thyme.phases.harvest.description',
+          care: 'plants.herbs.thyme.phases.harvest.care',
           editable: true,
           soil: {
-            watering: { interval: 4, description: 'Allow soil to dry between watering' },
+            watering: { 
+              interval: 4, 
+              description: 'plants.herbs.thyme.phases.harvest.soil.watering.description' 
+            },
             fertilizing: {
               interval: 21,
-              description: 'Regular feeding to support new growth',
+              description: 'plants.herbs.thyme.phases.harvest.soil.fertilizing.description',
             },
           },
           hydro: {
-            watering: { interval: 0, description: 'Continuous flow, moderate EC' },
+            watering: { 
+              interval: 0, 
+              description: 'plants.herbs.thyme.phases.harvest.hydro.watering.description' 
+            },
             fertilizing: {
               interval: 21,
-              description: 'Regular nutrients, EC 1.0-1.2',
+              description: 'plants.herbs.thyme.phases.harvest.hydro.fertilizing.description',
             },
           },
           coco: {
-            watering: { interval: 2, description: 'Water every 2 days in coco' },
+            watering: { 
+              interval: 2, 
+              description: 'plants.herbs.thyme.phases.harvest.coco.watering.description' 
+            },
             fertilizing: {
               interval: 21,
-              description: 'Regular feeding, EC 1.0-1.2',
+              description: 'plants.herbs.thyme.phases.harvest.coco.fertilizing.description',
             },
           },
         },
@@ -139,121 +164,145 @@ export const thyme = {
       phases: {
         germination: {
           days: 14,
-          description: 'Seeds sprouting',
-          care: 'Keep warm and moist',
+          description: 'plants.herbs.thyme.phases.germination.description',
+          care: 'plants.herbs.thyme.phases.germination.care',
           editable: false,
           soil: {
             watering: {
               interval: 1,
-              description: 'Keep soil moist during germination',
+              description: 'plants.herbs.thyme.phases.germination.soil.watering.description',
             },
             fertilizing: {
               interval: 0,
-              description: 'No fertilizing during germination',
+              description: 'plants.herbs.thyme.phases.germination.soil.fertilizing.description',
             },
           },
           hydro: {
             watering: {
               interval: 0,
-              description: 'Continuous moisture in rockwool',
+              description: 'plants.herbs.thyme.phases.germination.hydro.watering.description',
             },
             fertilizing: {
               interval: 0,
-              description: 'No nutrients during germination',
+              description: 'plants.herbs.thyme.phases.germination.hydro.fertilizing.description',
             },
           },
           coco: {
             watering: {
               interval: 1,
-              description: 'Keep coco moist during germination',
+              description: 'plants.herbs.thyme.phases.germination.coco.watering.description',
             },
             fertilizing: {
               interval: 0,
-              description: 'No fertilizing during germination',
+              description: 'plants.herbs.thyme.phases.germination.coco.fertilizing.description',
             },
           },
         },
         seedling: {
           days: 21,
-          description: 'First true leaves',
-          care: 'Provide adequate light',
+          description: 'plants.herbs.thyme.phases.seedling.description',
+          care: 'plants.herbs.thyme.phases.seedling.care',
           editable: false,
           soil: {
             watering: {
               interval: 3,
-              description: 'Water when top inch of soil feels dry',
+              description: 'plants.herbs.thyme.phases.seedling.soil.watering.description',
             },
             fertilizing: {
               interval: 0,
-              description: 'No fertilizing during seedling stage',
+              description: 'plants.herbs.thyme.phases.seedling.soil.fertilizing.description',
             },
           },
           hydro: {
-            watering: { interval: 0, description: 'Continuous flow, low EC' },
+            watering: { 
+              interval: 0, 
+              description: 'plants.herbs.thyme.phases.seedling.hydro.watering.description' 
+            },
             fertilizing: {
               interval: 7,
-              description: 'Light nutrients, EC 0.5-0.8',
+              description: 'plants.herbs.thyme.phases.seedling.hydro.fertilizing.description',
             },
           },
           coco: {
-            watering: { interval: 1, description: 'Daily watering in coco' },
-            fertilizing: { interval: 7, description: 'Light feeding, EC 0.5-0.8' },
+            watering: { 
+              interval: 1, 
+              description: 'plants.herbs.thyme.phases.seedling.coco.watering.description' 
+            },
+            fertilizing: { 
+              interval: 7, 
+              description: 'plants.herbs.thyme.phases.seedling.coco.fertilizing.description' 
+            },
           },
         },
         vegetative: {
           days: 35,
-          description: 'Leaf growth',
-          care: 'Pinch tips for bushiness',
+          description: 'plants.herbs.thyme.phases.vegetative.description',
+          care: 'plants.herbs.thyme.phases.vegetative.care',
           editable: false,
           soil: {
             watering: {
               interval: 4,
-              description: 'Allow soil to dry between watering',
+              description: 'plants.herbs.thyme.phases.vegetative.soil.watering.description',
             },
             fertilizing: {
               interval: 21,
-              description: 'Light feeding with balanced fertilizer',
+              description: 'plants.herbs.thyme.phases.vegetative.soil.fertilizing.description',
             },
           },
           hydro: {
-            watering: { interval: 0, description: 'Continuous flow, moderate EC' },
+            watering: { 
+              interval: 0, 
+              description: 'plants.herbs.thyme.phases.vegetative.hydro.watering.description' 
+            },
             fertilizing: {
               interval: 21,
-              description: 'Balanced nutrients, EC 1.0-1.2',
+              description: 'plants.herbs.thyme.phases.vegetative.hydro.fertilizing.description',
             },
           },
           coco: {
-            watering: { interval: 2, description: 'Water every 2 days in coco' },
+            watering: { 
+              interval: 2, 
+              description: 'plants.herbs.thyme.phases.vegetative.coco.watering.description' 
+            },
             fertilizing: {
               interval: 21,
-              description: 'Balanced feeding, EC 1.0-1.2',
+              description: 'plants.herbs.thyme.phases.vegetative.coco.fertilizing.description',
             },
           },
         },
         harvest: {
           days: 75,
-          description: 'Continuous harvest',
-          care: 'Harvest sprigs regularly',
+          description: 'plants.herbs.thyme.phases.harvest.description',
+          care: 'plants.herbs.thyme.phases.harvest.care',
           editable: true,
           soil: {
-            watering: { interval: 4, description: 'Allow soil to dry between watering' },
+            watering: { 
+              interval: 4, 
+              description: 'plants.herbs.thyme.phases.harvest.soil.watering.description' 
+            },
             fertilizing: {
               interval: 21,
-              description: 'Regular feeding to support new growth',
+              description: 'plants.herbs.thyme.phases.harvest.soil.fertilizing.description',
             },
           },
           hydro: {
-            watering: { interval: 0, description: 'Continuous flow, moderate EC' },
+            watering: { 
+              interval: 0, 
+              description: 'plants.herbs.thyme.phases.harvest.hydro.watering.description' 
+            },
             fertilizing: {
               interval: 21,
-              description: 'Regular nutrients, EC 1.0-1.2',
+              description: 'plants.herbs.thyme.phases.harvest.hydro.fertilizing.description',
             },
           },
           coco: {
-            watering: { interval: 2, description: 'Water every 2 days in coco' },
+            watering: { 
+              interval: 2, 
+              description: 'plants.herbs.thyme.phases.harvest.coco.watering.description' 
+            },
             fertilizing: {
               interval: 21,
-              description: 'Regular feeding, EC 1.0-1.2',
+              description: 'plants.herbs.thyme.phases.harvest.coco.fertilizing.description',
             },
           },
         },
@@ -263,24 +312,24 @@ export const thyme = {
           plantingWindow: {
             start: '04-01',
             end: '06-15',
-            description: 'Spring to early summer planting',
+            description: 'plants.herbs.thyme.seasonalTiming.temperate_north.plantingWindow.description',
           },
           harvestWindow: {
             start: '06-01',
             end: '10-31',
-            description: 'Continuous harvest throughout growing season',
+            description: 'plants.herbs.thyme.seasonalTiming.temperate_north.harvestWindow.description',
           },
         },
         mediterranean: {
           plantingWindow: {
             start: '03-01',
             end: '07-01',
-            description: 'Early spring to early summer planting',
+            description: 'plants.herbs.thyme.seasonalTiming.mediterranean.plantingWindow.description',
           },
           harvestWindow: {
             start: '05-01',
             end: '11-30',
-            description: 'Extended harvest season',
+            description: 'plants.herbs.thyme.seasonalTiming.mediterranean.harvestWindow.description',
           },
         },
       },
@@ -289,121 +338,145 @@ export const thyme = {
       phases: {
         germination: {
           days: 14,
-          description: 'Seeds sprouting',
-          care: 'Keep warm and moist',
+          description: 'plants.herbs.thyme.phases.germination.description',
+          care: 'plants.herbs.thyme.phases.germination.care',
           editable: true,
           soil: {
             watering: {
               interval: 1,
-              description: 'Keep soil moist during germination',
+              description: 'plants.herbs.thyme.phases.germination.soil.watering.description',
             },
             fertilizing: {
               interval: 0,
-              description: 'No fertilizing during germination',
+              description: 'plants.herbs.thyme.phases.germination.soil.fertilizing.description',
             },
           },
           hydro: {
             watering: {
               interval: 0,
-              description: 'Continuous moisture in rockwool',
+              description: 'plants.herbs.thyme.phases.germination.hydro.watering.description',
             },
             fertilizing: {
               interval: 0,
-              description: 'No nutrients during germination',
+              description: 'plants.herbs.thyme.phases.germination.hydro.fertilizing.description',
             },
           },
           coco: {
             watering: {
               interval: 1,
-              description: 'Keep coco moist during germination',
+              description: 'plants.herbs.thyme.phases.germination.coco.watering.description',
             },
             fertilizing: {
               interval: 0,
-              description: 'No fertilizing during germination',
+              description: 'plants.herbs.thyme.phases.germination.coco.fertilizing.description',
             },
           },
         },
         seedling: {
           days: 21,
-          description: 'First true leaves',
-          care: 'Provide adequate light',
+          description: 'plants.herbs.thyme.phases.seedling.description',
+          care: 'plants.herbs.thyme.phases.seedling.care',
           editable: true,
           soil: {
             watering: {
               interval: 3,
-              description: 'Water when top inch of soil feels dry',
+              description: 'plants.herbs.thyme.phases.seedling.soil.watering.description',
             },
             fertilizing: {
               interval: 0,
-              description: 'No fertilizing during seedling stage',
+              description: 'plants.herbs.thyme.phases.seedling.soil.fertilizing.description',
             },
           },
           hydro: {
-            watering: { interval: 0, description: 'Continuous flow, low EC' },
+            watering: { 
+              interval: 0, 
+              description: 'plants.herbs.thyme.phases.seedling.hydro.watering.description' 
+            },
             fertilizing: {
               interval: 7,
-              description: 'Light nutrients, EC 0.5-0.8',
+              description: 'plants.herbs.thyme.phases.seedling.hydro.fertilizing.description',
             },
           },
           coco: {
-            watering: { interval: 1, description: 'Daily watering in coco' },
-            fertilizing: { interval: 7, description: 'Light feeding, EC 0.5-0.8' },
+            watering: { 
+              interval: 1, 
+              description: 'plants.herbs.thyme.phases.seedling.coco.watering.description' 
+            },
+            fertilizing: { 
+              interval: 7, 
+              description: 'plants.herbs.thyme.phases.seedling.coco.fertilizing.description' 
+            },
           },
         },
         vegetative: {
           days: 35,
-          description: 'Leaf growth',
-          care: 'Pinch tips for bushiness',
+          description: 'plants.herbs.thyme.phases.vegetative.description',
+          care: 'plants.herbs.thyme.phases.vegetative.care',
           editable: true,
           soil: {
             watering: {
               interval: 4,
-              description: 'Allow soil to dry between watering',
+              description: 'plants.herbs.thyme.phases.vegetative.soil.watering.description',
             },
             fertilizing: {
               interval: 21,
-              description: 'Light feeding with balanced fertilizer',
+              description: 'plants.herbs.thyme.phases.vegetative.soil.fertilizing.description',
             },
           },
           hydro: {
-            watering: { interval: 0, description: 'Continuous flow, moderate EC' },
+            watering: { 
+              interval: 0, 
+              description: 'plants.herbs.thyme.phases.vegetative.hydro.watering.description' 
+            },
             fertilizing: {
               interval: 21,
-              description: 'Balanced nutrients, EC 1.0-1.2',
+              description: 'plants.herbs.thyme.phases.vegetative.hydro.fertilizing.description',
             },
           },
           coco: {
-            watering: { interval: 2, description: 'Water every 2 days in coco' },
+            watering: { 
+              interval: 2, 
+              description: 'plants.herbs.thyme.phases.vegetative.coco.watering.description' 
+            },
             fertilizing: {
               interval: 21,
-              description: 'Balanced feeding, EC 1.0-1.2',
+              description: 'plants.herbs.thyme.phases.vegetative.coco.fertilizing.description',
             },
           },
         },
         harvest: {
           days: 75,
-          description: 'Continuous harvest',
-          care: 'Harvest sprigs regularly',
+          description: 'plants.herbs.thyme.phases.harvest.description',
+          care: 'plants.herbs.thyme.phases.harvest.care',
           editable: true,
           soil: {
-            watering: { interval: 4, description: 'Allow soil to dry between watering' },
+            watering: { 
+              interval: 4, 
+              description: 'plants.herbs.thyme.phases.harvest.soil.watering.description' 
+            },
             fertilizing: {
               interval: 21,
-              description: 'Regular feeding to support new growth',
+              description: 'plants.herbs.thyme.phases.harvest.soil.fertilizing.description',
             },
           },
           hydro: {
-            watering: { interval: 0, description: 'Continuous flow, moderate EC' },
+            watering: { 
+              interval: 0, 
+              description: 'plants.herbs.thyme.phases.harvest.hydro.watering.description' 
+            },
             fertilizing: {
               interval: 21,
-              description: 'Regular nutrients, EC 1.0-1.2',
+              description: 'plants.herbs.thyme.phases.harvest.hydro.fertilizing.description',
             },
           },
           coco: {
-            watering: { interval: 2, description: 'Water every 2 days in coco' },
+            watering: { 
+              interval: 2, 
+              description: 'plants.herbs.thyme.phases.harvest.coco.watering.description' 
+            },
             fertilizing: {
               interval: 21,
-              description: 'Regular feeding, EC 1.0-1.2',
+              description: 'plants.herbs.thyme.phases.harvest.coco.fertilizing.description',
             },
           },
         },
@@ -411,19 +484,15 @@ export const thyme = {
     },
   },
   careTips: {
-    watering: 'Allow soil to dry between watering',
-    fertilizing: 'Light feeding every 3-4 weeks',
-    sunlight: 'Full sun (6+ hours daily)',
-    spacing: '12-18 inches apart',
-    temperature: 'Warm weather herb, drought tolerant',
-    soilPH: '6.0-8.0',
-    harvesting: 'Harvest sprigs regularly to encourage growth',
+    watering: 'plants.herbs.thyme.careTips.watering',
+    fertilizing: 'plants.herbs.thyme.careTips.fertilizing',
+    sunlight: 'plants.herbs.thyme.careTips.sunlight',
+    spacing: 'plants.herbs.thyme.careTips.spacing',
+    temperature: 'plants.herbs.thyme.careTips.temperature',
+    soilPH: 'plants.herbs.thyme.careTips.soilPH',
+    harvesting: 'plants.herbs.thyme.careTips.harvesting',
   },
-  commonProblems: {
-    'Root Rot': 'Overwatering - ensure good drainage',
-    'Leggy Growth': 'Insufficient light - provide more sunlight',
-    'Winter Damage': 'Protect from frost in cold climates',
-  },
+  commonProblems: createProblemRefs(['rootRot', 'leggyGrowth', 'winterDamage'], 'herbs'),
 };
 
 export default thyme; 

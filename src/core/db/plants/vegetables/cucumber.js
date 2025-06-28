@@ -3,193 +3,193 @@
  * Growing information for Cucumber
  */
 
-
+import { PLANT_TAGS } from '../categories.js';
 
 export const cucumber = {
-  name: 'Cucumber',
+  name: 'cucumber.name',
   category: 'category.vegetables',
-  tags: ['tag.photoperiod', 'tag.annual'],
+  tags: [PLANT_TAGS.PHOTOPERIOD, PLANT_TAGS.ANNUAL],
   emoji: '🥒',
   environments: {
     indoor: {
       phases: {
         germination: {
           days: 7,
-          description: 'Seeds sprouting',
-          care: 'Keep warm (70-85°F/21-29°C) and moist',
+          description: 'cucumber.phases.germination.description',
+          care: 'cucumber.phases.germination.care',
           editable: true,
           soil: {
             watering: {
               interval: 1,
-              description: 'Keep soil moist during germination',
+              description: 'cucumber.phases.germination.soil.watering.description',
             },
             fertilizing: {
               interval: 0,
-              description: 'No fertilizing during germination',
+              description: 'cucumber.phases.germination.soil.fertilizing.description',
             },
           },
           hydro: {
             watering: {
               interval: 0,
-              description: 'Continuous moisture in rockwool or hydroponic system',
+              description: 'cucumber.phases.germination.hydro.watering.description',
             },
             fertilizing: {
               interval: 0,
-              description: 'No nutrients during germination',
+              description: 'cucumber.phases.germination.hydro.fertilizing.description',
             },
           },
           coco: {
             watering: {
               interval: 1,
-              description: 'Keep coco moist during germination',
+              description: 'cucumber.phases.germination.coco.watering.description',
             },
             fertilizing: {
               interval: 0,
-              description: 'No fertilizing during germination',
+              description: 'cucumber.phases.germination.coco.fertilizing.description',
             },
           },
         },
         seedling: {
           days: 14,
-          description: 'First true leaves',
-          care: 'Provide warmth and adequate light',
+          description: 'cucumber.phases.seedling.description',
+          care: 'cucumber.phases.seedling.care',
           editable: true,
           soil: {
             watering: {
               interval: 3,
-              description: 'Water every 3 days during seedling stage',
+              description: 'cucumber.phases.seedling.soil.watering.description',
             },
             fertilizing: {
               interval: 7,
-              description: 'Fertilize weekly during seedling stage',
+              description: 'cucumber.phases.seedling.soil.fertilizing.description',
             },
           },
           hydro: {
             watering: {
               interval: 0,
-              description: 'Continuous flow, low EC',
+              description: 'cucumber.phases.seedling.hydro.watering.description',
             },
             fertilizing: {
               interval: 7,
-              description: 'Light nutrients, EC 0.5-0.8',
+              description: 'cucumber.phases.seedling.hydro.fertilizing.description',
             },
           },
           coco: {
             watering: {
               interval: 1,
-              description: 'Daily watering in coco',
+              description: 'cucumber.phases.seedling.coco.watering.description',
             },
             fertilizing: {
               interval: 7,
-              description: 'Light feeding, EC 0.5-0.8',
+              description: 'cucumber.phases.seedling.coco.fertilizing.description',
             },
           },
         },
         vegetative: {
           days: 21,
-          description: 'Vine development',
-          care: 'Begin training on supports',
+          description: 'cucumber.phases.vegetative.description',
+          care: 'cucumber.phases.vegetative.care',
           editable: true,
           soil: {
             watering: {
               interval: 2,
-              description: 'Water every 2 days during vegetative growth',
+              description: 'cucumber.phases.vegetative.soil.watering.description',
             },
             fertilizing: {
               interval: 14,
-              description: 'Fertilize every 2 weeks during vegetative growth',
+              description: 'cucumber.phases.vegetative.soil.fertilizing.description',
             },
           },
           hydro: {
             watering: {
               interval: 0,
-              description: 'Continuous flow, moderate EC',
+              description: 'cucumber.phases.vegetative.hydro.watering.description',
             },
             fertilizing: {
               interval: 14,
-              description: 'Balanced nutrients, EC 1.0-1.2',
+              description: 'cucumber.phases.vegetative.hydro.fertilizing.description',
             },
           },
           coco: {
             watering: {
               interval: 1,
-              description: 'Daily watering in coco',
+              description: 'cucumber.phases.vegetative.coco.watering.description',
             },
             fertilizing: {
               interval: 14,
-              description: 'Balanced feeding, EC 1.0-1.2',
+              description: 'cucumber.phases.vegetative.coco.fertilizing.description',
             },
           },
         },
         flowering: {
           days: 14,
-          description: 'Male and female flowers',
-          care: 'Ensure good pollination',
+          description: 'cucumber.phases.flowering.description',
+          care: 'cucumber.phases.flowering.care',
           editable: true,
           soil: {
             watering: {
               interval: 3,
-              description: 'Water every 3 days during flowering',
+              description: 'cucumber.phases.flowering.soil.watering.description',
             },
             fertilizing: {
               interval: 7,
-              description: 'Fertilize weekly during flowering',
+              description: 'cucumber.phases.flowering.soil.fertilizing.description',
             },
           },
           hydro: {
             watering: {
               interval: 0,
-              description: 'Continuous flow, moderate EC',
+              description: 'cucumber.phases.flowering.hydro.watering.description',
             },
             fertilizing: {
               interval: 7,
-              description: 'Balanced nutrients, EC 1.0-1.2',
+              description: 'cucumber.phases.flowering.hydro.fertilizing.description',
             },
           },
           coco: {
             watering: {
               interval: 1,
-              description: 'Daily watering in coco',
+              description: 'cucumber.phases.flowering.coco.watering.description',
             },
             fertilizing: {
               interval: 7,
-              description: 'Balanced feeding, EC 1.0-1.2',
+              description: 'cucumber.phases.flowering.coco.fertilizing.description',
             },
           },
         },
         fruiting: {
           days: 50,
-          description: 'Fruit production',
-          care: 'Regular harvest to encourage production',
+          description: 'cucumber.phases.fruiting.description',
+          care: 'cucumber.phases.fruiting.care',
           editable: true,
           soil: {
             watering: {
               interval: 2,
-              description: 'Water every 2 days during fruiting',
+              description: 'cucumber.phases.fruiting.soil.watering.description',
             },
             fertilizing: {
               interval: 21,
-              description: 'Fertilize every 3 weeks during fruiting',
+              description: 'cucumber.phases.fruiting.soil.fertilizing.description',
             },
           },
           hydro: {
             watering: {
               interval: 0,
-              description: 'Continuous flow, moderate EC',
+              description: 'cucumber.phases.fruiting.hydro.watering.description',
             },
             fertilizing: {
               interval: 21,
-              description: 'Balanced nutrients, EC 1.0-1.2',
+              description: 'cucumber.phases.fruiting.hydro.fertilizing.description',
             },
           },
           coco: {
             watering: {
               interval: 1,
-              description: 'Daily watering in coco',
+              description: 'cucumber.phases.fruiting.coco.watering.description',
             },
             fertilizing: {
               interval: 21,
-              description: 'Balanced feeding, EC 1.0-1.2',
+              description: 'cucumber.phases.fruiting.coco.fertilizing.description',
             },
           },
         },
@@ -198,184 +198,33 @@ export const cucumber = {
     outdoor: {
       phases: {
         germination: {
-          days: 7,
-          description: 'Seeds sprouting',
-          care: 'Keep warm (70-85°F/21-29°C) and moist',
+          start: '05-01',
+          end: '06-15',
+          description: 'cucumber.phases.germination.description',
+          care: 'cucumber.phases.germination.care',
           editable: false,
-          soil: {
-            watering: {
-              interval: 1,
-              description: 'Keep soil moist during germination',
-            },
-            fertilizing: {
-              interval: 0,
-              description: 'No fertilizing during germination',
-            },
-          },
-          hydro: {
-            watering: {
-              interval: 0,
-              description: 'Continuous moisture in rockwool or hydroponic system',
-            },
-            fertilizing: {
-              interval: 0,
-              description: 'No nutrients during germination',
-            },
-          },
-          coco: {
-            watering: {
-              interval: 1,
-              description: 'Keep coco moist during germination',
-            },
-            fertilizing: {
-              interval: 0,
-              description: 'No fertilizing during germination',
-            },
-          },
         },
         seedling: {
-          days: 14,
-          description: 'First true leaves',
-          care: 'Provide warmth and adequate light',
+          description: 'cucumber.phases.seedling.description',
+          care: 'cucumber.phases.seedling.care',
           editable: false,
-          soil: {
-            watering: {
-              interval: 3,
-              description: 'Water every 3 days during seedling stage',
-            },
-            fertilizing: {
-              interval: 7,
-              description: 'Fertilize weekly during seedling stage',
-            },
-          },
-          hydro: {
-            watering: {
-              interval: 0,
-              description: 'Continuous flow, low EC',
-            },
-            fertilizing: {
-              interval: 7,
-              description: 'Light nutrients, EC 0.5-0.8',
-            },
-          },
-          coco: {
-            watering: {
-              interval: 1,
-              description: 'Daily watering in coco',
-            },
-            fertilizing: {
-              interval: 7,
-              description: 'Light feeding, EC 0.5-0.8',
-            },
-          },
         },
         vegetative: {
-          days: 21,
-          description: 'Vine development',
-          care: 'Begin training on supports',
+          description: 'cucumber.phases.vegetative.description',
+          care: 'cucumber.phases.vegetative.care',
           editable: false,
-          soil: {
-            watering: {
-              interval: 2,
-              description: 'Water every 2 days during vegetative growth',
-            },
-            fertilizing: {
-              interval: 14,
-              description: 'Fertilize every 2 weeks during vegetative growth',
-            },
-          },
-          hydro: {
-            watering: {
-              interval: 0,
-              description: 'Continuous flow, moderate EC',
-            },
-            fertilizing: {
-              interval: 14,
-              description: 'Balanced nutrients, EC 1.0-1.2',
-            },
-          },
-          coco: {
-            watering: {
-              interval: 1,
-              description: 'Daily watering in coco',
-            },
-            fertilizing: {
-              interval: 14,
-              description: 'Balanced feeding, EC 1.0-1.2',
-            },
-          },
         },
         flowering: {
-          days: 14,
-          description: 'Outdoor flowering',
-          care: 'Natural pollination, consistent watering',
+          description: 'cucumber.phases.flowering.description',
+          care: 'cucumber.phases.flowering.care',
           editable: true,
-          soil: {
-            watering: {
-              interval: 3,
-              description: 'Water every 3 days during flowering',
-            },
-            fertilizing: {
-              interval: 7,
-              description: 'Fertilize weekly during flowering',
-            },
-          },
-          hydro: {
-            watering: {
-              interval: 0,
-              description: 'Continuous flow, moderate EC',
-            },
-            fertilizing: {
-              interval: 7,
-              description: 'Balanced nutrients, EC 1.0-1.2',
-            },
-          },
-          coco: {
-            watering: {
-              interval: 1,
-              description: 'Daily watering in coco',
-            },
-            fertilizing: {
-              interval: 7,
-              description: 'Balanced feeding, EC 1.0-1.2',
-            },
-          },
         },
         fruiting: {
-          days: 42,
-          description: 'Outdoor fruit production',
-          care: 'Regular harvest, weather protection',
+          start: '07-01',
+          end: '09-30',
+          description: 'cucumber.phases.fruiting.description',
+          care: 'cucumber.phases.fruiting.care',
           editable: true,
-          soil: {
-            watering: {
-              interval: 2,
-              description: 'Water every 2 days during fruiting',
-            },
-            fertilizing: {
-              interval: 21,
-              description: 'Fertilize every 3 weeks during fruiting',
-            },
-          },
-          hydro: {
-            watering: {
-              interval: 0,
-              description: 'Continuous flow, moderate EC',
-            },
-            fertilizing: {
-              interval: 21,
-              description: 'Balanced nutrients, EC 1.0-1.2',
-            },
-          },
-          coco: {
-            watering: {
-              interval: 1,
-              description: 'Daily watering in coco',
-            },
-            fertilizing: {
-              interval: 21,
-              description: 'Balanced feeding, EC 1.0-1.2',
-            },
-          },
         },
       },
       seasonalTiming: {
@@ -383,24 +232,24 @@ export const cucumber = {
           plantingWindow: {
             start: '05-01',
             end: '06-15',
-            description: 'After last frost, soil warm',
+            description: 'cucumber.seasonalTiming.temperate_north.plantingWindow.description',
           },
           harvestWindow: {
             start: '07-01',
             end: '09-30',
-            description: 'Harvest until first frost',
+            description: 'cucumber.seasonalTiming.temperate_north.harvestWindow.description',
           },
         },
         mediterranean: {
           plantingWindow: {
             start: '03-15',
             end: '05-15',
-            description: 'Early spring to late spring',
+            description: 'cucumber.seasonalTiming.mediterranean.plantingWindow.description',
           },
           harvestWindow: {
             start: '06-01',
             end: '10-31',
-            description: 'Long harvest period',
+            description: 'cucumber.seasonalTiming.mediterranean.harvestWindow.description',
           },
         },
       },
@@ -409,200 +258,50 @@ export const cucumber = {
       phases: {
         germination: {
           days: 7,
-          description: 'Seeds sprouting',
-          care: 'Keep warm (70-85°F/21-29°C) and moist',
+          description: 'cucumber.phases.germination.description',
+          care: 'cucumber.phases.germination.care',
           editable: true,
-          soil: {
-            watering: {
-              interval: 1,
-              description: 'Keep soil moist during germination',
-            },
-            fertilizing: {
-              interval: 0,
-              description: 'No fertilizing during germination',
-            },
-          },
-          hydro: {
-            watering: {
-              interval: 0,
-              description: 'Continuous moisture in rockwool or hydroponic system',
-            },
-            fertilizing: {
-              interval: 0,
-              description: 'No nutrients during germination',
-            },
-          },
-          coco: {
-            watering: {
-              interval: 1,
-              description: 'Keep coco moist during germination',
-            },
-            fertilizing: {
-              interval: 0,
-              description: 'No fertilizing during germination',
-            },
-          },
         },
         seedling: {
           days: 14,
-          description: 'First true leaves',
-          care: 'Provide warmth and adequate light',
+          description: 'cucumber.phases.seedling.description',
+          care: 'cucumber.phases.seedling.care',
           editable: true,
-          soil: {
-            watering: {
-              interval: 3,
-              description: 'Water every 3 days during seedling stage',
-            },
-            fertilizing: {
-              interval: 7,
-              description: 'Fertilize weekly during seedling stage',
-            },
-          },
-          hydro: {
-            watering: {
-              interval: 0,
-              description: 'Continuous flow, low EC',
-            },
-            fertilizing: {
-              interval: 7,
-              description: 'Light nutrients, EC 0.5-0.8',
-            },
-          },
-          coco: {
-            watering: {
-              interval: 1,
-              description: 'Daily watering in coco',
-            },
-            fertilizing: {
-              interval: 7,
-              description: 'Light feeding, EC 0.5-0.8',
-            },
-          },
         },
         vegetative: {
           days: 21,
-          description: 'Vine development',
-          care: 'Begin training on supports',
+          description: 'cucumber.phases.vegetative.description',
+          care: 'cucumber.phases.vegetative.care',
           editable: true,
-          soil: {
-            watering: {
-              interval: 2,
-              description: 'Water every 2 days during vegetative growth',
-            },
-            fertilizing: {
-              interval: 14,
-              description: 'Fertilize every 2 weeks during vegetative growth',
-            },
-          },
-          hydro: {
-            watering: {
-              interval: 0,
-              description: 'Continuous flow, moderate EC',
-            },
-            fertilizing: {
-              interval: 14,
-              description: 'Balanced nutrients, EC 1.0-1.2',
-            },
-          },
-          coco: {
-            watering: {
-              interval: 1,
-              description: 'Daily watering in coco',
-            },
-            fertilizing: {
-              interval: 14,
-              description: 'Balanced feeding, EC 1.0-1.2',
-            },
-          },
         },
         flowering: {
           days: 14,
-          description: 'Male and female flowers',
-          care: 'Ensure good pollination',
+          description: 'cucumber.phases.flowering.description',
+          care: 'cucumber.phases.flowering.care',
           editable: true,
-          soil: {
-            watering: {
-              interval: 3,
-              description: 'Water every 3 days during flowering',
-            },
-            fertilizing: {
-              interval: 7,
-              description: 'Fertilize weekly during flowering',
-            },
-          },
-          hydro: {
-            watering: {
-              interval: 0,
-              description: 'Continuous flow, moderate EC',
-            },
-            fertilizing: {
-              interval: 7,
-              description: 'Balanced nutrients, EC 1.0-1.2',
-            },
-          },
-          coco: {
-            watering: {
-              interval: 1,
-              description: 'Daily watering in coco',
-            },
-            fertilizing: {
-              interval: 7,
-              description: 'Balanced feeding, EC 1.0-1.2',
-            },
-          },
         },
         fruiting: {
           days: 50,
-          description: 'Fruit production',
-          care: 'Regular harvest to encourage production',
+          description: 'cucumber.phases.fruiting.description',
+          care: 'cucumber.phases.fruiting.care',
           editable: true,
-          soil: {
-            watering: {
-              interval: 2,
-              description: 'Water every 2 days during fruiting',
-            },
-            fertilizing: {
-              interval: 21,
-              description: 'Fertilize every 3 weeks during fruiting',
-            },
-          },
-          hydro: {
-            watering: {
-              interval: 0,
-              description: 'Continuous flow, moderate EC',
-            },
-            fertilizing: {
-              interval: 21,
-              description: 'Balanced nutrients, EC 1.0-1.2',
-            },
-          },
-          coco: {
-            watering: {
-              interval: 1,
-              description: 'Daily watering in coco',
-            },
-            fertilizing: {
-              interval: 21,
-              description: 'Balanced feeding, EC 1.0-1.2',
-            },
-          },
         },
       },
     },
   },
   careTips: {
-    watering: 'Deep, consistent watering - avoid wetting leaves',
-    fertilizing: 'Balanced fertilizer, side-dress monthly',
-    sunlight: 'Full sun (6+ hours daily)',
-    spacing: '12-18 inches apart with support, 3 feet apart if sprawling',
-    temperature: formatTemperature('Warm season crop, 70-85°F optimal'),
-    soilPH: '6.0-6.8',
-    support: 'Trellises or cages for vertical growing',
+    watering: 'cucumber.careTips.watering',
+    fertilizing: 'cucumber.careTips.fertilizing',
+    sunlight: 'cucumber.careTips.sunlight',
+    spacing: 'cucumber.careTips.spacing',
+    temperature: 'cucumber.careTips.temperature',
+    soilPH: 'cucumber.careTips.soilPH',
+    support: 'cucumber.careTips.support',
   },
   commonProblems: {
-    'Powdery Mildew': 'White powder on leaves - improve air circulation',
-    'Cucumber Beetles': 'Yellow striped beetles - use row covers early season',
-    'Bitter Fruit': 'Stress from heat or irregular watering',
+    powderyMildew: 'cucumber.commonProblems.powderyMildew',
+    cucumberBeetles: 'cucumber.commonProblems.cucumberBeetles',
+    bitterFruit: 'cucumber.commonProblems.bitterFruit',
   },
 };
 

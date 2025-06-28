@@ -4,6 +4,7 @@
  */
 
 import { PLANT_TAGS } from '../categories.js';
+import { createProblemRefs } from '../problems.js';
 
 export const lavender = {
   name: 'lavender.name',
@@ -493,11 +494,7 @@ export const lavender = {
     soilPH: 'lavender.careTips.soilPH',
     pruning: 'lavender.careTips.pruning',
   },
-  commonProblems: {
-    'Root Rot': 'lavender.commonProblems.rootRot',
-    'Powdery Mildew': 'lavender.commonProblems.powderyMildew',
-    'Leggy Growth': 'lavender.commonProblems.leggyGrowth',
-  },
+  commonProblems: createProblemRefs(['rootRot', 'powderyMildew', 'leggyGrowth'], 'flowers'),
 };
 
 export default lavender; 

@@ -51,7 +51,7 @@ export default {
   'basil.careTips.temperature': 'Temperatura ottimale 21-27°C. Il basilico è sensibile al gelo.',
   'basil.careTips.soilPH': 'Preferisce terreno leggermente acido a neutro (pH 6,0-7,5).',
   'basil.careTips.harvesting': 'Raccogliere foglie regolarmente per promuovere cespugliosità. Rimuovere gemme floreali per sapore migliore.',
-  'basil.commonProblems.fusariumWilt': 'Foglie gialle e appassimento - rimuovere piante colpite, migliorare drenaggio.',
-  'basil.commonProblems.aphids': 'Piccoli insetti verdi sulle foglie - risciacquare con acqua o usare sapone insetticida.',
-  'basil.commonProblems.bolting': 'Fioritura precoce per clima caldo - rimuovere fiori, fornire ombra.',
+  "basil.commonProblems.fusariumWilt": "Fusarium Wilt: Foglie gialle e appassimento - rimuovere piante colpite, migliorare drenaggio.",
+  "basil.commonProblems.aphids": "Afidi: Piccoli insetti verdi sulle foglie - risciacquare con acqua o usare sapone insetticida.",
+  "basil.commonProblems.bolting": "Montata a seme: Fioritura precoce per clima caldo - rimuovere fiori, fornire ombra.",
 };

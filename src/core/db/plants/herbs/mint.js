@@ -4,6 +4,7 @@
  */
 
 import { PLANT_TAGS } from '../categories.js';
+import { createProblemRefs } from '../problems.js';
 
 export const mint = {
   name: 'Mint',
@@ -15,121 +16,121 @@ export const mint = {
       phases: {
         germination: {
           days: 10,
-          description: 'Seeds sprouting',
-          care: 'Keep warm and moist',
+          description: 'plant.mint.indoor.germination.description',
+          care: 'plant.mint.indoor.germination.care',
           editable: true,
           soil: {
             watering: {
               interval: 1,
-              description: 'Keep soil moist during germination',
+              description: 'plant.mint.indoor.germination.soil.watering',
             },
             fertilizing: {
               interval: 0,
-              description: 'No fertilizing during germination',
+              description: 'plant.mint.indoor.germination.soil.fertilizing',
             },
           },
           hydro: {
             watering: {
               interval: 0,
-              description: 'Continuous moisture in rockwool',
+              description: 'plant.mint.indoor.germination.hydro.watering',
             },
             fertilizing: {
               interval: 0,
-              description: 'No nutrients during germination',
+              description: 'plant.mint.indoor.germination.hydro.fertilizing',
             },
           },
           coco: {
             watering: {
               interval: 1,
-              description: 'Keep coco moist during germination',
+              description: 'plant.mint.indoor.germination.coco.watering',
             },
             fertilizing: {
               interval: 0,
-              description: 'No fertilizing during germination',
+              description: 'plant.mint.indoor.germination.coco.fertilizing',
             },
           },
         },
         seedling: {
           days: 21,
-          description: 'First true leaves',
-          care: 'Provide adequate light',
+          description: 'plant.mint.indoor.seedling.description',
+          care: 'plant.mint.indoor.seedling.care',
           editable: true,
           soil: {
             watering: {
               interval: 2,
-              description: 'Water when top inch of soil feels dry',
+              description: 'plant.mint.indoor.seedling.soil.watering',
             },
             fertilizing: {
               interval: 0,
-              description: 'No fertilizing during seedling stage',
+              description: 'plant.mint.indoor.seedling.soil.fertilizing',
             },
           },
           hydro: {
-            watering: { interval: 0, description: 'Continuous flow, low EC' },
+            watering: { interval: 0, description: 'plant.mint.indoor.seedling.hydro.watering' },
             fertilizing: {
               interval: 7,
-              description: 'Light nutrients, EC 0.5-0.8',
+              description: 'plant.mint.indoor.seedling.hydro.fertilizing',
             },
           },
           coco: {
-            watering: { interval: 1, description: 'Daily watering in coco' },
-            fertilizing: { interval: 7, description: 'Light feeding, EC 0.5-0.8' },
+            watering: { interval: 1, description: 'plant.mint.indoor.seedling.coco.watering' },
+            fertilizing: { interval: 7, description: 'plant.mint.indoor.seedling.coco.fertilizing' },
           },
         },
         vegetative: {
           days: 30,
-          description: 'Leaf growth',
-          care: 'Pinch tips for bushiness',
+          description: 'plant.mint.indoor.vegetative.description',
+          care: 'plant.mint.indoor.vegetative.care',
           editable: true,
           soil: {
             watering: {
               interval: 2,
-              description: 'Keep soil moist but not waterlogged',
+              description: 'plant.mint.indoor.vegetative.soil.watering',
             },
             fertilizing: {
               interval: 14,
-              description: 'Light feeding with balanced fertilizer',
+              description: 'plant.mint.indoor.vegetative.soil.fertilizing',
             },
           },
           hydro: {
-            watering: { interval: 0, description: 'Continuous flow, moderate EC' },
+            watering: { interval: 0, description: 'plant.mint.indoor.vegetative.hydro.watering' },
             fertilizing: {
               interval: 14,
-              description: 'Balanced nutrients, EC 1.0-1.2',
+              description: 'plant.mint.indoor.vegetative.hydro.fertilizing',
             },
           },
           coco: {
-            watering: { interval: 1, description: 'Daily watering in coco' },
+            watering: { interval: 1, description: 'plant.mint.indoor.vegetative.coco.watering' },
             fertilizing: {
               interval: 14,
-              description: 'Balanced feeding, EC 1.0-1.2',
+              description: 'plant.mint.indoor.vegetative.coco.fertilizing',
             },
           },
         },
         harvest: {
           days: 60,
-          description: 'Continuous harvest',
-          care: 'Harvest leaves regularly, prevent flowering',
+          description: 'plant.mint.indoor.harvest.description',
+          care: 'plant.mint.indoor.harvest.care',
           editable: true,
           soil: {
-            watering: { interval: 2, description: 'Keep soil consistently moist' },
+            watering: { interval: 2, description: 'plant.mint.indoor.harvest.soil.watering' },
             fertilizing: {
               interval: 14,
-              description: 'Regular feeding to support new growth',
+              description: 'plant.mint.indoor.harvest.soil.fertilizing',
             },
           },
           hydro: {
-            watering: { interval: 0, description: 'Continuous flow, moderate EC' },
+            watering: { interval: 0, description: 'plant.mint.indoor.harvest.hydro.watering' },
             fertilizing: {
               interval: 14,
-              description: 'Regular nutrients, EC 1.0-1.2',
+              description: 'plant.mint.indoor.harvest.hydro.fertilizing',
             },
           },
           coco: {
-            watering: { interval: 1, description: 'Daily watering in coco' },
+            watering: { interval: 1, description: 'plant.mint.indoor.harvest.coco.watering' },
             fertilizing: {
               interval: 14,
-              description: 'Regular feeding, EC 1.0-1.2',
+              description: 'plant.mint.indoor.harvest.coco.fertilizing',
             },
           },
         },
@@ -139,121 +140,121 @@ export const mint = {
       phases: {
         germination: {
           days: 10,
-          description: 'Seeds sprouting',
-          care: 'Keep warm and moist',
+          description: 'plant.mint.outdoor.germination.description',
+          care: 'plant.mint.outdoor.germination.care',
           editable: false,
           soil: {
             watering: {
               interval: 1,
-              description: 'Keep soil moist during germination',
+              description: 'plant.mint.outdoor.germination.soil.watering',
             },
             fertilizing: {
               interval: 0,
-              description: 'No fertilizing during germination',
+              description: 'plant.mint.outdoor.germination.soil.fertilizing',
             },
           },
           hydro: {
             watering: {
               interval: 0,
-              description: 'Continuous moisture in rockwool',
+              description: 'plant.mint.outdoor.germination.hydro.watering',
             },
             fertilizing: {
               interval: 0,
-              description: 'No nutrients during germination',
+              description: 'plant.mint.outdoor.germination.hydro.fertilizing',
             },
           },
           coco: {
             watering: {
               interval: 1,
-              description: 'Keep coco moist during germination',
+              description: 'plant.mint.outdoor.germination.coco.watering',
             },
             fertilizing: {
               interval: 0,
-              description: 'No fertilizing during germination',
+              description: 'plant.mint.outdoor.germination.coco.fertilizing',
             },
           },
         },
         seedling: {
           days: 21,
-          description: 'First true leaves',
-          care: 'Provide adequate light',
+          description: 'plant.mint.outdoor.seedling.description',
+          care: 'plant.mint.outdoor.seedling.care',
           editable: false,
           soil: {
             watering: {
               interval: 2,
-              description: 'Water when top inch of soil feels dry',
+              description: 'plant.mint.outdoor.seedling.soil.watering',
             },
             fertilizing: {
               interval: 0,
-              description: 'No fertilizing during seedling stage',
+              description: 'plant.mint.outdoor.seedling.soil.fertilizing',
             },
           },
           hydro: {
-            watering: { interval: 0, description: 'Continuous flow, low EC' },
+            watering: { interval: 0, description: 'plant.mint.outdoor.seedling.hydro.watering' },
             fertilizing: {
               interval: 7,
-              description: 'Light nutrients, EC 0.5-0.8',
+              description: 'plant.mint.outdoor.seedling.hydro.fertilizing',
             },
           },
           coco: {
-            watering: { interval: 1, description: 'Daily watering in coco' },
-            fertilizing: { interval: 7, description: 'Light feeding, EC 0.5-0.8' },
+            watering: { interval: 1, description: 'plant.mint.outdoor.seedling.coco.watering' },
+            fertilizing: { interval: 7, description: 'plant.mint.outdoor.seedling.coco.fertilizing' },
           },
         },
         vegetative: {
           days: 30,
-          description: 'Leaf growth',
-          care: 'Pinch tips for bushiness',
+          description: 'plant.mint.outdoor.vegetative.description',
+          care: 'plant.mint.outdoor.vegetative.care',
           editable: false,
           soil: {
             watering: {
               interval: 2,
-              description: 'Keep soil moist but not waterlogged',
+              description: 'plant.mint.outdoor.vegetative.soil.watering',
             },
             fertilizing: {
               interval: 14,
-              description: 'Light feeding with balanced fertilizer',
+              description: 'plant.mint.outdoor.vegetative.soil.fertilizing',
             },
           },
           hydro: {
-            watering: { interval: 0, description: 'Continuous flow, moderate EC' },
+            watering: { interval: 0, description: 'plant.mint.outdoor.vegetative.hydro.watering' },
             fertilizing: {
               interval: 14,
-              description: 'Balanced nutrients, EC 1.0-1.2',
+              description: 'plant.mint.outdoor.vegetative.hydro.fertilizing',
             },
           },
           coco: {
-            watering: { interval: 1, description: 'Daily watering in coco' },
+            watering: { interval: 1, description: 'plant.mint.outdoor.vegetative.coco.watering' },
             fertilizing: {
               interval: 14,
-              description: 'Balanced feeding, EC 1.0-1.2',
+              description: 'plant.mint.outdoor.vegetative.coco.fertilizing',
             },
           },
         },
         harvest: {
           days: 60,
-          description: 'Continuous harvest',
-          care: 'Harvest leaves regularly, prevent flowering',
+          description: 'plant.mint.outdoor.harvest.description',
+          care: 'plant.mint.outdoor.harvest.care',
           editable: true,
           soil: {
-            watering: { interval: 2, description: 'Keep soil consistently moist' },
+            watering: { interval: 2, description: 'plant.mint.outdoor.harvest.soil.watering' },
             fertilizing: {
               interval: 14,
-              description: 'Regular feeding to support new growth',
+              description: 'plant.mint.outdoor.harvest.soil.fertilizing',
             },
           },
           hydro: {
-            watering: { interval: 0, description: 'Continuous flow, moderate EC' },
+            watering: { interval: 0, description: 'plant.mint.outdoor.harvest.hydro.watering' },
             fertilizing: {
               interval: 14,
-              description: 'Regular nutrients, EC 1.0-1.2',
+              description: 'plant.mint.outdoor.harvest.hydro.fertilizing',
             },
           },
           coco: {
-            watering: { interval: 1, description: 'Daily watering in coco' },
+            watering: { interval: 1, description: 'plant.mint.outdoor.harvest.coco.watering' },
             fertilizing: {
               interval: 14,
-              description: 'Regular feeding, EC 1.0-1.2',
+              description: 'plant.mint.outdoor.harvest.coco.fertilizing',
             },
           },
         },
@@ -263,24 +264,24 @@ export const mint = {
           plantingWindow: {
             start: '04-01',
             end: '06-15',
-            description: 'Spring to early summer planting',
+            description: 'plant.mint.outdoor.seasonalTiming.temperate_north.plantingWindow.description',
           },
           harvestWindow: {
             start: '06-01',
             end: '10-31',
-            description: 'Continuous harvest throughout growing season',
+            description: 'plant.mint.outdoor.seasonalTiming.temperate_north.harvestWindow.description',
           },
         },
         mediterranean: {
           plantingWindow: {
             start: '03-01',
             end: '07-01',
-            description: 'Early spring to early summer planting',
+            description: 'plant.mint.outdoor.seasonalTiming.mediterranean.plantingWindow.description',
           },
           harvestWindow: {
             start: '05-01',
             end: '11-30',
-            description: 'Extended harvest season',
+            description: 'plant.mint.outdoor.seasonalTiming.mediterranean.harvestWindow.description',
           },
         },
       },
@@ -289,121 +290,121 @@ export const mint = {
       phases: {
         germination: {
           days: 10,
-          description: 'Seeds sprouting',
-          care: 'Keep warm and moist',
+          description: 'plant.mint.greenhouse.germination.description',
+          care: 'plant.mint.greenhouse.germination.care',
           editable: true,
           soil: {
             watering: {
               interval: 1,
-              description: 'Keep soil moist during germination',
+              description: 'plant.mint.greenhouse.germination.soil.watering',
             },
             fertilizing: {
               interval: 0,
-              description: 'No fertilizing during germination',
+              description: 'plant.mint.greenhouse.germination.soil.fertilizing',
             },
           },
           hydro: {
             watering: {
               interval: 0,
-              description: 'Continuous moisture in rockwool',
+              description: 'plant.mint.greenhouse.germination.hydro.watering',
             },
             fertilizing: {
               interval: 0,
-              description: 'No nutrients during germination',
+              description: 'plant.mint.greenhouse.germination.hydro.fertilizing',
             },
           },
           coco: {
             watering: {
               interval: 1,
-              description: 'Keep coco moist during germination',
+              description: 'plant.mint.greenhouse.germination.coco.watering',
             },
             fertilizing: {
               interval: 0,
-              description: 'No fertilizing during germination',
+              description: 'plant.mint.greenhouse.germination.coco.fertilizing',
             },
           },
         },
         seedling: {
           days: 21,
-          description: 'First true leaves',
-          care: 'Provide adequate light',
+          description: 'plant.mint.greenhouse.seedling.description',
+          care: 'plant.mint.greenhouse.seedling.care',
           editable: true,
           soil: {
             watering: {
               interval: 2,
-              description: 'Water when top inch of soil feels dry',
+              description: 'plant.mint.greenhouse.seedling.soil.watering',
             },
             fertilizing: {
               interval: 0,
-              description: 'No fertilizing during seedling stage',
+              description: 'plant.mint.greenhouse.seedling.soil.fertilizing',
             },
           },
           hydro: {
-            watering: { interval: 0, description: 'Continuous flow, low EC' },
+            watering: { interval: 0, description: 'plant.mint.greenhouse.seedling.hydro.watering' },
             fertilizing: {
               interval: 7,
-              description: 'Light nutrients, EC 0.5-0.8',
+              description: 'plant.mint.greenhouse.seedling.hydro.fertilizing',
             },
           },
           coco: {
-            watering: { interval: 1, description: 'Daily watering in coco' },
-            fertilizing: { interval: 7, description: 'Light feeding, EC 0.5-0.8' },
+            watering: { interval: 1, description: 'plant.mint.greenhouse.seedling.coco.watering' },
+            fertilizing: { interval: 7, description: 'plant.mint.greenhouse.seedling.coco.fertilizing' },
           },
         },
         vegetative: {
           days: 30,
-          description: 'Leaf growth',
-          care: 'Pinch tips for bushiness',
+          description: 'plant.mint.greenhouse.vegetative.description',
+          care: 'plant.mint.greenhouse.vegetative.care',
           editable: true,
           soil: {
             watering: {
               interval: 2,
-              description: 'Keep soil moist but not waterlogged',
+              description: 'plant.mint.greenhouse.vegetative.soil.watering',
             },
             fertilizing: {
               interval: 14,
-              description: 'Light feeding with balanced fertilizer',
+              description: 'plant.mint.greenhouse.vegetative.soil.fertilizing',
             },
           },
           hydro: {
-            watering: { interval: 0, description: 'Continuous flow, moderate EC' },
+            watering: { interval: 0, description: 'plant.mint.greenhouse.vegetative.hydro.watering' },
             fertilizing: {
               interval: 14,
-              description: 'Balanced nutrients, EC 1.0-1.2',
+              description: 'plant.mint.greenhouse.vegetative.hydro.fertilizing',
             },
           },
           coco: {
-            watering: { interval: 1, description: 'Daily watering in coco' },
+            watering: { interval: 1, description: 'plant.mint.greenhouse.vegetative.coco.watering' },
             fertilizing: {
               interval: 14,
-              description: 'Balanced feeding, EC 1.0-1.2',
+              description: 'plant.mint.greenhouse.vegetative.coco.fertilizing',
             },
           },
         },
         harvest: {
           days: 60,
-          description: 'Continuous harvest',
-          care: 'Harvest leaves regularly, prevent flowering',
+          description: 'plant.mint.greenhouse.harvest.description',
+          care: 'plant.mint.greenhouse.harvest.care',
           editable: true,
           soil: {
-            watering: { interval: 2, description: 'Keep soil consistently moist' },
+            watering: { interval: 2, description: 'plant.mint.greenhouse.harvest.soil.watering' },
             fertilizing: {
               interval: 14,
-              description: 'Regular feeding to support new growth',
+              description: 'plant.mint.greenhouse.harvest.soil.fertilizing',
             },
           },
           hydro: {
-            watering: { interval: 0, description: 'Continuous flow, moderate EC' },
+            watering: { interval: 0, description: 'plant.mint.greenhouse.harvest.hydro.watering' },
             fertilizing: {
               interval: 14,
-              description: 'Regular nutrients, EC 1.0-1.2',
+              description: 'plant.mint.greenhouse.harvest.hydro.fertilizing',
             },
           },
           coco: {
-            watering: { interval: 1, description: 'Daily watering in coco' },
+            watering: { interval: 1, description: 'plant.mint.greenhouse.harvest.coco.watering' },
             fertilizing: {
               interval: 14,
-              description: 'Regular feeding, EC 1.0-1.2',
+              description: 'plant.mint.greenhouse.harvest.coco.fertilizing',
             },
           },
         },
@@ -411,19 +412,15 @@ export const mint = {
     },
   },
   careTips: {
-    watering: 'Keep soil consistently moist',
-    fertilizing: 'Light feeding every 2-3 weeks',
-    sunlight: 'Partial shade to full sun',
-    spacing: '12-18 inches apart',
-    temperature: 'Cool to warm weather herb',
-    soilPH: '6.0-7.0',
-    harvesting: 'Pinch leaves regularly to encourage growth',
+    watering: 'plant.mint.careTips.watering',
+    fertilizing: 'plant.mint.careTips.fertilizing',
+    sunlight: 'plant.mint.careTips.sunlight',
+    spacing: 'plant.mint.careTips.spacing',
+    temperature: 'plant.mint.careTips.temperature',
+    soilPH: 'plant.mint.careTips.soilPH',
+    harvesting: 'plant.mint.careTips.harvesting',
   },
-  commonProblems: {
-    'Rust Disease': 'Orange spots on leaves - improve airflow and reduce humidity',
-    'Root Rot': 'Overwatering - ensure good drainage',
-    'Invasive Growth': 'Plant in containers to prevent spreading',
-  },
+  commonProblems: createProblemRefs(['rustDisease', 'rootRot', 'invasiveGrowth'], 'herbs'),
 };
 
 export default mint; 

@@ -6,7 +6,7 @@
 import { PLANT_TAGS } from '../categories.js';
 
 export const kale = {
-  name: 'Kale',
+  name: 'kale.name',
   category: 'category.vegetables',
   emoji: '🥬',
   tags: [PLANT_TAGS.LEAFY, PLANT_TAGS.ANNUAL, PLANT_TAGS.PHOTOPERIOD],
@@ -15,181 +15,181 @@ export const kale = {
       phases: {
         germination: {
           days: 7,
-          description: 'Seeds sprouting',
-          care: 'Keep cool and moist',
+          description: 'kale.phases.germination.description',
+          care: 'kale.phases.germination.care',
           editable: true,
           soil: {
             watering: {
               interval: 1,
-              description: 'Keep soil moist during germination',
+              description: 'kale.phases.germination.soil.watering.description',
             },
             fertilizing: {
               interval: 0,
-              description: 'No fertilizing during germination',
+              description: 'kale.phases.germination.soil.fertilizing.description',
             },
           },
           hydro: {
             watering: {
               interval: 0,
-              description: 'Continuous moisture in rockwool or hydroponic system',
+              description: 'kale.phases.germination.hydro.watering.description',
             },
             fertilizing: {
               interval: 0,
-              description: 'No nutrients during germination',
+              description: 'kale.phases.germination.hydro.fertilizing.description',
             },
           },
           coco: {
             watering: {
               interval: 1,
-              description: 'Keep coco moist during germination',
+              description: 'kale.phases.germination.coco.watering.description',
             },
             fertilizing: {
               interval: 0,
-              description: 'No fertilizing during germination',
+              description: 'kale.phases.germination.coco.fertilizing.description',
             },
           },
         },
         seedling: {
           days: 14,
-          description: 'Young plant development',
-          care: 'Provide adequate light',
+          description: 'kale.phases.seedling.description',
+          care: 'kale.phases.seedling.care',
           editable: true,
           soil: {
             watering: {
               interval: 2,
-              description: 'Water when top inch of soil is dry',
+              description: 'kale.phases.seedling.soil.watering.description',
             },
             fertilizing: {
               interval: 0,
-              description: 'No fertilizing during seedling stage',
+              description: 'kale.phases.seedling.soil.fertilizing.description',
             },
           },
           hydro: {
             watering: {
               interval: 0,
-              description: 'Continuous flow, low EC',
+              description: 'kale.phases.seedling.hydro.watering.description',
             },
             fertilizing: {
               interval: 7,
-              description: 'Light nutrients, EC 0.5-0.8',
+              description: 'kale.phases.seedling.hydro.fertilizing.description',
             },
           },
           coco: {
             watering: {
               interval: 1,
-              description: 'Daily watering in coco',
+              description: 'kale.phases.seedling.coco.watering.description',
             },
             fertilizing: {
               interval: 7,
-              description: 'Light feeding, EC 0.5-0.8',
+              description: 'kale.phases.seedling.coco.fertilizing.description',
             },
           },
         },
         vegetative: {
           days: 21,
-          description: 'Leaf production',
-          care: 'Regular feeding for leaf growth',
+          description: 'kale.phases.vegetative.description',
+          care: 'kale.phases.vegetative.care',
           editable: true,
           soil: {
             watering: {
               interval: 3,
-              description: 'Deep watering every 3 days',
+              description: 'kale.phases.vegetative.soil.watering.description',
             },
             fertilizing: {
               interval: 14,
-              description: 'Fertilize every 2 weeks during vegetative growth',
+              description: 'kale.phases.vegetative.soil.fertilizing.description',
             },
           },
           hydro: {
             watering: {
               interval: 0,
-              description: 'Continuous flow, moderate EC',
+              description: 'kale.phases.vegetative.hydro.watering.description',
             },
             fertilizing: {
               interval: 14,
-              description: 'Balanced nutrients, EC 1.0-1.2',
+              description: 'kale.phases.vegetative.hydro.fertilizing.description',
             },
           },
           coco: {
             watering: {
               interval: 1,
-              description: 'Daily watering in coco',
+              description: 'kale.phases.vegetative.coco.watering.description',
             },
             fertilizing: {
               interval: 14,
-              description: 'Balanced feeding, EC 1.0-1.2',
+              description: 'kale.phases.vegetative.coco.fertilizing.description',
             },
           },
         },
         leaf_development: {
           days: 14,
-          description: 'Leaf maturation',
-          care: 'Leaves developing full size and flavor',
+          description: 'kale.phases.leaf_development.description',
+          care: 'kale.phases.leaf_development.care',
           editable: true,
           soil: {
             watering: {
               interval: 3,
-              description: 'Deep watering every 3 days',
+              description: 'kale.phases.leaf_development.soil.watering.description',
             },
             fertilizing: {
               interval: 14,
-              description: 'Fertilize every 2 weeks during leaf development',
+              description: 'kale.phases.leaf_development.soil.fertilizing.description',
             },
           },
           hydro: {
             watering: {
               interval: 0,
-              description: 'Continuous flow, moderate EC',
+              description: 'kale.phases.leaf_development.hydro.watering.description',
             },
             fertilizing: {
               interval: 14,
-              description: 'Balanced nutrients, EC 1.0-1.2',
+              description: 'kale.phases.leaf_development.hydro.fertilizing.description',
             },
           },
           coco: {
             watering: {
               interval: 1,
-              description: 'Daily watering in coco',
+              description: 'kale.phases.leaf_development.coco.watering.description',
             },
             fertilizing: {
               interval: 14,
-              description: 'Balanced feeding, EC 1.0-1.2',
+              description: 'kale.phases.leaf_development.coco.fertilizing.description',
             },
           },
         },
         harvest: {
           days: 30,
-          description: 'Continuous harvest',
-          care: 'Harvest outer leaves, leave center to grow',
+          description: 'kale.phases.harvest.description',
+          care: 'kale.phases.harvest.care',
           editable: true,
           soil: {
             watering: {
               interval: 7,
-              description: 'Weekly watering during harvest',
+              description: 'kale.phases.harvest.soil.watering.description',
             },
             fertilizing: {
               interval: 21,
-              description: 'Fertilize every 3 weeks during harvest',
+              description: 'kale.phases.harvest.soil.fertilizing.description',
             },
           },
           hydro: {
             watering: {
               interval: 0,
-              description: 'Continuous flow, moderate EC',
+              description: 'kale.phases.harvest.hydro.watering.description',
             },
             fertilizing: {
               interval: 21,
-              description: 'Balanced nutrients, EC 1.0-1.2',
+              description: 'kale.phases.harvest.hydro.fertilizing.description',
             },
           },
           coco: {
             watering: {
               interval: 1,
-              description: 'Daily watering in coco',
+              description: 'kale.phases.harvest.coco.watering.description',
             },
             fertilizing: {
               interval: 21,
-              description: 'Balanced feeding, EC 1.0-1.2',
+              description: 'kale.phases.harvest.coco.fertilizing.description',
             },
           },
         },
@@ -198,183 +198,58 @@ export const kale = {
     outdoor: {
       phases: {
         germination: {
-          days: 7,
-          description: 'Seeds sprouting',
-          care: 'Keep cool and moist',
+          start: '03-15',
+          end: '05-15',
+          description: 'kale.phases.germination.description',
+          care: 'kale.phases.germination.care',
           editable: false,
-          soil: {
-            watering: {
-              interval: 1,
-              description: 'Keep soil moist during germination',
-            },
-            fertilizing: {
-              interval: 0,
-              description: 'No fertilizing during germination',
-            },
-          },
-          hydro: {
-            watering: {
-              interval: 0,
-              description: 'Continuous moisture in rockwool or hydroponic system',
-            },
-            fertilizing: {
-              interval: 0,
-              description: 'No nutrients during germination',
-            },
-          },
-          coco: {
-            watering: {
-              interval: 1,
-              description: 'Keep coco moist during germination',
-            },
-            fertilizing: {
-              interval: 0,
-              description: 'No fertilizing during germination',
-            },
-          },
         },
         seedling: {
-          days: 14,
-          description: 'Young plant development',
-          care: 'Provide adequate light',
+          description: 'kale.phases.seedling.description',
+          care: 'kale.phases.seedling.care',
           editable: false,
-          soil: {
-            watering: {
-              interval: 2,
-              description: 'Water when top inch of soil is dry',
-            },
-            fertilizing: {
-              interval: 0,
-              description: 'No fertilizing during seedling stage',
-            },
-          },
-          hydro: {
-            watering: {
-              interval: 0,
-              description: 'Continuous flow, low EC',
-            },
-            fertilizing: {
-              interval: 7,
-              description: 'Light nutrients, EC 0.5-0.8',
-            },
-          },
-          coco: {
-            watering: {
-              interval: 1,
-              description: 'Daily watering in coco',
-            },
-            fertilizing: {
-              interval: 7,
-              description: 'Light feeding, EC 0.5-0.8',
-            },
-          },
         },
         vegetative: {
-          days: 21,
-          description: 'Leaf production',
-          care: 'Regular feeding for leaf growth',
+          description: 'kale.phases.vegetative.description',
+          care: 'kale.phases.vegetative.care',
           editable: false,
-          soil: {
-            watering: {
-              interval: 3,
-              description: 'Deep watering every 3 days',
-            },
-            fertilizing: {
-              interval: 14,
-              description: 'Fertilize every 2 weeks during vegetative growth',
-            },
-          },
-          hydro: {
-            watering: {
-              interval: 0,
-              description: 'Continuous flow, moderate EC',
-            },
-            fertilizing: {
-              interval: 14,
-              description: 'Balanced nutrients, EC 1.0-1.2',
-            },
-          },
-          coco: {
-            watering: {
-              interval: 1,
-              description: 'Daily watering in coco',
-            },
-            fertilizing: {
-              interval: 14,
-              description: 'Balanced feeding, EC 1.0-1.2',
-            },
-          },
         },
         leaf_development: {
-          days: 14,
-          description: 'Leaf maturation',
-          care: 'Leaves developing full size and flavor',
+          description: 'kale.phases.leaf_development.description',
+          care: 'kale.phases.leaf_development.care',
           editable: false,
-          soil: {
-            watering: {
-              interval: 3,
-              description: 'Deep watering every 3 days',
-            },
-            fertilizing: {
-              interval: 14,
-              description: 'Fertilize every 2 weeks during leaf development',
-            },
-          },
-          hydro: {
-            watering: {
-              interval: 0,
-              description: 'Continuous flow, moderate EC',
-            },
-            fertilizing: {
-              interval: 14,
-              description: 'Balanced nutrients, EC 1.0-1.2',
-            },
-          },
-          coco: {
-            watering: {
-              interval: 1,
-              description: 'Daily watering in coco',
-            },
-            fertilizing: {
-              interval: 14,
-              description: 'Balanced feeding, EC 1.0-1.2',
-            },
-          },
         },
         harvest: {
-          days: 30,
-          description: 'Leaf maturation',
-          care: 'Harvest outer leaves, allow center to continue growing',
+          start: '06-01',
+          end: '11-30',
+          description: 'kale.phases.harvest.description',
+          care: 'kale.phases.harvest.care',
           editable: true,
-          soil: {
-            watering: {
-              interval: 7,
-              description: 'Weekly watering during harvest',
-            },
-            fertilizing: {
-              interval: 21,
-              description: 'Fertilize every 3 weeks during harvest',
-            },
+        },
+      },
+      seasonalTiming: {
+        temperate_north: {
+          plantingWindow: {
+            start: '03-15',
+            end: '05-15',
+            description: 'kale.seasonalTiming.temperate_north.plantingWindow.description',
           },
-          hydro: {
-            watering: {
-              interval: 0,
-              description: 'Continuous flow, moderate EC',
-            },
-            fertilizing: {
-              interval: 21,
-              description: 'Balanced nutrients, EC 1.0-1.2',
-            },
+          harvestWindow: {
+            start: '06-01',
+            end: '11-30',
+            description: 'kale.seasonalTiming.temperate_north.harvestWindow.description',
           },
-          coco: {
-            watering: {
-              interval: 1,
-              description: 'Daily watering in coco',
-            },
-            fertilizing: {
-              interval: 21,
-              description: 'Balanced feeding, EC 1.0-1.2',
-            },
+        },
+        mediterranean: {
+          plantingWindow: {
+            start: '09-01',
+            end: '11-01',
+            description: 'kale.seasonalTiming.mediterranean.plantingWindow.description',
+          },
+          harvestWindow: {
+            start: '11-01',
+            end: '04-30',
+            description: 'kale.seasonalTiming.mediterranean.harvestWindow.description',
           },
         },
       },
@@ -383,200 +258,50 @@ export const kale = {
       phases: {
         germination: {
           days: 7,
-          description: 'Seeds sprouting',
-          care: 'Keep cool and moist',
+          description: 'kale.phases.germination.description',
+          care: 'kale.phases.germination.care',
           editable: true,
-          soil: {
-            watering: {
-              interval: 1,
-              description: 'Keep soil moist during germination',
-            },
-            fertilizing: {
-              interval: 0,
-              description: 'No fertilizing during germination',
-            },
-          },
-          hydro: {
-            watering: {
-              interval: 0,
-              description: 'Continuous moisture in rockwool or hydroponic system',
-            },
-            fertilizing: {
-              interval: 0,
-              description: 'No nutrients during germination',
-            },
-          },
-          coco: {
-            watering: {
-              interval: 1,
-              description: 'Keep coco moist during germination',
-            },
-            fertilizing: {
-              interval: 0,
-              description: 'No fertilizing during germination',
-            },
-          },
         },
         seedling: {
           days: 14,
-          description: 'Young plant development',
-          care: 'Provide adequate light',
+          description: 'kale.phases.seedling.description',
+          care: 'kale.phases.seedling.care',
           editable: true,
-          soil: {
-            watering: {
-              interval: 2,
-              description: 'Water when top inch of soil is dry',
-            },
-            fertilizing: {
-              interval: 0,
-              description: 'No fertilizing during seedling stage',
-            },
-          },
-          hydro: {
-            watering: {
-              interval: 0,
-              description: 'Continuous flow, low EC',
-            },
-            fertilizing: {
-              interval: 7,
-              description: 'Light nutrients, EC 0.5-0.8',
-            },
-          },
-          coco: {
-            watering: {
-              interval: 1,
-              description: 'Daily watering in coco',
-            },
-            fertilizing: {
-              interval: 7,
-              description: 'Light feeding, EC 0.5-0.8',
-            },
-          },
         },
         vegetative: {
           days: 21,
-          description: 'Leaf production',
-          care: 'Regular feeding for leaf growth',
+          description: 'kale.phases.vegetative.description',
+          care: 'kale.phases.vegetative.care',
           editable: true,
-          soil: {
-            watering: {
-              interval: 3,
-              description: 'Deep watering every 3 days',
-            },
-            fertilizing: {
-              interval: 14,
-              description: 'Fertilize every 2 weeks during vegetative growth',
-            },
-          },
-          hydro: {
-            watering: {
-              interval: 0,
-              description: 'Continuous flow, moderate EC',
-            },
-            fertilizing: {
-              interval: 14,
-              description: 'Balanced nutrients, EC 1.0-1.2',
-            },
-          },
-          coco: {
-            watering: {
-              interval: 1,
-              description: 'Daily watering in coco',
-            },
-            fertilizing: {
-              interval: 14,
-              description: 'Balanced feeding, EC 1.0-1.2',
-            },
-          },
         },
         leaf_development: {
           days: 14,
-          description: 'Leaf maturation',
-          care: 'Leaves developing full size and flavor',
+          description: 'kale.phases.leaf_development.description',
+          care: 'kale.phases.leaf_development.care',
           editable: true,
-          soil: {
-            watering: {
-              interval: 3,
-              description: 'Deep watering every 3 days',
-            },
-            fertilizing: {
-              interval: 14,
-              description: 'Fertilize every 2 weeks during leaf development',
-            },
-          },
-          hydro: {
-            watering: {
-              interval: 0,
-              description: 'Continuous flow, moderate EC',
-            },
-            fertilizing: {
-              interval: 14,
-              description: 'Balanced nutrients, EC 1.0-1.2',
-            },
-          },
-          coco: {
-            watering: {
-              interval: 1,
-              description: 'Daily watering in coco',
-            },
-            fertilizing: {
-              interval: 14,
-              description: 'Balanced feeding, EC 1.0-1.2',
-            },
-          },
         },
         harvest: {
           days: 30,
-          description: 'Continuous harvest',
-          care: 'Harvest outer leaves, leave center to grow',
+          description: 'kale.phases.harvest.description',
+          care: 'kale.phases.harvest.care',
           editable: true,
-          soil: {
-            watering: {
-              interval: 7,
-              description: 'Weekly watering during harvest',
-            },
-            fertilizing: {
-              interval: 21,
-              description: 'Fertilize every 3 weeks during harvest',
-            },
-          },
-          hydro: {
-            watering: {
-              interval: 0,
-              description: 'Continuous flow, moderate EC',
-            },
-            fertilizing: {
-              interval: 21,
-              description: 'Balanced nutrients, EC 1.0-1.2',
-            },
-          },
-          coco: {
-            watering: {
-              interval: 1,
-              description: 'Daily watering in coco',
-            },
-            fertilizing: {
-              interval: 21,
-              description: 'Balanced feeding, EC 1.0-1.2',
-            },
-          },
         },
       },
     },
   },
   careTips: {
-    watering: 'Deep, regular watering',
-    fertilizing: 'High nitrogen fertilizer every 3-4 weeks',
-    sunlight: 'Full sun to partial shade',
-    spacing: '12-18 inches apart',
-    temperature: 'Cool season crop, tolerates frost',
-    soilPH: '6.0-7.5',
-    harvesting: 'Harvest outer leaves when 8-10 inches long',
+    watering: 'kale.careTips.watering',
+    fertilizing: 'kale.careTips.fertilizing',
+    sunlight: 'kale.careTips.sunlight',
+    spacing: 'kale.careTips.spacing',
+    temperature: 'kale.careTips.temperature',
+    soilPH: 'kale.careTips.soilPH',
+    harvesting: 'kale.careTips.harvesting',
   },
   commonProblems: {
-    'Cabbage Worms': 'Green caterpillars - use BT spray or row covers',
-    Aphids: 'Small insects - spray with water or insecticidal soap',
-    Clubroot: 'Soil disease - rotate crops and improve drainage',
+    cabbageWorms: 'kale.commonProblems.cabbageWorms',
+    aphids: 'kale.commonProblems.aphids',
+    clubroot: 'kale.commonProblems.clubroot',
   },
 };
 

@@ -4,6 +4,7 @@
  */
 
 import { PLANT_TAGS } from '../categories.js';
+import { createProblemRefs } from '../problems.js';
 
 export const blueberries = {
   name: 'blueberries.name',
@@ -604,11 +605,7 @@ export const blueberries = {
     soilPH: 'blueberries.careTips.soilPH',
     mulching: 'blueberries.careTips.mulching',
   },
-  commonProblems: {
-    'Iron Deficiency': 'blueberries.commonProblems.ironDeficiency',
-    'Birds': 'blueberries.commonProblems.birds',
-    'Root Rot': 'blueberries.commonProblems.rootRot',
-  },
+  commonProblems: createProblemRefs(['ironDeficiency', 'birds', 'rootRot'], 'fruits'),
 };
 
 export default blueberries; 

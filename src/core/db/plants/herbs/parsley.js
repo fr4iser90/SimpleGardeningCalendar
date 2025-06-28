@@ -4,9 +4,10 @@
  */
 
 import { PLANT_TAGS } from '../categories.js';
+import { createProblemRefs } from '../problems.js';
 
 export const parsley = {
-  name: 'Parsley',
+  name: 'plants.herbs.parsley.name',
   category: 'category.herbs',
   tags: [PLANT_TAGS.BIENNIAL, PLANT_TAGS.PHOTOPERIOD],
   emoji: '🌿',
@@ -15,121 +16,145 @@ export const parsley = {
       phases: {
         germination: {
           days: 21,
-          description: 'Seeds sprouting',
-          care: 'Keep warm and moist',
+          description: 'plants.herbs.parsley.phases.germination.description',
+          care: 'plants.herbs.parsley.phases.germination.care',
           editable: true,
           soil: {
             watering: {
               interval: 1,
-              description: 'Keep soil moist during germination',
+              description: 'plants.herbs.parsley.phases.germination.soil.watering.description',
             },
             fertilizing: {
               interval: 0,
-              description: 'No fertilizing during germination',
+              description: 'plants.herbs.parsley.phases.germination.soil.fertilizing.description',
             },
           },
           hydro: {
             watering: {
               interval: 0,
-              description: 'Continuous moisture in rockwool',
+              description: 'plants.herbs.parsley.phases.germination.hydro.watering.description',
             },
             fertilizing: {
               interval: 0,
-              description: 'No nutrients during germination',
+              description: 'plants.herbs.parsley.phases.germination.hydro.fertilizing.description',
             },
           },
           coco: {
             watering: {
               interval: 1,
-              description: 'Keep coco moist during germination',
+              description: 'plants.herbs.parsley.phases.germination.coco.watering.description',
             },
             fertilizing: {
               interval: 0,
-              description: 'No fertilizing during germination',
+              description: 'plants.herbs.parsley.phases.germination.coco.fertilizing.description',
             },
           },
         },
         seedling: {
           days: 28,
-          description: 'First true leaves',
-          care: 'Provide adequate light',
+          description: 'plants.herbs.parsley.phases.seedling.description',
+          care: 'plants.herbs.parsley.phases.seedling.care',
           editable: true,
           soil: {
             watering: {
               interval: 2,
-              description: 'Water when top inch of soil feels dry',
+              description: 'plants.herbs.parsley.phases.seedling.soil.watering.description',
             },
             fertilizing: {
               interval: 0,
-              description: 'No fertilizing during seedling stage',
+              description: 'plants.herbs.parsley.phases.seedling.soil.fertilizing.description',
             },
           },
           hydro: {
-            watering: { interval: 0, description: 'Continuous flow, low EC' },
+            watering: { 
+              interval: 0, 
+              description: 'plants.herbs.parsley.phases.seedling.hydro.watering.description' 
+            },
             fertilizing: {
               interval: 7,
-              description: 'Light nutrients, EC 0.5-0.8',
+              description: 'plants.herbs.parsley.phases.seedling.hydro.fertilizing.description',
             },
           },
           coco: {
-            watering: { interval: 1, description: 'Daily watering in coco' },
-            fertilizing: { interval: 7, description: 'Light feeding, EC 0.5-0.8' },
+            watering: { 
+              interval: 1, 
+              description: 'plants.herbs.parsley.phases.seedling.coco.watering.description' 
+            },
+            fertilizing: { 
+              interval: 7, 
+              description: 'plants.herbs.parsley.phases.seedling.coco.fertilizing.description' 
+            },
           },
         },
         vegetative: {
           days: 45,
-          description: 'Leaf growth',
-          care: 'Pinch tips for bushiness',
+          description: 'plants.herbs.parsley.phases.vegetative.description',
+          care: 'plants.herbs.parsley.phases.vegetative.care',
           editable: true,
           soil: {
             watering: {
               interval: 2,
-              description: 'Keep soil moist but not waterlogged',
+              description: 'plants.herbs.parsley.phases.vegetative.soil.watering.description',
             },
             fertilizing: {
               interval: 14,
-              description: 'Light feeding with balanced fertilizer',
+              description: 'plants.herbs.parsley.phases.vegetative.soil.fertilizing.description',
             },
           },
           hydro: {
-            watering: { interval: 0, description: 'Continuous flow, moderate EC' },
+            watering: { 
+              interval: 0, 
+              description: 'plants.herbs.parsley.phases.vegetative.hydro.watering.description' 
+            },
             fertilizing: {
               interval: 14,
-              description: 'Balanced nutrients, EC 1.0-1.2',
+              description: 'plants.herbs.parsley.phases.vegetative.hydro.fertilizing.description',
             },
           },
           coco: {
-            watering: { interval: 1, description: 'Daily watering in coco' },
+            watering: { 
+              interval: 1, 
+              description: 'plants.herbs.parsley.phases.vegetative.coco.watering.description' 
+            },
             fertilizing: {
               interval: 14,
-              description: 'Balanced feeding, EC 1.0-1.2',
+              description: 'plants.herbs.parsley.phases.vegetative.coco.fertilizing.description',
             },
           },
         },
         harvest: {
           days: 90,
-          description: 'Continuous harvest',
-          care: 'Harvest leaves regularly',
+          description: 'plants.herbs.parsley.phases.harvest.description',
+          care: 'plants.herbs.parsley.phases.harvest.care',
           editable: true,
           soil: {
-            watering: { interval: 2, description: 'Keep soil consistently moist' },
+            watering: { 
+              interval: 2, 
+              description: 'plants.herbs.parsley.phases.harvest.soil.watering.description' 
+            },
             fertilizing: {
               interval: 14,
-              description: 'Regular feeding to support new growth',
+              description: 'plants.herbs.parsley.phases.harvest.soil.fertilizing.description',
             },
           },
           hydro: {
-            watering: { interval: 0, description: 'Continuous flow, moderate EC' },
+            watering: { 
+              interval: 0, 
+              description: 'plants.herbs.parsley.phases.harvest.hydro.watering.description' 
+            },
             fertilizing: {
               interval: 14,
-              description: 'Regular nutrients, EC 1.0-1.2',
+              description: 'plants.herbs.parsley.phases.harvest.hydro.fertilizing.description',
             },
           },
           coco: {
-            watering: { interval: 1, description: 'Daily watering in coco' },
+            watering: { 
+              interval: 1, 
+              description: 'plants.herbs.parsley.phases.harvest.coco.watering.description' 
+            },
             fertilizing: {
               interval: 14,
-              description: 'Regular feeding, EC 1.0-1.2',
+              description: 'plants.herbs.parsley.phases.harvest.coco.fertilizing.description',
             },
           },
         },
@@ -139,121 +164,145 @@ export const parsley = {
       phases: {
         germination: {
           days: 21,
-          description: 'Seeds sprouting',
-          care: 'Keep warm and moist',
+          description: 'plants.herbs.parsley.phases.germination.description',
+          care: 'plants.herbs.parsley.phases.germination.care',
           editable: false,
           soil: {
             watering: {
               interval: 1,
-              description: 'Keep soil moist during germination',
+              description: 'plants.herbs.parsley.phases.germination.soil.watering.description',
             },
             fertilizing: {
               interval: 0,
-              description: 'No fertilizing during germination',
+              description: 'plants.herbs.parsley.phases.germination.soil.fertilizing.description',
             },
           },
           hydro: {
             watering: {
               interval: 0,
-              description: 'Continuous moisture in rockwool',
+              description: 'plants.herbs.parsley.phases.germination.hydro.watering.description',
             },
             fertilizing: {
               interval: 0,
-              description: 'No nutrients during germination',
+              description: 'plants.herbs.parsley.phases.germination.hydro.fertilizing.description',
             },
           },
           coco: {
             watering: {
               interval: 1,
-              description: 'Keep coco moist during germination',
+              description: 'plants.herbs.parsley.phases.germination.coco.watering.description',
             },
             fertilizing: {
               interval: 0,
-              description: 'No fertilizing during germination',
+              description: 'plants.herbs.parsley.phases.germination.coco.fertilizing.description',
             },
           },
         },
         seedling: {
           days: 28,
-          description: 'First true leaves',
-          care: 'Provide adequate light',
+          description: 'plants.herbs.parsley.phases.seedling.description',
+          care: 'plants.herbs.parsley.phases.seedling.care',
           editable: false,
           soil: {
             watering: {
               interval: 2,
-              description: 'Water when top inch of soil feels dry',
+              description: 'plants.herbs.parsley.phases.seedling.soil.watering.description',
             },
             fertilizing: {
               interval: 0,
-              description: 'No fertilizing during seedling stage',
+              description: 'plants.herbs.parsley.phases.seedling.soil.fertilizing.description',
             },
           },
           hydro: {
-            watering: { interval: 0, description: 'Continuous flow, low EC' },
+            watering: { 
+              interval: 0, 
+              description: 'plants.herbs.parsley.phases.seedling.hydro.watering.description' 
+            },
             fertilizing: {
               interval: 7,
-              description: 'Light nutrients, EC 0.5-0.8',
+              description: 'plants.herbs.parsley.phases.seedling.hydro.fertilizing.description',
             },
           },
           coco: {
-            watering: { interval: 1, description: 'Daily watering in coco' },
-            fertilizing: { interval: 7, description: 'Light feeding, EC 0.5-0.8' },
+            watering: { 
+              interval: 1, 
+              description: 'plants.herbs.parsley.phases.seedling.coco.watering.description' 
+            },
+            fertilizing: { 
+              interval: 7, 
+              description: 'plants.herbs.parsley.phases.seedling.coco.fertilizing.description' 
+            },
           },
         },
         vegetative: {
           days: 45,
-          description: 'Leaf growth',
-          care: 'Pinch tips for bushiness',
+          description: 'plants.herbs.parsley.phases.vegetative.description',
+          care: 'plants.herbs.parsley.phases.vegetative.care',
           editable: false,
           soil: {
             watering: {
               interval: 2,
-              description: 'Keep soil moist but not waterlogged',
+              description: 'plants.herbs.parsley.phases.vegetative.soil.watering.description',
             },
             fertilizing: {
               interval: 14,
-              description: 'Light feeding with balanced fertilizer',
+              description: 'plants.herbs.parsley.phases.vegetative.soil.fertilizing.description',
             },
           },
           hydro: {
-            watering: { interval: 0, description: 'Continuous flow, moderate EC' },
+            watering: { 
+              interval: 0, 
+              description: 'plants.herbs.parsley.phases.vegetative.hydro.watering.description' 
+            },
             fertilizing: {
               interval: 14,
-              description: 'Balanced nutrients, EC 1.0-1.2',
+              description: 'plants.herbs.parsley.phases.vegetative.hydro.fertilizing.description',
             },
           },
           coco: {
-            watering: { interval: 1, description: 'Daily watering in coco' },
+            watering: { 
+              interval: 1, 
+              description: 'plants.herbs.parsley.phases.vegetative.coco.watering.description' 
+            },
             fertilizing: {
               interval: 14,
-              description: 'Balanced feeding, EC 1.0-1.2',
+              description: 'plants.herbs.parsley.phases.vegetative.coco.fertilizing.description',
             },
           },
         },
         harvest: {
           days: 90,
-          description: 'Continuous harvest',
-          care: 'Harvest leaves regularly',
+          description: 'plants.herbs.parsley.phases.harvest.description',
+          care: 'plants.herbs.parsley.phases.harvest.care',
           editable: true,
           soil: {
-            watering: { interval: 2, description: 'Keep soil consistently moist' },
+            watering: { 
+              interval: 2, 
+              description: 'plants.herbs.parsley.phases.harvest.soil.watering.description' 
+            },
             fertilizing: {
               interval: 14,
-              description: 'Regular feeding to support new growth',
+              description: 'plants.herbs.parsley.phases.harvest.soil.fertilizing.description',
             },
           },
           hydro: {
-            watering: { interval: 0, description: 'Continuous flow, moderate EC' },
+            watering: { 
+              interval: 0, 
+              description: 'plants.herbs.parsley.phases.harvest.hydro.watering.description' 
+            },
             fertilizing: {
               interval: 14,
-              description: 'Regular nutrients, EC 1.0-1.2',
+              description: 'plants.herbs.parsley.phases.harvest.hydro.fertilizing.description',
             },
           },
           coco: {
-            watering: { interval: 1, description: 'Daily watering in coco' },
+            watering: { 
+              interval: 1, 
+              description: 'plants.herbs.parsley.phases.harvest.coco.watering.description' 
+            },
             fertilizing: {
               interval: 14,
-              description: 'Regular feeding, EC 1.0-1.2',
+              description: 'plants.herbs.parsley.phases.harvest.coco.fertilizing.description',
             },
           },
         },
@@ -262,25 +311,25 @@ export const parsley = {
         temperate_north: {
           plantingWindow: {
             start: '04-01',
-            end: '06-15',
-            description: 'Spring to early summer planting',
+            end: '07-01',
+            description: 'plants.herbs.parsley.seasonalTiming.temperate_north.plantingWindow.description',
           },
           harvestWindow: {
             start: '06-01',
-            end: '10-31',
-            description: 'Continuous harvest throughout growing season',
+            end: '11-30',
+            description: 'plants.herbs.parsley.seasonalTiming.temperate_north.harvestWindow.description',
           },
         },
         mediterranean: {
           plantingWindow: {
             start: '03-01',
-            end: '07-01',
-            description: 'Early spring to early summer planting',
+            end: '08-01',
+            description: 'plants.herbs.parsley.seasonalTiming.mediterranean.plantingWindow.description',
           },
           harvestWindow: {
             start: '05-01',
-            end: '11-30',
-            description: 'Extended harvest season',
+            end: '12-31',
+            description: 'plants.herbs.parsley.seasonalTiming.mediterranean.harvestWindow.description',
           },
         },
       },
@@ -289,121 +338,145 @@ export const parsley = {
       phases: {
         germination: {
           days: 21,
-          description: 'Seeds sprouting',
-          care: 'Keep warm and moist',
+          description: 'plants.herbs.parsley.phases.germination.description',
+          care: 'plants.herbs.parsley.phases.germination.care',
           editable: true,
           soil: {
             watering: {
               interval: 1,
-              description: 'Keep soil moist during germination',
+              description: 'plants.herbs.parsley.phases.germination.soil.watering.description',
             },
             fertilizing: {
               interval: 0,
-              description: 'No fertilizing during germination',
+              description: 'plants.herbs.parsley.phases.germination.soil.fertilizing.description',
             },
           },
           hydro: {
             watering: {
               interval: 0,
-              description: 'Continuous moisture in rockwool',
+              description: 'plants.herbs.parsley.phases.germination.hydro.watering.description',
             },
             fertilizing: {
               interval: 0,
-              description: 'No nutrients during germination',
+              description: 'plants.herbs.parsley.phases.germination.hydro.fertilizing.description',
             },
           },
           coco: {
             watering: {
               interval: 1,
-              description: 'Keep coco moist during germination',
+              description: 'plants.herbs.parsley.phases.germination.coco.watering.description',
             },
             fertilizing: {
               interval: 0,
-              description: 'No fertilizing during germination',
+              description: 'plants.herbs.parsley.phases.germination.coco.fertilizing.description',
             },
           },
         },
         seedling: {
           days: 28,
-          description: 'First true leaves',
-          care: 'Provide adequate light',
+          description: 'plants.herbs.parsley.phases.seedling.description',
+          care: 'plants.herbs.parsley.phases.seedling.care',
           editable: true,
           soil: {
             watering: {
               interval: 2,
-              description: 'Water when top inch of soil feels dry',
+              description: 'plants.herbs.parsley.phases.seedling.soil.watering.description',
             },
             fertilizing: {
               interval: 0,
-              description: 'No fertilizing during seedling stage',
+              description: 'plants.herbs.parsley.phases.seedling.soil.fertilizing.description',
             },
           },
           hydro: {
-            watering: { interval: 0, description: 'Continuous flow, low EC' },
+            watering: { 
+              interval: 0, 
+              description: 'plants.herbs.parsley.phases.seedling.hydro.watering.description' 
+            },
             fertilizing: {
               interval: 7,
-              description: 'Light nutrients, EC 0.5-0.8',
+              description: 'plants.herbs.parsley.phases.seedling.hydro.fertilizing.description',
             },
           },
           coco: {
-            watering: { interval: 1, description: 'Daily watering in coco' },
-            fertilizing: { interval: 7, description: 'Light feeding, EC 0.5-0.8' },
+            watering: { 
+              interval: 1, 
+              description: 'plants.herbs.parsley.phases.seedling.coco.watering.description' 
+            },
+            fertilizing: { 
+              interval: 7, 
+              description: 'plants.herbs.parsley.phases.seedling.coco.fertilizing.description' 
+            },
           },
         },
         vegetative: {
           days: 45,
-          description: 'Leaf growth',
-          care: 'Pinch tips for bushiness',
+          description: 'plants.herbs.parsley.phases.vegetative.description',
+          care: 'plants.herbs.parsley.phases.vegetative.care',
           editable: true,
           soil: {
             watering: {
               interval: 2,
-              description: 'Keep soil moist but not waterlogged',
+              description: 'plants.herbs.parsley.phases.vegetative.soil.watering.description',
             },
             fertilizing: {
               interval: 14,
-              description: 'Light feeding with balanced fertilizer',
+              description: 'plants.herbs.parsley.phases.vegetative.soil.fertilizing.description',
             },
           },
           hydro: {
-            watering: { interval: 0, description: 'Continuous flow, moderate EC' },
+            watering: { 
+              interval: 0, 
+              description: 'plants.herbs.parsley.phases.vegetative.hydro.watering.description' 
+            },
             fertilizing: {
               interval: 14,
-              description: 'Balanced nutrients, EC 1.0-1.2',
+              description: 'plants.herbs.parsley.phases.vegetative.hydro.fertilizing.description',
             },
           },
           coco: {
-            watering: { interval: 1, description: 'Daily watering in coco' },
+            watering: { 
+              interval: 1, 
+              description: 'plants.herbs.parsley.phases.vegetative.coco.watering.description' 
+            },
             fertilizing: {
               interval: 14,
-              description: 'Balanced feeding, EC 1.0-1.2',
+              description: 'plants.herbs.parsley.phases.vegetative.coco.fertilizing.description',
             },
           },
         },
         harvest: {
           days: 90,
-          description: 'Continuous harvest',
-          care: 'Harvest leaves regularly',
+          description: 'plants.herbs.parsley.phases.harvest.description',
+          care: 'plants.herbs.parsley.phases.harvest.care',
           editable: true,
           soil: {
-            watering: { interval: 2, description: 'Keep soil consistently moist' },
+            watering: { 
+              interval: 2, 
+              description: 'plants.herbs.parsley.phases.harvest.soil.watering.description' 
+            },
             fertilizing: {
               interval: 14,
-              description: 'Regular feeding to support new growth',
+              description: 'plants.herbs.parsley.phases.harvest.soil.fertilizing.description',
             },
           },
           hydro: {
-            watering: { interval: 0, description: 'Continuous flow, moderate EC' },
+            watering: { 
+              interval: 0, 
+              description: 'plants.herbs.parsley.phases.harvest.hydro.watering.description' 
+            },
             fertilizing: {
               interval: 14,
-              description: 'Regular nutrients, EC 1.0-1.2',
+              description: 'plants.herbs.parsley.phases.harvest.hydro.fertilizing.description',
             },
           },
           coco: {
-            watering: { interval: 1, description: 'Daily watering in coco' },
+            watering: { 
+              interval: 1, 
+              description: 'plants.herbs.parsley.phases.harvest.coco.watering.description' 
+            },
             fertilizing: {
               interval: 14,
-              description: 'Regular feeding, EC 1.0-1.2',
+              description: 'plants.herbs.parsley.phases.harvest.coco.fertilizing.description',
             },
           },
         },
@@ -411,19 +484,15 @@ export const parsley = {
     },
   },
   careTips: {
-    watering: 'Keep soil consistently moist',
-    fertilizing: 'Light feeding every 2-3 weeks',
-    sunlight: 'Partial shade to full sun',
-    spacing: '6-12 inches apart',
-    temperature: 'Cool to warm weather herb',
-    soilPH: '6.0-7.0',
-    harvesting: 'Harvest leaves regularly to encourage growth',
+    watering: 'plants.herbs.parsley.careTips.watering',
+    fertilizing: 'plants.herbs.parsley.careTips.fertilizing',
+    sunlight: 'plants.herbs.parsley.careTips.sunlight',
+    spacing: 'plants.herbs.parsley.careTips.spacing',
+    temperature: 'plants.herbs.parsley.careTips.temperature',
+    soilPH: 'plants.herbs.parsley.careTips.soilPH',
+    harvesting: 'plants.herbs.parsley.careTips.harvesting',
   },
-  commonProblems: {
-    'Slow Germination': 'Parsley seeds are slow to germinate - be patient',
-    'Bolting': 'Going to seed in second year - harvest regularly',
-    'Leaf Spot': 'Fungal disease - improve airflow and avoid overhead watering',
-  },
+  commonProblems: createProblemRefs(['rootRot', 'leafSpot', 'bolting'], 'herbs'),
 };
 
 export default parsley; 

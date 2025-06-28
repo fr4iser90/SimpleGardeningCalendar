@@ -5,10 +5,8 @@
 
 import { PLANT_TAGS } from '../categories.js';
 
-
-
 export const spinach = {
-  name: 'Spinach',
+  name: 'spinach.name',
   category: 'category.vegetables',
   emoji: '🥬',
   tags: [PLANT_TAGS.LEAFY, PLANT_TAGS.ANNUAL, PLANT_TAGS.PHOTOPERIOD],
@@ -17,145 +15,145 @@ export const spinach = {
       phases: {
         germination: {
           days: 7,
-          description: 'Seeds sprouting',
-          care: 'Keep cool and moist',
+          description: 'spinach.phases.germination.description',
+          care: 'spinach.phases.germination.care',
           editable: true,
           soil: {
             watering: {
               interval: 1,
-              description: 'Keep soil moist during germination',
+              description: 'spinach.phases.germination.soil.watering.description',
             },
             fertilizing: {
               interval: 0,
-              description: 'No fertilizing during germination',
+              description: 'spinach.phases.germination.soil.fertilizing.description',
             },
           },
           hydro: {
             watering: {
               interval: 0,
-              description: 'Continuous moisture in rockwool or hydroponic system',
+              description: 'spinach.phases.germination.hydro.watering.description',
             },
             fertilizing: {
               interval: 0,
-              description: 'No nutrients during germination',
+              description: 'spinach.phases.germination.hydro.fertilizing.description',
             },
           },
           coco: {
             watering: {
               interval: 1,
-              description: 'Keep coco moist during germination',
+              description: 'spinach.phases.germination.coco.watering.description',
             },
             fertilizing: {
               interval: 0,
-              description: 'No fertilizing during germination',
+              description: 'spinach.phases.germination.coco.fertilizing.description',
             },
           },
         },
         leafing: {
           days: 21,
-          description: 'Leaf development',
-          care: 'Thin seedlings to 4-6 inches apart',
+          description: 'spinach.phases.leafing.description',
+          care: 'spinach.phases.leafing.care',
           editable: true,
           soil: {
             watering: {
               interval: 2,
-              description: 'Water every 2 days for leaf growth',
+              description: 'spinach.phases.leafing.soil.watering.description',
             },
             fertilizing: {
               interval: 14,
-              description: 'Fertilize every 2 weeks during leafing',
+              description: 'spinach.phases.leafing.soil.fertilizing.description',
             },
           },
           hydro: {
             watering: {
               interval: 0,
-              description: 'Continuous flow, low EC',
+              description: 'spinach.phases.leafing.hydro.watering.description',
             },
             fertilizing: {
               interval: 14,
-              description: 'Balanced nutrients, EC 1.0-1.2',
+              description: 'spinach.phases.leafing.hydro.fertilizing.description',
             },
           },
           coco: {
             watering: {
               interval: 1,
-              description: 'Daily watering in coco',
+              description: 'spinach.phases.leafing.coco.watering.description',
             },
             fertilizing: {
               interval: 14,
-              description: 'Balanced feeding, EC 1.0-1.2',
+              description: 'spinach.phases.leafing.coco.fertilizing.description',
             },
           },
         },
         harvest: {
           days: 14,
-          description: 'Continuous harvest period',
-          care: 'Harvest outer leaves, keep center growing',
+          description: 'spinach.phases.harvest.description',
+          care: 'spinach.phases.harvest.care',
           editable: true,
           soil: {
             watering: {
               interval: 3,
-              description: 'Water every 3 days during harvest',
+              description: 'spinach.phases.harvest.soil.watering.description',
             },
             fertilizing: {
               interval: 14,
-              description: 'Fertilize every 2 weeks during harvest',
+              description: 'spinach.phases.harvest.soil.fertilizing.description',
             },
           },
           hydro: {
             watering: {
               interval: 0,
-              description: 'Continuous flow, moderate EC',
+              description: 'spinach.phases.harvest.hydro.watering.description',
             },
             fertilizing: {
               interval: 14,
-              description: 'Balanced nutrients, EC 1.0-1.2',
+              description: 'spinach.phases.harvest.hydro.fertilizing.description',
             },
           },
           coco: {
             watering: {
               interval: 1,
-              description: 'Daily watering in coco',
+              description: 'spinach.phases.harvest.coco.watering.description',
             },
             fertilizing: {
               interval: 14,
-              description: 'Balanced feeding, EC 1.0-1.2',
+              description: 'spinach.phases.harvest.coco.fertilizing.description',
             },
           },
         },
         bolting: {
           days: 7,
-          description: 'Going to seed',
-          care: 'Harvest quickly before leaves become bitter',
+          description: 'spinach.phases.bolting.description',
+          care: 'spinach.phases.bolting.care',
           editable: true,
           soil: {
             watering: {
               interval: 0,
-              description: 'No watering needed during bolting',
+              description: 'spinach.phases.bolting.soil.watering.description',
             },
             fertilizing: {
               interval: 0,
-              description: 'No fertilizing during bolting',
+              description: 'spinach.phases.bolting.soil.fertilizing.description',
             },
           },
           hydro: {
             watering: {
               interval: 0,
-              description: 'No watering needed during bolting',
+              description: 'spinach.phases.bolting.hydro.watering.description',
             },
             fertilizing: {
               interval: 0,
-              description: 'No nutrients during bolting',
+              description: 'spinach.phases.bolting.hydro.fertilizing.description',
             },
           },
           coco: {
             watering: {
               interval: 0,
-              description: 'No watering needed during bolting',
+              description: 'spinach.phases.bolting.coco.watering.description',
             },
             fertilizing: {
               interval: 0,
-              description: 'No fertilizing during bolting',
+              description: 'spinach.phases.bolting.coco.fertilizing.description',
             },
           },
         },
@@ -164,148 +162,28 @@ export const spinach = {
     outdoor: {
       phases: {
         germination: {
-          days: 7,
-          description: 'Seeds sprouting',
-          care: 'Keep cool and moist',
+          start: '03-15',
+          end: '05-01',
+          description: 'spinach.phases.germination.description',
+          care: 'spinach.phases.germination.care',
           editable: false,
-          soil: {
-            watering: {
-              interval: 1,
-              description: 'Keep soil moist during germination',
-            },
-            fertilizing: {
-              interval: 0,
-              description: 'No fertilizing during germination',
-            },
-          },
-          hydro: {
-            watering: {
-              interval: 0,
-              description: 'Continuous moisture in rockwool or hydroponic system',
-            },
-            fertilizing: {
-              interval: 0,
-              description: 'No nutrients during germination',
-            },
-          },
-          coco: {
-            watering: {
-              interval: 1,
-              description: 'Keep coco moist during germination',
-            },
-            fertilizing: {
-              interval: 0,
-              description: 'No fertilizing during germination',
-            },
-          },
         },
         leafing: {
-          days: 21,
-          description: 'Leaf development',
-          care: 'Thin seedlings to 4-6 inches apart',
+          description: 'spinach.phases.leafing.description',
+          care: 'spinach.phases.leafing.care',
           editable: false,
-          soil: {
-            watering: {
-              interval: 2,
-              description: 'Water every 2 days for leaf growth',
-            },
-            fertilizing: {
-              interval: 14,
-              description: 'Fertilize every 2 weeks during leafing',
-            },
-          },
-          hydro: {
-            watering: {
-              interval: 0,
-              description: 'Continuous flow, low EC',
-            },
-            fertilizing: {
-              interval: 14,
-              description: 'Balanced nutrients, EC 1.0-1.2',
-            },
-          },
-          coco: {
-            watering: {
-              interval: 1,
-              description: 'Daily watering in coco',
-            },
-            fertilizing: {
-              interval: 14,
-              description: 'Balanced feeding, EC 1.0-1.2',
-            },
-          },
         },
         harvest: {
-          days: 21,
-          description: 'Leaf maturation',
-          care: 'Harvest outer leaves or whole plant',
+          start: '04-15',
+          end: '06-30',
+          description: 'spinach.phases.harvest.description',
+          care: 'spinach.phases.harvest.care',
           editable: true,
-          soil: {
-            watering: {
-              interval: 3,
-              description: 'Water every 3 days during harvest',
-            },
-            fertilizing: {
-              interval: 14,
-              description: 'Fertilize every 2 weeks during harvest',
-            },
-          },
-          hydro: {
-            watering: {
-              interval: 0,
-              description: 'Continuous flow, moderate EC',
-            },
-            fertilizing: {
-              interval: 14,
-              description: 'Balanced nutrients, EC 1.0-1.2',
-            },
-          },
-          coco: {
-            watering: {
-              interval: 1,
-              description: 'Daily watering in coco',
-            },
-            fertilizing: {
-              interval: 14,
-              description: 'Balanced feeding, EC 1.0-1.2',
-            },
-          },
         },
         bolting: {
-          days: 7,
-          description: 'Going to seed',
-          care: 'Harvest quickly before leaves become bitter',
+          description: 'spinach.phases.bolting.description',
+          care: 'spinach.phases.bolting.care',
           editable: false,
-          soil: {
-            watering: {
-              interval: 0,
-              description: 'No watering needed during bolting',
-            },
-            fertilizing: {
-              interval: 0,
-              description: 'No fertilizing during bolting',
-            },
-          },
-          hydro: {
-            watering: {
-              interval: 0,
-              description: 'No watering needed during bolting',
-            },
-            fertilizing: {
-              interval: 0,
-              description: 'No nutrients during bolting',
-            },
-          },
-          coco: {
-            watering: {
-              interval: 0,
-              description: 'No watering needed during bolting',
-            },
-            fertilizing: {
-              interval: 0,
-              description: 'No fertilizing during bolting',
-            },
-          },
         },
       },
       seasonalTiming: {
@@ -313,24 +191,24 @@ export const spinach = {
           plantingWindow: {
             start: '03-15',
             end: '05-01',
-            description: 'Early spring planting',
+            description: 'spinach.seasonalTiming.temperate_north.plantingWindow.description',
           },
           harvestWindow: {
             start: '04-15',
             end: '06-30',
-            description: 'Harvest before hot weather',
+            description: 'spinach.seasonalTiming.temperate_north.harvestWindow.description',
           },
         },
         mediterranean: {
           plantingWindow: {
-            start: '02-15',
-            end: '04-01',
-            description: 'Very early spring planting',
+            start: '09-01',
+            end: '11-01',
+            description: 'spinach.seasonalTiming.mediterranean.plantingWindow.description',
           },
           harvestWindow: {
-            start: '03-15',
-            end: '05-31',
-            description: 'Harvest before heat',
+            start: '10-15',
+            end: '04-30',
+            description: 'spinach.seasonalTiming.mediterranean.harvestWindow.description',
           },
         },
       },
@@ -339,164 +217,44 @@ export const spinach = {
       phases: {
         germination: {
           days: 7,
-          description: 'Seeds sprouting',
-          care: 'Keep cool and moist',
+          description: 'spinach.phases.germination.description',
+          care: 'spinach.phases.germination.care',
           editable: true,
-          soil: {
-            watering: {
-              interval: 1,
-              description: 'Keep soil moist during germination',
-            },
-            fertilizing: {
-              interval: 0,
-              description: 'No fertilizing during germination',
-            },
-          },
-          hydro: {
-            watering: {
-              interval: 0,
-              description: 'Continuous moisture in rockwool or hydroponic system',
-            },
-            fertilizing: {
-              interval: 0,
-              description: 'No nutrients during germination',
-            },
-          },
-          coco: {
-            watering: {
-              interval: 1,
-              description: 'Keep coco moist during germination',
-            },
-            fertilizing: {
-              interval: 0,
-              description: 'No fertilizing during germination',
-            },
-          },
         },
         leafing: {
           days: 21,
-          description: 'Leaf development',
-          care: 'Thin seedlings to 4-6 inches apart',
+          description: 'spinach.phases.leafing.description',
+          care: 'spinach.phases.leafing.care',
           editable: true,
-          soil: {
-            watering: {
-              interval: 2,
-              description: 'Water every 2 days for leaf growth',
-            },
-            fertilizing: {
-              interval: 14,
-              description: 'Fertilize every 2 weeks during leafing',
-            },
-          },
-          hydro: {
-            watering: {
-              interval: 0,
-              description: 'Continuous flow, low EC',
-            },
-            fertilizing: {
-              interval: 14,
-              description: 'Balanced nutrients, EC 1.0-1.2',
-            },
-          },
-          coco: {
-            watering: {
-              interval: 1,
-              description: 'Daily watering in coco',
-            },
-            fertilizing: {
-              interval: 14,
-              description: 'Balanced feeding, EC 1.0-1.2',
-            },
-          },
         },
         harvest: {
           days: 14,
-          description: 'Continuous harvest period',
-          care: 'Harvest outer leaves, keep center growing',
+          description: 'spinach.phases.harvest.description',
+          care: 'spinach.phases.harvest.care',
           editable: true,
-          soil: {
-            watering: {
-              interval: 3,
-              description: 'Water every 3 days during harvest',
-            },
-            fertilizing: {
-              interval: 14,
-              description: 'Fertilize every 2 weeks during harvest',
-            },
-          },
-          hydro: {
-            watering: {
-              interval: 0,
-              description: 'Continuous flow, moderate EC',
-            },
-            fertilizing: {
-              interval: 14,
-              description: 'Balanced nutrients, EC 1.0-1.2',
-            },
-          },
-          coco: {
-            watering: {
-              interval: 1,
-              description: 'Daily watering in coco',
-            },
-            fertilizing: {
-              interval: 14,
-              description: 'Balanced feeding, EC 1.0-1.2',
-            },
-          },
         },
         bolting: {
           days: 7,
-          description: 'Going to seed',
-          care: 'Harvest quickly before leaves become bitter',
+          description: 'spinach.phases.bolting.description',
+          care: 'spinach.phases.bolting.care',
           editable: true,
-          soil: {
-            watering: {
-              interval: 0,
-              description: 'No watering needed during bolting',
-            },
-            fertilizing: {
-              interval: 0,
-              description: 'No fertilizing during bolting',
-            },
-          },
-          hydro: {
-            watering: {
-              interval: 0,
-              description: 'No watering needed during bolting',
-            },
-            fertilizing: {
-              interval: 0,
-              description: 'No nutrients during bolting',
-            },
-          },
-          coco: {
-            watering: {
-              interval: 0,
-              description: 'No watering needed during bolting',
-            },
-            fertilizing: {
-              interval: 0,
-              description: 'No fertilizing during bolting',
-            },
-          },
         },
       },
     },
   },
   careTips: {
-    watering: 'Keep soil consistently moist',
-    fertilizing: 'High nitrogen fertilizer for leaf growth',
-    sunlight: 'Full sun in cool weather, partial shade in warm weather',
-    spacing: '4-6 inches apart',
-    temperature: formatTemperature('Cool season crop, 50-70°F optimal'),
-    soilPH: '6.0-7.0',
-    succession: 'Plant every 2 weeks for continuous harvest',
+    watering: 'spinach.careTips.watering',
+    fertilizing: 'spinach.careTips.fertilizing',
+    sunlight: 'spinach.careTips.sunlight',
+    spacing: 'spinach.careTips.spacing',
+    temperature: 'spinach.careTips.temperature',
+    soilPH: 'spinach.careTips.soilPH',
+    succession: 'spinach.careTips.succession',
   },
   commonProblems: {
-    Bolting: 'Heat stress - plant in cool season, provide shade',
-    'Downy Mildew': 'Fungal disease - improve air circulation',
-    'Leaf Miners': 'Tunnels in leaves - remove affected leaves',
+    bolting: 'spinach.commonProblems.bolting',
+    downyMildew: 'spinach.commonProblems.downyMildew',
+    leafMiners: 'spinach.commonProblems.leafMiners',
   },
 };
 

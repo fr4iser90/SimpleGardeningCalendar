@@ -1,119 +1,49 @@
 export default {
-  name: "Salvia",
-  category: "category.herbs",
-  tags: ["tag.perennial"],
-  environments: {
-    indoor: {
-      phases: {
-        germination: {
-          name: "Germinazione",
-          description: "I semi germinano e compaiono le radici.",
-          care: "Mantenere caldo e umido. Usare vassoi o piccoli vasi, coprire leggermente con terra.",
-        },
-        seedling: {
-          name: "Piantina",
-          description: "Prime vere foglie.",
-          care: "Fornire luce intensa, mantenere il terreno umido ma non inzuppato.",
-        },
-        vegetative: {
-          name: "Vegetativa",
-          description: "Crescita di foglie e steli.",
-          care: "Pizzicare le punte, annaffiare regolarmente, concimare leggermente ogni 3-4 settimane.",
-        },
-        harvest: {
-          name: "Raccolta",
-          description: "Raccolta continua delle foglie.",
-          care: "Raccogliere regolarmente per stimolare la crescita. Evitare la fioritura.",
-        },
-      },
-    },
-    outdoor: {
-      phases: {
-        germination: {
-          name: "Germinazione",
-          description: "I semi germinano e compaiono le radici.",
-          care: "Seminare dopo l'ultima gelata, mantenere il terreno umido fino alla comparsa delle piantine.",
-        },
-        seedling: {
-          name: "Piantina",
-          description: "Prime vere foglie.",
-          care: "Posizionare a mezz'ombra, proteggere dal sole forte e dal vento.",
-        },
-        vegetative: {
-          name: "Vegetativa",
-          description: "Crescita di foglie e steli.",
-          care: "Annaffiare regolarmente, concimare leggermente, pizzicare le punte per la ramificazione.",
-        },
-        harvest: {
-          name: "Raccolta",
-          description: "Raccolta continua delle foglie.",
-          care: "Raccogliere foglie e steli secondo necessità. Potare per evitare la fioritura e la diffusione.",
-        },
-      },
-      seasonalTiming: {
-        temperate_north: {
-          plantingWindow: {
-            start: "04-01",
-            end: "06-01",
-            description: "Semina in primavera, dopo le gelate",
-          },
-          harvestWindow: {
-            start: "06-15",
-            end: "09-30",
-            description: "Raccolta durante l'estate",
-          },
-        },
-        mediterranean: {
-          plantingWindow: {
-            start: "02-15",
-            end: "05-01",
-            description: "Semina molto precoce fino a fine primavera",
-          },
-          harvestWindow: {
-            start: "05-15",
-            end: "09-30",
-            description: "Raccolta in estate",
-          },
-        },
-      },
-    },
-    greenhouse: {
-      phases: {
-        germination: {
-          name: "Germinazione",
-          description: "I semi germinano e compaiono le radici.",
-          care: "Mantenere caldo e umido in ambiente protetto.",
-        },
-        seedling: {
-          name: "Piantina",
-          description: "Prime vere foglie.",
-          care: "Fornire luce intensa, mantenere il terreno umido.",
-        },
-        vegetative: {
-          name: "Vegetativa",
-          description: "Crescita di foglie e steli.",
-          care: "Pizzicare le punte, annaffiare regolarmente, concimare leggermente.",
-        },
-        harvest: {
-          name: "Raccolta",
-          description: "Raccolta continua delle foglie.",
-          care: "Raccogliere foglie e steli secondo necessità. Potare per evitare la fioritura e la diffusione.",
-        },
-      },
-    },
-  },
-  careTips: {
-    watering: "Lasciare asciugare il terreno tra un'annaffiatura e l'altra.",
-    fertilizing: "Concimare leggermente ogni 3-4 settimane.",
-    sunlight: "Pieno sole (6+ ore al giorno).",
-    spacing: "45-60 cm di distanza.",
-    temperature: "Ama il caldo, tollera la siccità.",
-    soilPH: "6,0-7,0",
-    harvesting: "Raccogliere regolarmente per stimolare la crescita.",
-  },
-  commonProblems: {
-    "Marciume radicale": "Eccesso d'acqua – garantire un buon drenaggio.",
-    "Crescita esile": "Poca luce – fornire più sole.",
-    "Danni da gelo": "Proteggere dal gelo nelle regioni fredde.",
-  },
-}; 
+  "sage.name": "Salvia",
+  "sage.phases.germination.description": "I semi germinano e compaiono le radici.",
+  "sage.phases.germination.care": "Mantenere caldo e umido. Usare vassoi o piccoli vasi, coprire leggermente con terra.",
+  "sage.phases.germination.soil.watering.description": "Irrigazione giornaliera per mantenere il terreno umido.",
+  "sage.phases.germination.soil.fertilizing.description": "Nessuna fertilizzazione durante la germinazione.",
+  "sage.phases.germination.hydro.watering.description": "Flusso continuo in idroponica.",
+  "sage.phases.germination.hydro.fertilizing.description": "Nessun nutriente durante la germinazione.",
+  "sage.phases.germination.coco.watering.description": "Irrigazione giornaliera in cocco.",
+  "sage.phases.germination.coco.fertilizing.description": "Nessuna fertilizzazione durante la germinazione.",
+  "sage.phases.seedling.description": "Prime vere foglie.",
+  "sage.phases.seedling.care": "Fornire luce intensa, mantenere il terreno umido ma non inzuppato.",
+  "sage.phases.seedling.soil.watering.description": "Irrigazione ogni 3 giorni.",
+  "sage.phases.seedling.soil.fertilizing.description": "Nessuna fertilizzazione durante questa fase.",
+  "sage.phases.seedling.hydro.watering.description": "Flusso continuo in idroponica.",
+  "sage.phases.seedling.hydro.fertilizing.description": "Nutrienti leggeri, EC basso, ogni 7 giorni.",
+  "sage.phases.seedling.coco.watering.description": "Irrigazione giornaliera in cocco.",
+  "sage.phases.seedling.coco.fertilizing.description": "Nutrienti leggeri, EC basso, ogni 7 giorni.",
+  "sage.phases.vegetative.description": "Crescita di foglie e steli.",
+  "sage.phases.vegetative.care": "Pizzicare le punte, annaffiare regolarmente, concimare leggermente ogni 3-4 settimane.",
+  "sage.phases.vegetative.soil.watering.description": "Irrigazione ogni 4 giorni, lasciare asciugare il terreno.",
+  "sage.phases.vegetative.soil.fertilizing.description": "Concimazione leggera ogni 21 giorni.",
+  "sage.phases.vegetative.hydro.watering.description": "Flusso continuo in idroponica.",
+  "sage.phases.vegetative.hydro.fertilizing.description": "Nutrienti moderati, EC 0,8-1,0, ogni 21 giorni.",
+  "sage.phases.vegetative.coco.watering.description": "Irrigazione ogni 2 giorni in cocco.",
+  "sage.phases.vegetative.coco.fertilizing.description": "Nutrienti moderati, EC 0,8-1,0, ogni 21 giorni.",
+  "sage.phases.harvest.description": "Raccolta continua delle foglie.",
+  "sage.phases.harvest.care": "Raccogliere regolarmente per stimolare la crescita. Evitare la fioritura.",
+  "sage.phases.harvest.soil.watering.description": "Irrigazione ogni 4 giorni.",
+  "sage.phases.harvest.soil.fertilizing.description": "Concimazione leggera ogni 21 giorni.",
+  "sage.phases.harvest.hydro.watering.description": "Flusso continuo in idroponica.",
+  "sage.phases.harvest.hydro.fertilizing.description": "Nutrienti moderati, EC 0,8-1,0, ogni 21 giorni.",
+  "sage.phases.harvest.coco.watering.description": "Irrigazione ogni 2 giorni in cocco.",
+  "sage.phases.harvest.coco.fertilizing.description": "Nutrienti moderati, EC 0,8-1,0, ogni 21 giorni.",
+  "sage.seasonalTiming.temperate_north.plantingWindow.description": "Semina in primavera, dopo le gelate.",
+  "sage.seasonalTiming.temperate_north.harvestWindow.description": "Raccolta durante l'estate.",
+  "sage.seasonalTiming.mediterranean.plantingWindow.description": "Semina molto precoce fino a fine primavera.",
+  "sage.seasonalTiming.mediterranean.harvestWindow.description": "Raccolta in estate.",
+  "sage.careTips.watering": "Lasciare asciugare il terreno tra un'annaffiatura e l'altra.",
+  "sage.careTips.fertilizing": "Concimare leggermente ogni 3-4 settimane.",
+  "sage.careTips.sunlight": "Pieno sole (6+ ore al giorno).",
+  "sage.careTips.spacing": "45-60 cm di distanza.",
+  "sage.careTips.temperature": "Ama il caldo, tollera la siccità.",
+  "sage.careTips.soilPH": "6,0-7,0.",
+  "sage.careTips.harvesting": "Raccogliere regolarmente per stimolare la crescita.",
+  "sage.commonProblems.rootRot": "Marciume radicale: Eccesso d'acqua – garantire un buon drenaggio.",
+  "sage.commonProblems.leggyGrowth": "Crescita esile: Poca luce – fornire più sole.",
+  "sage.commonProblems.frostDamage": "Danni da gelo: Proteggere dal gelo nelle regioni fredde."
+};

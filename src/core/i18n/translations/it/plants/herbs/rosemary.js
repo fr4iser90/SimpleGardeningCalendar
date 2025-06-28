@@ -1,119 +1,49 @@
 export default {
-  name: "Rosmarino",
-  category: "category.herbs",
-  tags: ["tag.perennial"],
-  environments: {
-    indoor: {
-      phases: {
-        germination: {
-          name: "Germinazione",
-          description: "I semi germinano e compaiono le radici.",
-          care: "Mantenere caldo e umido. Usare vassoi o piccoli vasi, coprire leggermente con terra.",
-        },
-        seedling: {
-          name: "Piantina",
-          description: "Prime vere foglie.",
-          care: "Fornire luce intensa, mantenere il terreno umido ma non inzuppato.",
-        },
-        vegetative: {
-          name: "Vegetativa",
-          description: "Crescita di foglie e steli.",
-          care: "Pizzicare le punte, annaffiare regolarmente, concimare leggermente ogni 3-4 settimane.",
-        },
-        harvest: {
-          name: "Raccolta",
-          description: "Raccolta continua dei rametti.",
-          care: "Raccogliere regolarmente per stimolare la crescita. Evitare la fioritura.",
-        },
-      },
-    },
-    outdoor: {
-      phases: {
-        germination: {
-          name: "Germinazione",
-          description: "I semi germinano e compaiono le radici.",
-          care: "Seminare dopo l'ultima gelata, mantenere il terreno umido fino alla comparsa delle piantine.",
-        },
-        seedling: {
-          name: "Piantina",
-          description: "Prime vere foglie.",
-          care: "Posizionare a mezz'ombra, proteggere dal sole forte e dal vento.",
-        },
-        vegetative: {
-          name: "Vegetativa",
-          description: "Crescita di foglie e steli.",
-          care: "Annaffiare regolarmente, concimare leggermente, pizzicare le punte per la ramificazione.",
-        },
-        harvest: {
-          name: "Raccolta",
-          description: "Raccolta continua dei rametti.",
-          care: "Raccogliere i rametti secondo necessità. Potare per evitare la fioritura e la diffusione.",
-        },
-      },
-      seasonalTiming: {
-        temperate_north: {
-          plantingWindow: {
-            start: '04-01',
-            end: '06-01',
-            description: "Semina in primavera, dopo le gelate",
-          },
-          harvestWindow: {
-            start: "06-15",
-            end: "09-30",
-            description: "Raccolta durante l'estate",
-          },
-        },
-        mediterranean: {
-          plantingWindow: {
-            start: '02-15',
-            end: '05-01',
-            description: "Semina molto precoce fino a fine primavera",
-          },
-          harvestWindow: {
-            start: "05-15",
-            end: "09-30",
-            description: "Raccolta in estate",
-          },
-        },
-      },
-    },
-    greenhouse: {
-      phases: {
-        germination: {
-          name: "Germinazione",
-          description: "I semi germinano e compaiono le radici.",
-          care: "Mantenere caldo e umido in ambiente protetto.",
-        },
-        seedling: {
-          name: "Piantina",
-          description: "Prime vere foglie.",
-          care: "Fornire luce intensa, mantenere il terreno umido.",
-        },
-        vegetative: {
-          name: "Vegetativa",
-          description: "Crescita di foglie e steli.",
-          care: "Pizzicare le punte, annaffiare regolarmente, concimare leggermente.",
-        },
-        harvest: {
-          name: "Raccolta",
-          description: "Raccolta continua dei rametti.",
-          care: "Raccogliere i rametti secondo necessità. Potare per evitare la fioritura e la diffusione.",
-        },
-      },
-    },
-  },
-  careTips: {
-    watering: "Lasciare asciugare il terreno tra un'annaffiatura e l'altra.",
-    fertilizing: "Concimare leggermente ogni 3-4 settimane.",
-    sunlight: "Pieno sole (6+ ore al giorno).",
-    spacing: "45-60 cm di distanza.",
-    temperature: "Ama il caldo, proteggere dal gelo.",
-    soilPH: "6,0-7,0",
-    harvesting: "Raccogliere regolarmente per stimolare la crescita.",
-  },
-  commonProblems: {
-    "Marciume radicale": "Eccesso d'acqua – garantire un buon drenaggio.",
-    "Oidio": "Polvere bianca sulle foglie – migliorare l'aerazione.",
-    "Danni da gelo": "Proteggere dal gelo nelle regioni fredde.",
-  },
-}; 
+  "rosemary.name": "Rosmarino",
+  "rosemary.phases.germination.description": "I semi germinano e compaiono le radici.",
+  "rosemary.phases.germination.care": "Mantenere caldo e umido. Usare vassoi o piccoli vasi, coprire leggermente con terra.",
+  "rosemary.phases.germination.soil.watering.description": "Irrigazione giornaliera per mantenere il terreno umido.",
+  "rosemary.phases.germination.soil.fertilizing.description": "Nessuna fertilizzazione durante la germinazione.",
+  "rosemary.phases.germination.hydro.watering.description": "Flusso continuo in idroponica.",
+  "rosemary.phases.germination.hydro.fertilizing.description": "Nessun nutriente durante la germinazione.",
+  "rosemary.phases.germination.coco.watering.description": "Irrigazione giornaliera in cocco.",
+  "rosemary.phases.germination.coco.fertilizing.description": "Nessuna fertilizzazione durante la germinazione.",
+  "rosemary.phases.seedling.description": "Prime vere foglie.",
+  "rosemary.phases.seedling.care": "Fornire luce intensa, mantenere il terreno umido ma non inzuppato.",
+  "rosemary.phases.seedling.soil.watering.description": "Irrigazione ogni 3 giorni.",
+  "rosemary.phases.seedling.soil.fertilizing.description": "Nessuna fertilizzazione durante questa fase.",
+  "rosemary.phases.seedling.hydro.watering.description": "Flusso continuo in idroponica.",
+  "rosemary.phases.seedling.hydro.fertilizing.description": "Nutrienti leggeri, EC basso, ogni 7 giorni.",
+  "rosemary.phases.seedling.coco.watering.description": "Irrigazione giornaliera in cocco.",
+  "rosemary.phases.seedling.coco.fertilizing.description": "Nutrienti leggeri, EC basso, ogni 7 giorni.",
+  "rosemary.phases.vegetative.description": "Crescita di foglie e steli.",
+  "rosemary.phases.vegetative.care": "Pizzicare le punte, annaffiare regolarmente, concimare leggermente ogni 3-4 settimane.",
+  "rosemary.phases.vegetative.soil.watering.description": "Irrigazione ogni 4 giorni, lasciare asciugare il terreno.",
+  "rosemary.phases.vegetative.soil.fertilizing.description": "Concimazione leggera ogni 21 giorni.",
+  "rosemary.phases.vegetative.hydro.watering.description": "Flusso continuo in idroponica.",
+  "rosemary.phases.vegetative.hydro.fertilizing.description": "Nutrienti moderati, EC 0,8-1,0, ogni 21 giorni.",
+  "rosemary.phases.vegetative.coco.watering.description": "Irrigazione ogni 2 giorni in cocco.",
+  "rosemary.phases.vegetative.coco.fertilizing.description": "Nutrienti moderati, EC 0,8-1,0, ogni 21 giorni.",
+  "rosemary.phases.harvest.description": "Raccolta continua dei rametti.",
+  "rosemary.phases.harvest.care": "Raccogliere regolarmente per stimolare la crescita. Evitare la fioritura.",
+  "rosemary.phases.harvest.soil.watering.description": "Irrigazione ogni 4 giorni.",
+  "rosemary.phases.harvest.soil.fertilizing.description": "Concimazione leggera ogni 21 giorni.",
+  "rosemary.phases.harvest.hydro.watering.description": "Flusso continuo in idroponica.",
+  "rosemary.phases.harvest.hydro.fertilizing.description": "Nutrienti moderati, EC 0,8-1,0, ogni 21 giorni.",
+  "rosemary.phases.harvest.coco.watering.description": "Irrigazione ogni 2 giorni in cocco.",
+  "rosemary.phases.harvest.coco.fertilizing.description": "Nutrienti moderati, EC 0,8-1,0, ogni 21 giorni.",
+  "rosemary.seasonalTiming.temperate_north.plantingWindow.description": "Semina in primavera, dopo le gelate.",
+  "rosemary.seasonalTiming.temperate_north.harvestWindow.description": "Raccolta durante l'estate.",
+  "rosemary.seasonalTiming.mediterranean.plantingWindow.description": "Semina molto precoce fino a fine primavera.",
+  "rosemary.seasonalTiming.mediterranean.harvestWindow.description": "Raccolta in estate.",
+  "rosemary.careTips.watering": "Lasciare asciugare il terreno tra un'annaffiatura e l'altra.",
+  "rosemary.careTips.fertilizing": "Concimare leggermente ogni 3-4 settimane.",
+  "rosemary.careTips.sunlight": "Pieno sole (6+ ore al giorno).",
+  "rosemary.careTips.spacing": "45-60 cm di distanza.",
+  "rosemary.careTips.temperature": "Ama il caldo, proteggere dal gelo.",
+  "rosemary.careTips.soilPH": "6,0-7,0",
+  "rosemary.careTips.harvesting": "Raccogliere regolarmente per stimolare la crescita.",
+  "rosemary.commonProblems.rootRot": "Marciume radicale: Eccesso d'acqua – garantire un buon drenaggio.",
+  "rosemary.commonProblems.powderyMildew": "Oidio: Polvere bianca sulle foglie – migliorare l'aerazione.",
+  "rosemary.commonProblems.winterDamage": "Danni da gelo: Proteggere dal gelo nelle regioni fredde."
+};

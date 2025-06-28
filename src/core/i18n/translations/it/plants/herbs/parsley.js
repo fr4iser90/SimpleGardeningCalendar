@@ -1,119 +1,49 @@
 export default {
-  name: "Prezzemolo",
-  category: "category.herbs",
-  tags: ["tag.biennial"],
-  environments: {
-    indoor: {
-      phases: {
-        germination: {
-          name: "Germinazione",
-          description: "I semi germinano e compaiono le radici.",
-          care: "Mantenere caldo e umido. Usare vassoi o piccoli vasi, coprire leggermente con terra.",
-        },
-        seedling: {
-          name: "Piantina",
-          description: "Prime vere foglie.",
-          care: "Fornire luce intensa, mantenere il terreno umido ma non inzuppato.",
-        },
-        vegetative: {
-          name: "Vegetativa",
-          description: "Crescita di foglie e steli.",
-          care: "Pizzicare le punte, annaffiare regolarmente, concimare leggermente ogni 2-3 settimane.",
-        },
-        harvest: {
-          name: "Raccolta",
-          description: "Raccolta continua delle foglie.",
-          care: "Raccogliere regolarmente per stimolare la crescita. Evitare la fioritura.",
-        },
-      },
-    },
-    outdoor: {
-      phases: {
-        germination: {
-          name: "Germinazione",
-          description: "I semi germinano e compaiono le radici.",
-          care: "Seminare dopo l'ultima gelata, mantenere il terreno umido fino alla comparsa delle piantine.",
-        },
-        seedling: {
-          name: "Piantina",
-          description: "Prime vere foglie.",
-          care: "Posizionare a mezz'ombra, proteggere dal sole forte e dal vento.",
-        },
-        vegetative: {
-          name: "Vegetativa",
-          description: "Crescita di foglie e steli.",
-          care: "Annaffiare regolarmente, concimare leggermente, pizzicare le punte per la ramificazione.",
-        },
-        harvest: {
-          name: "Raccolta",
-          description: "Raccolta continua delle foglie.",
-          care: "Raccogliere foglie e steli secondo necessità. La potatura previene la fioritura e la diffusione.",
-        },
-      },
-      seasonalTiming: {
-        temperate_north: {
-          plantingWindow: {
-            start: '04-01',
-            end: '06-01',
-            description: 'Dopo l\'ultima gelata, pianta biennale',
-          },
-          harvestWindow: {
-            start: '05-15',
-            end: '10-15',
-            description: 'Raccolta continua nel primo anno',
-          },
-        },
-        mediterranean: {
-          plantingWindow: {
-            start: '03-01',
-            end: '05-01',
-            description: 'Inizio precoce per pianta biennale',
-          },
-          harvestWindow: {
-            start: '04-15',
-            end: '11-15',
-            description: 'Stagione di raccolta estesa',
-          },
-        },
-      },
-    },
-    greenhouse: {
-      phases: {
-        germination: {
-          name: "Germinazione",
-          description: "I semi germinano e compaiono le radici.",
-          care: "Mantenere caldo e umido in ambiente protetto.",
-        },
-        seedling: {
-          name: "Piantina",
-          description: "Prime vere foglie.",
-          care: "Fornire luce intensa, mantenere il terreno umido.",
-        },
-        vegetative: {
-          name: "Vegetativa",
-          description: "Crescita di foglie e steli.",
-          care: "Pizzicare le punte, annaffiare regolarmente, concimare leggermente.",
-        },
-        harvest: {
-          name: "Raccolta",
-          description: "Raccolta continua delle foglie.",
-          care: "Raccogliere foglie e steli secondo necessità. Potare per evitare la fioritura e la diffusione.",
-        },
-      },
-    },
-  },
-  careTips: {
-    watering: "Mantenere il terreno sempre umido.",
-    fertilizing: "Concimare leggermente ogni 2-3 settimane.",
-    sunlight: "Mezz'ombra o pieno sole.",
-    spacing: "15-30 cm di distanza.",
-    temperature: "Pianta da clima fresco o caldo.",
-    soilPH: "6,0-7,0",
-    harvesting: "Raccogliere regolarmente per stimolare la crescita.",
-  },
-  commonProblems: {
-    "Germinazione lenta": "I semi di prezzemolo germinano lentamente – pazienza.",
-    "Montata a seme": "Fioritura nel secondo anno – raccogliere regolarmente.",
-    "Macchie fogliari": "Malattia fungina – migliorare l'aerazione, evitare irrigazione dall'alto.",
-  },
-}; 
+  "parsley.name": "Prezzemolo",
+  "parsley.phases.germination.description": "I semi germinano e compaiono le radici.",
+  "parsley.phases.germination.care": "Mantenere caldo e umido. Usare vassoi o piccoli vasi, coprire leggermente con terra.",
+  "parsley.phases.germination.soil.watering.description": "Mantenere il terreno umido fino alla comparsa delle piantine.",
+  "parsley.phases.germination.soil.fertilizing.description": "Nessuna fertilizzazione durante la germinazione.",
+  "parsley.phases.germination.hydro.watering.description": "Flusso continuo in idroponica.",
+  "parsley.phases.germination.hydro.fertilizing.description": "Nessun nutriente durante la germinazione.",
+  "parsley.phases.germination.coco.watering.description": "Irrigazione giornaliera in cocco.",
+  "parsley.phases.germination.coco.fertilizing.description": "Nessuna fertilizzazione durante la germinazione.",
+  "parsley.phases.seedling.description": "Prime vere foglie.",
+  "parsley.phases.seedling.care": "Fornire luce intensa, mantenere il terreno umido ma non inzuppato.",
+  "parsley.phases.seedling.soil.watering.description": "Innaffiare quando il centimetro superiore del terreno è asciutto.",
+  "parsley.phases.seedling.soil.fertilizing.description": "Nessun fertilizzante necessario per giovani piantine.",
+  "parsley.phases.seedling.hydro.watering.description": "Flusso continuo, EC basso.",
+  "parsley.phases.seedling.hydro.fertilizing.description": "Nutrienti leggeri, EC 0,5-0,8.",
+  "parsley.phases.seedling.coco.watering.description": "Innaffiamento giornaliero in fibra di cocco.",
+  "parsley.phases.seedling.coco.fertilizing.description": "Alimentazione leggera, EC 0,5-0,8.",
+  "parsley.phases.vegetative.description": "Crescita di foglie e steli.",
+  "parsley.phases.vegetative.care": "Pizzicare le punte per favorire la ramificazione, annaffiare regolarmente, concimare leggermente ogni 2-3 settimane.",
+  "parsley.phases.vegetative.soil.watering.description": "Innaffiare quando i 5 cm superiori del terreno sono asciutti.",
+  "parsley.phases.vegetative.soil.fertilizing.description": "Applicare fertilizzante bilanciato ogni 2-3 settimane.",
+  "parsley.phases.vegetative.hydro.watering.description": "Flusso continuo, EC moderato.",
+  "parsley.phases.vegetative.hydro.fertilizing.description": "Cambio nutrienti settimanale, EC 1,0-1,2.",
+  "parsley.phases.vegetative.coco.watering.description": "Innaffiamento giornaliero in fibra di cocco.",
+  "parsley.phases.vegetative.coco.fertilizing.description": "Alimentazione settimanale, EC 1,0-1,2.",
+  "parsley.phases.harvest.description": "Raccolta continua delle foglie.",
+  "parsley.phases.harvest.care": "Raccogliere regolarmente per stimolare la crescita. Evitare la fioritura.",
+  "parsley.phases.harvest.soil.watering.description": "Innaffiare quando i 5 cm superiori del terreno sono asciutti.",
+  "parsley.phases.harvest.soil.fertilizing.description": "Applicare fertilizzante bilanciato ogni 2-3 settimane.",
+  "parsley.phases.harvest.hydro.watering.description": "Flusso continuo, EC moderato.",
+  "parsley.phases.harvest.hydro.fertilizing.description": "Cambio nutrienti settimanale, EC 1,0-1,2.",
+  "parsley.phases.harvest.coco.watering.description": "Innaffiamento giornaliero in fibra di cocco.",
+  "parsley.phases.harvest.coco.fertilizing.description": "Alimentazione settimanale, EC 1,0-1,2.",
+  "parsley.seasonalTiming.temperate_north.plantingWindow.description": "Dopo l'ultima gelata, pianta biennale.",
+  "parsley.seasonalTiming.temperate_north.harvestWindow.description": "Raccolta continua nel primo anno.",
+  "parsley.seasonalTiming.mediterranean.plantingWindow.description": "Inizio precoce per pianta biennale.",
+  "parsley.seasonalTiming.mediterranean.harvestWindow.description": "Stagione di raccolta estesa.",
+  "parsley.careTips.watering": "Mantenere il terreno sempre umido.",
+  "parsley.careTips.fertilizing": "Concimare leggermente ogni 2-3 settimane.",
+  "parsley.careTips.sunlight": "Mezz'ombra o pieno sole.",
+  "parsley.careTips.spacing": "15-30 cm di distanza.",
+  "parsley.careTips.temperature": "Pianta da clima fresco o caldo.",
+  "parsley.careTips.soilPH": "6,0-7,0.",
+  "parsley.careTips.harvesting": "Raccogliere regolarmente per stimolare la crescita.",
+  "parsley.commonProblems.slowGermination": "Germinazione lenta: I semi di prezzemolo germinano lentamente – pazienza.",
+  "parsley.commonProblems.bolting": "Montata a seme: Fioritura nel secondo anno – raccogliere regolarmente.",
+  "parsley.commonProblems.leafSpots": "Macchie fogliari: Malattia fungina – migliorare l'aerazione, evitare irrigazione dall'alto."
+};

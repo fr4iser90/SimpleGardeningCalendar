@@ -6,413 +6,266 @@
 import { PLANT_TAGS } from '../categories.js';
 
 export const potatoes = {
-  name: 'Potatoes',
+  name: 'potatoes.name',
   category: 'category.vegetables',
-  tags: ['tag.root', 'tag.annual', 'tag.photoperiod'],
+  tags: [PLANT_TAGS.ROOT, PLANT_TAGS.ANNUAL, PLANT_TAGS.PHOTOPERIOD],
   emoji: '🥔',
   environments: {
     indoor: {
       phases: {
         sprouting: {
           days: 14,
-          description: 'Eye sprouting',
-          care: 'Keep seed potatoes in warm, dark place',
+          description: 'potatoes.phases.sprouting.description',
+          care: 'potatoes.phases.sprouting.care',
           editable: true,
           soil: {
             watering: {
               interval: 1,
-              description: 'Keep soil moist during sprouting',
+              description: 'potatoes.phases.sprouting.soil.watering.description',
             },
             fertilizing: {
               interval: 0,
-              description: 'No fertilizing during sprouting',
+              description: 'potatoes.phases.sprouting.soil.fertilizing.description',
             },
           },
           hydro: {
             watering: {
               interval: 0,
-              description: 'Continuous moisture in rockwool or hydroponic system',
+              description: 'potatoes.phases.sprouting.hydro.watering.description',
             },
             fertilizing: {
               interval: 0,
-              description: 'No nutrients during sprouting',
+              description: 'potatoes.phases.sprouting.hydro.fertilizing.description',
             },
           },
           coco: {
             watering: {
               interval: 1,
-              description: 'Keep coco moist during sprouting',
+              description: 'potatoes.phases.sprouting.coco.watering.description',
             },
             fertilizing: {
               interval: 0,
-              description: 'No fertilizing during sprouting',
+              description: 'potatoes.phases.sprouting.coco.fertilizing.description',
             },
           },
         },
         vegetative: {
           days: 30,
-          description: 'Leaf and stem growth',
-          care: 'Start hilling when plants are 6 inches tall',
+          description: 'potatoes.phases.vegetative.description',
+          care: 'potatoes.phases.vegetative.care',
           editable: true,
           soil: {
             watering: {
               interval: 7,
-              description: 'Weekly deep watering',
+              description: 'potatoes.phases.vegetative.soil.watering.description',
             },
             fertilizing: {
               interval: 14,
-              description: 'Fertilize every 2 weeks during vegetative growth',
+              description: 'potatoes.phases.vegetative.soil.fertilizing.description',
             },
           },
           hydro: {
             watering: {
               interval: 0,
-              description: 'Continuous flow, moderate EC',
+              description: 'potatoes.phases.vegetative.hydro.watering.description',
             },
             fertilizing: {
               interval: 14,
-              description: 'Balanced nutrients, EC 1.0-1.2',
+              description: 'potatoes.phases.vegetative.hydro.fertilizing.description',
             },
           },
           coco: {
             watering: {
               interval: 1,
-              description: 'Daily watering in coco',
+              description: 'potatoes.phases.vegetative.coco.watering.description',
             },
             fertilizing: {
               interval: 14,
-              description: 'Balanced feeding, EC 1.0-1.2',
+              description: 'potatoes.phases.vegetative.coco.fertilizing.description',
             },
           },
         },
         tuberization: {
           days: 40,
-          description: 'Tuber formation',
-          care: 'Hill soil around base every 2-3 weeks',
+          description: 'potatoes.phases.tuberization.description',
+          care: 'potatoes.phases.tuberization.care',
           editable: true,
           soil: {
             watering: {
               interval: 7,
-              description: 'Weekly deep watering',
+              description: 'potatoes.phases.tuberization.soil.watering.description',
             },
             fertilizing: {
               interval: 21,
-              description: 'Fertilize every 3 weeks during tuberization',
+              description: 'potatoes.phases.tuberization.soil.fertilizing.description',
             },
           },
           hydro: {
             watering: {
               interval: 0,
-              description: 'Continuous flow, moderate EC',
+              description: 'potatoes.phases.tuberization.hydro.watering.description',
             },
             fertilizing: {
               interval: 21,
-              description: 'Balanced nutrients, EC 1.0-1.2',
+              description: 'potatoes.phases.tuberization.hydro.fertilizing.description',
             },
           },
           coco: {
             watering: {
               interval: 1,
-              description: 'Daily watering in coco',
+              description: 'potatoes.phases.tuberization.coco.watering.description',
             },
             fertilizing: {
               interval: 21,
-              description: 'Balanced feeding, EC 1.0-1.2',
+              description: 'potatoes.phases.tuberization.coco.fertilizing.description',
             },
           },
         },
         bulking: {
           days: 45,
-          description: 'Tuber growth',
-          care: 'Maintain consistent moisture, continue hilling',
+          description: 'potatoes.phases.bulking.description',
+          care: 'potatoes.phases.bulking.care',
           editable: true,
           soil: {
             watering: {
               interval: 7,
-              description: 'Weekly deep watering',
+              description: 'potatoes.phases.bulking.soil.watering.description',
             },
             fertilizing: {
               interval: 21,
-              description: 'Fertilize every 3 weeks during bulking',
+              description: 'potatoes.phases.bulking.soil.fertilizing.description',
             },
           },
           hydro: {
             watering: {
               interval: 0,
-              description: 'Continuous flow, moderate EC',
+              description: 'potatoes.phases.bulking.hydro.watering.description',
             },
             fertilizing: {
               interval: 21,
-              description: 'Balanced nutrients, EC 1.0-1.2',
+              description: 'potatoes.phases.bulking.hydro.fertilizing.description',
             },
           },
           coco: {
             watering: {
               interval: 1,
-              description: 'Daily watering in coco',
+              description: 'potatoes.phases.bulking.coco.watering.description',
             },
             fertilizing: {
               interval: 21,
-              description: 'Balanced feeding, EC 1.0-1.2',
+              description: 'potatoes.phases.bulking.coco.fertilizing.description',
             },
           },
         },
         maturation: {
           days: 20,
-          description: 'Plant dies back, tubers ready',
-          care: 'Reduce watering when plants start yellowing',
+          description: 'potatoes.phases.maturation.description',
+          care: 'potatoes.phases.maturation.care',
           editable: true,
           soil: {
             watering: {
               interval: 0,
-              description: 'No watering needed during maturation',
+              description: 'potatoes.phases.maturation.soil.watering.description',
             },
             fertilizing: {
               interval: 0,
-              description: 'No fertilizing during maturation',
+              description: 'potatoes.phases.maturation.soil.fertilizing.description',
             },
           },
           hydro: {
             watering: {
               interval: 0,
-              description: 'No watering needed during maturation',
+              description: 'potatoes.phases.maturation.hydro.watering.description',
             },
             fertilizing: {
               interval: 0,
-              description: 'No nutrients during maturation',
+              description: 'potatoes.phases.maturation.hydro.fertilizing.description',
             },
           },
           coco: {
             watering: {
               interval: 0,
-              description: 'No watering needed during maturation',
+              description: 'potatoes.phases.maturation.coco.watering.description',
             },
             fertilizing: {
               interval: 0,
-              description: 'No fertilizing during maturation',
+              description: 'potatoes.phases.maturation.coco.fertilizing.description',
             },
-
           },
         },
         harvest: {
           days: 30,
-          description: 'Tuber maturation',
-          care: 'Harvest when foliage dies back',
+          description: 'potatoes.phases.harvest.description',
+          care: 'potatoes.phases.harvest.care',
           editable: true,
           soil: {
-            watering: { interval: 7, description: 'Stop watering 1-2 weeks before harvest' },
-            fertilizing: { interval: 0, description: 'No fertilizing before harvest' },
+            watering: { 
+              interval: 7, 
+              description: 'potatoes.phases.harvest.soil.watering.description' 
+            },
+            fertilizing: { 
+              interval: 0, 
+              description: 'potatoes.phases.harvest.soil.fertilizing.description' 
+            },
           },
           hydro: {
-            watering: { interval: 0, description: 'Flush with plain water before harvest' },
-            fertilizing: { interval: 0, description: 'No nutrients before harvest' },
+            watering: { 
+              interval: 0, 
+              description: 'potatoes.phases.harvest.hydro.watering.description' 
+            },
+            fertilizing: { 
+              interval: 0, 
+              description: 'potatoes.phases.harvest.hydro.fertilizing.description' 
+            },
           },
           coco: {
-            watering: { interval: 1, description: 'Daily watering in coco before harvest' },
-            fertilizing: { interval: 0, description: 'No fertilizing before harvest' },
+            watering: { 
+              interval: 1, 
+              description: 'potatoes.phases.harvest.coco.watering.description' 
+            },
+            fertilizing: { 
+              interval: 0, 
+              description: 'potatoes.phases.harvest.coco.fertilizing.description' 
+            },
           },
-        }
+        },
       },
     },
     outdoor: {
       phases: {
         sprouting: {
-          days: 14,
-          description: 'Eye sprouting',
-          care: 'Keep seed potatoes in warm, dark place',
+          start: '03-15',
+          end: '05-15',
+          description: 'potatoes.phases.sprouting.description',
+          care: 'potatoes.phases.sprouting.care',
           editable: false,
-          soil: {
-            watering: {
-              interval: 1,
-              description: 'Keep soil moist during sprouting',
-            },
-            fertilizing: {
-              interval: 0,
-              description: 'No fertilizing during sprouting',
-            },
-          },
-          hydro: {
-            watering: {
-              interval: 0,
-              description: 'Continuous moisture in rockwool or hydroponic system',
-            },
-            fertilizing: {
-              interval: 0,
-              description: 'No nutrients during sprouting',
-            },
-          },
-          coco: {
-            watering: {
-              interval: 1,
-              description: 'Keep coco moist during sprouting',
-            },
-            fertilizing: {
-              interval: 0,
-              description: 'No fertilizing during sprouting',
-            },
-          },
         },
         vegetative: {
-          days: 30,
-          description: 'Leaf and stem growth',
-          care: 'Start hilling when plants are 6 inches tall',
+          description: 'potatoes.phases.vegetative.description',
+          care: 'potatoes.phases.vegetative.care',
           editable: false,
-          soil: {
-            watering: {
-              interval: 7,
-              description: 'Weekly deep watering',
-            },
-            fertilizing: {
-              interval: 14,
-              description: 'Fertilize every 2 weeks during vegetative growth',
-            },
-          },
-          hydro: {
-            watering: {
-              interval: 0,
-              description: 'Continuous flow, moderate EC',
-            },
-            fertilizing: {
-              interval: 14,
-              description: 'Balanced nutrients, EC 1.0-1.2',
-            },
-          },
-          coco: {
-            watering: {
-              interval: 1,
-              description: 'Daily watering in coco',
-            },
-            fertilizing: {
-              interval: 14,
-              description: 'Balanced feeding, EC 1.0-1.2',
-            },
-          },
         },
         tuberization: {
-          days: 40,
-          description: 'Tuber formation',
-          care: 'Hill soil around base every 2-3 weeks',
+          description: 'potatoes.phases.tuberization.description',
+          care: 'potatoes.phases.tuberization.care',
           editable: false,
-          soil: {
-            watering: {
-              interval: 7,
-              description: 'Weekly deep watering',
-            },
-            fertilizing: {
-              interval: 21,
-              description: 'Fertilize every 3 weeks during tuberization',
-            },
-          },
-          hydro: {
-            watering: {
-              interval: 0,
-              description: 'Continuous flow, moderate EC',
-            },
-            fertilizing: {
-              interval: 21,
-              description: 'Balanced nutrients, EC 1.0-1.2',
-            },
-          },
-          coco: {
-            watering: {
-              interval: 1,
-              description: 'Daily watering in coco',
-            },
-            fertilizing: {
-              interval: 21,
-              description: 'Balanced feeding, EC 1.0-1.2',
-            },
-          },
         },
         bulking: {
-          days: 45,
-          description: 'Tuber growth',
-          care: 'Maintain consistent moisture, continue hilling',
+          description: 'potatoes.phases.bulking.description',
+          care: 'potatoes.phases.bulking.care',
           editable: false,
-          soil: {
-            watering: {
-              interval: 7,
-              description: 'Weekly deep watering',
-            },
-            fertilizing: {
-              interval: 21,
-              description: 'Fertilize every 3 weeks during bulking',
-            },
-          },
-          hydro: {
-            watering: {
-              interval: 0,
-              description: 'Continuous flow, moderate EC',
-            },
-            fertilizing: {
-              interval: 21,
-              description: 'Balanced nutrients, EC 1.0-1.2',
-            },
-          },
-          coco: {
-            watering: {
-              interval: 1,
-              description: 'Daily watering in coco',
-            },
-            fertilizing: {
-              interval: 21,
-              description: 'Balanced feeding, EC 1.0-1.2',
-            },
-          },
         },
         maturation: {
-          days: 20,
-          description: 'Plant dies back, tubers ready',
-          care: 'Reduce watering when plants start yellowing',
+          description: 'potatoes.phases.maturation.description',
+          care: 'potatoes.phases.maturation.care',
           editable: false,
-          soil: {
-            watering: {
-              interval: 0,
-              description: 'No watering needed during maturation',
-            },
-            fertilizing: {
-              interval: 0,
-              description: 'No fertilizing during maturation',
-            },
-          },
-          hydro: {
-            watering: {
-              interval: 0,
-              description: 'No watering needed during maturation',
-            },
-            fertilizing: {
-              interval: 0,
-              description: 'No nutrients during maturation',
-            },
-          },
-          coco: {
-            watering: {
-              interval: 0,
-              description: 'No watering needed during maturation',
-            },
-            fertilizing: {
-              interval: 0,
-              description: 'No fertilizing during maturation',
-            },
-          },
         },
         harvest: {
-          days: 30,
-          description: 'Tuber maturation',
-          care: 'Harvest when foliage dies back',
+          start: '07-01',
+          end: '09-30',
+          description: 'potatoes.phases.harvest.description',
+          care: 'potatoes.phases.harvest.care',
           editable: true,
-          soil: {
-            watering: { interval: 7, description: 'Stop watering 1-2 weeks before harvest' },
-            fertilizing: { interval: 0, description: 'No fertilizing before harvest' },
-          },
-          hydro: {
-            watering: { interval: 0, description: 'Flush with plain water before harvest' },
-            fertilizing: { interval: 0, description: 'No nutrients before harvest' },
-          },
-          coco: {
-            watering: { interval: 1, description: 'Daily watering in coco before harvest' },
-            fertilizing: { interval: 0, description: 'No fertilizing before harvest' },
-          },
         },
       },
       seasonalTiming: {
@@ -420,24 +273,24 @@ export const potatoes = {
           plantingWindow: {
             start: '03-15',
             end: '05-15',
-            description: 'Early to mid spring planting',
+            description: 'potatoes.seasonalTiming.temperate_north.plantingWindow.description',
           },
           harvestWindow: {
             start: '07-01',
             end: '09-30',
-            description: 'Harvest throughout summer',
+            description: 'potatoes.seasonalTiming.temperate_north.harvestWindow.description',
           },
         },
         mediterranean: {
           plantingWindow: {
             start: '02-01',
             end: '04-15',
-            description: 'Very early spring planting',
+            description: 'potatoes.seasonalTiming.mediterranean.plantingWindow.description',
           },
           harvestWindow: {
             start: '05-01',
             end: '08-31',
-            description: 'Harvest before autumn rains',
+            description: 'potatoes.seasonalTiming.mediterranean.harvestWindow.description',
           },
         },
       },
@@ -446,222 +299,57 @@ export const potatoes = {
       phases: {
         sprouting: {
           days: 14,
-          description: 'Eye sprouting',
-          care: 'Keep seed potatoes in warm, dark place',
+          description: 'potatoes.phases.sprouting.description',
+          care: 'potatoes.phases.sprouting.care',
           editable: true,
-          soil: {
-            watering: {
-              interval: 1,
-              description: 'Keep soil moist during sprouting',
-            },
-            fertilizing: {
-              interval: 0,
-              description: 'No fertilizing during sprouting',
-            },
-          },
-          hydro: {
-            watering: {
-              interval: 0,
-              description: 'Continuous moisture in rockwool or hydroponic system',
-            },
-            fertilizing: {
-              interval: 0,
-              description: 'No nutrients during sprouting',
-            },
-          },
-          coco: {
-            watering: {
-              interval: 1,
-              description: 'Keep coco moist during sprouting',
-            },
-            fertilizing: {
-              interval: 0,
-              description: 'No fertilizing during sprouting',
-            },
-          },
         },
         vegetative: {
           days: 30,
-          description: 'Leaf and stem growth',
-          care: 'Start hilling when plants are 6 inches tall',
+          description: 'potatoes.phases.vegetative.description',
+          care: 'potatoes.phases.vegetative.care',
           editable: true,
-          soil: {
-            watering: {
-              interval: 7,
-              description: 'Weekly deep watering',
-            },
-            fertilizing: {
-              interval: 14,
-              description: 'Fertilize every 2 weeks during vegetative growth',
-            },
-          },
-          hydro: {
-            watering: {
-              interval: 0,
-              description: 'Continuous flow, moderate EC',
-            },
-            fertilizing: {
-              interval: 14,
-              description: 'Balanced nutrients, EC 1.0-1.2',
-            },
-          },
-          coco: {
-            watering: {
-              interval: 1,
-              description: 'Daily watering in coco',
-            },
-            fertilizing: {
-              interval: 14,
-              description: 'Balanced feeding, EC 1.0-1.2',
-            },
-          },
         },
         tuberization: {
           days: 40,
-          description: 'Tuber formation',
-          care: 'Hill soil around base every 2-3 weeks',
+          description: 'potatoes.phases.tuberization.description',
+          care: 'potatoes.phases.tuberization.care',
           editable: true,
-          soil: {
-            watering: {
-              interval: 7,
-              description: 'Weekly deep watering',
-            },
-            fertilizing: {
-              interval: 21,
-              description: 'Fertilize every 3 weeks during tuberization',
-            },
-          },
-          hydro: {
-            watering: {
-              interval: 0,
-              description: 'Continuous flow, moderate EC',
-            },
-            fertilizing: {
-              interval: 21,
-              description: 'Balanced nutrients, EC 1.0-1.2',
-            },
-          },
-          coco: {
-            watering: {
-              interval: 1,
-              description: 'Daily watering in coco',
-            },
-            fertilizing: {
-              interval: 21,
-              description: 'Balanced feeding, EC 1.0-1.2',
-            },
-          },
         },
         bulking: {
           days: 45,
-          description: 'Tuber growth',
-          care: 'Maintain consistent moisture, continue hilling',
+          description: 'potatoes.phases.bulking.description',
+          care: 'potatoes.phases.bulking.care',
           editable: true,
-          soil: {
-            watering: {
-              interval: 7,
-              description: 'Weekly deep watering',
-            },
-            fertilizing: {
-              interval: 21,
-              description: 'Fertilize every 3 weeks during bulking',
-            },
-          },
-          hydro: {
-            watering: {
-              interval: 0,
-              description: 'Continuous flow, moderate EC',
-            },
-            fertilizing: {
-              interval: 21,
-              description: 'Balanced nutrients, EC 1.0-1.2',
-            },
-          },
-          coco: {
-            watering: {
-              interval: 1,
-              description: 'Daily watering in coco',
-            },
-            fertilizing: {
-              interval: 21,
-              description: 'Balanced feeding, EC 1.0-1.2',
-            },
-          },
         },
         maturation: {
           days: 20,
-          description: 'Plant dies back, tubers ready',
-          care: 'Reduce watering when plants start yellowing',
+          description: 'potatoes.phases.maturation.description',
+          care: 'potatoes.phases.maturation.care',
           editable: true,
-          soil: {
-            watering: {
-              interval: 0,
-              description: 'No watering needed during maturation',
-            },
-            fertilizing: {
-              interval: 0,
-              description: 'No fertilizing during maturation',
-            },
-          },
-          hydro: {
-            watering: {
-              interval: 0,
-              description: 'No watering needed during maturation',
-            },
-            fertilizing: {
-              interval: 0,
-              description: 'No nutrients during maturation',
-            },
-          },
-          coco: {
-            watering: {
-              interval: 0,
-              description: 'No watering needed during maturation',
-            },
-            fertilizing: {
-              interval: 0,
-              description: 'No fertilizing during maturation',
-            },
-          },
         },
         harvest: {
           days: 30,
-          description: 'Tuber maturation',
-          care: 'Harvest when foliage dies back',
+          description: 'potatoes.phases.harvest.description',
+          care: 'potatoes.phases.harvest.care',
           editable: true,
-          soil: {
-            watering: { interval: 7, description: 'Stop watering 1-2 weeks before harvest' },
-            fertilizing: { interval: 0, description: 'No fertilizing before harvest' },
-          },
-          hydro: {
-            watering: { interval: 0, description: 'Flush with plain water before harvest' },
-            fertilizing: { interval: 0, description: 'No nutrients before harvest' },
-          },
-          coco: {
-            watering: { interval: 1, description: 'Daily watering in coco before harvest' },
-            fertilizing: { interval: 0, description: 'No fertilizing before harvest' },
-          },
-        }
+        },
       },
     },
   },
   careTips: {
-    watering: 'Regular watering (1-2 inches per week), avoid waterlogging',
-    fertilizing:
-      'High phosphorus fertilizer at planting, side-dress when flowering',
-    sunlight: 'Full sun (6+ hours daily)',
-    spacing: '12 inches apart, rows 3 feet apart',
-    soil: 'Well-draining, slightly acidic soil (pH 5.0-6.0)',
-    hilling: 'Hill soil around stems to prevent green tubers',
+    watering: 'potatoes.careTips.watering',
+    fertilizing: 'potatoes.careTips.fertilizing',
+    sunlight: 'potatoes.careTips.sunlight',
+    spacing: 'potatoes.careTips.spacing',
+    soil: 'potatoes.careTips.soil',
+    hilling: 'potatoes.careTips.hilling',
   },
   commonProblems: {
-    Scab: 'Keep soil pH below 5.5, maintain even moisture',
-    'Hollow Heart': 'Irregular growing conditions - maintain consistent care',
-    'Green Tubers': 'Exposure to light - ensure proper hilling',
-    'Colorado Potato Beetle':
-      'Orange and black striped beetles - hand pick or use row covers',
+    scab: 'potatoes.commonProblems.scab',
+    hollowHeart: 'potatoes.commonProblems.hollowHeart',
+    greenTubers: 'potatoes.commonProblems.greenTubers',
+    coloradoPotatoBeetle: 'potatoes.commonProblems.coloradoPotatoBeetle',
   },
 };
 
 export default potatoes;
-
