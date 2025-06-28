@@ -4,7 +4,7 @@
  */
 
 import { getPlantRegistry } from './plants/index.js';
-import { getTranslatedPlantData } from '../i18n/index.js';
+import { getTranslatedPlantData, getAllTranslatedPlantData } from '../i18n/index.js';
 import { SEASONAL_WINDOWS } from './connection.js';
 import { t } from '../i18n/index.js';
 
@@ -65,12 +65,15 @@ export async function validatePlantingDate(plantKey, environment, plantingDate, 
     return { isValid: true, message: t('timing.indoor_growing_date_flexible') };
   }
   
-  const plantData = await getPlantDataForEnvironment(plantKey, environment);
-  if (!plantData || !plantData.seasonalTiming || !plantData.seasonalTiming[region]) {
+  // Get translated plant data ONLY - no fallbacks to English DB
+  const allTranslatedPlants = await getAllTranslatedPlantData();
+  const plantData = allTranslatedPlants.get(plantKey);
+  
+  if (!plantData || !plantData.environments || !plantData.environments.outdoor || !plantData.environments.outdoor.seasonalTiming || !plantData.environments.outdoor.seasonalTiming[region]) {
     return { isValid: false, message: t('timing.no_seasonal_restrictions_found') };
   }
   
-  const seasonal = plantData.seasonalTiming[region];
+  const seasonal = plantData.environments.outdoor.seasonalTiming[region];
   const plantingWindow = seasonal.plantingWindow;
   
   if (!plantingWindow) {
@@ -88,7 +91,10 @@ export async function validatePlantingDate(plantKey, environment, plantingDate, 
     return { 
       isValid: true, 
       message: t('timing.good_timing', { description: t(plantingWindow.description) }),
-      recommendedPeriod: t(plantingWindow.description)
+      recommendedPeriod: t(plantingWindow.description),
+      start: plantingWindow.start,
+      end: plantingWindow.end,
+      description: plantingWindow.description
     };
   } else {
     return { 

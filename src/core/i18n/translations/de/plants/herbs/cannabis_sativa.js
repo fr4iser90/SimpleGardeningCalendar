@@ -71,6 +71,32 @@ export default {
           care: "Wetterabhängig, Trichome prüfen, bei Regen schnell trocknen.",
         },
       },
+      seasonalTiming: {
+        temperate_north: {
+          plantingWindow: {
+            start: '04-01',
+            end: '05-15',
+            description: 'Früher Start für lange Blüte erforderlich',
+          },
+          harvestWindow: {
+            start: '10-15',
+            end: '11-30',
+            description: 'Späte Ernte aufgrund langer Blüte',
+          },
+        },
+        mediterranean: {
+          plantingWindow: {
+            start: '03-01',
+            end: '05-01',
+            description: 'Früher Start für verlängerte Saison',
+          },
+          harvestWindow: {
+            start: '10-01',
+            end: '12-15',
+            description: 'Verlängerte Erntesaison',
+          },
+        },
+      },
     },
     greenhouse: {
       phases: {

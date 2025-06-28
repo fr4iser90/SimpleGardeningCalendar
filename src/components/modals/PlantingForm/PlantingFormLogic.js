@@ -389,6 +389,11 @@ export async function checkSeasonalTiming() {
     seasonalWarning.classList.remove('hidden');
     seasonalWarning.className = 'p-3 bg-green-50 dark:bg-green-900 border border-green-200 dark:border-green-700 rounded mb-3';
     
+    // Format dates for display even when timing is perfect
+    const startDate = await formatDateForDisplay(validation.start || '03-15');
+    const endDate = await formatDateForDisplay(validation.end || '05-15');
+    const description = t(validation.description || 'timing.early_to_mid_spring');
+    
     if (seasonalMessage) {
       seasonalMessage.innerHTML = `
         <div class="flex items-start">
@@ -403,7 +408,8 @@ export async function checkSeasonalTiming() {
     if (seasonalDetails) {
       seasonalDetails.innerHTML = `
         <div class="mt-2 text-sm text-green-700 dark:text-green-300">
-          <p><strong>${t('timing.ideal_for')}:</strong> ${validation.recommendedPeriod || t('timing.current_season')}</p>
+          <p><strong>${t('timing.ideal_for')}:</strong> ${description}</p>
+          <p class="mt-1"><strong>${t('timing.recommended_window')}:</strong> ${startDate} - ${endDate}</p>
           ${getPlantingTips(plantTypeSelect.value, region) ? `<p class="mt-1"><strong>${t('timing.tips')}:</strong> ${getPlantingTips(plantTypeSelect.value, region)}</p>` : ''}
         </div>
       `;
