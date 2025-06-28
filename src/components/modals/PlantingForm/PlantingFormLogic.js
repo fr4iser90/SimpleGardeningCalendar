@@ -306,8 +306,16 @@ export function checkSeasonalTiming() {
     }
     return;
   }
-  
+
+  // Nur für Outdoor anzeigen
   const envKey = getEnvironmentKey(environmentSelect?.value);
+  if (envKey !== 'outdoor') {
+    seasonalWarning.classList.add('hidden');
+    if (seasonalMessage) seasonalMessage.innerHTML = '';
+    if (seasonalDetails) seasonalDetails.innerHTML = '';
+    return;
+  }
+
   const validation = validatePlantingDate(plantTypeSelect.value, envKey, dateInput.value);
   const region = regionSelect?.value || 'temperate_north';
   
