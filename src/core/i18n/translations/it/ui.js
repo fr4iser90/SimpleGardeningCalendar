@@ -681,5 +681,45 @@ export const it = {
     'google.quota.modal.calendar_creation.wait_hours_info': 'Se anche la creazione manuale non funziona, attendi alcune ore e riprova. Google rimuoverà automaticamente il limite dopo un po\' di tempo.',
 
     'plants.category_title': 'Piante {category}',
+
+    // Google Setup Detailed Help
+    'google.setup.cloud_console.title': 'Configurazione Google Cloud Console',
+    'google.setup.cloud_console.step1': 'Vai su Google Cloud Console',
+    'google.setup.cloud_console.step2': 'Crea un nuovo progetto o seleziona uno esistente',
+    'google.setup.cloud_console.step2_desc': 'Clicca sul menu a tendina del progetto in alto e crea un nuovo progetto',
+    'google.setup.cloud_console.step3': 'Abilita l\'API Google Calendar',
+    'google.setup.cloud_console.step4': 'Crea un ID Client OAuth 2.0',
+    'google.setup.cloud_console.step4_desc': 'Clicca "Create Credentials" → "OAuth 2.0 Client IDs" → "Web application"',
+    'google.setup.cloud_console.step5': 'Aggiungi il tuo dominio alle "Origini JavaScript autorizzate"',
+    'google.setup.cloud_console.step5_desc': 'Aggiungi: https://garden.fr4iser.com (per usare questa app). Solo per sviluppo locale: http://localhost:5173',
+    'google.setup.cloud_console.step5_desc2': 'Aggiungi il tuo dominio di produzione durante il deployment',
+    'google.setup.client_id.title': 'Ottieni ID Client',
+    'google.setup.client_id.description': 'Dopo aver creato l\'ID Client OAuth 2.0, riceverai un ID Client che assomiglia a questo:',
+    'google.setup.client_id.example': '123456789-abc123def456.apps.googleusercontent.com',
+    'google.setup.client_id.instruction': 'Copia questo ID Client e incollalo nel campo sopra.',
+    'google.setup.troubleshooting.title': 'Risoluzione Problemi',
+    'google.setup.troubleshooting.redirect_mismatch': 'Assicurati di aver aggiunto il dominio corretto alle origini autorizzate',
+    'google.setup.troubleshooting.access_denied': 'Verifica che l\'API Calendar sia abilitata',
+    'google.setup.troubleshooting.invalid_client': 'Verifica che il tuo ID Client sia corretto',
+    'google.setup.troubleshooting.calendar_not_showing': 'Assicurati di essere connesso con l\'account Google corretto',
+    'google.setup.security.title': 'Avviso di Sicurezza',
+    'google.setup.security.description': 'Il tuo ID Client è memorizzato localmente nel tuo browser ed è sicuro da usare. Non condividere mai il tuo Client Secret (se presente) - è necessario solo l\'ID Client.',
+    
+    // Google Calendar API Limits
+    'google.api_limits.title': '📊 Limiti API Google Calendar',
+    'google.api_limits.calendar_creation.title': '🎯 Limiti Creazione Calendari:',
+    'google.api_limits.calendar_creation.limit': '~50 calendari per account Google (varia per tipo di account)',
+    'google.api_limits.calendar_creation.error': 'Errore: "quotaExceeded" - Hai raggiunto il limite di creazione calendari',
+    'google.api_limits.calendar_creation.solution': 'Soluzione: Crea manualmente un calendario giardino in Google Calendar, l\'app lo rileverà automaticamente',
+    'google.api_limits.event_creation.title': '📅 Limiti Creazione Eventi:',
+    'google.api_limits.event_creation.limit': '~10.000.000 eventi al giorno (praticamente illimitato per uso normale)',
+    'google.api_limits.event_creation.no_problem': 'Nessun problema ad aggiungere migliaia di eventi giardino',
+    'google.api_limits.api_calls.title': '🔄 Limiti Chiamate API:',
+    'google.api_limits.api_calls.limit': '~1.000.000 chiamate API al giorno',
+    'google.api_limits.api_calls.sufficient': 'Sufficiente per uso normale del calendario giardino',
+    'google.api_limits.pro_tip.title': '💡 Suggerimento Pro:',
+    'google.api_limits.pro_tip.text': 'Se ricevi un errore "quotaExceeded" quando crei calendari, crea semplicemente manualmente un calendario giardino in Google Calendar con un nome come "🌱 Giardino" o "🌱 Garden". L\'app lo rileverà automaticamente e lo userà!',
+    
+    // Google Setup Modal Additional
 };
   

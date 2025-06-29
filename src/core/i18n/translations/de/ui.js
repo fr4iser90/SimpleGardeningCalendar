@@ -475,7 +475,7 @@ export const de = {
     'google.setup.cloud_console.step4': 'OAuth 2.0 Client ID erstellen',
     'google.setup.cloud_console.step4_desc': 'Klicken Sie "Create Credentials" → "OAuth 2.0 Client IDs" → "Web application"',
     'google.setup.cloud_console.step5': 'Fügen Sie Ihre Domain zu "Authorized JavaScript origins" hinzu',
-    'google.setup.cloud_console.step5_desc': 'Fügen Sie hinzu: http://localhost:5173 (für Entwicklung)',
+    'google.setup.cloud_console.step5_desc': 'Fügen Sie hinzu: https://garden.fr4iser.com (für Nutzer dieser App). Nur für lokale Entwicklung: http://localhost:5173',
     'google.setup.cloud_console.step5_desc2': 'Fügen Sie Ihre Produktions-Domain beim Deployment hinzu',
     'google.setup.client_id.title': 'Client ID erhalten',
     'google.setup.client_id.description': 'Nach dem Erstellen der OAuth 2.0 Client ID erhalten Sie eine Client ID, die so aussieht:',
