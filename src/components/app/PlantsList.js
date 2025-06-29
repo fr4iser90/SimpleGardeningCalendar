@@ -46,7 +46,7 @@ export async function showMyPlantsModal() {
               <div class="flex justify-between items-start mb-2">
                 <h3 class="font-semibold dark:text-white">${displayName}</h3>
                 <div class="flex items-center space-x-2">
-                  <span class="text-xs px-2 py-1 bg-green-100 dark:bg-green-900 text-green-800 dark:text-green-200 rounded">${planting.category}</span>
+                  <span class="text-xs px-2 py-1 bg-green-100 dark:bg-green-900 text-green-800 dark:text-green-200 rounded">${t(planting.category)}</span>
                   <button onclick="deletePlant(${planting.id})" class="text-red-500 hover:text-red-700 text-sm p-1 rounded hover:bg-red-50 dark:hover:bg-red-900/20" title="${deleteButtonText}">
                     🗑️
                   </button>
@@ -269,7 +269,7 @@ export async function viewPlantDetails(plantingId) {
               <div class="space-y-2 text-sm">
                 <div><strong>${labelType}:</strong> ${planting.plantName}</div>
                 ${planting.customName ? `<div><strong>${t('plants_list.custom_name_label')}:</strong> ${planting.customName}</div>` : ''}
-                <div><strong>${t('plants_list.category_label')}:</strong> ${planting.category}</div>
+                <div><strong>${t('plants_list.category_label')}:</strong> ${t(planting.category)}</div>
                 <div><strong>${labelLocation}:</strong> ${planting.location}</div>
                 <div><strong>${labelStarted}:</strong> ${formatDateWithLocale(planting.startDate)}</div>
                 <div><strong>${labelExpectedCompletion}:</strong> ${formatDateWithLocale(planting.completionDate)}</div>
