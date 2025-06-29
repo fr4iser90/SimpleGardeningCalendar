@@ -266,7 +266,71 @@ export function initializeGoogleStatusBar() {
     
     try {
       await googleCalendar.attemptSignIn(true);
+      
+      // NEU: Warten bis die Authentifizierung vollständig abgeschlossen ist
       updateStatusBarActivity(t('google.activity.connection_established'), false);
+      
+      // KRITISCH: Aktive Warteschleife bis die Authentifizierung vollständig ist
+      const { getAuthState } = await import('../../services/GoogleCalendar/GoogleCalendarApi.js');
+      
+      let attempts = 0;
+      const maxAttempts = 10; // Maximal 10 Sekunden warten
+      
+      while (attempts < maxAttempts) {
+        const { isSignedIn } = getAuthState();
+        
+        if (isSignedIn) {
+          console.log(`✅ Authentication completed after ${attempts + 1} attempts`);
+          break;
+        }
+        
+        console.log(`⏳ Waiting for authentication to complete... (attempt ${attempts + 1}/${maxAttempts})`);
+        await new Promise(resolve => setTimeout(resolve, 1000)); // 1 Sekunde warten
+        attempts++;
+      }
+      
+      // Finale Prüfung
+      const { isSignedIn: finalAuthState } = getAuthState();
+      if (!finalAuthState) {
+        throw new Error('Authentication timeout - please try again');
+      }
+      
+      // NEU: Automatische Kalender-Erkennung nach Reconnect
+      updateStatusBarActivity(t('google.activity.checking_calendar_setup'), true);
+      
+      const { autoDetectAndMatchCalendars } = await import('../../services/GoogleCalendar/GoogleCalendarWizard.js');
+      const { googleCalendarSettings } = await import('../../services/GoogleCalendar/GoogleCalendarSettings.js');
+      
+      const settings = googleCalendarSettings.load();
+      
+      // Prüfe ob Kalender-Mappings existieren
+      if (!settings.calendarMappings || Object.keys(settings.calendarMappings).length === 0) {
+        console.log('🔍 No calendar mappings found after reconnect - running auto-detection...');
+        try {
+          const detectionResult = await autoDetectAndMatchCalendars();
+          const calendarCount = Object.keys(detectionResult.matched).length;
+          showNotification(`✅ Calendar setup complete after reconnect: ${calendarCount} calendars configured`, 'success');
+          
+          // Automatischer Sync nach Kalender-Setup
+          updateStatusBarActivity(t('google.activity.autosync_after_reconnect'), true);
+          const { performBidirectionalSync } = await import('../../services/GoogleCalendar/GoogleCalendarSync.js');
+          const syncResult = await performBidirectionalSync();
+          showNotification(`🔄 AutoSync after reconnect: ${syncResult.exported || 0} exported, ${syncResult.imported || 0} imported`, 'success');
+          updateStatusBarActivity(t('google.activity.autosync_complete_after_reconnect', { 
+            exported: syncResult.exported || 0, 
+            imported: syncResult.imported || 0 
+          }), false);
+          
+        } catch (error) {
+          console.error('Failed to auto-detect calendars after reconnect:', error);
+          showNotification('⚠️ Calendar setup failed after reconnect: ' + error.message, 'warning');
+          updateStatusBarActivity(t('google.activity.autosync_failed_after_reconnect', { error: error.message }), false);
+        }
+      } else {
+        console.log('✅ Calendar mappings already exist after reconnect');
+        updateStatusBarActivity(t('google.activity.connection_established'), false);
+      }
+      
     } catch (error) {
       console.error('Google Calendar reconnect failed:', error);
       showNotification(t('google.reconnect_failed'), 'error');

@@ -16,19 +16,29 @@ export async function showEventDetails(event) {
   if (event.extendedProps.plantingId) {
     const notes = await getPlantNotes(event.extendedProps.plantingId);
     notesHtml = `
-      <div class="mt-4">
-        <h3 class="font-semibold mb-2 dark:text-white">${t('plants_list.notes')}</h3>
-        <div class="space-y-2 max-h-32 overflow-y-auto">
-          ${notes.map(note => `
-            <div class="text-sm bg-blue-50 dark:bg-blue-900 border border-blue-200 dark:border-blue-700 p-2 rounded">
-              <div class="text-xs text-gray-500 dark:text-gray-400">${format(new Date(note.date), 'MMM d, yyyy h:mm a')}</div>
-              <div class="mt-1">${note.note}</div>
+      <div class="mt-6">
+        <h3 class="text-lg font-semibold mb-3 dark:text-white flex items-center">
+          <span class="mr-2">📝</span>
+          ${t('plants_list.notes')}
+        </h3>
+        <div class="space-y-3 max-h-48 overflow-y-auto">
+          ${notes.length > 0 ? notes.map(note => `
+            <div class="bg-blue-50 dark:bg-blue-900/30 border-l-4 border-blue-400 p-3 rounded-r-lg">
+              <div class="text-xs text-gray-500 dark:text-gray-400 mb-1">
+                ${format(new Date(note.date), 'MMM d, yyyy h:mm a')}
+              </div>
+              <div class="text-sm dark:text-gray-200">${note.note}</div>
             </div>
-          `).join('')}
+          `).join('') : `
+            <div class="text-center text-gray-500 dark:text-gray-400 py-4">
+              ${t('plants.no_notes')}
+            </div>
+          `}
         </div>
-        <div class="mt-2">
-          <textarea id="newNote" class="w-full p-2 border rounded dark:bg-gray-700 dark:border-gray-600 dark:text-white" rows="2" placeholder="${t('plants.add_note')}..."></textarea>
-          <button onclick="addNote(${event.extendedProps.plantingId})" class="mt-1 px-3 py-1 bg-green-600 text-white rounded hover:bg-green-700">
+        <div class="mt-4">
+          <textarea id="newNote" class="w-full p-3 border border-gray-300 dark:border-gray-600 rounded-lg dark:bg-gray-700 dark:text-white resize-none focus:ring-2 focus:ring-blue-500 focus:border-transparent" rows="3" placeholder="${t('plants.add_note')}..."></textarea>
+          <button onclick="addNote(${event.extendedProps.plantingId})" class="mt-2 px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors duration-200 flex items-center">
+            <span class="mr-2">➕</span>
             ${t('btn.add_note')}
           </button>
         </div>
@@ -42,29 +52,66 @@ export async function showEventDetails(event) {
       let customDurationInfo = '';
       
       if (planting.customPhaseDurations) {
-        customDurationInfo = `<div class="text-xs text-purple-600 dark:text-purple-400 mt-1">
-          ${t('event.details.custom_phase_durations')}
-        </div>`;
+        customDurationInfo = `
+          <div class="mt-3 p-3 bg-purple-100 dark:bg-purple-900/30 border border-purple-200 dark:border-purple-700 rounded-lg">
+            <div class="flex items-center text-sm text-purple-700 dark:text-purple-300">
+              <span class="mr-2">⏱️</span>
+              ${t('event.details.custom_phase_durations')}
+            </div>
+          </div>
+        `;
       }
       
       plantingInfo = `
-        <div class="p-3 bg-blue-50 dark:bg-blue-900 border border-blue-200 dark:border-blue-700 rounded mt-2 text-sm">
-          <strong>${t('event.details.plant')}</strong> ${displayName}${planting.customName ? ` (${t(planting.plantName)})` : ''}<br>
-          <strong>${t('event.details.category')}</strong> ${t(planting.category)}<br>
-          <strong>${t('event.details.environment')}</strong> ${t(planting.environment)}<br>
-          ${planting.location ? `<strong>${t('event.details.location')}</strong> ${planting.location}<br>` : ''}
-          <strong>${t('event.details.current_phase')}</strong> ${t('phase.' + planting.currentPhase)}<br>
-          <strong>${t('event.details.started')}</strong> ${formatDateWithLocale(planting.startDate)}<br>
-          <strong>${t('event.details.expected_completion')}</strong> ${formatDateWithLocale(planting.completionDate)}
+        <div class="bg-gradient-to-r from-blue-50 to-indigo-50 dark:from-blue-900/20 dark:to-indigo-900/20 border border-blue-200 dark:border-blue-700 rounded-lg p-4">
+          <h3 class="text-lg font-semibold mb-3 dark:text-white flex items-center">
+            <span class="mr-2">🌱</span>
+            ${t('event.details.plant_info')}
+          </h3>
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-3 text-sm">
+            <div class="flex justify-between">
+              <span class="font-medium text-gray-600 dark:text-gray-300">${t('event.details.plant')}:</span>
+              <span class="dark:text-white">${displayName}${planting.customName ? ` (${t(planting.plantName)})` : ''}</span>
+            </div>
+            <div class="flex justify-between">
+              <span class="font-medium text-gray-600 dark:text-gray-300">${t('event.details.category')}:</span>
+              <span class="dark:text-white">${t(planting.category)}</span>
+            </div>
+            <div class="flex justify-between">
+              <span class="font-medium text-gray-600 dark:text-gray-300">${t('event.details.environment')}:</span>
+              <span class="dark:text-white">${t(planting.environment)}</span>
+            </div>
+            ${planting.location ? `
+              <div class="flex justify-between">
+                <span class="font-medium text-gray-600 dark:text-gray-300">${t('event.details.location')}:</span>
+                <span class="dark:text-white">${planting.location}</span>
+              </div>
+            ` : ''}
+            <div class="flex justify-between">
+              <span class="font-medium text-gray-600 dark:text-gray-300">${t('event.details.current_phase')}:</span>
+              <span class="dark:text-white">${t('phase.' + planting.currentPhase)}</span>
+            </div>
+            <div class="flex justify-between">
+              <span class="font-medium text-gray-600 dark:text-gray-300">${t('event.details.started')}:</span>
+              <span class="dark:text-white">${formatDateWithLocale(planting.startDate)}</span>
+            </div>
+            <div class="flex justify-between">
+              <span class="font-medium text-gray-600 dark:text-gray-300">${t('event.details.expected_completion')}:</span>
+              <span class="dark:text-white">${formatDateWithLocale(planting.completionDate)}</span>
+            </div>
+          </div>
           ${customDurationInfo}
         </div>
       `;
 
       plantingStatus = `
-        <div class="mt-4">
-          <h3 class="font-semibold mb-2 dark:text-white">${t('planting.status.title')}</h3>
-          <div class="p-3 bg-yellow-50 dark:bg-yellow-900 border border-yellow-200 dark:border-yellow-700 rounded">
-            <select id="plantingStatus" class="w-full p-2 border rounded dark:bg-gray-700 dark:border-gray-600 dark:text-white" onchange="updateStatus(${event.extendedProps.plantingId}, this.value)">
+        <div class="mt-6">
+          <h3 class="text-lg font-semibold mb-3 dark:text-white flex items-center">
+            <span class="mr-2">📊</span>
+            ${t('planting.status.title')}
+          </h3>
+          <div class="bg-yellow-50 dark:bg-yellow-900/20 border border-yellow-200 dark:border-yellow-700 rounded-lg p-4">
+            <select id="plantingStatus" class="w-full p-3 border border-gray-300 dark:border-gray-600 rounded-lg dark:bg-gray-700 dark:text-white focus:ring-2 focus:ring-blue-500 focus:border-transparent" onchange="updateStatus(${event.extendedProps.plantingId}, this.value)">
               <option value="active" ${planting.status === 'active' ? 'selected' : ''}>${t('planting.status.active')}</option>
               <option value="completed" ${planting.status === 'completed' ? 'selected' : ''}>${t('planting.status.completed')}</option>
               <option value="failed" ${planting.status === 'failed' ? 'selected' : ''}>${t('planting.status.failed')}</option>
@@ -76,32 +123,51 @@ export async function showEventDetails(event) {
   }
 
   modal.innerHTML = `
-    <div class="bg-white dark:bg-gray-800 rounded-lg p-6 max-w-md w-full max-h-[90vh] overflow-y-auto">
-      <div class="flex justify-between items-start mb-4">
-        <h2 class="text-xl font-semibold dark:text-white">${event.title}</h2>
-        <span class="px-2 py-1 rounded text-sm text-white" style="background-color: ${event.backgroundColor};">
-          ${t('task.' + event.extendedProps.type)}
-        </span>
+    <div class="bg-white dark:bg-gray-800 rounded-xl p-6 max-w-2xl w-full max-h-[90vh] overflow-y-auto shadow-2xl">
+      <!-- Header -->
+      <div class="flex justify-between items-start mb-6">
+        <div class="flex-1">
+          <h2 class="text-2xl font-bold dark:text-white mb-2">${event.title}</h2>
+          <div class="flex items-center space-x-2">
+            <span class="px-3 py-1 rounded-full text-sm font-medium text-white" style="background-color: ${event.backgroundColor};">
+              ${t('task.' + event.extendedProps.type)}
+            </span>
+            <span class="text-sm text-gray-500 dark:text-gray-400">
+              ${format(new Date(event.start), 'EEEE, MMMM d, yyyy')}
+            </span>
+          </div>
+        </div>
+        <button class="text-gray-400 hover:text-gray-600 dark:hover:text-gray-200 transition-colors duration-200" onclick="this.closest('.fixed').remove()">
+          <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+          </svg>
+        </button>
       </div>
-      <div class="space-y-3 dark:text-gray-200">
-        <div class="p-3 bg-gray-50 dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded">
-          <p class="text-sm">
-            <strong>${t('event.details.date')}</strong> ${format(new Date(event.start), 'MMMM d, yyyy')}
-          </p>
-        </div>
+
+      <!-- Content -->
+      <div class="space-y-6">
         ${plantingInfo}
-        <div class="p-3 bg-green-50 dark:bg-green-900 border border-green-200 dark:border-green-700 rounded text-sm">
-          <strong>${t('event.details.description')}</strong><br>
-          <div class="mt-1 whitespace-pre-wrap">${event.extendedProps.description || t('event.details.no_description')}</div>
+        
+        <!-- Description -->
+        <div class="bg-green-50 dark:bg-green-900/20 border border-green-200 dark:border-green-700 rounded-lg p-4">
+          <h3 class="text-lg font-semibold mb-3 dark:text-white flex items-center">
+            <span class="mr-2">📋</span>
+            ${t('event.details.description')}
+          </h3>
+          <div class="text-sm dark:text-gray-200 whitespace-pre-wrap leading-relaxed">${event.extendedProps.description || t('event.details.no_description')}</div>
         </div>
+
         ${plantingStatus}
         ${notesHtml}
       </div>
-      <div class="flex justify-between mt-6">
-        <button class="px-4 py-2 bg-red-600 text-white rounded hover:bg-red-700" onclick="deleteEvent(${event.id}, ${event.extendedProps.plantingId})">
+
+      <!-- Footer -->
+      <div class="flex justify-between mt-8 pt-6 border-t border-gray-200 dark:border-gray-700">
+        <button class="px-6 py-3 bg-red-600 text-white rounded-lg hover:bg-red-700 transition-colors duration-200 flex items-center" onclick="deleteEvent(${event.id}, ${event.extendedProps.plantingId})">
+          <span class="mr-2">🗑️</span>
           ${t('btn.delete')}
         </button>
-        <button class="px-4 py-2 text-gray-600 dark:text-gray-300" onclick="this.closest('.fixed').remove()">
+        <button class="px-6 py-3 bg-gray-300 dark:bg-gray-600 text-gray-700 dark:text-gray-200 rounded-lg hover:bg-gray-400 dark:hover:bg-gray-500 transition-colors duration-200" onclick="this.closest('.fixed').remove()">
           ${t('btn.close')}
         </button>
       </div>
