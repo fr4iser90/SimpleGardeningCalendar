@@ -148,7 +148,7 @@ async function handlePlantingSubmission() {
     plantingData.environment
   );
   
-  if (calendarId && calendarId !== selectedCalendarId) {
+  if (calendarId && String(calendarId) !== String(selectedCalendarId)) {
     console.log('🌱 [AddEventModal] Switching to calendar:', calendarId, 'from:', selectedCalendarId);
     
     // Update localStorage
