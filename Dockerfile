@@ -45,10 +45,10 @@ RUN chown -R nginx:nginx /usr/share/nginx/html && \
 # Switch to non-root user
 USER nginx
 
-# Expose port
-EXPOSE 80
+# Expose port for HTTPS
+EXPOSE 443
 
-# Health check
+# Health check for HTTP (SSL termination may be handled externally in production)
 HEALTHCHECK --interval=30s --timeout=3s --start-period=5s --retries=3 \
     CMD curl -f http://localhost/ || exit 1
 
