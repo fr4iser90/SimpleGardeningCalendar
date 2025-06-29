@@ -4,6 +4,7 @@ import { addPlanting } from '../../services/PlantService.js';
 import { showButtonSpinner, hideButtonSpinner } from '../ui/LoadingSpinner.js';
 import { DB_NAME, DB_VERSION } from '../../core/db/connection.js';
 import { createPlantingForm, getPlantingFormData } from './PlantingForm';
+import { sanitizeHTML } from '../../utils/sanitize.js';
 
 export async function showAddEventModal(date, preselectedType = null) {
   const modal = document.createElement('div');
@@ -12,7 +13,7 @@ export async function showAddEventModal(date, preselectedType = null) {
 
   const eventTypeValue = preselectedType === 'planting' ? 'planting' : 'custom';
 
-  modal.innerHTML = `
+  modal.innerHTML = sanitizeHTML(`
     <div class="bg-white dark:bg-gray-800 rounded-lg p-6 max-w-4xl w-full max-h-[90vh] overflow-y-auto">
       <h2 class="text-xl font-semibold mb-4 dark:text-white">${t('modal.add_event.title')}</h2>
       <form id="eventForm" class="space-y-4">
@@ -61,7 +62,7 @@ export async function showAddEventModal(date, preselectedType = null) {
         </div>
       </form>
     </div>
-  `;
+  `);
 
   document.body.appendChild(modal);
 

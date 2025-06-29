@@ -1,4 +1,5 @@
 import { t } from '../../core/i18n/index.js';
+import { sanitizeHTML } from '../../utils/sanitize.js';
 
 /**
  * Notifications - Central notification system
@@ -140,11 +141,11 @@ export function showToastNotification(message, type = 'info', options = {}) {
     '<button class="ml-2 text-white hover:text-gray-200" onclick="this.parentElement.remove()">✕</button>' : '';
 
   notification.className = `${positionClasses[position]} ${colorClasses[type]} text-white px-6 py-3 rounded-lg shadow-lg z-50 transform transition-all duration-300 translate-x-full border`;
-  notification.innerHTML = `
+  notification.innerHTML = sanitizeHTML(`
     <div class="flex items-center">
       ${icon} <span class="ml-2">${message}</span>${closeButton}
     </div>
-  `;
+  `);
   
   document.body.appendChild(notification);
   

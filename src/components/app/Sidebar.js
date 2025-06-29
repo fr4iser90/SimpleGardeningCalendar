@@ -5,6 +5,7 @@ import { openDB } from 'idb';
 import { DB_NAME, DB_VERSION } from '../../core/db/connection.js';
 import { t } from '../../core/i18n/index.js';
 import { formatDateWithLocale } from '../../core/db/utils.js';
+import { sanitizeHTML } from '../../utils/sanitize.js';
 
 export async function loadPlantCategories(t) {
   const { PLANT_CATEGORIES, getPlantingsByCategory } = await import('../../core/db/index.js');
@@ -23,10 +24,10 @@ export async function loadPlantCategories(t) {
     
     const categoryEl = document.createElement('div');
     categoryEl.className = 'flex justify-between items-center p-2 bg-gray-50 dark:bg-gray-700 rounded cursor-pointer hover:bg-gray-100 dark:hover:bg-gray-600';
-    categoryEl.innerHTML = `
+    categoryEl.innerHTML = sanitizeHTML(`
       <span class="dark:text-gray-200">${translatedCategory}</span>
       <span class="text-sm text-gray-500 dark:text-gray-400">${activeCount}</span>
-    `;
+    `);
     
     categoryEl.addEventListener('click', () => {
       showCategoryPlantsModal(category, plantings);
@@ -68,10 +69,10 @@ export async function loadUpcomingTasks(t) {
   if (!document.getElementById(toggleId)) {
     const toggleDiv = document.createElement('div');
     toggleDiv.className = 'mb-2 flex items-center';
-    toggleDiv.innerHTML = `
+    toggleDiv.innerHTML = sanitizeHTML(`
       <input type="checkbox" id="${toggleId}" class="mr-2" ${showAllCalendars ? 'checked' : ''}>
       <label for="${toggleId}" class="text-xs text-gray-600 dark:text-gray-300 cursor-pointer">${t('ui.show_all_calendars')}</label>
-    `;
+    `);
     tasksContainer.parentNode.insertBefore(toggleDiv, tasksContainer);
     document.getElementById(toggleId).addEventListener('change', (e) => {
       localStorage.setItem('showAllCalendarsForTasks', e.target.checked ? 'true' : 'false');
@@ -82,7 +83,7 @@ export async function loadUpcomingTasks(t) {
   tasksContainer.innerHTML = '';
 
   if (upcomingEvents.length === 0) {
-    tasksContainer.innerHTML = `<p class="text-gray-500 dark:text-gray-400 text-sm">${t('ui.no_upcoming_tasks')}</p>`;
+    tasksContainer.innerHTML = sanitizeHTML(`<p class="text-gray-500 dark:text-gray-400 text-sm">${t('ui.no_upcoming_tasks')}</p>`);
     return;
   }
 
@@ -92,10 +93,10 @@ export async function loadUpcomingTasks(t) {
     const eventDate = new Date(event.date);
     const isToday = eventDate.toDateString() === today.toDateString();
     const dateStr = isToday ? 'Today' : formatDateWithLocale(eventDate);
-    taskEl.innerHTML = `
+    taskEl.innerHTML = sanitizeHTML(`
       <div class="font-medium dark:text-white">${event.title}</div>
       <div class="text-gray-500 dark:text-gray-400">${dateStr}</div>
-    `;
+    `);
     tasksContainer.appendChild(taskEl);
   });
 }
@@ -104,7 +105,7 @@ export async function showCategoryPlantsModal(category, plantings) {
   const modal = document.createElement('div');
   modal.className = 'fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center p-4 z-50';
   
-  modal.innerHTML = `
+  modal.innerHTML = sanitizeHTML(`
     <div class="bg-white dark:bg-gray-800 rounded-lg p-6 max-w-4xl w-full max-h-[80vh] overflow-y-auto">
       <div class="flex justify-between items-center mb-4">
         <h2 class="text-xl font-semibold dark:text-white">${t('plants.category_title', { category })}</h2>
@@ -142,7 +143,7 @@ export async function showCategoryPlantsModal(category, plantings) {
         }
       </div>
     </div>
-  `;
+  `);
   
   document.body.appendChild(modal);
   
