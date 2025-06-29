@@ -616,6 +616,7 @@ export const en = {
     'plant_details.growing_phases': 'Growing Phases',
     'plant_details.care_tips': 'Care Tips',
     'plant_details.common_problems': 'Common Problems',
+    'plant_details.solutions': 'Solutions',
     'plant_details.start_growing': 'Start Growing',
     'plant_details.close': 'Close',
     'plant_details.no_phases_available': 'No phases available',

@@ -178,7 +178,7 @@ export function showPlantDetailsModal(plant, plantKey) {
           <h3 class="font-semibold mb-2 dark:text-white">${t('plant_details.tags')}</h3>
           <div class="flex flex-wrap gap-2">
             ${plant.tags.map(tag => `
-              <span class="px-2 py-1 bg-blue-100 dark:bg-blue-900 text-blue-800 dark:text-blue-200 rounded text-sm">${tag}</span>
+              <span class="px-2 py-1 bg-blue-100 dark:bg-blue-900 text-blue-800 dark:text-blue-200 rounded text-sm">${t(tag)}</span>
             `).join('')}
           </div>
         </div>

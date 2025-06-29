@@ -595,6 +595,7 @@ export const fr = {
     'plant_details.growing_phases': 'Phases de Croissance',
     'plant_details.care_tips': 'Conseils d\'Entretien',
     'plant_details.common_problems': 'Problèmes Courants',
+    'plant_details.solutions': 'Solutions',
     'plant_details.start_growing': 'Commencer à Cultiver',
     'plant_details.close': 'Fermer',
     'plant_details.no_phases_available': 'Aucune phase disponible',

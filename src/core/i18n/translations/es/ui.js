@@ -651,6 +651,7 @@ export const es = {
     'plant_details.growing_phases': 'Fases de Crecimiento',
     'plant_details.care_tips': 'Consejos de Cuidado',
     'plant_details.common_problems': 'Problemas Comunes',
+    'plant_details.solutions': 'Soluciones',
     'plant_details.start_growing': 'Comenzar a Cultivar',
     'plant_details.close': 'Cerrar',
     'plant_details.no_phases_available': 'No hay fases disponibles',
