@@ -175,6 +175,9 @@ async function handlePlantingSubmission() {
   
   showNotification(t('notification.planting_added'), 'success');
   document.dispatchEvent(new CustomEvent('refreshCalendar'));
+  
+  // Trigger events to update all plant-related UI components
+  document.dispatchEvent(new CustomEvent('refreshSidebar'));
 }
 
 async function handleCustomEventSubmission(formData) {

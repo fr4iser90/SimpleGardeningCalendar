@@ -77,8 +77,20 @@ function getIntelligentEventDescription(phaseName, plantData, phaseData) {
   // Add common problems for final phases
   if (isFinalPhase(phaseName, plantData) && plantData.commonProblems) {
     description += `\n\n${t('plant_details.common_problems') || 'Common Problems to Watch For:'}\n`;
-    Object.entries(plantData.commonProblems).forEach(([problem, solution]) => {
-      description += `- ${problem}: ${solution}\n`;
+    Object.entries(plantData.commonProblems).forEach(([problemKey, problemObj]) => {
+      if (problemObj && typeof problemObj === 'object') {
+        description += `- ${t(problemObj.name)}`;
+        if (problemObj.description) {
+          description += `: ${t(problemObj.description)}`;
+        }
+        if (problemObj.solutions) {
+          description += `\n  Solutions: ${t(problemObj.solutions)}`;
+        }
+        description += '\n';
+      } else {
+        // Fallback falls nur ein String gespeichert ist
+        description += `- ${problemKey}: ${problemObj}\n`;
+      }
     });
   }
   

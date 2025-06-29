@@ -722,5 +722,17 @@ export const it = {
     'google.api_limits.pro_tip.text': 'Se ricevi un errore "quotaExceeded" quando crei calendari, crea semplicemente manualmente un calendario giardino in Google Calendar con un nome come "🌱 Giardino" o "🌱 Garden". L\'app lo rileverà automaticamente e lo userà!',
     
     // Google Setup Modal Additional
+
+    // Google Calendar Activity Status
+    'google.activity.fetching_calendars': 'Recupero calendari Google...',
+    'google.activity.cleaning_old_calendars': 'Pulizia calendari vecchi...',
+    'google.activity.deleted_old_calendar': 'Calendario vecchio eliminato: {name}',
+    'google.activity.refreshing_calendars': 'Aggiornamento lista calendari...',
+    'google.activity.setup_single_calendar': 'Configurazione calendario giardino singolo...',
+    'google.activity.setup_area_based_calendars': 'Configurazione calendari per area...',
+    'google.activity.setting_up': 'Configurazione {name}...',
+    'google.activity.cleaning_unused_calendars': 'Pulizia calendari inutilizzati...',
+    'google.activity.setup_complete': 'Configurazione calendari completata: {matched} trovati, {created} creati',
+    'google.activity.deleted_unused_calendar': 'Calendario inutilizzato eliminato: {name}',
 };
   

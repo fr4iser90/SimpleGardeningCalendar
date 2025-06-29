@@ -129,6 +129,11 @@ function resolvePlantTranslations(plantData, translations) {
         if (translations[translationKey]) {
           obj[key] = translations[translationKey];
         }
+        // Special handling for category - keep it as is if it's a system category
+        else if (key === 'category' && value.startsWith('category.')) {
+          // Keep the category as is - don't translate system categories
+          obj[key] = value;
+        }
       } else if (typeof value === 'object' && value !== null && !Array.isArray(value)) {
         // Recursively resolve nested objects
         resolveTranslations(value, currentPath);

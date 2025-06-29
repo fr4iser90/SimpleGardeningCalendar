@@ -739,5 +739,16 @@ export const fr = {
 
     // ThemeToggle.js
 
+    // Google Calendar Activity Status
+    'google.activity.fetching_calendars': 'Récupération des calendriers Google...',
+    'google.activity.cleaning_old_calendars': 'Nettoyage des anciens calendriers...',
+    'google.activity.deleted_old_calendar': 'Ancien calendrier supprimé : {name}',
+    'google.activity.refreshing_calendars': 'Actualisation de la liste des calendriers...',
+    'google.activity.setup_single_calendar': 'Configuration du calendrier de jardin unique...',
+    'google.activity.setup_area_based_calendars': 'Configuration des calendriers par zone...',
+    'google.activity.setting_up': 'Configuration de {name}...',
+    'google.activity.cleaning_unused_calendars': 'Nettoyage des calendriers inutilisés...',
+    'google.activity.setup_complete': 'Configuration des calendriers terminée : {matched} trouvés, {created} créés',
+    'google.activity.deleted_unused_calendar': 'Calendrier inutilisé supprimé : {name}',
 };
   

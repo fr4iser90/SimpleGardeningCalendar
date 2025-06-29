@@ -46,6 +46,9 @@ export async function importGardenTemplate(templateData, startYear = new Date().
   const events = [];
   const currentLang = getCurrentLanguage();
   
+  // Get the currently selected local calendar ID
+  const selectedCalendarId = localStorage.getItem('selectedLocalCalendarId');
+  
   for (const task of templateData.tasks) {
     // Create date for the specified year
     const [month, day] = task.date.split('-').map(Number);
@@ -60,7 +63,8 @@ export async function importGardenTemplate(templateData, startYear = new Date().
       templateCategory: templateData.category,
       templateName: templateData.name,
       language: currentLang,
-      isTemplate: true
+      isTemplate: true,
+      calendarId: selectedCalendarId // Add the calendar ID so events appear in the correct calendar
     };
     
     // Add event to database

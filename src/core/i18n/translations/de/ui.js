@@ -801,5 +801,17 @@ export const de = {
     // Google Quota Messages
     'google.quota.limit_reached': 'Quota Limit erreicht',
     'google.quota.create_manually': 'Bitte manuell Garten-Kalender in Google Calendar erstellen',
+
+    // Google Calendar Activity Status
+    'google.activity.fetching_calendars': 'Google Kalender werden abgerufen...',
+    'google.activity.cleaning_old_calendars': 'Alte Kalender werden bereinigt...',
+    'google.activity.deleted_old_calendar': 'Alten Kalender gelöscht: {name}',
+    'google.activity.refreshing_calendars': 'Kalenderliste wird aktualisiert...',
+    'google.activity.setup_single_calendar': 'Einzelnen Garten-Kalender einrichten...',
+    'google.activity.setup_area_based_calendars': 'Bereichsbasierte Kalender einrichten...',
+    'google.activity.setting_up': '{name} wird eingerichtet...',
+    'google.activity.cleaning_unused_calendars': 'Ungenutzte Kalender werden bereinigt...',
+    'google.activity.setup_complete': 'Kalender-Einrichtung abgeschlossen: {matched} gefunden, {created} erstellt',
+    'google.activity.deleted_unused_calendar': 'Ungenutzten Kalender gelöscht: {name}',
 };
   

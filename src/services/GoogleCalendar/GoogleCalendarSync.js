@@ -33,17 +33,22 @@ export async function performBidirectionalSync() {
   const errors = [];
   
   try {
-    // Step 1: Auto-detect and match calendars ALWAYS before export
-    updateActivityStatus(t('google.activity.checking_calendar_setup'));
-    console.log('🔍 Checking calendar setup...');
-    const calendarResults = await autoDetectAndMatchCalendars();
+    // OPTIMIERT: Nur Kalender-Setup prüfen, wenn nötig
+    const settings = googleCalendarSettings.load();
+    if (!settings.calendarMappings || Object.keys(settings.calendarMappings).length === 0) {
+      updateActivityStatus(t('google.activity.checking_calendar_setup'));
+      console.log('🔍 No calendar mappings found - running auto-detection...');
+      await autoDetectAndMatchCalendars();
+    } else {
+      console.log('✅ Calendar mappings already exist, skipping detection');
+    }
 
     // NEU: Nach Kalender-Matching alle Events, deren googleCalendarId nicht mehr passt, zum Re-Export markieren
     updateActivityStatus(t('google.activity.updating_calendar_ids'));
     const db = await openDB(DB_NAME, DB_VERSION);
     const allEvents = await db.getAll('events');
-    const settings = googleCalendarSettings.load();
-    const validCalendarIds = Object.values(settings.calendarMappings || {});
+    const updatedSettings = googleCalendarSettings.load(); // Reload after potential detection
+    const validCalendarIds = Object.values(updatedSettings.calendarMappings || {});
     let reexportCount = 0;
     for (const event of allEvents) {
       if (event.googleEventId && (!event.googleCalendarId || !validCalendarIds.includes(event.googleCalendarId))) {
@@ -57,9 +62,8 @@ export async function performBidirectionalSync() {
       console.log(`🔄 Marked ${reexportCount} events for re-export after calendar change.`);
     }
 
-    // --- NEU: Kurzer Delay, damit Google Kalender wirklich gelöscht/angelegt hat ---
-    await new Promise(resolve => setTimeout(resolve, 2000));
-    // ---
+    // OPTIMIERT: Kürzerer Delay
+    await new Promise(resolve => setTimeout(resolve, 1000));
 
     // Double-check: Set all events with invalid googleCalendarId to null (extra robust)
     const allEventsCheck = await db.getAll('events');
@@ -229,8 +233,8 @@ export async function exportLocalEventsToGoogle() {
   const events = await db.getAll('events');
   const settings = googleCalendarSettings.load();
   
-  // Auto-detect and match calendars if no setup exists
-  if (!settings.calendarMappings) {
+  // OPTIMIERT: Nur Kalender-Setup prüfen, wenn wirklich nötig
+  if (!settings.calendarMappings || Object.keys(settings.calendarMappings).length === 0) {
     updateActivityStatus(t('google.activity.creating_calendar_mappings'));
     console.log('[DEBUG] No calendar mappings found - running auto-detection...');
     try {
@@ -239,6 +243,8 @@ export async function exportLocalEventsToGoogle() {
       console.error('[DEBUG] Auto-detection failed:', error);
       throw new Error('Failed to set up Google Calendar sync. Please try again.');
     }
+  } else {
+    console.log('[DEBUG] Calendar mappings exist, skipping auto-detection');
   }
   
   // KRITISCHER FIX: Robuste Duplikat-Prüfung vor Export

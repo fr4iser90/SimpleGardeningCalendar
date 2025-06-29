@@ -204,7 +204,21 @@ async function createHarvestEvent(store, plantData, phases, completionDate, plan
   
   let harvestDescription = `Time to ${finalPhase === 'harvest' ? 'harvest' : 'complete'} your ${t(plantData.name)}!`;
   if (plantData.commonProblems && Object.keys(plantData.commonProblems).length > 0) {
-    harvestDescription += `\n\nCommon Problems to Check For:\n${Object.entries(plantData.commonProblems).map(([problem, solution]) => `- ${problem}: ${solution}`).join('\n')}`;
+    harvestDescription += `\n\nCommon Problems to Check For:`;
+    Object.entries(plantData.commonProblems).forEach(([problemKey, problemObj]) => {
+      if (problemObj && typeof problemObj === 'object') {
+        harvestDescription += `\n- ${t(problemObj.name)}`;
+        if (problemObj.description) {
+          harvestDescription += `: ${t(problemObj.description)}`;
+        }
+        if (problemObj.solutions) {
+          harvestDescription += `\n  Solutions: ${t(problemObj.solutions)}`;
+        }
+      } else {
+        // Fallback falls nur ein String gespeichert ist
+        harvestDescription += `\n- ${problemKey}: ${problemObj}`;
+      }
+    });
   }
   
   await store.add({

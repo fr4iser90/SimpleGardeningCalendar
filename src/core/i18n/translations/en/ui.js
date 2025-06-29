@@ -788,5 +788,17 @@ export const en = {
     'google.quota.modal.setup_calendars': 'Setup Calendars',
     'google.quota.modal.calendar_creation.wait_hours_info': 'If manual creation also fails, please wait several hours and try again. Google will automatically lift the limit after some time.',
 
+    // Google Calendar Activity Status
+    'google.activity.fetching_calendars': 'Fetching Google calendars...',
+    'google.activity.cleaning_old_calendars': 'Cleaning up old calendars...',
+    'google.activity.deleted_old_calendar': 'Deleted old calendar: {name}',
+    'google.activity.refreshing_calendars': 'Refreshing calendar list...',
+    'google.activity.setup_single_calendar': 'Setting up single garden calendar...',
+    'google.activity.setup_area_based_calendars': 'Setting up area-based calendars...',
+    'google.activity.setting_up': 'Setting up {name}...',
+    'google.activity.cleaning_unused_calendars': 'Cleaning up unused calendars...',
+    'google.activity.setup_complete': 'Calendar setup complete: {matched} matched, {created} created',
+    'google.activity.deleted_unused_calendar': 'Deleted unused calendar: {name}',
+
 };
   
