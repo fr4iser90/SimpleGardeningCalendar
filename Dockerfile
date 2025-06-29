@@ -4,7 +4,7 @@ WORKDIR /app
 
 # Install dependencies first (better layer caching)
 COPY package*.json ./
-RUN npm ci && npm cache clean --force
+RUN rm -rf node_modules package-lock.json && npm install && npm cache clean --force
 
 # Copy source code
 COPY . .
@@ -28,7 +28,7 @@ RUN apk update && apk upgrade && \
     apk add --no-cache curl && \
     rm -rf /var/cache/apk/*
 
-# Copy ONLY the built application from dist folder
+# Copy built application
 COPY --from=builder /app/dist /usr/share/nginx/html
 
 # Copy nginx configuration
@@ -45,10 +45,10 @@ RUN chown -R nginx:nginx /usr/share/nginx/html && \
 # Switch to non-root user
 USER nginx
 
-# Expose port for HTTPS
-EXPOSE 443
+# Expose port
+EXPOSE 80
 
-# Health check for HTTP (SSL termination may be handled externally in production)
+# Health check
 HEALTHCHECK --interval=30s --timeout=3s --start-period=5s --retries=3 \
     CMD curl -f http://localhost/ || exit 1
 
