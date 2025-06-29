@@ -20,7 +20,7 @@ export const es = {
   'tag.annual': 'Anual',
   'tag.biennial': 'Bienal',
   'tag.photoperiod': 'Fotoperíodo',
-  'tag.autoflower': 'Autofloreciente',
+  'tag.autoflowering': 'Autofloreciente',
   'tag.indica': 'Indica',
   'tag.sativa': 'Sativa',
   'tag.hybrid': 'Híbrido',

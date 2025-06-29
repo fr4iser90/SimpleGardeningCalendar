@@ -20,6 +20,8 @@ export const fr = {
   'tag.annual': 'Annuelle',
   'tag.biennial': 'Bisannuelle',
   'tag.cannabis': 'Cannabis',
+  'tag.photoperiod': 'Photopériode',
+  'tag.autoflowering': 'Autofloraison',
 
   // Growing Environments
   'environment.indoor': 'Intérieur',
