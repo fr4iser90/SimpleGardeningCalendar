@@ -42,6 +42,7 @@ export async function createLocalCalendar(calendarData) {
   
   const calendar = {
     name: calendarData.name,
+    categoryKey: calendarData.categoryKey || null,
     type: 'local',
     color: calendarData.color || '#3B82F6',
     icon: calendarData.icon || '📅',
@@ -179,24 +180,28 @@ export async function createGardenTemplateCalendars() {
   const templates = [
     {
       name: t('calendar.vegetables'),
+      categoryKey: 'vegetables',
       color: '#F59E0B',
       icon: '🥕',
       description: t('calendar.vegetables_description')
     },
     {
       name: t('calendar.herbs'),
+      categoryKey: 'herbs',
       color: '#10B981',
       icon: '🌱',
       description: t('calendar.herbs_description')
     },
     {
       name: t('calendar.ornamental'),
+      categoryKey: 'ornamental',
       color: '#EC4899',
       icon: '🌸',
       description: t('calendar.ornamental_description')
     },
     {
       name: t('calendar.fruits'),
+      categoryKey: 'fruits',
       color: '#DC2626',
       icon: '🍎',
       description: t('calendar.fruits_description')

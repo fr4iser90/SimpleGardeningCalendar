@@ -57,6 +57,14 @@ export function updateLocalCalendarStatus() {
     getAllLocalCalendars().then(allCalendars => {
       const hasMultipleCalendars = allCalendars.length > 1;
       
+      // Helper function to get display name for calendar
+      const getCalendarDisplayName = (calendar) => {
+        if (calendar.categoryKey) {
+          return t('calendar.' + calendar.categoryKey);
+        }
+        return calendar.name;
+      };
+      
       statusDisplay.innerHTML = `
         <span class="font-bold mr-2 flex items-center"><span class="text-lg mr-1">🗓️</span>${t('local.status.title')}:</span>
         <span class="text-green-600 dark:text-green-400 flex items-center">
@@ -73,11 +81,11 @@ export function updateLocalCalendarStatus() {
             >
               ${allCalendars.map(cal => `
                 <option value="${cal.id}" ${cal.id === parseInt(selectedCalendarId) ? 'selected' : ''}>
-                  ${cal.name}
+                  ${getCalendarDisplayName(cal)}
                 </option>
               `).join('')}
             </select>
-          ` : `<span>${selectedCalendar.name}</span>`}
+          ` : `<span>${getCalendarDisplayName(selectedCalendar)}</span>`}
         </div>
         <span class="mx-2">|</span>
         <button 
@@ -108,7 +116,8 @@ export function switchLocalCalendar(calendarId) {
     // Get calendar name for notification
     getCalendar(parseInt(calendarId)).then(calendar => {
       if (calendar) {
-        showNotification(t('local.status.switched', { name: calendar.name }), 'success');
+        const displayName = calendar.categoryKey ? t('calendar.' + calendar.categoryKey) : calendar.name;
+        showNotification(t('local.status.switched', { name: displayName }), 'success');
       }
     });
     

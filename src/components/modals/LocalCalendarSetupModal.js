@@ -4,7 +4,8 @@ import {
   getDefaultCalendar,
   createLocalCalendar,
   deleteLocalCalendar,
-  updateLocalCalendar
+  updateLocalCalendar,
+  getCalendar
 } from '../../core/db/calendars.js';
 import { showNotification } from '../../utils/notifications.js';
 import { renderLocalCalendarWizardHTML, setupLocalCalendarWizardEventListeners } from './LocalCalendarWizard.js';
@@ -221,27 +222,37 @@ async function loadCurrentCalendars() {
       return;
     }
 
-    currentCalendarsList.innerHTML = calendars.map(calendar => `
-      <div class="flex items-center justify-between p-3 border border-gray-200 dark:border-gray-600 rounded-lg ${calendar.id.toString() === activeCalendarId ? 'bg-blue-50 dark:bg-blue-900/20' : ''}">
-        <div class="flex items-center space-x-2">
-          <span class="text-lg">${calendar.icon || '🌱'}</span>
-          <span class="font-medium dark:text-white">${calendar.name}</span>
-          ${calendar.id.toString() === activeCalendarId ? '<span class="text-xs px-2 py-1 bg-blue-200 dark:bg-blue-800 text-blue-800 dark:text-blue-200 rounded">Aktiv</span>' : ''}
+    currentCalendarsList.innerHTML = calendars.map(calendar => {
+      // Helper function to get display name for calendar
+      const getCalendarDisplayName = (calendar) => {
+        if (calendar.categoryKey) {
+          return t('calendar.' + calendar.categoryKey);
+        }
+        return calendar.name;
+      };
+      
+      return `
+        <div class="flex items-center justify-between p-3 border border-gray-200 dark:border-gray-600 rounded-lg ${calendar.id.toString() === activeCalendarId ? 'bg-blue-50 dark:bg-blue-900/20' : ''}">
+          <div class="flex items-center space-x-2">
+            <span class="text-lg">${calendar.icon || '🌱'}</span>
+            <span class="font-medium dark:text-white">${getCalendarDisplayName(calendar)}</span>
+            ${calendar.id.toString() === activeCalendarId ? '<span class="text-xs px-2 py-1 bg-blue-200 dark:bg-blue-800 text-blue-800 dark:text-blue-200 rounded">Aktiv</span>' : ''}
+          </div>
+          <div class="flex gap-2">
+            ${calendar.id.toString() !== activeCalendarId ? `
+              <button onclick="switchToCalendar('${calendar.id}')" class="px-2 py-1 bg-blue-600 text-white rounded hover:bg-blue-700 text-xs">
+                ${t('local.setup.switch_to')}
+              </button>
+            ` : ''}
+            ${!calendar.isDefault ? `
+              <button onclick="deleteCalendar('${calendar.id}')" class="px-2 py-1 bg-red-600 text-white rounded hover:bg-red-700 text-xs">
+                🗑️
+              </button>
+            ` : ''}
+          </div>
         </div>
-        <div class="flex gap-2">
-          ${calendar.id.toString() !== activeCalendarId ? `
-            <button onclick="switchToCalendar('${calendar.id}')" class="px-2 py-1 bg-blue-600 text-white rounded hover:bg-blue-700 text-xs">
-              ${t('local.setup.switch_to')}
-            </button>
-          ` : ''}
-          ${!calendar.isDefault ? `
-            <button onclick="deleteCalendar('${calendar.id}')" class="px-2 py-1 bg-red-600 text-white rounded hover:bg-red-700 text-xs">
-              🗑️
-            </button>
-          ` : ''}
-        </div>
-      </div>
-    `).join('');
+      `;
+    }).join('');
     
   } catch (error) {
     console.error('Failed to load calendars:', error);
@@ -279,12 +290,23 @@ function resetToDefaults() {
 // Global functions for calendar management
 window.switchToCalendar = async function(calendarId) {
   try {
-    localStorage.setItem('selectedLocalCalendarId', calendarId);
-    loadCurrentCalendars();
-    showNotification(t('local.status.switched', { name: 'Calendar' }), 'success');
-    
-    // Trigger calendar update event
-    document.dispatchEvent(new CustomEvent('localCalendarsUpdated'));
+    // Use the global switchLocalCalendar function from LocalCalendarStatusBar.js
+    if (window.switchLocalCalendar) {
+      window.switchLocalCalendar(calendarId);
+    } else {
+      // Fallback if global function is not available
+      localStorage.setItem('selectedLocalCalendarId', calendarId);
+      loadCurrentCalendars();
+      
+      // Get calendar for notification
+      const calendar = await getCalendar(parseInt(calendarId));
+      const displayName = calendar?.categoryKey ? t('calendar.' + calendar.categoryKey) : calendar?.name || 'Calendar';
+      
+      showNotification(t('local.status.switched', { name: displayName }), 'success');
+      
+      // Trigger calendar update event
+      document.dispatchEvent(new CustomEvent('localCalendarsUpdated'));
+    }
   } catch (error) {
     showNotification(t('local.status.switch_error'), 'error');
   }

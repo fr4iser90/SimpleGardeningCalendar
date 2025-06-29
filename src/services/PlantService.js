@@ -112,7 +112,6 @@ export async function addPlanting(plantType, startDate, location = 'Default Gard
   // --- NEU: Intelligente Kalenderzuordnung bei Option 2 (areas) ---
   const localCalendarsSetting = JSON.parse(localStorage.getItem('localCalendarsSetting') || '{}');
   if (localCalendarsSetting.type === 'areas') {
-    // Hole alle lokalen Kalender
     const { getAllLocalCalendars } = await import('../core/db/calendars.js');
     const calendars = await getAllLocalCalendars();
     let category = plantData.category;
@@ -121,20 +120,19 @@ export async function addPlanting(plantType, startDate, location = 'Default Gard
     } else {
       category = (category || '').toLowerCase();
     }
-    // Mapping wie in migrateEventsToNewOrganization
     let matchedCal = null;
     if (category.includes('vegetable')) {
-      matchedCal = calendars.find(cal => cal.name === t('calendar.vegetables'));
+      matchedCal = calendars.find(cal => cal.categoryKey === 'vegetables');
     } else if (category.includes('herb')) {
-      matchedCal = calendars.find(cal => cal.name === t('calendar.herbs'));
+      matchedCal = calendars.find(cal => cal.categoryKey === 'herbs');
     } else if (category.includes('flower')) {
-      matchedCal = calendars.find(cal => cal.name === t('calendar.ornamental'));
+      matchedCal = calendars.find(cal => cal.categoryKey === 'ornamental');
     } else if (category.includes('fruit')) {
-      matchedCal = calendars.find(cal => cal.name === t('calendar.fruits'));
+      matchedCal = calendars.find(cal => cal.categoryKey === 'fruits');
     }
     if (matchedCal) {
       calendarId = matchedCal.id;
-      console.log('🌱 [addPlanting] Matched calendar:', matchedCal.name, matchedCal.id);
+      console.log('🌱 [addPlanting] Matched calendar:', matchedCal.name, matchedCal.id, matchedCal.categoryKey);
     }
   }
   // --- ENDE NEU ---

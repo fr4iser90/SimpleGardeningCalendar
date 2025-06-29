@@ -375,15 +375,15 @@ async function handleLocalCalendarSetup(organizationType, customCalendars = []) 
     // Nur ausgewählte Bereiche als Kalender anlegen
     const checkedAreas = Array.from(document.querySelectorAll('.area-checkbox:checked')).map(cb => cb.value);
     const areaTemplates = [
-      { key: 'vegetables', name: t('calendar.vegetables'), icon: '🥕' },
-      { key: 'herbs', name: t('calendar.herbs'), icon: '🌿' },
-      { key: 'flowers', name: t('calendar.ornamental'), icon: '🌸' },
-      { key: 'fruits', name: t('calendar.fruits'), icon: '🍓' }
+      { key: 'vegetables', name: t('calendar.vegetables'), icon: '🥕', categoryKey: 'vegetables' },
+      { key: 'herbs', name: t('calendar.herbs'), icon: '🌿', categoryKey: 'herbs' },
+      { key: 'flowers', name: t('calendar.ornamental'), icon: '🌸', categoryKey: 'ornamental' },
+      { key: 'fruits', name: t('calendar.fruits'), icon: '🍓', categoryKey: 'fruits' }
     ];
     const selectedTemplates = areaTemplates.filter(tpl => checkedAreas.includes(tpl.key));
     const areaCalendarIds = [];
     for (const tpl of selectedTemplates) {
-      const calendarId = await createLocalCalendar({ name: tpl.name, icon: tpl.icon });
+      const calendarId = await createLocalCalendar({ name: tpl.name, icon: tpl.icon, categoryKey: tpl.categoryKey });
       areaCalendarIds.push(calendarId);
     }
     if (areaCalendarIds.length > 0) {
