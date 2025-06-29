@@ -706,8 +706,9 @@ export const de = {
     'modal.auto_detect.examples': 'Beispiele:',
 
     // Event Details
-    'event.details.plant': 'Pflanze:',
-    'event.details.category': 'Kategorie:',
+    'event.details.plant': 'Pflanze',
+    'event.details.plant_info': 'Pflanzeninformationen',
+    'event.details.category': 'Kategorie',
     'event.details.environment': 'Umgebung:',
     'event.details.location': 'Standort:',
     'event.details.current_phase': 'Aktuelle Phase:',
