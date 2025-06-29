@@ -131,7 +131,4 @@ export default {
   'raspberries.careTips.temperature': 'Kühle Saisonkultur, vor extremer Hitze schützen',
   'raspberries.careTips.soilPH': '5.5-6.5',
   'raspberries.careTips.trellising': 'Ruten mit Spalier oder Drahtsystem stützen',
-  'raspberries.commonProblems.caneBorers': 'Insektenschäden an Ruten - betroffene Ruten entfernen und vernichten',
-  'raspberries.commonProblems.grayMold': 'Pilzkrankheit auf Früchten - Luftzirkulation verbessern',
-  'raspberries.commonProblems.spiderMites': 'Kleine Schädlinge auf Blättern - Luftfeuchtigkeit erhöhen, Raubmilben verwenden',
 };

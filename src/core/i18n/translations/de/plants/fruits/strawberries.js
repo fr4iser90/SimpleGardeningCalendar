@@ -131,7 +131,4 @@ export default {
   'strawberries.careTips.temperature': 'Kühle Saisonkultur, vor extremer Hitze schützen',
   'strawberries.careTips.soilPH': '5.5-6.5',
   'strawberries.careTips.mulching': 'Strohmulch verwenden, um Beeren sauber zu halten',
-  'strawberries.commonProblems.grayMold': 'Pilzkrankheit auf Früchten - Luftzirkulation verbessern',
-  'strawberries.commonProblems.slugs': 'Schnecken fressen Beeren - Barrieren oder Fallen verwenden',
-  'strawberries.commonProblems.birds': 'Vögel fressen Beeren - Netze oder Vogelscheuchen verwenden',
 };

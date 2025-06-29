@@ -149,7 +149,6 @@ export default {
   'cannabis_autoflower.seasonalTiming.temperate_north.harvestWindow.description': 'Mehrfachernten während der Saison',
   'cannabis_autoflower.seasonalTiming.mediterranean.plantingWindow.description': 'Verlängerte Saison mit Mehrfachernten',
   'cannabis_autoflower.seasonalTiming.mediterranean.harvestWindow.description': 'Mehrfachernten während der Saison',
-  'cannabis_autoflower.naturalTiming': 'Autoflowers blühen automatisch unabhängig vom Lichtzyklus. Gesamtzyklus ist 70-90 Tage von Samen bis Ernte.',
   'cannabis_autoflower.careTips.watering': 'Leichtes Gießen, Autoflowers bevorzugen weniger Wasser als Photoperioden',
   'cannabis_autoflower.careTips.fertilizing': 'Leichter Fütterungsplan, 1/4 bis 1/2 Stärke Nährstoffe',
   'cannabis_autoflower.careTips.sunlight': '18-24 Stunden während des gesamten Zyklus',

@@ -7,7 +7,7 @@ import { PLANT_TAGS } from '../categories.js';
 import { createProblemRefs } from '../problems.js';
 
 export const mint = {
-  name: 'Mint',
+  name: 'mint.name',
   category: 'category.herbs',
   tags: [PLANT_TAGS.PERENNIAL, PLANT_TAGS.PHOTOPERIOD],
   emoji: '🌿',

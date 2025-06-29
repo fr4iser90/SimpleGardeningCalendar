@@ -103,7 +103,4 @@ export default {
   "roses.careTips.temperature": "Mäßige Temperaturen, vor extremer Hitze schützen",
   "roses.careTips.soilPH": "6,0-7,0",
   "roses.careTips.pruning": "Jährlicher Schnitt im Spätwinter oder Frühjahr",
-  "roses.commonProblems.blackSpot": "Pilzkrankheit - Luftzirkulation verbessern, Überkopf-Bewässerung vermeiden",
-  "roses.commonProblems.aphids": "Kleine Insekten auf neuem Wachstum - mit Wasser oder Insektizidseife besprühen",
-  "roses.commonProblems.powderyMildew": "Weißer Belag auf Blättern - Luftzirkulation verbessern, Luftfeuchtigkeit reduzieren",
 };

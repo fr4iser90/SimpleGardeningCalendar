@@ -107,7 +107,4 @@ export default {
   "lavender.careTips.temperature": "Mäßige Temperaturen, vor extremer Hitze schützen",
   "lavender.careTips.soilPH": "6,5-7,5 (alkalischer Boden bevorzugt)",
   "lavender.careTips.pruning": "Jährlicher Schnitt im Spätwinter oder Frühjahr",
-  "lavender.commonProblems.rootRot": "Pilzkrankheit - Drainage verbessern, Überwässerung vermeiden",
-  "lavender.commonProblems.powderyMildew": "Weißer Belag auf Blättern - Luftzirkulation verbessern, Luftfeuchtigkeit reduzieren",
-  "lavender.commonProblems.leggyGrowth": "Schwache Stängel - mehr Licht bieten, regelmäßig schneiden",
 };

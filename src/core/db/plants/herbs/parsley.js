@@ -481,32 +481,6 @@ export const parsley = {
           },
         },
       },
-      seasonalTiming: {
-        temperate_north: {
-          plantingWindow: {
-            start: '03-01',
-            end: '07-01',
-            description: 'parsley.environments.greenhouse.seasonalTiming.temperate_north.plantingWindow.description',
-          },
-          harvestWindow: {
-            start: '05-01',
-            end: '11-30',
-            description: 'parsley.environments.greenhouse.seasonalTiming.temperate_north.harvestWindow.description',
-          },
-        },
-        mediterranean: {
-          plantingWindow: {
-            start: '02-01',
-            end: '08-01',
-            description: 'parsley.environments.greenhouse.seasonalTiming.mediterranean.plantingWindow.description',
-          },
-          harvestWindow: {
-            start: '04-01',
-            end: '12-31',
-            description: 'parsley.environments.greenhouse.seasonalTiming.mediterranean.harvestWindow.description',
-          },
-        },
-      },
     },
   },
   careTips: {

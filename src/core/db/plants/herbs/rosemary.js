@@ -16,145 +16,145 @@ export const rosemary = {
       phases: {
         germination: {
           days: 14,
-          description: 'rosemary.phases.germination.description',
-          care: 'rosemary.phases.germination.care',
+          description: 'rosemary.environments.indoor.phases.germination.description',
+          care: 'rosemary.environments.indoor.phases.germination.care',
           editable: true,
           soil: {
             watering: {
               interval: 1,
-              description: 'rosemary.phases.germination.soil.watering.description',
+              description: 'rosemary.environments.indoor.phases.germination.soil.watering.description',
             },
             fertilizing: {
               interval: 0,
-              description: 'rosemary.phases.germination.soil.fertilizing.description',
+              description: 'rosemary.environments.indoor.phases.germination.soil.fertilizing.description',
             },
           },
           hydro: {
             watering: {
               interval: 0,
-              description: 'rosemary.phases.germination.hydro.watering.description',
+              description: 'rosemary.environments.indoor.phases.germination.hydro.watering.description',
             },
             fertilizing: {
               interval: 0,
-              description: 'rosemary.phases.germination.hydro.fertilizing.description',
+              description: 'rosemary.environments.indoor.phases.germination.hydro.fertilizing.description',
             },
           },
           coco: {
             watering: {
               interval: 1,
-              description: 'rosemary.phases.germination.coco.watering.description',
+              description: 'rosemary.environments.indoor.phases.germination.coco.watering.description',
             },
             fertilizing: {
               interval: 0,
-              description: 'rosemary.phases.germination.coco.fertilizing.description',
+              description: 'rosemary.environments.indoor.phases.germination.coco.fertilizing.description',
             },
           },
         },
         seedling: {
           days: 28,
-          description: 'rosemary.phases.seedling.description',
-          care: 'rosemary.phases.seedling.care',
+          description: 'rosemary.environments.indoor.phases.seedling.description',
+          care: 'rosemary.environments.indoor.phases.seedling.care',
           editable: true,
           soil: {
             watering: {
               interval: 3,
-              description: 'rosemary.phases.seedling.soil.watering.description',
+              description: 'rosemary.environments.indoor.phases.seedling.soil.watering.description',
             },
             fertilizing: {
               interval: 0,
-              description: 'rosemary.phases.seedling.soil.fertilizing.description',
+              description: 'rosemary.environments.indoor.phases.seedling.soil.fertilizing.description',
             },
           },
           hydro: {
             watering: { 
               interval: 0, 
-              description: 'rosemary.phases.seedling.hydro.watering.description' 
+              description: 'rosemary.environments.indoor.phases.seedling.hydro.watering.description' 
             },
             fertilizing: {
               interval: 7,
-              description: 'rosemary.phases.seedling.hydro.fertilizing.description',
+              description: 'rosemary.environments.indoor.phases.seedling.hydro.fertilizing.description',
             },
           },
           coco: {
             watering: { 
               interval: 1, 
-              description: 'rosemary.phases.seedling.coco.watering.description' 
+              description: 'rosemary.environments.indoor.phases.seedling.coco.watering.description' 
             },
             fertilizing: { 
               interval: 7, 
-              description: 'rosemary.phases.seedling.coco.fertilizing.description' 
+              description: 'rosemary.environments.indoor.phases.seedling.coco.fertilizing.description' 
             },
           },
         },
         vegetative: {
           days: 45,
-          description: 'rosemary.phases.vegetative.description',
-          care: 'rosemary.phases.vegetative.care',
+          description: 'rosemary.environments.indoor.phases.vegetative.description',
+          care: 'rosemary.environments.indoor.phases.vegetative.care',
           editable: true,
           soil: {
             watering: {
               interval: 4,
-              description: 'rosemary.phases.vegetative.soil.watering.description',
+              description: 'rosemary.environments.indoor.phases.vegetative.soil.watering.description',
             },
             fertilizing: {
               interval: 21,
-              description: 'rosemary.phases.vegetative.soil.fertilizing.description',
+              description: 'rosemary.environments.indoor.phases.vegetative.soil.fertilizing.description',
             },
           },
           hydro: {
             watering: { 
               interval: 0, 
-              description: 'rosemary.phases.vegetative.hydro.watering.description' 
+              description: 'rosemary.environments.indoor.phases.vegetative.hydro.watering.description' 
             },
             fertilizing: {
               interval: 21,
-              description: 'rosemary.phases.vegetative.hydro.fertilizing.description',
+              description: 'rosemary.environments.indoor.phases.vegetative.hydro.fertilizing.description',
             },
           },
           coco: {
             watering: { 
               interval: 2, 
-              description: 'rosemary.phases.vegetative.coco.watering.description' 
+              description: 'rosemary.environments.indoor.phases.vegetative.coco.watering.description' 
             },
             fertilizing: {
               interval: 21,
-              description: 'rosemary.phases.vegetative.coco.fertilizing.description',
+              description: 'rosemary.environments.indoor.phases.vegetative.coco.fertilizing.description',
             },
           },
         },
         harvest: {
           days: 90,
-          description: 'rosemary.phases.harvest.description',
-          care: 'rosemary.phases.harvest.care',
+          description: 'rosemary.environments.indoor.phases.harvest.description',
+          care: 'rosemary.environments.indoor.phases.harvest.care',
           editable: true,
           soil: {
             watering: { 
               interval: 4, 
-              description: 'rosemary.phases.harvest.soil.watering.description' 
+              description: 'rosemary.environments.indoor.phases.harvest.soil.watering.description' 
             },
             fertilizing: {
               interval: 21,
-              description: 'rosemary.phases.harvest.soil.fertilizing.description',
+              description: 'rosemary.environments.indoor.phases.harvest.soil.fertilizing.description',
             },
           },
           hydro: {
             watering: { 
               interval: 0, 
-              description: 'rosemary.phases.harvest.hydro.watering.description' 
+              description: 'rosemary.environments.indoor.phases.harvest.hydro.watering.description' 
             },
             fertilizing: {
               interval: 21,
-              description: 'rosemary.phases.harvest.hydro.fertilizing.description',
+              description: 'rosemary.environments.indoor.phases.harvest.hydro.fertilizing.description',
             },
           },
           coco: {
             watering: { 
               interval: 2, 
-              description: 'rosemary.phases.harvest.coco.watering.description' 
+              description: 'rosemary.environments.indoor.phases.harvest.coco.watering.description' 
             },
             fertilizing: {
               interval: 21,
-              description: 'rosemary.phases.harvest.coco.fertilizing.description',
+              description: 'rosemary.environments.indoor.phases.harvest.coco.fertilizing.description',
             },
           },
         },
@@ -164,145 +164,145 @@ export const rosemary = {
       phases: {
         germination: {
           days: 14,
-          description: 'rosemary.phases.germination.description',
-          care: 'rosemary.phases.germination.care',
+          description: 'rosemary.environments.outdoor.phases.germination.description',
+          care: 'rosemary.environments.outdoor.phases.germination.care',
           editable: false,
           soil: {
             watering: {
               interval: 1,
-              description: 'rosemary.phases.germination.soil.watering.description',
+              description: 'rosemary.environments.outdoor.phases.germination.soil.watering.description',
             },
             fertilizing: {
               interval: 0,
-              description: 'rosemary.phases.germination.soil.fertilizing.description',
+              description: 'rosemary.environments.outdoor.phases.germination.soil.fertilizing.description',
             },
           },
           hydro: {
             watering: {
               interval: 0,
-              description: 'rosemary.phases.germination.hydro.watering.description',
+              description: 'rosemary.environments.outdoor.phases.germination.hydro.watering.description',
             },
             fertilizing: {
               interval: 0,
-              description: 'rosemary.phases.germination.hydro.fertilizing.description',
+              description: 'rosemary.environments.outdoor.phases.germination.hydro.fertilizing.description',
             },
           },
           coco: {
             watering: {
               interval: 1,
-              description: 'rosemary.phases.germination.coco.watering.description',
+              description: 'rosemary.environments.outdoor.phases.germination.coco.watering.description',
             },
             fertilizing: {
               interval: 0,
-              description: 'rosemary.phases.germination.coco.fertilizing.description',
+              description: 'rosemary.environments.outdoor.phases.germination.coco.fertilizing.description',
             },
           },
         },
         seedling: {
           days: 28,
-          description: 'rosemary.phases.seedling.description',
-          care: 'rosemary.phases.seedling.care',
+          description: 'rosemary.environments.outdoor.phases.seedling.description',
+          care: 'rosemary.environments.outdoor.phases.seedling.care',
           editable: false,
           soil: {
             watering: {
               interval: 3,
-              description: 'rosemary.phases.seedling.soil.watering.description',
+              description: 'rosemary.environments.outdoor.phases.seedling.soil.watering.description',
             },
             fertilizing: {
               interval: 0,
-              description: 'rosemary.phases.seedling.soil.fertilizing.description',
+              description: 'rosemary.environments.outdoor.phases.seedling.soil.fertilizing.description',
             },
           },
           hydro: {
             watering: { 
               interval: 0, 
-              description: 'rosemary.phases.seedling.hydro.watering.description' 
+              description: 'rosemary.environments.outdoor.phases.seedling.hydro.watering.description' 
             },
             fertilizing: {
               interval: 7,
-              description: 'rosemary.phases.seedling.hydro.fertilizing.description',
+              description: 'rosemary.environments.outdoor.phases.seedling.hydro.fertilizing.description',
             },
           },
           coco: {
             watering: { 
               interval: 1, 
-              description: 'rosemary.phases.seedling.coco.watering.description' 
+              description: 'rosemary.environments.outdoor.phases.seedling.coco.watering.description' 
             },
             fertilizing: { 
               interval: 7, 
-              description: 'rosemary.phases.seedling.coco.fertilizing.description' 
+              description: 'rosemary.environments.outdoor.phases.seedling.coco.fertilizing.description' 
             },
           },
         },
         vegetative: {
           days: 45,
-          description: 'rosemary.phases.vegetative.description',
-          care: 'rosemary.phases.vegetative.care',
+          description: 'rosemary.environments.outdoor.phases.vegetative.description',
+          care: 'rosemary.environments.outdoor.phases.vegetative.care',
           editable: false,
           soil: {
             watering: {
               interval: 4,
-              description: 'rosemary.phases.vegetative.soil.watering.description',
+              description: 'rosemary.environments.outdoor.phases.vegetative.soil.watering.description',
             },
             fertilizing: {
               interval: 21,
-              description: 'rosemary.phases.vegetative.soil.fertilizing.description',
+              description: 'rosemary.environments.outdoor.phases.vegetative.soil.fertilizing.description',
             },
           },
           hydro: {
             watering: { 
               interval: 0, 
-              description: 'rosemary.phases.vegetative.hydro.watering.description' 
+              description: 'rosemary.environments.outdoor.phases.vegetative.hydro.watering.description' 
             },
             fertilizing: {
               interval: 21,
-              description: 'rosemary.phases.vegetative.hydro.fertilizing.description',
+              description: 'rosemary.environments.outdoor.phases.vegetative.hydro.fertilizing.description',
             },
           },
           coco: {
             watering: { 
               interval: 2, 
-              description: 'rosemary.phases.vegetative.coco.watering.description' 
+              description: 'rosemary.environments.outdoor.phases.vegetative.coco.watering.description' 
             },
             fertilizing: {
               interval: 21,
-              description: 'rosemary.phases.vegetative.coco.fertilizing.description',
+              description: 'rosemary.environments.outdoor.phases.vegetative.coco.fertilizing.description',
             },
           },
         },
         harvest: {
           days: 90,
-          description: 'rosemary.phases.harvest.description',
-          care: 'rosemary.phases.harvest.care',
+          description: 'rosemary.environments.outdoor.phases.harvest.description',
+          care: 'rosemary.environments.outdoor.phases.harvest.care',
           editable: true,
           soil: {
             watering: { 
               interval: 4, 
-              description: 'rosemary.phases.harvest.soil.watering.description' 
+              description: 'rosemary.environments.outdoor.phases.harvest.soil.watering.description' 
             },
             fertilizing: {
               interval: 21,
-              description: 'rosemary.phases.harvest.soil.fertilizing.description',
+              description: 'rosemary.environments.outdoor.phases.harvest.soil.fertilizing.description',
             },
           },
           hydro: {
             watering: { 
               interval: 0, 
-              description: 'rosemary.phases.harvest.hydro.watering.description' 
+              description: 'rosemary.environments.outdoor.phases.harvest.hydro.watering.description' 
             },
             fertilizing: {
               interval: 21,
-              description: 'rosemary.phases.harvest.hydro.fertilizing.description',
+              description: 'rosemary.environments.outdoor.phases.harvest.hydro.fertilizing.description',
             },
           },
           coco: {
             watering: { 
               interval: 2, 
-              description: 'rosemary.phases.harvest.coco.watering.description' 
+              description: 'rosemary.environments.outdoor.phases.harvest.coco.watering.description' 
             },
             fertilizing: {
               interval: 21,
-              description: 'rosemary.phases.harvest.coco.fertilizing.description',
+              description: 'rosemary.environments.outdoor.phases.harvest.coco.fertilizing.description',
             },
           },
         },
@@ -338,145 +338,145 @@ export const rosemary = {
       phases: {
         germination: {
           days: 14,
-          description: 'rosemary.phases.germination.description',
-          care: 'rosemary.phases.germination.care',
+          description: 'rosemary.environments.greenhouse.phases.germination.description',
+          care: 'rosemary.environments.greenhouse.phases.germination.care',
           editable: true,
           soil: {
             watering: {
               interval: 1,
-              description: 'rosemary.phases.germination.soil.watering.description',
+              description: 'rosemary.environments.greenhouse.phases.germination.soil.watering.description',
             },
             fertilizing: {
               interval: 0,
-              description: 'rosemary.phases.germination.soil.fertilizing.description',
+              description: 'rosemary.environments.greenhouse.phases.germination.soil.fertilizing.description',
             },
           },
           hydro: {
             watering: {
               interval: 0,
-              description: 'rosemary.phases.germination.hydro.watering.description',
+              description: 'rosemary.environments.greenhouse.phases.germination.hydro.watering.description',
             },
             fertilizing: {
               interval: 0,
-              description: 'rosemary.phases.germination.hydro.fertilizing.description',
+              description: 'rosemary.environments.greenhouse.phases.germination.hydro.fertilizing.description',
             },
           },
           coco: {
             watering: {
               interval: 1,
-              description: 'rosemary.phases.germination.coco.watering.description',
+              description: 'rosemary.environments.greenhouse.phases.germination.coco.watering.description',
             },
             fertilizing: {
               interval: 0,
-              description: 'rosemary.phases.germination.coco.fertilizing.description',
+              description: 'rosemary.environments.greenhouse.phases.germination.coco.fertilizing.description',
             },
           },
         },
         seedling: {
           days: 28,
-          description: 'rosemary.phases.seedling.description',
-          care: 'rosemary.phases.seedling.care',
+          description: 'rosemary.environments.greenhouse.phases.seedling.description',
+          care: 'rosemary.environments.greenhouse.phases.seedling.care',
           editable: true,
           soil: {
             watering: {
               interval: 3,
-              description: 'rosemary.phases.seedling.soil.watering.description',
+              description: 'rosemary.environments.greenhouse.phases.seedling.soil.watering.description',
             },
             fertilizing: {
               interval: 0,
-              description: 'rosemary.phases.seedling.soil.fertilizing.description',
+              description: 'rosemary.environments.greenhouse.phases.seedling.soil.fertilizing.description',
             },
           },
           hydro: {
             watering: { 
               interval: 0, 
-              description: 'rosemary.phases.seedling.hydro.watering.description' 
+              description: 'rosemary.environments.greenhouse.phases.seedling.hydro.watering.description' 
             },
             fertilizing: {
               interval: 7,
-              description: 'rosemary.phases.seedling.hydro.fertilizing.description',
+              description: 'rosemary.environments.greenhouse.phases.seedling.hydro.fertilizing.description',
             },
           },
           coco: {
             watering: { 
               interval: 1, 
-              description: 'rosemary.phases.seedling.coco.watering.description' 
+              description: 'rosemary.environments.greenhouse.phases.seedling.coco.watering.description' 
             },
             fertilizing: { 
               interval: 7, 
-              description: 'rosemary.phases.seedling.coco.fertilizing.description' 
+              description: 'rosemary.environments.greenhouse.phases.seedling.coco.fertilizing.description' 
             },
           },
         },
         vegetative: {
           days: 45,
-          description: 'rosemary.phases.vegetative.description',
-          care: 'rosemary.phases.vegetative.care',
+          description: 'rosemary.environments.greenhouse.phases.vegetative.description',
+          care: 'rosemary.environments.greenhouse.phases.vegetative.care',
           editable: true,
           soil: {
             watering: {
               interval: 4,
-              description: 'rosemary.phases.vegetative.soil.watering.description',
+              description: 'rosemary.environments.greenhouse.phases.vegetative.soil.watering.description',
             },
             fertilizing: {
               interval: 21,
-              description: 'rosemary.phases.vegetative.soil.fertilizing.description',
+              description: 'rosemary.environments.greenhouse.phases.vegetative.soil.fertilizing.description',
             },
           },
           hydro: {
             watering: { 
               interval: 0, 
-              description: 'rosemary.phases.vegetative.hydro.watering.description' 
+              description: 'rosemary.environments.greenhouse.phases.vegetative.hydro.watering.description' 
             },
             fertilizing: {
               interval: 21,
-              description: 'rosemary.phases.vegetative.hydro.fertilizing.description',
+              description: 'rosemary.environments.greenhouse.phases.vegetative.hydro.fertilizing.description',
             },
           },
           coco: {
             watering: { 
               interval: 2, 
-              description: 'rosemary.phases.vegetative.coco.watering.description' 
+              description: 'rosemary.environments.greenhouse.phases.vegetative.coco.watering.description' 
             },
             fertilizing: {
               interval: 21,
-              description: 'rosemary.phases.vegetative.coco.fertilizing.description',
+              description: 'rosemary.environments.greenhouse.phases.vegetative.coco.fertilizing.description',
             },
           },
         },
         harvest: {
           days: 90,
-          description: 'rosemary.phases.harvest.description',
-          care: 'rosemary.phases.harvest.care',
+          description: 'rosemary.environments.greenhouse.phases.harvest.description',
+          care: 'rosemary.environments.greenhouse.phases.harvest.care',
           editable: true,
           soil: {
             watering: { 
               interval: 4, 
-              description: 'rosemary.phases.harvest.soil.watering.description' 
+              description: 'rosemary.environments.greenhouse.phases.harvest.soil.watering.description' 
             },
             fertilizing: {
               interval: 21,
-              description: 'rosemary.phases.harvest.soil.fertilizing.description',
+              description: 'rosemary.environments.greenhouse.phases.harvest.soil.fertilizing.description',
             },
           },
           hydro: {
             watering: { 
               interval: 0, 
-              description: 'rosemary.phases.harvest.hydro.watering.description' 
+              description: 'rosemary.environments.greenhouse.phases.harvest.hydro.watering.description' 
             },
             fertilizing: {
               interval: 21,
-              description: 'rosemary.phases.harvest.hydro.fertilizing.description',
+              description: 'rosemary.environments.greenhouse.phases.harvest.hydro.fertilizing.description',
             },
           },
           coco: {
             watering: { 
               interval: 2, 
-              description: 'rosemary.phases.harvest.coco.watering.description' 
+              description: 'rosemary.environments.greenhouse.phases.harvest.coco.watering.description' 
             },
             fertilizing: {
               interval: 21,
-              description: 'rosemary.phases.harvest.coco.fertilizing.description',
+              description: 'rosemary.environments.greenhouse.phases.harvest.coco.fertilizing.description',
             },
           },
         },
@@ -495,4 +495,4 @@ export const rosemary = {
   commonProblems: createProblemRefs(['rootRot', 'leggyGrowth', 'winterDamage'], 'herbs'),
 };
 
-export default rosemary; 
+export default rosemary;

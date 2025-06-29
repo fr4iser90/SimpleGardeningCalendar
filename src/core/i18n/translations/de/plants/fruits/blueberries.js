@@ -131,7 +131,4 @@ export default {
   'blueberries.careTips.temperature': 'Kühle Saisonkultur, vor extremer Hitze schützen',
   'blueberries.careTips.soilPH': '4.0-5.5',
   'blueberries.careTips.mulching': 'Kiefernnadeln oder Sägemehl für sauren Mulch verwenden',
-  'blueberries.commonProblems.ironDeficiency': 'Gelbe Blätter mit grünen Adern - Eisenchelat hinzufügen',
-  'blueberries.commonProblems.birds': 'Vögel fressen Beeren - Netze oder Vogelscheuchen verwenden',
-  'blueberries.commonProblems.rootRot': 'Pilzkrankheit in nassem Boden - Drainage verbessern',
 };

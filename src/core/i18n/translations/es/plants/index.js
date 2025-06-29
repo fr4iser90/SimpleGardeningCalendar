@@ -1,7 +1,7 @@
-// Traducciones UI de plantas en español (si es necesario)
-// Los datos de las plantas vienen de los archivos de datos, no de las traducciones
+// Deutsche Pflanzen-UI-Übersetzungen (falls benötigt)
+// Pflanzen-Daten selbst kommen aus den Daten-Dateien, nicht aus Übersetzungen
 
 export const es = {
-  // Solo traducciones UI específicas aquí, si es necesario
-  // Los datos de las plantas están en src/core/db/plants/...
+  // Nur UI-spezifische Übersetzungen hier, falls benötigt
+  // Pflanzen-Daten sind in src/core/db/plants/...
 };

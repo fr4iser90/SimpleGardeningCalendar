@@ -8,10 +8,10 @@ import { PLANT_TAGS } from '../categories.js';
 import { createProblemRefs } from '../problems.js';
 
 export const cannabis_indica = {
-  name: 'Cannabis Indica',
+  name: 'cannabis_indica.name',
   category: 'category.herbs', // Updated category
   tags: [PLANT_TAGS.CANNABIS, PLANT_TAGS.ANNUAL, PLANT_TAGS.PHOTOPERIOD], // New tag structure
-  legalNote: 'cannabis_indica.legal_note',
+  legalNote: 'cannabis_indica.legalNote',
   environments: {
     indoor: {
       phases: {
