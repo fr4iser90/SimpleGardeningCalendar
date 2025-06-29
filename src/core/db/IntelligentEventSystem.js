@@ -78,18 +78,25 @@ function getIntelligentEventDescription(phaseName, plantData, phaseData) {
   if (isFinalPhase(phaseName, plantData) && plantData.commonProblems) {
     description += `\n\n${t('plant_details.common_problems') || 'Common Problems to Watch For:'}\n`;
     Object.entries(plantData.commonProblems).forEach(([problemKey, problemObj]) => {
-      if (problemObj && typeof problemObj === 'object') {
-        description += `- ${t(problemObj.name)}`;
+      if (problemObj && typeof problemObj === 'object' && problemObj.name) {
+        // Proper problem object with translation keys
+        const problemName = t(problemObj.name) || problemKey;
+        description += `- ${problemName}`;
         if (problemObj.description) {
-          description += `: ${t(problemObj.description)}`;
+          const problemDesc = t(problemObj.description);
+          description += `: ${problemDesc}`;
         }
         if (problemObj.solutions) {
-          description += `\n  Solutions: ${t(problemObj.solutions)}`;
+          const problemSol = t(problemObj.solutions);
+          description += `\n  ${t('plant_details.solutions') || 'Solutions'}: ${problemSol}`;
         }
         description += '\n';
-      } else {
-        // Fallback falls nur ein String gespeichert ist
+      } else if (typeof problemObj === 'string') {
+        // Direct string value
         description += `- ${problemKey}: ${problemObj}\n`;
+      } else {
+        // Fallback for unknown format
+        description += `- ${problemKey}: ${JSON.stringify(problemObj)}\n`;
       }
     });
   }
@@ -331,8 +338,27 @@ export async function createIntelligentPlantingEvents(planting, plantData, phase
           let description = `${weekCheckDesc}\n\n${phaseData.care}\n\n${lookForSigns}\n${phaseCheckpoints}`;
           if (plantData.commonProblems && Object.keys(plantData.commonProblems).length > 0) {
             description += `\n\n${t('plant_details.common_problems') || 'Common Problems to Watch For:'}\n`;
-            Object.entries(plantData.commonProblems).forEach(([problem, solution]) => {
-              description += `- ${problem}: ${solution}\n`;
+            Object.entries(plantData.commonProblems).forEach(([problemKey, problemObj]) => {
+              if (problemObj && typeof problemObj === 'object' && problemObj.name) {
+                // Proper problem object with translation keys
+                const problemName = t(problemObj.name) || problemKey;
+                description += `- ${problemName}`;
+                if (problemObj.description) {
+                  const problemDesc = t(problemObj.description);
+                  description += `: ${problemDesc}`;
+                }
+                if (problemObj.solutions) {
+                  const problemSol = t(problemObj.solutions);
+                  description += `\n  ${t('plant_details.solutions') || 'Solutions'}: ${problemSol}`;
+                }
+                description += '\n';
+              } else if (typeof problemObj === 'string') {
+                // Direct string value
+                description += `- ${problemKey}: ${problemObj}\n`;
+              } else {
+                // Fallback for unknown format
+                description += `- ${problemKey}: ${JSON.stringify(problemObj)}\n`;
+              }
             });
           }
           eventsToAdd.push({
