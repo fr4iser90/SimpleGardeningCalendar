@@ -283,6 +283,7 @@ export const es = {
     'phase.flowering': 'Floración',
     'phase.fruiting': 'Fructificación',
     'phase.harvest': 'Cosecha',
+    'phase.bolting': 'Espigado',
     'phase.dormancy': 'Dormancia',
     'phase.sprouting': 'Brotación',
     'phase.rooting': 'Enraizamiento',
@@ -544,7 +545,11 @@ export const es = {
     'export.error.generation_failed': 'Error al generar la exportación',
     'export.notification.start': 'Creando exportación...',
   
-    // AppShell.js
+    // Notifications
+    'notification.planting_added': '¡Planta agregada exitosamente!',
+    'notification.error_saving': 'Error al guardar',
+    
+    // ThemeToggle.js
     'theme.toggle.light': 'Cambiar a modo claro',
     'theme.toggle.dark': 'Cambiar a modo oscuro',
   

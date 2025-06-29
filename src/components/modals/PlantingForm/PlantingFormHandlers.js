@@ -11,7 +11,7 @@ import {
  * PlantingFormHandlers - Contains all event handling logic for the planting form
  */
 
-export function initializePlantingFormHandlers(formContainer) {
+export async function initializePlantingFormHandlers(formContainer) {
   const environmentSelect = formContainer.querySelector('#environmentSelect');
   const regionSelect = formContainer.querySelector('#regionSelect');
   const regionField = formContainer.querySelector('#regionField');
@@ -51,8 +51,8 @@ export function initializePlantingFormHandlers(formContainer) {
     // Update plant options when environment changes
     const category = plantCategorySelect?.value || '';
     updatePlantOptions(category, environment);
-    updatePlantInfo();
-    updatePhaseInputs();
+    await updatePlantInfo();
+    await updatePhaseInputs();
     await checkSeasonalTiming();
   });
 
@@ -63,8 +63,8 @@ export function initializePlantingFormHandlers(formContainer) {
   });
 
   plantTypeSelect?.addEventListener('change', async function() {
-    updatePlantInfo();
-    updatePhaseInputs();
+    await updatePlantInfo();
+    await updatePhaseInputs();
     updateCustomNamePlaceholder();
     await checkSeasonalTiming();
   });
@@ -77,5 +77,5 @@ export function initializePlantingFormHandlers(formContainer) {
     const environment = environmentSelect?.value || 'indoor';
     updatePlantOptions(plantCategorySelect.value, environment);
   }
-  updatePlantInfo();
+  await updatePlantInfo();
 }

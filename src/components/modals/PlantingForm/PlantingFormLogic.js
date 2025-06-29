@@ -115,7 +115,7 @@ export async function updatePlantOptions(category, environment = getDefaultEnvir
   });
 }
 
-export function updatePlantInfo() {
+export async function updatePlantInfo() {
   const plantTypeSelect = document.getElementById('plantTypeSelect');
   const plantInfo = document.getElementById('plantInfo');
   const environmentSelect = document.getElementById('environmentSelect');
@@ -129,7 +129,7 @@ export function updatePlantInfo() {
     return;
   }
 
-  const plantEnvData = getPlantDataForEnvironment(plantTypeSelect.value, environmentSelect?.value);
+  const plantEnvData = await getPlantDataForEnvironment(plantTypeSelect.value, environmentSelect?.value);
   if (!plantEnvData) {
     plantInfo.style.display = '';
     plantInfo.innerHTML = '<p class="text-red-500">Plant data not found for this environment</p>';
@@ -181,7 +181,7 @@ export function updatePlantInfo() {
   `;
 }
 
-export function updatePhaseInputs() {
+export async function updatePhaseInputs() {
   const plantTypeSelect = document.getElementById('plantTypeSelect');
   const environmentSelect = document.getElementById('environmentSelect');
   const phaseDurationSection = document.getElementById('phaseDurationSection');
@@ -194,7 +194,7 @@ export function updatePhaseInputs() {
     }
     return;
   }
-  const plantEnvData = getPlantDataForEnvironment(plantTypeSelect.value, environmentSelect?.value);
+  const plantEnvData = await getPlantDataForEnvironment(plantTypeSelect.value, environmentSelect?.value);
   if (!plantEnvData) {
     phaseDurationSection.style.display = 'none';
     return;
@@ -302,7 +302,7 @@ export function updatePhaseInputs() {
     `).join('');
   }
   phaseDurationSection.style.display = 'block';
-  updatePhaseCareInputs();
+  await updatePhaseCareInputs();
 }
 
 export async function updateCustomNamePlaceholder() {
@@ -430,7 +430,7 @@ export async function checkSeasonalTiming() {
   }
 }
 
-export function updatePhaseCareInputs() {
+export async function updatePhaseCareInputs() {
   const plantTypeSelect = document.getElementById('plantTypeSelect');
   const environmentSelect = document.getElementById('environmentSelect');
   const phaseCareSection = document.getElementById('phaseCareSection');
@@ -441,7 +441,7 @@ export function updatePhaseCareInputs() {
     return;
   }
   
-  const plantEnvData = getPlantDataForEnvironment(plantTypeSelect.value, environmentSelect?.value);
+  const plantEnvData = await getPlantDataForEnvironment(plantTypeSelect.value, environmentSelect?.value);
   
   if (!plantEnvData) {
     phaseCareSection.style.display = 'none';

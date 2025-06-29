@@ -3,7 +3,7 @@
  */
 
 import { getPlantRegistry } from '../../../core/db/plants/index.js';
-import { t } from '../../../core/i18n/index.js';
+import { t, getAllTranslatedPlantData } from '../../../core/i18n/index.js';
 
 /**
  * Extract environment key from environment value (removes 'environment.' prefix)
@@ -20,9 +20,23 @@ export function getEnvironmentKey(environment) {
  * @param {string} environment - Environment value from select element
  * @returns {Object|null} Plant data for the environment or null if not found
  */
-export function getPlantDataForEnvironment(plantType, environment) {
-  const registry = getPlantRegistry();
-  const plantData = registry.get(plantType);
+export async function getPlantDataForEnvironment(plantType, environment) {
+  // Try to get translated plant data first
+  let plantData = null;
+  try {
+    const allTranslatedPlants = await getAllTranslatedPlantData();
+    plantData = allTranslatedPlants.get(plantType);
+    if (!plantData) {
+      // Fallback to original registry if no translation available
+      const registry = getPlantRegistry();
+      plantData = registry.get(plantType);
+    }
+  } catch (error) {
+    console.warn('Failed to load translated plant data, using original registry:', error);
+    const registry = getPlantRegistry();
+    plantData = registry.get(plantType);
+  }
+  
   const envKey = getEnvironmentKey(environment);
   
   if (!plantData || !plantData.environments || !plantData.environments[envKey]) {

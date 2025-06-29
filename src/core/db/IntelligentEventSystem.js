@@ -30,7 +30,7 @@ function getPlantPhases(plantData) {
   }
   
   // Fallback: empty phases object
-  console.warn(`No phases found for plant ${plantData.name}`);
+  console.warn(`No phases found for plant ${t(plantData.name)}`);
   return {};
 }
 
@@ -43,7 +43,7 @@ function getPlantPhases(plantData) {
  */
 function getIntelligentEventTitle(phaseName, plantData, isLastPhase = false) {
   const phaseEmoji = getPhaseEmoji(phaseName);
-  const plantName = plantData.name;
+  const plantName = t(plantData.name);
   const phaseLabel = t('phase.' + phaseName) || phaseName;
   
   // Special handling for harvest phase only
@@ -185,7 +185,7 @@ export async function createIntelligentPlantingEvents(planting, plantData, phase
   const eventsToAdd = [];
   
   // Add initial planting event with legal notice if applicable
-  let plantingDescription = `${t('event.details.description') || 'Start planting'} ${plantData.name}`;
+  let plantingDescription = `${t('event.details.description') || 'Start planting'} ${t(plantData.name)}`;
   if (plantData.legalNote) {
     plantingDescription += `\n\n⚠️ ${t('plant_details.legal_notice') || 'LEGAL NOTICE:'} ${plantData.legalNote}`;
   }
@@ -198,7 +198,7 @@ export async function createIntelligentPlantingEvents(planting, plantData, phase
   }
 
   eventsToAdd.push({
-    title: `🌱 ${t('task.planting')} ${plantData.name}`,
+    title: `🌱 ${t('task.planting')} ${t(plantData.name)}`,
     date: planting.startDate,
     type: 'planting',
     description: plantingDescription,
@@ -212,7 +212,7 @@ export async function createIntelligentPlantingEvents(planting, plantData, phase
     const phaseData = plantPhases[phase.name];
     
     if (!phaseData) {
-      console.warn(`🎯 [createIntelligentPlantingEvents] Phase data not found for ${phase.name} in plant ${plantData.name}`);
+      console.warn(`🎯 [createIntelligentPlantingEvents] Phase data not found for ${phase.name} in plant ${t(plantData.name)}`);
       continue;
     }
     
@@ -324,7 +324,7 @@ export async function createIntelligentPlantingEvents(planting, plantData, phase
             });
           }
           eventsToAdd.push({
-            title: `📋 ${plantData.name}: ${weekCheckLabel} (${phaseLabel})`,
+            title: `📋 ${t(plantData.name)}: ${weekCheckLabel} (${phaseLabel})`,
             date: checkDate.toISOString().split('T')[0],
             type: 'maintenance',
             description,
@@ -427,7 +427,7 @@ async function createWateringEventsData(plantData, phase, plantingId, completion
   while (wateringDate < phaseEnd) {
     const wateringDescription = mediumData?.watering?.description || phase?.watering?.description || plantData.careTips?.watering || 'Check soil moisture and water as needed';
     events.push({
-      title: `💧 ${t('task.watering')} ${plantData.name}`,
+      title: `💧 ${t('task.watering')} ${t(plantData.name)}`,
       date: wateringDate.toISOString().split('T')[0],
       type: 'watering',
       description: `${wateringDescription}\n\nPhase: ${phaseName}\nCare: ${phase?.care || 'Follow general watering guidelines'}`,
@@ -498,7 +498,7 @@ async function createFertilizingEventsData(plantData, phase, plantingId, fertili
     while (fertilizeDate < phaseEnd) {
       const fertilizingDescription = mediumData?.fertilizing?.description || phase?.fertilizing?.description || plantData.careTips?.fertilizing || 'Apply appropriate fertilizer';
       events.push({
-        title: `🌿 ${t('task.fertilizing')} ${plantData.name}`,
+        title: `🌿 ${t('task.fertilizing')} ${t(plantData.name)}`,
         date: fertilizeDate.toISOString().split('T')[0],
         type: 'fertilizing',
         description: `${fertilizingDescription}\n\nPhase: ${phaseName}`,

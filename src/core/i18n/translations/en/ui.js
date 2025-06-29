@@ -250,6 +250,7 @@ export const en = {
     'phase.flowering': 'Flowering',
     'phase.fruiting': 'Fruiting',
     'phase.harvest': 'Harvest',
+    'phase.bolting': 'Bolting',
     'phase.dormancy': 'Dormancy',
     'phase.sprouting': 'Sprouting',
     'phase.rooting': 'Rooting',
@@ -509,7 +510,11 @@ export const en = {
     'export.error.no_data': 'No data to export',
     'export.error.generation_failed': 'Export generation failed',
     'export.notification.start': 'Creating export...',
-  
+    
+    // Notifications
+    'notification.planting_added': 'Plant added successfully!',
+    'notification.error_saving': 'Error saving',
+    
     // ThemeToggle.js
     'theme.toggle.light': 'Switch to Light Mode',
     'theme.toggle.dark': 'Switch to Dark Mode',

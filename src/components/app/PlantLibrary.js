@@ -47,6 +47,11 @@ export async function showPlantLibraryModal() {
     return true;
   });
   
+  console.log(`[DEBUG] Total plants: ${plantData.size}, Filtered plants: ${filteredPlants.length}`);
+  console.log(`[DEBUG] Cannabis plants found:`, filteredPlants.filter(([key, plant]) => 
+    plant.tags && plant.tags.includes(PLANT_TAGS.CANNABIS)
+  ).map(([key]) => key));
+  
   modal.innerHTML = `
     <div class="bg-white dark:bg-gray-800 rounded-lg p-6 max-w-4xl w-full max-h-[90vh] overflow-y-auto">
       <div class="flex justify-between items-center mb-4">

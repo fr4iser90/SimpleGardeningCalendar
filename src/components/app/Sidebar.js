@@ -121,7 +121,7 @@ export async function showCategoryPlantsModal(category, plantings) {
             <div class="border dark:border-gray-600 rounded-lg p-4 flex justify-between items-center">
               <div class="flex-1">
                 <h3 class="font-semibold dark:text-white">${displayName}</h3>
-                ${planting.customName ? `<div class="text-xs text-gray-500 dark:text-gray-400">Plant type: ${planting.plantName}</div>` : ''}
+                ${planting.customName ? `<div class="text-xs text-gray-500 dark:text-gray-400">Plant type: ${t(planting.plantName)}</div>` : ''}
                 <div class="text-sm text-gray-600 dark:text-gray-400">
                   ${planting.location} • Started ${formatDateWithLocale(planting.startDate)} • ${t('phase.' + planting.currentPhase)}
                 </div>

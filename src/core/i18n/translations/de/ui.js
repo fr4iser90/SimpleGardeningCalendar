@@ -256,7 +256,8 @@ export const de = {
     'phase.flowering': 'Blüte',
     'phase.fruiting': 'Fruchtbildung',
     'phase.harvest': 'Ernte',
-    'phase.dormancy': 'Ruhephase',
+    'phase.bolting': 'Schießen',
+    'phase.dormancy': 'Ruheperiode',
     'phase.editable': 'bearbeitbar',
     'phase.fixed': 'fest',
     'phase.sprouting': 'Aussaat/Keimung',
@@ -578,6 +579,10 @@ export const de = {
     'export.error.no_data': 'Keine Daten zum Exportieren',
     'export.error.generation_failed': 'Export-Generierung fehlgeschlagen',
     'export.notification.start': 'Export wird erstellt...',
+    
+    // Notifications
+    'notification.planting_added': 'Pflanze erfolgreich hinzugefügt!',
+    'notification.error_saving': 'Fehler beim Speichern',
     
     // ThemeToggle.js
     'theme.toggle.light': 'Zum Lichtmodus wechseln',

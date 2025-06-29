@@ -246,6 +246,7 @@ export const it = {
     'phase.flowering': 'Fioritura',
     'phase.fruiting': 'Fruttificazione',
     'phase.harvest': 'Raccolta',
+    'phase.bolting': 'Montata a seme',
     'phase.dormancy': 'Dormienza',
     'phase.sprouting': 'Germinazione',
     'phase.rooting': 'Radicazione',

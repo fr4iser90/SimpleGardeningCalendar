@@ -51,7 +51,7 @@ export async function showMyPlantsModal() {
                   </button>
                 </div>
               </div>
-              ${planting.customName ? `<div class="text-xs text-gray-500 dark:text-gray-400 mb-1">${labelType}: ${planting.plantName}</div>` : ''}
+              ${planting.customName ? `<div class="text-xs text-gray-500 dark:text-gray-400 mb-1">${labelType}: ${t(planting.plantName)}</div>` : ''}
               <div class="text-sm text-gray-600 dark:text-gray-400 space-y-1">
                 <div><strong>${labelLocation}:</strong> ${planting.location}</div>
                 <div><strong>${labelStarted}:</strong> ${formatDateWithLocale(planting.startDate)}</div>
@@ -269,7 +269,7 @@ export async function viewPlantDetails(plantingId) {
             <div class="bg-gray-50 dark:bg-gray-700 rounded-lg p-4">
               <h3 class="font-semibold mb-3 dark:text-white">${t('plants_list.plant_information')}</h3>
               <div class="space-y-2 text-sm">
-                <div><strong>${labelType}:</strong> ${planting.plantName}</div>
+                <div><strong>${labelType}:</strong> ${t(planting.plantName)}</div>
                 ${planting.customName ? `<div><strong>${t('plants_list.custom_name_label')}:</strong> ${planting.customName}</div>` : ''}
                 <div><strong>${t('plants_list.category_label')}:</strong> ${planting.category}</div>
                 <div><strong>${labelLocation}:</strong> ${planting.location}</div>

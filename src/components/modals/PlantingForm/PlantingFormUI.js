@@ -153,7 +153,7 @@ export async function createPlantingForm(date, preselectedPlant = null) {
   `;
   
   // Initialize form handlers
-  initializePlantingFormHandlers(formContainer);
+  await initializePlantingFormHandlers(formContainer);
   
   // Add auto-detection functionality
   initializeAutoDetection(formContainer);

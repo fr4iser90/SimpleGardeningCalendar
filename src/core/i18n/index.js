@@ -322,16 +322,31 @@ export { updateUITranslations };
  * @returns {string} Country code
  */
 export function getCurrentCountry() {
-  // Try to get from browser language
+  // HARD FIX: If user is German, always return DE
+  const savedLanguage = localStorage.getItem('preferredLanguage');
   const browserLang = navigator.language || navigator.userLanguage;
+  
+  console.log('[DEBUG] getCurrentCountry - savedLanguage:', savedLanguage);
+  console.log('[DEBUG] getCurrentCountry - browserLang:', browserLang);
+  console.log('[DEBUG] getCurrentCountry - currentLanguage:', currentLanguage);
+  
+  // If user is German, always return DE
+  if (savedLanguage === 'de' || browserLang?.startsWith('de') || currentLanguage === 'de') {
+    console.log('[DEBUG] getCurrentCountry - returning DE for German user');
+    return 'DE';
+  }
+  
+  // Try to get from browser language
   if (browserLang) {
     const countryCode = browserLang.split('-')[1] || browserLang.split('_')[1];
     if (countryCode && COUNTRY_SETTINGS[countryCode.toUpperCase()]) {
+      console.log('[DEBUG] getCurrentCountry - returning from browser:', countryCode.toUpperCase());
       return countryCode.toUpperCase();
     }
   }
   
   // Default to DE if no valid country found
+  console.log('[DEBUG] getCurrentCountry - defaulting to DE');
   return 'DE';
 }
 

@@ -300,7 +300,7 @@ export function getLocalizedCalendarName(type, subType) {
       const plantData = plantRegistry.get(subType);
       if (plantData) {
         const plantIcon = getCalendarTypeIcon(type, subType);
-        return `${plantIcon} ${plantData.name} ${t('calendar.garden')} ${currentYear}`;
+        return `${plantIcon} ${t(plantData.name)} ${t('calendar.garden')} ${currentYear}`;
       }
       return `🌱 ${subType} ${t('calendar.garden')} ${currentYear}`;
       

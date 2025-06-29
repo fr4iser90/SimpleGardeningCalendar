@@ -5,6 +5,7 @@
 
 import { getDB } from './connection.js';
 import { getPhaseEmoji, getWateringInterval, getPhaseCheckpoints } from './utils.js';
+import { t } from '../i18n/index.js';
 
 /**
  * Get phases from plant data, handling both old and new structures
@@ -23,7 +24,7 @@ function getPlantPhases(plantData) {
   }
   
   // Fallback: empty phases object
-  console.warn(`No phases found for plant ${plantData.name}`);
+  console.warn(`No phases found for plant ${t(plantData.name)}`);
   return {};
 }
 
@@ -45,14 +46,14 @@ export async function createPlantingEvents(planting, plantData, phases, completi
   const plantPhases = getPlantPhases(plantData);
   
   // Add initial planting event with legal notice if applicable
-  let plantingDescription = `Start planting ${plantData.name}`;
+  let plantingDescription = `Start planting ${t(plantData.name)}`;
   if (plantData.legalNote) {
     plantingDescription += `\n\n⚠️ LEGAL NOTICE: ${plantData.legalNote}`;
   }
   plantingDescription += `\n\nCare Tips:\n${Object.entries(plantData.careTips || {}).map(([key, value]) => `- ${key}: ${value}`).join('\n')}`;
 
   await tx.store.add({
-    title: `🌱 Plant ${plantData.name}`,
+    title: `🌱 Plant ${t(plantData.name)}`,
     date: planting.startDate,
     type: 'planting',
     description: plantingDescription,
@@ -66,13 +67,13 @@ export async function createPlantingEvents(planting, plantData, phases, completi
     const phaseData = plantPhases[phase.name];
     
     if (!phaseData) {
-      console.warn(`Phase data not found for ${phase.name} in plant ${plantData.name}`);
+      console.warn(`Phase data not found for ${phase.name} in plant ${t(plantData.name)}`);
       continue;
     }
     
     // Add phase start event
     await tx.store.add({
-      title: `${getPhaseEmoji(phase.name)} ${plantData.name}: ${phase.name} phase`,
+      title: `${getPhaseEmoji(phase.name)} ${t(plantData.name)}: ${phase.name} phase`,
       date: phase.startDate,
       type: 'maintenance',
       description: `${phaseData.description}\n\nCare Instructions:\n${phaseData.care}`,
@@ -89,7 +90,7 @@ export async function createPlantingEvents(planting, plantData, phases, completi
         
         if (checkDate < new Date(completionDate)) {
           await tx.store.add({
-            title: `📋 ${plantData.name}: Week ${week} check (${phase.name})`,
+            title: `📋 ${t(plantData.name)}: Week ${week} check (${phase.name})`,
             date: checkDate.toISOString().split('T')[0],
             type: 'maintenance',
             description: `Weekly check during ${phase.name} phase\n\n${phaseData.care}\n\nLook for signs of:\n${getPhaseCheckpoints(phase.name, plantData)}`,
@@ -141,7 +142,7 @@ async function createWateringEvents(store, plantData, phase, plantingId, complet
 
   while (wateringDate < phaseEnd) {
     await store.add({
-      title: `💧 Water ${plantData.name}`,
+      title: `💧 Water ${t(plantData.name)}`,
       date: wateringDate.toISOString().split('T')[0],
       type: 'watering',
       description: `${plantData.careTips?.watering || 'Check soil moisture and water as needed'}\n\nPhase: ${phase.name}\nCare: ${phaseData?.care || 'Follow general watering guidelines'}`,
@@ -175,7 +176,7 @@ async function createFertilizingEvents(store, plantData, phase, plantingId, fert
     
     while (fertilizeDate < phaseEnd) {
       await store.add({
-        title: `🌿 Fertilize ${plantData.name}`,
+        title: `🌿 Fertilize ${t(plantData.name)}`,
         date: fertilizeDate.toISOString().split('T')[0],
         type: 'fertilizing',
         description: `${plantData.careTips?.fertilizing || 'Apply appropriate fertilizer'}\n\nPhase: ${phase.name}`,
@@ -199,9 +200,9 @@ async function createHarvestEvent(store, plantData, phases, completionDate, plan
   // Get phases from plant data
   const plantPhases = getPlantPhases(plantData);
   const finalPhase = Object.keys(plantPhases).pop();
-  const eventTitle = finalPhase === 'harvest' ? `🌾 Harvest ${plantData.name}` : `✅ Complete ${plantData.name} cycle`;
+  const eventTitle = finalPhase === 'harvest' ? `🌾 Harvest ${t(plantData.name)}` : `✅ Complete ${t(plantData.name)} cycle`;
   
-  let harvestDescription = `Time to ${finalPhase === 'harvest' ? 'harvest' : 'complete'} your ${plantData.name}!`;
+  let harvestDescription = `Time to ${finalPhase === 'harvest' ? 'harvest' : 'complete'} your ${t(plantData.name)}!`;
   if (plantData.commonProblems && Object.keys(plantData.commonProblems).length > 0) {
     harvestDescription += `\n\nCommon Problems to Check For:\n${Object.entries(plantData.commonProblems).map(([problem, solution]) => `- ${problem}: ${solution}`).join('\n')}`;
   }

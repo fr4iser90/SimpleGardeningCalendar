@@ -5,6 +5,7 @@ import { showButtonSpinner, hideButtonSpinner } from '../ui/LoadingSpinner.js';
 import { DB_NAME, DB_VERSION } from '../../core/db/connection.js';
 import { createPlantingForm, getPlantingFormData } from './PlantingForm';
 import { sanitizeHTML } from '../../utils/sanitize.js';
+import { showNotification } from '../../utils/notifications.js';
 
 export async function showAddEventModal(date, preselectedType = null) {
   const modal = document.createElement('div');
@@ -193,17 +194,4 @@ async function handleCustomEventSubmission(formData) {
   });
   showNotification(t('notification.event_added'), 'success');
   document.dispatchEvent(new CustomEvent('refreshCalendar'));
-}
-
-function showNotification(message, type = 'info') {
-  const notification = document.createElement('div');
-  notification.className = `fixed top-4 right-4 p-4 rounded-lg text-white z-50 ${
-    type === 'success' ? 'bg-green-600' : 
-    type === 'error' ? 'bg-red-600' : 'bg-blue-600'
-  }`;
-  notification.textContent = message;
-  document.body.appendChild(notification);
-  setTimeout(() => {
-    notification.remove();
-  }, 3000);
 }
