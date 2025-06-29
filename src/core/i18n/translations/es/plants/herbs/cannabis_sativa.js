@@ -1,6 +1,6 @@
 export default {
   'cannabis_sativa.name': 'Cannabis Sativa',
-  'cannabis_sativa.legalNote': 'Überprüfen Sie die lokalen Gesetze vor dem Anbau. Diese Informationen dienen nur zu Bildungszwecken.',
+  'cannabis_sativa.legalNote': 'Verificar las leyes locales antes del cultivo. Esta información es solo con fines educativos.',
   'cannabis_sativa.environments.indoor.phases.germination.description': 'Germinación de semillas',
   'cannabis_sativa.environments.indoor.phases.germination.care': 'Mantener cálido y húmedo',
   'cannabis_sativa.environments.indoor.phases.germination.soil.watering.description': 'Mantener el suelo húmedo durante la germinación',

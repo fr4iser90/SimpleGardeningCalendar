@@ -213,19 +213,20 @@ export function showPlantDetailsModal(plant, plantKey) {
           </div>
         </div>
         
-        ${plant.commonProblems ? `
-          <div>
-            <h3 class="font-semibold mb-2 dark:text-white">${t('plant_details.common_problems')}</h3>
-            <div class="space-y-2">
-              ${Object.entries(plant.commonProblems).map(([problem, solution]) => `
-                <div class="text-sm">
-                  <strong class="text-red-600 dark:text-red-400">${problem}:</strong>
-                  <div class="text-gray-600 dark:text-gray-400">${solution}</div>
-                </div>
-              `).join('')}
-            </div>
-          </div>
-        ` : ''}
+${plant.commonProblems ? `
+  <div>
+    <h3 class="font-semibold mb-2 dark:text-white">${t('plant_details.common_problems')}</h3>
+    <div class="space-y-2">
+      ${Object.entries(plant.commonProblems).map(([problem, data]) => `
+        <div class="text-sm">
+          <strong class="text-red-600 dark:text-red-400">${t(data.name)}:</strong>
+          <div class="text-gray-600 dark:text-gray-400">${t(data.description)}</div>
+          <div class="text-gray-600 dark:text-gray-400"><strong>${t('plant_details.solutions')}:</strong> ${t(data.solutions)}</div>
+        </div>
+      `).join('')}
+    </div>
+  </div>
+` : ''}
         
         <div class="flex justify-center">
           <button onclick="startPlanting('${plantKey}')" class="px-6 py-2 bg-green-600 text-white rounded hover:bg-green-700">
@@ -255,4 +256,4 @@ function showQuickPlantModal(date) {
 }
 
 // Make functions globally available
-window.showPlantLibraryModal = showPlantLibraryModal; 
+window.showPlantLibraryModal = showPlantLibraryModal;
