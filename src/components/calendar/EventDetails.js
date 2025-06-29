@@ -4,6 +4,7 @@ import { t } from '../../core/i18n/index.js';
 import { getPlantNotes, addPlantNote, updatePlantingStatus } from '../../core/db/index.js';
 import { DB_NAME, DB_VERSION } from '../../core/db/connection.js';
 import { formatDateWithLocale } from '../../core/db/utils.js';
+import { closeModalReliably } from '../../utils/modalUtils.js';
 
 export async function showEventDetails(event) {
   const modal = document.createElement('div');
@@ -162,7 +163,9 @@ export async function deleteEvent(eventId, plantingId) {
       await db.delete('events', eventId);
     }
     
-    document.querySelector('.fixed').remove();
+    // Close modal more reliably using the utility function
+    closeModalReliably('button', `deleteEvent(${eventId}`);
+    
     if (window.calendar) {
       window.calendar.refetchEvents();
     }

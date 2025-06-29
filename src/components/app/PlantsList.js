@@ -5,6 +5,7 @@ import { openDB } from 'idb';
 import { DB_NAME, DB_VERSION } from '../../core/db/connection.js';
 import { t } from '../../core/i18n/index.js';
 import { formatDateWithLocale } from '../../core/db/utils.js';
+import { closeModalReliably } from '../../utils/modalUtils.js';
 
 export async function showMyPlantsModal() {
   const { getActivePlantings } = await import('../../core/db/index.js');
@@ -167,11 +168,8 @@ export async function deletePlant(plantingId) {
       console.warn('Could not delete planting:', error);
     }
     
-    // Close modal and refresh UI
-    const modal = document.querySelector('.fixed');
-    if (modal) {
-      modal.remove();
-    }
+    // Close modal and refresh UI using the utility function
+    closeModalReliably('button', `deletePlant(${plantingId}`);
     
     // Refresh calendar and sidebar
     const refreshEvent = new CustomEvent('refreshSidebar');
