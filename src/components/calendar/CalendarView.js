@@ -34,6 +34,10 @@ export async function initializeCalendar() {
   // Initialize default local calendars
   await initializeDefaultCalendars();
   
+  // Migrate existing default calendars to use categoryKey
+  const { migrateDefaultCalendarsToCategoryKey } = await import('../../core/db/calendars.js');
+  await migrateDefaultCalendarsToCategoryKey();
+  
   const calendarEl = document.getElementById('calendar');
   const currentLang = getCurrentLanguage();
   

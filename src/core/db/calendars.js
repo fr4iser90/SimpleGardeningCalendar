@@ -19,6 +19,7 @@ export async function initializeDefaultCalendars() {
     // Create default garden calendar with localized name
     await tx.store.add({
       name: t('calendar.garden'),
+      categoryKey: 'garden',
       type: 'local',
       color: '#10B981',
       icon: '🌱',
@@ -413,6 +414,27 @@ export async function migrateEventsToNewOrganization(organizationType) {
   return true;
 }
 
+/**
+ * Migrate existing default calendars to use categoryKey
+ * @returns {Promise<void>}
+ */
+export async function migrateDefaultCalendarsToCategoryKey() {
+  const db = await getDB();
+  const tx = db.transaction('calendars', 'readwrite');
+  const calendars = await tx.store.getAll();
+  
+  for (const calendar of calendars) {
+    // Update default calendar without categoryKey
+    if (calendar.isDefault && !calendar.categoryKey) {
+      calendar.categoryKey = 'garden';
+      await tx.store.put(calendar);
+      console.log('🔄 Migrated default calendar to use categoryKey: garden');
+    }
+  }
+  
+  await tx.done;
+}
+
 export default {
   initializeDefaultCalendars,
   createLocalCalendar,
@@ -425,5 +447,6 @@ export default {
   createGardenTemplateCalendars,
   deleteLocalCalendar,
   updateLocalCalendar,
-  migrateEventsToNewOrganization
+  migrateEventsToNewOrganization,
+  migrateDefaultCalendarsToCategoryKey
 }; 
